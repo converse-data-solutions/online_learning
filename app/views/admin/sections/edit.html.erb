@@ -1,0 +1,17 @@
+<h1>Edit Product</h1>
+
+
+  <%= form_for [:admin, @course, @section], url: admin_course_path( @course, @section) do |f| %>
+  
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    
+      <%= f.submit "Update Course" %>
+  
+  <% end %>
+
+  <%= link_to 'Back to Section List', admin_course_sections_path %>
+
+
+
+

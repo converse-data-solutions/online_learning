@@ -1,0 +1,19 @@
+<h1>Courses</h1>
+      <table >
+        <thead>
+          <th>Course Name</th>
+          <th>Description</th>
+          <th>Summary</th>
+        </thead>
+        <tbody>
+          <% @courses.each do |course| %>
+            <tr>
+              <td><%= course.course_name %></td>
+              <td><%= course.description %></td>
+              <td><%= course.summary %></td>
+              <td><%= link_to 'Show', course_path(course) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>  
+<%= link_to "home", root_path %>

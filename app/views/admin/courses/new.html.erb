@@ -1,0 +1,25 @@
+<h1>New Product</h1>
+
+
+  <%= form_for [:admin, @course], url: admin_courses_path(@course) do |f| %>
+    <div class="form-group">
+      <%= f.label :course_name %>
+      <br>
+      <%= f.text_field :course_name %>
+    </div>
+    <div>
+      <%= f.label :description %>
+      <br>
+      <%= f.text_area :description %>
+    </div>
+    <div>
+      <%= f.label :summary %>
+      <br>
+      <%= f.text_area :summary %>
+    </div> 
+
+      <%= f.submit "Create Course" %>
+  <% end %>
+
+  <%= link_to 'Back to Course List', admin_courses_path %>
+
