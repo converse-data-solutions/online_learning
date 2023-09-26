@@ -1,7 +1,7 @@
 <h1>Edit Product</h1>
 
 
-  <%= form_for [:admin, @course, @section], url: admin_course_path( @course, @section) do |f| %>
+  <%= form_for [:admin, @course, @section], url: admin_course_section_path( @course, @section) do |f| %>
   
       <%= f.label :title %>
       <%= f.text_field :title %>
