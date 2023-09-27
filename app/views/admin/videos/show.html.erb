@@ -8,7 +8,11 @@
   <p><strong>Title:</strong> <%= @video.title %></p>
   <p><strong>Description:</strong> <%= @video.description %></p>
   <% if @video.clip.attached? %>
-      <%= video_tag (url_for(@video.clip)), style: "width: 400px; height: 300px;" %>
+    <video
+      id="my-video" class="video-js" controls preload="auto" width="640" height="264"
+      data-setup="{}" >
+      <source src="<%= url_for(@video.clip) %>" type="video/mp4" />
+    </video>
     <% else %>
       <p>No video attached to this record.</p>
     <% end %> 

@@ -11,10 +11,15 @@
               <td><%= video.description %></td>
               <td>
                 <% if video.clip.attached? %>
-                  <%= video_tag url_for(video.clip), style: "width: 400px; height: 300px;", controls: true %>
+                 <video
+                  id="my-video" class="video-js" controls preload="auto" width="640" height="264"
+                   data-setup="{}" >
+                  <source src="<%= url_for(video.clip) %>" type="video/mp4" />
+                 </video>
                 <% else %>
                  <p>No video attached to this record.</p>
-                <% end %>              </td>
+                <% end %>
+              </td>
               <td><%= link_to 'Edit', edit_admin_section_video_path(@section, video) %></td>
               <td><%= link_to 'DELETE', admin_section_video_path(@section, video), data: {turbo_method: :delete} %></td>
               <td><%= link_to 'Show', admin_section_video_path(@section, video) %></td>

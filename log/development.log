@@ -23494,3 +23494,1102 @@ Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
 
 
   [1m[36mVideo Load (0.3ms)[0m  [1m[34mSELECT `videos`.* FROM `videos`[0m
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.1ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 7.1ms | Allocations: 7012)
+  Rendered layout layouts/application.html.erb (Duration: 9.4ms | Allocations: 9462)
+Completed 200 OK in 16ms (Views: 9.7ms | ActiveRecord: 1.7ms | Allocations: 12865)
+
+
+Started GET "/admin/sections/1/MY_VIDEO_POSTER.jpg" for ::1 at 2023-09-28 00:27:46 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO_POSTER.jpg"):
+  
+Started GET "/admin/sections/1/MY_VIDEO.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7a5be9589ba9da766e50baf9a676916f2508999a/ocean.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO.mp4"):
+  
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7b5c32f94f705b3a1b59f969df3475dad131b8c9/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7a5be9589ba9da766e50baf9a676916f2508999a", "filename"=>"ocean"}
+  [1m[36mActiveStorage::Blob Load (0.9ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+[36m  Disk Storage (0.3ms) [0m[34mGenerated URL for file at key: 3ca5ihy4q7fm8nk6spabb9khzlq5 (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40MzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--052fc51f121b4c2369b12b3ae339f02b29e3fcfd/ocean.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40MzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--052fc51f121b4c2369b12b3ae339f02b29e3fcfd/ocean.mp4
+Completed 302 Found in 4ms (ActiveRecord: 0.9ms | Allocations: 4237)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--28758e94077361ca7d02a171fdcdb6ef40a81880/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7b5c32f94f705b3a1b59f969df3475dad131b8c9", "filename"=>"a_sky_full_of_stars"}
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+[36m  Disk Storage (0.3ms) [0m[34mGenerated URL for file at key: 0i25dj3e9cd0klray5m4t0ejxop2 (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40NzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--e562bfb4f52259c27e6356f3e8937a114df725ab/a_sky_full_of_stars.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40NzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--e562bfb4f52259c27e6356f3e8937a114df725ab/a_sky_full_of_stars.mp4
+Completed 302 Found in 3ms (ActiveRecord: 0.7ms | Allocations: 3944)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40MzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--052fc51f121b4c2369b12b3ae339f02b29e3fcfd/ocean.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--28758e94077361ca7d02a171fdcdb6ef40a81880", "filename"=>"a_sky_full_of_stars"}
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+[36m  Disk Storage (0.3ms) [0m[34mGenerated URL for file at key: lgx2in7yabmt5xzrrznk7i98cl2j (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40ODNaIiwicHVyIjoiYmxvYl9rZXkifX0=--b489e51d7a09cf3d3e912e66a0a96fb24d67afd6/a_sky_full_of_stars.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40ODNaIiwicHVyIjoiYmxvYl9rZXkifX0=--b489e51d7a09cf3d3e912e66a0a96fb24d67afd6/a_sky_full_of_stars.mp4
+Completed 302 Found in 2ms (ActiveRecord: 0.5ms | Allocations: 1804)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40NzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--e562bfb4f52259c27e6356f3e8937a114df725ab/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 202)
+
+
+Started GET "/admin/sections/1/MY_VIDEO.webm" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 396)
+
+
+Started GET "/admin/sections/1/MY_VIDEO.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO.webm"):
+  
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40ODNaIiwicHVyIjoiYmxvYl9rZXkifX0=--b489e51d7a09cf3d3e912e66a0a96fb24d67afd6/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO.mp4"):
+  
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40MzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--052fc51f121b4c2369b12b3ae339f02b29e3fcfd/ocean.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 542)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40NzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--e562bfb4f52259c27e6356f3e8937a114df725ab/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 245)
+
+
+Started GET "/admin/sections/1/MY_VIDEO_POSTER.jpg" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 216)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO_POSTER.jpg"):
+  
+Started GET "/admin/sections/1/MY_VIDEO.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO.mp4"):
+  
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40MzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--052fc51f121b4c2369b12b3ae339f02b29e3fcfd/ocean.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+Started GET "/admin/sections/1/MY_VIDEO.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 190)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO.mp4"):
+  
+Started GET "/admin/sections/1/MY_VIDEO.webm" for ::1 at 2023-09-28 00:27:46 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40MzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--052fc51f121b4c2369b12b3ae339f02b29e3fcfd/ocean.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO.webm"):
+  
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 872)
+
+
+Started GET "/admin/sections/1/MY_VIDEO.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40MzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--052fc51f121b4c2369b12b3ae339f02b29e3fcfd/ocean.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO.mp4"):
+  
+Started GET "/admin/sections/1/MY_VIDEO.webm" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 285)
+
+
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO.webm"):
+  
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowMjo0Ni40MzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--052fc51f121b4c2369b12b3ae339f02b29e3fcfd/ocean.mp4" for ::1 at 2023-09-28 00:27:46 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 279)
+
+
+Started GET "/admin/sections/1/MY_VIDEO.webm" for ::1 at 2023-09-28 00:27:46 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/MY_VIDEO.webm"):
+  
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.3ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 7.5ms | Allocations: 7440)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 9888)
+Completed 200 OK in 14ms (Views: 8.8ms | ActiveRecord: 1.7ms | Allocations: 13278)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7b5c32f94f705b3a1b59f969df3475dad131b8c9/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7a5be9589ba9da766e50baf9a676916f2508999a/ocean.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7b5c32f94f705b3a1b59f969df3475dad131b8c9", "filename"=>"a_sky_full_of_stars"}
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--28758e94077361ca7d02a171fdcdb6ef40a81880/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+[36m  Disk Storage (0.4ms) [0m[34mGenerated URL for file at key: 0i25dj3e9cd0klray5m4t0ejxop2 (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 1823)
+
+
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--7a5be9589ba9da766e50baf9a676916f2508999a", "filename"=>"ocean"}
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+[36m  Disk Storage (0.3ms) [0m[34mGenerated URL for file at key: 3ca5ihy4q7fm8nk6spabb9khzlq5 (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4
+Completed 302 Found in 2ms (ActiveRecord: 0.4ms | Allocations: 1421)
+
+
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--28758e94077361ca7d02a171fdcdb6ef40a81880", "filename"=>"a_sky_full_of_stars"}
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+[36m  Disk Storage (0.4ms) [0m[34mGenerated URL for file at key: lgx2in7yabmt5xzrrznk7i98cl2j (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms | Allocations: 1345)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 212)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 405)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 218)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 234)
+
+
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.2ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.3ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 13.1ms | Allocations: 7837)
+  Rendered layout layouts/application.html.erb (Duration: 15.8ms | Allocations: 10148)
+Completed 200 OK in 22ms (Views: 14.2ms | ActiveRecord: 3.2ms | Allocations: 13292)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 192)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 226)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 307)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 196)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:33:44 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:33:52 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 197)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:33:52 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:35:06 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.2ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 8.6ms | Allocations: 7057)
+  Rendered layout layouts/application.html.erb (Duration: 10.2ms | Allocations: 9198)
+Completed 200 OK in 14ms (Views: 9.5ms | ActiveRecord: 1.6ms | Allocations: 11920)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 211)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 216)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 211)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 225)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 2ms (ActiveRecord: 0.0ms | Allocations: 190)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 211)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 241)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:35:06 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 184)
+
+
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.4ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.3ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+Processing by ActiveStorage::DiskController#show as MP4
+  [1m[36mActiveStorage::Blob Load (2.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 188)
+
+
+  [1m[36mActiveStorage::Attachment Load (0.9ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:14
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 21.2ms | Allocations: 8768)
+  Rendered layout layouts/application.html.erb (Duration: 23.3ms | Allocations: 10977)
+Completed 200 OK in 30ms (Views: 18.2ms | ActiveRecord: 6.8ms | Allocations: 14306)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:35:06 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.2ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 7.5ms | Allocations: 7316)
+  Rendered layout layouts/application.html.erb (Duration: 9.3ms | Allocations: 9737)
+Completed 200 OK in 15ms (Views: 8.9ms | ActiveRecord: 2.0ms | Allocations: 13029)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 218)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 209)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 272)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 212)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 213)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 6ms (ActiveRecord: 0.0ms | Allocations: 1009)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 2ms (ActiveRecord: 0.0ms | Allocations: 222)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.1ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 770)
+
+
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 9.4ms | Allocations: 8535)
+  Rendered layout layouts/application.html.erb (Duration: 12.8ms | Allocations: 11149)
+Completed 200 OK in 29ms (Views: 10.9ms | ActiveRecord: 2.9ms | Allocations: 14166)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 217)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 213)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 209)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 230)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:36:20 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 234)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 220)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:36:48 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.1ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 6.3ms | Allocations: 6911)
+  Rendered layout layouts/application.html.erb (Duration: 8.0ms | Allocations: 9365)
+Completed 200 OK in 12ms (Views: 8.1ms | ActiveRecord: 1.3ms | Allocations: 12662)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:48 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:48 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 206)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:36:48 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 209)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 194)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:36:48 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 190)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:36:48 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.2ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.1ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:36:48 +0530
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 11.9ms | Allocations: 7784)
+  Rendered layout layouts/application.html.erb (Duration: 15.7ms | Allocations: 10175)
+Completed 200 OK in 20ms (Views: 13.7ms | ActiveRecord: 3.1ms | Allocations: 12907)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:48 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 213)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:36:48 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 220)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:36:48 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 202)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 186)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:37:01 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.3ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.3ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 8.7ms | Allocations: 6857)
+  Rendered layout layouts/application.html.erb (Duration: 11.0ms | Allocations: 9278)
+Completed 200 OK in 18ms (Views: 11.2ms | ActiveRecord: 2.1ms | Allocations: 12557)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:37:01 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:37:01 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 214)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:37:01 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 190)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 194)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:37:01 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:37:01 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 221)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:37:01 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 200)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:37:01 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 209)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:37:01 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 748)
+
+
+  [1m[36mSection Load (0.4ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.6ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 14.5ms | Allocations: 7053)
+  Rendered layout layouts/application.html.erb (Duration: 16.4ms | Allocations: 9205)
+Completed 200 OK in 23ms (Views: 13.2ms | ActiveRecord: 5.1ms | Allocations: 12973)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:37:08 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.3ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 7.2ms | Allocations: 6858)
+  Rendered layout layouts/application.html.erb (Duration: 8.7ms | Allocations: 9279)
+Completed 200 OK in 12ms (Views: 8.5ms | ActiveRecord: 1.5ms | Allocations: 12576)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:37:08 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:37:08 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 201)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:37:08 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 206)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 379)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:37:08 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:37:08 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 227)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:37:08 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 195)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 3ms (ActiveRecord: 0.0ms | Allocations: 191)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:37:08 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:38:11 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.2ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 8.6ms | Allocations: 6860)
+  Rendered layout layouts/application.html.erb (Duration: 10.6ms | Allocations: 9315)
+Completed 200 OK in 15ms (Views: 10.1ms | ActiveRecord: 1.7ms | Allocations: 12605)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:11 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:38:11 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 220)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:11 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 216)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 197)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:12 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 193)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:12 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:38:12 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 210)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:12 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 195)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 198)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:12 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 194)
+
+
+Started GET "/admin/sections/1/videos/9" for ::1 at 2023-09-28 00:38:13 +0530
+Processing by Admin::VideosController#show as HTML
+  Parameters: {"section_id"=>"1", "id"=>"9"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.4ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:47:in `show'
+  [1m[36mVideo Load (0.4ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1 AND `videos`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:48:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/show.html.erb:10
+  Rendered admin/videos/show.html.erb within layouts/application (Duration: 3.5ms | Allocations: 2109)
+  Rendered layout layouts/application.html.erb (Duration: 3.7ms | Allocations: 2196)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 2.9ms | Allocations: 5701)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `video' for #<ActionView::Base:0x00000000043a80>):
+    11:     <video
+    12:       id="my-video" class="video-js" controls preload="auto" width="640" height="264"
+    13:       data-setup="{}" >
+    14:       <source src="<%= url_for(video.clip) %>" type="video/mp4" />
+    15:     </video>
+    16:     <% else %>
+    17:       <p>No video attached to this record.</p>
+  
+app/views/admin/videos/show.html.erb:14
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:13 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:38:13 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 222)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:13 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 380)
+
+
+Started GET "/admin/sections/1/videos/9" for ::1 at 2023-09-28 00:38:28 +0530
+Processing by Admin::VideosController#show as HTML
+  Parameters: {"section_id"=>"1", "id"=>"9"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.2ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:47:in `show'
+  [1m[36mVideo Load (0.1ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1 AND `videos`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:48:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/show.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/show.html.erb:10
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/show.html.erb:14
+  Rendered admin/videos/show.html.erb within layouts/application (Duration: 2.5ms | Allocations: 2163)
+  Rendered layout layouts/application.html.erb (Duration: 4.3ms | Allocations: 4618)
+Completed 200 OK in 11ms (Views: 4.8ms | ActiveRecord: 1.2ms | Allocations: 8674)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:28 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:28 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 00:38:33 +0530
+Processing by Admin::VideosController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.3ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/videos_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/videos/index.html.erb within layouts/application
+  [1m[36mVideo Load (0.3ms)[0m  [1m[34mSELECT `videos`.* FROM `videos` WHERE `videos`.`section_id` = 1[0m
+  ↳ app/views/admin/videos/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 1 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Video' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 3 LIMIT 1[0m
+  ↳ app/views/admin/videos/index.html.erb:17
+  Rendered admin/videos/index.html.erb within layouts/application (Duration: 12.5ms | Allocations: 6824)
+  Rendered layout layouts/application.html.erb (Duration: 14.0ms | Allocations: 8935)
+Completed 200 OK in 20ms (Views: 12.5ms | ActiveRecord: 3.1ms | Allocations: 11715)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:34 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:38:34 +0530
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 353)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:34 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 197)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:34 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 192)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNR2t5TldScU0yVTVZMlF3YTJ4eVlYazFiVFIwTUdWcWVHOXdNZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOTRaIiwicHVyIjoiYmxvYl9rZXkifX0=--509e7754d5200c23523bb6b5e48e71017d041d5d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:34 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhNMk5oTldsb2VUUnhOMlp0T0c1ck5uTndZV0ppT1d0b2VteHhOUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4wOThaIiwicHVyIjoiYmxvYl9rZXkifX0=--2dc7020fdac376d1d28d275951293ea94f5808b7/ocean.mp4" for ::1 at 2023-09-28 00:38:34 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 237)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiR2Q0TW1sdU4zbGhZbTEwTlhoNmNuSjZibXMzYVRrNFkyd3lhZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yN1QxOTowODo0NC4xMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--1d9c30a9d82af8dcb341e98a1eeb3428ee71974e/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 00:38:34 +0530
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 513)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
