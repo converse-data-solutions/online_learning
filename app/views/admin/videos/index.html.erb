@@ -1,0 +1,25 @@
+<h1>Courses</h1>
+      <table >
+        <thead>
+          <th>Course Name</th>
+          <th>Description</th>
+        </thead>
+        <tbody>
+          <% @videos.each do |video| %>
+            <tr>
+              <td><%= video.title %></td>
+              <td><%= video.description %></td>
+              <td>
+                <% if video.clip.attached? %>
+                  <%= video_tag url_for(video.clip), style: "width: 400px; height: 300px;", controls: true %>
+                <% else %>
+                 <p>No video attached to this record.</p>
+                <% end %>              </td>
+              <td><%= link_to 'Edit', edit_admin_section_video_path(@section, video) %></td>
+              <td><%= link_to 'DELETE', admin_section_video_path(@section, video), data: {turbo_method: :delete} %></td>
+              <td><%= link_to 'Show', admin_section_video_path(@section, video) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>  
+      <%= link_to 'Add Video', new_admin_section_video_path %>

@@ -17,4 +17,10 @@ Rails.application.routes.draw do
       resources :sections
     end
   end
+  
+  namespace :admin do
+    resources :sections do
+      resources :videos
+    end
+  end
 end
