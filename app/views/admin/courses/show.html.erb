@@ -7,8 +7,6 @@
   <h1>Course Details</h1>
   <p><strong>Course:</strong> <%= @course.course_name %></p>
   <p><strong>Description:</strong> <%= @course.description %></p>
-  <p><strong>Summary:</strong> <%= @course.summary %></p>
-  <!-- Add more details as needed -->
   <p><%= link_to 'Back', admin_courses_path %></p>
 
   <%= link_to "create Section", new_admin_course_section_path(@course) %>

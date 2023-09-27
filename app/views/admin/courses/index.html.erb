@@ -3,14 +3,12 @@
         <thead>
           <th>Course Name</th>
           <th>Description</th>
-          <th>Summary</th>
         </thead>
         <tbody>
           <% @courses.each do |course| %>
             <tr>
               <td><%= course.course_name %></td>
               <td><%= course.description %></td>
-              <td><%= course.summary %></td>
               <td><%= link_to 'Edit', edit_admin_course_path(course) %></td>
               <td><%= link_to 'DELETE', admin_course_path(course), data: {turbo_method: :delete} %></td>
               <td><%= link_to 'Show', admin_course_path(course) %></td>

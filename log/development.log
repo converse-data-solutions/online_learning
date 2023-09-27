@@ -13890,3 +13890,492 @@ Migrating to CreateVideos (20230926200022)
   [1m[36mActiveRecord::SchemaMigration Delete All (6.7ms)[0m  [1m[31mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20230926200022'[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('5139975884624234850')[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5139975884624234850', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to AddDescriptionToSections (20230927105700)
+  [1m[35m (38.4ms)[0m  [1m[35mALTER TABLE `sections` ADD `description` varchar(255)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230927105700')[0m
+  [1m[36mTRANSACTION (8.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('5139975884624234850')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5139975884624234850', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('5139975884624234850')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started GET "/" for ::1 at 2023-09-27 16:30:13 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by PageController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering page/index.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/page/index.html.erb:3
+  Rendered page/index.html.erb within layouts/application (Duration: 10.0ms | Allocations: 9590)
+  Rendered layout layouts/application.html.erb (Duration: 35.3ms | Allocations: 44164)
+Completed 200 OK in 42ms (Views: 35.0ms | ActiveRecord: 2.0ms | Allocations: 48465)
+
+
+Started GET "/admin/users" for ::1 at 2023-09-27 16:30:17 +0530
+Processing by AdminController#users as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/admin_controller.rb:14:in `check_admin_role'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/users.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  ↳ app/views/admin/users.html.erb:11
+  Rendered admin/users.html.erb within layouts/application (Duration: 6.1ms | Allocations: 927)
+  Rendered layout layouts/application.html.erb (Duration: 7.5ms | Allocations: 3175)
+Completed 200 OK in 34ms (Views: 7.9ms | ActiveRecord: 2.5ms | Allocations: 16632)
+
+
+Started GET "/admin/courses" for ::1 at 2023-09-27 16:30:19 +0530
+Processing by Admin::CoursesController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT `courses`.* FROM `courses`[0m
+  ↳ app/views/admin/courses/index.html.erb:9
+  Rendered admin/courses/index.html.erb within layouts/application (Duration: 7.5ms | Allocations: 4902)
+  Rendered layout layouts/application.html.erb (Duration: 7.6ms | Allocations: 4991)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 3.2ms | Allocations: 8286)
+
+
+  
+ActionView::Template::Error (undefined method `summary' for #<Course id: 2, course_name: "HTML", description: "Learn HTML", created_at: "2023-09-26 11:04:56.485111000 +0000", updated_at: "2023-09-27 05:51:14.062716000 +0000">):
+    10:             <tr>
+    11:               <td><%= course.course_name %></td>
+    12:               <td><%= course.description %></td>
+    13:               <td><%= course.summary %></td>
+    14:               <td><%= link_to 'Edit', edit_admin_course_path(course) %></td>
+    15:               <td><%= link_to 'DELETE', admin_course_path(course), data: {turbo_method: :delete} %></td>
+    16:               <td><%= link_to 'Show', admin_course_path(course) %></td>
+  
+app/views/admin/courses/index.html.erb:13
+app/views/admin/courses/index.html.erb:9
+Started GET "/admin/courses" for ::1 at 2023-09-27 16:31:43 +0530
+Processing by Admin::CoursesController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT `courses`.* FROM `courses`[0m
+  ↳ app/views/admin/courses/index.html.erb:8
+  Rendered admin/courses/index.html.erb within layouts/application (Duration: 3.6ms | Allocations: 2712)
+  Rendered layout layouts/application.html.erb (Duration: 9.1ms | Allocations: 15886)
+Completed 200 OK in 23ms (Views: 8.5ms | ActiveRecord: 4.7ms | Allocations: 27087)
+
+
+Started GET "/admin/courses/2/edit" for ::1 at 2023-09-27 16:31:46 +0530
+Processing by Admin::CoursesController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/courses_controller.rb:23:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/courses/edit.html.erb within layouts/application
+  Rendered admin/courses/edit.html.erb within layouts/application (Duration: 4.0ms | Allocations: 1832)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | Allocations: 3943)
+Completed 200 OK in 18ms (Views: 6.7ms | ActiveRecord: 1.9ms | Allocations: 7316)
+
+
+Started GET "/admin/courses" for ::1 at 2023-09-27 16:31:48 +0530
+Processing by Admin::CoursesController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT `courses`.* FROM `courses`[0m
+  ↳ app/views/admin/courses/index.html.erb:8
+  Rendered admin/courses/index.html.erb within layouts/application (Duration: 1.4ms | Allocations: 998)
+  Rendered layout layouts/application.html.erb (Duration: 3.4ms | Allocations: 3117)
+Completed 200 OK in 9ms (Views: 3.5ms | ActiveRecord: 1.2ms | Allocations: 5227)
+
+
+Started GET "/admin/courses/new" for ::1 at 2023-09-27 16:31:49 +0530
+Processing by Admin::CoursesController#new as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/courses/new.html.erb within layouts/application
+  Rendered admin/courses/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1139)
+  Rendered layout layouts/application.html.erb (Duration: 5.0ms | Allocations: 3258)
+Completed 200 OK in 13ms (Views: 5.4ms | ActiveRecord: 1.2ms | Allocations: 5478)
+
+
+Started GET "/admin/courses" for ::1 at 2023-09-27 16:31:50 +0530
+Processing by Admin::CoursesController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (1.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT `courses`.* FROM `courses`[0m
+  ↳ app/views/admin/courses/index.html.erb:8
+  Rendered admin/courses/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 998)
+  Rendered layout layouts/application.html.erb (Duration: 3.9ms | Allocations: 3152)
+Completed 200 OK in 12ms (Views: 4.1ms | ActiveRecord: 2.1ms | Allocations: 5284)
+
+
+Started GET "/admin/courses/2" for ::1 at 2023-09-27 16:31:55 +0530
+Processing by Admin::CoursesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/courses_controller.rb:43:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/courses/show.html.erb within layouts/application
+  Rendered admin/courses/show.html.erb within layouts/application (Duration: 0.8ms | Allocations: 264)
+  Rendered layout layouts/application.html.erb (Duration: 4.5ms | Allocations: 2407)
+Completed 200 OK in 12ms (Views: 5.0ms | ActiveRecord: 1.4ms | Allocations: 5091)
+
+
+Started GET "/admin/courses/2/sections/new" for ::1 at 2023-09-27 16:31:57 +0530
+Processing by Admin::SectionsController#new as HTML
+  Parameters: {"course_id"=>"2"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:11:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/new.html.erb within layouts/application
+  Rendered admin/sections/new.html.erb within layouts/application (Duration: 1.7ms | Allocations: 1002)
+  Rendered layout layouts/application.html.erb (Duration: 4.0ms | Allocations: 3191)
+Completed 200 OK in 21ms (Views: 4.7ms | ActiveRecord: 3.6ms | Allocations: 11233)
+
+
+Started GET "/admin/courses/2/sections" for ::1 at 2023-09-27 16:31:59 +0530
+Processing by Admin::SectionsController#index as HTML
+  Parameters: {"course_id"=>"2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/index.html.erb within layouts/application
+  [1m[36mSection Load (0.5ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2[0m
+  ↳ app/views/admin/sections/index.html.erb:7
+  Rendered admin/sections/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 2483)
+  Rendered layout layouts/application.html.erb (Duration: 4.4ms | Allocations: 4594)
+Completed 200 OK in 12ms (Views: 4.2ms | ActiveRecord: 1.8ms | Allocations: 7332)
+
+
+Started GET "/admin/courses/2/sections/1/edit" for ::1 at 2023-09-27 16:32:04 +0530
+Processing by Admin::SectionsController#edit as HTML
+  Parameters: {"course_id"=>"2", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.5ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:25:in `edit'
+  [1m[36mSection Load (0.3ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:26:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/edit.html.erb within layouts/application
+  Rendered admin/sections/edit.html.erb within layouts/application (Duration: 1.8ms | Allocations: 830)
+  Rendered layout layouts/application.html.erb (Duration: 4.2ms | Allocations: 2942)
+Completed 200 OK in 11ms (Views: 4.6ms | ActiveRecord: 1.2ms | Allocations: 6482)
+
+
+Started GET "/admin/courses/2/sections/1/edit" for ::1 at 2023-09-27 16:35:09 +0530
+Processing by Admin::SectionsController#edit as HTML
+  Parameters: {"course_id"=>"2", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:25:in `edit'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:26:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/edit.html.erb within layouts/application
+  Rendered admin/sections/edit.html.erb within layouts/application (Duration: 1.1ms | Allocations: 1214)
+  Rendered layout layouts/application.html.erb (Duration: 6.4ms | Allocations: 14365)
+Completed 200 OK in 26ms (Views: 7.1ms | ActiveRecord: 5.8ms | Allocations: 32052)
+
+
+Started PATCH "/admin/courses/2/sections/1" for ::1 at 2023-09-27 16:35:27 +0530
+Processing by Admin::SectionsController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "section"=>{"title"=>"IntroDuction", "description"=>"Introduction to HTml"}, "commit"=>"Update Section", "course_id"=>"2", "id"=>"1"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:30:in `update'
+  [1m[36mSection Load (0.2ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:31:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+  [1m[36mSection Update (0.3ms)[0m  [1m[33mUPDATE `sections` SET `sections`.`updated_at` = '2023-09-27 11:05:27.537125', `sections`.`description` = 'Introduction to HTml' WHERE `sections`.`id` = 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+Redirected to http://localhost:3000/admin/courses/2/sections
+Completed 302 Found in 18ms (ActiveRecord: 8.8ms | Allocations: 6661)
+
+
+Started GET "/admin/courses/2/sections" for ::1 at 2023-09-27 16:35:27 +0530
+Processing by Admin::SectionsController#index as TURBO_STREAM
+  Parameters: {"course_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/index.html.erb within layouts/application
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2[0m
+  ↳ app/views/admin/sections/index.html.erb:8
+  Rendered admin/sections/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 2434)
+  Rendered layout layouts/application.html.erb (Duration: 3.0ms | Allocations: 4545)
+Completed 200 OK in 6ms (Views: 3.1ms | ActiveRecord: 0.7ms | Allocations: 7296)
+
+
+Started GET "/admin/courses/2/sections/14/edit" for ::1 at 2023-09-27 16:35:30 +0530
+Processing by Admin::SectionsController#edit as HTML
+  Parameters: {"course_id"=>"2", "id"=>"14"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:25:in `edit'
+  [1m[36mSection Load (0.4ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 14 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:26:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/edit.html.erb within layouts/application
+  Rendered admin/sections/edit.html.erb within layouts/application (Duration: 1.6ms | Allocations: 799)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | Allocations: 2911)
+Completed 200 OK in 13ms (Views: 8.3ms | ActiveRecord: 0.9ms | Allocations: 6309)
+
+
+Started PATCH "/admin/courses/2/sections/14" for ::1 at 2023-09-27 16:35:42 +0530
+Processing by Admin::SectionsController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "section"=>{"title"=>"OverView", "description"=>"OverView to HTML"}, "commit"=>"Update Section", "course_id"=>"2", "id"=>"14"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:30:in `update'
+  [1m[36mSection Load (0.4ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 14 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:31:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+  [1m[36mSection Update (0.3ms)[0m  [1m[33mUPDATE `sections` SET `sections`.`updated_at` = '2023-09-27 11:05:42.136963', `sections`.`description` = 'OverView to HTML' WHERE `sections`.`id` = 14[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (8.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+Redirected to http://localhost:3000/admin/courses/2/sections
+Completed 302 Found in 24ms (ActiveRecord: 10.9ms | Allocations: 5388)
+
+
+Started GET "/admin/courses/2/sections" for ::1 at 2023-09-27 16:35:42 +0530
+Processing by Admin::SectionsController#index as TURBO_STREAM
+  Parameters: {"course_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/index.html.erb within layouts/application
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2[0m
+  ↳ app/views/admin/sections/index.html.erb:8
+  Rendered admin/sections/index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 1323)
+  Rendered layout layouts/application.html.erb (Duration: 2.5ms | Allocations: 3440)
+Completed 200 OK in 6ms (Views: 2.6ms | ActiveRecord: 0.6ms | Allocations: 6086)
+
+
+Started GET "/admin/courses/2/sections/15/edit" for ::1 at 2023-09-27 16:35:44 +0530
+Processing by Admin::SectionsController#edit as HTML
+  Parameters: {"course_id"=>"2", "id"=>"15"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:25:in `edit'
+  [1m[36mSection Load (0.4ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 15 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:26:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/edit.html.erb within layouts/application
+  Rendered admin/sections/edit.html.erb within layouts/application (Duration: 1.4ms | Allocations: 799)
+  Rendered layout layouts/application.html.erb (Duration: 4.0ms | Allocations: 2910)
+Completed 200 OK in 13ms (Views: 4.4ms | ActiveRecord: 2.0ms | Allocations: 6304)
+
+
+Started PATCH "/admin/courses/2/sections/15" for ::1 at 2023-09-27 16:35:58 +0530
+Processing by Admin::SectionsController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "section"=>{"title"=>"Basic", "description"=>"Basic of HTML"}, "commit"=>"Update Section", "course_id"=>"2", "id"=>"15"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.5ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:30:in `update'
+  [1m[36mSection Load (0.3ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 15 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:31:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+  [1m[36mSection Update (0.3ms)[0m  [1m[33mUPDATE `sections` SET `sections`.`updated_at` = '2023-09-27 11:05:58.721310', `sections`.`description` = 'Basic of HTML' WHERE `sections`.`id` = 15[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+Redirected to http://localhost:3000/admin/courses/2/sections
+Completed 302 Found in 22ms (ActiveRecord: 9.7ms | Allocations: 5375)
+
+
+Started GET "/admin/courses/2/sections" for ::1 at 2023-09-27 16:35:58 +0530
+Processing by Admin::SectionsController#index as TURBO_STREAM
+  Parameters: {"course_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/index.html.erb within layouts/application
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2[0m
+  ↳ app/views/admin/sections/index.html.erb:8
+  Rendered admin/sections/index.html.erb within layouts/application (Duration: 1.4ms | Allocations: 1326)
+  Rendered layout layouts/application.html.erb (Duration: 2.7ms | Allocations: 3437)
+Completed 200 OK in 6ms (Views: 2.7ms | ActiveRecord: 0.7ms | Allocations: 6083)
+
+
+Started GET "/admin/courses/2/sections/17/edit" for ::1 at 2023-09-27 16:36:00 +0530
+Processing by Admin::SectionsController#edit as HTML
+  Parameters: {"course_id"=>"2", "id"=>"17"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:25:in `edit'
+  [1m[36mSection Load (0.4ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 17 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:26:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/edit.html.erb within layouts/application
+  Rendered admin/sections/edit.html.erb within layouts/application (Duration: 1.4ms | Allocations: 799)
+  Rendered layout layouts/application.html.erb (Duration: 2.7ms | Allocations: 2911)
+Completed 200 OK in 14ms (Views: 3.1ms | ActiveRecord: 1.9ms | Allocations: 6315)
+
+
+Started PATCH "/admin/courses/2/sections/17" for ::1 at 2023-09-27 16:36:13 +0530
+Processing by Admin::SectionsController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "section"=>{"title"=>"Intermediate", "description"=>"Intermediate HTML"}, "commit"=>"Update Section", "course_id"=>"2", "id"=>"17"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:30:in `update'
+  [1m[36mSection Load (0.3ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 17 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:31:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+  [1m[36mSection Update (0.4ms)[0m  [1m[33mUPDATE `sections` SET `sections`.`updated_at` = '2023-09-27 11:06:13.467873', `sections`.`description` = 'Intermediate HTML' WHERE `sections`.`id` = 17[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (8.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admin/sections_controller.rb:32:in `update'
+Redirected to http://localhost:3000/admin/courses/2/sections
+Completed 302 Found in 22ms (ActiveRecord: 11.3ms | Allocations: 5376)
+
+
+Started GET "/admin/courses/2/sections" for ::1 at 2023-09-27 16:36:13 +0530
+Processing by Admin::SectionsController#index as TURBO_STREAM
+  Parameters: {"course_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/index.html.erb within layouts/application
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2[0m
+  ↳ app/views/admin/sections/index.html.erb:8
+  Rendered admin/sections/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 1330)
+  Rendered layout layouts/application.html.erb (Duration: 2.7ms | Allocations: 3476)
+Completed 200 OK in 6ms (Views: 2.8ms | ActiveRecord: 0.8ms | Allocations: 6131)
+
+
+Started GET "/admin/courses" for ::1 at 2023-09-27 16:36:15 +0530
+Processing by Admin::CoursesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.1ms)[0m  [1m[34mSELECT `courses`.* FROM `courses`[0m
+  ↳ app/views/admin/courses/index.html.erb:8
+  Rendered admin/courses/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 1313)
+  Rendered layout layouts/application.html.erb (Duration: 3.2ms | Allocations: 3525)
+Completed 200 OK in 6ms (Views: 3.6ms | ActiveRecord: 0.6ms | Allocations: 6090)
+
+
+Started GET "/admin/courses/2/sections/17/edit" for ::1 at 2023-09-27 16:36:19 +0530
+Processing by Admin::SectionsController#edit as HTML
+  Parameters: {"course_id"=>"2", "id"=>"17"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.5ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:25:in `edit'
+  [1m[36mSection Load (0.3ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 17 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:26:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/edit.html.erb within layouts/application
+  Rendered admin/sections/edit.html.erb within layouts/application (Duration: 0.9ms | Allocations: 801)
+  Rendered layout layouts/application.html.erb (Duration: 2.2ms | Allocations: 2912)
+Completed 200 OK in 9ms (Views: 2.6ms | ActiveRecord: 1.5ms | Allocations: 6335)
+
+
+Started GET "/admin/courses/2/sections/15/edit" for ::1 at 2023-09-27 16:36:20 +0530
+Processing by Admin::SectionsController#edit as HTML
+  Parameters: {"course_id"=>"2", "id"=>"15"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.2ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:25:in `edit'
+  [1m[36mSection Load (0.2ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 15 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:26:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/edit.html.erb within layouts/application
+  Rendered admin/sections/edit.html.erb within layouts/application (Duration: 1.2ms | Allocations: 800)
+  Rendered layout layouts/application.html.erb (Duration: 4.0ms | Allocations: 2911)
+Completed 200 OK in 11ms (Views: 4.4ms | ActiveRecord: 1.3ms | Allocations: 6312)
+
+

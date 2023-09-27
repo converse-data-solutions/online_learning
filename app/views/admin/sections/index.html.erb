@@ -2,11 +2,13 @@
       <table >
         <thead>
           <th>Section Name</th>
+          <th>Description</th>
         </thead>
         <tbody>
           <% @sections.each do |section| %>
             <tr>
               <td><%= section.title %></td>
+              <td><%= section.description %>
               <td><%= link_to 'Edit', edit_admin_course_section_path(@courses, section) %></td>
             <td><%= link_to 'DELETE', admin_course_section_path(@courses, section), data: { turbo_method: :delete } %></td>
             <td><%= link_to 'Show', admin_course_section_path(@courses, section) %></td>
