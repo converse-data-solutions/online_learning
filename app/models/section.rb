@@ -1,4 +1,4 @@
 class Section < ApplicationRecord
   belongs_to :course
-  has_many :videos
+  has_many :lessons
 end

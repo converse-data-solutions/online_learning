@@ -25,7 +25,7 @@ end
   
   namespace :admin do
     resources :sections do
-      resources :videos
+      resources :lessons
     end
   end
 end

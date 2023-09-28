@@ -1,0 +1,25 @@
+<h1>New Lesson</h1>
+
+
+  <%= form_for [:admin, @section, @lesson], url: admin_section_lessons_path(@section, @lesson) do |f| %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <br>
+      <%= f.text_field :title %>
+    </div>
+    <div>
+      <%= f.label :description %>
+      <br>
+      <%= f.text_area :description %>
+    </div>
+    <div>
+      <%= f.label :clip %>
+      <br>
+      <%= f.file_field :clip %>
+    </div>
+
+      <%= f.submit "Create Lesson" %>
+  <% end %>
+
+  <%= link_to 'Back to Lesson List', admin_section_lessons_path %>
+

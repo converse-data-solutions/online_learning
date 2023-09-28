@@ -28398,3 +28398,903 @@ Processing by CoursesController#index as TURBO_STREAM
 Completed 200 OK in 28ms (Views: 23.4ms | ActiveRecord: 3.1ms | Allocations: 3335)
 
 
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT GET_LOCK('5139975884624234850', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to RenameVideosToLessons (20230928124632)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230928124632')[0m
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('5139975884624234850')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5139975884624234850', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('5139975884624234850')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5139975884624234850', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('5139975884624234850')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5139975884624234850', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to RenameVideosToLessons (20230928124632)
+  [1m[35m (0.9ms)[0m  [1m[35mRENAME TABLE `lessons` TO `videos`[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('5139975884624234850')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5139975884624234850', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to RenameVideosToLessons (20230928124632)
+  [1m[36mActiveRecord::SchemaMigration Delete All (7.5ms)[0m  [1m[31mDELETE FROM `schema_migrations` WHERE `schema_migrations`.`version` = '20230928124632'[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('5139975884624234850')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5139975884624234850', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to RenameVideosToLessons (20230928125402)
+  [1m[35m (38.0ms)[0m  [1m[35mRENAME TABLE `videos` TO `lessons`[0m
+  [1m[35m (18.2ms)[0m  [1m[35mALTER TABLE `lessons` RENAME INDEX `index_videos_on_section_id` TO `index_lessons_on_section_id`[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230928125402')[0m
+  [1m[36mTRANSACTION (8.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('5139975884624234850')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('5139975884624234850', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT RELEASE_LOCK('5139975884624234850')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started GET "/" for ::1 at 2023-09-28 19:13:32 +0530
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by PageController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering page/index.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/page/index.html.erb:3
+  Rendered page/index.html.erb within layouts/application (Duration: 9.7ms | Allocations: 9612)
+  Rendered layout layouts/application.html.erb (Duration: 36.3ms | Allocations: 43080)
+Completed 200 OK in 41ms (Views: 35.6ms | ActiveRecord: 1.9ms | Allocations: 47436)
+
+
+Started GET "/admin/users" for ::1 at 2023-09-28 19:13:35 +0530
+Processing by AdminController#users as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 4 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/admin_controller.rb:14:in `check_admin_role'
+Redirected to http://localhost:3000/
+Filter chain halted as :check_admin_role rendered or redirected
+Completed 302 Found in 14ms (ActiveRecord: 2.0ms | Allocations: 10199)
+
+
+Started GET "/" for ::1 at 2023-09-28 19:13:35 +0530
+Processing by PageController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering page/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/page/index.html.erb:3
+  Rendered page/index.html.erb within layouts/application (Duration: 1.3ms | Allocations: 1101)
+  Rendered layout layouts/application.html.erb (Duration: 2.6ms | Allocations: 3224)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms | Allocations: 3488)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2023-09-28 19:13:36 +0530
+Processing by Users::SessionsController#destroy as TURBO_STREAM
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 4 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 6ms (ActiveRecord: 0.4ms | Allocations: 3040)
+
+
+Started GET "/" for ::1 at 2023-09-28 19:13:36 +0530
+Processing by PageController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering page/index.html.erb within layouts/application
+  Rendered page/index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 384)
+  Rendered layout layouts/application.html.erb (Duration: 2.6ms | Allocations: 2516)
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.0ms | Allocations: 2828)
+
+
+Started GET "/users/sign_in" for ::1 at 2023-09-28 19:13:38 +0530
+Processing by Users::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.9ms | Allocations: 725)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 11.8ms | Allocations: 3583)
+  Rendered layout layouts/application.html.erb (Duration: 13.5ms | Allocations: 5806)
+Completed 200 OK in 15ms (Views: 14.5ms | ActiveRecord: 0.0ms | Allocations: 7351)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-28 19:13:44 +0530
+Processing by Users::SessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'admin@example.com' ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 186ms (ActiveRecord: 0.2ms | Allocations: 3786)
+
+
+Started GET "/" for ::1 at 2023-09-28 19:13:44 +0530
+Processing by PageController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering page/index.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/page/index.html.erb:3
+  Rendered page/index.html.erb within layouts/application (Duration: 1.3ms | Allocations: 1062)
+  Rendered layout layouts/application.html.erb (Duration: 2.7ms | Allocations: 3190)
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms | Allocations: 3456)
+
+
+Started GET "/admin/users" for ::1 at 2023-09-28 19:13:46 +0530
+Processing by AdminController#users as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/admin_controller.rb:14:in `check_admin_role'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/users.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  ↳ app/views/admin/users.html.erb:11
+  Rendered admin/users.html.erb within layouts/application (Duration: 1.5ms | Allocations: 934)
+  Rendered layout layouts/application.html.erb (Duration: 3.2ms | Allocations: 3146)
+Completed 200 OK in 13ms (Views: 4.5ms | ActiveRecord: 0.7ms | Allocations: 8868)
+
+
+Started GET "/admin/courses" for ::1 at 2023-09-28 19:13:48 +0530
+Processing by Admin::CoursesController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/courses/index.html.erb within layouts/application
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT `courses`.* FROM `courses`[0m
+  ↳ app/views/admin/courses/index.html.erb:8
+  Rendered admin/courses/index.html.erb within layouts/application (Duration: 4.7ms | Allocations: 3849)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | Allocations: 6062)
+Completed 200 OK in 12ms (Views: 6.6ms | ActiveRecord: 1.6ms | Allocations: 9699)
+
+
+Started GET "/admin/courses/2" for ::1 at 2023-09-28 19:13:49 +0530
+Processing by Admin::CoursesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.5ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/courses_controller.rb:43:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/courses/show.html.erb within layouts/application
+  Rendered admin/courses/show.html.erb within layouts/application (Duration: 0.8ms | Allocations: 265)
+  Rendered layout layouts/application.html.erb (Duration: 3.0ms | Allocations: 2376)
+Completed 200 OK in 16ms (Views: 3.5ms | ActiveRecord: 1.9ms | Allocations: 5766)
+
+
+Started GET "/admin/courses/2/sections/new" for ::1 at 2023-09-28 19:13:51 +0530
+Processing by Admin::SectionsController#new as HTML
+  Parameters: {"course_id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:11:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/new.html.erb within layouts/application
+  Rendered admin/sections/new.html.erb within layouts/application (Duration: 1.4ms | Allocations: 1420)
+  Rendered layout layouts/application.html.erb (Duration: 2.8ms | Allocations: 3609)
+Completed 200 OK in 18ms (Views: 3.4ms | ActiveRecord: 2.6ms | Allocations: 12001)
+
+
+Started GET "/admin/courses/2/sections" for ::1 at 2023-09-28 19:13:53 +0530
+Processing by Admin::SectionsController#index as HTML
+  Parameters: {"course_id"=>"2"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/index.html.erb within layouts/application
+  [1m[36mSection Load (1.0ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2[0m
+  ↳ app/views/admin/sections/index.html.erb:8
+  Rendered admin/sections/index.html.erb within layouts/application (Duration: 6.9ms | Allocations: 2517)
+  Rendered layout layouts/application.html.erb (Duration: 8.7ms | Allocations: 4662)
+Completed 200 OK in 21ms (Views: 8.2ms | ActiveRecord: 3.4ms | Allocations: 7386)
+
+
+Started GET "/admin/courses/2/sections/1/edit" for ::1 at 2023-09-28 19:13:54 +0530
+Processing by Admin::SectionsController#edit as HTML
+  Parameters: {"course_id"=>"2", "id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.4ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:25:in `edit'
+  [1m[36mSection Load (0.4ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2 AND `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:26:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/edit.html.erb within layouts/application
+  Rendered admin/sections/edit.html.erb within layouts/application (Duration: 3.0ms | Allocations: 1086)
+  Rendered layout layouts/application.html.erb (Duration: 5.6ms | Allocations: 3209)
+Completed 200 OK in 13ms (Views: 6.1ms | ActiveRecord: 1.3ms | Allocations: 6727)
+
+
+Started GET "/admin/courses/2/sections" for ::1 at 2023-09-28 19:13:55 +0530
+Processing by Admin::SectionsController#index as HTML
+  Parameters: {"course_id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mCourse Load (0.3ms)[0m  [1m[34mSELECT `courses`.* FROM `courses` WHERE `courses`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/admin/sections_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/sections/index.html.erb within layouts/application
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`course_id` = 2[0m
+  ↳ app/views/admin/sections/index.html.erb:8
+  Rendered admin/sections/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 1330)
+  Rendered layout layouts/application.html.erb (Duration: 2.8ms | Allocations: 3442)
+Completed 200 OK in 9ms (Views: 3.0ms | ActiveRecord: 1.5ms | Allocations: 6104)
+
+
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 19:14:01 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/videos"):
+  
+Started GET "/admin/sections/1/videos" for ::1 at 2023-09-28 19:15:25 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/admin/sections/1/videos"):
+  
+Started GET "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:15:42 +0530
+Processing by Admin::LessonsController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/index.html.erb within layouts/application
+  [1m[36mLesson Load (0.2ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  Rendered admin/lessons/index.html.erb within layouts/application (Duration: 11.5ms | Allocations: 10808)
+  Rendered layout layouts/application.html.erb (Duration: 12.9ms | Allocations: 13046)
+Completed 200 OK in 20ms (Views: 11.1ms | ActiveRecord: 3.0ms | Allocations: 18782)
+
+
+Started GET "/admin/sections/1/lessons/9/edit" for ::1 at 2023-09-28 19:15:50 +0530
+Processing by Admin::LessonsController#edit as HTML
+  Parameters: {"section_id"=>"1", "id"=>"9"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.5ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:25:in `edit'
+  [1m[36mLesson Load (0.3ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1 AND `lessons`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:26:in `edit'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/edit.html.erb within layouts/application
+  Rendered admin/lessons/edit.html.erb within layouts/application (Duration: 3.3ms | Allocations: 1594)
+  Rendered layout layouts/application.html.erb (Duration: 5.5ms | Allocations: 3705)
+Completed 200 OK in 17ms (Views: 6.0ms | ActiveRecord: 2.1ms | Allocations: 7230)
+
+
+Started GET "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:16:02 +0530
+Processing by Admin::LessonsController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.3ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/index.html.erb within layouts/application
+  [1m[36mLesson Load (0.3ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  Rendered admin/lessons/index.html.erb within layouts/application (Duration: 4.0ms | Allocations: 3764)
+  Rendered layout layouts/application.html.erb (Duration: 5.5ms | Allocations: 5875)
+Completed 200 OK in 11ms (Views: 6.1ms | ActiveRecord: 1.6ms | Allocations: 8561)
+
+
+Started DELETE "/admin/sections/1/lessons/9" for ::1 at 2023-09-28 19:16:04 +0530
+Processing by Admin::LessonsController#destroy as TURBO_STREAM
+  Parameters: {"section_id"=>"1", "id"=>"9"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.3ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:40:in `destroy'
+  [1m[36mLesson Load (0.3ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1 AND `lessons`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:41:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 9 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+  [1m[36mLesson Destroy (0.2ms)[0m  [1m[31mDELETE FROM `lessons` WHERE `lessons`.`id` = 9[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+  [1m[36mTRANSACTION (7.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+Redirected to http://localhost:3000/admin/sections/1/lessons
+Completed 302 Found in 22ms (ActiveRecord: 9.7ms | Allocations: 6311)
+
+
+Started GET "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:16:04 +0530
+Processing by Admin::LessonsController#index as TURBO_STREAM
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/index.html.erb within layouts/application
+  [1m[36mLesson Load (0.1ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  Rendered admin/lessons/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 2752)
+  Rendered layout layouts/application.html.erb (Duration: 4.0ms | Allocations: 4863)
+Completed 200 OK in 8ms (Views: 3.8ms | ActiveRecord: 1.1ms | Allocations: 7521)
+
+
+Started DELETE "/admin/sections/1/lessons/10" for ::1 at 2023-09-28 19:16:05 +0530
+Processing by Admin::LessonsController#destroy as TURBO_STREAM
+  Parameters: {"section_id"=>"1", "id"=>"10"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.4ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:40:in `destroy'
+  [1m[36mLesson Load (0.3ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1 AND `lessons`.`id` = 10 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:41:in `destroy'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 10 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+  [1m[36mLesson Destroy (0.2ms)[0m  [1m[31mDELETE FROM `lessons` WHERE `lessons`.`id` = 10[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+  [1m[36mTRANSACTION (12.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+Redirected to http://localhost:3000/admin/sections/1/lessons
+Completed 302 Found in 31ms (ActiveRecord: 15.1ms | Allocations: 6113)
+
+
+Started GET "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:16:05 +0530
+Processing by Admin::LessonsController#index as TURBO_STREAM
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/index.html.erb within layouts/application
+  [1m[36mLesson Load (0.1ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  Rendered admin/lessons/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 1740)
+  Rendered layout layouts/application.html.erb (Duration: 3.2ms | Allocations: 3885)
+Completed 200 OK in 6ms (Views: 3.2ms | ActiveRecord: 0.9ms | Allocations: 6569)
+
+
+Started DELETE "/admin/sections/1/lessons/11" for ::1 at 2023-09-28 19:16:05 +0530
+Processing by Admin::LessonsController#destroy as TURBO_STREAM
+  Parameters: {"section_id"=>"1", "id"=>"11"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.5ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:40:in `destroy'
+  [1m[36mLesson Load (0.4ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1 AND `lessons`.`id` = 11 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:41:in `destroy'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 11 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+  [1m[36mLesson Destroy (0.3ms)[0m  [1m[31mDELETE FROM `lessons` WHERE `lessons`.`id` = 11[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admin/lessons_controller.rb:42:in `destroy'
+Redirected to http://localhost:3000/admin/sections/1/lessons
+Completed 302 Found in 25ms (ActiveRecord: 10.5ms | Allocations: 6092)
+
+
+Started GET "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:16:05 +0530
+Processing by Admin::LessonsController#index as TURBO_STREAM
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/index.html.erb within layouts/application
+  [1m[36mLesson Load (0.1ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:8
+  Rendered admin/lessons/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 728)
+  Rendered layout layouts/application.html.erb (Duration: 2.1ms | Allocations: 2840)
+Completed 200 OK in 5ms (Views: 2.2ms | ActiveRecord: 0.6ms | Allocations: 5486)
+
+
+Started GET "/admin/sections/1/lessons/new" for ::1 at 2023-09-28 19:16:07 +0530
+Processing by Admin::LessonsController#new as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.3ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:10:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/new.html.erb within layouts/application
+  Rendered admin/lessons/new.html.erb within layouts/application (Duration: 2.4ms | Allocations: 1290)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | Allocations: 3401)
+Completed 200 OK in 11ms (Views: 5.8ms | ActiveRecord: 0.7ms | Allocations: 6283)
+
+
+Started POST "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:16:28 +0530
+Processing by Admin::LessonsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "lesson"=>{"title"=>"First", "description"=>"First One", "clip"=>#<ActionDispatch::Http::UploadedFile:0x00007f92aded4d00 @tempfile=#<Tempfile:/tmp/RackMultipart20230928-24335-bpy9cy.mp4>, @content_type="video/mp4", @original_filename="a_sky_full_of_stars.mp4", @headers="Content-Disposition: form-data; name=\"lesson[clip]\"; filename=\"a_sky_full_of_stars.mp4\"\r\nContent-Type: video/mp4\r\n">}, "commit"=>"Create Lesson", "section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mLesson Create (0.2ms)[0m  [1m[32mINSERT INTO `lessons` (`title`, `description`, `section_id`, `created_at`, `updated_at`) VALUES ('First', 'First One', 1, '2023-09-28 13:46:28.189036', '2023-09-28 13:46:28.189036')[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` INNER JOIN `active_storage_attachments` ON `active_storage_blobs`.`id` = `active_storage_attachments`.`blob_id` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mActiveStorage::Blob Create (0.2ms)[0m  [1m[32mINSERT INTO `active_storage_blobs` (`key`, `filename`, `content_type`, `metadata`, `service_name`, `byte_size`, `checksum`, `created_at`) VALUES ('rhwfgl5k6l15juih4vlruzt1ge4d', 'a_sky_full_of_stars.mp4', 'video/mp4', '{\"identified\":true}', 'local', 5303309, 'JSyn+YWhXdHvt/gLW8o/Lg==', '2023-09-28 13:46:28.197683')[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mActiveStorage::Attachment Create (0.1ms)[0m  [1m[32mINSERT INTO `active_storage_attachments` (`name`, `record_type`, `record_id`, `blob_id`, `created_at`) VALUES ('clip', 'Lesson', 12, 5, '2023-09-28 13:46:28.198870')[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mLesson Update (0.2ms)[0m  [1m[33mUPDATE `lessons` SET `lessons`.`updated_at` = '2023-09-28 13:46:28.199950' WHERE `lessons`.`id` = 12[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mTRANSACTION (8.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+[36m  Disk Storage (9.4ms) [0m[32mUploaded file to key: rhwfgl5k6l15juih4vlruzt1ge4d (checksum: JSyn+YWhXdHvt/gLW8o/Lg==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 055add47-b1e2-496a-ba5d-0e8dca8d1207) to Async(default) with arguments: #<GlobalID:0x00007f92af6e3e78 @uri=#<URI::GID gid://auth-app/ActiveStorage::Blob/5>>
+Redirected to http://localhost:3000/admin/sections/1/lessons
+Completed 302 Found in 54ms (ActiveRecord: 11.7ms | Allocations: 27932)
+
+
+Started GET "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:16:28 +0530
+[ActiveJob] [ActiveStorage::AnalyzeJob] [055add47-b1e2-496a-ba5d-0e8dca8d1207]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 5 LIMIT 1[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [055add47-b1e2-496a-ba5d-0e8dca8d1207] Performing ActiveStorage::AnalyzeJob (Job ID: 055add47-b1e2-496a-ba5d-0e8dca8d1207) from Async(default) enqueued at 2023-09-28T13:46:28Z with arguments: #<GlobalID:0x00007f92ac07c470 @uri=#<URI::GID gid://auth-app/ActiveStorage::Blob/5>>
+Processing by Admin::LessonsController#index as TURBO_STREAM
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+[ActiveJob] [ActiveStorage::AnalyzeJob] [055add47-b1e2-496a-ba5d-0e8dca8d1207] [36m  Disk Storage (4.4ms) [0m[34mDownloaded file from key: rhwfgl5k6l15juih4vlruzt1ge4d[0m
+  [1m[36mSection Load (0.2ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/index.html.erb within layouts/application
+  [1m[36mLesson Load (0.2ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 5 LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:17
+  Rendered admin/lessons/index.html.erb within layouts/application (Duration: 3.9ms | Allocations: 3799)
+  Rendered layout layouts/application.html.erb (Duration: 6.3ms | Allocations: 5944)
+Completed 200 OK in 11ms (Views: 6.1ms | ActiveRecord: 1.4ms | Allocations: 8797)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [055add47-b1e2-496a-ba5d-0e8dca8d1207] Skipping video analysis because ffprobe isn't installed
+[ActiveJob] [ActiveStorage::AnalyzeJob] [055add47-b1e2-496a-ba5d-0e8dca8d1207]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [055add47-b1e2-496a-ba5d-0e8dca8d1207]   [1m[36mActiveStorage::Blob Update (0.2ms)[0m  [1m[33mUPDATE `active_storage_blobs` SET `active_storage_blobs`.`metadata` = '{\"identified\":true,\"audio\":false,\"video\":false,\"analyzed\":true}' WHERE `active_storage_blobs`.`id` = 5[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [055add47-b1e2-496a-ba5d-0e8dca8d1207]   [1m[36mTRANSACTION (9.2ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [055add47-b1e2-496a-ba5d-0e8dca8d1207] Performed ActiveStorage::AnalyzeJob (Job ID: 055add47-b1e2-496a-ba5d-0e8dca8d1207) from Async(default) in 32.37ms
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2b9ed44b67c2eee141ac89d115979ba9fe3bd4d8/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:16:28 +0530
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2b9ed44b67c2eee141ac89d115979ba9fe3bd4d8", "filename"=>"a_sky_full_of_stars"}
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 5 LIMIT 1[0m
+[36m  Disk Storage (2.6ms) [0m[34mGenerated URL for file at key: rhwfgl5k6l15juih4vlruzt1ge4d (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4
+Completed 302 Found in 7ms (ActiveRecord: 0.2ms | Allocations: 2412)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:16:28 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:16:28 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 289)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 181)
+
+
+Started GET "/admin/sections/1/lessons/new" for ::1 at 2023-09-28 19:16:32 +0530
+Processing by Admin::LessonsController#new as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:10:in `new'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/new.html.erb within layouts/application
+  Rendered admin/lessons/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 983)
+  Rendered layout layouts/application.html.erb (Duration: 2.6ms | Allocations: 3128)
+Completed 200 OK in 6ms (Views: 2.9ms | ActiveRecord: 0.6ms | Allocations: 5960)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:16:32 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 181)
+
+
+Started POST "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:16:51 +0530
+Processing by Admin::LessonsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "lesson"=>{"title"=>"Second", "description"=>"Second one", "clip"=>#<ActionDispatch::Http::UploadedFile:0x00007f92aded6470 @tempfile=#<Tempfile:/tmp/RackMultipart20230928-24335-hafxq1.mp4>, @content_type="video/mp4", @original_filename="ocean.mp4", @headers="Content-Disposition: form-data; name=\"lesson[clip]\"; filename=\"ocean.mp4\"\r\nContent-Type: video/mp4\r\n">}, "commit"=>"Create Lesson", "section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:15:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mLesson Create (0.2ms)[0m  [1m[32mINSERT INTO `lessons` (`title`, `description`, `section_id`, `created_at`, `updated_at`) VALUES ('Second', 'Second one', 1, '2023-09-28 13:46:51.199643', '2023-09-28 13:46:51.199643')[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` INNER JOIN `active_storage_attachments` ON `active_storage_blobs`.`id` = `active_storage_attachments`.`blob_id` WHERE `active_storage_attachments`.`record_id` = 13 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 13 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mActiveStorage::Blob Create (0.2ms)[0m  [1m[32mINSERT INTO `active_storage_blobs` (`key`, `filename`, `content_type`, `metadata`, `service_name`, `byte_size`, `checksum`, `created_at`) VALUES ('mjcn03170sk8ospk95isclk4jzyv', 'ocean.mp4', 'video/mp4', '{\"identified\":true}', 'local', 9318289, 'HxyrKqzmJJUC2ECAkLCDEA==', '2023-09-28 13:46:51.203654')[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mActiveStorage::Attachment Create (0.1ms)[0m  [1m[32mINSERT INTO `active_storage_attachments` (`name`, `record_type`, `record_id`, `blob_id`, `created_at`) VALUES ('clip', 'Lesson', 13, 6, '2023-09-28 13:46:51.204730')[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mLesson Update (0.1ms)[0m  [1m[33mUPDATE `lessons` SET `lessons`.`updated_at` = '2023-09-28 13:46:51.205587' WHERE `lessons`.`id` = 13[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+  [1m[36mTRANSACTION (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/admin/lessons_controller.rb:16:in `create'
+[36m  Disk Storage (16.3ms) [0m[32mUploaded file to key: mjcn03170sk8ospk95isclk4jzyv (checksum: HxyrKqzmJJUC2ECAkLCDEA==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 83219ba8-d351-459a-907c-70998c39b0ae) to Async(default) with arguments: #<GlobalID:0x00007f92ade2a210 @uri=#<URI::GID gid://auth-app/ActiveStorage::Blob/6>>
+Redirected to http://localhost:3000/admin/sections/1/lessons
+Completed 302 Found in 50ms (ActiveRecord: 9.0ms | Allocations: 11292)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [83219ba8-d351-459a-907c-70998c39b0ae]   [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 6 LIMIT 1[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [83219ba8-d351-459a-907c-70998c39b0ae] Performing ActiveStorage::AnalyzeJob (Job ID: 83219ba8-d351-459a-907c-70998c39b0ae) from Async(default) enqueued at 2023-09-28T13:46:51Z with arguments: #<GlobalID:0x00007f92adb2c090 @uri=#<URI::GID gid://auth-app/ActiveStorage::Blob/6>>
+Started GET "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:16:51 +0530
+Processing by Admin::LessonsController#index as TURBO_STREAM
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/index.html.erb within layouts/application
+  [1m[36mLesson Load (0.1ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 5 LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:17
+[ActiveJob] [ActiveStorage::AnalyzeJob] [83219ba8-d351-459a-907c-70998c39b0ae] [36m  Disk Storage (6.9ms) [0m[34mDownloaded file from key: mjcn03170sk8ospk95isclk4jzyv[0m
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 13 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 6 LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:17
+  Rendered admin/lessons/index.html.erb within layouts/application (Duration: 4.4ms | Allocations: 4624)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | Allocations: 6769)
+Completed 200 OK in 10ms (Views: 6.4ms | ActiveRecord: 1.0ms | Allocations: 9453)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [83219ba8-d351-459a-907c-70998c39b0ae] Skipping video analysis because ffprobe isn't installed
+[ActiveJob] [ActiveStorage::AnalyzeJob] [83219ba8-d351-459a-907c-70998c39b0ae]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [83219ba8-d351-459a-907c-70998c39b0ae]   [1m[36mActiveStorage::Blob Update (0.3ms)[0m  [1m[33mUPDATE `active_storage_blobs` SET `active_storage_blobs`.`metadata` = '{\"identified\":true,\"audio\":false,\"video\":false,\"analyzed\":true}' WHERE `active_storage_blobs`.`id` = 6[0m
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--cec717844ef939e95cbe6890e12f53b9ce048832/ocean.mp4" for ::1 at 2023-09-28 19:16:51 +0530
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--cec717844ef939e95cbe6890e12f53b9ce048832", "filename"=>"ocean"}
+  [1m[36mActiveStorage::Blob Load (1.8ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 6 LIMIT 1[0m
+[36m  Disk Storage (0.3ms) [0m[34mGenerated URL for file at key: mjcn03170sk8ospk95isclk4jzyv (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4
+Completed 302 Found in 4ms (ActiveRecord: 1.8ms | Allocations: 1512)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:16:51 +0530
+[ActiveJob] [ActiveStorage::AnalyzeJob] [83219ba8-d351-459a-907c-70998c39b0ae]   [1m[36mTRANSACTION (7.4ms)[0m  [1m[35mCOMMIT[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [83219ba8-d351-459a-907c-70998c39b0ae] Performed ActiveStorage::AnalyzeJob (Job ID: 83219ba8-d351-459a-907c-70998c39b0ae) from Async(default) in 38.04ms
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 181)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:16:51 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 188)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:16:51 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:16:51 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 183)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 2ms (ActiveRecord: 0.0ms | Allocations: 207)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:16:51 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 2ms (ActiveRecord: 0.0ms | Allocations: 192)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:16:51 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:19:24 +0530
+Processing by Admin::LessonsController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/index.html.erb within layouts/application
+  [1m[36mLesson Load (0.2ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 5 LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 13 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 6 LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:17
+  Rendered admin/lessons/index.html.erb within layouts/application (Duration: 5.0ms | Allocations: 4953)
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | Allocations: 7433)
+Completed 200 OK in 11ms (Views: 7.1ms | ActiveRecord: 1.3ms | Allocations: 10679)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:19:24 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:19:24 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Processing by ActiveStorage::DiskController#show as MP4
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 577)
+
+
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 198)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:19:24 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:19:24 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:19:24 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 196)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 186)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:19:24 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:19:24 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:19:27 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:19:38 +0530
+Processing by Admin::LessonsController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.1ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/index.html.erb within layouts/application
+  [1m[36mLesson Load (0.1ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 5 LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 13 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 6 LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:17
+  Rendered admin/lessons/index.html.erb within layouts/application (Duration: 4.4ms | Allocations: 4578)
+  Rendered layout layouts/application.html.erb (Duration: 5.7ms | Allocations: 6690)
+Completed 200 OK in 9ms (Views: 5.4ms | ActiveRecord: 1.1ms | Allocations: 9348)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:19:38 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 195)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:19:39 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 193)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MToyOC4yNzNaIiwicHVyIjoiYmxvYl9rZXkifX0=--1c187a0c6a1a5fcff372685daf2e81868669fcca/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:19:39 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1MTo1MS4yNjhaIiwicHVyIjoiYmxvYl9rZXkifX0=--6de9786a6852f7159f63e9292077c484eaafcef9/ocean.mp4" for ::1 at 2023-09-28 19:19:39 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 190)
+
+
+Started GET "/admin/sections/1/lessons" for ::1 at 2023-09-28 19:22:03 +0530
+Processing by Admin::LessonsController#index as HTML
+  Parameters: {"section_id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT `roles`.* FROM `roles` INNER JOIN `users_roles` ON `roles`.`id` = `users_roles`.`role_id` WHERE `users_roles`.`user_id` = 1 AND (((roles.name = 'admin') AND (roles.resource_type IS NULL) AND (roles.resource_id IS NULL)))[0m
+  ↳ app/controllers/application_controller.rb:3:in `check_admin_role'
+  [1m[36mSection Load (0.2ms)[0m  [1m[34mSELECT `sections`.* FROM `sections` WHERE `sections`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/admin/lessons_controller.rb:5:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/lessons/index.html.erb within layouts/application
+  [1m[36mLesson Load (0.2ms)[0m  [1m[34mSELECT `lessons`.* FROM `lessons` WHERE `lessons`.`section_id` = 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:8
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 12 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 5 LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:17
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT `active_storage_attachments`.* FROM `active_storage_attachments` WHERE `active_storage_attachments`.`record_id` = 13 AND `active_storage_attachments`.`record_type` = 'Lesson' AND `active_storage_attachments`.`name` = 'clip' LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:13
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 6 LIMIT 1[0m
+  ↳ app/views/admin/lessons/index.html.erb:17
+  Rendered admin/lessons/index.html.erb within layouts/application (Duration: 4.6ms | Allocations: 4953)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | Allocations: 7433)
+Completed 200 OK in 11ms (Views: 6.9ms | ActiveRecord: 1.3ms | Allocations: 10671)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2b9ed44b67c2eee141ac89d115979ba9fe3bd4d8/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:22:03 +0530
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--cec717844ef939e95cbe6890e12f53b9ce048832/ocean.mp4" for ::1 at 2023-09-28 19:22:03 +0530
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2b9ed44b67c2eee141ac89d115979ba9fe3bd4d8", "filename"=>"a_sky_full_of_stars"}
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 5 LIMIT 1[0m
+[36m  Disk Storage (0.3ms) [0m[34mGenerated URL for file at key: rhwfgl5k6l15juih4vlruzt1ge4d (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45NTdaIiwicHVyIjoiYmxvYl9rZXkifX0=--ca50cdef9306f4badfd798dc8765d2aae8a2d400/a_sky_full_of_stars.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45NTdaIiwicHVyIjoiYmxvYl9rZXkifX0=--ca50cdef9306f4badfd798dc8765d2aae8a2d400/a_sky_full_of_stars.mp4
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms | Allocations: 1427)
+
+
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--cec717844ef939e95cbe6890e12f53b9ce048832", "filename"=>"ocean"}
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 6 LIMIT 1[0m
+[36m  Disk Storage (0.4ms) [0m[34mGenerated URL for file at key: mjcn03170sk8ospk95isclk4jzyv (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45NjFaIiwicHVyIjoiYmxvYl9rZXkifX0=--0a8e8061f9cabdefc70aa8c41cb80fd8cb423d67/ocean.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45NjFaIiwicHVyIjoiYmxvYl9rZXkifX0=--0a8e8061f9cabdefc70aa8c41cb80fd8cb423d67/ocean.mp4
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 1344)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45NTdaIiwicHVyIjoiYmxvYl9rZXkifX0=--ca50cdef9306f4badfd798dc8765d2aae8a2d400/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:22:03 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45NjFaIiwicHVyIjoiYmxvYl9rZXkifX0=--0a8e8061f9cabdefc70aa8c41cb80fd8cb423d67/ocean.mp4" for ::1 at 2023-09-28 19:22:03 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 191)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 378)
+
+
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--cec717844ef939e95cbe6890e12f53b9ce048832/ocean.mp4" for ::1 at 2023-09-28 19:22:03 +0530
+Started GET "/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2b9ed44b67c2eee141ac89d115979ba9fe3bd4d8/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:22:03 +0530
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--cec717844ef939e95cbe6890e12f53b9ce048832", "filename"=>"ocean"}
+  [1m[36mActiveStorage::Blob Load (0.3ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 6 LIMIT 1[0m
+[36m  Disk Storage (0.4ms) [0m[34mGenerated URL for file at key: mjcn03170sk8ospk95isclk4jzyv (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45OThaIiwicHVyIjoiYmxvYl9rZXkifX0=--16cd837cc37e644f2cffcd1f59283f5cd04d3d9e/ocean.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45OThaIiwicHVyIjoiYmxvYl9rZXkifX0=--16cd837cc37e644f2cffcd1f59283f5cd04d3d9e/ocean.mp4
+Completed 302 Found in 2ms (ActiveRecord: 0.3ms | Allocations: 1439)
+
+
+Processing by ActiveStorage::Blobs::RedirectController#show as MP4
+  Parameters: {"signed_id"=>"eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--2b9ed44b67c2eee141ac89d115979ba9fe3bd4d8", "filename"=>"a_sky_full_of_stars"}
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT `active_storage_blobs`.* FROM `active_storage_blobs` WHERE `active_storage_blobs`.`id` = 5 LIMIT 1[0m
+[36m  Disk Storage (0.3ms) [0m[34mGenerated URL for file at key: rhwfgl5k6l15juih4vlruzt1ge4d (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowNC4wMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--b0366e5cab3d78d5be9aebf0ff36d88b58e4135d/a_sky_full_of_stars.mp4)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowNC4wMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--b0366e5cab3d78d5be9aebf0ff36d88b58e4135d/a_sky_full_of_stars.mp4
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms | Allocations: 1348)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45OThaIiwicHVyIjoiYmxvYl9rZXkifX0=--16cd837cc37e644f2cffcd1f59283f5cd04d3d9e/ocean.mp4" for ::1 at 2023-09-28 19:22:04 +0530
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhjbWgzWm1kc05XczJiREUxYW5WcGFEUjJiSEoxZW5ReFoyVTBaQVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpWFdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSmhYM05yZVY5bWRXeHNYMjltWDNOMFlYSnpMbTF3TkNJN0lHWnBiR1Z1WVcxbEtqMVZWRVl0T0NjbllWOXphM2xmWm5Wc2JGOXZabDl6ZEdGeWN5NXRjRFFHT3daVU9oRmpiMjUwWlc1MFgzUjVjR1ZKSWc1MmFXUmxieTl0Y0RRR093WlVPaEZ6WlhKMmFXTmxYMjVoYldVNkNteHZZMkZzIiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowNC4wMDFaIiwicHVyIjoiYmxvYl9rZXkifX0=--b0366e5cab3d78d5be9aebf0ff36d88b58e4135d/a_sky_full_of_stars.mp4" for ::1 at 2023-09-28 19:22:04 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 195)
+
+
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"a_sky_full_of_stars"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 191)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45OThaIiwicHVyIjoiYmxvYl9rZXkifX0=--16cd837cc37e644f2cffcd1f59283f5cd04d3d9e/ocean.mp4" for ::1 at 2023-09-28 19:22:04 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 1ms (ActiveRecord: 0.0ms | Allocations: 188)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhiV3BqYmpBek1UY3djMnM0YjNOd2F6azFhWE5qYkdzMGFucDVkZ1k2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpUVdGMGRHRmphRzFsYm5RN0lHWnBiR1Z1WVcxbFBTSnZZMlZoYmk1dGNEUWlPeUJtYVd4bGJtRnRaU285VlZSR0xUZ25KMjlqWldGdUxtMXdOQVk3QmxRNkVXTnZiblJsYm5SZmRIbHdaVWtpRG5acFpHVnZMMjF3TkFZN0JsUTZFWE5sY25acFkyVmZibUZ0WlRvS2JHOWpZV3c9IiwiZXhwIjoiMjAyMy0wOS0yOFQxMzo1NzowMy45OThaIiwicHVyIjoiYmxvYl9rZXkifX0=--16cd837cc37e644f2cffcd1f59283f5cd04d3d9e/ocean.mp4" for ::1 at 2023-09-28 19:22:04 +0530
+Processing by ActiveStorage::DiskController#show as MP4
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"ocean"}
+Completed 206 Partial Content in 0ms (ActiveRecord: 0.0ms | Allocations: 180)
+
+

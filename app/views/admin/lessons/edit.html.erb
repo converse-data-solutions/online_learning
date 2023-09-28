@@ -1,0 +1,30 @@
+<h1>Edit Lesson</h1>
+
+
+  <%= form_for [:admin, @section, @lesson], url: admin_section_lesson_path(@section, @lesson) do |f| %>
+    <div>
+      <%= f.label :title %>
+      <br>
+      <%= f.text_field :title %>
+    </div>
+    <div>
+      <%= f.label :description %>
+      <br>  
+      <%= f.text_field :description %>
+    </div>
+    <br>
+    <div>
+      <%= f.label :clip %>
+      <br>
+      <%= f.file_field :clip %>
+    </div>
+    <div>   
+      <%= f.submit "Update Lesson" %>
+    </div>
+  <% end %>
+<br>
+  <%= link_to 'Back to Lesson List', admin_section_lessons_path %>
+
+
+
+
