@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   root 'page#index'
   get 'admin/users', to: 'admin#users'
+resources :entrollments
+resources :courses do
+  resources :entrollments
+end
+
   resources :courses, only: [:index, :show]
   resources :courses do
     resources :sections

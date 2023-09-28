@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :entrollments
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -6,8 +7,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum role: [:user, :admin]
-  def self.validatable_attributes(_)
-    super - [:role]
-  end
 
 end

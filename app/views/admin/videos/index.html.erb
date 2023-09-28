@@ -11,13 +11,13 @@
               <td><%= video.description %></td>
               <td>
                 <% if video.clip.attached? %>
-                 <video
-                  id="my-video" class="video-js" controls preload="auto" width="640" height="264"
-                   data-setup="{}" >
-                  <source src="<%= url_for(video.clip) %>" type="video/mp4" />
-                 </video>
-                <% else %>
-                 <p>No video attached to this record.</p>
+                  <video
+                    id="video-<%= video.id %>" class="video-js" controls preload="auto" width="640" height="264"
+                    data-setup="{}" >
+                    <source src="<%= url_for(video.clip) %>" type="video/mp4" />
+                  </video>
+                  <% else %>
+                    <p>No video attached to this record.</p>
                 <% end %>
               </td>
               <td><%= link_to 'Edit', edit_admin_section_video_path(@section, video) %></td>
@@ -26,5 +26,5 @@
             </tr>
           <% end %>
         </tbody>
-      </table>  
-      <%= link_to 'Add Video', new_admin_section_video_path %>
+      </table>
+<%= link_to 'Add Video', new_admin_section_video_path %>
