@@ -7,6 +7,7 @@ class EntrollmentsController < ApplicationController
       end
     
       def create
+        
         @entrollment = Entrollment.new(entrollment_params)
     
         if @entrollment.save

@@ -8,4 +8,8 @@ class User < ApplicationRecord
 
   enum role: [:user, :admin]
 
+  def already_entrolled?
+    self.entrollments.exists?
+  end
+
 end

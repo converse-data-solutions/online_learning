@@ -1,5 +1,6 @@
 <h1>Entroll in <%= @course.course_name %></h1>
-
+ <p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <%= form_for @entrollment do |f| %>
   <div class="field">
     <label for="entrollment_status">Status</label>
@@ -11,7 +12,11 @@
   <%= f.hidden_field :user_id %>
 
   <div class="actions">
-    <%= f.submit 'Entroll' %>
+  <%if current_user.already_entrolled? %>
+    <%= f.submit 'Entrolled', disabled: true %>
+  <% else %>
+    <%= f.submit 'Enroll' %>
+  <% end %>
   </div>
 <% end %>
 
