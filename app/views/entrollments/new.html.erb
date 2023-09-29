@@ -12,11 +12,14 @@
   <%= f.hidden_field :user_id %>
 
   <div class="actions">
-  <%if current_user.already_entrolled? %>
-    <%= f.submit 'Entrolled', disabled: true %>
-  <% else %>
-    <%= f.submit 'Enroll' %>
-  <% end %>
+  <% if !current_user.already_entrolled?(@course) %>
+      <%= f.submit 'Enroll' %>
+    <% elsif %>
+      <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
+      <p>You are already entrolled in this course with status: <%= entrollment.status %></p>
+    <% else enrollment.status == "approved" %>
+      <% redirect_to courses_path %>
+    <% end %>
   </div>
 <% end %>
 
