@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   get 'courses/index'
   get 'courses/show'
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
   }
+ 
 
   root 'page#index'
   get 'admin/users', to: 'admin#users'
