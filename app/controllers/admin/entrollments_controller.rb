@@ -1,51 +1,25 @@
 class Admin::EntrollmentsController < ApplicationController
     before_action :check_admin_role
-    before_action :set_entrollment, only: [:edit, :update, :destroy, :show]
-
+    before_action :set_entrollment, only: [:update_status]
 
     def index
         @entrollments = Entrollment.all
-        Rails.logger.debug(@entrollments.inspect)
-      end
-    
-      def edit
-        @entrollment = Entrollment.find(params[:id])
-      end
-      def update
-        @entrollment = Entrollment.find(params[:id])
-        
-        if @entrollment.update(entrollment_params)
-          flash[:success] = 'Enrollment status updated.'
-          redirect_to admin_entrollments_path
-        else
-          flash[:error] = 'Failed to update enrollment status.'
-          Rails.logger.debug(@entrollment.errors.full_messages) # Log any validation errors
-          redirect_back(fallback_location: edit_admin_entrollment_path(@entrollment))
+    end
+    def update_status
+        @entrollment = Entrollment.find(params[:entrollment_id])
+        if params[:status].in?(Entrollment.statuses.keys)
+          @entrollment.update(status: params[:status])
         end
-      end
-      
-    
-        def destroy
-            @entrollment = Entrollment.find(params[:id])
-            if @entrollment.destroy
-              flash[:success] = 'Entrollment deleted.'
-            else
-              flash[:error] = 'Failed to delete entrollment.'
-            end
-            redirect_to admin_entrollments_path
-          end
-      def show
-        @entrollment = Entrollment.find(params[:id])
-
+        redirect_to admin_entrollments_path
       end
     
       private
     
       def set_entrollment
-        @entrollment = Entrollment.find(params[:id])
+        @entrollment = Entrollment.find(params[:entrollment_id])
       end
+
     
-      def entrollment_params
-        params.require(:entrollment).permit(:status, :course_id, :user_id)
-      end
+
+    
 end

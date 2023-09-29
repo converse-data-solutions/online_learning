@@ -29,7 +29,11 @@ end
     end
   end
   namespace :admin do
-    resources :entrollments, only: [:index, :edit, :update, :destroy, :show]
+    resources :entrollments, only: [:index, :edit, :update, :destroy, :show] do
+      member do
+        post :update_status
+      end
+    end
   end
   
 end

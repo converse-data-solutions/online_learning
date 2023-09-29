@@ -23,9 +23,3 @@ class EntrollmentsController < ApplicationController
         params.require(:entrollment).permit(:course_id, :user_id)
       end
 end
-params= {"authenticity_token"=>"[FILTERED]", "entrollment"=>{"status"=>"requested", "course_id"=>"2", "user_id"=>"3"}, "commit"=>"Entroll"}
-params[:entrollment
-]
-params = entrollment.course_id
-
-params["entrollment"]

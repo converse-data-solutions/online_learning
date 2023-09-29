@@ -3,22 +3,16 @@ class Entrollment < ApplicationRecord
   belongs_to :course
   
   enum status: {
-    requested: 0,
-    pending: 1,
-    approved: 2
+    pending: 0,
+    approved: 1,
+    denied: 2
   }
-    validates :status, presence: true
-
-  after_initialize :set_default_status
+  before_create :set_initial_status
 
 
   private
-
-  def set_default_status
-    # if self.user.admin?
-    #   self.status = :approved
-    # else
-    #   self.status = :requested
-    # end
-  end
+  
+    def set_initial_status
+      self.status = :pending
+    end
 end
