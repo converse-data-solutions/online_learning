@@ -1,0 +1,9 @@
+<tr>
+  <td><%= entrollment.user.email %></td>
+  <td><%= entrollment.course.course_name %></td>
+  <td><%= entrollment.status.humanize %></td>
+  <td>
+    <%= link_to 'Edit', edit_admin_entrollment_path(entrollment) %>
+    <%= link_to 'DELETE', admin_entrollment_path(entrollment), data: { turbo_method: :delete } %>
+  </td>
+</tr>

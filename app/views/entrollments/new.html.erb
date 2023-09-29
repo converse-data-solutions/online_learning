@@ -1,15 +1,18 @@
-<h1>Enroll in <%= @course.course_name %></h1>
+<h1>Entroll in <%= @course.course_name %></h1>
 
 <%= form_for @entrollment do |f| %>
+  <div class="field">
+    <label for="entrollment_status">Status</label>
+    <%= f.hidden_field :status, value: "requested" %>
+    Requested
+  </div>
+
   <%= f.hidden_field :course_id %>
   <%= f.hidden_field :user_id %>
-  
-  <div class="field">
-    <%= f.label :status %>
-    <%= f.select :status, [['Requested', 'requested'], ['Pending', 'pending'], ['Approved', 'approved']] %>
-  </div>
-  
+
   <div class="actions">
-    <%= f.submit 'Enroll' %>
+    <%= f.submit 'Entroll' %>
   </div>
 <% end %>
+
+<%= link_to 'Back to Courses', courses_path %>

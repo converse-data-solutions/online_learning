@@ -16,6 +16,7 @@
     <% else %>
       <p>No lesson attached to this record.</p>
     <% end %> 
+    <p><strong>Attachments:</strong> <%= @lesson.attachments %></p>
   <p><%= link_to 'Back', admin_section_lessons_path %></p>
 
   <%= link_to "create Lesson", new_admin_section_lesson_path(@lesson) %>

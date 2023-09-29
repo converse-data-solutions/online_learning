@@ -20,7 +20,15 @@
                     <p>No lesson attached to this record.</p>
                 <% end %>
               </td>
-              <td><%= link_to 'Edit', edit_admin_section_lesson_path(@section, lesson) %></td>
+ <td> <!-- Added a table cell for Attachments -->
+          <% if lesson.attachments.attached? %>
+            <% lesson.attachments.each do |attachment| %>
+              <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %><br>
+            <% end %>
+          <% else %>
+            <p>No attachments for this lesson.</p>
+          <% end %>
+        </td>              <td><%= link_to 'Edit', edit_admin_section_lesson_path(@section, lesson) %></td>
               <td><%= link_to 'DELETE', admin_section_lesson_path(@section, lesson), data: {turbo_method: :delete} %></td>
               <td><%= link_to 'Show', admin_section_lesson_path(@section, lesson) %></td>
             </tr>

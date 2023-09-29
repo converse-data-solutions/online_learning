@@ -28,4 +28,8 @@ end
       resources :lessons
     end
   end
+  namespace :admin do
+    resources :entrollments, only: [:index, :edit, :update, :destroy, :show]
+  end
+  
 end

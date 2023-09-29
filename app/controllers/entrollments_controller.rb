@@ -10,16 +10,22 @@ class EntrollmentsController < ApplicationController
         @entrollment = Entrollment.new(entrollment_params)
     
         if @entrollment.save
-          flash[:success] = 'Enrollment request submitted.'
+          flash[:success] = 'Entrollment request submitted.'
           redirect_to courses_path
         else
-          flash[:error] = 'Enrollment request not submitted.'
-          render 'new'
+          flash[:error] = 'Entrollment request not submitted.'
+          render :new
         end
       end
       private
     
       def entrollment_params
-        params.require(:entrollment).permit(:course_id, :user_id, :status)
+        params.require(:entrollment).permit(:course_id, :user_id)
       end
 end
+params= {"authenticity_token"=>"[FILTERED]", "entrollment"=>{"status"=>"requested", "course_id"=>"2", "user_id"=>"3"}, "commit"=>"Entroll"}
+params[:entrollment
+]
+params = entrollment.course_id
+
+params["entrollment"]

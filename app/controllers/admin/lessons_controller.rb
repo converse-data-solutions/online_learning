@@ -51,7 +51,7 @@ class Admin::LessonsController < ApplicationController
     private
 
     def lesson_params
-        params.require(:lesson).permit(:title, :description, :section_id, :clip)
+        params.require(:lesson).permit(:title, :description, :section_id, :clip, attachments: [])
     end
 
 end
