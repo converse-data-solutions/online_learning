@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: [:user, :admin]
+  enum role: { user: 0, admin: 1 }
 
   def already_entrolled?(course)
     entrollments.where(course: course).exists?

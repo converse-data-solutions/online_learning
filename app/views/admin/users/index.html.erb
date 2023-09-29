@@ -1,0 +1,59 @@
+<h1>Admin Users</h1>
+
+<%= form_for @new_admin, url: admin_users_path, method: :post do |f| %>
+  <h2>Create New Admin User</h2>
+  <div>
+  <%= f.label :email %>
+  <br>
+  <%= f.email_field :email, required: true %>
+</div>
+<br>
+<div>
+  <%= f.label :password %>
+  <br>
+  <%= f.password_field :password, required: true %>
+</div>
+<br>
+<div>
+  <%= f.label :password_confirmation %>
+  <br>
+  <%= f.password_field :password_confirmation, required: true %>
+</div>
+<br>
+<div>
+   <%= f.label :role %>
+   <br>
+  <%= f.select :role, User.roles.keys, { selected: @new_admin.role } %>
+</div>
+<br>
+  <%= f.submit "Create Admin User", class: 'btn btn-primary' %>
+<% end %>
+
+<h2>Existing Admin Users</h2>
+<table>
+  <thead>
+    <tr>
+      
+      <th>Email</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <td>
+          <%= form_for user, url: admin_user_path(user), method: :put do |f| %>
+            <%= f.select :role, User.roles.keys, { selected: user.role }, class: 'form-control' %>
+            <%= f.submit "Update", class: 'btn btn-primary' %>
+          <% end %>
+
+              <td><%= link_to 'DELETE', admin_user_path(user), data: {turbo_method: :delete} %></td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

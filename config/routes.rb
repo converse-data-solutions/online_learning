@@ -9,11 +9,15 @@ Rails.application.routes.draw do
  
 
   root 'page#index'
-  get 'admin/users', to: 'admin#users'
+  # get 'admin/users', to: 'admin#users'
 resources :entrollments
 resources :courses do
   resources :entrollments
 end
+
+  namespace :admin do
+    resources :users, only: [:index, :edit, :update, :create, :destroy, :show, :new]
+  end
 
   resources :courses, only: [:index, :show]
   resources :courses do
