@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'comments/create'
   get 'sections/show'
   get 'courses/index'
   get 'courses/show'
@@ -13,6 +14,17 @@ Rails.application.routes.draw do
 resources :entrollments
 resources :courses do
   resources :entrollments
+end
+resources :courses do
+  resources :comments, except: [:index, :show]
+end
+
+resources :sections do
+  resources :comments, only: [:create]
+end
+
+resources :lessons do
+  resources :comments, only: [:create]
 end
 
   namespace :admin do

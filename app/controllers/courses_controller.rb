@@ -7,6 +7,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @entrollment = Entrollment.new(user_id: current_user.id, course_id: @course.id)
-    render "entrollments/new"
+    @comments = @course.comments
+    @comment = Comment.new
   end
 end

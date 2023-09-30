@@ -1,0 +1,8 @@
+<h1>Edit Comment</h1>
+
+<%= form_with(model: [@course, @comment], url: course_comment_path(@course, @comment), method: :patch) do |form| %>
+  <%= form.text_area :body, placeholder: "Edit your comment..." %>
+  <%= form.submit "Update Comment" %>
+<% end %>
+
+<%= link_to "Back", course_path(@course) %>

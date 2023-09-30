@@ -1,0 +1,11 @@
+<!-- app/views/comments/_comments_form.html.erb -->
+
+<!-- Form to add a comment for the course -->
+<%= form_with(model: [@course, @comment], url: course_comments_path(@course)) do |form| %>
+  <%= form.text_area :body, placeholder: "Add a comment..." %>
+  
+  <!-- Add a hidden field for user_id -->
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <%= form.submit "Post Comment" %>
+<% end %>

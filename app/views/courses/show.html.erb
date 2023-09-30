@@ -1,16 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Course Details</title>
-</head>
-<body>
-  <h1>Course Details</h1>
-  <p><strong>Course:</strong> <%= @course.course_name %></p>
-  <p><strong>Description:</strong> <%= @course.description %></p>
-  <% if current_user %>
-  <%= link_to "Enroll", new_course_entrollment_path(course_id: @course.id) %>
-  <% end %>
-  <%= link_to "Back to Course", courses_path(@course) %>
+<h1>Entroll in <%= @course.course_name %></h1>
+ 
+<%= form_for @entrollment do |f| %>
+  <div class="field">
+    <label for="entrollment_status"></label>
+    <%= f.hidden_field :status, value: "pending" %>
+  </div>
 
-</body>
-</html>
+    <%= f.hidden_field :course_id %>
+  <%= f.hidden_field :user_id %>
+
+  <div class="actions">
+  <% if !current_user.already_entrolled?(@course) %>
+      <%= f.submit 'Enroll' %>
+    <% elsif %>
+      <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
+      <p>You are already entrolled in this course with status: <%= entrollment.status %></p>
+    <% else enrollment.status == "approved" %>
+      <% redirect_to courses_path %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Courses', courses_path %>
+
+
+
+
+
+
+<h1><%= @course.course_name %></h1>
+
+<%= form_with(model: [@course, @comment], url: course_comments_path(@course, @comment)) do |form| %>
+  <%= form.text_area :body, placeholder: "Add a comment..." %>
+  <%= form.hidden_field :commentable_id, value: @course.id %>
+  <%= form.hidden_field :commentable_type, value: @course.class.name %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <%= form.submit "Post Comment" %>
+<% end %>
+
+<% @course.comments.each do |comment| %>
+  <p><%= comment.body %></p>
+  <% if current_user == comment.user %>
+      <%= link_to "Edit", edit_course_comment_path(@course, comment) %> |
+      <%= link_to "Delete", course_comment_path(@course, comment), data: {turbo_method: :delete} %>
+    <% end %>
+<% end %>
