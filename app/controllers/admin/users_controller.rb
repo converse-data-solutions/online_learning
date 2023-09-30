@@ -13,7 +13,6 @@ class Admin::UsersController < ApplicationController
   
       def create
         @new_admin = User.new(new_admin_params)
-        binding.pry
       
         if @new_admin.save
           @new_admin.send_reset_password_instructions
@@ -33,8 +32,9 @@ class Admin::UsersController < ApplicationController
       def update
         @user = User.find(params[:id])
         @user.add_role(user_params[:role])
-      
-        if @user.update(user_params.except(:role))
+        byebug
+        if @user.update(user_params)
+          byebug
           flash[:notice] = "User information updated successfully."
           redirect_to admin_users_path
         else
