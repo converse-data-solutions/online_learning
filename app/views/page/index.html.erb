@@ -4,8 +4,9 @@
   <h1>Welcome Home, <%= current_user.email %></h1>
   <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %>
   <br>
+  <% if current_user.has_role? :admin %>
     <%= link_to 'Admin', admin_users_path %>
-
+  <% end %>
 <% else %>
   <h1>Home</h1>
   <%= link_to 'Sign in', new_user_session_path %>

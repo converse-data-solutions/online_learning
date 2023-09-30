@@ -1,33 +1,3 @@
-<h1>Admin Users</h1>
-
-<%= form_for @new_admin, url: admin_users_path, method: :post do |f| %>
-  <h2>Create New Admin User</h2>
-  <div>
-  <%= f.label :email %>
-  <br>
-  <%= f.email_field :email, required: true %>
-</div>
-<br>
-<div>
-  <%= f.label :password %>
-  <br>
-  <%= f.password_field :password, required: true %>
-</div>
-<br>
-<div>
-  <%= f.label :password_confirmation %>
-  <br>
-  <%= f.password_field :password_confirmation, required: true %>
-</div>
-<br>
-<div>
-   <%= f.label :role %>
-   <br>
-  <%= f.select :role, User.roles.keys, { selected: @new_admin.role } %>
-</div>
-<br>
-  <%= f.submit "Create Admin User", class: 'btn btn-primary' %>
-<% end %>
 
 <h2>Existing Admin Users</h2>
 <table>
@@ -47,7 +17,7 @@
         <td><%= user.role %></td>
         <td>
           <%= form_for user, url: admin_user_path(user), method: :put do |f| %>
-            <%= f.select :role, User.roles.keys, { selected: user.role }, class: 'form-control' %>
+            <%= f.select :role, [:admin, :student], { selected: user.has_role?(:admin) ? :admin : :student }, class: 'form-control' %>
             <%= f.submit "Update", class: 'btn btn-primary' %>
           <% end %>
 
@@ -57,3 +27,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= render partial: "form" %>

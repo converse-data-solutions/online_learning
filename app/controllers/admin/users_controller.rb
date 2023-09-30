@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
     before_action :authenticate_user!
     before_action :check_admin_role
-  
+    
     def index
         @users = User.all
         @new_admin = User.new
@@ -13,10 +13,10 @@ class Admin::UsersController < ApplicationController
   
       def create
         @new_admin = User.new(new_admin_params)
-      
-        @new_admin.add_role(:admin)
+        binding.pry
       
         if @new_admin.save
+          @new_admin.send_reset_password_instructions
           flash[:notice] = "Admin user created successfully."
           redirect_to admin_users_path
         else
@@ -63,7 +63,7 @@ class Admin::UsersController < ApplicationController
     end
   
     def new_admin_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:email, :password, :password_confirmation, :role)
     end
   
     def check_admin_role

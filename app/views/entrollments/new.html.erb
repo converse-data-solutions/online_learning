@@ -3,12 +3,11 @@
 <p class="alert"><%= alert %></p>
 <%= form_for @entrollment do |f| %>
   <div class="field">
-    <label for="entrollment_status">Status</label>
-    <%= f.hidden_field :status, value: "requested" %>
-    Requested
+    <label for="entrollment_status"></label>
+    <%= f.hidden_field :status, value: "pending" %>
   </div>
 
-  <%= f.hidden_field :course_id %>
+    <%= f.hidden_field :course_id %>
   <%= f.hidden_field :user_id %>
 
   <div class="actions">

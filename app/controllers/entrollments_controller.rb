@@ -11,7 +11,7 @@ class EntrollmentsController < ApplicationController
         @entrollment = Entrollment.new(entrollment_params)
     
         if @entrollment.save
-          flash[:success] = 'Entrollment request submitted.'
+          flash[:notice] = 'Entrollment request submitted.'
           redirect_to courses_path
         else
           flash[:error] = 'Entrollment request not submitted.'

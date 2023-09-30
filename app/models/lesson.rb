@@ -1,5 +1,5 @@
 class Lesson < ApplicationRecord
   belongs_to :section
-  has_one_attached :clip
-  has_many_attached :attachments
+  has_one_attached :clip, dependent: :destroy
+  has_many_attached :attachments, dependent: :destroy
 end
