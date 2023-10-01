@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lesson Details</title>
+</head>
+<body>
+<div class="container-fluid d-flex" >
+<div class="w-75">
+  <p><strong>Title:</strong> <%= @lesson.title %></p>
+  <p><strong>Description:</strong> <%= @lesson.description %></p>
+  <div>
+  <% if @lesson.clip.attached? %>
+    <video
+      id="video-<%= @lesson.id %>" class="video-js" controls preload="auto" width="640" height="264"
+      data-setup="{}">
+      <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
+    </video>
+    <% else %>
+      <p>No lesson attached to this record.</p>
+  <% end %>
+  </div>
+  <div>
+  <% if @lesson.attachments.attached? %>
+        <% @lesson.attachments.each do |attachment| %>
+        <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %><br>
+        <% end %>
+    <% else %>
+        <p>No attachments for this lesson.</p>
+  <% end %>
+  </div>
+  <h1><%= @lesson.title %></h1>
+
+<%= form_with(model: [@lesson, @comment], url: section_comments_path(@lesson, @comment)) do |form| %>
+  <%= form.text_area :body, placeholder: "Add a comment..." %>
+  <%= form.hidden_field :commentable_id, value: @lesson.id %>
+  <%= form.hidden_field :commentable_type, value: @lesson.class.name %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <%= form.submit "Post Comment" %>
+<% end %>
+
+<% @lesson.comments.each do |comment| %>
+  <p><%= comment.body %></p>
+  <% if current_user == comment.user %>
+      <%= link_to "Edit" %> |
+      <%= link_to "Delete" %>
+    <% end %>
+<% end %>
+</div>
+
+<div class="w-25" >
+<div class="accordion" id="accordionExample">
+  <% @lesson.get_all_sections.each_with_index do |section, index| %>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading<%= index %>">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="true" aria-controls="collapse<%= index %>">
+          <%= section.title %>
+        </button>
+      </h2>
+      <div id="collapse<%= index %>" class="accordion-collapse collapse show" aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <ul>
+            <% section.lessons.each do |lesson| %>
+              <div class="d-flex justify-content-between">
+                <div>
+                  <li class="list-unstyled text-decoration-none">
+                    <%= link_to lesson.title, lesson, class: "text-decoration-none" %>
+                  </li>
+                </div>
+                <div>
+                  <li class="list-unstyled text-decoration-none me-5">
+                  </li>
+                </div>
+              </div>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -4,4 +4,7 @@ class Lesson < ApplicationRecord
   has_many_attached :attachments, dependent: :destroy
   has_many :comments, as: :commentable
 
+  def get_all_sections
+    Section.where(course_id: self.section.course_id)
+  end
 end

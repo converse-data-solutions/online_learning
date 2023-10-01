@@ -1,17 +1,19 @@
+<div class="container">
 <h1>Courses</h1>
-      <table >
-        <thead>
-          <th>Course Name</th>
-          <th>Description</th>
-        </thead>
-        <tbody>
-          <% @courses.each do |course| %>
-            <tr>
-              <td><%= course.course_name %></td>
-              <td><%= course.description %></td>
-              <td><%= link_to 'Show', course_path(course) %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>  
-<%= link_to "home", root_path %>
+<% @courses.each_slice(4) do |courses| %>
+<div class="row">
+<% courses.each do |course| %>
+<div class="col-sm-3">
+<div class="card" style="width: 18rem;">
+  <img src="<%= asset_path("nature.jpeg") %>" class="card-img-top" alt="..." style="height: 286px;">
+  <div class="card-body">
+    <h5 class="card-title"><%= course.course_name %></h5>
+    <p class="card-text"><%= course.description %></p>
+    <%= link_to 'Show', course_path(course), class: "btn btn-primary" %>
+  </div>
+</div>
+</div>
+<% end %>
+</div>
+<% end %>
+</div>

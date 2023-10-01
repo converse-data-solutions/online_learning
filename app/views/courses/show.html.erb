@@ -1,3 +1,4 @@
+<div class="container">
 <h1>Entroll in <%= @course.course_name %></h1>
  
 <%= form_for @entrollment do |f| %>
@@ -12,16 +13,17 @@
   <div class="actions">
   <% if !current_user.already_entrolled?(@course) %>
       <%= f.submit 'Enroll' %>
-    <% elsif %>
+    <% else %>
       <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
       <p>You are already entrolled in this course with status: <%= entrollment.status %></p>
-    <% else enrollment.status == "approved" %>
-      <% redirect_to courses_path %>
-    <% end %>
+    <% if entrollment.status == "approved" %>
+      <%= link_to "view Sections", course_sections_path(@course), class: "btn btn-primary" %>
+     <% end %>
+    <% end %> 
   </div>
 <% end %>
 
-<%= link_to 'Back to Courses', courses_path %>
+<%= link_to 'Back to Courses', courses_path, class: "btn btn-primary" %>
 
 
 
@@ -31,13 +33,13 @@
 <h1><%= @course.course_name %></h1>
 
 <%= form_with(model: [@course, @comment], url: course_comments_path(@course, @comment)) do |form| %>
-  <%= form.text_area :body, placeholder: "Add a comment..." %>
+  <%= form.text_area :body, placeholder: "Add a comment..." , class: "form-control" , rows: "3" %>
   <%= form.hidden_field :commentable_id, value: @course.id %>
   <%= form.hidden_field :commentable_type, value: @course.class.name %>
 
   <%= form.hidden_field :user_id, value: current_user.id %>
 
-  <%= form.submit "Post Comment" %>
+  <%= form.submit "Post Comment", class: "btn btn-info" %>
 <% end %>
 
 <% @course.comments.each do |comment| %>
@@ -47,3 +49,74 @@
       <%= link_to "Delete", course_comment_path(@course, comment), data: {turbo_method: :delete} %>
     <% end %>
 <% end %>
+
+
+
+
+<div class="card border-0">
+  <div class="card-body">
+    <h5 class="card-title"><%= @course.course_name %></h5>
+    <%# <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> %>
+    <p class="card-text"><%= @course.description %></p>
+    <p class="card-text">Created at: <%= @course.created_at.strftime("%B %d, %Y") %></p>
+    <a href="#" class="card-link text-decoration-none"><%= form_for @entrollment do |f| %>
+  <div class="field">
+    <label for="entrollment_status"></label>
+    <%= f.hidden_field :status, value: "pending" %>
+  </div>
+
+    <%= f.hidden_field :course_id %>
+  <%= f.hidden_field :user_id %>
+
+  <div class="actions">
+  <% if !current_user.already_entrolled?(@course) %>
+      <%= f.submit 'Enroll', class: "btn btn-secondary" %>
+    <% else %>
+      <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
+    <% if entrollment.status == "approved" %>
+      <%= link_to "view Sections", course_sections_path(@course), class: "btn btn-secondary" %>
+      <% else %>
+    <p class="text-decoration-none">You are already entrolled in this course with status: <%= entrollment.status %></p>
+     <% end %>
+    <% end %> 
+  </div>
+<% end %></a>
+  </div>
+</div>
+<% @sections.each do |section|%>
+<p><%= section.title %></p>
+<% end%>
+
+
+<div class="accordion" id="accordionExample">
+  <% @sections.each_with_index do |section, index| %>
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="heading<%= index %>">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="true" aria-controls="collapse<%= index %>">
+          <%= section.title %>
+        </button>
+      </h2>
+      <div id="collapse<%= index %>" class="accordion-collapse collapse show" aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <ul>
+            <% section.lessons.each do |lesson| %>
+              <div class="d-flex justify-content-between">
+                <div>
+                  <li class="list-unstyled text-decoration-none">
+                    <%= link_to lesson.title, lesson, class: "text-decoration-none" %>
+                  </li>
+                </div>
+                <div>
+                  <li class="list-unstyled text-decoration-none me-5">
+                    <%= link_to "preview", lesson_path(lesson), class: "text-decoration-none" %>
+                  </li>
+                </div>
+              </div>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>

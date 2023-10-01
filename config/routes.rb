@@ -32,9 +32,15 @@ end
   end
 
   resources :courses, only: [:index, :show]
+
   resources :courses do
     resources :sections
   end
+
+  resources :sections do
+    resources :lessons
+  end
+
   namespace :admin do
     resources :courses do
       resources :sections

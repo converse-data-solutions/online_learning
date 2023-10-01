@@ -1,0 +1,39 @@
+     <table >
+        <thead>
+          <th>title</th>
+          <th>Description</th>
+        </thead>
+        <tbody>
+          <% @lessons.each do |lesson| %>
+            <tr>
+              <td><%= lesson.title %></td>
+              <td><%= lesson.description %>
+            <td>
+                <% if lesson.clip.attached? %>
+                  <video
+                    id="video-<%= lesson.id %>" class="video-js" controls preload="auto" 
+                    data-setup="{}" >
+                    <source src="<%= url_for(lesson.clip) %>" type="video/mp4" />
+                  </video>
+                  <% else %>
+                    <p>No lesson attached to this record.</p>
+                <% end %>
+            </td>
+            <td> 
+            <% if lesson.attachments.attached? %>
+                <% lesson.attachments.each do |attachment| %>
+                <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %><br>
+                <% end %>
+            <% else %>
+                <p>No attachments for this lesson.</p>
+            <% end %>
+            </td>
+            </tr>
+          <% end %>
+          <td><%= link_to "show"%></td>
+        </tbody>
+      </table>  
+
+      <br>
+      <br>
+<%= link_to "Courses", courses_path %>

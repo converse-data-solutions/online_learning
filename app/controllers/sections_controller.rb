@@ -7,5 +7,7 @@ class SectionsController < ApplicationController
   def show
     @course = Course.find(params[:course_id])
     @section = @course.sections.find(params[:id])
+    @comments = @section.comments
+    @comment = Comment.new
   end
 end

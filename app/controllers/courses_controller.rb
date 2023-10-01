@@ -6,6 +6,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+    @sections = @course.sections
     @entrollment = Entrollment.new(user_id: current_user.id, course_id: @course.id)
     @comments = @course.comments
     @comment = Comment.new

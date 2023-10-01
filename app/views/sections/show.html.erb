@@ -1,1 +1,34 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Section Details</title>
+</head>
+<body>
+  <h1>Course Details</h1>
+  <p><strong>Title:</strong> <%= @section.title %></p>
+  <p><strong>Description:</strong> <%= @section.description %></p>
+  <p><%= link_to 'Back to Sections', course_sections_path %></p>
+  <p><%= link_to 'Back to Courses', courses_path %></p>
+</body>
+</html>
+
+<h1><%= @section.title %></h1>
+
+<%= form_with(model: [@section, @comment], url: section_comments_path(@section, @comment)) do |form| %>
+  <%= form.text_area :body, placeholder: "Add a comment..." %>
+  <%= form.hidden_field :commentable_id, value: @section.id %>
+  <%= form.hidden_field :commentable_type, value: @section.class.name %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <%= form.submit "Post Comment" %>
+<% end %>
+
+<% @section.comments.each do |comment| %>
+  <p><%= comment.body %></p>
+  <% if current_user == comment.user %>
+      <%= link_to "Edit" %> |
+      <%= link_to "Delete" %>
+    <% end %>
+<% end %>
