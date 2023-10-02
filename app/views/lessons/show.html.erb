@@ -12,7 +12,7 @@
   <div>
   <% if @lesson.clip.attached? %>
     <video
-      id="video-<%= @lesson.id %>" class="video-js" controls preload="auto" width="640" height="264"
+      id="video-<%= @lesson.id %>" class="video-js my-player" controls preload="auto" width="1350" height="700"
       data-setup="{}">
       <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
     </video>
@@ -50,7 +50,7 @@
 <% end %>
 </div>
 
-<div class="w-25" >
+<div class="w-25">
 <div class="accordion" id="accordionExample">
   <% @lesson.get_all_sections.each_with_index do |section, index| %>
     <div class="accordion-item">

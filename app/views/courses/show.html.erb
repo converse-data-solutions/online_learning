@@ -27,32 +27,6 @@
 
 
 
-
-
-
-<h1><%= @course.course_name %></h1>
-
-<%= form_with(model: [@course, @comment], url: course_comments_path(@course, @comment)) do |form| %>
-  <%= form.text_area :body, placeholder: "Add a comment..." , class: "form-control" , rows: "3" %>
-  <%= form.hidden_field :commentable_id, value: @course.id %>
-  <%= form.hidden_field :commentable_type, value: @course.class.name %>
-
-  <%= form.hidden_field :user_id, value: current_user.id %>
-
-  <%= form.submit "Post Comment", class: "btn btn-info" %>
-<% end %>
-
-<% @course.comments.each do |comment| %>
-  <p><%= comment.body %></p>
-  <% if current_user == comment.user %>
-      <%= link_to "Edit", edit_course_comment_path(@course, comment) %> |
-      <%= link_to "Delete", course_comment_path(@course, comment), data: {turbo_method: :delete} %>
-    <% end %>
-<% end %>
-
-
-
-
 <div class="card border-0">
   <div class="card-body">
     <h5 class="card-title"><%= @course.course_name %></h5>
@@ -118,5 +92,33 @@
       </div>
     </div>
   <% end %>
+</div>
+<div class="mt-5">
+<%= form_with(model: [@course, @comment], url: course_comments_path(@course, @comment)) do |form| %>
+  <%= form.text_area :body, placeholder: "Add a comment..." , class: "form-control" , rows: "3" %>
+  <%= form.hidden_field :commentable_id, value: @course.id %>
+  <%= form.hidden_field :commentable_type, value: @course.class.name %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <%= form.submit "Post Comment", class: "btn btn-info" %>
+<% end %>
+
+<div class="row gap-5 mt-5">
+<% @course.comments.each do |comment| %>
+<div class="card row col-sm-4 gap-2" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= comment.user.email %></h5>
+    <p class="card-text"><%= comment.body %></p>
+    <h6 class="card-subtitle mb-2 text-muted"><%= comment.created_at.strftime("%B %d, %Y") %></h6>
+    <% if current_user == comment.user %>
+      <%= link_to "Edit", edit_course_comment_path(@course, comment), :class=>"card-link btn btn-secondary" %>  
+      <%= link_to "Delete", course_comment_path(@course, comment), data: {turbo_method: :delete}, :class=> "card-link btn btn-secondary" %>
+    <% end %>
+  </div>
+ 
+</div>
+ <% end %>
+ </div>
 </div>
 </div>
