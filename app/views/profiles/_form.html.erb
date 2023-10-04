@@ -1,0 +1,53 @@
+<%= form_with(model: profile) do |form| %>
+  <% if profile.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+        <% profile.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+  <%= form.label :gender, "Gender", style: "display: block" %>
+  <%= form.select :gender, ["Male", "Female", "Other"], {}, prompt: "Select gender" %>
+  </div>
+
+
+  <div>
+    <%= form.label :age, style: "display: block" %>
+    <%= form.number_field :age %>
+  </div>
+
+  <div>
+    <%= form.label :phno, style: "display: block" %>
+    <%= form.text_field :phno %>
+  </div>
+
+  <div>
+  <%= form.label :qualification, "Qualification", style: "display: block" %>
+  <%= form.select :qualification, ["B.Sc", "B.Tech", "M.Sc", "M.Tech", "Ph.D", "Diploma", "MCA", "MBA", "B.A", "B.Com", "M.Com", "CS", "B.Ed", "M.Ed", "Other"], {}, prompt: "Select qualification" %>
+</div>
+
+
+  <div>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div>
+  <%= form.label :image, style: "display: block" %>
+  <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

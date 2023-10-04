@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one :profile
   has_many :entrollments,  dependent: :destroy
   has_many :comments, as: :commentable
   has_many :ratings, as: :rateable
