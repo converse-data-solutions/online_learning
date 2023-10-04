@@ -8,6 +8,9 @@
   <%= f.email_field :email, required: true %>
 </div>
 <br>
+<%= f.hidden_field :commentable_id, value: @new_admin.id %>
+  <%= f.hidden_field :commentable_type, value: @new_admin.class.name %>
+
 <div>
   <%= f.label :password %>
   <br>

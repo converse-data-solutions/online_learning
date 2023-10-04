@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:notice] = "Comment created successfully"
     else
-      flash[:alert] = "Comment creation failed"
+      flash[:alert] = "You have already commented for this course." 
     end
 
     redirect_back(fallback_location: root_path)

@@ -41,6 +41,19 @@ end
     resources :lessons
   end
 
+  resources :courses do
+    resources :ratings, only: [:create]
+  end 
+  
+  resources :sections do
+    resources :ratings, only: [:update]
+  end
+  
+  resources :lessons do
+    resources :ratings, only: [:update]
+  end
+  
+
   namespace :admin do
     resources :courses do
       resources :sections

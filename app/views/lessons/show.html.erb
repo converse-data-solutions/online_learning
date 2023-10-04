@@ -12,8 +12,8 @@
   <div>
   <% if @lesson.clip.attached? %>
     <video
-      id="video-<%= @lesson.id %>" class="video-js my-player" controls preload="auto" width="1350" height="700"
-      data-setup="{}">
+      id="video-<%= @lesson.id %>" class="video-js my-player" controls="false" loop="true" preload="auto" width="1350" height="700" autoplay ="muted"
+      data-setup="{}"  >
       <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
     </video>
     <% else %>
@@ -83,5 +83,69 @@
 </div>
 </div>
 </div>
+<script>
+var player = null;
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("Hai");
+  var videos = document.querySelectorAll('video');
+
+  videos.forEach(function(video) {
+    videojs(video.id, {}, function() {
+      var player = this;
+
+      videojs('video', {
+  controlBar: {
+    skipButtons: {
+      forward: 5
+    }
+  }
+});
+
+      // player.controlBar.addChild('button', {
+      //   text: '< Backward',
+      //   el: videojs.createEl('button', {
+      //     className: 'vjs-backward-button vjs-control',
+      //     innerHTML: '<span class="vjs-icon-placeholder"></span> Backward'
+      //   }),
+      //   onClick: function () {
+      //     player.currentTime(player.currentTime() - 10); ``
+      //   }
+      // });
+
+      // player.controlBar.addChild('button', {
+      //   text: 'Forward >',
+      //   el: videojs.createEl('button', {
+      //     className: 'vjs-forward-button vjs-control',
+      //     innerHTML: 'Forward <span class="vjs-icon-placeholder"></span>'
+      //   }),
+      //   onClick: function () {
+      //     player.currentTime(player.currentTime() + 10); 
+      //   }
+      // });
+
+      player.on('play', function() {
+        videos.forEach(function(otherVideo) {
+          if (otherVideo !== video) {
+            videojs(otherVideo.id).pause();
+          }
+        });
+      });
+
+      console.log(player);
+
+      player.on('timeupdate', function () {
+
+        let currentTime = player.currentTime();
+        
+        console.log("Current Time of the Video Player: ", currentTime)
+         
+      });
+    });
+  });
+});
+
+
+
+</script>
 </body>
 </html>

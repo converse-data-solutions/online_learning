@@ -4,9 +4,10 @@
   <title>Section Details</title>
 </head>
 <body>
-  <h1>Course Details</h1>
+  <h1>Section Details</h1>
   <p><strong>Title:</strong> <%= @section.title %></p>
   <p><strong>Description:</strong> <%= @section.description %></p>
   <p><%= link_to 'Back', admin_course_sections_path %></p>
 </body>
 </html>
+<%= link_to "Lessons", admin_section_lessons_path(@section) %>

@@ -33,6 +33,24 @@
     <%# <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> %>
     <p class="card-text"><%= @course.description %></p>
     <p class="card-text">Created at: <%= @course.created_at.strftime("%B %d, %Y") %></p>
+     
+<% if @course.ratings.any? %>
+    <% total_stars = @course.ratings.sum(:star) %>
+    <% average_rating = total_stars.to_f / @course.ratings.count %>
+    <p>Average Rating: 
+      <% (1..5).each do |i| %>
+        <% if average_rating >= i %>
+          <i class="fas fa-star" style="color: gold;"></i>
+        <% else %>
+          <i class="far fa-star" style="color: gold;"></i>
+        <% end %>
+      <% end %>
+      (<%= average_rating.round(1) %> stars)
+    </p>
+<% else %>
+  <p>No ratings yet for this course.</p>
+<% end %>
+
     <a href="#" class="card-link text-decoration-none"><%= form_for @entrollment do |f| %>
   <div class="field">
     <label for="entrollment_status"></label>
@@ -105,20 +123,39 @@
 <% end %>
 
 <div class="row gap-5 mt-5">
-<% @course.comments.each do |comment| %>
-<div class="card row col-sm-4 gap-2" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title"><%= comment.user.email %></h5>
-    <p class="card-text"><%= comment.body %></p>
-    <h6 class="card-subtitle mb-2 text-muted"><%= comment.created_at.strftime("%B %d, %Y") %></h6>
-    <% if current_user == comment.user %>
-      <%= link_to "Edit", edit_course_comment_path(@course, comment), :class=>"card-link btn btn-secondary" %>  
-      <%= link_to "Delete", course_comment_path(@course, comment), data: {turbo_method: :delete}, :class=> "card-link btn btn-secondary" %>
-    <% end %>
-  </div>
- 
+  <% @course.comments.each do |comment| %>
+    <div class="card row col-sm-4 gap-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= comment.user.email %></h5>
+        <p class="card-text"><%= comment.body %></p>
+        <h6 class="card-subtitle mb-2 text-muted"><%= comment.created_at.strftime("%B %d, %Y") %></h6>
+        <% if current_user == comment.user %>
+          <%= link_to "Edit", edit_course_comment_path(@course, comment), :class=>"card-link btn btn-secondary" %>  
+          <%= link_to "Delete", course_comment_path(@course, comment), data: {turbo_method: :delete}, :class=> "card-link btn btn-secondary" %>
+          <% end %>
+        <% user_rating = @course.ratings.find_by(user_id: comment.user_id) %>
+        <% if user_rating %>
+          <div>
+            <%= comment.user.email %>'s Rating:
+            <% (1..5).each do |i| %>
+              <% if user_rating.star >= i %>
+                <i class="fas fa-star" style="color: gold;"></i>
+              <% else %>
+                <i class="far fa-star" style="color: gold;"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <% else %>
+            <p>No ratings yet for this course.</p>
+        <% end %>
+        
+      </div>
+    </div>
+  <% end %>
 </div>
- <% end %>
- </div>
+<% if user_signed_in? %>
+          <%= render 'ratings/form', rateable: @course %>
+        <% end %>
+
 </div>
 </div>
