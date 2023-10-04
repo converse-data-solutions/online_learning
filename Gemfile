@@ -5,6 +5,7 @@ ruby "3.2.2"
 gem 'devise'
 gem 'cancan'
 gem 'rolify', '~> 6.0', '>= 6.0.1'
+gem 'htmlbeautifier', '~> 1.4', '>= 1.4.2'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8"
 
