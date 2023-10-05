@@ -1,27 +1,4 @@
 <div class="container">
-<h1>Entroll in <%= @course.course_name %></h1>
- 
-<%= form_for @entrollment do |f| %>
-  <div class="field">
-    <label for="entrollment_status"></label>
-    <%= f.hidden_field :status, value: "pending" %>
-  </div>
-
-    <%= f.hidden_field :course_id %>
-  <%= f.hidden_field :user_id %>
-
-  <div class="actions">
-  <% if !current_user.already_entrolled?(@course) %>
-      <%= f.submit 'Enroll' %>
-    <% else %>
-      <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
-      <p>You are already entrolled in this course with status: <%= entrollment.status %></p>
-    <% if entrollment.status == "approved" %>
-      <%= link_to "view Sections", course_sections_path(@course), class: "btn btn-primary" %>
-     <% end %>
-    <% end %> 
-  </div>
-<% end %>
 
 <%= link_to 'Back to Courses', courses_path, class: "btn btn-primary" %>
 
@@ -75,10 +52,6 @@
 <% end %></a>
   </div>
 </div>
-<% @sections.each do |section|%>
-<p><%= section.title %></p>
-<% end%>
-
 
 <div class="accordion" id="accordionExample">
   <% @sections.each_with_index do |section, index| %>
@@ -121,6 +94,9 @@
 
   <%= form.submit "Post Comment", class: "btn btn-info" %>
 <% end %>
+    <% if user_signed_in? %>
+      <%= render 'ratings/form', rateable: @course %>
+    <% end %>
 </div>
 
 <div class="row gap-5 mt-5">
@@ -154,9 +130,5 @@
     </div>
   <% end %>
 </div>
-<% if user_signed_in? %>
-          <%= render 'ratings/form', rateable: @course %>
-        <% end %>
-
 </div>
 </div>

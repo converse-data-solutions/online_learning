@@ -93,30 +93,6 @@ document.addEventListener("DOMContentLoaded", function() {
     videojs(video.id, {}, function() {
       var player = this;
 
-     
-
-      // player.controlBar.addChild('button', {
-      //   text: '< Backward',
-      //   el: videojs.createEl('button', {
-      //     className: 'vjs-backward-button vjs-control',
-      //     innerHTML: '<span class="vjs-icon-placeholder"></span> Backward'
-      //   }),
-      //   onClick: function () {
-      //     player.currentTime(player.currentTime() - 10); ``
-      //   }
-      // });
-
-      // player.controlBar.addChild('button', {
-      //   text: 'Forward >',
-      //   el: videojs.createEl('button', {
-      //     className: 'vjs-forward-button vjs-control',
-      //     innerHTML: 'Forward <span class="vjs-icon-placeholder"></span>'
-      //   }),
-      //   onClick: function () {
-      //     player.currentTime(player.currentTime() + 10); 
-      //   }
-      // });
-
       player.on('play', function() {
         videos.forEach(function(otherVideo) {
           if (otherVideo !== video) {

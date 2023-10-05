@@ -1,4 +1,4 @@
-<%= form_with(model: Rating.new, url: course_ratings_path(@course), local: true, remote: true, class: "rating-form", data: { course_id: @course.id, rateable_type: rateable.class.name, rateable_id: rateable.id }) do |f| %>
+<%= form_with(model: Rating.new, url: course_ratings_path(@course), remote: true, class: "rating-form", data: { course_id: @course.id, rateable_type: rateable.class.name, rateable_id: rateable.id }) do |f| %>
   <div class="star-rating">
     <% (1..5).each do |value| %>
       <span class="star" data-value="<%= value %>"><i class="fas fa-star"></i></span>

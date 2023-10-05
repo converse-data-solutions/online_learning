@@ -16,9 +16,9 @@ resources :entrollments
 resources :courses do
   resources :entrollments
 end
-resources :courses do
-  resources :comments, except: [:index, :show]
-end
+  resources :courses do
+    resources :comments, except: [:index, :show]
+  end
 
 resources :sections do
   resources :comments, only: [:create]
@@ -72,6 +72,10 @@ end
         post :update_status
       end
     end
+  end
+
+  namespace :admin do
+    resources :entrollment_details
   end
   
 end
