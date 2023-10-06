@@ -74,6 +74,10 @@ end
       end
     end
   end
+
+  namespace :admin do
+    resources :entrollment_details
+  end
   
   namespace :admin do
     resources :lessons do
