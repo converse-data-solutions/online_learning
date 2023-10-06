@@ -16,9 +16,9 @@ resources :entrollments
 resources :courses do
   resources :entrollments
 end
-resources :courses do
-  resources :comments, except: [:index, :show]
-end
+  resources :courses do
+    resources :comments, except: [:index, :show]
+  end
 
 resources :sections do
   resources :comments, only: [:create]
@@ -37,9 +37,10 @@ end
   resources :courses do
     resources :sections
   end
-
-  resources :sections do
-    resources :lessons
+  resources :courses do
+    resources :sections do
+      resources :lessons
+    end
   end
 
   resources :courses do
@@ -70,6 +71,16 @@ end
     resources :entrollments, only: [:index, :edit, :update, :destroy, :show] do
       member do
         post :update_status
+      end
+    end
+  end
+  
+  namespace :admin do
+    resources :lessons do
+      resources :entrollment_details do
+        member do
+          get 'update_progress'
+        end
       end
     end
   end

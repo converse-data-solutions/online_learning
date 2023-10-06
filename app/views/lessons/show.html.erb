@@ -12,9 +12,16 @@
   <div>
   <% if @lesson.clip.attached? %>
     <video
-      id="video-<%= @lesson.id %>" class="video-js my-player" controls="false" loop="true" preload="auto" width="1350" height="700" autoplay ="muted"
-      data-setup="{}"  >
+      id="video-<%= @lesson.id %>" class="video-js my-player" preload="auto" width="1350" height="700" controls 
+      data-setup="{}"   >
       <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
+      <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a
+      web browser that
+      <a href="https://videojs.com/html5-video-support/" target="_blank"
+        >supports HTML5 video</a
+      >
+    </p>
     </video>
     <% else %>
       <p>No lesson attached to this record.</p>
@@ -83,7 +90,24 @@
 </div>
 </div>
 </div>
+<%= link_to "View Progress", admin_lesson_entrollment_detail_path(@lesson) %>
+
 <script>
+var media = videojs("video-<%= @lesson.id %>",{
+  autoPlay: 'muted',
+  loop: true,
+  controls: true,
+  fluid: true,
+  aspectRatio: '16:9',
+  playbackRates: [0.5, 1, 1.5, 2],
+  html5: true,
+  userActions: { 
+    hotkeys: {
+      enable: true,
+      seekStep: 5
+    }
+  }
+});
 var player = null;
 document.addEventListener("DOMContentLoaded", function() {
   console.log("Hai");
@@ -92,30 +116,6 @@ document.addEventListener("DOMContentLoaded", function() {
   videos.forEach(function(video) {
     videojs(video.id, {}, function() {
       var player = this;
-
-     
-
-      // player.controlBar.addChild('button', {
-      //   text: '< Backward',
-      //   el: videojs.createEl('button', {
-      //     className: 'vjs-backward-button vjs-control',
-      //     innerHTML: '<span class="vjs-icon-placeholder"></span> Backward'
-      //   }),
-      //   onClick: function () {
-      //     player.currentTime(player.currentTime() - 10); ``
-      //   }
-      // });
-
-      // player.controlBar.addChild('button', {
-      //   text: 'Forward >',
-      //   el: videojs.createEl('button', {
-      //     className: 'vjs-forward-button vjs-control',
-      //     innerHTML: 'Forward <span class="vjs-icon-placeholder"></span>'
-      //   }),
-      //   onClick: function () {
-      //     player.currentTime(player.currentTime() + 10); 
-      //   }
-      // });
 
       player.on('play', function() {
         videos.forEach(function(otherVideo) {
@@ -128,18 +128,40 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log(player);
 
       player.on('timeupdate', function () {
+        // let currentTime = player.currentTime();
+        // let a = video.duration;
+        // console.log("Video Duration: ", a);
+        // console.log("Current Time of the Video Player: ", currentTime)
+      var videoDuration = video.duration;
+        if (isNaN(videoDuration)) videoDuration = 0;
+        console.log("Video Duration: ", videoDuration);
+        player.on('timeupdate', function () {
+        var currentTime = player.currentTime();
+        var videoPercentage = (currentTime / videoDuration) * 100;
 
-        let currentTime = player.currentTime();
-        
-        console.log("Current Time of the Video Player: ", currentTime)
-         
+        console.log("Current Time of the Video Player: ", currentTime);
+        console.log("Video Percentage: ", videoPercentage);
+
+        $.ajax({
+          url: '<%= update_progress_admin_lesson_entrollment_detail_path(@lesson, @entrollment) %>',
+          method: 'GET',
+          data: {
+            entrollment_id: <%= @entrollment[1] %>,
+            lesson_id: <%= @lesson.id %>,
+            progress: videoPercentage
+          },
+          success: function(response) {
+            console.log("Successfully updated");
+          },
+          error: function(error) {
+            console.log("Not updated");
+          }
+        });
+      }); 
       });
     });
   });
 });
-
-
-
 </script>
 </body>
 </html>

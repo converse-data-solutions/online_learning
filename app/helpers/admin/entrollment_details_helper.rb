@@ -1,0 +1,2 @@
+module Admin::EntrollmentDetailsHelper
+end

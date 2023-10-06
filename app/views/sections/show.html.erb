@@ -10,6 +10,7 @@
   <p><strong>Description:</strong> <%= @section.description %></p>
   <p><%= link_to 'Back to Sections', course_sections_path %></p>
   <p><%= link_to 'Back to Courses', courses_path %></p>
+  <p></p><%= link_to "Lessons", course_section_lessons_path(@course, @section)%>
 </body>
 </html>
 

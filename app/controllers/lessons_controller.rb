@@ -8,6 +8,8 @@ class LessonsController < ApplicationController
     def show
         @lesson = Lesson.find(params[:id])
         @sections = Lesson.where(section_id: @lesson.section_id)
+        @course = @lesson.section.course
+        @entrollment = @course.entrollment.pluck(:id)
         @comments = @lesson.comments
         @comment = Comment.new
       end

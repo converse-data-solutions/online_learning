@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_04_180044) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_05_062828) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,6 +55,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_180044) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "entrollment_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.float "view_time"
+    t.boolean "status"
+    t.bigint "entrollment_id", null: false
+    t.bigint "lesson_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entrollment_id"], name: "index_entrollment_details_on_entrollment_id"
+    t.index ["lesson_id"], name: "index_entrollment_details_on_lesson_id"
   end
 
   create_table "entrollments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -147,6 +158,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_180044) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
+  add_foreign_key "entrollment_details", "entrollments"
+  add_foreign_key "entrollment_details", "lessons"
   add_foreign_key "entrollments", "courses"
   add_foreign_key "entrollments", "users"
   add_foreign_key "lessons", "sections"

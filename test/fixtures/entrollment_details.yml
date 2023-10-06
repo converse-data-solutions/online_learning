@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  view_time: 1.5
+  status: false
+  entrollment: one
+  lesson: one
+
+two:
+  view_time: 1.5
+  status: false
+  entrollment: two
+  lesson: two

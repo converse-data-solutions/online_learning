@@ -5,7 +5,6 @@
 <div id="profiles">
   <% @profiles.each do |profile| %>
     <%= render profile %>
-    <%= image_tag profile.image%>
     <p>
       <%= link_to "Show this profile", profile %>
     </p>
