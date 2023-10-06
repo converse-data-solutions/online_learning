@@ -127,10 +127,6 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log(player);
 
       player.on('timeupdate', function () {
-        // let currentTime = player.currentTime();
-        // let a = video.duration;
-        // console.log("Video Duration: ", a);
-        // console.log("Current Time of the Video Player: ", currentTime)
       var videoDuration = video.duration;
         if (isNaN(videoDuration)) videoDuration = 0;
         console.log("Video Duration: ", videoDuration);
