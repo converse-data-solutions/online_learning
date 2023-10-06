@@ -90,7 +90,6 @@
 </div>
 </div>
 </div>
-<%= link_to "View Progress", admin_lesson_entrollment_detail_path(@lesson) %>
 
 <script>
 var media = videojs("video-<%= @lesson.id %>",{
@@ -143,10 +142,10 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Video Percentage: ", videoPercentage);
 
         $.ajax({
-          url: '<%= update_progress_admin_lesson_entrollment_detail_path(@lesson, @entrollment) %>',
+          url: '<%= update_progress_path %>',
           method: 'GET',
           data: {
-            entrollment_id: <%= @entrollment[1] %>,
+            course_id: <%= params[:course_id] %>,
             lesson_id: <%= @lesson.id %>,
             progress: videoPercentage
           },

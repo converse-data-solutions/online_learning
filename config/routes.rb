@@ -79,14 +79,12 @@ end
     resources :entrollment_details
   end
   
-  namespace :admin do
+
     resources :lessons do
       resources :entrollment_details do
-        member do
-          get 'update_progress'
-        end
       end
     end
-  end
+ 
+  get 'entollment_details/update_progress', to: 'entrollment_details#update_progress', as: :update_progress
   
 end

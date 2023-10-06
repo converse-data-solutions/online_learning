@@ -1,19 +1,24 @@
-class Admin::EntrollmentDetailsController < ApplicationController
+class EntrollmentDetailsController < ApplicationController
   def update_progress
-    @entrollment = Entrollment.find(params[:entrollment_id])
-    @entrollment_detail = @entrollment.entrollment_details.create(entrollment_detail_params)
+    @lesson = Lesson.find(params[:lesson_id])
+    @entrollment = current_user.entrollments.find_by(course_id: params[:course_id])
+
+    @entrollment_detail = @entrollment.entrollment_details.find_or_initialize_by(lesson_id: @lesson.id)
+
     video_percentage = params[:progress].to_f
     @entrollment_detail.update(view_time: video_percentage)
-    video_duration = @entrollment_detail.lesson.clip.metadata['duration'].to_i
-  
-    if video_percentage >= (video_duration * 0.9)
+
+    video_duration = @lesson.clip.metadata['duration'].to_i
+
+    if video_percentage = (video_duration * 0.9)
       @entrollment_detail.update(status: true)
     else
       @entrollment_detail.update(status: false)
     end
-  
+
     render json: { message: 'Progress updated successfully' }
   end
+
 
     def show
         @lesson = Lesson.find(params[:id])
