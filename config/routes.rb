@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :profiles
   get 'comments/create'
   get 'sections/show'
   get 'courses/index'
@@ -12,6 +11,11 @@ Rails.application.routes.draw do
 
   root 'page#index'
   # get 'admin/users', to: 'admin#users'
+
+  resources :users do
+    resources :profiles
+  end
+
 resources :entrollments
 resources :courses do
   resources :entrollments

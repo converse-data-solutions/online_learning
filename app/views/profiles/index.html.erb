@@ -6,9 +6,9 @@
   <% @profiles.each do |profile| %>
     <%= render profile %>
     <p>
-      <%= link_to "Show this profile", profile %>
+      <%= link_to "Show this profile", user_profile_path(profile.user.id, profile) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New profile", new_profile_path %>
+<%= link_to "New profile", new_user_profile_path %>
