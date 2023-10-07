@@ -102,6 +102,8 @@ var media = videojs("video-<%= @lesson.id %>",{
   resumePlayback: true,
   html5: true,
   userActions: { 
+    forward: true,
+    back: true,
     hotkeys: {
       enable: true,
       seekStep: 5
@@ -116,6 +118,16 @@ document.addEventListener("DOMContentLoaded", function() {
   videos.forEach(function(video) {
     videojs(video.id, {}, function() {
       var player = this;
+
+      document.addEventListener("keydown", function (event) {
+      if (document.activeElement === video) {
+        if (event.key === "ArrowRight") {
+          player.currentTime(player.currentTime() + 5);
+        } else if (event.key === "ArrowLeft") {
+          player.currentTime(player.currentTime() - 5);
+        }
+      }
+    });
 
       player.on('play', function() {
         videos.forEach(function(otherVideo) {
@@ -143,6 +155,10 @@ document.addEventListener("DOMContentLoaded", function() {
         player.currentTime(lastTime);
         player.play();
       }
+
+
+
+
 
       player.on('timeupdate', function () {
       var videoDuration = video.duration;
