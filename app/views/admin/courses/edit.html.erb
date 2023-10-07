@@ -1,8 +1,9 @@
+<div class="container">
 <h1>Edit Course</h1>
 
 
   <%= form_for [:admin, @course], url: admin_course_path(@course) do |f| %>
-    <div>
+    <div class="mb-3">
       <%= f.label :course_name %>
       <br>
       <%= f.text_field :course_name %>
@@ -14,12 +15,12 @@
     </div>
     <br>
     <div>   
-      <%= f.submit "Update Course" %>
+      <%= f.submit "Update Course", class: "btn btn-primary" %>
     </div>
   <% end %>
 <br>
-  <%= link_to 'Back to Course List', admin_courses_path %>
-
+  <%= link_to 'Back to Course List', admin_courses_path, class: "btn btn-secondary" %>
+</div>
 
 
 

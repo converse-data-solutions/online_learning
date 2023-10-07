@@ -28,7 +28,7 @@
   <p>No ratings yet for this course.</p>
 <% end %>
 
-  <a href="#" class="card-link text-decoration-none"><%= form_for @entrollment do |f| %>
+  <a class="card-link text-decoration-none"><%= form_for @entrollment do |f| %>
   <div class="field">
     <label for="entrollment_status"></label>
     <%= f.hidden_field :status, value: "pending" %>

@@ -1,26 +1,28 @@
+<div class="container">
 <h1>Sections</h1>
-      <table >
+      <table class="table table-striped" >
         <thead>
           <th>Section Name</th>
           <th>Description</th>
+          <th>Actions</th>
+          <th></th>
+          <th></th>
         </thead>
         <tbody>
           <% @sections.each do |section| %>
             <tr>
               <td><%= section.title %></td>
               <td><%= section.description %>
-              <td><%= link_to 'Edit', edit_admin_course_section_path(@courses, section) %></td>
-            <td><%= link_to 'DELETE', admin_course_section_path(@courses, section), data: { turbo_method: :delete } %></td>
-            <td><%= link_to 'Show', admin_course_section_path(@courses, section) %></td>
+              <td><%= link_to 'Edit', edit_admin_course_section_path(@courses, section), class: "btn btn-secondary" %></td>
+            <td><%= link_to 'DELETE', admin_course_section_path(@courses, section), data: { turbo_method: :delete }, class: "btn btn-danger" %></td>
+            <td><%= link_to 'Show', admin_course_section_path(@courses, section), class: "btn btn-primary" %></td>
             </tr>
           <% end %>
         </tbody>
       </table>  
 
       <br>
-      <%= link_to 'Add Section', new_admin_course_section_path %>
+      <%= link_to 'Add Section', new_admin_course_section_path, class: "btn btn-primary mb-3" %>
       <br>
-      <%= link_to "Back to Course", admin_courses_path(@course) %>
-
-
-
+      <%= link_to "Back to Course", admin_courses_path(@course), class: "btn btn-secondary" %>
+</div>

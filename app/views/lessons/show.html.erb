@@ -99,6 +99,7 @@ var media = videojs("video-<%= @lesson.id %>",{
   fluid: true,
   aspectRatio: '16:9',
   playbackRates: [0.5, 1, 1.5, 2],
+  resumePlayback: true,
   html5: true,
   userActions: { 
     hotkeys: {
@@ -125,6 +126,23 @@ document.addEventListener("DOMContentLoaded", function() {
       });
 
       console.log(player);
+
+
+      const key = `videojs-resume-playback:${video.id}`;
+
+      player.on('timeupdate', () => {
+        localStorage.setItem(key, player.currentTime());
+      });
+
+      player.on('ended', () => {
+        localStorage.removeItem(key);
+      });
+
+      const lastTime = parseFloat(localStorage.getItem(key));
+      if (lastTime) {
+        player.currentTime(lastTime);
+        player.play();
+      }
 
       player.on('timeupdate', function () {
       var videoDuration = video.duration;

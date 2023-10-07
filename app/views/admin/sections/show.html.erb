@@ -4,10 +4,12 @@
   <title>Section Details</title>
 </head>
 <body>
+  <div class="container">
   <h1>Section Details</h1>
   <p><strong>Title:</strong> <%= @section.title %></p>
   <p><strong>Description:</strong> <%= @section.description %></p>
-  <p><%= link_to 'Back', admin_course_sections_path %></p>
+  <p><%= link_to 'Back', admin_course_sections_path, class: "btn btn-secondary" %></p>
 </body>
 </html>
-<%= link_to "Lessons", admin_section_lessons_path(@section) %>
+<%= link_to "Lessons", admin_section_lessons_path(@section), class: "btn btn-primary" %>
+</div>
