@@ -19,7 +19,7 @@
             <%= f.select :role, [:admin, :student], { selected: user.has_role?(:admin) ? :admin : :student }, class: 'form-control' %>
             <%= f.submit "Update", class: 'btn btn-primary' %>
           <% end %>
-
+          <td><%= link_to 'Edit', edit_admin_user_path(user), class: "btn btn-secondary" %></td>
           <td><%= link_to 'DELETE', admin_user_path(user), data: {turbo_method: :delete} %></td>
         </td>
       </tr>

@@ -32,9 +32,7 @@ class Admin::UsersController < ApplicationController
       def update
         @user = User.find(params[:id])
         @user.add_role(user_params[:role])
-        byebug
-        if @user.update(user_params)
-          byebug
+        if @user.update(user_params)  
           flash[:notice] = "User information updated successfully."
           redirect_to admin_users_path
         else

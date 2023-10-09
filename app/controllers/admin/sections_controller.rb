@@ -18,7 +18,7 @@ class Admin::SectionsController < ApplicationController
         if @section.save
             redirect_to admin_course_sections_path
         else
-            render :new
+            render :new, status: :unprocessable_entity
         end
     end
     def edit
@@ -32,7 +32,7 @@ class Admin::SectionsController < ApplicationController
         if @section.update(section_params)
             redirect_to admin_course_sections_path
         else
-            render :edit
+            render :edit, status: :unprocessable_entity
         end
     end
 

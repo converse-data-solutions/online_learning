@@ -1,7 +1,8 @@
 class LessonsController < ApplicationController
 
     def index
-        @section = Section.find(params[:section_id])
+        @course = Course.find(params[:course_id])
+        @section = @course.sections.find(params[:section_id])
         @lessons = @section.lessons
     end
 

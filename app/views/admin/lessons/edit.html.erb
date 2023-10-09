@@ -1,3 +1,4 @@
+<div class="container">
 <h1>Edit Lesson</h1>
 
 
@@ -6,30 +7,43 @@
       <%= f.label :title %>
       <br>
       <%= f.text_field :title %>
+      <% if @lesson.errors.has_key?(:title) %>
+        <span style="color: red">
+          <%= @lesson.errors[:title].first %>
+        </span>
+      <% end %>
     </div>
     <div>
       <%= f.label :description %>
       <br>  
       <%= f.text_field :description %>
+      <% if @lesson.errors.has_key?(:description) %>
+        <span style="color: red">
+          <%= @lesson.errors[:description].first %>
+        </span>
+      <% end %>
     </div>
     <br>
     <div>
       <%= f.label :clip %>
       <br>
       <%= f.file_field :clip %>
+      <% if @lesson.errors.has_key?(:clip) %>
+        <span style="color: red">
+          <%= @lesson.errors[:clip].first %>
+        </span>
+      <% end %>
     </div>
     <br>
     <div>
       <%= f.label :attachments %>
       <br>
       <%= f.file_field :attachments %>
-    <div>   
-      <%= f.submit "Update Lesson" %>
+    <div>
+      <br>
+      <%= f.submit "Update Lesson", class: "btn btn-primary" %>
     </div>
   <% end %>
 <br>
-  <%= link_to 'Back to Lesson List', admin_section_lessons_path %>
-
-
-
-
+  <%= link_to 'Back to Lesson List', admin_section_lessons_path, class: "btn btn-secondary" %>
+</div>

@@ -1,10 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @profile %>
+<% if @profile.image.attached? %>
 <%= image_tag @profile.image%>
+<% else %>
+<p>No image</p>
+<% end %>
 <div>
   <%= link_to "Edit this profile", edit_user_profile_path(@profile) %> |
-  <%= link_to "Back to profiles", user_profiles_path %>
+<%= link_to "New profile", new_user_profile_path %>
 
   <%= button_to "Destroy this profile", user_profile_path(@profile), method: :delete %>
 </div>

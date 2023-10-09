@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +17,7 @@
       <p class="vjs-no-js">
       To view this video please enable JavaScript, and consider upgrading to a
       web browser that
-      <a href="https://videojs.com/html5-video-support/" target="_blank"
-        >supports HTML5 video</a
+      <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a
       >
     </p>
     </video>
@@ -114,10 +112,26 @@ var player = null;
 document.addEventListener("DOMContentLoaded", function() {
   console.log("Hai");
   var videos = document.querySelectorAll('video');
+    var totalDuration = 0; 
+
 
   videos.forEach(function(video) {
     videojs(video.id, {}, function() {
       var player = this;
+
+      player.on('loadedmetadata', function () {
+        totalDuration += player.duration();
+
+        var allVideosLoaded = Array.from(videos).every(function (v) {
+          return v.readyState >= 1;
+        });
+
+        if (allVideosLoaded) {
+          var totalDurationInHours = totalDuration / 3600; 
+          var totalDurationInMinutes = (totalDuration % 3600) / 60; 
+          console.log('Overall duration: ' + totalDurationInHours + ' hours ' + totalDurationInMinutes + ' minutes');
+        }
+      });
 
       document.addEventListener("keydown", function (event) {
       if (document.activeElement === video) {
@@ -155,10 +169,6 @@ document.addEventListener("DOMContentLoaded", function() {
         player.currentTime(lastTime);
         player.play();
       }
-
-
-
-
 
       player.on('timeupdate', function () {
       var videoDuration = video.duration;

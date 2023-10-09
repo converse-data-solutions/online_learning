@@ -10,4 +10,12 @@ class Lesson < ApplicationRecord
   def get_all_sections
     Section.where(course_id: self.section.course_id)
   end
+
+  validates :title,
+          :presence => {:message => "Please enter the Lesson title" }
+  validates :description,
+          :presence => {:message => "Please enter the Lesson description"}
+  validates :clip,
+          :presence => {:message => "Please attach the Lesson clip"}
+
 end

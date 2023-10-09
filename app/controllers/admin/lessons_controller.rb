@@ -17,7 +17,7 @@ class Admin::LessonsController < ApplicationController
         if @lesson.save
             redirect_to admin_section_lessons_path
         else
-            render :new
+            render :new, status: :unprocessable_entity
         end
     end
 
@@ -32,7 +32,7 @@ class Admin::LessonsController < ApplicationController
         if @lesson.update(lesson_params)
             redirect_to admin_section_lessons_path
         else
-            render :edit
+            render :edit, status: :unprocessable_entity
         end
     end
 
