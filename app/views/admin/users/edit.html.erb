@@ -11,5 +11,10 @@
     <br>
     <%= f.select :role, ['admin', 'student'] %>
   </div>
+  <div>
+    <%= f.label :deleted, 'Status:' %>
+    <br>
+    <%= f.select :deleted, [['Active', false], ['Inactive', true]], {}, required: true %>
+  </div>
   <%= f.submit "Update Admin User", class: 'btn btn-primary' %>
 <% end %>
