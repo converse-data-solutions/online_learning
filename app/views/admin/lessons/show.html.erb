@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Lesson Details</title>
-</head>
-<body>
-  <h1>Lesson Details</h1>
-  <p><strong>Title:</strong> <%= @lesson.title %></p>
-  <p><strong>Description:</strong> <%= @lesson.description %></p>
-  <% if @lesson.clip.attached? %>
-    <video
+  <head>
+    <title>Lesson Details</title>
+  </head>
+  <body>
+    <h1>Lesson Details</h1>
+    <p><strong>Title:</strong> <%= @lesson.title %></p>
+    <p><strong>Description:</strong> <%= @lesson.description %></p>
+    <% if @lesson.clip.attached? %>
+      <video
       id="my-video" class="video-js" controls preload="auto" width="640" height="264"
       data-setup="{}" >
-      <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
-    </video>
+        <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
+      </video>
     <% else %>
       <p>No lesson attached to this record.</p>
-    <% end %> 
+    <% end %>
     <p><strong>Attachments:</strong> <%= @lesson.attachments %></p>
-  <p><%= link_to 'Back', admin_section_lessons_path %></p>
-
-  <%= link_to "create Lesson", new_admin_section_lesson_path(@lesson) %>
-
-</body>
+    <p><%= link_to 'Back', admin_section_lessons_path %></p>
+    <%= link_to "create Lesson", new_admin_section_lesson_path(@lesson) %>
+  </body>
 </html>

@@ -11,9 +11,9 @@
                 <h5 class="card-title"><%= course.course_name %></h5>
                 <p class="card-text"><%= course.description %></p>
                 <% if user_signed_in? %>
-                <%= link_to 'Show', course_path(course), class: "btn btn-primary" %>
+                  <%= link_to 'Show', course_path(course), class: "btn btn-primary" %>
                 <% else %>
-                <%= link_to "Login to Continue", new_user_session_path, class: "btn btn-primary" %>
+                  <%= link_to "Login to Continue", new_user_session_path, class: "btn btn-primary" %>
                 <% end %>
               </div>
             </div>
@@ -23,4 +23,3 @@
     </div>
   <% end %>
 </div>
-

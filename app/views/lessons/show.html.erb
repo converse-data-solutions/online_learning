@@ -1,187 +1,186 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Lesson Details</title>
-</head>
-<body>
-<div class="container-fluid d-flex" >
-<div class="w-75">
-  <p><strong>Title:</strong> <%= @lesson.title %></p>
-  <p><strong>Description:</strong> <%= @lesson.description %></p>
-  <div>
-  <% if @lesson.clip.attached? %>
-    <video
+  <head>
+    <title>Lesson Details</title>
+  </head>
+  <body>
+    <div class="container-fluid d-flex" >
+      <div class="w-75">
+        <p><strong>Title:</strong> <%= @lesson.title %></p>
+        <p><strong>Description:</strong> <%= @lesson.description %></p>
+        <div>
+          <% if @lesson.clip.attached? %>
+            <video
       id="video-<%= @lesson.id %>" class="video-js my-player" preload="auto" width="1350" height="700" controls 
       data-setup="{}"   >
-      <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
-      <p class="vjs-no-js">
-      To view this video please enable JavaScript, and consider upgrading to a
-      web browser that
-      <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a
+              <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
+              <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a
+                web browser that
+                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a
       >
-    </p>
-    </video>
-    <% else %>
-      <p>No lesson attached to this record.</p>
-  <% end %>
-  </div>
-  <div>
-  <% if @lesson.attachments.attached? %>
-        <% @lesson.attachments.each do |attachment| %>
-        <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %><br>
-        <% end %>
-    <% else %>
-        <p>No attachments for this lesson.</p>
-  <% end %>
-  </div>
-  </div>
-
-<div class="w-25">
-<div class="accordion" id="accordionExample">
-  <% @lesson.get_all_sections.each_with_index do |section, index| %>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="heading<%= index %>">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="true" aria-controls="collapse<%= index %>">
-          <%= section.title %>
-        </button>
-      </h2>
-      <div id="collapse<%= index %>" class="accordion-collapse collapse show" aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <ul>
-            <% section.lessons.each do |lesson| %>
-              <div class="d-flex justify-content-between">
-                <div>
-                  <li class="list-unstyled text-decoration-none">
-                    <%= link_to lesson.title, lesson, class: "text-decoration-none" %>
-                  </li>
-                </div>
-                <div>
-                  <li class="list-unstyled text-decoration-none me-5">
-                  </li>
+              </p>
+            </video>
+          <% else %>
+            <p>No lesson attached to this record.</p>
+          <% end %>
+        </div>
+        <div>
+          <% if @lesson.attachments.attached? %>
+            <% @lesson.attachments.each do |attachment| %>
+              <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %><br>
+            <% end %>
+          <% else %>
+            <p>No attachments for this lesson.</p>
+          <% end %>
+        </div>
+      </div>
+      <div class="w-25">
+        <div class="accordion" id="accordionExample">
+          <% @lesson.get_all_sections.each_with_index do |section, index| %>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="heading<%= index %>">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="true" aria-controls="collapse<%= index %>">
+                  <%= section.title %>
+                </button>
+              </h2>
+              <div id="collapse<%= index %>" class="accordion-collapse collapse show" aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <ul>
+                    <% section.lessons.each do |lesson| %>
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <li class="list-unstyled text-decoration-none">
+                            <%= link_to lesson.title, lesson, class: "text-decoration-none" %>
+                          </li>
+                        </div>
+                        <div>
+                          <li class="list-unstyled text-decoration-none me-5">
+                          </li>
+                        </div>
+                      </div>
+                    <% end %>
+                  </ul>
                 </div>
               </div>
-            <% end %>
-          </ul>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
-  <% end %>
-</div>
-</div>
-</div>
-<%= link_to "View Progress", lesson_entrollment_detail_path(@lesson) %>
-<script>
-var media = videojs("video-<%= @lesson.id %>",{
-  autoPlay: 'muted',
-  loop: true,
-  controls: true,
-  fluid: true,
-  aspectRatio: '16:9',
-  playbackRates: [0.5, 1, 1.5, 2],
-  resumePlayback: true,
-  html5: true,
-  userActions: { 
-    forward: true,
-    back: true,
-    hotkeys: {
-      enable: true,
-      seekStep: 5
-    }
-  }
-});
-var player = null;
-document.addEventListener("DOMContentLoaded", function() {
-  console.log("Hai");
-  var videos = document.querySelectorAll('video');
-    var totalDuration = 0; 
-
-
-  videos.forEach(function(video) {
-    videojs(video.id, {}, function() {
-      var player = this;
-
-      player.on('loadedmetadata', function () {
-        totalDuration += player.duration();
-
-        var allVideosLoaded = Array.from(videos).every(function (v) {
-          return v.readyState >= 1;
-        });
-
-        if (allVideosLoaded) {
-          var totalDurationInHours = totalDuration / 3600; 
-          var totalDurationInMinutes = (totalDuration % 3600) / 60; 
-          console.log('Overall duration: ' + totalDurationInHours + ' hours ' + totalDurationInMinutes + ' minutes');
+    <%= link_to "View Progress", lesson_entrollment_detail_path(@lesson) %>
+    <script>
+      var media = videojs("video-<%= @lesson.id %>",{
+        autoPlay: 'muted',
+        loop: true,
+        controls: true,
+        fluid: true,
+        aspectRatio: '16:9',
+        playbackRates: [0.5, 1, 1.5, 2],
+        resumePlayback: true,
+        html5: true,
+        userActions: {
+          forward: true,
+          back: true,
+          hotkeys: {
+            enable: true,
+            seekStep: 5
+          }
         }
       });
+      var player = null;
+      document.addEventListener("DOMContentLoaded", function() {
+        console.log("Hai");
+        var videos = document.querySelectorAll('video');
+          var totalDuration = 0;
 
-      document.addEventListener("keydown", function (event) {
-      if (document.activeElement === video) {
-        if (event.key === "ArrowRight") {
-          player.currentTime(player.currentTime() + 5);
-        } else if (event.key === "ArrowLeft") {
-          player.currentTime(player.currentTime() - 5);
-        }
-      }
-    });
 
-      player.on('play', function() {
-        videos.forEach(function(otherVideo) {
-          if (otherVideo !== video) {
-            videojs(otherVideo.id).pause();
-          }
+        videos.forEach(function(video) {
+          videojs(video.id, {}, function() {
+            var player = this;
+
+            player.on('loadedmetadata', function () {
+              totalDuration += player.duration();
+
+              var allVideosLoaded = Array.from(videos).every(function (v) {
+                return v.readyState >= 1;
+              });
+
+              if (allVideosLoaded) {
+                var totalDurationInHours = totalDuration / 3600;
+                var totalDurationInMinutes = (totalDuration % 3600) / 60;
+                console.log('Overall duration: ' + totalDurationInHours + ' hours ' + totalDurationInMinutes + ' minutes');
+              }
+            });
+
+            document.addEventListener("keydown", function (event) {
+            if (document.activeElement === video) {
+              if (event.key === "ArrowRight") {
+                player.currentTime(player.currentTime() + 5);
+              } else if (event.key === "ArrowLeft") {
+                player.currentTime(player.currentTime() - 5);
+              }
+            }
+          });
+
+            player.on('play', function() {
+              videos.forEach(function(otherVideo) {
+                if (otherVideo !== video) {
+                  videojs(otherVideo.id).pause();
+                }
+              });
+            });
+
+            console.log(player);
+
+
+            const key = `videojs-resume-playback:${video.id}`;
+
+            player.on('timeupdate', () => {
+              localStorage.setItem(key, player.currentTime());
+            });
+
+            player.on('ended', () => {
+              localStorage.removeItem(key);
+            });
+
+            const lastTime = parseFloat(localStorage.getItem(key));
+            if (lastTime) {
+              player.currentTime(lastTime);
+              player.play();
+            }
+
+            player.on('timeupdate', function () {
+            var videoDuration = video.duration;
+              if (isNaN(videoDuration)) videoDuration = 0;
+              console.log("Video Duration: ", videoDuration);
+              player.on('timeupdate', function () {
+              var currentTime = player.currentTime();
+              var videoPercentage = (currentTime / videoDuration) * 100;
+
+              console.log("Current Time of the Video Player: ", currentTime);
+              console.log("Video Percentage: ", videoPercentage);
+
+              $.ajax({
+                url: '<%= update_progress_path %>',
+                method: 'GET',
+                data: {
+                  course_id: <%= params[:course_id] %>,
+                  lesson_id: <%= @lesson.id %>,
+                  progress: videoPercentage
+                },
+                success: function(response) {
+                  console.log("Successfully updated");
+                },
+                error: function(error) {
+                  console.log("Not updated");
+                }
+              });
+            });
+            });
+          });
         });
       });
-
-      console.log(player);
-
-
-      const key = `videojs-resume-playback:${video.id}`;
-
-      player.on('timeupdate', () => {
-        localStorage.setItem(key, player.currentTime());
-      });
-
-      player.on('ended', () => {
-        localStorage.removeItem(key);
-      });
-
-      const lastTime = parseFloat(localStorage.getItem(key));
-      if (lastTime) {
-        player.currentTime(lastTime);
-        player.play();
-      }
-
-      player.on('timeupdate', function () {
-      var videoDuration = video.duration;
-        if (isNaN(videoDuration)) videoDuration = 0;
-        console.log("Video Duration: ", videoDuration);
-        player.on('timeupdate', function () {
-        var currentTime = player.currentTime();
-        var videoPercentage = (currentTime / videoDuration) * 100;
-
-        console.log("Current Time of the Video Player: ", currentTime);
-        console.log("Video Percentage: ", videoPercentage);
-
-        $.ajax({
-          url: '<%= update_progress_path %>',
-          method: 'GET',
-          data: {
-            course_id: <%= params[:course_id] %>,
-            lesson_id: <%= @lesson.id %>,
-            progress: videoPercentage
-          },
-          success: function(response) {
-            console.log("Successfully updated");
-          },
-          error: function(error) {
-            console.log("Not updated");
-          }
-        });
-      }); 
-      });
-    });
-  });
-});
-</script>
-</body>
+    </script>
+  </body>
 </html>

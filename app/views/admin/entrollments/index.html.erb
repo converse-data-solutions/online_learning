@@ -9,22 +9,22 @@
   </thead>
   <tbody>
     <% @entrollments.each do |entrollment| %>
-  <tr>
-    <td><%= entrollment.user.profile&.name %></td>
-    <td><%= entrollment.course.course_name %></td>
-    <td><%= entrollment.status %></td>
-    <td>
-      <%= form_tag(update_status_admin_entrollment_path(entrollment), method: "post") do %>
-        <%= hidden_field_tag("entrollment_id", entrollment.id) %>
-        <%= button_tag(type: "submit", name: "status", value: "approved") do %>
-          Approve
-        <% end %>
-        <%= button_tag(type: "submit", name: "status", value: "denied") do %>
-          Deny
-        <% end %>
-      <% end %>
-    </td>
-  </tr>
-<% end %>
+      <tr>
+        <td><%= entrollment.user.profile&.name %></td>
+        <td><%= entrollment.course.course_name %></td>
+        <td><%= entrollment.status %></td>
+        <td>
+          <%= form_tag(update_status_admin_entrollment_path(entrollment), method: "post") do %>
+            <%= hidden_field_tag("entrollment_id", entrollment.id) %>
+            <%= button_tag(type: "submit", name: "status", value: "approved") do %>
+              Approve
+            <% end %>
+            <%= button_tag(type: "submit", name: "status", value: "denied") do %>
+              Deny
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

@@ -1,7 +1,5 @@
 <div class="container">
-<h1>Edit Lesson</h1>
-
-
+  <h1>Edit Lesson</h1>
   <%= form_for [:admin, @section, @lesson], url: admin_section_lesson_path(@section, @lesson) do |f| %>
     <div>
       <%= f.label :title %>
@@ -15,7 +13,7 @@
     </div>
     <div>
       <%= f.label :description %>
-      <br>  
+      <br>
       <%= f.text_field :description %>
       <% if @lesson.errors.has_key?(:description) %>
         <span style="color: red">
@@ -51,15 +49,13 @@
       <% else %>
         <p>No attachments are currently attached.</p>
       <% end %>
-
       <%= f.file_field :attachments, multiple: true %>
     </div>
-      
     <div>
       <br>
       <%= f.submit "Update Lesson", class: "btn btn-primary" %>
     </div>
   <% end %>
-<br>
+  <br>
   <%= link_to 'Back to Lesson List', admin_section_lessons_path, class: "btn btn-secondary" %>
 </div>

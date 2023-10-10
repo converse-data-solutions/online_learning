@@ -10,10 +10,8 @@ class Entrollment < ApplicationRecord
   }
   before_create :set_initial_status
 
-
   private
-  
-    def set_initial_status
-      self.status = :pending
-    end
+  def set_initial_status
+    self.status = :pending
+  end
 end

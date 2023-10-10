@@ -1,16 +1,13 @@
 class Admin::LessonsController < ApplicationController
-    before_action :check_admin_role
-
+    before_action :check_admin_role 
     def index
         @section = Section.find(params[:section_id])
         @lessons = @section.lessons
-    end
-
+    end 
     def new
         @section = Section.find(params[:section_id])
         @lesson = @section.lessons.new
-    end
-
+    end 
     def create
         @section = Section.find(params[:section_id])
         @lesson = @section.lessons.create(lesson_params)
@@ -19,13 +16,11 @@ class Admin::LessonsController < ApplicationController
         else
             render :new, status: :unprocessable_entity
         end
-    end
-
+    end 
     def edit
         @section = Section.find(params[:section_id])
         @lesson = @section.lessons.find(params[:id])
-    end
-
+    end 
     def update
         @section = Section.find(params[:section_id])
         @lesson = @section.lessons.find(params[:id])
@@ -34,22 +29,18 @@ class Admin::LessonsController < ApplicationController
         else
             render :edit, status: :unprocessable_entity
         end
-    end
-
+    end 
     def destroy
         @section = Section.find(params[:section_id])
         @lesson = @section.lessons.find(params[:id])
         @lesson.destroy
         redirect_to admin_section_lessons_path
-    end
-
+    end 
     def show
         @section = Section.find(params[:section_id])
         @lesson = @section.lessons.find(params[:id])
-    end
-
-    private
-
+    end 
+    private 
     def lesson_params
         params.require(:lesson).permit(:title, :description, :section_id, :clip, attachments: [])
     end

@@ -1,36 +1,31 @@
 <div class="container">
-<h1>Edit Course</h1>
-
-
+  <h1>Edit Course</h1>
   <%= form_for [:admin, @course], url: admin_course_path(@course) do |f| %>
     <div class="mb-3">
       <%= f.label :course_name %>
       <br>
       <%= f.text_field :course_name %>
       <% if @course.errors.has_key?(:course_name) %>
-      <span style="color: red">
-        <%= @course.errors[:course_name].first %>
-      </span>
-    <% end %>
+        <span style="color: red">
+          <%= @course.errors[:course_name].first %>
+        </span>
+      <% end %>
     </div>
     <div>
       <%= f.label :description %>
       <br>
       <%= f.text_field :description %>
       <% if @course.errors.has_key?(:description) %>
-      <span style="color: red">
-        <%= @course.errors[:description].first %>
-      </span>
-    <% end %>
+        <span style="color: red">
+          <%= @course.errors[:description].first %>
+        </span>
+      <% end %>
     </div>
     <br>
-    <div>   
+    <div>
       <%= f.submit "Update Course", class: "btn btn-primary" %>
     </div>
   <% end %>
-<br>
+  <br>
   <%= link_to 'Back to Course List', admin_courses_path, class: "btn btn-secondary" %>
 </div>
-
-
-

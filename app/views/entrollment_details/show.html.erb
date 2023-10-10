@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Video Progress and Status</title>
-</head>
-<body>
-  <div class="container">
-    <h1>Video Progress and Status</h1>
-    <p><strong>Lesson Title:</strong> <%= @lesson.title %></p>
-    <p><strong>Lesson Description:</strong> <%= @lesson.description %></p>
-    <p><strong>Video Progress:</strong> <%= @entrollment_detail.view_time %> seconds</p>
-    <p><strong>Video Status:</strong> <%= @entrollment_detail.status ? 'Completed' : 'Not Completed' %></p>
-  </div>
-</body>
+  <head>
+    <title>Video Progress and Status</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Video Progress and Status</h1>
+      <p><strong>Lesson Title:</strong> <%= @lesson.title %></p>
+      <p><strong>Lesson Description:</strong> <%= @lesson.description %></p>
+      <p><strong>Video Progress:</strong> <%= @entrollment_detail.view_time %> seconds</p>
+      <p><strong>Video Status:</strong> <%= @entrollment_detail.status ? 'Completed' : 'Not Completed' %></p>
+    </div>
+  </body>
 </html>
-  

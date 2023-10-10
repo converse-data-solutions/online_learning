@@ -16,21 +16,21 @@ Rails.application.routes.draw do
     resources :profiles
   end
 
-resources :entrollments
-resources :courses do
   resources :entrollments
-end
   resources :courses do
-    resources :comments, except: [:index, :show]
+    resources :entrollments
+  end
+    resources :courses do
+      resources :comments, except: [:index, :show]
+    end
+
+  resources :sections do
+    resources :comments, only: [:create]
   end
 
-resources :sections do
-  resources :comments, only: [:create]
-end
-
-resources :lessons do
-  resources :comments, only: [:create]
-end
+  resources :lessons do
+    resources :comments, only: [:create]
+  end
 
   namespace :admin do
     resources :users, only: [:index, :edit, :update, :create, :destroy, :show, :new]
@@ -84,10 +84,10 @@ end
   end
   
 
-    resources :lessons do
-      resources :entrollment_details do
-      end
+  resources :lessons do
+    resources :entrollment_details do
     end
+  end
  
   get 'entollment_details/update_progress', to: 'entrollment_details#update_progress', as: :update_progress
   

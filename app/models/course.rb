@@ -10,5 +10,4 @@ class Course < ApplicationRecord
           :uniqueness => {:message => "Course name already exists."}
   validates :description,
           :presence => {:message => "Please enter the Course description"}
-
 end

@@ -1,5 +1,4 @@
 <h1>Admin Users</h1>
-
 <%= form_for @new_admin, url: admin_users_path, method: :post do |f| %>
   <h2>Create New User</h2>
   <div>
@@ -11,7 +10,6 @@
   <br>
   <%= f.hidden_field :resource_id, value: @new_admin.id %>
   <%= f.hidden_field :resource_type, value: @new_admin.class.name %>
-
   <div>
     <%= f.label :role %>
     <br>
@@ -22,7 +20,7 @@
     <%= f.label :password %>
     <br>
     <%= f.password_field :password %>
-    <div class="error" id="password-error", style="color: red;"></div> 
+    <div class="error" id="password-error", style="color: red;"></div>
   </div>
   <br>
   <div>
@@ -34,7 +32,6 @@
   <br>
   <%= f.submit "Create Admin User", class: 'btn btn-primary' %>
 <% end %>
-
 <script>
   $(document).ready(function() {
   $('form').on('submit', function(e) {
@@ -68,7 +65,5 @@
 
     return true;
   });
-});
-
-
+  });
 </script>

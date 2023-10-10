@@ -4,8 +4,7 @@ class LessonsController < ApplicationController
         @course = Course.find(params[:course_id])
         @section = @course.sections.find(params[:section_id])
         @lessons = @section.lessons
-    end
-
+    end    
     def show
         @lesson = Lesson.find(params[:id])
         @sections = Lesson.where(section_id: @lesson.section_id)
@@ -13,6 +12,6 @@ class LessonsController < ApplicationController
         @entrollment = @course.entrollment.pluck(:id)
         @comments = @lesson.comments
         @comment = Comment.new
-      end
+    end
       
 end

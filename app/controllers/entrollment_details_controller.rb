@@ -17,26 +17,23 @@ class EntrollmentDetailsController < ApplicationController
   end
 
 
-    def show
-        @lesson = Lesson.find(params[:id])
-        @entrollment_detail = EntrollmentDetail.find_or_create_by(lesson: @lesson)
-        @video_duration = @lesson.clip.metadata['duration'].to_i
-        @current_time = @entrollment_detail.view_time.to_i
-
-            if @current_time >= @video_duration
-              @video_progress = 100.0
-              @entrollment_detail.update(status: true)
-            else
-              @video_progress = (@current_time.to_f / @video_duration) * 100
-            end
-    
-        render 'entrollment_details/show'
+  def show
+    @lesson = Lesson.find(params[:id])
+    @entrollment_detail = EntrollmentDetail.find_or_create_by(lesson: @lesson)
+    @video_duration = @lesson.clip.metadata['duration'].to_i
+    @current_time = @entrollment_detail.view_time.to_i
+      if @current_time >= @video_duration
+        @video_progress = 100.0
+        @entrollment_detail.update(status: true)
+      else
+        @video_progress = (@current_time.to_f / @video_duration) * 100
       end
 
-    private
-
-    def entrollment_detail_params
-      params.require(:entrollment_detail).permit(:view_time, :lesson_id, :entrollment_id, :status)
-    end
+    render 'entrollment_details/show'
+  end
+  private
+  def entrollment_detail_params
+    params.require(:entrollment_detail).permit(:view_time, :lesson_id, :entrollment_id, :status)
+  end
 
 end

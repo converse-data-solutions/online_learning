@@ -10,5 +10,4 @@ class Section < ApplicationRecord
           :uniqueness => {:message => "already exists."}
   validates :description,
           :presence => {:message => "Please enter the Section description"}
-
 end

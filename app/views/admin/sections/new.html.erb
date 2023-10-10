@@ -1,6 +1,6 @@
 <div class="container">
   <h1>New Section</h1>
-<%= form_for [:admin, @course, @section], url: admin_course_sections_path(@course, @section) do |f| %>
+  <%= form_for [:admin, @course, @section], url: admin_course_sections_path(@course, @section) do |f| %>
     <div class="form-group">
       <%= f.label :title %>
       <br>
@@ -23,9 +23,9 @@
     </div>
     <div>
       <%= f.text_field :course_id, value: @course.id, readonly: true, type: "hidden" %>
-      </div> 
-      <%= f.submit "Create Section", class: "btn btn-primary" %>
+    </div>
+    <%= f.submit "Create Section", class: "btn btn-primary" %>
   <% end %>
-<br>
+  <br>
   <%= link_to 'Back to Section List', admin_course_sections_path, class: "btn btn-secondary" %>
 </div>
