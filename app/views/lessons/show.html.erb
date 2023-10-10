@@ -34,26 +34,7 @@
         <p>No attachments for this lesson.</p>
   <% end %>
   </div>
-  <h1><%= @lesson.title %></h1>
-
-<%= form_with(model: [@lesson, @comment], url: section_comments_path(@lesson, @comment)) do |form| %>
-  <%= form.text_area :body, placeholder: "Add a comment..." %>
-  <%= form.hidden_field :commentable_id, value: @lesson.id %>
-  <%= form.hidden_field :commentable_type, value: @lesson.class.name %>
-
-  <%= form.hidden_field :user_id, value: current_user.id %>
-
-  <%= form.submit "Post Comment" %>
-<% end %>
-
-<% @lesson.comments.each do |comment| %>
-  <p><%= comment.body %></p>
-  <% if current_user == comment.user %>
-      <%= link_to "Edit" %> |
-      <%= link_to "Delete" %>
-    <% end %>
-<% end %>
-</div>
+  </div>
 
 <div class="w-25">
 <div class="accordion" id="accordionExample">
