@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :entrollments, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :ratings, as: :rateable, dependent: :destroy
-  rolify
+  rolify :before_add => :remove_previouse_role
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -24,4 +24,10 @@ class User < ApplicationRecord
     self.add_role(self.role || :student)
   end
 
+  def remove_previouse_role(role)
+    previous_role = self.roles.first
+    self.remove_role(previous_role.name) if previous_role
+  end
+
+  scope :active, -> { where.not(deleted: true) }
 end

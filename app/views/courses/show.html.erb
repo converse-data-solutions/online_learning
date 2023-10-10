@@ -53,37 +53,6 @@
   </div>
 </div>
 
-<div class="accordion" id="accordionExample">
-  <% @sections.each_with_index do |section, index| %>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="heading<%= index %>">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= index %>" aria-expanded="true" aria-controls="collapse<%= index %>">
-          <%= section.title %>
-        </button>
-      </h2>
-      <div id="collapse<%= index %>" class="accordion-collapse collapse show" aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <ul>
-            <% section.lessons.each do |lesson| %>
-              <div class="d-flex justify-content-between">
-                <div>
-                  <li class="list-unstyled text-decoration-none">
-                    <%= link_to lesson.title, lesson, class: "text-decoration-none" %>
-                  </li>
-                </div>
-                <div>
-                  <li class="list-unstyled text-decoration-none me-5">
-                    <%= link_to "preview", lesson_path(lesson), class: "text-decoration-none" %>
-                  </li>
-                </div>
-              </div>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
 <div class="mt-5">
 <%= form_with(model: [@course, @comment], url: course_comments_path(@course, @comment)) do |form| %>
   <%= form.text_area :body, placeholder: "Add a comment..." , class: "form-control" , rows: "3" %>

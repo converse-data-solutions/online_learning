@@ -1,0 +1,15 @@
+<h1>Admin Users</h1>
+<%= form_for [:admin, @user] do |f| %>
+  <h2>Update User</h2>
+  <div>
+    <%= f.label :email %>
+    <br>
+    <%= f.email_field :email, required: true %>
+  </div>
+  <div>
+    <%= f.label :role %>
+    <br>
+    <%= f.select :role, ['admin', 'student'] %>
+  </div>
+  <%= f.submit "Update Admin User", class: 'btn btn-primary' %>
+<% end %>

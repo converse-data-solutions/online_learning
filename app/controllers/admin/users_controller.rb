@@ -31,8 +31,7 @@ class Admin::UsersController < ApplicationController
     
       def update
         @user = User.find(params[:id])
-        @user.add_role(user_params[:role])
-        if @user.update(user_params)  
+        if @user.add_role(user_params[:role])
           flash[:notice] = "User information updated successfully."
           redirect_to admin_users_path
         else
@@ -57,7 +56,7 @@ class Admin::UsersController < ApplicationController
     private
   
     def user_params
-      params.require(:user).permit(:role)
+      params.require(:user).permit(:role, :email)
     end
   
     def new_admin_params
