@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
     before_action :check_admin_role
     
     def index
-        @users = User.all
+        @users = User.active.all
         @new_admin = User.new
       end
       
@@ -46,7 +46,7 @@ class Admin::UsersController < ApplicationController
       if user == current_user
         flash[:alert] = "You cannot delete yourself."
       else
-        user.destroy
+        user.update(deleted: true)
         flash[:notice] = "User deleted successfully."
       end
   

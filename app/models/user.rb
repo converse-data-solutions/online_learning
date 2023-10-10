@@ -13,7 +13,6 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
-
   def already_entrolled?(course)
     entrollments.where(course: course).exists?
   end
@@ -29,5 +28,9 @@ class User < ApplicationRecord
     self.remove_role(previous_role.name) if previous_role
   end
 
-  scope :active, -> { where.not(deleted: true) }
+  scope :active, -> { where(deleted: false) }
+  def self.find_for_authentication(conditions)
+    super(conditions.merge(:deleted => false))
+  end
+  
 end
