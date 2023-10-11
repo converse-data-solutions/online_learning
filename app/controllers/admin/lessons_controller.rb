@@ -2,7 +2,6 @@
 
 # This is an Admin Lesson controller
 class Admin::LessonsController < ApplicationController
-  before_action :check_admin_role
   def index
     @section = Section.find(params[:section_id])
     @lessons = @section.lessons

@@ -3,7 +3,6 @@
 # This is an Admin Section controller
 class Admin::SectionsController < ApplicationController
   # before_action :authenticate_admin!
-  before_action :check_admin_role
   def index
     @courses = Course.find(params[:course_id])
     @sections = @courses.sections

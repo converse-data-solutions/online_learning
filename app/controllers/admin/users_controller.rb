@@ -3,7 +3,6 @@
 # This is an Admin User controller
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_admin_role
 
   def index
     @users = User.all
@@ -80,12 +79,5 @@ class Admin::UsersController < ApplicationController
 
   def new_admin_params
     params.require(:user).permit(:email, :password, :password_confirmation, :role)
-  end
-
-  def check_admin_role
-    return if current_user.has_role?(:admin)
-
-    flash[:alert] = "You don't have permission to access this page."
-    redirect_to root_path
   end
 end

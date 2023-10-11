@@ -3,7 +3,6 @@
 # This is an Admin Course controller
 class Admin::CoursesController < ApplicationController
   # before_action :authenticate_admin!
-  before_action :check_admin_role
 
   def index
     @courses = Course.all

@@ -2,7 +2,6 @@
 
 # This is an Admin Entrollments controller
 class Admin::EntrollmentsController < ApplicationController
-  before_action :check_admin_role
   before_action :set_entrollment, only: [:update_status]
   def index
     @entrollments = Entrollment.all
