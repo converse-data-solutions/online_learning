@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
+# This is an course controller
 class CoursesController < ApplicationController
   def index
     @courses = Course.all
-    
   end
 
   def show

@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
+# This is an Rating controller
 class RatingsController < ApplicationController
   before_action :find_course
-  
+
   def create
     @rating = @course.ratings.new(rating_params)
-    @rating.user = current_user 
+    @rating.user = current_user
     if @rating.save
       redirect_to @course, notice: 'Rating was successfully created.'
     else
-      redirect_to @course, alert: "You have already rated for this course."
+      redirect_to @course, alert: 'You have already rated for this course.'
     end
   end
 

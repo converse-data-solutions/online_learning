@@ -10,7 +10,7 @@
   <tbody>
     <% @entrollments.each do |entrollment| %>
       <tr>
-        <td><%= entrollment.user.profile&.name %></td>
+        <td><%= entrollment.user.email %></td>
         <td><%= entrollment.course.course_name %></td>
         <td><%= entrollment.status %></td>
         <td>

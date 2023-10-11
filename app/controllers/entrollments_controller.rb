@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
+# This is an Entrollment controller
 class EntrollmentsController < ApplicationController
   def new
-    @entrollment = Entrollment.new 
+    @entrollment = Entrollment.new
     @course = Course.find(params[:course_id])
-    @entrollment.course_id = @course.id 
-    @entrollment.user_id = current_user.id 
+    @entrollment.course_id = @course.id
+    @entrollment.user_id = current_user.id
   end
-  
+
   def create
     @entrollment = Entrollment.new(entrollment_params)
     if @entrollment.save
@@ -16,6 +19,7 @@ class EntrollmentsController < ApplicationController
       render :new
     end
   end
+
   private
 
   def entrollment_params
