@@ -3,10 +3,10 @@
 # This is an Admin User controller
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :user_assignment, only: %i[edit update destroy]
 
   def index
     @users = User.all
-    @new_admin = User.new
   end
 
   def new
@@ -17,23 +17,15 @@ class Admin::UsersController < ApplicationController
     @new_admin = User.new(new_admin_params)
 
     if @new_admin.save
-      @new_admin.send_reset_password_instructions
-      flash[:notice] = 'Admin user created successfully.'
-      redirect_to admin_users_path
+      admin_save
     else
-      flash[:alert] = 'Failed to create admin user.'
-      @users = User.all
-      render :index
+      admin_save_error
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @user = User.find(params[:id])
-
     if @user == current_user
       handle_own_status_change
     else
@@ -44,12 +36,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:id])
-
-    if user == current_user
+    if @user == current_user
       flash[:alert] = 'You cannot delete yourself.'
     else
-      user.update(deleted: true)
+      @user.update(deleted: true)
       flash[:notice] = 'User deleted successfully.'
     end
 
@@ -57,6 +47,22 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
+  def user_assignment
+    @user = User.find(params[:id])
+  end
+
+  def admin_save
+    @new_admin.send_reset_password_instructions
+    flash[:notice] = 'Admin user created successfully.'
+    redirect_to admin_users_path
+  end
+
+  def admin_save_error
+    flash[:alert] = 'Failed to create admin user.'
+    @users = User.all
+    render :index
+  end
 
   def handle_own_status_change
     flash[:alert] = 'You cannot change your own status.'

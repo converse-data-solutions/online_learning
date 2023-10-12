@@ -8,7 +8,7 @@ class EntrollmentDetailsController < ApplicationController
     @entrollment_detail.update(view_time: video_percentage)
 
     @lesson.clip.metadata['duration'].to_i
-    @entrollment_detail.update(status: true) if @entrollment_detail.status != true && (video_percentage >= 100)
+    @entrollment_detail.update(status: true) if @entrollment_detail.status != true && (video_percentage >= 99)
 
     render json: { message: 'Progress updated successfully' }
   end

@@ -2,19 +2,18 @@
 
 # This is an Admin Section controller
 class Admin::SectionsController < ApplicationController
-  # before_action :authenticate_admin!
+  before_action :course_assignment, only: %i[new create edit update show]
+  before_action :section_assignment, only: %i[show edit update]
   def index
     @courses = Course.find(params[:course_id])
     @sections = @courses.sections
   end
 
   def new
-    @course = Course.find(params[:course_id])
     @section = @course.sections.new
   end
 
   def create
-    @course = Course.find(params[:course_id])
     @section = @course.sections.create(section_params)
     if @section.save
       redirect_to admin_course_sections_path
@@ -23,14 +22,9 @@ class Admin::SectionsController < ApplicationController
     end
   end
 
-  def edit
-    @course = Course.find(params[:course_id])
-    @section = @course.sections.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @course = Course.find(params[:course_id])
-    @section = @course.sections.find(params[:id])
     if @section.update(section_params)
       redirect_to admin_course_sections_path
     else
@@ -38,10 +32,7 @@ class Admin::SectionsController < ApplicationController
     end
   end
 
-  def show
-    @course = Course.find(params[:course_id])
-    @section = @course.sections.find(params[:id])
-  end
+  def show; end
 
   def destroy
     @section = Section.find(params[:id])
@@ -50,6 +41,14 @@ class Admin::SectionsController < ApplicationController
   end
 
   private
+
+  def course_assignment
+    @course = Course.find(params[:course_id])
+  end
+
+  def section_assignment
+    @section = @course.sections.find(params[:id])
+  end
 
   def section_params
     params.require(:section).permit(:title, :description, :course_id)

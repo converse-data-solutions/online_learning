@@ -2,18 +2,17 @@
 
 # This is an Admin Lesson controller
 class Admin::LessonsController < ApplicationController
+  before_action :section_assignment, only: %i[index show new create edit update destroy]
+  before_action :lesson_assignment, only: %i[show edit update destroy]
   def index
-    @section = Section.find(params[:section_id])
     @lessons = @section.lessons.includes(clip_attachment: :blob, attachments_attachments: :blob)
   end
 
   def new
-    @section = Section.find(params[:section_id])
     @lesson = @section.lessons.new
   end
 
   def create
-    @section = Section.find(params[:section_id])
     @lesson = @section.lessons.create(lesson_params)
     if @lesson.save
       redirect_to admin_section_lessons_path
@@ -22,14 +21,9 @@ class Admin::LessonsController < ApplicationController
     end
   end
 
-  def edit
-    @section = Section.find(params[:section_id])
-    @lesson = @section.lessons.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @section = Section.find(params[:section_id])
-    @lesson = @section.lessons.find(params[:id])
     if @lesson.update(lesson_params)
       redirect_to admin_section_lessons_path
     else
@@ -38,18 +32,21 @@ class Admin::LessonsController < ApplicationController
   end
 
   def destroy
-    @section = Section.find(params[:section_id])
-    @lesson = @section.lessons.find(params[:id])
     @lesson.destroy
     redirect_to admin_section_lessons_path
   end
 
-  def show
-    @section = Section.find(params[:section_id])
-    @lesson = @section.lessons.find(params[:id])
-  end
+  def show; end
 
   private
+
+  def section_assignment
+    @section = Section.find(params[:section_id])
+  end
+
+  def lesson_assignment
+    @lesson = @section.lessons.find(params[:id])
+  end
 
   def lesson_params
     params.require(:lesson).permit(:title, :description, :section_id, :clip, attachments: [])

@@ -65,6 +65,8 @@ group :development do
   gem 'traceroute', '~> 0.8.1'
   gem 'web-console'
 
+  gem 'rubycritic', '~> 4.8', '>= 4.8.1'
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 

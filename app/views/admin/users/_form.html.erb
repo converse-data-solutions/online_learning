@@ -1,5 +1,5 @@
 <h1>Admin Users</h1>
-<%= form_for @new_admin, url: admin_users_path, method: :post do |f| %>
+<%= form_for User.new, url: admin_users_path, method: :post do |f| %>
   <h2>Create New User</h2>
   <div>
     <%= f.label :email %>
@@ -8,8 +8,6 @@
     <div class="error" id="email-error", style="color: red;"></div>
   </div>
   <br>
-  <%= f.hidden_field :resource_id, value: @new_admin.id %>
-  <%= f.hidden_field :resource_type, value: @new_admin.class.name %>
   <div>
     <%= f.label :role %>
     <br>
