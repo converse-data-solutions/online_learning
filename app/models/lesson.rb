@@ -10,7 +10,7 @@ class Lesson < ApplicationRecord
   has_many :entrollment_details, dependent: :destroy
 
   def all_sections
-    Section.where(course_id: section.course_id)
+    Section.includes(:lessons).where(course_id: section.course_id)
   end
 
   validates :title,

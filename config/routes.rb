@@ -16,11 +16,11 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     resources :profiles
   end
-  resources :entrollments, only: %i[show, create]
+  resources :entrollments, only: %i[show create]
   # resources :courses do
   #   resources :entrollments
   # end
-  resources :courses, only: %i[index, show] do
+  resources :courses, only: %i[index show] do
     resources :comments, except: %i[index show]
   end
 

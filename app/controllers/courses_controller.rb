@@ -3,7 +3,7 @@
 # This is an course controller
 class CoursesController < ApplicationController
   def index
-    @courses = Course.all
+    @courses = Course.includes(:sections).all
   end
 
   def show

@@ -57,10 +57,10 @@
     <% end %>
   </div>
   <div class="row gap-5 mt-5">
-    <% @course.comments.each do |comment| %>
+    <% @course.comments.includes(:user).each do |comment| %>
       <div class="card row col-sm-4 gap-2" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title"><%= comment.user.profile&.name %></h5>
+          <h5 class="card-title"><%= comment.user.email %></h5>
           <p class="card-text"><%= comment.body %></p>
           <h6 class="card-subtitle mb-2 text-muted"><%= comment.created_at.strftime("%B %d, %Y") %></h6>
           <% if current_user == comment.user %>
@@ -70,7 +70,7 @@
           <% user_rating = @course.ratings.find_by(user_id: comment.user_id) %>
           <% if user_rating %>
             <div>
-              <%= comment.user.profile&.name %>'s Rating:
+              <%= comment.user.email %>'s Rating:
               <% (1..5).each do |i| %>
                 <% if user_rating.star >= i %>
                   <i class="fas fa-star" style="color: gold;"></i>

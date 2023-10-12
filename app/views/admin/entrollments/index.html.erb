@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @entrollments.each do |entrollment| %>
+    <% @entrollments.includes(:user, :course).each do |entrollment| %>
       <tr>
         <td><%= entrollment.user.email %></td>
         <td><%= entrollment.course.course_name %></td>

@@ -4,7 +4,7 @@
 class Admin::LessonsController < ApplicationController
   def index
     @section = Section.find(params[:section_id])
-    @lessons = @section.lessons
+    @lessons = @section.lessons.includes(clip_attachment: :blob, attachments_attachments: :blob)
   end
 
   def new
