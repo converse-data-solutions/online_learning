@@ -1,17 +1,21 @@
+# frozen_string_literal: true
+
+# This is an Comments controller
 class CommentsController < ApplicationController
-  before_action :authenticate_user! 
+  before_action :authenticate_user!
 
   def new
     @comment = Comment.new
   end
+
   def create
     @comment = Comment.new(comment_params)
-    @comment.user_id = current_user.id 
+    @comment.user_id = current_user.id
 
     if @comment.save
-      flash[:notice] = "Comment created successfully"
+      flash[:notice] = 'Comment created successfully'
     else
-      flash[:alert] = "You have already commented for this course."   
+      flash[:alert] = 'You have already commented for this course.'
     end
 
     redirect_back(fallback_location: root_path)
@@ -27,7 +31,7 @@ class CommentsController < ApplicationController
     @comment = @course.comments.find(params[:id])
 
     if @comment.update(comment_params)
-      redirect_to @course, notice: "Comment updated successfully"
+      redirect_to @course, notice: 'Comment updated successfully'
     else
       render 'edit'
     end
@@ -38,7 +42,7 @@ class CommentsController < ApplicationController
     @comment = @course.comments.find(params[:id])
     @comment.destroy
 
-    redirect_to @course, notice: "Comment deleted successfully"
+    redirect_to @course, notice: 'Comment deleted successfully'
   end
 
   private
@@ -46,5 +50,4 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:body, :commentable_type, :commentable_id, :user_id)
   end
-
 end

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# this is an Course model
 class Course < ApplicationRecord
   has_many :sections, dependent: :destroy
   has_many :entrollment, dependent: :destroy
@@ -5,9 +8,9 @@ class Course < ApplicationRecord
   has_many :ratings, as: :rateable, dependent: :destroy
 
   # validations
-  validates :course_name, 
-          :presence => {:message => "Please enter the Course name" },
-          :uniqueness => {:message => "Course name already exists."}
+  validates :course_name,
+            presence: { message: 'Please enter the Course name' },
+            uniqueness: { message: 'Course name already exists.' }
   validates :description,
-          :presence => {:message => "Please enter the Course description"}
+            presence: { message: 'Please enter the Course description' }
 end

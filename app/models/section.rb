@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# this is an Section model
 class Section < ApplicationRecord
   belongs_to :course
   has_many :lessons, dependent: :destroy
@@ -5,9 +8,9 @@ class Section < ApplicationRecord
   has_many :ratings, as: :rateable, dependent: :destroy
 
   # validations
-  validates :title, 
-          :presence => {:message => "Please enter the Section title" },
-          :uniqueness => {:message => "already exists."}
+  validates :title,
+            presence: { message: 'Please enter the Section title' },
+            uniqueness: { message: 'already exists.' }
   validates :description,
-          :presence => {:message => "Please enter the Section description"}
+            presence: { message: 'Please enter the Section description' }
 end

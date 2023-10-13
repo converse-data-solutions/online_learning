@@ -29,7 +29,7 @@
 
   <div>
     <%= form.label :phno, style: "display: block" %>
-    <%= form.text_field :phno %>
+    <%= form.number_field :phno %>
   </div>
 
   <div>
@@ -45,8 +45,17 @@
   <div>
   <%= form.label :image, style: "display: block" %>
   <%= form.file_field :image %>
+  <% if @profile.image.attached? %>
+        <ul>
+            <li>
+              <%= link_to @profile.image.filename, rails_blob_path(@profile.image, disposition: "attachment") %>
+            </li>
+        </ul>
+      <% else %>
+        <p>No attachments are currently attached.</p>
+      <% end %>
   </div>
-
+<br>
   <div>
     <%= form.submit %>
   </div>

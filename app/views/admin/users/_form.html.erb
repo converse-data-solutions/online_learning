@@ -1,5 +1,5 @@
 <h1>Admin Users</h1>
-<%= form_for @new_admin, url: admin_users_path, method: :post do |f| %>
+<%= form_for User.new, url: admin_users_path, method: :post do |f| %>
   <h2>Create New User</h2>
   <div>
     <%= f.label :email %>
@@ -8,8 +8,6 @@
     <div class="error" id="email-error", style="color: red;"></div>
   </div>
   <br>
-  <%= f.hidden_field :resource_id, value: @new_admin.id %>
-  <%= f.hidden_field :resource_type, value: @new_admin.class.name %>
   <div>
     <%= f.label :role %>
     <br>
@@ -34,36 +32,42 @@
 <% end %>
 <script>
   $(document).ready(function() {
-  $('form').on('submit', function(e) {
-    var email = $('#user_email').val();
-    var password = $('#user_password').val();
-    var passwordConfirmation = $('#user_password_confirmation').val();
+    $('form').on('submit', function(e) {
+      var email = $('#user_email').val();
+      var password = $('#user_password').val();
+      var passwordConfirmation = $('#user_password_confirmation').val();
 
-    $('.error').text('');
+      $('.error').text('');
+      $('.error').css('color', 'red');
 
-    var errors = false;
+      var errors = false;
 
-    if (!email || !email.trim()) {
-      $('#email-error').text('Please enter a valid email address.');
-      errors = true;
-    }
+      if (!email || !email.trim()) {
+        $('#email-error').text('Please enter a valid email address.');
+        errors = true;
+      }
 
-    if (!password || !password.trim()) {
-      $('#password-error').text('Please enter a password.');
-      errors = true;
-    }
+      if (!password || !password.trim()) {
+        $('#password-error').text('Please enter a password.');
+        errors = true;
+      }
 
-    if (!passwordConfirmation || !passwordConfirmation.trim()) {
-      $('#password-confirmation-error').text('Please confirm your password.');
-      errors = true;
-    }
+      if (!passwordConfirmation || !passwordConfirmation.trim()) {
+        $('#password-confirmation-error').text('Please confirm your password.');
+        errors = true;
+      }
 
-    if (errors) {
-      e.preventDefault();
-      return false;
-    }
+      if (password !== passwordConfirmation) {
+        $('#password-confirmation-error').text('Password and password confirmation do not match.').css('color', 'red');
+        errors = true;
+      }
 
-    return true;
-  });
+      if (errors) {
+        e.preventDefault();
+        return false;
+      }
+
+      return true;
+    });
   });
 </script>

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# this is an Lesson Controller
 class Lesson < ApplicationRecord
   belongs_to :section
   has_one_attached :clip, dependent: :destroy
@@ -6,15 +9,14 @@ class Lesson < ApplicationRecord
   has_many :ratings, as: :rateable, dependent: :destroy
   has_many :entrollment_details, dependent: :destroy
 
-
-  def get_all_sections
-    Section.where(course_id: self.section.course_id)
+  def all_sections
+    Section.includes(:lessons).where(course_id: section.course_id)
   end
 
   validates :title,
-          :presence => {:message => "Please enter the Lesson title" }
+            presence: { message: 'Please enter the Lesson title' }
   validates :description,
-          :presence => {:message => "Please enter the Lesson description"}
+            presence: { message: 'Please enter the Lesson description' }
   validates :clip,
-          :presence => {:message => "Please attach the Lesson clip"}
+            presence: { message: 'Please attach the Lesson clip' }
 end
