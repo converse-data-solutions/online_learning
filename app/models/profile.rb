@@ -9,6 +9,10 @@ class Profile < ApplicationRecord
             presence: { message: 'Please enter the Your name' }
   validates :gender,
             presence: { message: 'Please enter the Your gender' }
+  validates :age,
+            presence: { message: 'Please enter the Your age' }
+  validates :phno,
+            presence: { message: 'Please enter the Your phone number' }
   validates :image,
             presence: { message: 'Please attach the Your Profile image' }
 end

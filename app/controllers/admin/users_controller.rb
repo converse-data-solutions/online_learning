@@ -14,9 +14,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    @new_admin = User.new(new_admin_params)
+    @new_admin = User.new(admin_params)
 
-    if @new_admin.save
+    if @new_admin.save && @new_admin.add_role(user_role[:role])
+      # @new_admin.save
       admin_save
     else
       admin_save_error
@@ -69,7 +70,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def handle_user_status_change
-    new_role = user_params[:role]
+    new_role = params[:user][:role]
     new_status = params[:user][:deleted].to_s == 'true'
 
     if @user.add_role(new_role) && @user.update(deleted: new_status)
@@ -79,11 +80,15 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def user_params
-    params.require(:user).permit(:role, :email)
+  # def user_params
+  #   params.require(:user).permit(:role)
+  # end
+
+  def admin_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :deleted)
   end
 
-  def new_admin_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :role)
+  def user_role
+    params.require(:user)
   end
 end

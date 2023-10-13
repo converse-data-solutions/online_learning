@@ -32,36 +32,42 @@
 <% end %>
 <script>
   $(document).ready(function() {
-  $('form').on('submit', function(e) {
-    var email = $('#user_email').val();
-    var password = $('#user_password').val();
-    var passwordConfirmation = $('#user_password_confirmation').val();
+    $('form').on('submit', function(e) {
+      var email = $('#user_email').val();
+      var password = $('#user_password').val();
+      var passwordConfirmation = $('#user_password_confirmation').val();
 
-    $('.error').text('');
+      $('.error').text('');
+      $('.error').css('color', 'red');
 
-    var errors = false;
+      var errors = false;
 
-    if (!email || !email.trim()) {
-      $('#email-error').text('Please enter a valid email address.');
-      errors = true;
-    }
+      if (!email || !email.trim()) {
+        $('#email-error').text('Please enter a valid email address.');
+        errors = true;
+      }
 
-    if (!password || !password.trim()) {
-      $('#password-error').text('Please enter a password.');
-      errors = true;
-    }
+      if (!password || !password.trim()) {
+        $('#password-error').text('Please enter a password.');
+        errors = true;
+      }
 
-    if (!passwordConfirmation || !passwordConfirmation.trim()) {
-      $('#password-confirmation-error').text('Please confirm your password.');
-      errors = true;
-    }
+      if (!passwordConfirmation || !passwordConfirmation.trim()) {
+        $('#password-confirmation-error').text('Please confirm your password.');
+        errors = true;
+      }
 
-    if (errors) {
-      e.preventDefault();
-      return false;
-    }
+      if (password !== passwordConfirmation) {
+        $('#password-confirmation-error').text('Password and password confirmation do not match.').css('color', 'red');
+        errors = true;
+      }
 
-    return true;
-  });
+      if (errors) {
+        e.preventDefault();
+        return false;
+      }
+
+      return true;
+    });
   });
 </script>

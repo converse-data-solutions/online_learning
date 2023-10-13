@@ -25,6 +25,15 @@
     <div>
       <%= f.label :clip %>
       <br>
+      <% if @lesson.clip.attached? %>
+        <ul>
+            <li>
+              <%= link_to @lesson.clip.filename, rails_blob_path(@lesson.clip, disposition: "attachment") %>
+            </li>
+        </ul>
+      <% else %>
+        <p>No attachments are currently attached.</p>
+      <% end %>
       <%= f.file_field :clip %>
       <% if @lesson.errors.has_key?(:clip) %>
         <span style="color: red">

@@ -8,7 +8,6 @@ class Admin::EntrollmentsController < ApplicationController
   end
 
   def update_status
-    @entrollment = Entrollment.find(params[:entrollment_id])
     @entrollment.update(status: params[:status]) if params[:status].in?(Entrollment.statuses.keys)
     redirect_to admin_entrollments_path
   end

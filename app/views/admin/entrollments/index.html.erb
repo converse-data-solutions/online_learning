@@ -1,4 +1,4 @@
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>User</th>
@@ -16,10 +16,10 @@
         <td>
           <%= form_tag(update_status_admin_entrollment_path(entrollment), method: "post") do %>
             <%= hidden_field_tag("entrollment_id", entrollment.id) %>
-            <%= button_tag(type: "submit", name: "status", value: "approved") do %>
+            <%= button_tag(type: "submit", name: "status", value: "approved", class: "btn btn-success") do %>
               Approve
-            <% end %>
-            <%= button_tag(type: "submit", name: "status", value: "denied") do %>
+            <% end %>:
+            <%= button_tag(type: "submit", name: "status", value: "denied", class: "btn btn-danger") do %>
               Deny
             <% end %>
           <% end %>

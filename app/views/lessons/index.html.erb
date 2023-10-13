@@ -1,8 +1,11 @@
      
-<table >
+<table class="table table-striped">
   <thead>
     <th>title</th>
     <th>Description</th>
+    <th>Clip</th>
+    <th>Attachments</th>
+    <th>Actions</th>
   </thead>
   <tbody>
     <% @lessons.each do |lesson| %>
@@ -29,8 +32,11 @@
               <p>No attachments for this lesson.</p>
             <% end %>
           </td>
+          <td>
+            <td><%= link_to "show", course_section_lesson_path(@course, @section, lesson) %></td>
+          </td>
         </tr>
-        <td><%= link_to "show", course_section_lesson_path(@course, @section, lesson) %></td>
+        
       <% end %>
     </tbody>
   </table>
