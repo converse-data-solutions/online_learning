@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  # prepend_before_action :check_captcha, only: [:create] # Change this to be any actions you want to protect.
 
   # GET /resource/sign_up
   # def new
@@ -41,9 +42,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
@@ -60,4 +61,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def check_captcha
+    success = verify_recaptcha(action: 'login', minimum_score: 0.5,
+                               secret_key: '6LfoFZ8oAAAAAIaGVgMNSiBPlaI_0EA3jfsYtrSm')
+    return if verify_recaptcha # verify_recaptcha(action: 'login') for v3
+
+    self.resource = resource_class.new sign_in_params
+
+    respond_with_navigational(resource) do
+      flash.discard(:recaptcha_error) # We need to discard flash to avoid showing it on the next page reload
+      render :new
+    end
+  end
 end

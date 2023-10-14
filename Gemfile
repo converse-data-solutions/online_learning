@@ -81,5 +81,7 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem 'newrelic-infinite_tracing'
-gem 'newrelic_rpm'
+# gem 'newrelic-infinite_tracing'
+# gem 'newrelic_rpm'
+
+gem "recaptcha", "~> 5.15"

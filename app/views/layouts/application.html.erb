@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
     <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
     <script src="https://path/to/videojs-resume-playback.min.js"></script>
@@ -41,10 +42,10 @@
               </li>
             <% end %>
             <li class="nav-item">
-                <%= link_to 'Profile', user_profiles_path(current_user), class: "nav-link" %>
+              <%= link_to 'Profile', user_profiles_path(current_user), class: "nav-link" %>
             </li>
             <li class="nav-item">
-                <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
+              <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link" %>
             </li>
             <br>
           <% else %>
