@@ -10,11 +10,18 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   attr_accessor :role
 
   after_create :assign_default_role
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+    end
+  end
 
   def already_entrolled?(course)
     entrollments.where(course:).exists?

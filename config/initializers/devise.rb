@@ -25,6 +25,9 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'smartaravindhan001@gmail.com'
+  config.omniauth :google_oauth2,
+                  Rails.application.credentials.dig(:google_oauth_client_id),
+                  Rails.application.credentials.dig(:google_oauth_client_secret)
 
   # Configure the class responsible to send e-mails.
   config.mailer = 'Devise::Mailer'
@@ -168,7 +171,6 @@ Devise.setup do |config|
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
-
 
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
