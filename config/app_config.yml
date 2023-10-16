@@ -1,0 +1,15 @@
+default: &default
+  app_url: http://localhost:3000
+  
+
+development:
+  <<: *default
+  app_url: http://localhost:3000
+
+test:
+  <<: *default
+  app_url: http://localhost:3000
+
+production:
+  <<: *default
+  app_url: https://techvillageacademy-1baf62cde5a3.herokuapp.com/
