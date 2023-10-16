@@ -2,7 +2,7 @@
 
 <h1>Profiles</h1>
 <% if @current_user.profile.nil? %>
-<%= link_to "New profile", new_user_profile_path %>
+<%= render "form", profile: @profile %>
 <% else %>
 
 <div id="profiles">

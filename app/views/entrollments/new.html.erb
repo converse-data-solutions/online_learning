@@ -1,22 +1,24 @@
-<h1>Entroll in <%= @course.course_name %></h1>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<%= form_for @entrollment do |f| %>
-  <div class="field">
-    <label for="entrollment_status"></label>
-    <%= f.hidden_field :status, value: "pending" %>
-  </div>
-  <%= f.hidden_field :course_id %>
-  <%= f.hidden_field :user_id %>
-  <div class="actions">
-    <% if !current_user.already_entrolled?(@course) %>
-      <%= f.submit 'Enroll' %>
-    <% elsif %>
-      <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
-      <p>You are already entrolled in this course with status: <%= entrollment.status %></p>
-    <% else enrollment.status == "approved" %>
-      <% redirect_to courses_path %>
-    <% end %>
-  </div>
+<% if user.role != "admin" %>
+  <h1>Entroll in <%= @course.course_name %></h1>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= form_for @entrollment do |f| %>
+    <div class="field">
+      <label for="entrollment_status"></label>
+      <%= f.hidden_field :status, value: "pending" %>
+    </div>
+    <%= f.hidden_field :course_id %>
+    <%= f.hidden_field :user_id %>
+    <div class="actions">
+      <% if !current_user.already_entrolled?(@course) %>
+        <%= f.submit 'Enroll' %>
+      <% elsif %>
+        <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
+        <p>You are already entrolled in this course with status: <%= entrollment.status %></p>
+      <% else enrollment.status == "approved" %>
+        <% redirect_to courses_path %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 <%= link_to 'Back to Courses', courses_path %>

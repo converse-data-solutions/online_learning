@@ -4,6 +4,7 @@
     <tr>
       <th>Name</th>
       <th>Role</th>
+      <th>Current Type</th>
       <th>Status</th>
       <th>Actions</th>
       <th></th>
@@ -15,6 +16,7 @@
       <tr>
         <td><%= user.email %></td>
         <td><%= user.has_role?(:admin) ? 'Admin' : 'Student' %></td>
+        <td><%= user.current_type %></td>
         <td>
           <% if user.deleted? %>
             <span class="text-danger">Inactive</span>

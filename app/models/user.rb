@@ -12,6 +12,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
+  enum current_type: {
+    visitor: 0,
+    enrolled: 1,
+    online: 2,
+    offline: 3
+  }
+
   attr_accessor :role
 
   after_create :assign_default_role

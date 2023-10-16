@@ -22,40 +22,44 @@
       <% else %>
         <p>No ratings yet for this course.</p>
       <% end %>
-      <a class="card-link text-decoration-none"><%= form_for @entrollment do |f| %>
-          <div class="field">
-            <label for="entrollment_status"></label>
-            <%= f.hidden_field :status, value: "pending" %>
-          </div>
-          <%= f.hidden_field :course_id %>
-          <%= f.hidden_field :user_id %>
-          <div class="actions">
-            <% if !current_user.already_entrolled?(@course) %>
-              <%= f.submit 'Enroll', class: "btn btn-secondary" %>
-            <% else %>
-              <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
-              <% if entrollment.status == "approved" %>
-                <%= link_to "view Sections", course_sections_path(@course), class: "btn btn-secondary" %>
+      <% if !current_user.has_role?("admin") %>
+        <a class="card-link text-decoration-none"><%= form_for @entrollment do |f| %>
+            <div class="field">
+              <label for="entrollment_status"></label>
+              <%= f.hidden_field :status, value: "pending" %>
+            </div>
+            <%= f.hidden_field :course_id %>
+            <%= f.hidden_field :user_id %>
+            <div class="actions">
+              <% if !current_user.already_entrolled?(@course) %>
+                <%= f.submit 'Enroll', class: "btn btn-secondary" %>
               <% else %>
-                <p class="text-decoration-none">You are already entrolled in this course with status: <%= entrollment.status %></p>
+                <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
+                <% if entrollment.status == "approved" %>
+                  <%= link_to "view Sections", course_sections_path(@course), class: "btn btn-secondary" %>
+                <% else %>
+                  <p class="text-decoration-none">You are already entrolled in this course with status: <%= entrollment.status %></p>
+                <% end %>
               <% end %>
-            <% end %>
-          </div>
-        <% end %></a>
+            </div>
+          <% end %></a>
+      <% end %>
     </div>
   </div>
-  <div class="mt-5">
-    <%= form_with(model: [@course, @comment], url: course_comments_path(@course, @comment)) do |form| %>
-      <%= form.text_area :body, placeholder: "Add a comment..." , class: "form-control" , rows: "3" %>
-      <%= form.hidden_field :commentable_id, value: @course.id %>
-      <%= form.hidden_field :commentable_type, value: @course.class.name %>
-      <%= form.hidden_field :user_id, value: current_user.id %>
-      <%= form.submit "Post Comment", class: "btn btn-info" %>
-    <% end %>
-    <% if user_signed_in? %>
-      <%= render 'ratings/form', rateable: @course %>
-    <% end %>
-  </div>
+  <% if !current_user.has_role?("admin") %>
+    <div class="mt-5">
+      <%= form_with(model: [@course, @comment], url: course_comments_path(@course, @comment)) do |form| %>
+        <%= form.text_area :body, placeholder: "Add a comment..." , class: "form-control" , rows: "3" %>
+        <%= form.hidden_field :commentable_id, value: @course.id %>
+        <%= form.hidden_field :commentable_type, value: @course.class.name %>
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.submit "Post Comment", class: "btn btn-info" %>
+      <% end %>
+      <% if user_signed_in? %>
+        <%= render 'ratings/form', rateable: @course %>
+      <% end %>
+    </div>
+  <% end %>
   <div class="row gap-5 mt-5">
     <% @course.comments.includes(:user).each do |comment| %>
       <div class="card row col-sm-4 gap-2" style="width: 18rem;">

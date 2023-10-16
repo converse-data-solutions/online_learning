@@ -27,7 +27,7 @@
         </div>
         <div>
           <% if @lesson.attachments.attached? %>
-            <% @lesson.attachments.each do |attachment| %>
+            <% @lesson.attachments.includes(:blob).each do |attachment| %>
               <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %><br>
             <% end %>
           <% else %>

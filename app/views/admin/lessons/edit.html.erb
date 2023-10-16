@@ -47,7 +47,7 @@
       <br>
       <% if @lesson.attachments.attached? %>
         <ul>
-          <% @lesson.attachments.each do |attachment| %>
+          <% @lesson.attachments.includes(:blob).each do |attachment| %>
             <li>
               <%= link_to attachment.filename, rails_blob_path(attachment, disposition: "attachment") %>
               <%= f.check_box :_destroy, { multiple: true }, false, nil %>
