@@ -72,12 +72,19 @@ class Admin::UsersController < ApplicationController
   def handle_user_status_change
     new_role = params[:user][:role]
     new_status = params[:user][:deleted].to_s == 'true'
+    new_current_type = params[:user][:current_type]
 
-    if @user.add_role(new_role) && @user.update(deleted: new_status)
+    if update_user_information(new_role, new_status, new_current_type)
       flash[:notice] = 'User information updated successfully.'
     else
       flash[:alert] = 'Failed to update user information.'
     end
+  end
+
+  def update_user_information(new_role, new_status, new_current_type)
+    return true if @user.add_role(new_role) && @user.update(deleted: new_status, current_type: new_current_type)
+
+    false
   end
 
   # def user_params
@@ -85,7 +92,7 @@ class Admin::UsersController < ApplicationController
   # end
 
   def admin_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :deleted)
+    params.require(:user).permit(:email, :password, :password_confirmation, :deleted, :current_type)
   end
 
   def user_role

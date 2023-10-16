@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
   def index
     @user = current_user
     @profiles = @user.profile
+    @profile = Profile.new
     # @profiles = Profile.all
   end
 

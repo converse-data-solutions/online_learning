@@ -15,6 +15,12 @@
   </div>
   <br>
   <div>
+    <%= f.label :current_type %>
+    <br>
+    <%= f.select :current_type, User.current_types.keys.map { |type| [type.humanize, type] } %>
+  </div>
+  <br>
+  <div>
     <%= f.label :password %>
     <br>
     <%= f.password_field :password %>

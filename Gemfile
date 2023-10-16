@@ -5,6 +5,9 @@ ruby '3.2.2'
 gem 'cancan'
 gem 'devise'
 gem 'htmlbeautifier', '~> 1.4', '>= 1.4.2'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'rolify', '~> 6.0', '>= 6.0.1'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
@@ -81,5 +84,7 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem 'newrelic-infinite_tracing'
-gem 'newrelic_rpm'
+# gem 'newrelic-infinite_tracing'
+# gem 'newrelic_rpm'
+
+gem 'recaptcha', '~> 5.15'

@@ -15,8 +15,8 @@ class EntrollmentDetailsController < ApplicationController
 
   def show
     status_show
-    if @current_time >= @video_duration
-      @video_progress = 99
+    @video_percentage = (@current_time.to_f / @video_duration) * 100
+    if @video_percentage == 99
       @entrollment_detail.update(status: true)
     else
       @video_progress = (@current_time.to_f / @video_duration) * 100

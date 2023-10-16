@@ -12,6 +12,11 @@
     <%= f.select :role, ['admin', 'student'] %>
   </div>
   <div>
+    <%= f.label :current_type %>
+    <br>
+    <%= f.select :current_type, User.current_types.keys.map { |type| [type.humanize, type] } %>
+  </div>
+  <div>
     <%= f.label :deleted, 'Status:' %>
     <br>
     <%= f.select :deleted, [['Active', false], ['Inactive', true]], {}, required: true %>
