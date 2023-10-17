@@ -40,6 +40,7 @@
     <p>No image</p>
     <% end %>
 </div>
-
-<%= link_to "Edit profile", edit_user_profile_path(@current_user.id, @current_user.profile) %>
+<%= link_to "Your Paymets", payments_path, class: "btn btn-primary" %>
+<br>
+<%= link_to "Edit profile", edit_user_profile_path(@current_user.id, @current_user.profile), class: "btn btn-secondary" %>
 <% end %>

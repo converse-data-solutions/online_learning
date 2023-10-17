@@ -2,6 +2,7 @@
 
 # this is an User model
 class User < ApplicationRecord
+  has_many :payments, dependent: :destroy
   has_one :profile, dependent: :destroy
   has_many :entrollments, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy

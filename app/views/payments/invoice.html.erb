@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+  width: 700px;
+}
+
+.wrapper {
+   width: 100%;
+   border: 2px solid #000;
+   margin: 10px 0; 
+  
+  .row{
+    border-bottom: 1px solid #000;
+    
+    .border-right {
+      border-right: 1px solid #000;
+    }
+  }
+  
+  .no-border {
+    border-bottom: 0;
+  }
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+.padding-0 {
+  padding: 0;
+}
+
+img {
+  height: 30px;
+}
+
+table, th, td {
+  border: 2px solid #000 !important;
+}
+
+    .first {
+      border-top: 0;
+    }
+    
+    .last {
+      border-bottom: 0;
+    }
+    
+    b {
+      display: block;
+    }
+    
+    span {
+      font-size: 12px;
+    }
+  
+
+
+.invoice-bill {
+  width: 100%;
+  
+  td {
+    border: 1px solid #000;
+    padding: 5px;
+  }
+  
+  .serial-no {
+    width: 70px;
+  }
+  
+  .particulars {
+    width: 500px;
+  }
+  
+  .amount {
+    width: 150px;
+  }
+  
+  .particular-items {
+    padding: 5px 10px;
+  }
+  
+  .amount-items {
+    padding: 5px 0;
+  }
+}
+
+.entry-id {
+  margin: 35px 0;
+}
+
+.bank-details {
+  margin-top: 30px;
+}
+
+.authorised-sign-wrapper {
+  width: 300px;
+  border: 1px solid #000;
+  padding: 5px 20px;
+} 
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <div class="row margin-0" style="width: 100%; display: flex;">
+        <div class="col-sm-5" style="width: 70%;">
+          <img src="https://techvillageacademy.com/assets/images/logo/logo.png" alt="logo" style="width: 230px; height: 70px;">
+          <p>xyz Inc.<br /> 1250 Oabc Pkeee Stre 1010<br />Sunnyvale, CA 94085</p>
+        </div>
+        <div class="col-sm-7 padding-0" style="width: 30%;">
+          <table class="table" cellspacing="0" cellpadding="10">
+            <tbody>
+            <tr>
+              <td class="first">
+                <b>Date</b>
+              </td>
+              <td class="first">
+                <b></b>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Payment ID</b>
+              </td>
+              <td>
+                <b></b>
+              </td>
+            </tr>
+            <tr style="width: 10%; height: 100px;">
+              <td class="last">
+                <b>Contact No</b>
+              </td>
+              <td class="last">
+                <b></b>
+              </td>
+             
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row margin-0">
+        <div class="col-sm-12 padding-0">
+          <table border="1" style="border-collapse: collapse; width: 100%;">
+            <thead style="border-bottom: 1px solid #000;">
+              <tr>
+              <th class="serial-no">
+                <b>SL. No.</b>
+              </th>
+              <th class="particulars">
+                <b>Particulars</b>
+              </th>
+              <th class="particulars">
+                <b>Todatl Course Fee</b>
+              </th>
+              <th class="amount">
+                <b>Amount Paid</b>
+              </th>
+            </tr>
+            </thead>
+            <tr>
+              <td>
+                1
+              </td>
+              <td>
+                <p>
+                  Unbxd Software License Fees for Jan 2017
+                </p>
+                <div class="particular-items">
+                  <p>
+                    Setup Fees
+                  </p>
+                  <p>
+                    POC Fees
+                  </p>
+                  <p>
+                    Monthly License Fees
+                  </p>
+                  <p>
+                    Overage Fees
+                  </p>
+                  <p>
+                    Additional Fees
+                  </p>
+                  <p>
+                    Discount Fees
+                  </p>
+                </div>
+              </td>
+              <td></td>
+              <td>
+                <p>$99</p>
+                <div class="particular-items amount-items">
+                  <p>$39</p>
+                  <p>$19</p>
+                  <p>$29</p>
+                  <p>$49</p>
+                  <p>$99</p>
+                  <p>$99</p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="text-align: end;"><b>Total</b></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td colspan="3" style="text-align: end;">
+                <b>Total</b>
+              </td>
+              <td>$99</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div style="width: 100%; height: 120px; border-bottom: 1px solid #000;">
+        <span class="">Total Amount (In Words):</span>
+      </div>
+      <div style="width: 100%; height: 220px; border-bottom: 1px solid #000; display: flex; justify-content: space-between; flex-direction: column;">
+        <div style="text-align: end;">
+        <span>Authorized Signatory </span>
+        </div>
+        <div style="text-align: end;">
+          <p>Gayathri Tamilselvan</p>
+          <p>Operational Head of Tech Village Academy </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

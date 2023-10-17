@@ -9,7 +9,11 @@ class Admin::EntrollmentsController < ApplicationController
 
   def update_status
     @entrollment.update(status: params[:status]) if params[:status].in?(Entrollment.statuses.keys)
-    redirect_to admin_entrollments_path
+    if @entrollment.status == 'approved'
+      redirect_to admin_payments_path
+    else
+      redirect_to admin_entrollments_path
+    end
   end
 
   private
