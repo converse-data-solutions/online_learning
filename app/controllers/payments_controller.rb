@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  # layout 'pdf'
+  layout 'pdf'
   def index
     @user = current_user
     @payments = @user.payments
