@@ -1,6 +1,7 @@
      
 <table class="table table-striped">
   <thead>
+    <th></th>
     <th>title</th>
     <th>Description</th>
     <th>Clip</th>
@@ -10,6 +11,7 @@
   <tbody>
     <% @lessons.each do |lesson| %>
       <tr>
+        <td><%= lesson.section.title %></td>
         <td><%= lesson.title %></td>
         <td><%= lesson.description %>
           <td>
