@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>New User Enrollment</h1>
+    <p>
+      A new user has enrolled in <strong><%= @entrollment.course.course_name %></strong>!
+    </p>
+    <p>
+      <strong>User Email:</strong> <%= @entrollment.user.email %><br>
+      <strong>Course Name:</strong> <%= @entrollment.course.course_name %><br>
+      <strong>Enrollment Date:</strong> <%= Time.now.to_s(:short) %>
+    </p>
+    <p>
+      Please take the necessary actions to review the enrollment.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<h1>Invoice</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>User Email</th>
+      <th>Entrolled Course</th>
+      <th>Payment Date</th>
+      <th>Amount</th>
+      <th>Invoice</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @payments.each do |payment| %>
+  <tr>
+  <td><p><%= payment.user.email %></p></td>
+  <td><p><%= payment.entrollment_id %></p></td>
+  <td><p><%= payment.paid_at.strftime("%B %d, %Y") %></p></td>
+  <td><p><%= payment.amount %></p></td>
+  <td><%= link_to 'View Invoice', invoice_payment_path(payment, format: :pdf), class: "btn btn-secondary" %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>

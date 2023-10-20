@@ -12,6 +12,8 @@ class EntrollmentsController < ApplicationController
   def create
     @entrollment = Entrollment.new(entrollment_params)
     if @entrollment.save
+      EntrollmentMailer.new_entrollment_notification(@entrollment).deliver_now
+
       flash[:notice] = 'Entrollment request submitted.'
       redirect_to courses_path
     else

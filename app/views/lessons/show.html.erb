@@ -17,10 +17,11 @@
               <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a
                 web browser that
-                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a
-      >
+                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
               </p>
             </video>
+            <button id="previous-video">Previous</button>
+            <button id="next-video">Next</button>
           <% else %>
             <p>No lesson attached to this record.</p>
           <% end %>
@@ -51,7 +52,7 @@
                       <div class="d-flex justify-content-between">
                         <div>
                           <li class="list-unstyled text-decoration-none">
-                            <%= link_to lesson.title, lesson, class: "text-decoration-none" %>
+                            <%= link_to lesson.title, course_section_lesson_path(@course, section, lesson), class: "text-decoration-none", id: "lesson-<%= lesson.id" %>
                           </li>
                         </div>
                         <div>
@@ -72,7 +73,6 @@
     <script>
       var media = videojs("video-<%= @lesson.id %>",{
         autoPlay: 'muted',
-        loop: true,
         controls: true,
         fluid: true,
         aspectRatio: '16:9',
@@ -93,8 +93,6 @@
         console.log("Hai");
         var videos = document.querySelectorAll('video');
           var totalDuration = 0;
-
-
         videos.forEach(function(video) {
           videojs(video.id, {}, function() {
             var player = this;
@@ -179,6 +177,45 @@
             });
             });
           });
+        });
+               var videoPlayer = videojs("video-<%= @lesson.id %>", {
+          controls: true,
+          fluid: true,
+          aspectRatio: '16:9'
+        });
+
+        var videos = [
+          <% @lesson.all_sections.each do |section| %>
+            <% section.lessons.includes(clip_attachment: :blob).each do |lesson| %>
+              "<%= url_for(lesson.clip) %>",
+            <% end %>
+          <% end %>
+        ];
+
+        videos.pop();
+
+        var currentVideoIndex = 0;
+
+        function loadVideo(index) {
+          var videoSrc = videos[index];
+          videoPlayer.src(videoSrc);
+          videoPlayer.load();
+        }
+
+        loadVideo(currentVideoIndex);
+
+        document.getElementById("previous-video").addEventListener("click", function() {
+          if (currentVideoIndex > 0) {
+            currentVideoIndex--;
+            loadVideo(currentVideoIndex);
+          }
+        });
+
+        document.getElementById("next-video").addEventListener("click", function() {
+          if (currentVideoIndex < videos.length - 1) {
+            currentVideoIndex++;
+            loadVideo(currentVideoIndex);
+          }
         });
       });
     </script>

@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     resources :profiles
   end
+  resources :payments do
+    member do
+      get 'invoice'
+    end
+  end
+  # get 'payments/invoice/:id', to: 'payments#invoice', as: :invoice
   resources :entrollments, only: %i[show create]
   # resources :courses do
   #   resources :entrollments
@@ -58,6 +64,10 @@ Rails.application.routes.draw do
 
   resources :lessons, only: [] do
     resources :ratings, only: []
+  end
+
+  namespace :admin do
+    resources :payments
   end
 
   namespace :admin do

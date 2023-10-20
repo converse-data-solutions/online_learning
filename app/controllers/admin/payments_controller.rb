@@ -4,6 +4,8 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def new
+    @users = User.all
+    @entrollments = Entrollment.all
     @payment = Payment.new
   end
 
@@ -42,6 +44,6 @@ class Admin::PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(:user_id, :entrollment_id)
+    params.require(:payment).permit(:user_id, :entrollment_id, :amount, :paid_at)
   end
 end

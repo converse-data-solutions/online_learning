@@ -1,0 +1,29 @@
+<h1>Payment Details</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Payment ID</th>
+      <th>User ID</th>
+      <th>Entrolled Course</th>
+      <th>Payment Date</th>
+      <th>Amount</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payments.includes(:user).each do |payment| %>
+      <tr>
+        <td><%= payment.id %></td>
+        <td><%= payment.user.email %></td>
+        <td><%= payment.entrollment_id %></td>
+        <td><%= payment.paid_at.strftime("%B %d, %Y") %></td>
+        <td><%= payment.amount %></td>
+        <td><%= link_to 'Edit', edit_admin_payment_path(payment), class: "btn btn-secondary" %></td>
+        <td><%= link_to 'DELETE', admin_payment_path(payment), data: {turbo_method: :delete}, class: "btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Payment", new_admin_payment_path, class: "btn btn-primary mt-3 "%>

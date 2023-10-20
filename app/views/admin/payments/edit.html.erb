@@ -1,0 +1,47 @@
+<h1>Edit Payment</h1>
+<%= form_for [:admin, @payment], url: admin_payment_path(@payment) do |f| %>
+<div>
+  <%= f.label :user_id %>
+  <br>
+  <%= f.text_field :user_id %>
+  <% if @payment.errors.has_key?(:user_id) %>
+    <span style="color: red">
+      <%= @payment.errors[:user_id].first %>
+    </span>
+  <% end %>
+</div>
+<div>
+  <%= f.label :entrollment_id %>
+  <br>
+  <%= f.text_field :entrollment_id %>
+  <% if @payment.errors.has_key?(:entrollment_id) %>
+    <span style="color: red">
+      <%= @payment.errors[:entrollment_id].first %>
+    </span>
+  <% end %>
+</div>
+<div>
+  <%= f.label :paid_at %>
+  <br>
+  <%= f.text_field :paid_at %>
+  <% if @payment.errors.has_key?(:paid_at) %>
+    <span style="color: red">
+      <%= @payment.errors[:paid_at].first %>
+    </span>
+  <% end %>
+</div>
+<div>
+  <%= f.label :amount %>
+  <br>
+  <%= f.text_field :amount %>
+  <% if @payment.errors.has_key?(:amount) %>
+    <span style="color: red">
+      <%= @payment.errors[:amount].first %>
+    </span>
+  <% end %>
+</div>
+<br>
+<%= f.submit "Update Payment", class: "btn btn-primary" %>
+
+<% end %>
+  

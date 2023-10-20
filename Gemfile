@@ -9,6 +9,9 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'rolify', '~> 6.0', '>= 6.0.1'
+gem 'sass-rails', '~> 6.0'
+gem 'wicked_pdf', '~> 2.7'
+gem 'wkhtmltopdf-binary'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
 
