@@ -12,7 +12,7 @@
           <% if @lesson.clip.attached? %>
             <video
       id="video-<%= @lesson.id %>" class="video-js my-player" preload="auto" width="1350" height="700" controls 
-      data-setup="{}"   >
+      data-setup="{}">
               <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
               <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a
@@ -20,8 +20,8 @@
                 <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
               </p>
             </video>
-            <button id="previous-video">Previous</button>
-            <button id="next-video">Next</button>
+            <button id="previous-video" class="vjs-control vjs-button vjs-next-button">Previous</button>
+            <button id="next-video" class="vjs-control vjs-button vjs-prev-button">Next</button>
           <% else %>
             <p>No lesson attached to this record.</p>
           <% end %>
@@ -48,11 +48,11 @@
               <div id="collapse<%= index %>" class="accordion-collapse collapse show" aria-labelledby="heading<%= index %>" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                   <ul>
-                    <% section.lessons.each do |lesson| %>
-                      <div class="d-flex justify-content-between">
+                    <% section.lessons.each_with_index do |lesson, index| %>
+                      <div class="d-flex justify-content-between <%= lesson.id == @lesson.id ? 'active' : '' %> lesson_data">
                         <div>
                           <li class="list-unstyled text-decoration-none">
-                            <%= link_to lesson.title, course_section_lesson_path(@course, section, lesson), class: "text-decoration-none", id: "lesson-<%= lesson.id" %>
+                            <%= link_to lesson.title, course_section_lesson_path(@course, section, lesson), class: "text-decoration-none lesson_link", id: "lesson-#{index+ 1}", data: {lesson_index: index+ 1 } %>
                           </li>
                         </div>
                         <div>
@@ -75,10 +75,11 @@
         autoPlay: 'muted',
         controls: true,
         fluid: true,
-        aspectRatio: '16:9',
         playbackRates: [0.5, 1, 1.5, 2],
         resumePlayback: true,
-        html5: true,
+        nextButton: true,
+        prevButton: true,
+        previous: true,
         userActions: {
           forward: true,
           back: true,
@@ -96,8 +97,11 @@
         videos.forEach(function(video) {
           videojs(video.id, {}, function() {
             var player = this;
-
             player.on('loadedmetadata', function () {
+              console.log(player.duration());
+              console.log(player.currentTime());
+              let videoDuration = player.duration();
+              console.log(videoDuration);
               totalDuration += player.duration();
 
               var allVideosLoaded = Array.from(videos).every(function (v) {
@@ -109,6 +113,40 @@
                 var totalDurationInMinutes = (totalDuration % 3600) / 60;
                 console.log('Overall duration: ' + totalDurationInHours + ' hours ' + totalDurationInMinutes + ' minutes');
               }
+              let previousPercentage = 0;
+
+              player.on('timeupdate', function () {
+              // videoDuration = video.duration
+                // if (isNaN(videoDuration)) videoDuration = 0;
+                console.log("Video Duration: ", videoDuration);
+                player.on('timeupdate', function () {
+                var currentTime = player.currentTime();
+                var videoPercentage = Math.round((currentTime / videoDuration) * 100);
+                console.log(videoPercentage);
+  
+              if ((videoPercentage % 10) == 0 && videoPercentage > previousPercentage) {
+                previousPercentage = videoPercentage;
+                console.log("Current Time of the Video Player: ", currentTime);
+                console.log("Video Percentage: ", videoPercentage);
+  
+                $.ajax({
+                  url: '<%= update_progress_path %>',
+                  method: 'GET',
+                  data: {
+                    course_id: <%= params[:course_id] %>,
+                    lesson_id: <%= @lesson.id %>,
+                    progress: videoPercentage
+                  },
+                  success: function(response) {
+                    console.log("Successfully updated");
+                  },
+                  error: function(error) {
+                    console.log("Not updated");
+                  }
+                });
+               };
+              });
+              }); 
             });
 
             document.addEventListener("keydown", function (event) {
@@ -148,75 +186,36 @@
               player.play();
             }
 
-            player.on('timeupdate', function () {
-            var videoDuration = video.duration;
-              if (isNaN(videoDuration)) videoDuration = 0;
-              console.log("Video Duration: ", videoDuration);
-              player.on('timeupdate', function () {
-              var currentTime = player.currentTime();
-              var videoPercentage = (currentTime / videoDuration) * 100;
-
-              console.log("Current Time of the Video Player: ", currentTime);
-              console.log("Video Percentage: ", videoPercentage);
-
-              $.ajax({
-                url: '<%= update_progress_path %>',
-                method: 'GET',
-                data: {
-                  course_id: <%= params[:course_id] %>,
-                  lesson_id: <%= @lesson.id %>,
-                  progress: videoPercentage
-                },
-                success: function(response) {
-                  console.log("Successfully updated");
-                },
-                error: function(error) {
-                  console.log("Not updated");
-                }
-              });
+            player.ready(function() {
+              console.log("hii")
             });
-            });
+
+            
           });
         });
-               var videoPlayer = videojs("video-<%= @lesson.id %>", {
-          controls: true,
-          fluid: true,
-          aspectRatio: '16:9'
-        });
-
-        var videos = [
-          <% @lesson.all_sections.each do |section| %>
-            <% section.lessons.includes(clip_attachment: :blob).each do |lesson| %>
-              "<%= url_for(lesson.clip) %>",
-            <% end %>
-          <% end %>
-        ];
-
-        videos.pop();
-
-        var currentVideoIndex = 0;
-
-        function loadVideo(index) {
-          var videoSrc = videos[index];
-          videoPlayer.src(videoSrc);
-          videoPlayer.load();
+        function goToLesson(lesson_info) {
+          const activeLesson = document.querySelector(".lesson_data.active");
+          const lessonLink = activeLesson && activeLesson.querySelector(".lesson_link");
+          const lessonIndex = lessonLink && lessonLink.getAttribute("data-lesson-index");
+          const targetLessonId = lessonIndex && "lesson-" + (parseInt(lessonIndex) + lesson_info);
+          const targetLesson = targetLessonId && document.getElementById(targetLessonId);
+          
+          if (targetLesson) {
+            const href = targetLesson.getAttribute("href");
+            if (href) {
+              window.location.href = href;
+            }
+          }
         }
-
-        loadVideo(currentVideoIndex);
-
+        
         document.getElementById("previous-video").addEventListener("click", function() {
-          if (currentVideoIndex > 0) {
-            currentVideoIndex--;
-            loadVideo(currentVideoIndex);
-          }
+          goToLesson(-1);
         });
-
+        
         document.getElementById("next-video").addEventListener("click", function() {
-          if (currentVideoIndex < videos.length - 1) {
-            currentVideoIndex++;
-            loadVideo(currentVideoIndex);
-          }
+          goToLesson(1);
         });
+        
       });
     </script>
   </body>
