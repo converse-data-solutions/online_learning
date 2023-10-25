@@ -24,7 +24,17 @@ console.log("video-"+line_data);
 //     }
 //   });
   var player = null;
-  document.addEventListener("DOMContentLoaded", function() {
+
+  console.log("Iam watching");
+
+  function initVideo() {
+    const line = document.querySelector(".lesson_video");
+    console.log(line);
+    const courseId = line.getAttribute("data-course_id");
+    console.log(courseId);
+    const line_data = line.getAttribute("data-lesson_id");
+    let videoId = "video-"+line_data;
+
     console.log("Hai");
     var videos = document.querySelectorAll('video');
       var totalDuration = 0;
@@ -104,7 +114,7 @@ console.log("video-"+line_data);
 
          };
         });
-        }); 
+        });
       });
 
       document.addEventListener("keydown", function (event) {
@@ -159,10 +169,11 @@ console.log("video-"+line_data);
       const targetLesson = targetLessonId && document.getElementById(targetLessonId);
       
       if (targetLesson) {
-        const href = targetLesson.getAttribute("href");
-        if (href) {
-          window.location.href = href;
-        }
+        targetLesson.click()
+        // const href = targetLesson.getAttribute("href");
+        // if (href) {
+        //   window.location.href = href;
+        // }
       }
     }
     
@@ -173,5 +184,25 @@ console.log("video-"+line_data);
     document.getElementById("next-video").addEventListener("click", function() {
       goToLesson(1);
     });
-    
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    console.log("DomLoaded");
+    initVideo();
   });
+
+  document.addEventListener("turbo:render", function() {
+    console.log("TurboFrame Loaded");
+    initVideo();
+  })
+
+  document.addEventListener("turbo:before-fetch-response", function (e) {
+    // console.log(player);
+    let oldPlayer = document.querySelectorAll('video')[0];
+    console.log(oldPlayer);
+    videojs(oldPlayer).dispose();
+    // let player_dispose = player.dispose();
+    // console.log(player_dispose);
+    console.log("Before Fetch Response");
+  })
+

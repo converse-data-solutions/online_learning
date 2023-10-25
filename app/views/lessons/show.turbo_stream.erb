@@ -1,3 +1,5 @@
-<%= turbo_stream.replace "change-lesson" do %>
-    <%= render "lessons/show" %>
+<%#= turbo_stream.prepend "change-lesson" do %>
+    <%= render "lessons/show", locals: {course: @course, section: @section, lesson: @lesson} %>
+    test
 <% end %>
+<%= turbo_stream.replace "lesson-details", render "lessons/show", locals: {course: @course, section: @section, lesson: @lesson} %>

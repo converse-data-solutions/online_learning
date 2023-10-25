@@ -2,38 +2,9 @@
     <%= javascript_import_module_tag "/assets/controllers/lessons/show.js" %>
   <% end %>
     <div class="container-fluid d-flex" >
-    <turbo-frame_tag id="lesson-details" class="w-75">
-      <div class="" id="change-lesson">
-        <p><strong>Title:</strong> <%= @lesson.title %></p>
-        <p><strong>Description:</strong> <%= @lesson.description %></p>
-        <div>
-          <% if @lesson.clip.attached? %>
-            <video
-              id="video-<%= @lesson.id %>" class="video-js vjs-default-skin vjs-16-9 my-player lesson_video" preload="auto" width="1350px" height="700px" controls data-lesson_id=<%= @lesson.id %> data-course_id=<%= @lesson.section.course.id %> >
-              <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
-              <p class="vjs-no-js">
-                To view this video please enable JavaScript, and consider upgrading to a
-                web browser that
-                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-              </p>
-            </video>
-            <button id="previous-video" class="vjs-control vjs-button vjs-next-button">Previous</button>
-            <button id="next-video" class="vjs-control vjs-button vjs-prev-button">Next</button>
-          <% else %>
-            <p>No lesson attached to this record.</p>
-          <% end %>
-        </div>
-        <div>
-          <% if @lesson.attachments.attached? %>
-            <% @lesson.attachments.includes(:blob).each do |attachment| %>
-              <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %><br>
-            <% end %>
-          <% else %>
-            <p>No attachments for this lesson.</p>
-          <% end %>
-        </div>
-      </div>
-    </turbo-frame>
+    <div class="change-lesson w-75">
+    <%= render "lessons/show", locals: {course: @course, section: @section, lesson: @lesson} %>
+    </div>
       <div class="w-25">
         <div class="accordion" id="accordionExample">
           <% @lesson.all_sections.each_with_index do |section, index| %>
@@ -50,7 +21,7 @@
                       <div class="d-flex justify-content-between <%= lesson.id == @lesson.id ? 'active' : '' %> lesson_data">
                         <div>
                           <li class="list-unstyled text-decoration-none">
-                            <%= link_to lesson.title, course_section_lesson_path(@course, section, lesson), class: "text-decoration-none lesson_link", id: "lesson-#{index+ 1}", data: {lesson_index: index+ 1 } %>
+                            <%= link_to lesson.title, course_section_lesson_path(@course, section, lesson), class: "text-decoration-none lesson_link", id: "lesson-#{index+ 1}", data: {lesson_index: index+ 1, turbo_frame: 'lesson-details' } %>
                           </li>
                         </div>
                         <div>
