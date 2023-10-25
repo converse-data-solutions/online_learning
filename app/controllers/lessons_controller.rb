@@ -15,5 +15,10 @@ class LessonsController < ApplicationController
     @entrollment = @course.entrollment.pluck(:id)
     @comments = @lesson.comments
     @comment = Comment.new
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream { render :show, locals: {lesson: @lesson} }
+    end
   end
 end
