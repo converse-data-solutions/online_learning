@@ -10,7 +10,8 @@ class Profile < ApplicationRecord
   validates :gender,
             presence: { message: 'Please enter the Your gender' }
   validates :age,
-            presence: { message: 'Please enter the Your age' }
+            presence: { message: 'Please enter the Your age' },
+            numericality: { greater_than_or_equal_to: 10, less_than_or_equal_to: 100 }
   validates :phno,
             presence: { message: 'Please enter the Your phone number' }
   validates :image,

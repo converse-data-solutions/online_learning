@@ -9,20 +9,3 @@
   <%= f.hidden_field :rateable_id, value: @course.id %>
   <%= f.submit "Submit Rating", class: "btn btn-primary", style: "display:none" %>
 <% end %>
-<script>
-  var ratingForms = document.getElementById('rating-form');
-  
-    if (ratingForms){
-      const stars = form.querySelectorAll('.star');
-      const ratingInput = form.querySelector('.rating-input');
-      const courseId = form.dataset.courseId;
-
-      stars.forEach(star => {
-        star.addEventListener('click', () => {
-          const value = parseInt(star.getAttribute('data-value'));
-          ratingInput.value = value;
-          ratingForms.submit();
-        });
-      });
-    }
-</script>

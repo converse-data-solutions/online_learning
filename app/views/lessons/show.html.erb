@@ -1,41 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Lesson Details</title>
-  </head>
-  <body>
+  <% content_for :head do %>
+    <%= javascript_import_module_tag "/assets/controllers/lessons/show.js" %>
+  <% end %>
     <div class="container-fluid d-flex" >
-      <div class="w-75">
-        <p><strong>Title:</strong> <%= @lesson.title %></p>
-        <p><strong>Description:</strong> <%= @lesson.description %></p>
-        <div>
-          <% if @lesson.clip.attached? %>
-            <video
-      id="video-<%= @lesson.id %>" class="video-js my-player" preload="auto" width="1350" height="700" controls 
-      data-setup="{}">
-              <source src="<%= url_for(@lesson.clip) %>" type="video/mp4" />
-              <p class="vjs-no-js">
-                To view this video please enable JavaScript, and consider upgrading to a
-                web browser that
-                <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-              </p>
-            </video>
-            <button id="previous-video" class="vjs-control vjs-button vjs-next-button">Previous</button>
-            <button id="next-video" class="vjs-control vjs-button vjs-prev-button">Next</button>
-          <% else %>
-            <p>No lesson attached to this record.</p>
-          <% end %>
-        </div>
-        <div>
-          <% if @lesson.attachments.attached? %>
-            <% @lesson.attachments.includes(:blob).each do |attachment| %>
-              <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %><br>
-            <% end %>
-          <% else %>
-            <p>No attachments for this lesson.</p>
-          <% end %>
-        </div>
-      </div>
+    <div class="change-lesson w-75">
+    <%= render "lessons/show", locals: {course: @course, section: @section, lesson: @lesson} %>
+    </div>
       <div class="w-25">
         <div class="accordion" id="accordionExample">
           <% @lesson.all_sections.each_with_index do |section, index| %>
@@ -52,7 +21,7 @@
                       <div class="d-flex justify-content-between <%= lesson.id == @lesson.id ? 'active' : '' %> lesson_data">
                         <div>
                           <li class="list-unstyled text-decoration-none">
-                            <%= link_to lesson.title, course_section_lesson_path(@course, section, lesson), class: "text-decoration-none lesson_link", id: "lesson-#{index+ 1}", data: {lesson_index: index+ 1 } %>
+                            <%= link_to lesson.title, course_section_lesson_path(@course, section, lesson), class: "text-decoration-none lesson_link", id: "lesson-#{index+ 1}", data: {lesson_index: index+ 1, turbo_frame: 'lesson-details' } %>
                           </li>
                         </div>
                         <div>
@@ -70,153 +39,3 @@
       </div>
     </div>
     <%= link_to "View Progress", lesson_entrollment_detail_path(@lesson) %>
-    <script>
-      var media = videojs("video-<%= @lesson.id %>",{
-        autoPlay: 'muted',
-        controls: true,
-        fluid: true,
-        playbackRates: [0.5, 1, 1.5, 2],
-        resumePlayback: true,
-        nextButton: true,
-        prevButton: true,
-        previous: true,
-        userActions: {
-          forward: true,
-          back: true,
-          hotkeys: {
-            enable: true,
-            seekStep: 5
-          }
-        }
-      });
-      var player = null;
-      document.addEventListener("DOMContentLoaded", function() {
-        console.log("Hai");
-        var videos = document.querySelectorAll('video');
-          var totalDuration = 0;
-        videos.forEach(function(video) {
-          videojs(video.id, {}, function() {
-            var player = this;
-            player.on('loadedmetadata', function () {
-              console.log(player.duration());
-              console.log(player.currentTime());
-              let videoDuration = player.duration();
-              console.log(videoDuration);
-              totalDuration += player.duration();
-
-              var allVideosLoaded = Array.from(videos).every(function (v) {
-                return v.readyState >= 1;
-              });
-
-              if (allVideosLoaded) {
-                var totalDurationInHours = totalDuration / 3600;
-                var totalDurationInMinutes = (totalDuration % 3600) / 60;
-                console.log('Overall duration: ' + totalDurationInHours + ' hours ' + totalDurationInMinutes + ' minutes');
-              }
-              let previousPercentage = 0;
-
-              player.on('timeupdate', function () {
-              // videoDuration = video.duration
-                // if (isNaN(videoDuration)) videoDuration = 0;
-                console.log("Video Duration: ", videoDuration);
-                player.on('timeupdate', function () {
-                var currentTime = player.currentTime();
-                var videoPercentage = Math.round((currentTime / videoDuration) * 100);
-                console.log(videoPercentage);
-  
-              if ((videoPercentage % 10) == 0 && videoPercentage > previousPercentage) {
-                previousPercentage = videoPercentage;
-                console.log("Current Time of the Video Player: ", currentTime);
-                console.log("Video Percentage: ", videoPercentage);
-  
-                $.ajax({
-                  url: '<%= update_progress_path %>',
-                  method: 'GET',
-                  data: {
-                    course_id: <%= params[:course_id] %>,
-                    lesson_id: <%= @lesson.id %>,
-                    progress: videoPercentage
-                  },
-                  success: function(response) {
-                    console.log("Successfully updated");
-                  },
-                  error: function(error) {
-                    console.log("Not updated");
-                  }
-                });
-               };
-              });
-              }); 
-            });
-
-            document.addEventListener("keydown", function (event) {
-            if (document.activeElement === video) {
-              if (event.key === "ArrowRight") {
-                player.currentTime(player.currentTime() + 5);
-              } else if (event.key === "ArrowLeft") {
-                player.currentTime(player.currentTime() - 5);
-              }
-            }
-          });
-
-            player.on('play', function() {
-              videos.forEach(function(otherVideo) {
-                if (otherVideo !== video) {
-                  videojs(otherVideo.id).pause();
-                }
-              });
-            });
-
-            console.log(player);
-
-
-            const key = `videojs-resume-playback:${video.id}`;
-
-            player.on('timeupdate', () => {
-              localStorage.setItem(key, player.currentTime());
-            });
-
-            player.on('ended', () => {
-              localStorage.removeItem(key);
-            });
-
-            const lastTime = parseFloat(localStorage.getItem(key));
-            if (lastTime) {
-              player.currentTime(lastTime);
-              player.play();
-            }
-
-            player.ready(function() {
-              console.log("hii")
-            });
-
-            
-          });
-        });
-        function goToLesson(lesson_info) {
-          const activeLesson = document.querySelector(".lesson_data.active");
-          const lessonLink = activeLesson && activeLesson.querySelector(".lesson_link");
-          const lessonIndex = lessonLink && lessonLink.getAttribute("data-lesson-index");
-          const targetLessonId = lessonIndex && "lesson-" + (parseInt(lessonIndex) + lesson_info);
-          const targetLesson = targetLessonId && document.getElementById(targetLessonId);
-          
-          if (targetLesson) {
-            const href = targetLesson.getAttribute("href");
-            if (href) {
-              window.location.href = href;
-            }
-          }
-        }
-        
-        document.getElementById("previous-video").addEventListener("click", function() {
-          goToLesson(-1);
-        });
-        
-        document.getElementById("next-video").addEventListener("click", function() {
-          goToLesson(1);
-        });
-        
-      });
-    </script>
-  </body>
-</html>

@@ -5,6 +5,7 @@ class Entrollment < ApplicationRecord
   belongs_to :user
   belongs_to :course
   has_many :entrollment_details, dependent: :destroy
+  has_many :payments, dependent: :destroy
 
   enum status: {
     pending: 0,
