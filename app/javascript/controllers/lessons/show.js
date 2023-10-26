@@ -1,49 +1,18 @@
-const line = document.querySelector(".lesson_video");
-console.log(line);
-const courseId = line.getAttribute("data-course_id");
-console.log(courseId);
-const line_data = line.getAttribute("data-lesson_id");
-let videoId = "video-"+line_data;
-console.log("video-"+line_data);
-// var media = videojs("video-"+line_data, {
-//     autoPlay: 'muted',
-//     controls: true,
-//     fluid: true,
-//     playbackRates: [0.5, 1, 1.5, 2],
-//     resumePlayback: true,
-//     nextButton: true,
-//     prevButton: true,
-//     previous: true,
-//     userActions: {
-//       forward: true,
-//       back: true,
-//       hotkeys: {
-//         enable: true,
-//         seekStep: 5
-//       }
-//     }
-//   });
-  var player = null;
+var player = null;
 
-  console.log("Iam watching");
+function initVideo() {
+  const line = document.querySelector(".lesson_video");
+  const courseId = line.getAttribute("data-course_id");
+  const line_data = line.getAttribute("data-lesson_id");
+  let videoId = "video-" + line_data;
 
-  function initVideo() {
-    const line = document.querySelector(".lesson_video");
-    console.log(line);
-    const courseId = line.getAttribute("data-course_id");
-    console.log(courseId);
-    const line_data = line.getAttribute("data-lesson_id");
-    let videoId = "video-"+line_data;
+  var videos = document.querySelectorAll("video");
+  var totalDuration = 0;
 
-    console.log("Hai");
-    var videos = document.querySelectorAll('video');
-      var totalDuration = 0;
-    // videos.forEach(function(video) {
-  
-    // });
-
-    videojs(videoId, {
-      autoPlay: 'muted',
+  videojs(
+    videoId,
+    {
+      autoPlay: "muted",
       controls: true,
       fluid: true,
       playbackRates: [0.5, 1, 1.5, 2],
@@ -56,16 +25,14 @@ console.log("video-"+line_data);
         back: true,
         hotkeys: {
           enable: true,
-          seekStep: 5
-        }
-      }
-    }, function() {
+          seekStep: 5,
+        },
+      },
+    },
+    function () {
       var player = this;
-      player.on('loadedmetadata', function () {
-        console.log(player.duration());
-        console.log(player.currentTime());
+      player.on("loadedmetadata", function () {
         let videoDuration = player.duration();
-        console.log(videoDuration);
         totalDuration += player.duration();
 
         var allVideosLoaded = Array.from(videos).every(function (v) {
@@ -75,76 +42,68 @@ console.log("video-"+line_data);
         if (allVideosLoaded) {
           var totalDurationInHours = totalDuration / 3600;
           var totalDurationInMinutes = (totalDuration % 3600) / 60;
-          console.log('Overall duration: ' + totalDurationInHours + ' hours ' + totalDurationInMinutes + ' minutes');
         }
         let previousPercentage = 0;
 
-        player.on('timeupdate', function () {
-        // videoDuration = video.duration
-          // if (isNaN(videoDuration)) videoDuration = 0;
-          console.log("Video Duration: ", videoDuration);
-          player.on('timeupdate', function () {
-          var currentTime = player.currentTime();
-          var videoPercentage = Math.round((currentTime / videoDuration) * 100);
-          console.log(videoPercentage);
+        player.on("timeupdate", function () {
+          player.on("timeupdate", function () {
+            var currentTime = player.currentTime();
+            var videoPercentage = Math.round(
+              (currentTime / videoDuration) * 100
+            );
 
-        if ((videoPercentage % 10) == 0 && videoPercentage > previousPercentage) {
-          previousPercentage = videoPercentage;
-          console.log("Current Time of the Video Player: ", currentTime);
-          console.log("Video Percentage: ", videoPercentage);
+            if (
+              videoPercentage % 10 == 0 &&
+              videoPercentage > previousPercentage
+            ) {
+              previousPercentage = videoPercentage;
 
-          var updateProgressUrl = "/entollment_details/update_progress?course_id=" + courseId + "&lesson_id=" + line_data + "&progress=" + videoPercentage;
+              var updateProgressUrl =
+                "/entollment_details/update_progress?course_id=" +
+                courseId +
+                "&lesson_id=" +
+                line_data +
+                "&progress=" +
+                videoPercentage;
 
-          var request = new XMLHttpRequest();
-          request.open("GET", updateProgressUrl, true);
+              var request = new XMLHttpRequest();
+              request.open("GET", updateProgressUrl, true);
 
-          request.onload = function() {
-            if (request.status === 200) {
-              console.log("Successfully updated");
-            } else {
-              console.log("Not updated");
+              request.onload = function () {
+                if (request.status === 200) {
+                  console.log("Successfully updated");
+                } else {
+                  console.log("Not updated");
+                }
+              };
+
+              request.onerror = function () {
+                console.log("Request failed");
+              };
+
+              request.send();
             }
-          };
-
-          request.onerror = function() {
-            console.log("Request failed");
-          };
-
-          request.send();
-
-         };
-        });
+          });
         });
       });
 
       document.addEventListener("keydown", function (event) {
-      if (document.activeElement === videos) {
-        if (event.key === "ArrowRight") {
-          player.currentTime(player.currentTime() + 5);
-        } else if (event.key === "ArrowLeft") {
-          player.currentTime(player.currentTime() - 5);
+        if (document.activeElement === videos) {
+          if (event.key === "ArrowRight") {
+            player.currentTime(player.currentTime() + 5);
+          } else if (event.key === "ArrowLeft") {
+            player.currentTime(player.currentTime() - 5);
+          }
         }
-      }
-    });
-
-      // player.on('play', function() {
-      //   videos.forEach(function(otherVideo) {
-      //     if (otherVideo !== video) {
-      //       videojs(otherVideo.id).pause();
-      //     }
-      //   });
-      // });
-
-      console.log(player);
-
+      });
 
       const key = `videojs-resume-playback:${videoId}`;
 
-      player.on('timeupdate', () => {
+      player.on("timeupdate", () => {
         localStorage.setItem(key, player.currentTime());
       });
 
-      player.on('ended', () => {
+      player.on("ended", () => {
         localStorage.removeItem(key);
       });
 
@@ -154,55 +113,46 @@ console.log("video-"+line_data);
         player.play();
       }
 
-      player.ready(function() {
-        console.log("hii")
-      });
-
-      
-    });
-
-    function goToLesson(lesson_info) {
-      const activeLesson = document.querySelector(".lesson_data.active");
-      const lessonLink = activeLesson && activeLesson.querySelector(".lesson_link");
-      const lessonIndex = lessonLink && lessonLink.getAttribute("data-lesson-index");
-      const targetLessonId = lessonIndex && "lesson-" + (parseInt(lessonIndex) + lesson_info);
-      const targetLesson = targetLessonId && document.getElementById(targetLessonId);
-      
-      if (targetLesson) {
-        targetLesson.click()
-        // const href = targetLesson.getAttribute("href");
-        // if (href) {
-        //   window.location.href = href;
-        // }
-      }
+      player.ready(function () {});
     }
-    
-    document.getElementById("previous-video").addEventListener("click", function() {
-      goToLesson(-1);
-    });
-    
-    document.getElementById("next-video").addEventListener("click", function() {
-      goToLesson(1);
-    });
+  );
+
+  function goToLesson(lesson_info) {
+    const activeLesson = document.querySelector(".lesson_data.active");
+    const lessonLink =
+      activeLesson && activeLesson.querySelector(".lesson_link");
+    const lessonIndex =
+      lessonLink && lessonLink.getAttribute("data-lesson-index");
+    const targetLessonId =
+      lessonIndex && "lesson-" + (parseInt(lessonIndex) + lesson_info);
+    const targetLesson =
+      targetLessonId && document.getElementById(targetLessonId);
+
+    if (targetLesson) {
+      targetLesson.click();
+    }
   }
 
-  document.addEventListener("DOMContentLoaded", function() {
-    console.log("DomLoaded");
-    initVideo();
+  document
+    .getElementById("previous-video")
+    .addEventListener("click", function () {
+      goToLesson(-1);
+    });
+
+  document.getElementById("next-video").addEventListener("click", function () {
+    goToLesson(1);
   });
+}
 
-  document.addEventListener("turbo:render", function() {
-    console.log("TurboFrame Loaded");
-    initVideo();
-  })
+document.addEventListener("DOMContentLoaded", function () {
+  initVideo();
+});
 
-  document.addEventListener("turbo:before-fetch-response", function (e) {
-    // console.log(player);
-    let oldPlayer = document.querySelectorAll('video')[0];
-    console.log(oldPlayer);
-    videojs(oldPlayer).dispose();
-    // let player_dispose = player.dispose();
-    // console.log(player_dispose);
-    console.log("Before Fetch Response");
-  })
+document.addEventListener("turbo:render", function () {
+  initVideo();
+});
 
+document.addEventListener("turbo:before-fetch-response", function () {
+  let oldPlayer = document.querySelectorAll("video")[0];
+  videojs(oldPlayer).dispose();
+});

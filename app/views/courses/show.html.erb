@@ -1,3 +1,6 @@
+<%= content_for :head do %>
+  <%= javascript_import_module_tag "controllers/ratings" %>
+<% end %>
 <div class="container">
   <%= link_to 'Back to Courses', courses_path, class: "btn btn-primary" %>
   <div class="card border-0">
@@ -92,20 +95,3 @@
   </div>
 </div>
 </div>
-<script>
-  var ratingForms = document.getElementById('rating-form');
-
-    if (ratingForms){
-      const stars = ratingForms.querySelectorAll('.star');
-      const ratingInput = ratingForms.querySelector('.rating-input');
-      const courseId = ratingForms.dataset.courseId;
-
-      stars.forEach(star => {
-        star.addEventListener('click', () => {
-          const value = parseInt(star.getAttribute('data-value'));
-          ratingInput.value = value;
-          ratingForms.submit();
-        });
-      });
-    }
-</script>

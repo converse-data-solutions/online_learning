@@ -1,6 +1,4 @@
-<h1>Admin Users</h1>
 <%= form_for User.new, url: admin_users_path, method: :post do |f| %>
-  <h2>Create New User</h2>
   <div>
     <%= f.label :email %>
     <br>
@@ -36,44 +34,4 @@
   <br>
   <%= f.submit "Create Admin User", class: 'btn btn-primary' %>
 <% end %>
-<script>
-  $(document).ready(function() {
-    $('form').on('submit', function(e) {
-      var email = $('#user_email').val();
-      var password = $('#user_password').val();
-      var passwordConfirmation = $('#user_password_confirmation').val();
 
-      $('.error').text('');
-      $('.error').css('color', 'red');
-
-      var errors = false;
-
-      if (!email || !email.trim()) {
-        $('#email-error').text('Please enter a valid email address.');
-        errors = true;
-      }
-
-      if (!password || !password.trim()) {
-        $('#password-error').text('Please enter a password.');
-        errors = true;
-      }
-
-      if (!passwordConfirmation || !passwordConfirmation.trim()) {
-        $('#password-confirmation-error').text('Please confirm your password.');
-        errors = true;
-      }
-
-      if (password !== passwordConfirmation) {
-        $('#password-confirmation-error').text('Password and password confirmation do not match.').css('color', 'red');
-        errors = true;
-      }
-
-      if (errors) {
-        e.preventDefault();
-        return false;
-      }
-
-      return true;
-    });
-  });
-</script>

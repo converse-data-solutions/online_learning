@@ -62,7 +62,7 @@ class Admin::UsersController < ApplicationController
   def admin_save_error
     flash[:alert] = 'Failed to create admin user.'
     @users = User.all
-    render :index
+    redirect_to new_admin_user_path
   end
 
   def handle_own_status_change

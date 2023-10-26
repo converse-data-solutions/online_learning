@@ -37,7 +37,6 @@
           </td>
           <td><%= link_to 'Edit', edit_admin_section_lesson_path(@section, lesson), class: "btn btn-secondary" %></td>
           <td><%= link_to 'DELETE', admin_section_lesson_path(@section, lesson), data: {turbo_method: :delete}, class: "btn btn-danger" %></td>
-          <td><%= link_to 'Show', admin_section_lesson_path(@section, lesson), class: "btn btn-primary" %></td>
         </tr>
       <% end %>
     </tbody>

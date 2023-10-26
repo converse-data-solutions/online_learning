@@ -31,8 +31,9 @@
     <% end %>
   </tbody>
 </table>
-<%= render partial: "form" %>
-<BR>
+<br>
+<%= link_to "Create New User", new_admin_user_path, class: "btn btn-primary" %>
+<br>
 <%= link_to "Manage Courses", admin_courses_path, class: "btn btn-secondary" %>
 <br>
 <br>
