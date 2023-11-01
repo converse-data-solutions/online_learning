@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
   resources :courses, only: %i[index show]
   get 'stripe/purchase_success', to: 'stripe#purchase_success'
+  get 'stripe/subscription_success', to: 'stripe#subscription_success'
 
   resources :courses, only: [] do
     resources :sections, only: %i[index show]
@@ -104,6 +105,12 @@ Rails.application.routes.draw do
   resources :courses do
     member do
       post 'create-checkout-session', to: 'courses#create_checkout_session'
+      post 'create-subscription-checkout-session', to: 'courses#create_subscription_checkout_session'
+    end
+  end
+  resources :courses do
+    member do
+      post 'create-subscription-checkout-session', to: 'courses#create_subscription_checkout_session'
     end
   end
 end

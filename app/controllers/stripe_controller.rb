@@ -11,4 +11,8 @@ class StripeController < ApplicationController
       end
     end
   end
+
+  def subscription_success
+  end
+
 end

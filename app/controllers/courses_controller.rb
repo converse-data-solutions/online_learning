@@ -37,4 +37,19 @@ class CoursesController < ApplicationController
     })
     redirect_to session.url, allow_other_host: true
   end
+
+  def create_subscription_checkout_session
+    session = Stripe::Checkout::Session.create({
+     payment_method_types: ['card'],
+     customer_email: current_user.email,
+     success_url: 'http://localhost:3000/stripe/subscription_success?session_id={CHECKOUT_SESSION_ID}',
+     cancel_url: 'http://localhost:3000/',
+     mode: 'subscription',
+     line_items: [{
+       quantity: 1,
+       price: 'price_1O7i2WSAiOjRmAYnuvtvXhB7'
+     }]
+  })
+  redirect_to session.url, allow_other_host: true, status: 303
+  end
 end
