@@ -23,6 +23,16 @@
     </div>
     <br>
     <div>
+      <%= f.label :amount %>
+      <br>
+      <%= f.number_field :amount %>
+      <% if @course.errors.has_key?(:amount) %>
+        <span style="color: red">
+          <%= @course.errors[:amount].first %>
+        </span>
+      <% end %>
+    </div>
+    <div>
       <%= f.submit "Update Course", class: "btn btn-primary" %>
     </div>
   <% end %>

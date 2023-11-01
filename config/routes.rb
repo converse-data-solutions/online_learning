@@ -99,4 +99,10 @@ Rails.application.routes.draw do
   end
 
   get 'entollment_details/update_progress', to: 'entrollment_details#update_progress', as: :update_progress
+
+  resources :courses do
+    member do
+      post 'create-checkout-session', to: 'courses#create_checkout_session'
+    end
+  end
 end
