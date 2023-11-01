@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   end
 
   resources :courses, only: %i[index show]
+  get 'stripe/purchase_success', to: 'stripe#purchase_success'
 
   resources :courses, only: [] do
     resources :sections, only: %i[index show]

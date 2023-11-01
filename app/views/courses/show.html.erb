@@ -34,7 +34,7 @@
              
               <div class="actions">
                 <% if !current_user.already_entrolled?(@course) %>
-                  <%= f.submit 'Enroll and Pay', class: "btn btn-secondary" %>
+                  <%= f.submit 'Buy Now', class: "btn btn-secondary" %>
                 <% else %>
                   <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
                   <% if entrollment.status == "approved" %>

@@ -22,7 +22,7 @@ class CoursesController < ApplicationController
       },
       customer_email: current_user.email,  
       line_items: [{
-        quantity: 5,
+        quantity: 1,
         price_data: {
           currency: 'inr',
           unit_amount: @course_id.amount * 100,
