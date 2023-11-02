@@ -15,5 +15,4 @@ class StripeController < ApplicationController
   def subscription_success
     redirect_to courses_path
   end
-
 end

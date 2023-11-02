@@ -58,4 +58,8 @@ class CoursesController < ApplicationController
   })
   redirect_to session.url, allow_other_host: true, status: 303
   end
+
+  def subscription_button
+    @course = Course.find(params[:id])
+  end
 end
