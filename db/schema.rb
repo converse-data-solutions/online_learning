@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_01_071851) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_02_180527) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -142,6 +142,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_071851) do
     t.index ["course_id"], name: "index_sections_on_course_id"
   end
 
+  create_table "subscriptions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "status"
+    t.string "subscription_type"
+    t.decimal "amount_paid", precision: 10
+    t.datetime "paid_at"
+    t.datetime "next_due"
+    t.string "stripe_subscription_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -184,4 +197,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_071851) do
   add_foreign_key "profiles", "users"
   add_foreign_key "ratings", "users"
   add_foreign_key "sections", "courses"
+  add_foreign_key "subscriptions", "users"
 end

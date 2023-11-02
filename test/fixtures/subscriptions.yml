@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  status: MyString
+  subscription_type: MyString
+  amount_paid: 9.99
+  paid_at: 2023-11-02 23:35:27
+  next_due: 2023-11-02 23:35:27
+  stripe_subscription_id: MyString
+
+two:
+  user: two
+  status: MyString
+  subscription_type: MyString
+  amount_paid: 9.99
+  paid_at: 2023-11-02 23:35:27
+  next_due: 2023-11-02 23:35:27
+  stripe_subscription_id: MyString

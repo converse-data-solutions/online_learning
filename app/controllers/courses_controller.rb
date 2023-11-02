@@ -56,6 +56,7 @@ class CoursesController < ApplicationController
        price: plan
      }]
   })
+  byebug
   redirect_to session.url, allow_other_host: true, status: 303
   end
 
