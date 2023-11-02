@@ -39,6 +39,12 @@ class CoursesController < ApplicationController
   end
 
   def create_subscription_checkout_session
+
+    if params[:monthly]
+      plan = 'price_1O7zsNSAiOjRmAYnsGHXdfgZ' 
+    else params[:yearly]
+      plan = 'price_1O7zsNSAiOjRmAYntRb1O9us'
+    end
     session = Stripe::Checkout::Session.create({
      payment_method_types: ['card'],
      customer_email: current_user.email,
@@ -47,7 +53,7 @@ class CoursesController < ApplicationController
      mode: 'subscription',
      line_items: [{
        quantity: 1,
-       price: 'price_1O7i2WSAiOjRmAYnuvtvXhB7'
+       price: plan
      }]
   })
   redirect_to session.url, allow_other_host: true, status: 303
