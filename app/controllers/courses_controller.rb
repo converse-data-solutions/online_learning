@@ -45,7 +45,12 @@ class CoursesController < ApplicationController
     else params[:yearly]
       plan = 'price_1O7zsNSAiOjRmAYntRb1O9us'
     end
+
+    subscription = Subscription.find_or_create_by!(user: current_user) do |subscription|
+      subscription.status = 'pending'
+    end
     session = Stripe::Checkout::Session.create({
+      client_reference_id: subscription.id,
      payment_method_types: ['card'],
      customer_email: current_user.email,
      success_url: 'http://localhost:3000/stripe/subscription_success?session_id={CHECKOUT_SESSION_ID}',

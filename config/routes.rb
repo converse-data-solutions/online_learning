@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   root 'page#index'
 
+  post 'stripe_webhook', to: 'stripe#webhook'
+
   resources :users, only: [] do
     resources :profiles
   end
