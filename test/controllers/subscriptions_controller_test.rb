@@ -17,7 +17,7 @@ class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create subscription" do
     assert_difference("Subscription.count") do
-      post subscriptions_url, params: { subscription: { amount_paid: @subscription.amount_paid, next_due: @subscription.next_due, paid_at: @subscription.paid_at, status: @subscription.status, stripe_subscription_id: @subscription.stripe_subscription_id, subscription_type: @subscription.subscription_type, user_id: @subscription.user_id } }
+      post subscriptions_url, params: { subscription: { next_invoice_on: @subscription.next_invoice_on, paid_until: @subscription.paid_until, status: @subscription.status, stripe_customer_ref: @subscription.stripe_customer_ref, stripe_subscription_ref: @subscription.stripe_subscription_ref, user_id: @subscription.user_id } }
     end
 
     assert_redirected_to subscription_url(Subscription.last)
@@ -34,7 +34,7 @@ class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update subscription" do
-    patch subscription_url(@subscription), params: { subscription: { amount_paid: @subscription.amount_paid, next_due: @subscription.next_due, paid_at: @subscription.paid_at, status: @subscription.status, stripe_subscription_id: @subscription.stripe_subscription_id, subscription_type: @subscription.subscription_type, user_id: @subscription.user_id } }
+    patch subscription_url(@subscription), params: { subscription: { next_invoice_on: @subscription.next_invoice_on, paid_until: @subscription.paid_until, status: @subscription.status, stripe_customer_ref: @subscription.stripe_customer_ref, stripe_subscription_ref: @subscription.stripe_subscription_ref, user_id: @subscription.user_id } }
     assert_redirected_to subscription_url(@subscription)
   end
 

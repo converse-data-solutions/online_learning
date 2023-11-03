@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_02_180527) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_03_100034) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -143,13 +143,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_02_180527) do
   end
 
   create_table "subscriptions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "paid_until"
+    t.string "stripe_customer_ref"
+    t.string "stripe_subscription_ref"
+    t.datetime "next_invoice_on"
     t.bigint "user_id", null: false
     t.string "status"
-    t.string "subscription_type"
-    t.decimal "amount_paid", precision: 10
-    t.datetime "paid_at"
-    t.datetime "next_due"
-    t.string "stripe_subscription_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_subscriptions_on_user_id"

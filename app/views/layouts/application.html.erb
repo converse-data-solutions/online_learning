@@ -41,9 +41,9 @@
                 <%= link_to 'Admin', admin_users_path, class: "nav-link" %>
               </li>
             <% end %>
-            <% if @course.present? %>
-              <%= link_to 'Subscriptions', subscription_button_path(@course), class: "nav-link" %>
-            <% end %>
+            <li class="nav-item">
+              <%= link_to 'Subscriptions', subscription_button_path, class: "nav-link" %>
+            </li>
             <li class="nav-item">
               <%= link_to 'Profile', user_profiles_path(current_user), class: "nav-link" %>
             </li>

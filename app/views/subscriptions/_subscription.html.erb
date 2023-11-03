@@ -1,5 +1,25 @@
 <div id="<%= dom_id subscription %>">
   <p>
+    <strong>Paid until:</strong>
+    <%= subscription.paid_until %>
+  </p>
+
+  <p>
+    <strong>Stripe customer ref:</strong>
+    <%= subscription.stripe_customer_ref %>
+  </p>
+
+  <p>
+    <strong>Stripe subscription ref:</strong>
+    <%= subscription.stripe_subscription_ref %>
+  </p>
+
+  <p>
+    <strong>Next invoice on:</strong>
+    <%= subscription.next_invoice_on %>
+  </p>
+
+  <p>
     <strong>User:</strong>
     <%= subscription.user_id %>
   </p>
@@ -7,31 +27,6 @@
   <p>
     <strong>Status:</strong>
     <%= subscription.status %>
-  </p>
-
-  <p>
-    <strong>Subscription type:</strong>
-    <%= subscription.subscription_type %>
-  </p>
-
-  <p>
-    <strong>Amount paid:</strong>
-    <%= subscription.amount_paid %>
-  </p>
-
-  <p>
-    <strong>Paid at:</strong>
-    <%= subscription.paid_at %>
-  </p>
-
-  <p>
-    <strong>Next due:</strong>
-    <%= subscription.next_due %>
-  </p>
-
-  <p>
-    <strong>Stripe subscription:</strong>
-    <%= subscription.stripe_subscription_id %>
   </p>
 
 </div>

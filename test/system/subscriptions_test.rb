@@ -14,12 +14,11 @@ class SubscriptionsTest < ApplicationSystemTestCase
     visit subscriptions_url
     click_on "New subscription"
 
-    fill_in "Amount paid", with: @subscription.amount_paid
-    fill_in "Next due", with: @subscription.next_due
-    fill_in "Paid at", with: @subscription.paid_at
+    fill_in "Next invoice on", with: @subscription.next_invoice_on
+    fill_in "Paid until", with: @subscription.paid_until
     fill_in "Status", with: @subscription.status
-    fill_in "Stripe subscription", with: @subscription.stripe_subscription_id
-    fill_in "Subscription type", with: @subscription.subscription_type
+    fill_in "Stripe customer ref", with: @subscription.stripe_customer_ref
+    fill_in "Stripe subscription ref", with: @subscription.stripe_subscription_ref
     fill_in "User", with: @subscription.user_id
     click_on "Create Subscription"
 
@@ -31,12 +30,11 @@ class SubscriptionsTest < ApplicationSystemTestCase
     visit subscription_url(@subscription)
     click_on "Edit this subscription", match: :first
 
-    fill_in "Amount paid", with: @subscription.amount_paid
-    fill_in "Next due", with: @subscription.next_due
-    fill_in "Paid at", with: @subscription.paid_at
+    fill_in "Next invoice on", with: @subscription.next_invoice_on
+    fill_in "Paid until", with: @subscription.paid_until
     fill_in "Status", with: @subscription.status
-    fill_in "Stripe subscription", with: @subscription.stripe_subscription_id
-    fill_in "Subscription type", with: @subscription.subscription_type
+    fill_in "Stripe customer ref", with: @subscription.stripe_customer_ref
+    fill_in "Stripe subscription ref", with: @subscription.stripe_subscription_ref
     fill_in "User", with: @subscription.user_id
     click_on "Update Subscription"
 

@@ -108,15 +108,12 @@ Rails.application.routes.draw do
   resources :courses do
     member do
       post 'create-checkout-session', to: 'courses#create_checkout_session'
-      post 'create-subscription-checkout-session', to: 'courses#create_subscription_checkout_session'
-    end
-  end
-  resources :courses do
-    member do
-      post 'create-subscription-checkout-session', to: 'courses#create_subscription_checkout_session'
     end
   end
 
-  get 'courses/:id/subscription_button', to: 'courses#subscription_button', as: :subscription_button
+  post 'subscribe_button_create_subscription_checkout_session', to: 'subscriptions#create_subscription_checkout_session'
+ 
+
+  get 'subscription_button', to: 'subscriptions#subscription_button', as: :subscription_button
 
 end

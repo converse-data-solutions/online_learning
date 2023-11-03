@@ -26,16 +26,6 @@
       <% else %>
         <p>No ratings yet for this course.</p>
       <% end %>
-      <div data-turbo="false" class="d-flex gap-2 flex-row">
-        <%= form_tag(create_subscription_checkout_session_course_path(course_id: @course.id), method: :post, data: { turbo: false }) do %>
-          <%= hidden_field_tag :monthly, true %>
-          <%= submit_tag "Monthly Pay", class: "btn btn-secondary" %>
-        <% end %>
-        <%= form_tag(create_subscription_checkout_session_course_path(course_id: @course.id), method: :post, data: { turbo: false }) do %>
-          <%= hidden_field_tag :yearly, true %>
-          <%= submit_tag "Yearly Pay", class: "btn btn-secondary" %>
-        <% end %>
-      </div>
       <br>
       <% if !current_user.has_role?("admin") %>
         <a class="card-link text-decoration-none" data-turbo="false">

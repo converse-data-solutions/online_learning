@@ -12,6 +12,26 @@
   <% end %>
 
   <div>
+    <%= form.label :paid_until, style: "display: block" %>
+    <%= form.datetime_field :paid_until %>
+  </div>
+
+  <div>
+    <%= form.label :stripe_customer_ref, style: "display: block" %>
+    <%= form.text_field :stripe_customer_ref %>
+  </div>
+
+  <div>
+    <%= form.label :stripe_subscription_ref, style: "display: block" %>
+    <%= form.text_field :stripe_subscription_ref %>
+  </div>
+
+  <div>
+    <%= form.label :next_invoice_on, style: "display: block" %>
+    <%= form.datetime_field :next_invoice_on %>
+  </div>
+
+  <div>
     <%= form.label :user_id, style: "display: block" %>
     <%= form.text_field :user_id %>
   </div>
@@ -19,31 +39,6 @@
   <div>
     <%= form.label :status, style: "display: block" %>
     <%= form.text_field :status %>
-  </div>
-
-  <div>
-    <%= form.label :subscription_type, style: "display: block" %>
-    <%= form.text_field :subscription_type %>
-  </div>
-
-  <div>
-    <%= form.label :amount_paid, style: "display: block" %>
-    <%= form.text_field :amount_paid %>
-  </div>
-
-  <div>
-    <%= form.label :paid_at, style: "display: block" %>
-    <%= form.datetime_field :paid_at %>
-  </div>
-
-  <div>
-    <%= form.label :next_due, style: "display: block" %>
-    <%= form.datetime_field :next_due %>
-  </div>
-
-  <div>
-    <%= form.label :stripe_subscription_id, style: "display: block" %>
-    <%= form.text_field :stripe_subscription_id %>
   </div>
 
   <div>

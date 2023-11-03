@@ -1,19 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  paid_until: 2023-11-03 15:30:34
+  stripe_customer_ref: MyString
+  stripe_subscription_ref: MyString
+  next_invoice_on: 2023-11-03 15:30:34
   user: one
   status: MyString
-  subscription_type: MyString
-  amount_paid: 9.99
-  paid_at: 2023-11-02 23:35:27
-  next_due: 2023-11-02 23:35:27
-  stripe_subscription_id: MyString
 
 two:
+  paid_until: 2023-11-03 15:30:34
+  stripe_customer_ref: MyString
+  stripe_subscription_ref: MyString
+  next_invoice_on: 2023-11-03 15:30:34
   user: two
   status: MyString
-  subscription_type: MyString
-  amount_paid: 9.99
-  paid_at: 2023-11-02 23:35:27
-  next_due: 2023-11-02 23:35:27
-  stripe_subscription_id: MyString

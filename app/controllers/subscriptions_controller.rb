@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[ show edit update destroy ]
-
+require 'stripe'
   # GET /subscriptions or /subscriptions.json
   def index
     @subscriptions = Subscription.all
@@ -57,6 +57,36 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def create_subscription_checkout_session
+
+    if params[:monthly]
+      plan = 'price_1O7zsNSAiOjRmAYnsGHXdfgZ' 
+    else params[:yearly]
+      plan = 'price_1O7zsNSAiOjRmAYntRb1O9us'
+    end
+
+    subscription = Subscription.find_or_create_by!(user: current_user) do |subscription|
+      subscription.status = 'pending'
+    end
+    session = Stripe::Checkout::Session.create({
+      client_reference_id: subscription.id,
+     payment_method_types: ['card'],
+     customer_email: current_user.email,
+     success_url: 'http://localhost:3000/stripe/subscription_success?session_id={CHECKOUT_SESSION_ID}',
+     cancel_url: 'http://localhost:3000/',
+     mode: 'subscription',
+     line_items: [{
+       quantity: 1,
+       price: plan
+     }]
+  })
+  redirect_to session.url, allow_other_host: true, status: 303
+  end
+
+  def subscription_button
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription
@@ -65,6 +95,6 @@ class SubscriptionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def subscription_params
-      params.require(:subscription).permit(:user_id, :status, :subscription_type, :amount_paid, :paid_at, :next_due, :stripe_subscription_id)
+      params.require(:subscription).permit(:paid_until, :stripe_customer_ref, :stripe_subscription_ref, :next_invoice_on, :user_id, :status)
     end
 end
