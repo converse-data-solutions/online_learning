@@ -2,6 +2,7 @@
 
 # Route File
 Rails.application.routes.draw do
+  resources :subscription_details
   resources :subscriptions
   get 'comments/create'
   get 'sections/show'

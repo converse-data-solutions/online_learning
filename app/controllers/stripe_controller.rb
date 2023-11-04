@@ -29,41 +29,47 @@ skip_before_action :verify_authenticity_token, only: :webhook
       event = Stripe::Webhook.construct_event(
         payload, sig_header, endpoint_secret
       )
-    rescue JSON::ParserError => e
-      # Invalid payload
-      head 400
-      return
-    rescue Stripe::SignatureVerificationError => e
-      # Invalid signature
+    rescue JSON::ParserError, Stripe::SignatureVerificationError => e
       head 400
       return
     end
   
-    # Handle the event
     case event.type
     when 'checkout.session.completed'
       session = event.data.object
       if session.client_reference_id.present?
-        # Retrieve the associated subscription
         subscription = Stripe::Subscription.retrieve(session.subscription)
-        user = User.find_by(email: session.customer_email)  # You need to adapt this based on your user lookup logic
+        user = User.find_by(email: session.customer_email)
+        byebug
+        puts session.inspect
         subscription_record = Subscription.find_or_create_by(
-          stripe_customer_ref: subscription.customer,
-          stripe_subscription_ref: subscription.id,
-          user: user  # Associate the user with the subscription
+          user: user
         )
+  
         subscription_record.update!(
           status: 'active',
           paid_until: Time.at(subscription.current_period_end),
-          next_invoice_on: Time.at(subscription.current_period_end)
+          next_invoice_on: Time.at(subscription.current_period_end),
+          stripe_subscription_ref: subscription.id,
+          stripe_customer_ref: subscription.customer
+        )
+  
+        SubscriptionDetail.create(
+          user: user,
+          subscription: subscription_record,
+          stripe_subscription_id: subscription.id,
+          amount: subscription.items.data.first.price.unit_amount,
+          paid_at: Time.now, 
+          start_date: Time.at(subscription.current_period_start),
+          end_date: Time.at(subscription.current_period_end)
         )
       end
-    
+  
     when 'customer.subscription.updated'
       stripe_subscription = event.data.object
       subscription = Subscription.find_by(stripe_subscription_ref: stripe_subscription.id)
+  
       if subscription
-        # Update status, paid_until, and next_invoice_on based on subscription status
         if stripe_subscription.status == 'active'
           subscription.update!(
             status: 'active',
@@ -77,12 +83,24 @@ skip_before_action :verify_authenticity_token, only: :webhook
             next_invoice_on: nil
           )
         end
+  
+        SubscriptionDetail.create(
+          user: subscription.user,
+          subscription: subscription,
+          stripe_subscription_id: stripe_subscription.id,
+          amount: stripe_subscription.items.data.first.price.unit_amount,
+          paid_at: Time.now, 
+          start_date: Time.at(stripe_subscription.current_period_start),
+          end_date: Time.at(stripe_subscription.current_period_end)
+        )
       end
+  
     when 'customer.subscription.created'
       stripe_subscription = event.data.object
       subscription = Subscription.find_by(stripe_subscription_ref: stripe_subscription.id)
+      # user = User.find_by(email: stripe_subscription.customer_email)
+      byebug
       if subscription
-        # Update status, paid_until, and next_invoice_on based on subscription status
         if stripe_subscription.status == 'active'
           subscription.update!(
             status: 'active',
@@ -100,20 +118,32 @@ skip_before_action :verify_authenticity_token, only: :webhook
     when 'customer.subscription.deleted'
       stripe_subscription = event.data.object
       subscription = Subscription.find_by(stripe_subscription_ref: stripe_subscription.id)
+  
       if subscription
-        # Update status, paid_until, and next_invoice_on based on subscription status
         subscription.update!(
           status: 'canceled',
-          paid_until: nil,
-          next_invoice_on: nil
+          paid_until: Time.at(stripe_subscription.current_period_end),
+          next_invoice_on: Time.at(stripe_subscription.current_period_end)
         )
+  
+        # SubscriptionDetail.create(
+        #   user: subscription.user,
+        #   subscription: subscription,
+        #   stripe_subscription_id: stripe_subscription.id,
+        #   amount: 0, 
+        #   paid_at: Time.now, 
+        #   start_date: Time.at(stripe_subscription.current_period_start),
+        #   end_date: Time.at(stripe_subscription.current_period_end)
+        # )
       end
+  
     else
       puts "Unhandled event type: #{event.type}"
     end
   
     head :ok
   end
+  
   
 
 end

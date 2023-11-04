@@ -1,5 +1,7 @@
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[ show edit update destroy ]
+  before_action :set_subscription, only: %i[ show edit update ]
+  # before_action :set_subscription, only: [:destroy]
+
 require 'stripe'
   # GET /subscriptions or /subscriptions.json
   def index
@@ -49,8 +51,9 @@ require 'stripe'
 
   # DELETE /subscriptions/1 or /subscriptions/1.json
   def destroy
-    @subscription.destroy
-
+    @subscription = Subscription.find(params[:id])
+    Stripe::Subscription.cancel(@subscription.stripe_subscription_ref)
+    byebug
     respond_to do |format|
       format.html { redirect_to subscriptions_url, notice: "Subscription was successfully destroyed." }
       format.json { head :no_content }
@@ -60,9 +63,9 @@ require 'stripe'
   def create_subscription_checkout_session
 
     if params[:monthly]
-      plan = 'price_1O7zsNSAiOjRmAYnsGHXdfgZ' 
+      plan = 'price_1O8f0bSAiOjRmAYnd1EoBr6H' 
     else params[:yearly]
-      plan = 'price_1O7zsNSAiOjRmAYntRb1O9us'
+      plan = 'price_1O8lwSSAiOjRmAYnIIfbweCj'
     end
 
     subscription = Subscription.find_or_create_by!(user: current_user) do |subscription|
@@ -85,7 +88,9 @@ require 'stripe'
 
   def subscription_button
   end
-
+  def cancel_subscription
+    @subscription = current_user.subscription
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -93,6 +98,7 @@ require 'stripe'
       @subscription = Subscription.find(params[:id])
     end
 
+    
     # Only allow a list of trusted parameters through.
     def subscription_params
       params.require(:subscription).permit(:paid_until, :stripe_customer_ref, :stripe_subscription_ref, :next_invoice_on, :user_id, :status)
