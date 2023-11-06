@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
 require 'stripe'
   # GET /subscriptions or /subscriptions.json
   def index
-    @subscriptions = Subscription.all
+    @subscriptions = current_user.subscriptions
   end
 
   # GET /subscriptions/1 or /subscriptions/1.json

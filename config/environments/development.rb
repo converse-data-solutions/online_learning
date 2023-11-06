@@ -11,7 +11,7 @@ Rails.application.configure do
   end
 
   # Settings specified here will take precedence over those in config/application.rb.
-  config.hosts << "2ca7-117-200-77-14.ngrok-free.app"
+  config.hosts << "5b43-117-200-77-14.ngrok-free.app"
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
