@@ -1,6 +1,6 @@
 # config/initializers/recaptcha.rb
 
 Recaptcha.configure do |config|
-  config.site_key = '6LfoFZ8oAAAAAOq88cQI4Pp5TTUcYqftFUH17F_w'
-  config.secret_key = '6LfoFZ8oAAAAAIaGVgMNSiBPlaI_0EA3jfsYtrSm'
+  config.site_key = Rails.application.credentials[:production][:recaptcha][:recaptcha_public_key]
+  config.secret_key = Rails.application.credentials[:production][:recaptcha][:recaptcha_private_key]
 end

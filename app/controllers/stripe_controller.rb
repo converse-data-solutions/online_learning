@@ -1,14 +1,15 @@
 class StripeController < ApplicationController
-skip_before_action :verify_authenticity_token, only: :webhook
+skip_before_action :verify_authenticity_token, only: %i[ webhook ]
   def purchase_success
      session = Stripe::Checkout::Session.retrieve(params[:session_id])
     if session.payment_status == 'paid'
       course_id = session.metadata.course_id
       course = Course.find(course_id)
-      Entrollment.find_or_create_by(user: current_user, course: course) do |purchase|
+      user = current_user
+      Entrollment.find_or_create_by(user: user, course: course) do |purchase|
         purchase.status = 'approved'
         purchase.save!
-        purchase.stripe_ref = session.payment_intent
+        
         redirect_to courses_path
       end
     end
@@ -40,7 +41,7 @@ skip_before_action :verify_authenticity_token, only: :webhook
       if session.client_reference_id.present?
         subscription = Stripe::Subscription.retrieve(session.subscription)
         user = User.find_by(email: session.customer_email)
-        byebug
+        
         puts session.inspect
         subscription_record = Subscription.find_or_create_by(
           user: user
@@ -98,8 +99,6 @@ skip_before_action :verify_authenticity_token, only: :webhook
     when 'customer.subscription.created'
       stripe_subscription = event.data.object
       subscription = Subscription.find_by(stripe_subscription_ref: stripe_subscription.id)
-      # user = User.find_by(email: stripe_subscription.customer_email)
-      byebug
       if subscription
         if stripe_subscription.status == 'active'
           subscription.update!(
