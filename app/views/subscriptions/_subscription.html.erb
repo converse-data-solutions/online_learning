@@ -1,0 +1,32 @@
+<div id="<%= dom_id subscription %>">
+  <p>
+    <strong>Paid until:</strong>
+    <%= subscription.paid_until %>
+  </p>
+
+  <p>
+    <strong>Stripe customer ref:</strong>
+    <%= subscription.stripe_customer_ref %>
+  </p>
+
+  <p>
+    <strong>Stripe subscription ref:</strong>
+    <%= subscription.stripe_subscription_ref %>
+  </p>
+
+  <p>
+    <strong>Next invoice on:</strong>
+    <%= subscription.next_invoice_on %>
+  </p>
+
+  <p>
+    <strong>User:</strong>
+    <%= subscription.user_id %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= subscription.status %>
+  </p>
+
+</div>

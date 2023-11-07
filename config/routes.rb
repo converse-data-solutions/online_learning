@@ -2,6 +2,8 @@
 
 # Route File
 Rails.application.routes.draw do
+  resources :subscription_details
+  resources :subscriptions
   get 'comments/create'
   get 'sections/show'
   get 'courses/index'
@@ -13,6 +15,8 @@ Rails.application.routes.draw do
   }
 
   root 'page#index'
+
+  post 'stripe_webhook', to: 'stripe#webhook'
 
   resources :users, only: [] do
     resources :profiles
@@ -44,6 +48,8 @@ Rails.application.routes.draw do
   end
 
   resources :courses, only: %i[index show]
+  get 'stripe/purchase_success', to: 'stripe#purchase_success'
+  get 'stripe/subscription_success', to: 'stripe#subscription_success'
 
   resources :courses, only: [] do
     resources :sections, only: %i[index show]
@@ -99,4 +105,16 @@ Rails.application.routes.draw do
   end
 
   get 'entollment_details/update_progress', to: 'entrollment_details#update_progress', as: :update_progress
+
+  resources :courses do
+    member do
+      post 'create-checkout-session', to: 'courses#create_checkout_session'
+    end
+  end
+
+  post 'subscribe_button_create_subscription_checkout_session', to: 'subscriptions#create_subscription_checkout_session'
+ 
+
+  get 'subscription_button', to: 'subscriptions#subscription_button', as: :subscription_button
+
 end

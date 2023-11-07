@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :entrollments, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :ratings, as: :rateable, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
+  has_many :subscription_details, dependent: :destroy
   rolify before_add: :remove_previouse_role
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

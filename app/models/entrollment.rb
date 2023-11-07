@@ -17,6 +17,6 @@ class Entrollment < ApplicationRecord
   private
 
   def set_initial_status
-    self.status = :pending
+    self.status = :pending unless self.status
   end
 end

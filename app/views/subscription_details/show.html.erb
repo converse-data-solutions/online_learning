@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @subscription_detail %>
+
+<div>
+  <%= link_to "Edit this subscription detail", edit_subscription_detail_path(@subscription_detail) %> |
+  <%= link_to "Back to subscription details", subscription_details_path %>
+
+  <%= button_to "Destroy this subscription detail", @subscription_detail, method: :delete %>
+</div>

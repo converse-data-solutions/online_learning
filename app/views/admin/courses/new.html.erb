@@ -21,6 +21,16 @@
         </span>
       <% end %>
     </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :amount %>
+      <br>
+      <%= f.text_field :amount %>
+      <% if @course.errors.has_key?(:amount) %>
+        <span style="color: red">
+          <%= @course.errors[:amount].first %>
+        </span>
+      <% end %>
     <%= f.submit "Create Course", class: "btn btn-primary" %>
   <% end %>
   <br>

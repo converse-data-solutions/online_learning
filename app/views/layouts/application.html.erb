@@ -42,6 +42,19 @@
               </li>
             <% end %>
             <li class="nav-item">
+              <% if current_user.subscriptions.present? %>
+                <% current_user.subscriptions.each do |subscription| %>
+                  <% if subscription.status == "cancelled" %>
+                    <%= link_to 'Subscription Activated(Cancelled)', subscription_button_path(subscription), class: "nav-link btn btn-danger" %>
+                  <% else subscription.status == "active" %>
+                    <%= link_to 'Subscription Activated', subscriptions_path, class: "nav-link btn btn-success" %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to 'Subscribe Me!', subscription_button_path, class: "nav-link btn btn-success" %>
+              <% end %>
+            </li>
+            <li class="nav-item">
               <%= link_to 'Profile', user_profiles_path(current_user), class: "nav-link" %>
             </li>
             <li class="nav-item">

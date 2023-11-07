@@ -8,6 +8,7 @@
       <h5 class="card-title"><%= @course.course_name %></h5>
       <%# <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> %>
       <p class="card-text"><%= @course.description %></p>
+      <p class="card-text"><strong>Price:</strong><%= @course.amount %></p>
       <p class="card-text">Created at: <%= @course.created_at.strftime("%B %d, %Y") %></p>
       <% if @course.ratings.any? %>
         <% total_stars = @course.ratings.sum(:star) %>
@@ -25,73 +26,72 @@
       <% else %>
         <p>No ratings yet for this course.</p>
       <% end %>
+      <br>
       <% if !current_user.has_role?("admin") %>
-        <a class="card-link text-decoration-none"><%= form_for @entrollment do |f| %>
-            <div class="field">
-              <label for="entrollment_status"></label>
-              <%= f.hidden_field :status, value: "pending" %>
-            </div>
-            <%= f.hidden_field :course_id %>
-            <%= f.hidden_field :user_id %>
+        <a class="card-link text-decoration-none" data-turbo="false">
+          <%= form_with model: @course, url: create_checkout_session_course_path(@course), method: :post do |f| %>
+            <%= f.hidden_field :course_id, value: @course.id %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
             <div class="actions">
               <% if !current_user.already_entrolled?(@course) %>
-                <%= f.submit 'Enroll', class: "btn btn-secondary" %>
+                <%= f.submit 'Buy Now', class: "btn btn-success" %>
               <% else %>
                 <% entrollment = current_user.entrollments.find_by(course_id: @course.id) %>
                 <% if entrollment.status == "approved" %>
-                  <%= link_to "view Sections", course_sections_path(@course), class: "btn btn-secondary" %>
+                  <%= link_to "View Sections", course_sections_path(@course), class: "btn btn-secondary" %>
                 <% else %>
-                  <p class="text-decoration-none">You are already entrolled in this course with status: <%= entrollment.status %></p>
+                  <p class="text-decoration-none">You are already enrolled in this course with status: <%= entrollment.status %></p>
                 <% end %>
               <% end %>
             </div>
-          <% end %></a>
-      <% end %>
-    </div>
-  </div>
-  <% if !current_user.has_role?("admin") %>
-    <div class="mt-5">
-      <%= form_with(model: [@course, @comment], url: course_comments_path(@course, @comment)) do |form| %>
-        <%= form.text_area :body, placeholder: "Add a comment..." , class: "form-control" , rows: "3" %>
-        <%= form.hidden_field :commentable_id, value: @course.id %>
-        <%= form.hidden_field :commentable_type, value: @course.class.name %>
-        <%= form.hidden_field :user_id, value: current_user.id %>
-        <%= form.submit "Post Comment", class: "btn btn-info" %>
-      <% end %>
-      <% if user_signed_in? %>
-        <%= render 'ratings/form', rateable: @course %>
-      <% end %>
-    </div>
-  <% end %>
-  <div class="row gap-5 mt-5">
-    <% @course.comments.includes(:user).each do |comment| %>
-      <div class="card row col-sm-4 gap-2" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"><%= comment.user.email %></h5>
-          <p class="card-text"><%= comment.body %></p>
-          <h6 class="card-subtitle mb-2 text-muted"><%= comment.created_at.strftime("%B %d, %Y") %></h6>
-          <% if current_user == comment.user %>
-            <%= link_to "Edit", edit_course_comment_path(@course, comment), :class=>"card-link btn btn-secondary" %>
-            <%= link_to "Delete", course_comment_path(@course, comment), data: {turbo_method: :delete}, :class=> "card-link btn btn-secondary" %>
-          <% end %>
-          <% user_rating = @course.ratings.find_by(user_id: comment.user_id) %>
-          <% if user_rating %>
-            <div>
-              <%= comment.user.email %>'s Rating:
-              <% (1..5).each do |i| %>
-                <% if user_rating.star >= i %>
-                  <i class="fas fa-star" style="color: gold;"></i>
-                <% else %>
-                  <i class="far fa-star" style="color: gold;"></i>
-                <% end %>
-              <% end %>
-            </div>
-          <% else %>
-            <p>No ratings yet for this course.</p>
-          <% end %>
-        </div>
-      </div>
+          </div>
+        <% end %></a>
     <% end %>
   </div>
+</div>
+<% if !current_user.has_role?("admin") %>
+  <div class="mt-5">
+    <%= form_with(model: [@course, @comment], url: course_comments_path(@course, @comment)) do |form| %>
+      <%= form.text_area :body, placeholder: "Add a comment..." , class: "form-control" , rows: "3" %>
+      <%= form.hidden_field :commentable_id, value: @course.id %>
+      <%= form.hidden_field :commentable_type, value: @course.class.name %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%= form.submit "Post Comment", class: "btn btn-info" %>
+    <% end %>
+    <% if user_signed_in? %>
+      <%= render 'ratings/form', rateable: @course %>
+    <% end %>
+  </div>
+<% end %>
+<div class="row gap-5 mt-5">
+  <% @course.comments.includes(:user).each do |comment| %>
+    <div class="card row col-sm-4 gap-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%= comment.user.email %></h5>
+        <p class="card-text"><%= comment.body %></p>
+        <h6 class="card-subtitle mb-2 text-muted"><%= comment.created_at.strftime("%B %d, %Y") %></h6>
+        <% if current_user == comment.user %>
+          <%= link_to "Edit", edit_course_comment_path(@course, comment), :class=>"card-link btn btn-secondary" %>
+          <%= link_to "Delete", course_comment_path(@course, comment), data: {turbo_method: :delete}, :class=> "card-link btn btn-secondary" %>
+        <% end %>
+        <% user_rating = @course.ratings.find_by(user_id: comment.user_id) %>
+        <% if user_rating %>
+          <div>
+            <%= comment.user.email %>'s Rating:
+            <% (1..5).each do |i| %>
+              <% if user_rating.star >= i %>
+                <i class="fas fa-star" style="color: gold;"></i>
+              <% else %>
+                <i class="far fa-star" style="color: gold;"></i>
+              <% end %>
+            <% end %>
+          </div>
+        <% else %>
+          <p>No ratings yet for this course.</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
 </div>
 </div>

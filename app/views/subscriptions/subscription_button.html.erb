@@ -1,0 +1,14 @@
+<% if current_user.subscriptions.present? %>
+  <% link_to 'Cancel Subscription', method: :delete, data: { turbo_method: :delete }, class: "btn btn-danger" %>
+<% else %>
+  <div data-turbo="false" class="d-flex gap-2 flex-row">
+    <%= form_tag subscribe_button_create_subscription_checkout_session_path, method: :post, data: { turbo: false } do %>
+      <%= hidden_field_tag :monthly, true %>
+      <%= submit_tag "Monthly Pay", class: "btn btn-secondary" %>
+    <% end %>
+    <%= form_tag subscribe_button_create_subscription_checkout_session_path, method: :post, data: { turbo: false } do %>
+      <%= hidden_field_tag :yearly, true %>
+      <%= submit_tag "Yearly Pay", class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+<% end %>
