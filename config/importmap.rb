@@ -34,3 +34,5 @@ pin "mux.js/lib/utils/clock", to: "https://ga.jspm.io/npm:mux.js@6.0.1/lib/utils
 pin "safe-json-parse/tuple", to: "https://ga.jspm.io/npm:safe-json-parse@4.0.0/tuple.js"
 pin "url-toolkit", to: "https://ga.jspm.io/npm:url-toolkit@2.2.5/src/url-toolkit.js"
 pin "videojs-vtt.js", to: "https://ga.jspm.io/npm:videojs-vtt.js@0.15.5/lib/browser-index.js"
+pin "flowbite", to: "https://ga.jspm.io/npm:flowbite@2.0.0/lib/esm/index.js"
+pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.8/lib/index.js"

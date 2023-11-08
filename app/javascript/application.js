@@ -2,3 +2,4 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import videojs from 'video.js'
+import 'flowbite';
