@@ -37,6 +37,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
+    byebug
     if @user == current_user
       flash[:alert] = 'You cannot delete yourself.'
     else
@@ -62,7 +63,7 @@ class Admin::UsersController < ApplicationController
   def admin_save_error
     flash[:alert] = 'Failed to create admin user.'
     @users = User.all
-    redirect_to new_admin_user_path
+    redirect_to admin_users_path
   end
 
   def handle_own_status_change

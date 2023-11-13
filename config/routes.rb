@@ -43,6 +43,14 @@ Rails.application.routes.draw do
     resources :users, only: %i[index edit update create destroy new]
   end
 
+  namespace :admin do
+    resources :users do
+    member do
+     get :edit
+    end
+    end
+  end
+
   resources :courses, only: %i[index show]
 
   resources :courses, only: [] do

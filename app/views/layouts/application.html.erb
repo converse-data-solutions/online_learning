@@ -18,33 +18,33 @@
     <%= yield :head %>
     <title>Online Learning Portal</title>
   </head>
-  <body>
-    <div class="area flex">
-      <nav class="main-menu" id="sidebar">
+  <body class="bg-[#F0F4F5]">
+    <div class="area flex h-screen">
+      <nav class="main-menu " id="sidebar">
         <ul>
           <li>
             <p class="cursor-pointer flex">
               <div class="fa title title1">
-                <img src="<%= asset_path("xmark.png") %>" class="ml-5 mt-2 title" alt="...">
+                <img src="<%= asset_path("xmark.png") %>" class="ml-5 mt-2 title cursor-pointer" alt="...">
               </div>
               <span class="hidden open open1">
                 <img src="https://techvillageacademy.com/assets/images/logo/logo.png" class="w-25" />
-                <img src="<%= asset_path("hamburger.png") %> " class="openmenu" alt="..." />
+                <img src="<%= asset_path("hamburger.png") %> " class="openmenu cursor-pointer" alt="..." />
               </span>
             </p>
           </li>
           <li class="has-subnav mt-6">
-            <a class="cursor-pointer">
-              <div class="fa">
-                <img src="<%= asset_path("dashboard.png") %>" class="ml-5 title" alt="...">
-              </div>
-              <span class="nav-text title">
-                DashBoard
-              </span>
-            </a>
+            <div class="flex items-center selected">
+              <a class="cursor-pointer">
+                <div class="fa">
+                  <img src="<%= asset_path("dashboard.png") %>" class="ml-5 title" alt="..." id="title">
+                </div>
+                <%= link_to "Dashboard", root_path, class: "nav-text title flex text-[#999999]", id: "title" %>
+              </a>
+            </div>
           </li>
           <li class="has-subnav">
-            <a class="main cursor-pointer flex">
+            <a class="main cursor-pointer flex selected title">
               <div class="fa">
                 <img src="<%= asset_path("course.png") %>" class="ml-5 title" alt="...">
               </div>
@@ -58,7 +58,7 @@
             </a>
           </li>
           <li class="has-subnav">
-            <a class="cursor-pointer">
+            <a class="cursor-pointer selected">
               <div class="fa">
                 <img src="<%= asset_path("Vector-1.png") %>" class="ml-5 title" alt="...">
               </div>
@@ -68,17 +68,17 @@
             </a>
           </li>
           <li class="has-subnav">
-            <a class="cursor-pointer">
-              <div class="fa">
-                <img src="<%= asset_path("user.png") %>" class="ml-5 title" alt="...">
-              </div>
-              <span class="nav-text title">
-                User Management
-              </span>
-            </a>
+            <div class="flex items-center selected">
+              <a class="cursor-pointer">
+                <div class="fa">
+                  <img src="<%= asset_path("user.png") %>" class="ml-5 title" alt="...">
+                </div>
+                <%= link_to "User Management", admin_users_path, class: "flex nav-text title text-[#999999]" %>
+              </a>
+            </div>
           </li>
           <li class="has-subnav">
-            <a class="main cursor-pointer flex">
+            <a class="main cursor-pointer flex selected">
               <div class="fa">
                 <img src="<%= asset_path("course.png") %>" class="ml-5 title" alt="...">
               </div>
@@ -91,7 +91,7 @@
             </a>
           </li>
           <li class="has-subnav">
-            <a class="main cursor-pointer">
+            <a class="main cursor-pointer selected">
               <div class="fa">
                 <img src="<%= asset_path("payment.png") %>" class="ml-5 title" alt="...">
               </div>
@@ -105,7 +105,7 @@
             </a>
           </li>
           <li class="has-subnav">
-            <a class="main cursor-pointer">
+            <a class="main cursor-pointer selected">
               <div class="fa">
                 <img src="<%= asset_path("schedule.png") %>" class="ml-5 title" alt="...">
               </div>
@@ -117,7 +117,7 @@
             </a>
           </li>
           <li class="has-subnav">
-            <a class="main cursor-pointer">
+            <a class="main cursor-pointer selected">
               <div class="fa">
                 <img src="<%= asset_path("sales.png") %>" class="ml-5 title" alt="...">
               </div>
@@ -131,12 +131,12 @@
         </ul>
       </nav>
       <div class="flex flex-col w-full h-screen">
-        <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 w-full shadow-xl h-16">
+        <nav class="bg-white border-gray-200 pr-4 lg:pr-6 py-2.5 dark:bg-gray-800 w-[97%] shadow-xl h-16 ml-auto main-nav">
           <div class="flex flex-wrap justify-between items-center">
             <div class="flex justify-start items-center">
               <a href="#" class="flex mr-4">
               </a>
-              <form action="#" method="GET" class="hidden lg:block lg:pl-2">
+              <form action="#" method="GET" class=" lg:pl-2">
                 <label for="topbar-search" class="sr-only">Search</label>
                 <div class="relative mt-1 lg:w-96">
                   <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
@@ -155,26 +155,28 @@
           </button>
           <!-- Dropdown menu -->
           <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
-            <div class="py-3 px-4">
+            <div class="py-3 px-4 text-center">
               <span class="block text-sm font-semibold text-gray-900 dark:text-white">Neil sims</span>
               <span class="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
             </div>
             <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
               <li>
-                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">My profile</a>
+                <a href="#" class="block py-2 px-4 text-center text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">My profile</a>
               </li>
               <li>
-                <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }, class: 'block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-center' %>
               </li>
             </ul>
           </div>
         </nav>
-        <%= yield %>
+        <div class="bg-[#F0F4F5] h-screen main-page" id="main-page">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+          <%= yield %>
+        </div>
       </div>
     </div>
   </div>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.turbo.min.js"></script>
   <script>
     $(document).ready(function() {
@@ -185,10 +187,10 @@
       });
 
          $(document).ready(function () {
-        $('a').on('click', function (e) {
+        $('.selected').on('click', function (e) {
 
 
-      $('a').removeClass('active');
+      $('.selected').removeClass('active');
 
       $(this).addClass('active');
 
@@ -200,7 +202,7 @@
 
       });
 
-      $('li a:not(.active)').css({
+      $('li .selected:not(.active)').css({
         'margin-left': '0',
         'background-color': '',
         'color': ''
@@ -216,16 +218,27 @@
     $(".title").click(function(){
       $(".title1").css("display","none");
       $(".open").toggle().css({"display": "block"});
-      $(".openmenu").css({"position": "absolute", "right": "0px", "top": "15px"});
-      $(".main-menu").css({"overflow": "visible", "width": "395px"});
+      $(".openmenu").css({"position": "absolute", "right": "10px", "top": "15px"});
+      $(".main-menu").css({"overflow": "visible", "width": "310px"});
+      $(".main-page").css({"width": "84%", "margin-left": "auto", "transition": "all 0.2s linear"})
+      $(".main-nav").css({"width": "84%"});
       $(".open1").click(function(){
         $(".title1").css("display","block");
         $(".open").toggle().css({"display": "none"});
         $(".main-menu").css({"overflow": "hidden", "width": "60px"});
         $(".active").css({"background": "none"});
+        $(".main-page").css({"width": "100%"})
+        $(".main-nav").css({"width": "97%"});
+
       })
     });
     });
+    // $(document).ready(function(){
+    // $(".title").hover(function(){
+    //   $(".main-page").css({"width": "84%", "margin-left": "auto", "transition": "all 0.2s linear"});
+    // })
+
+    // })
   </script>
 </body>
 </html>
