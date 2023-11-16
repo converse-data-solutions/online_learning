@@ -231,13 +231,17 @@ nav.main-menu li.active > a,
   width: 100%;
   display: flex;
 }
-.active{
-  color: #0183CE;
+
+.active .hs-stepper-active\:border{
+  border: 1px solid #0183CE;
 }
-
-
-
-.active.hs-stepper-active\:bg-blue-600 {
+.active .hs-stepper-active\:p-2{
+  padding: 8px;
+}
+.active .hs-stepper-active\:rounded{
+  border-radius: 23px;
+}
+.active .hs-stepper-active\:bg-blue-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
