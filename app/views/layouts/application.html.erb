@@ -19,8 +19,8 @@
     <title>Online Learning Portal</title>
   </head>
   <body class="bg-[#F0F4F5]">
-    <div class="area flex h-screen">
-      <nav class="main-menu " id="sidebar">
+    <div class="area flex h-screen homecontroller">
+      <nav class="main-menu title" id="sidebar">
         <ul>
           <li>
             <p class="cursor-pointer flex">
@@ -34,12 +34,12 @@
             </p>
           </li>
           <li class="has-subnav mt-6">
-            <div class="flex items-center selected">
+            <div class="flex items-center selected <%= (params[:controller] == "page" && params[:action] == "index") ? "actived" : "" %>">
               <a class="cursor-pointer">
                 <div class="fa">
                   <img src="<%= asset_path("dashboard.png") %>" class="ml-5 title" alt="..." id="title">
                 </div>
-                <%= link_to "Dashboard", root_path, class: "nav-text title flex text-[#999999]", id: "title" %>
+                <%= link_to "Dashboard", root_path, class: "nav-text title flex text-[#999999] hover:text-[#0bc08b]", id: "title" %>
               </a>
             </div>
           </li>
@@ -68,12 +68,12 @@
             </a>
           </li>
           <li class="has-subnav">
-            <div class="flex items-center selected">
+            <div class="flex items-center selected <%= (params[:controller] == "admin/users" && params[:action] == "index") ? "actived" : "" %>">
               <a class="cursor-pointer">
                 <div class="fa">
                   <img src="<%= asset_path("user.png") %>" class="ml-5 title" alt="...">
                 </div>
-                <%= link_to "User Management", admin_users_path, class: "flex nav-text title text-[#999999]" %>
+                <%= link_to "User Management", admin_users_path, class: "flex nav-text title text-[#999999] hover:text-[#0bc08b]" %>
               </a>
             </div>
           </li>
@@ -190,55 +190,50 @@
         $('.selected').on('click', function (e) {
 
 
-      $('.selected').removeClass('active');
+      $('.selected').removeClass('actived');
 
-      $(this).addClass('active');
+      $(this).addClass('actived');
 
-      $('.active').css({
-        'margin-left': '6px',
-        'background-color': '#31B978',
-        'color': 'white',
-        'border-radius': '7px'
+      // $('.active').css({
+      //   'margin-left': '6px',
+      //   'background-color': '#31B978',
+      //   'color': 'white',
+      //   'border-radius': '7px'
 
-      });
+      // });
 
-      $('li .selected:not(.active)').css({
-        'margin-left': '0',
-        'background-color': '',
-        'color': ''
-      });
+      // $('li .selected:not(.active)').css({
+      //   'margin-left': '0',
+      //   'background-color': '',
+      //   'color': ''
+      // });
         });
       });
 
       function toggleSidebar(ref){
-    document.getElementById("sidebar").classList.toggle('active');
+    document.getElementById("sidebar").classList.toggle('actived');
     }
 
     $(document).ready(function(){
-    $(".title").click(function(){
-      $(".title1").css("display","none");
-      $(".open").toggle().css({"display": "block"});
-      $(".openmenu").css({"position": "absolute", "right": "10px", "top": "15px"});
-      $(".main-menu").css({"overflow": "visible", "width": "310px"});
-      $(".main-page").css({"width": "84%", "margin-left": "auto", "transition": "all 0.2s linear"})
-      $(".main-nav").css({"width": "84%"});
-      $(".open1").click(function(){
-        $(".title1").css("display","block");
-        $(".open").toggle().css({"display": "none"});
-        $(".main-menu").css({"overflow": "hidden", "width": "60px"});
-        $(".active").css({"background": "none"});
-        $(".main-page").css({"width": "100%"})
-        $(".main-nav").css({"width": "97%"});
+      $(".title").click(function(){
+        $(".title1").css("display","none");
+        $(".open").toggle().css({"display": "block"});
+        $(".openmenu").css({"position": "absolute", "right": "10px", "top": "15px"});
+        $(".main-menu").css({"overflow": "visible", "width": "310px"});
+        $(".main-page").css({"width": "84%", "margin-left": "auto", "transition": "all 0.2s linear"})
+        $(".main-nav").css({"width": "84%"});
+        $(".open1").click(function(){
+          $(".title1").css("display","block");
+          $(".open").toggle().css({"display": "none"});
+          $(".main-menu").css({"overflow": "hidden", "width": "60px"});
+          $(".actived").css({"background": "none"});
+          $(".main-page").css({"width": "100%"})
+          $(".main-nav").css({"width": "97%"});
 
-      })
+        })
+      });
     });
-    });
-    // $(document).ready(function(){
-    // $(".title").hover(function(){
-    //   $(".main-page").css({"width": "84%", "margin-left": "auto", "transition": "all 0.2s linear"});
-    // })
-
-    // })
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/preline@2.0.0/dist/preline.min.js"></script>
 </body>
 </html>

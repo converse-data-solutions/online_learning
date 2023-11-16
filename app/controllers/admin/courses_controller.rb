@@ -3,9 +3,15 @@
 # This is an Admin Course controller
 class Admin::CoursesController < ApplicationController
   # before_action :authenticate_admin!
-
+  require 'will_paginate/array'
   def index
-    @courses = Course.all
+    @courses = []
+    Course.all.each do |course|
+      @courses.push(course)
+    end
+    @courses = @courses.paginate(page: params[:page], per_page: 3)
+    @sections = Course.last.sections
+    @lessons = @sections.last.lessons
   end
 
   def new
@@ -14,11 +20,9 @@ class Admin::CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
-    if @course.save
-      redirect_to admin_courses_path
-    else
-      render :new, status: :unprocessable_entity
-    end
+    return if @course.save
+
+    render :new, status: :unprocessable_entity
   end
 
   def edit

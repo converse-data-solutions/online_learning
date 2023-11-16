@@ -15,11 +15,9 @@ class Admin::SectionsController < ApplicationController
 
   def create
     @section = @course.sections.create(section_params)
-    if @section.save
-      redirect_to admin_course_sections_path
-    else
-      render :new, status: :unprocessable_entity
-    end
+    return if @section.save
+
+    render :new, status: :unprocessable_entity
   end
 
   def edit; end
