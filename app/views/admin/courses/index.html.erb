@@ -1,8 +1,8 @@
 <%= content_for :head do %>
   <%= javascript_import_module_tag "controllers/validation" %>
 <% end %>
-<div class="flex flex-col lg:w-[94%] lg:ml-auto md:w-[80%] md:ml-auto">
-  <div class="flex w-[50%] sm:w-[90%] mt-10 mx-auto justify-between flex-col sm:flex-row">
+<div class="flex flex-col lg:w-[94%] lg:ml-auto md:w-[90%] md:ml-auto">
+  <div class="flex w-[71%] sm:w-[80%] md:w-[90%] mt-10 sm:mx-auto md:mx-auto justify-between flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
     <div class="text-[#818181] text-[18px]">Course List</div>
     <div>
       <!-- Modal toggle -->
@@ -86,7 +86,7 @@
                   <div data-hs-stepper-content-item='{
       "index": 1
     }'>
-                    <div class="p-4 mt-[15rem] w-[60%] mx-auto mb-[15rem]">
+                    <div class="p-4 mt-[11rem] w-[45%] mx-auto mb-[15rem]">
                       <%= form_for Course.new, url: admin_courses_path, class: "space-y-6 w-[80%]", method: :post do |f| %>
                         <div class="flex justify-between">
                           <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course</label>
@@ -104,7 +104,7 @@
       "index": 2
     }' style="display: none;">
                       <div class="p-4 h-[50vh]">
-                        <div class="relative overflow-x-auto shadow-sm sm:rounded-sm mt-4 w-[90%] mx-auto h-[50vh]">
+                        <div class="relative overflow-x-auto mt-4 w-[90%] mx-auto h-[50vh]">
                           <span class="mb-4">Course Name:<%= Course.last.course_name %></span>
                           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto">
                             <thead class="text-xs text-[#000] text-[14px] uppercase bg-[#EDEDED] dark:text-gray-400">
@@ -220,7 +220,7 @@
       "index": 3, "isFinal": true
     }' style="display: none;">
                       <div class="p-4 h-[100%]">
-                        <div class="relative overflow-x-auto shadow-sm sm:rounded-sm mt-4 w-[90%] mx-auto h-[50vh]">
+                        <div class="relative overflow-x-auto mt-4 w-[90%] mx-auto h-[50vh]">
                           <p class="mb-4"><span class="">Course Name:</span><span class="text-[#818181] pl-1"><%= Course.last.course_name %></span>
                             <span class="pl-3">Section Name:</span><span class="text-[#818181] pl-1"><%= Section.last.title %></span></p>
                           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto">
@@ -387,7 +387,7 @@
                         <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                         Back
                       </button>
-                      <button type="button" class="py-2 px-10 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-next-btn>
+                      <button type="button" class="py-2 px-10 text-[#fff] inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-next-btn>
                         next
                       </button>
                       <button type="button" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"  data-hs-stepper-finish-btn style="display: none;">
@@ -409,8 +409,8 @@
       </div>
     </div>
   </div>
-  <div class="flex items-center justify-between pt-10 md:pt:20 pb-4 w-[90%] mx-auto flex-col md:flex-row">
-    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] w-[70%] md:w-[15%] pb-4 sm:pb-0">
+  <div class="flex items-center justify-between pt-10 md:pt:20 pb-4 w-[90%] mx-auto flex-col sm:flex-row md:flex-row">
+    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] w-[70%] md:w-[35%] pb-4 sm:pb-0">
       <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { include_blank: "Select Course", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
     </div>
     <label for="table-search " class="sr-only">Search</label>
@@ -421,8 +421,8 @@
       <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border-[0] rounded-lg md:w-80 bg-gray-50 dark:placeholder-gray-400 dark:text-white w-[100%]" placeholder="Search for items">
     </div>
   </div>
-  <div class="relative overflow-x-auto shadow-sm sm:rounded-sm mt-4 w-[90%] mx-auto h-[50vh]">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto">
+  <div class="relative overflow-x-auto mt-4 w-[90%] mx-auto h-[50vh]">
+    <table class="w-full text-sm text-left text-gray-500 ml-[63px] md:ml-0 dark:text-gray-400 overflow-auto table-auto">
       <thead class="text-xs text-[#000] text-[14px] uppercase bg-[#EDEDED] dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-5">

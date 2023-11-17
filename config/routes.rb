@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   }
 
   root 'page#index'
-
+  namespace :admin do
+    resources :sections
+  end
   resources :users, only: [] do
     resources :profiles
   end

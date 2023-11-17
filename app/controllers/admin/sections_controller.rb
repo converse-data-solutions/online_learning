@@ -5,8 +5,9 @@ class Admin::SectionsController < ApplicationController
   before_action :course_assignment, only: %i[new create edit update show]
   before_action :section_assignment, only: %i[show edit update]
   def index
-    @courses = Course.find(params[:course_id])
-    @sections = @courses.sections
+    # @courses = Course.find(params[:course_id])
+    # @sections = @courses.sections
+    @sections = Section.all
   end
 
   def new

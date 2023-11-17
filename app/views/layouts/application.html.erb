@@ -51,7 +51,7 @@
               <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Courses<img src="<%= asset_path("down.png") %>" class="mr-5" alt="...">
                 <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden mx-auto w-2/4">
                   <li class="flex justify-center"><a href="#" class="block"><%= link_to "Course", admin_courses_path%> </a></li>
-                  <li class="flex justify-center"><a href="#" class="block"><%= link_to "Session"%></a></li>
+                  <li class="flex justify-center"><a href="#" class="block"><%= link_to "Section", admin_sections_path%></a></li>
                   <li class="flex justify-center"><a href="#" class="block">Session </a></li>
                 </ul>
               </span>
@@ -131,8 +131,8 @@
         </ul>
       </nav>
       <div class="flex flex-col w-full h-screen">
-        <nav class="bg-white border-gray-200 pr-4 lg:pr-6 py-2.5 dark:bg-gray-800 w-[97%] shadow-xl h-16 ml-auto main-nav">
-          <div class="flex flex-wrap justify-between items-center">
+        <nav class="bg-white border-gray-200 pr-4 lg:pr-6 py-2.5 dark:bg-gray-800 lg:w-[97%] md:w-[94%] sm:w-[95%] w-[87%] shadow-xl h-16 ml-auto main-nav">
+          <div class="flex justify-between items-center">
             <div class="flex justify-start items-center">
               <a href="#" class="flex mr-4">
               </a>
@@ -151,7 +151,7 @@
           </li>
           <button type="button" class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
             <span class="sr-only">Open user menu</span>
-            <img class="w-8 h-8 rounded-full" src="https://techvillageacademy.com/assets/images/logo/logo.png" alt="user photo">
+            <img class="w-8 h-8 rounded-full max-w-none sm:max-w-full" src="https://techvillageacademy.com/assets/images/logo/logo.png" alt="user photo">
           </button>
           <!-- Dropdown menu -->
           <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
@@ -210,29 +210,28 @@
         });
       });
 
-      function toggleSidebar(ref){
-    document.getElementById("sidebar").classList.toggle('actived');
-    }
 
     $(document).ready(function(){
       $(".title").click(function(){
         $(".title1").css("display","none");
         $(".open").toggle().css({"display": "block"});
+        $(".openmenu").css({"position": "absolute", "right": "0px", "top": "15px"});
+        $(".main-menu").css({"overflow": "visible", "width": "395px"});
         $(".openmenu").css({"position": "absolute", "right": "10px", "top": "15px"});
         $(".main-menu").css({"overflow": "visible", "width": "310px"});
-        $(".main-page").css({"width": "84%", "margin-left": "auto", "transition": "all 0.2s linear"})
+        $(".main-page").css({"width": "84%", "margin-left": "auto", "transition": "all 0.2s linear"});
         $(".main-nav").css({"width": "84%"});
-        $(".open1").click(function(){
-          $(".title1").css("display","block");
-          $(".open").toggle().css({"display": "none"});
-          $(".main-menu").css({"overflow": "hidden", "width": "60px"});
-          $(".actived").css({"background": "none"});
-          $(".main-page").css({"width": "100%"})
-          $(".main-nav").css({"width": "97%"});
-
-        })
       });
-    });
+      $(".open1").click(function(){
+        $(".title1").css("display","block");
+        $(".open").toggle().css({"display": "none"});
+        $(".main-menu").css({"overflow": "hidden", "width": "60px"});
+        $(".active").css({"background": "none"});
+        $(".main-page").css({"width": "100%"});
+        $(".main-nav").css({"width": "97%"});
+      })
+
+    })
   </script>
   <script src="https://cdn.jsdelivr.net/npm/preline@2.0.0/dist/preline.min.js"></script>
 </body>
