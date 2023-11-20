@@ -1,4 +1,4 @@
-<div class="container">
+<div class="w-full max-w-md mx-auto flex justify-center flex-col">
   <h2>Sign up</h2>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -27,7 +27,7 @@
         data-callback='onSubmit' 
         data-action='submit'>Submit</button> %>
     <div class="actions">
-      <%= f.submit "Sign up", class: "btn btn-primary" %>
+      <%= f.submit "Sign up", class: "bg-[#31B978] p-4 w-[20%] rounded text-white" %>
     </div>
   <% end %>
   <%= render "devise/shared/links" %>

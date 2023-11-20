@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :sections
   end
+  namespace :admin do
+    resources :lessons
+  end
   resources :users, only: [] do
     resources :profiles
   end

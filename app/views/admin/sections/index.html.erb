@@ -1,9 +1,9 @@
 <%= content_for :head do %>
   <%= javascript_import_module_tag "controllers/validation" %>
 <% end %>
-<div class="flex flex-col lg:w-[94%] lg:ml-auto md:w-[80%] md:ml-auto">
+<div class="flex flex-col lg:w-[94%] lg:ml-auto md:w-[92%] md:ml-auto">
   <div class="flex w-[50%] sm:w-[90%] mt-10 mx-auto justify-between flex-col sm:flex-row">
-    <div class="text-[#818181] text-[18px]">User Management - Admin</div>
+    <div class="text-[#31B978] text-[20px] font-semibold">Section Details</div>
     <div>
       <!-- Modal toggle -->
       <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded font-bold hover:bg-[#0082CE]" type="button">
@@ -25,7 +25,11 @@
             </button>
             <div class="px-6 py-6 lg:px-8">
               <h3 class="mb-4 text-xl font-semibold text-[#31B978] dark:text-white text-center">New Section Management</h3>
-              <%= form_for Section.new, url: admin_sections_path, class: "space-y-6", method: :post do |f| %>
+              <%= form_for Section.new, url: admin_sections_path(course_id: params[:course_id]), class: "space-y-6", method: :post do |f| %>
+                <div>
+                  <label for="Corse Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course Name</label>
+                  <%= f.collection_select :course_id, Course.all, :id, :course_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
+                </div>
                 <div>
                   <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
                   <%= f.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
@@ -45,14 +49,14 @@
     </div>
   </div>
   <div class="flex items-center justify-between pt-20 pb-4 w-[90%] mx-auto flex-col md:flex-row">
-    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] w-[70%] md:w-[35%] pb-4 sm:pb-0">
-      <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { include_blank: "Select Course", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
+    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] w-[70%] md:w-[30%] pb-4 sm:pb-0">
+      <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { include_blank: "Select Course", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block lg:w-[75%] md:w-[100%] w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
     </div>
-    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] w-[70%] md:w-[35%] pb-4 sm:pb-0">
-      <%= collection_select(:section, :title, Section.all, :id, :title, { include_blank: "Select section", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
+    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] w-[70%] md:w-[30%] pb-4 sm:pb-0">
+      <%= collection_select(:section, :title, Section.all, :id, :title, { include_blank: "Select section", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block lg:w-[75%] md:w-[100%] w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
     </div>
     <label for="table-search " class="sr-only">Search</label>
-    <div class="relative ml-[60px]">
+    <div class="relative ml-[60px] md:ml-[10px]">
       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
         <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
       </div>
@@ -156,4 +160,3 @@
     </table>
   </div>
 </div>
-

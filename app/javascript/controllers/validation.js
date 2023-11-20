@@ -58,3 +58,31 @@ document.addEventListener("turbo:render", function () {
   console.log("Turbo validation Loaded");
   initValidation();
 });
+
+$(".filter-handle").on("change", function (e) {
+  var location = e.target.value;
+  var table = $(".filter-table-data");
+  if (location.length) {
+    table.find("tr[data-type!=" + location + "]").hide();
+    table.find("tr[data-type=" + location + "]").show();
+  } else {
+    table.find("tr").show();
+  }
+});
+$(document).ready(function () {
+  $("#table-search").on("keyup", function () {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
+  });
+});
+
+$(document).ready(function () {
+  $(".display-section-button").click(function () {
+    $(".display-section").show();
+  });
+  $(".display-lesson-button").click(function () {
+    $(".display-lesson").show();
+  });
+});

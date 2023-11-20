@@ -3,10 +3,10 @@
 <% end %>
 <div class="flex flex-col lg:w-[94%] lg:ml-auto md:w-[90%] md:ml-auto">
   <div class="flex w-[71%] sm:w-[80%] md:w-[90%] mt-10 sm:mx-auto md:mx-auto justify-between flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
-    <div class="text-[#818181] text-[18px]">Course List</div>
+    <div class="text-[#31B978] text-[20px] font-semibold">Course Lists</div>
     <div>
       <!-- Modal toggle -->
-      <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-4 py-2 rounded font-bold hover:bg-[#0082CE]" type="button">
+      <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 md:px-4 py-2 rounded font-bold hover:bg-[#0082CE]" type="button">
         + Add New
       </button>
       <!-- Main modal -->
@@ -25,7 +25,7 @@
             </button>
             <div class="px-6 py-6 lg:px-8 ">
               <!-- Stepper -->
-              <h3 class="mb-4 text-xl font-semibold text-[#31B978] dark:text-white text-center">NEW COURSE</h3>
+              <h3 class="mb-8 text-2xl font-bold text-[#31B978] dark:text-white text-center">NEW COURSE</h3>
               <div data-hs-stepper>
                 <!-- Stepper Nav -->
                 <ul class="relative flex flex-row gap-x-2 w-[60%] ml-auto mr-[12rem]">
@@ -86,15 +86,15 @@
                   <div data-hs-stepper-content-item='{
       "index": 1
     }'>
-                    <div class="p-4 mt-[11rem] w-[45%] mx-auto mb-[15rem]">
+                    <div class="p-4 sm:mt-[11rem] sm:mx-auto mx-0 sm:mb-[15rem] mt-[4rem] mb-[3rem] md:w-[45%] sm:w-9/12 w-full">
                       <%= form_for Course.new, url: admin_courses_path, class: "space-y-6 w-[80%]", method: :post do |f| %>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between flex-col sm:flex-row">
                           <label for="course-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course</label>
-                          <%= f.text_field :course_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
+                          <%= f.text_field :course_name, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block sm:w-1/2 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
                         </div>
-                        <div class="mb-4 flex justify-between">
+                        <div class="mb-4 flex justify-between flex-col sm:flex-row">
                           <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description<span>(optional)</span></label>
-                          <%= f.text_area :description, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5 rounded-[7px]' %>
+                          <%= f.text_area :description, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block sm:w-1/2 w-full p-2.5 rounded-[7px]' %>
                         </div>
                       </div>
                     </div>
@@ -199,17 +199,19 @@
                               <%= form_for Section.new, url: admin_course_sections_path(course_id: Course.last.id), class: "space-y-6 w-[80%]", method: :post do |f| %>
                                 <%= f.hidden_field :course_id, value: Course.last.id %>
                                 <div class="">
-                                  <%= f.text_field :title, class: "w-[400px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+                                  <%= f.text_field :title, class: "w-[145px] sm:w-[200px] md:w-[240px] xl:w-[410px] lg:w-[295px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
                                 </div>
                                 <div class="">
-                                  <%= f.text_field :description, class: 'w-[470px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block  p-2.5 rounded-[7px]' %>
+                                  <%= f.text_field :description, class: 'w-[155px] sm:w-[200px] md:w-[240px] xl:w-[480px] lg:w-[310px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block  p-2.5 rounded-[7px]' %>
                                 </div>
-                                <%= f.submit "log in", type: "image", src: asset_path("okay.png")%>
+                                <div class="">
+                                  <%= f.submit "log in", type: "image", src: asset_path("okay.png")%>
+                                </div>
                               <% end %>
                             </div>
                           </div>
                           <div class="flex display-section-button">
-                            <span class="text-[35px] text-gray-500 text-center bg-[#F2F2F2] w-[5%] display-section-button">+</span>
+                            <span class="text-[35px] text-gray-500 text-center bg-[#F2F2F2] lg:w-[5%] md:w-[15%] sm:w-[25%] w-[35%] display-section-button">+</span>
                           </div>
                         </div>
                       </div>
@@ -348,23 +350,31 @@
                               <%= form_for Lesson.new, url: admin_section_lessons_path(section_id: Section.last.id), class: "space-y-6 w-[80%]", method: :post do |f| %>
                                 <%= f.hidden_field :lesson_id, value: Lesson.last.id %>
                                 <div class="">
-                                  <%= f.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+                                  <%= f.text_field :title, class: "w-[110px] sm:w-[110px] md:w-[110px] lg:w-[110px] xl:w-[165px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
                                 </div>
                                 <div class="">
-                                  <%= f.text_field :description, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block  p-2.5 rounded-[7px]' %>
+                                  <%= f.text_field :description, class: 'w-[125px] sm:w-[125px] md:w-[125px] lg:w-[180px] xl:w-[250px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block  p-2.5 rounded-[7px]' %>
                                 </div>
                                 <div class="">
-                                  <%= f.file_field :clip, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block  p-2.5 rounded-[7px]' %>
+                                  <%= f.file_field :clip, class: 'block w-[110px] sm:w-[120px] md:w-[120px] lg:w-[120px] xl:w-[180px] border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+    file:bg-gray-50 file:border-0
+    file:bg-gray-100 file:me-4
+    file:py-3 file:px-4
+    dark:file:bg-gray-700 dark:file:text-gray-400' %>
                                 </div>
                                 <div class="">
-                                  <%= f.file_field :attachments, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block  p-2.5 rounded-[7px]' %>
+                                  <%= f.file_field :attachments, class: 'block w-[120px] sm:w-[140px] md:w-[160px] lg:w-[300px] xl:w-[440px] border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+    file:bg-gray-50 file:border-0
+    file:bg-gray-100 file:me-4
+    file:py-3 file:px-4
+    dark:file:bg-gray-700 dark:file:text-gray-400' %>
                                 </div>
                                 <%= f.submit "log in", type: "image", src: asset_path("okay.png")%>
                               <% end %>
                             </div>
                           </div>
                           <div class="flex display-lesson-button">
-                            <span class="text-[35px] text-gray-500 text-center bg-[#F2F2F2] w-[5%] display-lesson-button">+</span>
+                            <span class="text-[35px] text-gray-500 text-center bg-[#F2F2F2] lg:w-[5%] md:w-[15%] sm:w-[25%] w-[35%] display-lesson-button">+</span>
                           </div>
                         </div>
                       </div>
@@ -382,18 +392,18 @@
                     </div>
                     <!-- End Final Contnet -->
                     <!-- Button Group -->
-                    <div class="mt-5 flex justify-between items-center gap-x-2">
-                      <button type="button" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-back-btn>
+                    <div class="mt-5 flex justify-end  items-center gap-x-2">
+                      <button type="button" class="py-2 px-3 hidden inline-flex items-center gap-x-1 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-back-btn>
                         <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                         Back
                       </button>
                       <button type="button" class="py-2 px-10 text-[#fff] inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-next-btn>
                         next
                       </button>
-                      <button type="button" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"  data-hs-stepper-finish-btn style="display: none;">
+                      <button type="button" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none"  data-hs-stepper-finish-btn style="display: none;">
                         Finish
                       </button>
-                      <button type="reset" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-reset-btn style="display: none;">
+                      <button type="reset" class="py-2 px-3 hidden inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-reset-btn style="display: none;">
                         Reset
                       </button>
                     </div>
@@ -411,7 +421,7 @@
   </div>
   <div class="flex items-center justify-between pt-10 md:pt:20 pb-4 w-[90%] mx-auto flex-col sm:flex-row md:flex-row">
     <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] w-[70%] md:w-[35%] pb-4 sm:pb-0">
-      <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { include_blank: "Select Course", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
+      <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { include_blank: "Select Course", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block lg:w-[70%] md:w-[85%] w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
     </div>
     <label for="table-search " class="sr-only">Search</label>
     <div class="relative ml-[60px]">
@@ -520,40 +530,3 @@
       <%= will_paginate(@courses) %>
     </div>
   </div>
-  <script>
-    $('.filter-handle').on('change', function(e) {
-    // retrieve the dropdown selected value
-    var location = e.target.value;
-    var table = $('.filter-table-data');
-    // if a location is selected
-    if (location.length) {
-      // hide all not matching
-      table.find('tr[data-type!=' + location + ']').hide();
-      // display all matching
-      table.find('tr[data-type=' + location + ']').show();
-    } else {
-      // location is not selected,
-      // display all
-      table.find('tr').show();
-    }
-    });
-    $(document).ready(function(){
-    $("#table-search").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myTable tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
-    });
-    });
-
-    $(document).ready(function(){
-      $(".display-section-button").click(function(){
-        $(".display-section").show();
-      })
-      $(".display-lesson-button").click(function(){
-        $(".display-lesson").show();
-      })
-    })
-    
-      
-  </script>

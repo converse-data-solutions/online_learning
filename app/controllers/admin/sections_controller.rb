@@ -11,11 +11,14 @@ class Admin::SectionsController < ApplicationController
   end
 
   def new
-    @section = @course.sections.new
+    @section = Sections.new
+    byebug
   end
 
   def create
-    @section = @course.sections.create(section_params)
+    @section = Section.new(section_params)
+    puts "Params: #{params.inspect}"
+    byebug
     return if @section.save
 
     render :new, status: :unprocessable_entity

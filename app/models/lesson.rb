@@ -8,6 +8,7 @@ class Lesson < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :ratings, as: :rateable, dependent: :destroy
   has_many :entrollment_details, dependent: :destroy
+  has_one :course, through: :section
 
   def all_sections
     Section.includes(:lessons).where(course_id: section.course_id)

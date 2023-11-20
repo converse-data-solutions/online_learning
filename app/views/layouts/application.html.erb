@@ -6,15 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= javascript_importmap_tags %>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
     <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
     <%= yield :head %>
     <title>Online Learning Portal</title>
   </head>
@@ -27,9 +26,9 @@
               <div class="fa title title1">
                 <img src="<%= asset_path("xmark.png") %>" class="ml-5 mt-2 title cursor-pointer" alt="...">
               </div>
-              <span class="hidden open open1">
+              <span class="hidden open hamburger title">
                 <img src="https://techvillageacademy.com/assets/images/logo/logo.png" class="w-25" />
-                <img src="<%= asset_path("hamburger.png") %> " class="openmenu cursor-pointer" alt="..." />
+                <img src="<%= asset_path("hamburger.png") %> " class="openmenu hamburger cursor-pointer" alt="..." />
               </span>
             </p>
           </li>
@@ -48,7 +47,7 @@
               <div class="fa">
                 <img src="<%= asset_path("course.png") %>" class="ml-5 title" alt="...">
               </div>
-              <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Courses<img src="<%= asset_path("down.png") %>" class="mr-5" alt="...">
+              <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Courses<img src="<%= asset_path("down.png") %>" class="mr-5 change-position" alt="...">
                 <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden mx-auto w-2/4">
                   <li class="flex justify-center"><a href="#" class="block"><%= link_to "Course", admin_courses_path%> </a></li>
                   <li class="flex justify-center"><a href="#" class="block"><%= link_to "Section", admin_sections_path%></a></li>
@@ -80,9 +79,9 @@
           <li class="has-subnav">
             <a class="main cursor-pointer flex selected">
               <div class="fa">
-                <img src="<%= asset_path("course.png") %>" class="ml-5 title" alt="...">
+                <img src="<%= asset_path("student.png") %>" class="ml-5 title" alt="...">
               </div>
-              <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Student Management<img src="<%= asset_path("down.png") %>" class="mr-5" alt="...">
+              <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Student Management<img src="<%= asset_path("down.png") %>" class="mr-5 change-position" alt="...">
                 <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-2/4 mx-auto">
                   <li class="flex justify-center"><a href="#" class="block">Attendance Details </a></li>
                   <li class="flex justify-center"><a href="#" class="block">Student Details</a></li>
@@ -95,7 +94,7 @@
               <div class="fa">
                 <img src="<%= asset_path("payment.png") %>" class="ml-5 title" alt="...">
               </div>
-              <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Payment<img src="<%= asset_path("down.png") %>" class="mr-5" alt="...">
+              <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Payment<img src="<%= asset_path("down.png") %>" class="mr-5 change-position" alt="...">
                 <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-2/4 mx-auto">
                   <li><a href="#" class="block">Invoice Creation </a></li>
                   <li><a href="#" class="block">Download Invoice</a></li>
@@ -109,7 +108,7 @@
               <div class="fa">
                 <img src="<%= asset_path("schedule.png") %>" class="ml-5 title" alt="...">
               </div>
-              <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Scheduling<img src="<%= asset_path("down.png") %>" class="mr-5" alt="...">
+              <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Scheduling<img src="<%= asset_path("down.png") %>" class="mr-5 change-position" alt="...">
                 <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-2/4 mx-auto">
                   <li><a href="#" class="block">Schedule Plan</a></li>
                 </ul>
@@ -121,7 +120,7 @@
               <div class="fa">
                 <img src="<%= asset_path("sales.png") %>" class="ml-5 title" alt="...">
               </div>
-              <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Sales<img src="<%= asset_path("down.png") %>" class="mr-5" alt="...">
+              <span class="nav-text main items-center justify-between mt-[7px] title" style="display: flex;">Sales<img src="<%= asset_path("down.png") %>" class="mr-5 change-position" alt="...">
                 <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-2/4 mx-auto">
                   <li><a href="#" class="block">Enquires</a></li>
                 </ul>
@@ -131,7 +130,7 @@
         </ul>
       </nav>
       <div class="flex flex-col w-full h-screen">
-        <nav class="bg-white border-gray-200 pr-4 lg:pr-6 py-2.5 dark:bg-gray-800 lg:w-[97%] md:w-[94%] sm:w-[95%] w-[87%] shadow-xl h-16 ml-auto main-nav">
+        <nav class="bg-white border-gray-200 pr-4 lg:pr-6 py-2.5 dark:bg-gray-800 lg:w-[97%] md:w-[94%] sm:w-[95%] w-[87%] shadow-2xl h-16 ml-auto main-nav" style="box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);">
           <div class="flex justify-between items-center">
             <div class="flex justify-start items-center">
               <a href="#" class="flex mr-4">
@@ -170,69 +169,14 @@
           </div>
         </nav>
         <div class="bg-[#F0F4F5] h-screen main-page" id="main-page">
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
+          <p class="notice ml-20"><%= notice %></p>
+          <p class="alert ml-20"><%= alert %></p>
           <%= yield %>
         </div>
       </div>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.turbo.min.js"></script>
-  <script>
-    $(document).ready(function() {
-        $('.main').click(function() {
-          const el = $(this).parent().find('.sub');
-          el.slideToggle('slow');
-        });
-      });
-
-         $(document).ready(function () {
-        $('.selected').on('click', function (e) {
-
-
-      $('.selected').removeClass('actived');
-
-      $(this).addClass('actived');
-
-      // $('.active').css({
-      //   'margin-left': '6px',
-      //   'background-color': '#31B978',
-      //   'color': 'white',
-      //   'border-radius': '7px'
-
-      // });
-
-      // $('li .selected:not(.active)').css({
-      //   'margin-left': '0',
-      //   'background-color': '',
-      //   'color': ''
-      // });
-        });
-      });
-
-
-    $(document).ready(function(){
-      $(".title").click(function(){
-        $(".title1").css("display","none");
-        $(".open").toggle().css({"display": "block"});
-        $(".openmenu").css({"position": "absolute", "right": "0px", "top": "15px"});
-        $(".main-menu").css({"overflow": "visible", "width": "395px"});
-        $(".openmenu").css({"position": "absolute", "right": "10px", "top": "15px"});
-        $(".main-menu").css({"overflow": "visible", "width": "310px"});
-        $(".main-page").css({"width": "84%", "margin-left": "auto", "transition": "all 0.2s linear"});
-        $(".main-nav").css({"width": "84%"});
-      });
-      $(".open1").click(function(){
-        $(".title1").css("display","block");
-        $(".open").toggle().css({"display": "none"});
-        $(".main-menu").css({"overflow": "hidden", "width": "60px"});
-        $(".active").css({"background": "none"});
-        $(".main-page").css({"width": "100%"});
-        $(".main-nav").css({"width": "97%"});
-      })
-
-    })
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/preline@2.0.0/dist/preline.min.js"></script>
 </body>
 </html>
