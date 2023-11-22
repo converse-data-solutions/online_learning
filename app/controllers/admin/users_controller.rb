@@ -4,7 +4,6 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :user_assignment, only: %i[edit update destroy]
-
   def index
     @users = User.all
   end
@@ -23,6 +22,7 @@ class Admin::UsersController < ApplicationController
       admin_save_error
     end
   end
+  # <%= f.submit "NEXT", class: 'text-[#fff]' %>
 
   def edit; end
 

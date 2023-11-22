@@ -1,6 +1,5 @@
-<h1>Admin Users</h1>
-<%= form_for [:admin, @user] do |f| %>
-  <h2>Update User</h2>
+<%= form_for(user, url: admin_user_path(user), method: :patch) do |f| %>
+<h2>Update User</h2>
   <div>
     <%= f.label :email %>
     <br>
@@ -23,4 +22,3 @@
   </div>
   <%= f.submit "Update Admin User", class: 'btn btn-primary' %>
 <% end %>
-

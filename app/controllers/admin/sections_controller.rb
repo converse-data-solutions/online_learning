@@ -5,21 +5,22 @@ class Admin::SectionsController < ApplicationController
   before_action :course_assignment, only: %i[new create edit update show]
   before_action :section_assignment, only: %i[show edit update]
   def index
-    @courses = Course.find(params[:course_id])
-    @sections = @courses.sections
+    # @courses = Course.find(params[:course_id])
+    # @sections = @courses.sections
+    @sections = Section.all
   end
 
   def new
-    @section = @course.sections.new
+    @section = Sections.new
   end
 
   def create
-    @section = @course.sections.create(section_params)
-    if @section.save
-      redirect_to admin_course_sections_path
-    else
-      render :new, status: :unprocessable_entity
-    end
+    @section = Section.new(section_params)
+    puts "Params: #{params.inspect}"
+    byebug
+    return if @section.save
+
+    render :new, status: :unprocessable_entity
   end
 
   def edit; end

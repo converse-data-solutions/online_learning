@@ -2,10 +2,11 @@
 
 # This is an Admin Lesson controller
 class Admin::LessonsController < ApplicationController
-  before_action :section_assignment, only: %i[index show new create edit update destroy]
+  before_action :section_assignment, only: %i[show new create edit update destroy]
   before_action :lesson_assignment, only: %i[show edit update destroy]
   def index
-    @lessons = @section.lessons.includes(clip_attachment: :blob, attachments_attachments: :blob)
+    # @lessons = @section.lessons.includes(clip_attachment: :blob, attachments_attachments: :blob)
+    @lessons = Lesson.all
   end
 
   def new

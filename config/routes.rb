@@ -13,7 +13,12 @@ Rails.application.routes.draw do
   }
 
   root 'page#index'
-
+  namespace :admin do
+    resources :sections
+  end
+  namespace :admin do
+    resources :lessons
+  end
   resources :users, only: [] do
     resources :profiles
   end
@@ -41,6 +46,14 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: %i[index edit update create destroy new]
+  end
+
+  namespace :admin do
+    resources :users do
+    member do
+     get :edit
+    end
+    end
   end
 
   resources :courses, only: %i[index show]
