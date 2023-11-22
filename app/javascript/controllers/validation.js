@@ -86,3 +86,10 @@ $(document).ready(function () {
     $(".display-lesson").show();
   });
 });
+
+$(document).ready(function () {
+  $(".next-btn").click(function () {
+    $("#new_course").submit();
+    event.preventDefault();
+  })
+});
