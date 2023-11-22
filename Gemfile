@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 gem 'cancan'
 gem 'devise'
+gem 'foreman', '~> 0.87.2'
 gem 'htmlbeautifier', '~> 1.4', '>= 1.4.2'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
@@ -11,10 +12,11 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'rolify', '~> 6.0', '>= 6.0.1'
 gem 'sass-rails', '~> 6.0'
 gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.32'
+gem 'terser', '~> 1.1', '>= 1.1.19'
 gem 'wicked_pdf', '~> 2.7'
 gem 'will_paginate', '~> 4.0'
 gem 'wkhtmltopdf-binary'
-gem 'foreman', '~> 0.87.2'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
 
