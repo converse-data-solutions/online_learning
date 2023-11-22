@@ -14,6 +14,7 @@ gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.32'
 gem 'wicked_pdf', '~> 2.7'
 gem 'will_paginate', '~> 4.0'
 gem 'wkhtmltopdf-binary'
+gem 'foreman', '~> 0.87.2'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
 

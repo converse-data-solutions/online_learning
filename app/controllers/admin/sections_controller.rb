@@ -12,7 +12,6 @@ class Admin::SectionsController < ApplicationController
 
   def new
     @section = Sections.new
-    byebug
   end
 
   def create

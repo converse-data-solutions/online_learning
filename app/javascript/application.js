@@ -4,7 +4,7 @@ import "controllers";
 import videojs from "video.js";
 import "flowbite";
 
-$(document).ready(function () {
+function navDropdown() {
   $(".main").click(function () {
     const el = $(this).parent().find(".sub");
     el.slideToggle("slow");
@@ -12,14 +12,14 @@ $(document).ready(function () {
       transform: "rotate(180deg)",
     });
   });
-});
+}
 
-$(document).ready(function () {
+function activeClass() {
   $(".selected").on("click", function (e) {
     $(".selected").removeClass("actived");
     $(this).addClass("actived");
   });
-});
+}
 
 var isClicked = false;
 
@@ -31,6 +31,10 @@ function handleNavbar() {
         "margin-left": "auto",
         transition: "all 0.2s linear",
       });
+      $(".main-nav").css({
+        width: "84%",
+        transition: "all 0.2s linear",
+      })
     });
 
     $("#sidebar").mouseleave(function () {
@@ -39,6 +43,10 @@ function handleNavbar() {
         "margin-left": "auto",
         transition: "all 0.2s linear",
       });
+      $(".main-nav").css({
+        width: "97%",
+        transition: "all 0.2s linear",
+      })
     });
   } else {
     $(".title").off("mouseenter");
@@ -55,25 +63,25 @@ function initNavbar() {
     $(".main-menu").toggleClass("main-menu2");
     $(".main-page").toggleClass("main-page2");
     $(".main-nav").toggleClass("main-nav2");
-    console.log("isClicked inside initNavbar", isClicked);
 
-    handleNavbar(); // Call the function to handle mouseenter and mouseleave events
+    handleNavbar();
   });
 }
 
 $(document).ready(function () {
   initNavbar();
+  navDropdown();
+  activeClass();
 
   $(document).on("turbo:render", function () {
     initNavbar();
+    navDropdown();
+    activeClass();
   });
 });
-
 
 $(document).ready(function () {
   $(".change-position").click(function () {
     $(".fa img").toggleClass("rotate-180");
   });
 });
-
-

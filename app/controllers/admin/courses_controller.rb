@@ -9,9 +9,9 @@ class Admin::CoursesController < ApplicationController
     Course.all.each do |course|
       @courses.push(course)
     end
-    @courses = @courses.paginate(page: params[:page], per_page: 3)
+    @courses = @courses.paginate(page: params[:page], per_page: 5)
     @sections = Course.last.sections
-    @lessons = @sections.last.lessons
+    @lessons = Lesson.all
   end
 
   def new

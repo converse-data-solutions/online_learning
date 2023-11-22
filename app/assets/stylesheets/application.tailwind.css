@@ -153,14 +153,12 @@ nav.main-menu li.active > a,
 }
 #sidebar {
 }
-/* Assuming a simple pagination container */
 .pagination {
   display: flex;
   list-style: none;
   padding: 0;
 }
 
-/* Styling for each pagination link */
 .pagination a {
   color: #333;
   padding: 5px 15px;
@@ -170,7 +168,6 @@ nav.main-menu li.active > a,
   border-radius: 3px;
 }
 
-/* Styling for the current page link */
 .pagination .current {
   background-color: #0bc08b;
   color: #fff;
@@ -180,13 +177,11 @@ nav.main-menu li.active > a,
   margin: 0 2px;
 }
 
-/* Styling for the previous and next links */
 .pagination .previous,
 .pagination .next {
   margin: 0 5px;
 }
 
-/* Disable styling for disabled links */
 .pagination .disabled {
   pointer-events: none;
   margin-top: -3px;
@@ -196,25 +191,27 @@ nav.main-menu li.active > a,
   margin-right: 5px;
 }
 
-/* Styling for the next link */
 .pagination .next_page {
   margin-left: 5px;
 }
 
-/* Hide text for previous and next links */
 .pagination .previous_page, .pagination .next_page {
-  font-size: 0; /* Hide text */
+  font-size: 0; 
 }
 
-/* Add back the arrow symbols */
 .pagination .previous_page::before {
-  content: '\003C'; /* Unicode character for left arrow */
-  font-size: 16px; /* Adjust the size of the arrow */
+  content: '\003C';
+  font-size: 16px; 
 }
 
 .pagination .next_page::before {
-  content: '\003E'; /* Unicode character for right arrow */
-  font-size: 16px; /* Adjust the size of the arrow */
+  content: '\003E';
+  font-size: 16px; 
+}
+
+.icon-active {
+  fill: #0bc08b;
+  stroke: #0bc08b;
 }
 
 .homecontroller .actived{
