@@ -25,20 +25,50 @@
             </button>
             <div class="px-6 py-6 lg:px-8">
               <h3 class="mb-4 text-xl font-semibold text-[#31B978] dark:text-white text-center">New Section Management</h3>
-              <%= form_for Lesson.new, url: admin_lessons_path, class: "space-y-6", method: :post do |f| %>
-                <div>
-                  <label for="Corse Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course Name</label>
-                  <%= f.collection_select :section_id, Section.all, :id, :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
+              <%= form_for Lesson.new, url: admin_lessons_path(), class: "space-y-6", method: :post do |f| %>
+                <div class="flex flex-row w-full gap-5">
+                  <div class="flex items-center mb-4 w-[50%]">
+                    <label for="Section Name" class="w-[30%] block mb-2 text-sm font-medium text-gray-900 dark:text-white">Section Name</label>
+                    <%= collection_select(:lesson, :section_id, Section.all, :id, :title, { include_blank: "Select Section", selected: '' }, { class: "mb-4 bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-[70%] p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
+                  </div>
+                  <div class="flex items-center w-[50%]">
+                    <label for="title" class="w-[30%] block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                    <%= f.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[70%] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
+                  </div>
                 </div>
-                <div>
-                  <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                  <%= f.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
+                <div class="flex flex-row w-full gap-5">
+                  <div class="flex flex-col w-1/2 gap-5">
+                    <div class="flex items-center mb-4">
+                      <label for="Clip" class="w-[30%] block mb-2 text-sm font-medium text-gray-900 dark:text-white">Clip</label>
+                      <div class="bg-[#F5F5F5] h-[50px] flex items-center w-[70%] rounded-lg">
+                        <div class="clipUpload">
+                          <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                          <%= f.file_field :clip, name: "clip" %>
+                          <p class="clip text-[#818181]">Upload your files here</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex items-center mb-4">
+                      <label for="Clip" class="w-[30%] block mb-2 text-sm font-medium text-gray-900 dark:text-white">Clip</label>
+                      <div class="bg-[#F5F5F5] h-[50px] flex items-center w-[70%] rounded-lg">
+                        <div class="fileUploadWrap">
+                          <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                          <%= f.file_field :attachments, multiple: true, name: "attachments" %>
+                          <p class="attachments text-[#818181]">Upload your files here</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-baseline mb-4 w-1/2">
+                    <label for="description" class="w-[30%] block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                    <%= f.text_area :description, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block w-[70%] h-[16vh] p-2.5 rounded-[7px]' %>
+                  </div>
                 </div>
-                <div class="mb-4">
-                  <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                  <%= f.text_area :description, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 rounded-[7px]' %>
-                </div>
-                <div class="w-1/5 mx-auto">
+                <div class="w-1/5 mx-auto mt-11">
                   <%= f.submit "Create", class: 'w-full text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
                 </div>
               <% end %>
@@ -49,8 +79,15 @@
     </div>
   </div>
   <div class="flex items-center justify-between pt-20 pb-4 w-[90%] mx-auto flex-col md:flex-row">
+    <div class="center">
+      <select name="sources" id="sources" class="custom-select sources bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-full p-2.5 bg-[#fff] text-[#818181]" placeholder="Source Type">
+        <option value="profile">Profile</option>
+        <option value="word">Word</option>
+        <option value="hashtag">Hashtag</option>
+      </select>
+    </div>
     <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] w-[70%] md:w-[20%] pb-4 sm:pb-0">
-      <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { include_blank: "Select Course", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
+      <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { include_blank: "Select Course", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
     </div>
     <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] w-[70%] md:w-[20%] pb-4 sm:pb-0">
       <%= collection_select(:section, :title, Section.all, :id, :title, { include_blank: "Select section", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
@@ -91,7 +128,7 @@
         </tr>
       </thead>
       <tbody class="overflow-auto">
-        <% @lessons.includes(:section, :course, clip_attachment: :blob, attachments_attachments: :blob).each do |lesson| %>
+        <% @lessons.includes(:section, clip_attachment: :blob, attachments_attachments: :blob).each do |lesson| %>
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
               <%= lesson.section.course.course_name %>
@@ -198,3 +235,63 @@
     </table>
   </div>
 </div>
+<script>
+  $(".custom-select").each(function() {
+  var classes = $(this).attr("class"),
+      id      = $(this).attr("id"),
+      name    = $(this).attr("name");
+  var template =  '<div class="' + classes + '">';
+      template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
+      template += '<div class="custom-options">';
+      $(this).find("option").each(function() {
+        template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
+      });
+  template += '</div></div>';
+
+  $(this).wrap('<div class="custom-select-wrapper"></div>');
+  $(this).hide();
+  $(this).after(template);
+  });
+  $(".custom-option:first-of-type").hover(function() {
+  $(this).parents(".custom-options").addClass("option-hover");
+  }, function() {
+  $(this).parents(".custom-options").removeClass("option-hover");
+  });
+  $(".custom-select-trigger").on("click", function() {
+  $('html').one('click',function() {
+    $(".custom-select").removeClass("opened");
+  });
+  $(this).parents(".custom-select").toggleClass("opened");
+  event.stopPropagation();
+  });
+  $(".custom-option").on("click", function() {
+  $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
+  $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
+  $(this).addClass("selection");
+  $(this).parents(".custom-select").removeClass("opened");
+  $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
+  });
+
+  // File Upload
+
+   $(document).on('change', ".clipUpload input[type='file']",function(){
+        if ($(this).val()) {
+
+            var filename = $(this).val().split("\\");
+
+            filename = filename[filename.length-1];
+
+            $('.clip').text(filename);
+        }
+   });
+      $(document).on('change', ".fileUploadWrap input[type='file']",function(){
+        if ($(this).val()) {
+
+            var filename = $(this).val().split("\\");
+
+            filename = filename[filename.length-1];
+
+            $('.attachments').text(filename);
+        }
+   });
+</script>

@@ -18,6 +18,6 @@ class Lesson < ApplicationRecord
             presence: { message: 'Please enter the Lesson title' }
   validates :description,
             presence: { message: 'Please enter the Lesson description' }
-  validates :clip,
-            presence: { message: 'Please attach the Lesson clip' }
+  # validates :clip,
+  #           presence: { message: 'Please attach the Lesson clip' }
 end

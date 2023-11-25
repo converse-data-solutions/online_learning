@@ -8,6 +8,10 @@ class Admin::UsersController < ApplicationController
     @users = User.all
   end
 
+  def student_index
+    @users = User.all
+  end
+
   def new
     @user = User.new
   end
@@ -22,7 +26,6 @@ class Admin::UsersController < ApplicationController
       admin_save_error
     end
   end
-  # <%= f.submit "NEXT", class: 'text-[#fff]' %>
 
   def edit; end
 

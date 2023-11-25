@@ -195,18 +195,19 @@ nav.main-menu li.active > a,
   margin-left: 5px;
 }
 
-.pagination .previous_page, .pagination .next_page {
-  font-size: 0; 
+.pagination .previous_page,
+.pagination .next_page {
+  font-size: 0;
 }
 
 .pagination .previous_page::before {
-  content: '\003C';
-  font-size: 16px; 
+  content: "\003C";
+  font-size: 16px;
 }
 
 .pagination .next_page::before {
-  content: '\003E';
-  font-size: 16px; 
+  content: "\003E";
+  font-size: 16px;
 }
 
 .icon-active {
@@ -214,32 +215,38 @@ nav.main-menu li.active > a,
   stroke: #0bc08b;
 }
 
-.homecontroller .actived{
+.homecontroller .actived {
   margin-left: 6px;
-  background-color: #31B978;
-  color: #fff !important; 
+  background-color: #31b978;
+  color: #fff !important;
   border-radius: 7px;
 }
-.homecontroller .actived:hover{
+.homecontroller .actived:hover {
   color: #fff !important;
 }
 
-.new_section{
-  width: 100%;
+.new_section {
+  width: 70%;
   display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 }
-.new_lesson{
-  width: 100%;
+.new_lesson {
+  width: 95%;
   display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.active .hs-stepper-active\:border{
-  border: 1px solid #0183CE;
+.active .hs-stepper-active\:border {
+  border: 1px solid #0183ce;
 }
-.active .hs-stepper-active\:p-2{
+.active .hs-stepper-active\:p-2 {
   padding: 8px;
 }
-.active .hs-stepper-active\:rounded{
+.active .hs-stepper-active\:rounded {
   border-radius: 23px;
 }
 .active .hs-stepper-active\:bg-blue-600 {
@@ -254,7 +261,7 @@ nav.main-menu li.active > a,
 
 .active .hs-stepper-active\:bg-blue-600 {
   --tw-bg-opacity: 1;
-  background-color: #0183CE;
+  background-color: #0183ce;
 }
 
 .active .hs-stepper-active\:text-white {
@@ -272,7 +279,7 @@ nav.main-menu li.active > a,
 
 .success.hs-stepper-success\:bg-blue-600 {
   --tw-bg-opacity: 1;
-  background-color: #0183CE;
+  background-color: #0183ce;
 }
 
 .success.hs-stepper-success\:text-white {
@@ -290,7 +297,7 @@ nav.main-menu li.active > a,
 
 .success .hs-stepper-success\:bg-blue-600 {
   --tw-bg-opacity: 1;
-  background-color: #0BC08B;
+  background-color: #0bc08b;
 }
 
 .success .hs-stepper-success\:text-white {
@@ -406,7 +413,6 @@ nav.main-menu li.active > a,
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-
 .processed:is(.dark .hs-stepper-processed\:dark\:border-gray-700) {
   --tw-border-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
@@ -420,14 +426,13 @@ nav.main-menu li.active > a,
 /* Navbar icon rotation */
 .rotate-180 {
   transform: rotate(180deg);
-  transition: transform 0.5s;  /* You can adjust the transition duration */
+  transition: transform 0.5s; /* You can adjust the transition duration */
 }
 
 .rotate-0 {
   transform: rotate(0deg);
-  transition: transform 0.5s;  /* You can adjust the transition duration */
+  transition: transform 0.5s; /* You can adjust the transition duration */
 }
-
 
 /* Your initial styles here */
 
@@ -451,11 +456,11 @@ nav.main-menu li.active > a,
 .main-nav2 {
   width: 84%;
 }
-.main-page{
+.main-page {
   width: 97%;
   margin-left: auto;
 }
-.main-page2{
+.main-page2 {
   width: 84%;
   margin-left: auto;
   transition: all 0.2s linear;
@@ -463,4 +468,133 @@ nav.main-menu li.active > a,
 #file-upload-button {
   width: 100%;
   height: 47px;
+}
+
+/* Select */
+
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+}
+.custom-select-wrapper select {
+  display: none;
+}
+.custom-select {
+  position: relative;
+  display: inline-block;
+  width: 20rem;
+}
+.custom-select-trigger {
+  position: relative;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #818181;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.custom-select-trigger:after {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 10px;
+  height: 10px;
+  top: 50%;
+  right: 0px;
+  margin-top: -3px;
+  border-bottom: 1px solid #818181;
+  border-right: 1px solid #818181;
+  transform: rotate(45deg) translateY(-50%);
+  transition: all 0.4s ease-in-out;
+  transform-origin: 50% 0;
+}
+.custom-select.opened .custom-select-trigger:after {
+  margin-top: 3px;
+  transform: rotate(-135deg) translateY(-50%);
+}
+.custom-options {
+  position: absolute;
+  display: block;
+  top: 100%;
+  left: 0;
+  right: 0;
+  min-width: 100%;
+  border: 1px solid #b5b5b5;
+  border-radius: 4px;
+  box-sizing: border-box;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  background: #fff;
+  transition: all 0.4s ease-in-out;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-15px);
+  max-height: 200px;
+  overflow-y: auto;
+}
+.custom-select.opened .custom-options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.option-hover:before {
+  background: #f9f9f9;
+}
+.custom-option {
+  position: relative;
+  display: block;
+  padding: 5px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #818181;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+.custom-option:first-of-type {
+  border-radius: 4px 4px 0 0;
+}
+.custom-option:last-of-type {
+  border-bottom: 0;
+  border-radius: 0 0 4px 4px;
+}
+.custom-option:hover,
+.custom-option.selection {
+  background: #f9f9f9;
+}
+
+/* File Upload */
+
+.fileUploadWrap {
+  position: relative;
+}
+.clipUpload {
+  position: relative;
+}
+.fileUploadIcon {
+  position: absolute;
+  cursor: pointer;
+  pointer-events: none;
+  width: 50px;
+  top: 50%;
+  transform: translatey(-50%);
+}
+.clip {
+  position: absolute;
+  left: 50px;
+  top: 0px;
+  pointer-events: none;
+}
+.attachments {
+  position: absolute;
+  left: 50px;
+  top: 0px;
+  pointer-events: none;
+}
+input[type="file"] {
+  margin-left: -25px;
+  opacity: 0;
 }
