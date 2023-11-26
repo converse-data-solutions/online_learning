@@ -79,13 +79,7 @@
     </div>
   </div>
   <div class="flex items-center justify-between pt-20 pb-4 w-[90%] mx-auto flex-col md:flex-row">
-    <div class="center">
-      <select name="sources" id="sources" class="custom-select sources bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-full p-2.5 bg-[#fff] text-[#818181]" placeholder="Source Type">
-        <option value="profile">Profile</option>
-        <option value="word">Word</option>
-        <option value="hashtag">Hashtag</option>
-      </select>
-    </div>
+    
     <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] w-[70%] md:w-[20%] pb-4 sm:pb-0">
       <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { include_blank: "Select Course", selected: '' }, { class: "bg-gray-50 border border-gray-300 text-sm rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
     </div>
@@ -208,7 +202,7 @@
                 </div>
               </div>
               <button data-modal-target="popup-modal-<%= lesson.id %>" data-modal-toggle="popup-modal-<%= lesson.id %>" class="block" type="button">
-                <img src="<%= asset_path("delete.png") %>" alt="...">
+                <img src="<%= asset_path("delete.png") %>" alt="...", class="w-6 h-6">
               </button>
               <div id="popup-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg">
                 <div class="relative w-full max-w-md max-h-full shadow-md">

@@ -16,19 +16,13 @@ class Admin::SectionsController < ApplicationController
 
   def create
     @section = Section.new(section_params)
-    if @section.save
-      redirect_to admin_course_sections_path
-    else
-      render :new, status: :unprocessable_entity
-    end
+    nil if @section.save
   end
 
   def edit; end
 
   def update
-    return unless @section.update(section_params)
-
-    redirect_to admin_sections_path
+    nil unless @section.update(section_params)
   end
 
   def show; end
@@ -36,7 +30,7 @@ class Admin::SectionsController < ApplicationController
   def destroy
     @section = Section.find(params[:id])
     @section.destroy
-    redirect_to admin_sections_path
+    redirect_to admin_courses_path
   end
 
   private

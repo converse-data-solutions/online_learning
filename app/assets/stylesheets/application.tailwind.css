@@ -12,6 +12,13 @@
 
 */
 
+
+
+.test-icon:hover path {
+  stroke: #0bc08b; /* Change the color to white on hover */
+}
+
+
 .fa-2x {
   font-size: 2em;
 }
@@ -185,7 +192,7 @@ nav.main-menu li.active > a,
   margin-left: auto;
 }
 .main-page2 {
-  width: 84%;
+  width: 85%;
   margin-left: auto;
   transition: all 0.2s linear;
 }
@@ -193,8 +200,27 @@ nav.main-menu li.active > a,
 .title-card {
   display: none;
 }
-#sidebar {
+
+@media screen and (max-width: 425px) {
+  .del-img{
+    max-width: 14px !important;
+  }
 }
+
+#menuShow:before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  border: solid 1px #DCDCDC;
+  border-width: 1px 0 0 1px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  background-color: #fff;
+  top: -7px;
+  right: 25px;
+}
+
 .pagination {
   display: flex;
   list-style: none;
@@ -208,6 +234,8 @@ nav.main-menu li.active > a,
   border-radius: 7px;
   text-decoration: none;
   border-radius: 3px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
 }
 
 .pagination .current {
@@ -216,6 +244,10 @@ nav.main-menu li.active > a,
   padding: 8px 15px;
   border-radius: 7px;
   margin: 0 2px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .pagination .previous,
@@ -243,12 +275,14 @@ nav.main-menu li.active > a,
 
 .pagination .previous_page::before {
   content: "\003C";
-  font-size: 16px;
+  font-size: 18px;
+  color: #0bc08b;
 }
 
 .pagination .next_page::before {
   content: "\003E";
-  font-size: 16px;
+  font-size: 18px;
+  color: #0bc08b;
 }
 
 .icon-active {
@@ -266,19 +300,33 @@ nav.main-menu li.active > a,
   color: #fff !important;
 }
 
+.actived .link-clr{
+  color: #fff !important;
+}
+
+.link-clr{
+  color: #999;
+}
+
 .new_section {
-  width: 70%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
+  flex-direction: row;
 }
 .new_lesson {
-  width: 95%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
+  flex-direction: row;
+}
+
+.max-w-4xl{
+  max-width: 47rem !important;
+}
+
+.reduce-width{
+  width: 85% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .active .hs-stepper-active\:border {
@@ -494,8 +542,10 @@ nav.main-menu li.active > a,
 .custom-select {
   position: relative;
   display: inline-block;
-  width: 20rem;
+  width: 14rem;
 }
+
+
 .custom-select-trigger {
   position: relative;
   display: block;
@@ -574,7 +624,7 @@ nav.main-menu li.active > a,
 }
 .custom-option:hover,
 .custom-option.selection {
-  background: #f9f9f9;
+  background: #EDEDED;
 }
 
 /* File Upload */
