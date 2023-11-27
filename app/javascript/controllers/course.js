@@ -146,11 +146,19 @@ $(document).ready(function () {
   tableSearch();
   collectionSelect();
 
+  console.log("ready----")
+
+  // new HSStepper($('#stepper-1')[0]);
+
   $(document).on("turbo:render", function () {
     courseSubmit();
     tableForm();
     tableSearch();
     collectionSelect();
+
+    if ($('#stepper-1').length > 0) {
+      new HSStepper($('#stepper-1')[0]);
+    }
   });
 });
 
