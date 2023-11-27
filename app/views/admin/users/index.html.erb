@@ -1,9 +1,9 @@
 <%= content_for :head do %>
   <%= javascript_import_module_tag "controllers/validation" %>
 <% end %>
-<div class="flex flex-col lg:w-[94%] lg:ml-auto md:w-[92%] sm:w-[80%] md:ml-auto">
-  <div class="flex w-[50%] sm:w-[90%] mt-10 mx-auto justify-between flex-col sm:flex-row">
-    <div class="text-[#818181] text-[18px]">User Management - Admin</div>
+<div class="flex flex-col w-full">
+  <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-row sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
+    <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px]  font-medium">User Management - Admin</div>
     <div>
       <!-- Modal toggle -->
       <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded font-bold hover:bg-[#0082CE]" type="button">
@@ -24,7 +24,7 @@
               <span class="sr-only">Close modal</span>
             </button>
             <div class="px-6 py-6 lg:px-8">
-              <h3 class="mb-4 text-xl font-semibold text-[#31B978] dark:text-white text-center">New User Management</h3>
+              <h3 class="mb-4 text-xl font-medium text-[#0BC08B] dark:text-white text-center">New User Management</h3>
               <%= form_for User.new, url: admin_users_path, class: "space-y-6", method: :post do |f| %>
                 <div>
                   <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
@@ -59,42 +59,42 @@
       </div>
     </div>
   </div>
-  <div class="flex items-center justify-between pt-12 md:pt-20 pb-4 w-[90%] mx-auto flex-col md:flex-row">
-    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] mb-4 sm:mb-0">User Management Lists</div>
+  <div class="flex items-center justify-between pt-10 md:pt:20 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[30px] flex-col sm:flex-row md:flex-row">
+    <div class="text-[#0BC08B] text-[20px] font-medium sm:ml-[10px] ml-[25px] mb-4 sm:mb-0">User Management Lists</div>
     <label for="table-search " class="sr-only">Search</label>
-    <div class="relative ml-[60px]">
-      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-      </div>
-      <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border-[0] rounded-lg md:w-80 bg-gray-50 dark:placeholder-gray-400 dark:text-white w-[100%]" placeholder="Search for items">
+    <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+      <img src="<%= asset_path("search.png") %>">
     </div>
+    <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]" placeholder="Search for items">
   </div>
-  <div class="relative overflow-x-auto shadow-sm sm:rounded-sm mt-4 w-[90%] mx-auto h-[50vh]">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto ml-[57px] sm:ml-0">
-      <thead class="text-xs text-[#000] text-[14px] uppercase bg-[#EDEDED] dark:text-gray-400">
+  </div>
+  <div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px] h-[50vh]">
+    <table class="w-full text-sm text-left text-gray-500 ml-[47px] sm:ml-[63px] lg:ml-0 md:ml-[26px] dark:text-gray-400 overflow-auto table-auto">
+      <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
         <tr>
-          <th scope="col" class="px-6 py-5">
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
             ID
           </th>
-          <th scope="col" class="px-6 py-5">
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
             Name
           </th>
-          <th scope="col" class="px-6 py-5">
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
             Email
           </th>
-          <th scope="col" class="px-6 py-5">
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
             Password
           </th>
-          <th scope="col" class="px-6 py-5">
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
             Role
           </th>
-          <th scope="col" class="px-6 py-5">
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
             Current Type
           </th>
-          <th scope="col" class="px-6 py-5">
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
             Status
           </th>
-          <th scope="col" class="px-6 py-5">
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
             Action
           </th>
         </tr>
@@ -106,22 +106,22 @@
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 <%= user.id %>
               </th>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
                 <%= user.profile&.name %>
               </td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
                 <%= user.email %>
               </td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
                 ***********
               </td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
                 <%= user.has_role?(:admin) ? 'Admin' : 'Student' %>
               </td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
                 <%= user.current_type %>
               </td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
                 <%= user.deleted? ? 'Inactive' : 'Active' %>
               </td>
               <td class="px-6 py-4 flex gap-4">

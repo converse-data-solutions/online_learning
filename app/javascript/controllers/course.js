@@ -151,6 +151,10 @@ $(document).ready(function () {
     tableForm();
     tableSearch();
     collectionSelect();
+
+    if ($('#stepper-loader').length > 0) {
+      new HSStepper($('#stepper-loader')[0]);
+    }
   });
 });
 
