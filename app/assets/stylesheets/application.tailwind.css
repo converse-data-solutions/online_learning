@@ -13,12 +13,6 @@
 */
 
 
-
-.test-icon:hover path {
-  stroke: #0bc08b; /* Change the color to white on hover */
-}
-
-
 .fa-2x {
   font-size: 2em;
 }
@@ -307,6 +301,27 @@ nav.main-menu li.active > a,
 .link-clr{
   color: #999;
 }
+
+.main-menu li:hover .link-clr{
+  color: #0bc08b;
+}
+
+
+.test-icon:hover path {
+  stroke: #0bc08b;
+}
+
+.main-menu li:hover  svg path {
+  stroke: #0bc08b;
+}
+.main-menu li:hover span{
+  stroke : #0bc08b;
+}
+
+.actived svg path {
+  stroke: #fff !important;
+}
+
 
 .new_section {
   width: 100%;
