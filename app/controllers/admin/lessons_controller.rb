@@ -16,14 +16,12 @@ class Admin::LessonsController < ApplicationController
   def create
     @lesson = Lesson.new(lesson_params)
     @lesson.save
-    render nothing: true, status: 200, content_type: 'text/html'
   end
 
   def edit; end
 
   def update
     @lesson.update(lesson_params)
-    render nothing: true, status: 200, content_type: 'text/html'
   end
 
   def destroy

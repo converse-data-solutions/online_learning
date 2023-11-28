@@ -329,12 +329,12 @@ nav.main-menu li.active > a,
 }
 
 
-.new_section {
+.custom-section {
   width: 100%;
   display: flex;
   flex-direction: row;
 }
-.new_lesson {
+.custom-lesson {
   width: 100%;
   display: flex;
   flex-direction: row;

@@ -188,8 +188,10 @@
                         </table>
                         <div class="bg-[#F2F2F2] h-[3rem] display-section hidden">
                           <div class="flex gap-1 flex-row w-[100%]">
-                            <%= form_for Section.new, url: admin_course_sections_path(course_id: Course.last.id), class: "space-y-6 w-[80%]", method: :post do |f| %>
-                              <%= f.hidden_field :course_id, value: Course.last.id %>
+                            <%= form_for Section.new, url: admin_course_sections_path(course_id: Course.last.id), method: :post, html: { class: "custom-section" } do |f| %>
+                              <div class="">
+                                <%= f.hidden_field :course_id, value: Course.last.id %>
+                              </div>
                               <div class="">
                                 <%= f.text_field :title, class: "w-[145px] sm:w-[200px] md:w-[240px] xl:w-[475px] lg:w-[295px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
                               </div>
@@ -366,7 +368,7 @@
                       </table>
                       <div class="bg-[#F2F2F2] h-[3rem] display-lesson hidden">
                         <div class="flex gap-1 flex-row w-[100%]">
-                          <%= form_for Lesson.new, url: admin_section_lessons_path(section_id: Section.last.id), class: "space-y-6 w-[80%]", method: :post do |f| %>
+                          <%= form_for Section.new, url: admin_section_lessons_path(section_id: Section.last.id), method: :post, html: { class: "custom-lesson" } do |f| %>
                             <%= f.hidden_field :lesson_id, value: Section.last.id %>
                             <div class="">
                               <%= f.text_field :title, class: "w-[110px] sm:w-[110px] md:w-[110px] lg:w-[110px] xl:w-[200px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block p-2.5" %>
@@ -392,7 +394,7 @@
                                 <p class="attachments text-[#818181]">Upload your files here</p>
                               </div>
                             </div>
-                            <%= f.submit "log in", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px]" %>
+                            <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px]" %>
                           <% end %>
                         </div>
                       </div>
@@ -450,7 +452,7 @@
     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
       <img src="<%= asset_path("search.png") %>">
     </div>
-    <input type="text" id="table-search" class="block p-2 pl-10 text-sm text-gray-900 border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]" placeholder="Search for items">
+    <input type="text" id="table-search" class="block p-2 pl-10 text-base text-gray-900 border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]" placeholder="Search or type">
   </div>
 </div>
 <div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px] h-[50vh]">
