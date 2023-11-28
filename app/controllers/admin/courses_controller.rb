@@ -20,9 +20,7 @@ class Admin::CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
-    return if @course.save
-
-    render :new, status: :unprocessable_entity
+    nil if @course.save
   end
 
   def edit

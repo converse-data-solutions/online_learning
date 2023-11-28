@@ -1,95 +1,66 @@
-function initValidation() {
-  var form = document.querySelector("form");
-  form.addEventListener("submit", function (e) {
-    var email = document.getElementById("user_email").value;
-    var password = document.getElementById("user_password").value;
-    var passwordConfirmation = document.getElementById(
-      "user_password_confirmation"
-    ).value;
-
-    var errorElements = document.querySelectorAll(".error");
-    for (var i = 0; i < errorElements.length; i++) {
-      errorElements[i].textContent = "";
-      errorElements[i].style.color = "red";
-    }
-
-    var errors = false;
-
-    if (!email || !email.trim()) {
-      document.getElementById("email-error").textContent =
-        "Please enter a valid email address.";
-      errors = true;
-    }
-
-    if (!password || !password.trim()) {
-      document.getElementById("password-error").textContent =
-        "Please enter a password.";
-      errors = true;
-    }
-
-    if (!passwordConfirmation || !passwordConfirmation.trim()) {
-      document.getElementById("password-confirmation-error").textContent =
-        "Please confirm your password.";
-      errors = true;
-    }
-
-    if (password !== passwordConfirmation) {
-      document.getElementById("password-confirmation-error").textContent =
-        "Password and password confirmation do not match.";
-      document.getElementById("password-confirmation-error").style.color =
-        "red";
-      errors = true;
-    }
-
-    if (errors) {
-      e.preventDefault();
-      return false;
-    }
-  });
-}
-initValidation();
-
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOM validation Loaded");
-  initValidation();
-});
-
-document.addEventListener("turbo:render", function () {
-  console.log("Turbo validation Loaded");
-  initValidation();
-});
-
-$(".filter-handle").on("change", function (e) {
-  var location = e.target.value;
-  var table = $(".filter-table-data");
-  if (location.length) {
-    table.find("tr[data-type!=" + location + "]").hide();
-    table.find("tr[data-type=" + location + "]").show();
-  } else {
-    table.find("tr").show();
+function userValidation() {
+  function validateEmail(email) {
+    return email.includes("@");
   }
-});
-$(document).ready(function () {
-  $("#table-search").on("keyup", function () {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function () {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-    });
+
+  function toggleError(element, isValid, errorMessage) {
+    var errorContainer = element.next(".error");
+    if (!isValid) {
+      errorContainer.text(errorMessage);
+      errorContainer.show();
+    } else {
+      errorContainer.hide();
+    }
+  }
+
+  function validateForm() {
+    var form = $("form");
+    var emailField = form.find("#user_email");
+    var passwordField = form.find("#user_password");
+    var confirmPasswordField = form.find("#user_password_confirmation");
+
+    var email = emailField.val();
+    var isValidEmail = validateEmail(email);
+    toggleError(emailField, isValidEmail, "Invalid email format");
+
+    var password = passwordField.val();
+    var isValidPassword = password.length >= 8;
+    toggleError(
+      passwordField,
+      isValidPassword,
+      "Password must be at least 8 characters"
+    );
+
+    var confirmPassword = confirmPasswordField.val();
+    var isValidConfirmPassword = confirmPassword === password;
+    toggleError(
+      confirmPasswordField,
+      isValidConfirmPassword,
+      "Passwords do not match"
+    );
+
+    return isValidEmail && isValidPassword && isValidConfirmPassword;
+  }
+
+  $("form").submit(function (event) {
+    if (!validateForm()) {
+      event.preventDefault();
+    }
   });
-});
+
+  $("#user_email").blur(function () {
+    validateEmail($(this).val());
+  });
+
+  $("#user_password").blur(function () {});
+
+  $("#user_password_confirmation").blur(function () {});
+}
 
 $(document).ready(function () {
-  $(".display-section-button").click(function () {
-    $(".display-section").show();
-  });
-  $(".display-lesson-button").click(function () {
-    $(".display-lesson").show();
-  });
-});
+  userValidation();
 
-$(document).ready(function () {
-  $(".next-btn").click(function () {
-    $("#new_course").submit();
-    event.preventDefault();
-  })
+  $(document).on("turbo:render", function () {
+    userValidation();
+  });
 });

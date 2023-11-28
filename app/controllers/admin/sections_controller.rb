@@ -2,7 +2,7 @@
 
 # This is an Admin Section controller
 class Admin::SectionsController < ApplicationController
-  before_action :course_assignment, only: %i[new create edit update show]
+  # before_action :course_assignment, only: %i[new create edit update show]
   before_action :section_assignment, only: %i[show edit update]
   def index
     # @courses = Course.find(params[:course_id])
@@ -16,21 +16,15 @@ class Admin::SectionsController < ApplicationController
 
   def create
     @section = Section.new(section_params)
-    puts "Params: #{params.inspect}"
-    byebug
-    return if @section.save
-
-    render :new, status: :unprocessable_entity
+    @section.save
+    render nothing: true, status: 200, content_type: 'text/html'
   end
 
   def edit; end
 
   def update
-    if @section.update(section_params)
-      redirect_to admin_course_sections_path
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @section.update(section_params)
+    render nothing: true, status: 200, content_type: 'text/html'
   end
 
   def show; end
@@ -38,7 +32,7 @@ class Admin::SectionsController < ApplicationController
   def destroy
     @section = Section.find(params[:id])
     @section.destroy
-    redirect_to admin_course_sections_path
+    redirect_to admin_courses_path
   end
 
   private
@@ -48,7 +42,7 @@ class Admin::SectionsController < ApplicationController
   end
 
   def section_assignment
-    @section = @course.sections.find(params[:id])
+    @section = Section.find(params[:id])
   end
 
   def section_params

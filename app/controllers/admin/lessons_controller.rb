@@ -2,7 +2,7 @@
 
 # This is an Admin Lesson controller
 class Admin::LessonsController < ApplicationController
-  before_action :section_assignment, only: %i[show new create edit update destroy]
+  # before_action :section_assignment, only: %i[show new create edit update destroy]
   before_action :lesson_assignment, only: %i[show edit update destroy]
   def index
     # @lessons = @section.lessons.includes(clip_attachment: :blob, attachments_attachments: :blob)
@@ -10,31 +10,25 @@ class Admin::LessonsController < ApplicationController
   end
 
   def new
-    @lesson = @section.lessons.new
+    @lesson = Lesson.new
   end
 
   def create
-    @lesson = @section.lessons.create(lesson_params)
-    if @lesson.save
-      redirect_to admin_section_lessons_path
-    else
-      render :new, status: :unprocessable_entity
-    end
+    @lesson = Lesson.new(lesson_params)
+    @lesson.save
+    render nothing: true, status: 200, content_type: 'text/html'
   end
 
   def edit; end
 
   def update
-    if @lesson.update(lesson_params)
-      redirect_to admin_section_lessons_path
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @lesson.update(lesson_params)
+    render nothing: true, status: 200, content_type: 'text/html'
   end
 
   def destroy
     @lesson.destroy
-    redirect_to admin_section_lessons_path
+    redirect_to admin_lessons_path
   end
 
   def show; end
@@ -46,7 +40,7 @@ class Admin::LessonsController < ApplicationController
   end
 
   def lesson_assignment
-    @lesson = @section.lessons.find(params[:id])
+    @lesson = Lesson.find(params[:id])
   end
 
   def lesson_params
