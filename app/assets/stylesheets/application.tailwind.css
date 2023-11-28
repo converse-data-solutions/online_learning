@@ -201,7 +201,7 @@ nav.main-menu li.active > a,
   }
 }
 
-#menuShow:before {
+#dropdown:before {
   content: "";
   position: absolute;
   height: 12px;
@@ -213,6 +213,10 @@ nav.main-menu li.active > a,
   background-color: #fff;
   top: -7px;
   right: 25px;
+}
+.profile-slider{
+  top: 10px !important;
+  left: -20px !important;
 }
 
 .pagination {

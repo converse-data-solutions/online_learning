@@ -11,7 +11,6 @@
       </button>
       <!-- Main modal -->
       <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
-
         <div class="relative w-full max-w-[90rem] max-h-full shadow-2xl">
           <!-- Modal content -->
           <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -192,10 +191,10 @@
                             <%= form_for Section.new, url: admin_course_sections_path(course_id: Course.last.id), class: "space-y-6 w-[80%]", method: :post do |f| %>
                               <%= f.hidden_field :course_id, value: Course.last.id %>
                               <div class="">
-                                <%= f.text_field :title, class: "w-[145px] sm:w-[200px] md:w-[240px] xl:w-[410px] lg:w-[295px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
+                                <%= f.text_field :title, class: "w-[145px] sm:w-[200px] md:w-[240px] xl:w-[475px] lg:w-[295px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
                               </div>
                               <div class="">
-                                <%= f.text_field :description, class: 'w-[155px] sm:w-[200px] md:w-[240px] xl:w-[480px] lg:w-[310px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block focus:ring-0 focus:ring-offset-0 focus:border-gray-200 p-2.5 rounded-[7px]' %>
+                                <%= f.text_field :description, class: 'w-[155px] sm:w-[200px] md:w-[240px] xl:w-[470px] lg:w-[310px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block focus:ring-0 focus:ring-offset-0 focus:border-gray-200 p-2.5 rounded-[7px]' %>
                               </div>
                               <div class="">
                                 <%= f.submit "log in", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px]" %>
@@ -370,24 +369,28 @@
                           <%= form_for Lesson.new, url: admin_section_lessons_path(section_id: Section.last.id), class: "space-y-6 w-[80%]", method: :post do |f| %>
                             <%= f.hidden_field :lesson_id, value: Section.last.id %>
                             <div class="">
-                              <%= f.text_field :title, class: "w-[110px] sm:w-[110px] md:w-[110px] lg:w-[110px] xl:w-[165px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block p-2.5" %>
+                              <%= f.text_field :title, class: "w-[110px] sm:w-[110px] md:w-[110px] lg:w-[110px] xl:w-[200px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block p-2.5" %>
                             </div>
                             <div class="">
-                              <%= f.text_field :description, class: 'w-[125px] sm:w-[125px] md:w-[125px] lg:w-[180px] xl:w-[250px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block  p-2.5 rounded-[7px]' %>
+                              <%= f.text_field :description, class: 'w-[125px] sm:w-[125px] md:w-[125px] lg:w-[180px] xl:w-[310px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block  p-2.5 rounded-[7px]' %>
                             </div>
                             <div class="">
-                              <%= f.file_field :clip, class: 'block w-[110px] sm:w-[120px] md:w-[120px] lg:w-[120px] xl:w-[180px] border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-    file:bg-gray-50 file:border-0
-    file:bg-gray-100 file:me-4
-    file:py-3 file:px-4
-    dark:file:bg-gray-700 dark:file:text-gray-400' %>
+                              <div class="clipUpload">
+                                <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <%= f.file_field :clip, name: "clip" %>
+                                <p class="clip text-[#818181]">Upload your files here</p>
+                              </div>
                             </div>
                             <div class="">
-                              <%= f.file_field :attachments, class: 'block w-[120px] sm:w-[140px] md:w-[160px] lg:w-[300px] xl:w-[440px] border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
-    file:bg-gray-50 file:border-0
-    file:bg-gray-100 file:me-4
-    file:py-3 file:px-4
-    dark:file:bg-gray-700 dark:file:text-gray-400' %>
+                              <div class="fileUploadWrap">
+                                <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <%= f.file_field :attachments, multiple: true, name: "attachments" %>
+                                <p class="attachments text-[#818181]">Upload your files here</p>
+                              </div>
                             </div>
                             <%= f.submit "log in", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px]" %>
                           <% end %>
@@ -440,7 +443,7 @@
 </div>
 <div class="flex items-center justify-between pt-10 md:pt:20 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[30px] flex-col sm:flex-row md:flex-row">
   <div class="text-[#31B978] text-[18px] font-bold  w-[70%] md:w-[35%] pb-4 sm:pb-0">
-<%= collection_select(:course, :course_name, Course.all, :id, :course_name, { placeholder: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+    <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { placeholder: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
   </div>
   <label for="table-search " class="sr-only">Search</label>
   <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
@@ -543,4 +546,3 @@
     <%= will_paginate(@courses) %>
   </div>
 </div>
-
