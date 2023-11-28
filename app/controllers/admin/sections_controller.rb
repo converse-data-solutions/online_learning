@@ -16,13 +16,15 @@ class Admin::SectionsController < ApplicationController
 
   def create
     @section = Section.new(section_params)
-    nil if @section.save
+    @section.save
+    render nothing: true, status: 200, content_type: 'text/html'
   end
 
   def edit; end
 
   def update
-    nil unless @section.update(section_params)
+    @section.update(section_params)
+    render nothing: true, status: 200, content_type: 'text/html'
   end
 
   def show; end

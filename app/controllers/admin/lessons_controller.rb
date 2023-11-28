@@ -15,20 +15,15 @@ class Admin::LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
-    byebug
-    if @lesson.save
-      redirect_to admin_lessons_path
-    else
-      redirect_to admin_lessons_path
-    end
+    @lesson.save
+    render nothing: true, status: 200, content_type: 'text/html'
   end
 
   def edit; end
 
   def update
-    return unless @lesson.update(lesson_params)
-
-    redirect_to admin_lessons_path
+    @lesson.update(lesson_params)
+    render nothing: true, status: 200, content_type: 'text/html'
   end
 
   def destroy
