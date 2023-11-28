@@ -33,7 +33,7 @@
                   <img src="<%= asset_path("xmark.png") %>" class="ml-5 mt-2 title cursor-pointer" alt="..."></a>
               </div>
               <span class="open hamburger title">
-                <img src="<%= asset_path("tva.png") %>" class="w-25" />
+                <img src="<%= asset_path("tva.png") %>" class="w-25 cursor-pointer" />
                 <img src="<%= asset_path("hamburger.png") %> " class="openmenu hamburger cursor-pointer" alt="..." />
               </span>
             </p>
@@ -180,7 +180,7 @@
                         <img class="w-8 h-8 rounded-full max-w-none sm:max-w-full" src="<%= asset_path("tva.png") %>">
                       </button>
                       <!-- Dropdown menu -->
-                      <div class="hidden z-50 my-4 w-[11rem] text-base list-none bg-white rounded  shadow dark:bg-gray-700 profile-slider" id="dropdown">
+                      <div class="hidden z-50 my-4 w-[11rem] text-base list-none bg-white rounded-lg shadow dark:bg-gray-700 profile-slider" id="dropdown">
                         <div class="py-3 px-4 text-center">
                           <img class="w-10 h-10 rounded-full bg-gray-800 mx-auto" src="<%= asset_path("tva.png") %>" alt="Rounded avatar">
                           <span class="block text-black text-base font-medium">Neil sims</span>
@@ -188,7 +188,7 @@
                         </div>
                         <span class="w-[80%] mx-auto h-[2px] bg-[#D3D3D3] flex border-b-[0px]"></span>
                         <ul class="py-1 text-gray-500 dark:text-gray-400 border-b-[0px]" aria-labelledby="dropdown">
-                          <li class="flex items-center justify-center">
+                          <li class="flex items-center justify-center h-[50px]">
                             <svg width="23px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#818181"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M17.5 21.0001H6.5C5.11929 21.0001 4 19.8808 4 18.5001C4 14.4194 10 14.5001 12 14.5001C14 14.5001 20 14.4194 20 18.5001C20 19.8808 18.8807 21.0001 17.5 21.0001Z" stroke="#818181" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="#818181" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                             <a href="#" class="block py-2 pr-4 pl-2 text-center text-[13px] text-black font-['Poppins'] font-medium">Profile</a>
                           </li>

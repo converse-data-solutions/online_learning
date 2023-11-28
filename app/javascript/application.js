@@ -110,7 +110,7 @@ function initNavbarTitle() {
 }
 
 function initNavbarHamburger() {
-  $(".hamburger").click(function (event) {
+    $(".hamburger").click(function (event) {
     console.log("clicked on .hamburger");
     event.stopPropagation();
 
@@ -121,6 +121,8 @@ function initNavbarHamburger() {
     $(".main-page").removeClass("main-page2");
     $(".main-nav").removeClass("main-nav2");
     $(".actived").removeClass("actived");
+    localStorage.removeItem("dropdownStates");
+    localStorage.removeItem("navbarState");
     handleNavbar();
   });
 }

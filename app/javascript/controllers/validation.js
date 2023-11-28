@@ -1,60 +1,66 @@
-// function initValidation() {
-//   var form = document.querySelector("form");
-//   form.addEventListener("submit", function (e) {
-//     var email = document.getElementById("user_email").value;
-//     var password = document.getElementById("user_password").value;
-//     var passwordConfirmation = document.getElementById(
-//       "user_password_confirmation"
-//     ).value;
+function userValidation() {
+  function validateEmail(email) {
+    return email.includes("@");
+  }
 
-//     var errorElements = document.querySelectorAll(".error");
-//     for (var i = 0; i < errorElements.length; i++) {
-//       errorElements[i].textContent = "";
-//       errorElements[i].style.color = "red";
-//     }
+  function toggleError(element, isValid, errorMessage) {
+    var errorContainer = element.next(".error");
+    if (!isValid) {
+      errorContainer.text(errorMessage);
+      errorContainer.show();
+    } else {
+      errorContainer.hide();
+    }
+  }
 
-//     var errors = false;
+  function validateForm() {
+    var form = $("form");
+    var emailField = form.find("#user_email");
+    var passwordField = form.find("#user_password");
+    var confirmPasswordField = form.find("#user_password_confirmation");
 
-//     if (!email || !email.trim()) {
-//       document.getElementById("email-error").textContent =
-//         "Please enter a valid email address.";
-//       errors = true;
-//     }
+    var email = emailField.val();
+    var isValidEmail = validateEmail(email);
+    toggleError(emailField, isValidEmail, "Invalid email format");
 
-//     if (!password || !password.trim()) {
-//       document.getElementById("password-error").textContent =
-//         "Please enter a password.";
-//       errors = true;
-//     }
+    var password = passwordField.val();
+    var isValidPassword = password.length >= 8;
+    toggleError(
+      passwordField,
+      isValidPassword,
+      "Password must be at least 8 characters"
+    );
 
-//     if (!passwordConfirmation || !passwordConfirmation.trim()) {
-//       document.getElementById("password-confirmation-error").textContent =
-//         "Please confirm your password.";
-//       errors = true;
-//     }
+    var confirmPassword = confirmPasswordField.val();
+    var isValidConfirmPassword = confirmPassword === password;
+    toggleError(
+      confirmPasswordField,
+      isValidConfirmPassword,
+      "Passwords do not match"
+    );
 
-//     if (password !== passwordConfirmation) {
-//       document.getElementById("password-confirmation-error").textContent =
-//         "Password and password confirmation do not match.";
-//       document.getElementById("password-confirmation-error").style.color =
-//         "red";
-//       errors = true;
-//     }
+    return isValidEmail && isValidPassword && isValidConfirmPassword;
+  }
 
-//     if (errors) {
-//       e.preventDefault();
-//       return false;
-//     }
-//   });
-// }
-// initValidation();
+  $("form").submit(function (event) {
+    if (!validateForm()) {
+      event.preventDefault();
+    }
+  });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   console.log("DOM validation Loaded");
-//   initValidation();
-// });
+  $("#user_email").blur(function () {
+    validateEmail($(this).val());
+  });
 
-// document.addEventListener("turbo:render", function () {
-//   console.log("Turbo validation Loaded");
-//   initValidation();
-// });
+  $("#user_password").blur(function () {});
+
+  $("#user_password_confirmation").blur(function () {});
+}
+
+$(document).ready(function () {
+  userValidation();
+
+  $(document).on("turbo:render", function () {
+    userValidation();
+  });
+});
