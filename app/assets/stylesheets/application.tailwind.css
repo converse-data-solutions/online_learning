@@ -685,4 +685,5 @@ nav.main-menu li.active > a,
 input[type="file"] {
   margin-left: -25px;
   opacity: 0;
+  width: 20%;
 }

@@ -20,7 +20,8 @@ class Admin::CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
-    nil if @course.save
+    @course.save
+    head :no_content
   end
 
   def edit

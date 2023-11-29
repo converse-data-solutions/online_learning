@@ -4,7 +4,6 @@ function collectionSelect() {
 			id = $(this).attr("id"),
 			name = $(this).attr("name");
 
-		// Use the placeholder attribute as the default text
 		var placeholder = $(this).data("placeholder") || "Select Course";
 
 		var template = '<div class="' + classes + '">';
@@ -85,7 +84,6 @@ $(document).ready(function() {
 	selectFilter();
 
 	$(document).on("turbo:render", function() {
-		selectFilter();
 
 	});
 });

@@ -84,7 +84,6 @@ function applyNavbarState() {
 
 function initNavbarTitle() {
   $(".title").click(function () {
-    console.log("clicked on .title");
     $(".title1").addClass("title11");
     $(".open").addClass("open1");
     $(".openmenu").css({ position: "absolute", right: "18px", top: "15px" });
@@ -97,7 +96,6 @@ function initNavbarTitle() {
 
 function initNavbarHamburger() {
   $(".hamburger").click(function (event) {
-    console.log("clicked on .hamburger");
     event.stopPropagation();
 
     $(".title1").removeClass("title11");

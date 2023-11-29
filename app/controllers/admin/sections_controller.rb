@@ -24,12 +24,14 @@ class Admin::SectionsController < ApplicationController
   def create
     @section = Section.new(section_params)
     @section.save
+    head :no_content
   end
 
   def edit; end
 
   def update
     @section.update(section_params)
+    head :no_content
   end
 
   def show; end

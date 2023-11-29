@@ -16,12 +16,14 @@ class Admin::LessonsController < ApplicationController
   def create
     @lesson = Lesson.new(lesson_params)
     @lesson.save
+    head :no_content
   end
 
   def edit; end
 
   def update
     @lesson.update(lesson_params)
+    head :no_content
   end
 
   def destroy
