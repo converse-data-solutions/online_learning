@@ -37,10 +37,13 @@ class Admin::LessonsController < ApplicationController
 
   def update
     @lesson = Lesson.find(params[:id])
-    if @lesson.update(lesson_params)
-      redirect_to admin_lessons_path
-    else
-      head :no_content
+    respond_to do |format|
+      if @lesson.update(lesson_params)
+        format.html { head :no_content }
+        format.js { redirect_to admin_lessons_path }
+      else
+        head :no_content
+      end
     end
   end
 

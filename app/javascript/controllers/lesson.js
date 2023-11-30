@@ -8,9 +8,7 @@ function collectionSelect() {
 
     var template = '<div class="' + classes + '">';
     template +=
-      '<span class="custom-select-trigger">' +
-      placeholderText +
-      "</span>";
+      '<span class="custom-select-trigger">' + placeholderText + "</span>";
     template += '<div class="custom-options">';
     $(this)
       .find("option")
@@ -81,6 +79,9 @@ function selectFilter() {
   });
 }
 
+// Form submission
+
+
 $(document).ready(function () {
   collectionSelect();
   selectFilter();
@@ -106,3 +107,4 @@ $(document).on("change", ".fileUploadWrap input[type='file']", function () {
     $(".attachments").text(filename);
   }
 });
+

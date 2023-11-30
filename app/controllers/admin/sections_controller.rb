@@ -37,10 +37,13 @@ class Admin::SectionsController < ApplicationController
 
   def update
     @section = Section.find(params[:id])
-    if @section.update(section_params)
-      redirect_to admin_sections_path
-    else
-      head :no_content
+    respond_to do |format|
+      if @section.update(section_params)
+        format.html { head :no_content }
+        format.js { redirect_to admin_sections_path }
+      else
+        head :no_content
+      end
     end
   end
 
