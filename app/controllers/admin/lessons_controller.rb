@@ -4,9 +4,17 @@
 class Admin::LessonsController < ApplicationController
   # before_action :section_assignment, only: %i[show new create edit update destroy]
   before_action :lesson_assignment, only: %i[show edit update destroy]
+  require 'will_paginate/array'
+
   def index
     # @lessons = @section.lessons.includes(clip_attachment: :blob, attachments_attachments: :blob)
-    @lessons = Lesson.all
+    # @lessons = Lesson.all
+
+    @lessons = []
+    Lesson.all.includes(:section, clip_attachment: :blob, attachments_attachments: :blob).each do |lesson|
+      @lessons.push(lesson)
+    end
+    @lessons = @lessons.paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -15,15 +23,25 @@ class Admin::LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
-    @lesson.save
-    head :no_content
+    respond_to do |format|
+      if @lesson.save
+        format.html { head :no_content }
+        format.js { redirect_to admin_lessons_path }
+      else
+        head :no_content
+      end
+    end
   end
 
   def edit; end
 
   def update
-    @lesson.update(lesson_params)
-    head :no_content
+    @lesson = Lesson.find(params[:id])
+    if @lesson.update(lesson_params)
+      redirect_to admin_lessons_path
+    else
+      head :no_content
+    end
   end
 
   def destroy

@@ -10,7 +10,7 @@
         + Add Session
       </button>
       <!-- Main modal -->
-      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
+      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
         <div class="relative w-full lg:max-w-[65rem] md:max-w-[40rem] sm:max-w-[32rem] max-h-full ml-[42px] sm:ml-[25px] md:ml-[0px]">
           <!-- Modal content -->
           <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -42,7 +42,7 @@
                           <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
-                          <%= f.file_field :clip, name: "clip" %>
+                          <%= f.file_field :clip %>
                           <p class="clip text-[#818181] text-[15px] font-medium">Upload your files here</p>
                         </div>
                       </div>
@@ -54,7 +54,7 @@
                           <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
-                          <%= f.file_field :attachments, multiple: true, name: "attachments" %>
+                          <%= f.file_field :attachments, multiple: true %>
                           <p class="attachments text-[#818181] text-[15px] font-medium">Upload your files here</p>
                         </div>
                       </div>
@@ -79,10 +79,10 @@
   <div class="flex items-center justify-between pt-10 md:pt:20 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[30px] flex-col sm:flex-row md:flex-row">
     <div class="flex flex-col md:flex-row gap-6">
       <div class="text-[#31B978] text-[18px] font-bold  pb-4 sm:pb-0">
-        <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { placeholder: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+        <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
       </div>
       <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0">
-        <%= collection_select(:section, :title, Section.all, :id, :title, { placeholder: "Select Section", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+        <%= collection_select(:section, :title, Section.all, :id, :title, { prompt: "Select Section", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
       </div>
     </div>
     <label for="table-search " class="sr-only">Search</label>
@@ -121,7 +121,7 @@
         </tr>
       </thead>
       <tbody class="overflow-auto">
-        <% @lessons.includes(:section, clip_attachment: :blob, attachments_attachments: :blob).each do |lesson| %>
+        <% @lessons.each do |lesson| %>
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <th scope="row" class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181] whitespace-nowrap dark:text-white">
               <%= lesson.section.course.course_name %>
@@ -147,7 +147,7 @@
             <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
               <% if lesson.attachments.attached? %>
                 <% lesson.attachments.each do |attachment| %>
-                  <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %><br>
+                  <%= link_to " #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %><br>
                 <% end %>
               <% else %>
                 <p>No attachments for this lesson.</p>
@@ -157,7 +157,7 @@
               <button data-modal-target="large-modal-<%= lesson.id %>" data-modal-toggle="large-modal-<%= lesson.id %>" class="block w-full md:w-auto" type="button">
                 <img src="<%= asset_path("pencil.png") %>" alt="...">
               </button>
-              <div id="large-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
+              <div id="large-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
                 <div class="relative w-full lg:max-w-[65rem] md:max-w-[40rem] sm:max-w-[32rem] max-h-full ml-[42px] sm:ml-[25px] md:ml-[0px]">
                   <!-- Modal content -->
                   <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -179,7 +179,7 @@
                         <div class="flex flex-col md:flex-col lg:flex-row w-full gap-5">
                           <div class="flex flex-col md:flex-row items-start mb-4 md:w-[50%] w-full">
                             <label for="Section" class="md:w-[30%] w-[30%] block mb-2 text-lg font-medium text-[#000]">Section</label>
-                            <%= collection_select(:lesson, :section_id, Section.all, :id, :title, { include_blank: "Select Section", selected: '' }, { class: "mb-4 bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 outline-none block w-full md:w-[70%] p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle" }) %>
+                            <%= f.text_field :section, value: lesson.section.title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full md:w-[70%] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4 disabled", disabled: true %>
                           </div>
                           <div class="flex flex-col md:flex-row items-start md:w-[50%] w-full">
                             <label for="title" class="w-[60%] md:w-[30%] block mb-2 text-lg text-[#000] font-medium">Title</label>
@@ -195,8 +195,14 @@
                                   <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                   </svg>
-                                  <%= f.file_field :clip, name: "clip" %>
-                                  <p class="clip text-[#818181] text-[15px] font-medium">Upload your files here</p>
+                                  <%= f.file_field :clip %>
+                                  <% if lesson.clip.attached? %>
+                                    <p class="clip text-[#818181] text-[15px] font-medium">
+                                      <%= link_to lesson.clip.filename, rails_blob_path(lesson.clip, disposition: 'attachment') %>
+                                    </p>
+                                  <% else %>
+                                    <p class="clip text-[#818181] text-[15px] font-medium">Upload your files here</p>
+                                  <% end %>
                                 </div>
                               </div>
                             </div>
@@ -207,8 +213,17 @@
                                   <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                   </svg>
-                                  <%= f.file_field :attachments, multiple: true, name: "attachments" %>
-                                  <p class="attachments text-[#818181] text-[15px] font-medium">Upload your files here</p>
+                                  <%= f.file_field :attachments, multiple: true %>
+                                  <% if lesson.attachments.attached? %>
+                                    <p class="attachments text-[#818181] text-[15px] font-medium">
+                                      <% lesson.attachments.each do |attachment| %>
+                                        <%= link_to attachment.filename, rails_blob_path(attachment, disposition: 'attachment') %>
+                                        <%= ', ' unless attachment == lesson.attachments.last %>
+                                      <% end %>
+                                    </p>
+                                  <% else %>
+                                    <p class="attachments text-[#818181] text-[15px] font-medium">Upload your files here</p>
+                                  <% end %>
                                 </div>
                               </div>
                             </div>
@@ -230,7 +245,7 @@
               <button data-modal-target="popup-modal-<%= lesson.id %>" data-modal-toggle="popup-modal-<%= lesson.id %>" class="block" type="button">
                 <img src="<%= asset_path("delete.png") %>" alt="...", class="del-img">
               </button>
-              <div id="popup-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg"  style="backdrop-filter: contrast(0.5);">
+              <div id="popup-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg"  style="backdrop-filter: contrast(0.5);">
                 <div class="relative w-full max-w-md max-h-full shadow-md">
                   <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <h4 class="text-[20px] font-medium pt-6 pl-6 text-[#31B978]">Confirm Deletion</h4>
@@ -253,65 +268,8 @@
         <% end %>
       </tbody>
     </table>
+    <div class="mt-4">
+      <%= will_paginate(@lessons) %>
+    </div>
   </div>
 </div>
-<script>
-  $(".custom-select").each(function() {
-  var classes = $(this).attr("class"),
-      id      = $(this).attr("id"),
-      name    = $(this).attr("name");
-  var template =  '<div class="' + classes + '">';
-      template += '<span class="custom-select-trigger">' + $(this).attr("placeholder") + '</span>';
-      template += '<div class="custom-options">';
-      $(this).find("option").each(function() {
-        template += '<span class="custom-option ' + $(this).attr("class") + '" data-value="' + $(this).attr("value") + '">' + $(this).html() + '</span>';
-      });
-  template += '</div></div>';
-
-  $(this).wrap('<div class="custom-select-wrapper"></div>');
-  $(this).hide();
-  $(this).after(template);
-  });
-  $(".custom-option:first-of-type").hover(function() {
-  $(this).parents(".custom-options").addClass("option-hover");
-  }, function() {
-  $(this).parents(".custom-options").removeClass("option-hover");
-  });
-  $(".custom-select-trigger").on("click", function() {
-  $('html').one('click',function() {
-    $(".custom-select").removeClass("opened");
-  });
-  $(this).parents(".custom-select").toggleClass("opened");
-  event.stopPropagation();
-  });
-  $(".custom-option").on("click", function() {
-  $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
-  $(this).parents(".custom-options").find(".custom-option").removeClass("selection");
-  $(this).addClass("selection");
-  $(this).parents(".custom-select").removeClass("opened");
-  $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
-  });
-
-  // File Upload
-
-   $(document).on('change', ".clipUpload input[type='file']",function(){
-        if ($(this).val()) {
-
-            var filename = $(this).val().split("\\");
-
-            filename = filename[filename.length-1];
-
-            $('.clip').text(filename);
-        }
-   });
-      $(document).on('change', ".fileUploadWrap input[type='file']",function(){
-        if ($(this).val()) {
-
-            var filename = $(this).val().split("\\");
-
-            filename = filename[filename.length-1];
-
-            $('.attachments').text(filename);
-        }
-   });
-</script>

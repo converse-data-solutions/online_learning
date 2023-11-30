@@ -661,6 +661,7 @@ nav.main-menu li.active > a,
 }
 .clipUpload {
   position: relative;
+  height: 40px;
 }
 .fileUploadIcon {
   position: absolute;

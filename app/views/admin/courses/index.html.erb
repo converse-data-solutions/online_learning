@@ -125,7 +125,7 @@
                                   <button data-modal-target="large-modal-<%= section.id %>" data-modal-toggle="large-modal-<%= section.id %>" class="block w-full md:w-auto   " type="button">
                                     <img src="<%= asset_path("pencil.png") %>" alt="...">
                                   </button>
-                                  <div id="large-modal-<%= section.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
+                                  <div id="large-modal-<%= section.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
                                     <div class="relative w-full max-w-4xl max-h-full">
                                       <!-- Modal content -->
                                       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -163,7 +163,7 @@
                                   <button data-modal-target="popup-modal-<%= section.id %>" data-modal-toggle="popup-modal-<%= section.id %>" class="block" type="button">
                                     <img src="<%= asset_path("delete.png") %>" alt="...", class="del-img">
                                   </button>
-                                  <div id="popup-modal-<%= section.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
+                                  <div id="popup-modal-<%= section.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
                                     <div class="relative w-full max-w-[42rem] max-h-full shadow-md">
                                       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                         <h4 class="text-[20px] font-medium pt-6 pl-6 text-[#31B978]">Confirm Deletion</h4>
@@ -270,7 +270,7 @@
                                 <button data-modal-target="large-modal-<%= lesson.id %>" data-modal-toggle="large-modal-<%= lesson.id %>" class="block w-full md:w-auto   " type="button">
                                   <img src="<%= asset_path("pencil.png") %>" alt="...">
                                 </button>
-                                <div id="large-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
+                                <div id="large-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
                                   <div class="relative w-full max-w-[54rem] max-h-full">
                                     <!-- Modal content -->
                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -343,7 +343,7 @@
                                 <button data-modal-target="popup-modal-<%= lesson.id %>" data-modal-toggle="popup-modal-<%= lesson.id %>" class="block" type="button">
                                   <img src="<%= asset_path("delete.png") %>" alt="...", class="del-img">
                                 </button>
-                                <div id="popup-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
+                                <div id="popup-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
                                   <div class="relative w-full max-w-[42rem] max-h-full shadow-md">
                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                       <h4 class="text-[20px] font-medium pt-6 pl-6 text-[#31B978]">Confirm Deletion</h4>
@@ -445,7 +445,7 @@
 </div>
 <div class="flex items-center justify-between pt-10 md:pt:20 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[30px] flex-col sm:flex-row md:flex-row">
   <div class="text-[#31B978] text-[18px] font-bold  w-[70%] md:w-[35%] pb-4 sm:pb-0">
-    <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { placeholder: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+    <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
   </div>
   <label for="table-search " class="sr-only">Search</label>
   <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
@@ -483,7 +483,7 @@
             <button data-modal-target="large-modal-<%= course.id %>" data-modal-toggle="large-modal-<%= course.id %>" class="block w-full md:w-auto   " type="button">
               <img src="<%= asset_path("pencil.png") %>" alt="...">
             </button>
-            <div id="large-modal-<%= course.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
+            <div id="large-modal-<%= course.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
               <div class="relative w-full max-w-4xl max-h-full">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -521,7 +521,7 @@
             <button data-modal-target="popup-modal-<%= course.id %>" data-modal-toggle="popup-modal-<%= course.id %>" class="block" type="button">
               <img src="<%= asset_path("delete.png") %>" alt="...", class="del-img">
             </button>
-            <div id="popup-modal-<%= course.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
+            <div id="popup-modal-<%= course.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
               <div class="relative w-full max-w-[42rem] max-h-full shadow-md">
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                   <h4 class="text-[20px] font-medium pt-6 pl-6 text-[#31B978]">Confirm Deletion</h4>
