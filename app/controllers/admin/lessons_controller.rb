@@ -2,14 +2,10 @@
 
 # This is an Admin Lesson controller
 class Admin::LessonsController < ApplicationController
-  # before_action :section_assignment, only: %i[show new create edit update destroy]
   before_action :lesson_assignment, only: %i[show edit update destroy]
   require 'will_paginate/array'
 
   def index
-    # @lessons = @section.lessons.includes(clip_attachment: :blob, attachments_attachments: :blob)
-    # @lessons = Lesson.all
-
     @lessons = []
     Lesson.all.includes(:section, clip_attachment: :blob, attachments_attachments: :blob).each do |lesson|
       @lessons.push(lesson)

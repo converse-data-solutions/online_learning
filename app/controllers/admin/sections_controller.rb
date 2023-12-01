@@ -2,14 +2,10 @@
 
 # This is an Admin Section controller
 class Admin::SectionsController < ApplicationController
-  # before_action :course_assignment, only: %i[new create edit update show]
   before_action :section_assignment, only: %i[show edit update]
   require 'will_paginate/array'
 
   def index
-    # @courses = Course.find(params[:course_id])
-    # @sections = @courses.sections
-    # @sections = Section.all
     @sections = []
     Section.all.includes(:course).each do |section|
       @sections.push(section)
