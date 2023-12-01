@@ -22,7 +22,7 @@
             </button>
             <div class="px-6 py-6 lg:px-8">
               <h3 class="mb-10 text-xl font-semibold text-[#31B978] dark:text-white text-center">New SESSION</h3>
-              <%= form_for Lesson.new, url: admin_lessons_path(), method: :post, html: { class: "space-y-6 w-[90%] mx-auto", id: "lesson-form" } do |f| %>
+              <%= form_for Lesson.new, url: admin_lessons_path(), method: :post, html: { class: "space-y-6 w-[90%] mx-auto", id: "lesson-form" }, multiple: true do |f| %>
                 <div class="flex flex-col md:flex-row w-full gap-x-10 gap-y-4">
                   <div class="flex flex-col md:flex-row items-start mb-4 md:w-[50%] w-full">
                     <label for="Section" class="md:w-[30%] w-[30%] block mb-2 text-lg font-medium text-[#000]">Section</label>
@@ -175,7 +175,7 @@
                     </div>
                     <!-- Modal body -->
                     <div class="p-7 space-y-6 lg:w-[86%] sm:w-[95%] w-[90%] mr-auto lg:ml-10 ml-5">
-                      <%= form_for(lesson, url: admin_lesson_path(lesson), method: :patch, html: { class: "space-y-6" }) do |f| %>
+                      <%= form_for(lesson, url: admin_lesson_path(lesson), method: :patch, html: { class: "space-y-6", id: "lesson-edit-form" }) do |f| %>
                         <div class="flex flex-col md:flex-col lg:flex-row w-full gap-5">
                           <div class="flex flex-col md:flex-row items-start mb-4 md:w-[50%] w-full">
                             <label for="Section" class="md:w-[30%] w-[30%] block mb-2 text-lg font-medium text-[#000]">Section</label>
@@ -245,8 +245,8 @@
               <button data-modal-target="popup-modal-<%= lesson.id %>" data-modal-toggle="popup-modal-<%= lesson.id %>" class="block" type="button">
                 <img src="<%= asset_path("delete.png") %>" alt="...", class="del-img">
               </button>
-              <div id="popup-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg"  style="backdrop-filter: contrast(0.5);">
-                <div class="relative w-full max-w-md max-h-full shadow-md">
+              <div id="popup-modal-<%= lesson.id %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
+                <div class="relative w-full max-w-[42rem] max-h-full shadow-md">
                   <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <h4 class="text-[20px] font-medium pt-6 pl-6 text-[#31B978]">Confirm Deletion</h4>
                     <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-<%= lesson.id %>">
@@ -258,7 +258,7 @@
                     <div class="px-6 pb-6 pt-2">
                       <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400 mt-4 ">Are you sure you want to delete this product?</h3>
                       <%= link_to 'DELETE', admin_lesson_path(lesson), data: {turbo_method: :delete}, class: "mr-2 text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] inline-flex items-center px-5 py-2.5 text-center mr-2" %>
-                      <button data-modal-hide="popup-modal" type="button" class="text-white rounded-lg border bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-[16px] font-semibold px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                      <button data-modal-hide="popup-modal" type="button" class="text-white rounded-lg border bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-[16px] font-semibold px-5 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
                     </div>
                   </div>
                 </div>
@@ -273,36 +273,5 @@
     </div>
   </div>
 </div>
-<script>
-$(document).ready(function() {
-  $("#lesson-form").submit(function(event) {
-    // Prevent the default form submission
-    event.preventDefault();
 
-    // Your form submission logic using AJAX
-    $.ajax({
-      url: '<%= admin_lessons_path() %>',
-      type: 'POST', // or 'GET' depending on your form method
-      data: $("#lesson-form").serialize(),
-      success: function(response) {
-        // Handle the response if needed
-
-        // Reload the page after form submission
-        location.reload();
-      },
-      error: function(error) {
-        // Handle errors if needed
-      }
-    });
-  });
-});
-
-
-  // $(document).ready(function() {
-  //   $("#lesson-form").submit(function() {
-  //     $("#lesson-form").submit();
-  //     location.reload();
-  //   })
-  // })
-</script>
 

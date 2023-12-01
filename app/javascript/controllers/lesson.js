@@ -80,13 +80,56 @@ function selectFilter() {
 }
 
 // Form submission
+  function lessonNewForm(){
+  $("#lesson-form").submit(function(event) {
+    event.preventDefault();
+
+    $.ajax({
+      url: $("#lesson-form").attr("action"),
+      type: $("#lesson-form").attr("method"),
+      data: new FormData($("#lesson-form")[0]),
+      processData: false,
+      contentType: false,
+      success: function(response) {
+       
+        location.reload();
+      },
+      error: function(error) {
+      }
+    });
+  });
+}
+  function lessonEditForm(){
+  $("#lesson-edit-form").submit(function(event) {
+    event.preventDefault();
+
+    $.ajax({
+      url: $("#lesson-edit-form").attr("action"),
+      type: $("#lesson-edit-form").attr("method"),
+      data: new FormData($("#lesson-edit-form")[0]),
+      processData: false,
+      contentType: false,
+      success: function(response) {
+
+        location.reload();
+      },
+      error: function(error) {
+      }
+    });
+  });
+  }
 
 
 $(document).ready(function () {
   collectionSelect();
   selectFilter();
+  lessonNewForm();
+  lessonEditForm();
 
-  $(document).on("turbo:render", function () {});
+  $(document).on("turbo:render", function () {
+    lessonNewForm();
+    lessonEditForm();
+  });
 });
 
 $(document).on("change", ".clipUpload input[type='file']", function () {

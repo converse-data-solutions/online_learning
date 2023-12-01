@@ -52,7 +52,6 @@ class Admin::SectionsController < ApplicationController
   def destroy
     @section = Section.find(params[:id])
     @section.destroy
-    redirect_to admin_courses_path
   end
 
   private

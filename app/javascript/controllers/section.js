@@ -79,12 +79,57 @@ function selectFilter() {
   });
 }
 
+// Form submission
+function sectionNewForm(){
+$("#section-form").submit(function(event) {
+  event.preventDefault();
+
+  $.ajax({
+    url: $("#section-form").attr("action"),
+    type: $("#section-form").attr("method"),
+    data: new FormData($("#section-form")[0]),
+    processData: false,
+    contentType: false,
+    success: function(response) {
+     
+      location.reload();
+    },
+    error: function(error) {
+    }
+  });
+});
+}
+
+function sectionEditForm(){
+$("#section-edit-form").submit(function(event) {
+  event.preventDefault();
+
+  $.ajax({
+    url: $("#section-edit-form").attr("action"),
+    type: $("#section-edit-form").attr("method"),
+    data: new FormData($("#section-edit-form")[0]),
+    processData: false,
+    contentType: false,
+    success: function(response) {
+
+      location.reload();
+    },
+    error: function(error) {
+    }
+  });
+});
+}
+
 $(document).ready(function () {
   collectionSelect();
   selectFilter();
+  sectionNewForm();
+  sectionEditForm();
 
   $(document).on("turbo:render", function () {
     selectFilter();
+    sectionNewForm();
+    sectionEditForm();
   });
 });
 
