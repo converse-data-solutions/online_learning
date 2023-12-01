@@ -23,28 +23,16 @@ class Admin::SectionsController < ApplicationController
 
   def create
     @section = Section.new(section_params)
-    respond_to do |format|
-      if @section.save
-        format.html { head :no_content }
-        format.js { redirect_to admin_sections_path }
-      else
-        head :no_content
-      end
-    end
+    @section.save
+    head :no_content
   end
 
   def edit; end
 
   def update
     @section = Section.find(params[:id])
-    respond_to do |format|
-      if @section.update(section_params)
-        format.html { head :no_content }
-        format.js { redirect_to admin_sections_path }
-      else
-        head :no_content
-      end
-    end
+    @section.update(section_params)
+    head :no_content
   end
 
   def show; end

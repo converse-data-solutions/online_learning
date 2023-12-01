@@ -23,28 +23,16 @@ class Admin::LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
-    respond_to do |format|
-      if @lesson.save
-        format.html { head :no_content }
-        format.js { redirect_to admin_lessons_path }
-      else
-        head :no_content
-      end
-    end
+    @lesson.save
+    head :no_content
   end
 
   def edit; end
 
   def update
     @lesson = Lesson.find(params[:id])
-    respond_to do |format|
-      if @lesson.update(lesson_params)
-        format.html { head :no_content }
-        format.js { redirect_to admin_lessons_path }
-      else
-        head :no_content
-      end
-    end
+    @lesson.update(lesson_params)
+    head :no_content
   end
 
   def destroy
