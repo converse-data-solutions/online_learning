@@ -1,45 +1,3 @@
-//Filter for Collection-Select
-
-$(".filter-handle").on("change", function (e) {
-  var location = e.target.value;
-  var table = $(".filter-table-data");
-  if (location.length) {
-    table.find("tr[data-type!=" + location + "]").hide();
-    table.find("tr[data-type=" + location + "]").show();
-  } else {
-    table.find("tr").show();
-  }
-});
-
-// Table Search Bar
-function tableSearch() {
-  $("#table-search").on("keyup", function () {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function () {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-    });
-  });
-}
-
-// Stepper Table New Form
-function tableForm() {
-  $(".display-section-button").click(function () {
-    $(".display-section").show();
-  });
-  $(".display-lesson-button").click(function () {
-    $(".display-lesson").show();
-  });
-}
-
-// Stepper Course Submit
-function courseSubmit() {
-  $(".next-btn").click(function () {
-    $("#new_course").submit();
-    event.preventDefault();
-  });
-}
-
-// Collection-Select Style
 function collectionSelect() {
   $(".custom-select").each(function () {
     var classes = $(this).attr("class"),
@@ -106,7 +64,73 @@ function collectionSelect() {
   });
 }
 
-// Lesson File Upload
+function selectFilter() {
+  $(".filter-handle").on("change", function () {
+    console.log("filtered");
+    var location = $(this).val();
+    var table = $(".filter-table-data");
+
+    if (location.length) {
+      table.find("tr[data-type!=" + location + "]").hide();
+      table.find("tr[data-type=" + location + "]").show();
+    } else {
+      table.find("tr").show();
+    }
+  });
+}
+
+// Form submission
+  function lessonNewForm(){
+  $("#lesson-form").submit(function(event) {
+    event.preventDefault();
+
+    $.ajax({
+      url: $("#lesson-form").attr("action"),
+      type: $("#lesson-form").attr("method"),
+      data: new FormData($("#lesson-form")[0]),
+      processData: false,
+      contentType: false,
+      success: function(response) {
+       
+        location.reload();
+      },
+      error: function(error) {
+      }
+    });
+  });
+}
+  function lessonEditForm(){
+  $("#lesson-edit-form").submit(function(event) {
+    event.preventDefault();
+
+    $.ajax({
+      url: $("#lesson-edit-form").attr("action"),
+      type: $("#lesson-edit-form").attr("method"),
+      data: new FormData($("#lesson-edit-form")[0]),
+      processData: false,
+      contentType: false,
+      success: function(response) {
+
+        location.reload();
+      },
+      error: function(error) {
+      }
+    });
+  });
+  }
+
+
+$(document).ready(function () {
+  collectionSelect();
+  selectFilter();
+  lessonNewForm();
+  lessonEditForm();
+
+  $(document).on("turbo:render", function () {
+    lessonNewForm();
+    lessonEditForm();
+  });
+});
 
 $(document).on("change", ".clipUpload input[type='file']", function () {
   if ($(this).val()) {
@@ -127,19 +151,3 @@ $(document).on("change", ".fileUploadWrap input[type='file']", function () {
   }
 });
 
-$(document).ready(function () {
-  courseSubmit();
-  tableForm();
-  tableSearch();
-  collectionSelect();
-
-  $(document).on("turbo:render", function () {
-    courseSubmit();
-    tableForm();
-    tableSearch();
-
-    if ($("#stepper-loader").length > 0) {
-      new HSStepper($("#stepper-loader")[0]);
-    }
-  });
-});

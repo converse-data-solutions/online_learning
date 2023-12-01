@@ -28,13 +28,13 @@
 
 .main-menu:hover,
 nav.main-menu.expanded {
-  width: 284px;
+  width: 290px;
   overflow: visible;
 }
 
 .main-menu:hover,
 .main-page.expanded {
-  width: 284px;
+  width: 290px;
   overflow: visible;
 }
 
@@ -61,7 +61,7 @@ nav.main-menu.expanded {
 .main-menu li {
   position: relative;
   display: block;
-  width: 284px;
+  width: 290px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -171,7 +171,7 @@ nav.main-menu li.active > a,
 
 .main-menu2 {
   overflow: visible;
-  width: 284px;
+  width: 290px;
 }
 
 .main-nav {
@@ -329,12 +329,12 @@ nav.main-menu li.active > a,
 }
 
 
-.new_section {
+.custom-section {
   width: 100%;
   display: flex;
   flex-direction: row;
 }
-.new_lesson {
+.custom-lesson {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -661,6 +661,7 @@ nav.main-menu li.active > a,
 }
 .clipUpload {
   position: relative;
+  height: 40px;
 }
 .fileUploadIcon {
   position: absolute;
@@ -683,6 +684,6 @@ nav.main-menu li.active > a,
   pointer-events: none;
 }
 input[type="file"] {
-  margin-left: -25px;
   opacity: 0;
+  width: 100%;
 }

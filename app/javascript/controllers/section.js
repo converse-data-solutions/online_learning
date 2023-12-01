@@ -1,52 +1,10 @@
-//Filter for Collection-Select
-
-$(".filter-handle").on("change", function (e) {
-  var location = e.target.value;
-  var table = $(".filter-table-data");
-  if (location.length) {
-    table.find("tr[data-type!=" + location + "]").hide();
-    table.find("tr[data-type=" + location + "]").show();
-  } else {
-    table.find("tr").show();
-  }
-});
-
-// Table Search Bar
-function tableSearch() {
-  $("#table-search").on("keyup", function () {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function () {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-    });
-  });
-}
-
-// Stepper Table New Form
-function tableForm() {
-  $(".display-section-button").click(function () {
-    $(".display-section").show();
-  });
-  $(".display-lesson-button").click(function () {
-    $(".display-lesson").show();
-  });
-}
-
-// Stepper Course Submit
-function courseSubmit() {
-  $(".next-btn").click(function () {
-    $("#new_course").submit();
-    event.preventDefault();
-  });
-}
-
-// Collection-Select Style
 function collectionSelect() {
   $(".custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
 
-    var placeholderText = $(this).find("option:first-of-type").text(); // Get text of the first option
+    var placeholderText = $(this).find("option:first-of-type").text();
 
     var template = '<div class="' + classes + '">';
     template +=
@@ -106,7 +64,74 @@ function collectionSelect() {
   });
 }
 
-// Lesson File Upload
+function selectFilter() {
+  $(".filter-handle").on("change", function () {
+    console.log("filtered");
+    var location = $(this).val();
+    var table = $(".filter-table-data");
+
+    if (location.length) {
+      table.find("tr[data-type!=" + location + "]").hide();
+      table.find("tr[data-type=" + location + "]").show();
+    } else {
+      table.find("tr").show();
+    }
+  });
+}
+
+// Form submission
+function sectionNewForm(){
+$("#section-form").submit(function(event) {
+  event.preventDefault();
+
+  $.ajax({
+    url: $("#section-form").attr("action"),
+    type: $("#section-form").attr("method"),
+    data: new FormData($("#section-form")[0]),
+    processData: false,
+    contentType: false,
+    success: function(response) {
+     
+      location.reload();
+    },
+    error: function(error) {
+    }
+  });
+});
+}
+
+function sectionEditForm(){
+$("#section-edit-form").submit(function(event) {
+  event.preventDefault();
+
+  $.ajax({
+    url: $("#section-edit-form").attr("action"),
+    type: $("#section-edit-form").attr("method"),
+    data: new FormData($("#section-edit-form")[0]),
+    processData: false,
+    contentType: false,
+    success: function(response) {
+
+      location.reload();
+    },
+    error: function(error) {
+    }
+  });
+});
+}
+
+$(document).ready(function () {
+  collectionSelect();
+  selectFilter();
+  sectionNewForm();
+  sectionEditForm();
+
+  $(document).on("turbo:render", function () {
+    selectFilter();
+    sectionNewForm();
+    sectionEditForm();
+  });
+});
 
 $(document).on("change", ".clipUpload input[type='file']", function () {
   if ($(this).val()) {
@@ -125,21 +150,4 @@ $(document).on("change", ".fileUploadWrap input[type='file']", function () {
 
     $(".attachments").text(filename);
   }
-});
-
-$(document).ready(function () {
-  courseSubmit();
-  tableForm();
-  tableSearch();
-  collectionSelect();
-
-  $(document).on("turbo:render", function () {
-    courseSubmit();
-    tableForm();
-    tableSearch();
-
-    if ($("#stepper-loader").length > 0) {
-      new HSStepper($("#stepper-loader")[0]);
-    }
-  });
 });
