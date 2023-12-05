@@ -24,7 +24,7 @@ function tableSearch() {
 // Stepper Table New Form
 function tableForm() {
   $(".display-section-button").click(function () {
-    $(".display-section").show();
+    $(".display-section").toggle();
   });
   $(".display-lesson-button").click(function () {
     $(".display-lesson").show();
@@ -126,6 +126,33 @@ $(document).on("change", ".fileUploadWrap input[type='file']", function () {
     $(".attachments").text(filename);
   }
 });
+
+function clearFormOnSubmit() {
+  $("#stepper_section-form").on("submit", function(event) {
+    event.preventDefault();
+
+    this.reset();
+  });
+}
+
+  // function stepperStep(){
+  //   console.log("stepper step");
+  //   $("#stepper-loader").currentIndex = 3;{
+  //    console.log("stepper step"); 
+  //   }
+    
+  // }
+      // function checkStepperIndex() {
+      //   HSStepper.getInstance("[data-hs-stepper]")
+      //   a= HSStepper.getInstance("[data-hs-stepper]").currentIndex
+      //   alert(a)
+      //   if (a == 3){
+      //       alert("sdfsfdsfs")
+      //   }
+      // }
+
+
+
 
 $(document).ready(function () {
   courseSubmit();

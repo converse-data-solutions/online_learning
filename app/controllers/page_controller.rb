@@ -2,5 +2,8 @@
 
 # This is an Pages controller
 class PageController < ApplicationController
-  def index; end
+  def index
+    # @sections = Course.last.sections
+    @sections = Section.all
+  end
 end

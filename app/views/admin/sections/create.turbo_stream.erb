@@ -1,0 +1,2 @@
+<%= turbo_stream.before "section_create_form", partial: "admin/sections/table", locals: {section: @section} %>
+<%= turbo_stream.after "section_create_form" , partial: "admin/sections/sections", locals: {sections: Course.last.sections } %>

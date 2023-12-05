@@ -19,8 +19,16 @@ class Admin::SectionsController < ApplicationController
 
   def create
     @section = Section.new(section_params)
-    @section.save
-    head :no_content
+    respond_to do |format|
+      if @section.save
+        format.turbo_stream
+        @form_cleared = true
+
+      else
+        format.html { render :new }
+        format.json { render json: @section.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit; end

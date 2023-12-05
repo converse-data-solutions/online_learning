@@ -19,8 +19,16 @@ class Admin::LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
-    @lesson.save
-    head :no_content
+    respond_to do |format|
+      if @lesson.save
+        format.turbo_stream
+        @form_cleared = true
+
+      else
+        format.html { render :new }
+        format.json { render json: @lesson.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit; end
