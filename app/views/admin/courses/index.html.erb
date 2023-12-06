@@ -138,9 +138,13 @@
                             </tr>
                           </thead>
                           <tbody class="overflow-auto filter-table-data" id="lessonTable">
-                            <% @lessons.includes(:section, clip_attachment: :blob, attachments_attachments: :blob).each do |lesson| %> 
-                              <%= render partial: "admin/lessons/table", locals: {lesson: lesson} %>
-                             <% end %>
+                             <turbo-frame id="alter_session">
+  <%= render partial: 'admin/lessons/table', locals: { lessons: @lessons } %>
+</turbo-frame>
+
+
+
+
                             <tr id="lesson_create_form">
                             <%= form_for Lesson.new, url: admin_section_lessons_path(section_id: Section.last.id), method: :post, html: { class: "custom-lesson" } do |f| %>
                             <%= f.hidden_field :section_id, value: Section.last.id %>
@@ -207,18 +211,15 @@
                       data-hs-stepper-next-btn> Next </button> <button type="button"
                       class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none"
                       data-hs-stepper-finish-btn style="display: none;"> Finish </button> <button type="reset"
-                      class="py-2 px-3 hidden inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none"
+                      class="py-2 px-3 hidden items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none"
                       data-hs-stepper-reset-btn style="display: none;"> Reset </button> </div> <!-- End Button Group -->
                   </div> <!-- End Stepper Content -->
                 </div> <!-- End Stepper -->
                 </div>
               </div>
             <div class="w-[25%] bg-red-200 h-[50rem]">
-              <div class="w-[100%]">
-                <%= render partial: "admin/sections/sections", locals: { sections: Course.last.sections } %>
-              
-
-               
+              <div class="w-[100%] h-[50vh] overflow-auto" id="sections-loop">
+                
 
               </div>
             </div>
@@ -315,24 +316,35 @@
       <div class="mt-4"> <%= will_paginate(@courses) %> </div>
     </div>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready( function () {
     if (typeof HSStepper !== 'undefined') {
        setTimeout(function () {
-      const stepperElement = HSStepper.querySelector('[data-hs-stepper]');
+      const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
       console.log(stepperElement);
 
       if (stepperElement) {
         try {
-          const stepperInstance = new HSStepper(stepperElement);
+          const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
+          console.log(stepperInstance);
 
-          document.querySelector('[data-hs-stepper-next-btn]').addEventListener('click', function () {
+          $('[data-hs-stepper-next-btn]').on('click', function () {
             stepperInstance.on('next');
 
-            const currentIndex = stepperInstance.currentIndex;
-            alert(currentIndex);
+            const currentIndex = stepperInstance.currentIndex + 1;
+            console.log(currentIndex);
 
-            if (currentIndex === 3) {
-              alert("sdfsfdsfs");
+            if (currentIndex === 3) {  
+              $.ajax({
+                url: "/admin/courses/sections/all",
+                type: "GET",
+                
+                success: function (response) {},
+                error: function (xhr, status, error) {},
+              });
+              console.log("ajax called");
+              $('[data-hs-stepper-next-btn]').css('display', 'none');
+              $('[data-hs-stepper-finish-btn]').css('display', 'block');
+              
             }
           });
 
@@ -349,28 +361,4 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
-
-
-  // document.addEventListener('DOMContentLoaded', function () {
-  //     if (typeof HSStepper !== 'undefined') {
-  //       setTimeout(function () {
-  //         const stepperInstance = HSStepper.getInstance("[data-hs-stepper]");
-  //         console.log(stepperInstance);
-
-  //         if (stepperInstance) {
-  //           const currentIndex = stepperInstance.currentIndex;
-              
-  //           alert(currentIndex);
-
-  //           if (currentIndex === 3) {
-  //             alert("sdfsfdsfs");
-  //           }
-  //         } else {
-  //           console.error("HSStepper instance not found");
-  //         }
-  //       }, 1000); 
-  //     } else {
-  //       console.error("HSStepper not defined. Make sure preline.js is loaded.");
-  //     }
-  //   });
   </script>

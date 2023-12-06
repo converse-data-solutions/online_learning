@@ -5,12 +5,23 @@ class Admin::SectionsController < ApplicationController
   before_action :section_assignment, only: %i[show edit update]
   require 'will_paginate/array'
 
+  def all
+    @sections = Course.last.sections
+  end
+
   def index
-    @sections = []
-    Section.all.includes(:course).each do |section|
-      @sections.push(section)
+    if params[:course_id].present?
+      @course = Course.find(params[:course_id])
+      @sections = @course.sections
+      respond_to(&:js)
+    else
+      @sections = []
+      @sections = Section.all.includes(:course)
+      #.each do |section|
+        # @sections.push(section)
+      # end
+      @sections = @sections.paginate(page: params[:page], per_page: 5)
     end
-    @sections = @sections.paginate(page: params[:page], per_page: 5)
   end
 
   def new

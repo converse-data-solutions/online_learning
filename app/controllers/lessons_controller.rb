@@ -18,7 +18,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.turbo_stream { render :show, locals: {lesson: @lesson} }
+      format.turbo_stream { render :show, locals: { lesson: @lesson } }
     end
   end
 end

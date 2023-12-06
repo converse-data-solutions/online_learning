@@ -1,0 +1,5 @@
+<h4>Section Details</h4>
+<% sections.each do |section| %>
+  <p class="m-4">Section Title: <%= section.title %></p>
+  <%= link_to "View Table", admin_alter_lesson_path(section_id: section.id), data: { turbo_method: :get, turbo_stream: true } %>
+<% end %>

@@ -46,6 +46,21 @@ class Admin::LessonsController < ApplicationController
 
   def show; end
 
+
+  def alter_lesson
+    @lessons = Lesson.where(section_id: params[:section_id])
+    puts "Request Format: #{request.format}"
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          'alter_session',
+          partial: 'admin/lessons/table',
+          locals: { lessons: @lessons }
+        )
+      end
+    end
+  end
+
   private
 
   def section_assignment
