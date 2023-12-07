@@ -23,8 +23,8 @@ class Admin::LessonsController < ApplicationController
       if @lesson.save
         format.turbo_stream
         @form_cleared = true
-
       else
+        puts "Section not found"
         format.html { render :new }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
@@ -49,15 +49,11 @@ class Admin::LessonsController < ApplicationController
 
   def alter_lesson
     @lessons = Lesson.where(section_id: params[:section_id])
+    @section = Section.find(params[:section_id])
+    @section_id = @section.id
     puts "Request Format: #{request.format}"
     respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          'alter_session',
-          partial: 'admin/lessons/table',
-          locals: { lessons: @lessons }
-        )
-      end
+      format.turbo_stream
     end
   end
 

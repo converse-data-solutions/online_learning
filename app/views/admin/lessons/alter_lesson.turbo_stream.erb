@@ -1,1 +1,2 @@
-
+<%#= turbo_stream.remove "lessonTable" %>
+<%= turbo_stream.replace "lessonTable", partial: 'admin/lessons/table', locals: { lessons: @lessons } %>

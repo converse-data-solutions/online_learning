@@ -5,7 +5,6 @@ ruby '3.2.2'
 gem 'cancan'
 gem 'devise'
 gem 'foreman', '~> 0.87.2'
-gem 'htmlbeautifier', '~> 1.4', '>= 1.4.2'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
@@ -66,6 +65,7 @@ group :development, :test do
   gem 'byebug', '~> 11.1', '>= 11.1.3'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'pry', '~> 0.14.2'
+  gem 'htmlbeautifier'
 end
 
 group :development do

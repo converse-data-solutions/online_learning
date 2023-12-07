@@ -102,10 +102,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :sections, only: [] do
-      resources :lessons
+      resources :lessons do
+        collection do
+          get 'alter_lesson'
+        end
+      end
     end
-  
-    get 'sections/lessons/alter_lesson', to: 'lessons#alter_lesson', as: :alter_lesson
   end
   
   namespace :admin do
