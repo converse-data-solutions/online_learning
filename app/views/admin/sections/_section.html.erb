@@ -1,121 +1,108 @@
  <style>
-    .line {
-  height: 70px;
-  width: 3px;
-  border-radius: 4px;
-  background: lightgrey;
-  transition: background 2s linear;
-}
- 
-.circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #c1c9d2;
-}
- 
-.active-circle {
-  background-color: #0183ce;
-  transition-duration: 0.5s;
-}
- 
-.fineshed-circle {
-  background-color: #0bc08b;
-  transition-duration: 0.5s;
-}
- 
-.outer-div {
-  background-color: #c1c9d2;
-  padding: 7px;
-  border: 2px solid #c1c9d2;
-  border-radius: 50%;
-  margin: 15px;
-  transition-duration: 0.5s;
-}
- 
-.active-outerdiv {
-  background-color: #f0f4f5;
-  border: 2px solid #0183ce;
-  transition-duration: 0.5s;
-}
- 
-.fineshed-outerdiv {
-  background-color: #0bc08b;
-  border: 2px solid #0bc08b;
-  transition-duration: 0.2s;
-}
-.outer-div .circle span {
-  display: none;
-  transition-duration: 0.5s;
-}
- 
-.fineshed-outerdiv .fineshed-circle span {
-  display: inline-block;
-  transition-duration: 0.5s;
-}
- 
-.fineshed-line {
-  background: #0bc08b !important;
-  transition-duration: 0.2s;
-}
-.text-noramal {
-  color: #c1c9d2;
-  transition-duration: 0.5s;
-}
-.text-active {
-  color: #000;
-  transition-duration: 0.5s;
-}
-.text-fineshed {
-  color: #0bc08b;
-  transition-duration: 0.5s;
-}
+  .line {
+    height: 70px;
+    width: 3px;
+    border-radius: 4px;
+    background: lightgrey;
+  }
 
-.fineshed-line {
-  background: #0bc08b !important;
-  transition-duration: 0.2s;
-}
-.completed-line {
-  background-color: #0bc08b !important;
-  transition-duration: 0.2s;
-}
-.completed-line .line {
-  background-color: #0bc08b !important;
-  transition-duration: 0.2s;
-}
-.line.completed-line {
-  background: #0bc08b !important;
-  transition-duration: 0.2s;
-}
+  .circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #c1c9d2;
+  }
 
-.completed-line {
-  background: #0bc08b !important;
-  transition-duration: 0.2s;
-}
+  .active-circle {
+    background-color: #0183ce;
+    transition-duration: 0.5s;
+  }
+
+  .fineshed-circle {
+    background-color: #0bc08b;
+    transition-duration: 0.5s;
+  }
+
+  .outer-div {
+    background-color: #c1c9d2;
+    padding: 7px;
+    border: 2px solid #c1c9d2;
+    border-radius: 50%;
+    margin: 15px;
+    transition-duration: 0.5s;
+  }
+
+  .active-outerdiv {
+    background-color: #f0f4f5;
+    border: 2px solid #0183ce;
+    transition-duration: 0.5s;
+  }
+
+  .fineshed-outerdiv {
+    background-color: #0bc08b;
+    border: 2px solid #0bc08b;
+    transition-duration: 0.2s;
+  }
+  .outer-div .circle span svg {
+    display: none;
+    transition-duration: 0.5s;
+  }
+
+  .fineshed-outerdiv .fineshed-circle span svg {
+    display: inline-block;
+    transition-duration: 0.5s;
+  }
+
+  .fineshed-line {
+    background: #0bc08b !important;
+    transition-duration: 0.2s;
+  }
+  .text-noramal {
+    color: #c1c9d2;
+    transition-duration: 0.5s;
+  }
+  .text-active {
+    color: #000;
+    transition-duration: 0.5s;
+  }
+  .text-fineshed {
+    color: #0bc08b;
+    transition-duration: 0.5s;
+  }
+
+  .fineshed-line {
+    background: #0bc08b !important;
+    transition-duration: 0.2s;
+  }
 </style>
 <div class="w-[20%] ml-[20px] mr-auto flex">
   <div class="flex justify-center flex-col">
     <% @sections.each_with_index do |section, index| %>
       <div id="<%= "step-#{index + 1}" %>" class="flex items-center justify-center containers">
         <div class="outer-div <%= index.zero? ? 'active-outerdiv' : '' %>">
-          <div class="circle <%= index.zero? ? 'active-circle' : '' %> flex justify-center items-center">
-            <span class="text-[30px] text-white ">&#10003;</span>
-          </div>
+          <%= link_to alter_lesson_admin_section_lessons_path(section_id: section.id), data: { turbo_method: :get, turbo_stream: true } do %>
+            <div class="circle <%= index.zero? ? 'active-circle' : '' %> flex justify-center items-center ">
+              <span class="text-[30px] text-white "><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256" width="20px" height="20px"><g transform=""><g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M41.9375,8.625c-0.66406,0.02344 -1.27344,0.375 -1.625,0.9375l-18.8125,28.78125l-12.1875,-10.53125c-0.52344,-0.54297 -1.30859,-0.74609 -2.03125,-0.51953c-0.71875,0.22266 -1.25391,0.83203 -1.37891,1.57422c-0.125,0.74609 0.17578,1.49609 0.78516,1.94531l13.9375,12.0625c0.4375,0.37109 1.01563,0.53516 1.58203,0.45313c0.57031,-0.08594 1.07422,-0.41016 1.38672,-0.89062l20.09375,-30.6875c0.42969,-0.62891 0.46484,-1.44141 0.09375,-2.10547c-0.37109,-0.66016 -1.08594,-1.05469 -1.84375,-1.01953z"></path></g></g></g></svg></span>
+            </div>
+          <% end %>
         </div>
       </div>
       <% unless index == @sections.size - 1 %>
-        <div class="flex items-center flex-col containers">
+        <div id="<%= "line-#{index + 1}" %>" class="flex items-center flex-col containers">
           <div class="line"></div>
         </div>
       <% end %>
     <% end %>
   </div>
-  <div class="flex justify-between flex-col">
+  <div class="flex justify-between flex-col mt-[20px]">
     <% @sections.each_with_index do |section, index| %>
-      <h2 id="<%= "text#{index + 1}" %>" class="text-noramal <%= index.zero? ? 'text-active' : '' %> font-medium"><%= section.title %></h2>
+      <div class="splite-section">
+        <h2 id="<%= "text#{index + 1}" %>" class="text-noramal <%= index.zero? ? 'text-active' : '' %> font-medium"><%= link_to section.title, alter_lesson_admin_section_lessons_path(section_id: section.id), data: { turbo_method: :get, turbo_stream: true } %></h2>
+        <h4><%= section.description %></h4>
+      </div>
     <% end %>
   </div>
-  <button id="next-button" class="add-button">Next</button>
+  <button id="next-button" class="add-button flex justify-end items-end">Next</button>
 </div>
 <script>
   $(document).ready(function () {
@@ -124,7 +111,7 @@
     };
 
     const slideStepper = function (element) {
-      $(".outer-div, .line, .circle, h2").removeClass("active-outerdiv fineshed-outerdiv active-circle fineshed-circle text-active text-fineshed completed-line");
+      $(".outer-div, .line, .circle, h2").removeClass("active-outerdiv fineshed-outerdiv active-circle fineshed-circle text-active text-fineshed fineshed-line");
 
       const currentStep = element.replace("step-", "");
 
@@ -143,7 +130,8 @@
         }
 
         if (i < currentStep) {
-          $(`${stepId} .line`).addClass("completed-line");
+          const lineId = `#line-${i}`;
+          $(`${lineId} .line`).addClass("fineshed-line");
         }
       }
     };
@@ -161,7 +149,6 @@
     });
 
     $(".circle").on("click", function (event) {
-      event.stopPropagation();
       const containerId = $(this).closest(".containers").attr("id");
       const currentStep = containerId.replace("step-", "");
       if (currentStep > 1) {
@@ -174,8 +161,6 @@
       buttonSlideStepper();
     });
 
-    // Initial styling
     slideStepper(`step-${active.stepper}`);
   });
 </script>
-
