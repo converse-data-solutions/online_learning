@@ -1,4 +1,5 @@
 <%= content_for :head do %> <%= javascript_import_module_tag "controllers/course" %> <% end %>
+<%= content_for :head do %> <%= javascript_import_module_tag "controllers/stepper" %> <% end %>
 <div class="flex flex-col w-full">
   <div
     class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-row sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
@@ -18,9 +19,9 @@
                 viewBox="0 0 14 14">
                 <path stroke="#31B978" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
               </svg> <span class="sr-only">Close modal</span> </button>
-            <div class="flex">
-              <div class="w-[75%]">
-                <div class="px-6 py-6 lg:px-8 bg-sky-100">
+            <div class="flex flex-col md:flex-row">
+              <div class="w-[100%] reduce-course">
+                <div class="px-6 py-6 lg:px-8">
                   <!-- Stepper -->
                   <h3 class="mb-14 font-semibold text-[26px] text-[#31B978] dark:text-white text-center">NEW COURSE</h3>
                   <div data-hs-stepper id="stepper-loader">
@@ -138,7 +139,7 @@
                               <tr>
                                 <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Title </th>
                                 <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Description </th>
-                                <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Clip </th>
+                                <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Clip           </th>
                                 <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Attachments </th>
                                 <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Action </th>
                               </tr>
@@ -180,8 +181,8 @@
               <!-- End Stepper -->
             </div>
           </div>
-          <div class="w-[25%] h-[50rem] mt-4">
-            <div class="w-[100%] h-[82vh] overflow-auto" id="sections-loop">
+          <div class="w-[100%] md:w-[25%] h-[52.25rem] bg-[#DEDEDE] hidden vertical-stepper">
+            <div class="w-[100%] h-[82vh] mt-4 mb-4 overflow-auto" id="sections-loop">
             </div>
           </div>
         </div>
@@ -314,6 +315,8 @@
                   console.log("ajax called");
                   $('[data-hs-stepper-next-btn]').css('display', 'none');
                   $('[data-hs-stepper-finish-btn]').css('display', 'block');
+                  $(".reduce-course").css("width", "75%");
+                  $(".vertical-stepper").css("display", "block");
 
                 }
               });

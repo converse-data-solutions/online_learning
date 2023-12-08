@@ -19,6 +19,7 @@ class Admin::LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
+    byebug
     respond_to do |format|
       if @lesson.save
         format.turbo_stream
