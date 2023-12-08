@@ -1,142 +1,181 @@
-<h4>Section Details</h4>
-<% sections.each do |section| %>
-  <p class="m-4">Section Title: <%= section.title %></p>
-  <%= link_to "View Table", alter_lesson_admin_section_lessons_path(section_id: section.id), data: { turbo_method: :get, turbo_stream: true } %>
-<% end %>
-<div class="w-[60%] mx-auto flex">
-  <div class="flex justify-center">
-    <div id="first-div" class="flex items-center containers">
-      <div class="outer-div active-outerdiv">
-        <div class="circle active-circle flex justify-center items-center">
-          <span class="text-[30px] text-white ">&#10003;</span>
+ <style>
+    .line {
+  height: 70px;
+  width: 3px;
+  border-radius: 4px;
+  background: lightgrey;
+  transition: background 2s linear;
+}
+ 
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #c1c9d2;
+}
+ 
+.active-circle {
+  background-color: #0183ce;
+  transition-duration: 0.5s;
+}
+ 
+.fineshed-circle {
+  background-color: #0bc08b;
+  transition-duration: 0.5s;
+}
+ 
+.outer-div {
+  background-color: #c1c9d2;
+  padding: 7px;
+  border: 2px solid #c1c9d2;
+  border-radius: 50%;
+  margin: 15px;
+  transition-duration: 0.5s;
+}
+ 
+.active-outerdiv {
+  background-color: #f0f4f5;
+  border: 2px solid #0183ce;
+  transition-duration: 0.5s;
+}
+ 
+.fineshed-outerdiv {
+  background-color: #0bc08b;
+  border: 2px solid #0bc08b;
+  transition-duration: 0.2s;
+}
+.outer-div .circle span {
+  display: none;
+  transition-duration: 0.5s;
+}
+ 
+.fineshed-outerdiv .fineshed-circle span {
+  display: inline-block;
+  transition-duration: 0.5s;
+}
+ 
+.fineshed-line {
+  background: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+.text-noramal {
+  color: #c1c9d2;
+  transition-duration: 0.5s;
+}
+.text-active {
+  color: #000;
+  transition-duration: 0.5s;
+}
+.text-fineshed {
+  color: #0bc08b;
+  transition-duration: 0.5s;
+}
+
+.fineshed-line {
+  background: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+.completed-line {
+  background-color: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+.completed-line .line {
+  background-color: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+.line.completed-line {
+  background: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+
+.completed-line {
+  background: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+</style>
+<div class="w-[20%] ml-[20px] mr-auto flex">
+  <div class="flex justify-center flex-col">
+    <% @sections.each_with_index do |section, index| %>
+      <div id="<%= "step-#{index + 1}" %>" class="flex items-center justify-center containers">
+        <div class="outer-div <%= index.zero? ? 'active-outerdiv' : '' %>">
+          <div class="circle <%= index.zero? ? 'active-circle' : '' %> flex justify-center items-center">
+            <span class="text-[30px] text-white ">&#10003;</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="second-div" class="flex items-center containers">
-      <div class="line"></div>
-      <div class="outer-div">
-        <div class="circle flex justify-center items-center">
-          <span class="text-[30px] text-white ">&#10003;</span>
+      <% unless index == @sections.size - 1 %>
+        <div class="flex items-center flex-col containers">
+          <div class="line"></div>
         </div>
-      </div>
-    </div>
-    <div id="third-div" class="flex items-center containers">
-      <div class="line"></div>
-      <div class="outer-div">
-        <div class="circle flex justify-center items-center">
-          <span class="text-[30px] text-white ">&#10003;</span>
-        </div>
-      </div>
-    </div>
+      <% end %>
+    <% end %>
   </div>
   <div class="flex justify-between flex-col">
-    <h2 id="text1" class="text-noramal text-active font-medium">Course details</h2>
-    <h2 id="text2" class="text-noramal font-medium">Section details</h2>
-    <h2 id="text3" class="text-noramal font-medium">Session details</h2>
+    <% @sections.each_with_index do |section, index| %>
+      <h2 id="<%= "text#{index + 1}" %>" class="text-noramal <%= index.zero? ? 'text-active' : '' %> font-medium"><%= section.title %></h2>
+    <% end %>
   </div>
   <button id="next-button" class="add-button">Next</button>
 </div>
 <script>
- $(document).ready(function () {
-  const active = {
-    stepper1: true,
-    stepper2: false,
-    stepper3: false,
-  };
+  $(document).ready(function () {
+    const active = {
+      stepper: 1,
+    };
 
-  const slideStepper = function (element) {
-    $(".outer-div, .line, .circle, h2").removeClass("active-outerdiv fineshed-outerdiv active-circle fineshed-circle fineshed-line text-active text-fineshed");
+    const slideStepper = function (element) {
+      $(".outer-div, .line, .circle, h2").removeClass("active-outerdiv fineshed-outerdiv active-circle fineshed-circle text-active text-fineshed completed-line");
 
-    if (element === "first-div" && !active.stepper1) {
-      active.stepper1 = true;
-    } else if (element === "second-div" && active.stepper1 && !active.stepper2) {
-      active.stepper2 = true;
-    } else if (element === "third-div" && active.stepper1 && active.stepper2 && !active.stepper3) {
-      active.stepper3 = true;
-    } else if (element === "second-div" && active.stepper1 && active.stepper2 && active.stepper3) {
-      active.stepper3 = false;
-    } else if ((element === "first-div" && active.stepper1 && active.stepper2) || (element === "first-div" && active.stepper1 && active.stepper2 && active.stepper3)) {
-      active.stepper2 = false;
-      active.stepper3 = false;
-    }
+      const currentStep = element.replace("step-", "");
 
-    // Apply new classes
-    if (active.stepper1) {
-      $("#first-div .outer-div").addClass("active-outerdiv");
-      $("#first-div .circle").addClass("active-circle");
-      $("#text1").addClass("text-active");
-    }
+      for (let i = 1; i <= currentStep; i++) {
+        const stepId = `#step-${i}`;
+        const textId = `#text${i}`;
 
-    if (active.stepper2) {
-      $("#first-div .outer-div").addClass("fineshed-outerdiv");
-      $("#first-div .circle").addClass("fineshed-circle");
-      $("#text1").addClass("text-fineshed");
+        if (i == currentStep) {
+          $(`${stepId} .outer-div`).addClass("active-outerdiv");
+          $(`${stepId} .circle`).addClass("active-circle");
+          $(`${textId}`).addClass("text-active");
+        } else {
+          $(`${stepId} .outer-div`).addClass("fineshed-outerdiv");
+          $(`${stepId} .circle`).addClass("fineshed-circle");
+          $(`${textId}`).addClass("text-fineshed");
+        }
 
-      $("#second-div .line").addClass("fineshed-line");
-      $("#second-div .outer-div").addClass("active-outerdiv");
-      $("#second-div .circle").addClass("active-circle");
-      $("#text2").addClass("text-active");
-    }
+        if (i < currentStep) {
+          $(`${stepId} .line`).addClass("completed-line");
+        }
+      }
+    };
 
-    if (active.stepper3) {
-      $("#second-div .outer-div").addClass("fineshed-outerdiv");
-      $("#second-div .circle").addClass("fineshed-circle");
-      $("#text2").addClass("text-fineshed");
+    const buttonSlideStepper = function () {
+      if (active.stepper < <%= @sections.size %>) {
+        slideStepper(`step-${active.stepper + 1}`);
+        active.stepper += 1;
+      }
+    };
 
-      $("#third-div .line").addClass("fineshed-line");
-      $("#third-div .outer-div").addClass("active-outerdiv");
-      $("#third-div .circle").addClass("active-circle");
-      $("#text3").addClass("text-active");
-    }
+    $(".containers").on("click", function () {
+      const elementId = $(this).attr("id");
+      slideStepper(elementId);
+    });
 
-    if ((!active.stepper3 && active.stepper2 && active.stepper1) || (!active.stepper3 && !active.stepper2 && active.stepper1)) {
-      $("#second-div .outer-div").removeClass("fineshed-outerdiv");
-      $("#second-div .circle").removeClass("fineshed-circle");
-      $("#text2").removeClass("text-fineshed");
+    $(".circle").on("click", function (event) {
+      event.stopPropagation();
+      const containerId = $(this).closest(".containers").attr("id");
+      const currentStep = containerId.replace("step-", "");
+      if (currentStep > 1) {
+        slideStepper(`step-${currentStep}`);
+        active.stepper = parseInt(currentStep);
+      }
+    });
 
-      $("#third-div .line").removeClass("fineshed-line");
-      $("#third-div .outer-div").removeClass("active-outerdiv");
-      $("#third-div .circle").removeClass("active-circle");
-      $("#text3").removeClass("text-active");
-    }
+    $("#next-button").on("click", function () {
+      buttonSlideStepper();
+    });
 
-    if ((!active.stepper3 && !active.stepper2 && active.stepper1) || (!active.stepper3 && !active.stepper2 && active.stepper1)) {
-      $("#second-div .outer-div").removeClass("active-outerdiv");
-      $("#second-div .circle").removeClass("active-circle");
-      $("#second-div .line").removeClass("fineshed-line");
-      $("#text2").removeClass("text-active");
-
-      $("#first-div .outer-div").removeClass("fineshed-outerdiv");
-      $("#first-div .circle").removeClass("fineshed-circle");
-      $("#text1").removeClass("text-fineshed");
-    }
-  };
-
-  const buttonSlideStepper = function () {
-    if (!active.stepper1) {
-      slideStepper("first-div");
-    } else if (!active.stepper2) {
-      slideStepper("second-div");
-    } else if (!active.stepper3) {
-      slideStepper("third-div");
-    }
-  };
-
-  $("#first-div").on("click", function () {
-    slideStepper("first-div");
+    // Initial styling
+    slideStepper(`step-${active.stepper}`);
   });
-
-  $("#second-div").on("click", function () {
-    slideStepper("second-div");
-  });
-
-  $("#third-div").on("click", function () {
-    slideStepper("third-div");
-  });
-
-  $("#next-button").on("click", function () {
-    buttonSlideStepper();
-  });
-});
-
 </script>
+

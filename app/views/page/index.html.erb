@@ -61,7 +61,7 @@
 }
  
 .fineshed-line {
-  background: #0bc08b;
+  background: #0bc08b !important;
   transition-duration: 0.2s;
 }
 .text-noramal {
@@ -76,6 +76,29 @@
   color: #0bc08b;
   transition-duration: 0.5s;
 }
+
+.fineshed-line {
+  background: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+.completed-line {
+  background-color: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+.completed-line .line {
+  background-color: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+.line.completed-line {
+  background: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+
+.completed-line {
+  background: #0bc08b !important;
+  transition-duration: 0.2s;
+}
+
     </style>
 </head>
 <body>
@@ -110,7 +133,7 @@
     };
 
     const slideStepper = function (element) {
-      $(".outer-div, .line, .circle, h2").removeClass("active-outerdiv fineshed-outerdiv active-circle fineshed-circle  text-active text-fineshed");
+      $(".outer-div, .line, .circle, h2").removeClass("active-outerdiv fineshed-outerdiv active-circle fineshed-circle text-active text-fineshed completed-line");
 
       const currentStep = element.replace("step-", "");
 
@@ -129,8 +152,7 @@
         }
 
         if (i < currentStep) {
-          const lineId = `#step-${i} .line`;
-          $(lineId).addClass("fineshed-line");
+          $(`${stepId} .line`).addClass("completed-line");
         }
       }
     };
@@ -160,8 +182,12 @@
     $("#next-button").on("click", function () {
       buttonSlideStepper();
     });
+
+    // Initial styling
+    slideStepper(`step-${active.stepper}`);
   });
 </script>
+
 
 </body>
 </html>
