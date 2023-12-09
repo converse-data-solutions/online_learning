@@ -1,5 +1,5 @@
 <tr id="lesson_create_form">
-  <%= form_for Lesson.new, url: admin_lessons_path(), method: :post, html: { class: "custom-lesson" } do |f| %>
+  <%= form_for Lesson.new, url: admin_lessons_path(section_id), method: :post, html: { class: "custom-lesson" } do |f| %>
     <td><%= f.text_field :section_id, value: section_id %></td>
     <td>
       <div class="">
