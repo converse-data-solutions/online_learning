@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     get 'users/student_index', to: 'users#student_index', as: :student_index
   end
 
+
   namespace :admin do
     resources :users do
     member do
@@ -58,6 +59,12 @@ Rails.application.routes.draw do
   end
 
   resources :courses, only: %i[index show]
+
+
+  # namespace :admin do
+  #   resources :sections
+  #   get '', to: 'sections#course_section_index'
+  # end
 
   resources :courses, only: [] do
     resources :sections, only: %i[index show]
@@ -86,15 +93,23 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :courses do
-      resources :sections
+      resources :sections, only: %i[index new create edit update destroy show]
+      collection do
+      get 'sections/all', to: 'sections#all', as: :all_index 
+      end
     end
   end
 
   namespace :admin do
     resources :sections, only: [] do
-      resources :lessons
+      resources :lessons do
+        collection do
+          get 'alter_lesson'
+        end
+      end
     end
   end
+  
   namespace :admin do
     resources :entrollments, only: %i[index] do
       member do

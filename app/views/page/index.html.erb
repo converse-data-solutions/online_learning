@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stepper</title>
+    <style>
+      .line {
+        height: 150px;
+        width: 3px;
+        border-radius: 4px;
+        background: lightgrey;
+        transition: background 2s linear;
+      }
+
+      .circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #c1c9d2;
+      }
+
+      .active-circle {
+        background-color: #0183ce;
+        transition-duration: 0.5s;
+      }
+
+      .fineshed-circle {
+        background-color: #0bc08b;
+        transition-duration: 0.5s;
+      }
+
+      .outer-div {
+        background-color: #c1c9d2;
+        padding: 7px;
+        border: 2px solid #c1c9d2;
+        border-radius: 50%;
+        margin: 15px;
+        transition-duration: 0.5s;
+      }
+
+      .active-outerdiv {
+        background-color: #f0f4f5;
+        border: 2px solid #0183ce;
+        transition-duration: 0.5s;
+      }
+
+      .fineshed-outerdiv {
+        background-color: #0bc08b;
+        border: 2px solid #0bc08b;
+        transition-duration: 0.2s;
+      }
+      .outer-div .circle span {
+        display: none;
+        transition-duration: 0.5s;
+      }
+
+      .fineshed-outerdiv .fineshed-circle span {
+        display: inline-block;
+        transition-duration: 0.5s;
+      }
+
+      .fineshed-line {
+        background: #0bc08b !important;
+        transition-duration: 0.2s;
+      }
+      .text-noramal {
+        color: #c1c9d2;
+        transition-duration: 0.5s;
+      }
+      .text-active {
+        color: #000;
+        transition-duration: 0.5s;
+      }
+      .text-fineshed {
+        color: #0bc08b;
+        transition-duration: 0.5s;
+      }
+
+      .fineshed-line {
+        background: #0bc08b !important;
+        transition-duration: 0.2s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="w-[20%] mx-auto flex">
+      <div class="flex justify-center flex-col">
+        <% @sections.each_with_index do |section, index| %>
+          <div id="<%= "step-#{index + 1}" %>" class="flex items-center justify-center containers">
+            <div class="outer-div <%= index.zero? ? 'active-outerdiv' : '' %>">
+              <div class="circle <%= index.zero? ? 'active-circle' : '' %> flex justify-center items-center">
+                <span class="text-[30px] text-white ">&#10003;</span>
+              </div>
+            </div>
+          </div>
+          <% unless index == @sections.size - 1 %>
+            <div class="flex items-center flex-col containers">
+              <div class="line"></div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="flex justify-between flex-col">
+        <% @sections.each_with_index do |section, index| %>
+          <h2 id="<%= "text#{index + 1}" %>" class="text-noramal <%= index.zero? ? 'text-active' : '' %> font-medium"><%= section.title %></h2>
+        <% end %>
+      </div>
+      <button id="next-button" class="add-button">Next</button>
+    </div>
+    <script>
+      $(document).ready(function () {
+        const active = {
+          stepper: 1,
+        };
+
+        const slideStepper = function (element) {
+          $(".outer-div, .line, .circle, h2").removeClass("active-outerdiv fineshed-outerdiv active-circle fineshed-circle text-active text-fineshed fineshed-line");
+
+          const currentStep = element.replace("step-", "");
+
+          for (let i = 1; i <= currentStep; i++) {
+            const stepId = `#step-${i}`;
+            const textId = `#text${i}`;
+
+            if (i == currentStep) {
+              $(`${stepId} .outer-div`).addClass("active-outerdiv");
+              $(`${stepId} .circle`).addClass("active-circle");
+              $(`${textId}`).addClass("text-active");
+            } else {
+              $(`${stepId} .outer-div`).addClass("fineshed-outerdiv");
+              $(`${stepId} .circle`).addClass("fineshed-circle");
+              $(`${textId}`).addClass("text-fineshed");
+            }
+
+            if (i < currentStep) {
+              const nextStepId = `#step-${i + 1}`;
+              $(`${nextStepId} ~ .flex + .flex-col .line`).addClass("fineshed-line");
+            }
+          }
+        };
+
+        const buttonSlideStepper = function () {
+          if (active.stepper < <%= @sections.size %>) {
+            slideStepper(`step-${active.stepper + 1}`);
+            active.stepper += 1;
+          }
+        };
+
+        $(".containers").on("click", function () {
+          const elementId = $(this).attr("id");
+          slideStepper(elementId);
+        });
+
+        $(".circle").on("click", function (event) {
+          event.stopPropagation();
+          const containerId = $(this).closest(".containers").attr("id");
+          const currentStep = containerId.replace("step-", "");
+          if (currentStep > 1) {
+            slideStepper(`step-${currentStep}`);
+            active.stepper = parseInt(currentStep);
+          }
+        });
+
+        $("#next-button").on("click", function () {
+          buttonSlideStepper();
+        });
+
+        // Initial styling
+        slideStepper(`step-${active.stepper}`);
+      });
+    </script>
+  </body>
+</html>

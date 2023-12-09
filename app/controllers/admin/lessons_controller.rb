@@ -19,8 +19,15 @@ class Admin::LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
-    @lesson.save
-    head :no_content
+    respond_to do |format|
+      if @lesson.save
+        format.html { redirect_to admin_lessons_path }
+        format.turbo_stream
+      else
+        format.html { render :new }
+        format.json { render json: @lesson.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit; end
@@ -37,6 +44,17 @@ class Admin::LessonsController < ApplicationController
   end
 
   def show; end
+
+
+  def alter_lesson
+    @lessons = Lesson.where(section_id: params[:section_id])
+    @section = Section.find(params[:section_id])
+    @section_id = @section.id
+    puts "Request Format: #{request.format}"
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
 
   private
 

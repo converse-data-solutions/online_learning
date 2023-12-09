@@ -20,8 +20,11 @@ class Admin::CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
-    @course.save
-    head :no_content
+    if @course.save
+      head :no_content
+    else
+      flash[:error] = @course.errors.full_messages
+    end
   end
 
   def edit

@@ -5,22 +5,43 @@ class Admin::SectionsController < ApplicationController
   before_action :section_assignment, only: %i[show edit update]
   require 'will_paginate/array'
 
+  def all
+    @sections = Course.last.sections
+  end
+
   def index
-    @sections = []
-    Section.all.includes(:course).each do |section|
-      @sections.push(section)
+    if params[:course_id].present?
+      @course = Course.find(params[:course_id])
+      @sections = @course.sections
+      respond_to(&:js)
+    else
+      @sections = []
+      @sections = Section.all.includes(:course)
+      #.each do |section|
+        # @sections.push(section)
+      # end
+      @sections = @sections.paginate(page: params[:page], per_page: 5)
     end
-    @sections = @sections.paginate(page: params[:page], per_page: 5)
   end
 
   def new
     @section = Sections.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @section = Section.new(section_params)
-    @section.save
-    head :no_content
+    puts "Request Format: #{request.format}"
+    respond_to do |format|
+      if @section.save
+        format.html { redirect_to admin_sections_path }
+        format.turbo_stream
+        @form_cleared = true
+
+      else
+        format.html { render :new }
+        format.json { render json: @section.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit; end
