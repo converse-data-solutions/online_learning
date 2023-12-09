@@ -195,6 +195,16 @@ nav.main-menu li.active > a,
   display: none;
 }
 
+.reduce-course2 {
+  width: 75%;
+}
+
+@media screen and (max-width: 425px) {
+  .reduce-course2 {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 425px) {
   .del-img{
     max-width: 14px !important;

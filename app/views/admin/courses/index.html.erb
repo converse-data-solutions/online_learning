@@ -26,8 +26,8 @@
                   <h3 class="mb-14 font-semibold text-[26px] text-[#31B978] dark:text-white text-center">NEW COURSE</h3>
                   <div data-hs-stepper id="stepper-loader">
                     <!-- Stepper Nav -->
-                    <ul class="relative flex flex-row gap-x-2 w-[60%] ml-[21rem] ">
-                      <li class="flex items-center gap-x-2 shrink basis-0 flex-1 group" data-hs-stepper-nav-item='{"index": 1}'> <span
+                    <ul class="relative flex flex-row gap-x-2 w-[60%] md:mx-auto sm:mr-auto">
+                      <li class="flex pl-24 items-center gap-x-2 shrink basis-0 flex-1 group" data-hs-stepper-nav-item='{"index": 1}'> <span
                       class="min-w-[28px] min-h-[28px] group flex flex-col items-center text-xs align-middle"> <span
                         class="hs-stepper-active:border hs-stepper-active:p-2 hs-stepper-active:rounded"> <span
                           class="w-6 h-6 flex justify-center items-center flex-shrink-0 bg-[#C1C9D2] font-medium text-gray-800 rounded-full group-focus:bg-gray-200 dark:bg-gray-700 dark:text-white dark:group-focus:bg-gray-600 hs-stepper-active:bg-blue-600 hs-stepper-active:text-white hs-stepper-success:bg-blue-600 hs-stepper-success:text-white hs-stepper-completed:bg-teal-500 hs-stepper-completed:group-focus:bg-teal-600">
@@ -101,7 +101,7 @@
                                 <% end %>
                                 <tr class="display-section hidden bg-[#EDEDED]" id="section_create_form">
                                   <%= form_for Section.new, url: admin_course_sections_path(course_id: Course.last.id), method: :post, html: { class: "custom-section", id: "stepper_section-form" } do |f| %>
-                                    <div class=""> <%= f.hidden_field :course_id, value: Course.last.id, class: "hide_course" %> </div>
+                                    <div class=""><%= f.hidden_field :course_id, value: Course.last.id, class: "hide_course" %></div>
                                     <td>
                                       <div class="">
                                         <%= f.text_field :title, class: "hide_title w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "test_id" %>
@@ -129,7 +129,7 @@
                       <!-- First Contnet -->
                       <div data-hs-stepper-content-item='{"index": 3, "isFinal": true}' style="display: none;">
                         <div class="p-4 h-[100%]">
-                          <div class="relative overflow-x-auto mt-4 w-[90%] mx-auto h-[50vh]">
+                          <div class="relative overflow-x-auto mt-4 w-[90%] mx-auto h-[45vh]">
                             <p class="mb-4 text-[15px] text-[#000] font-medium">Course Name:</span><span
                             class="text-[#818181] pl-3 font-medium text-[15px]"><%= Course.last.course_name %></span> <span
                             class="pl-3 text-[15px] text-[#000] font-medium">Section Name:</span><span
@@ -191,8 +191,7 @@
   </div>
 </div>
 </div>
-<div
-      class="flex items-center justify-between pt-10 md:pt:20 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[30px] flex-col sm:flex-row md:flex-row">
+<div class="flex items-center justify-between pt-10 md:pt:20 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[30px] flex-col sm:flex-row md:flex-row">
   <div class="text-[#31B978] text-[18px] font-bold  w-[70%] md:w-[35%] pb-4 sm:pb-0">
     <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
   </div>
@@ -315,8 +314,14 @@
                   console.log("ajax called");
                   $('[data-hs-stepper-next-btn]').css('display', 'none');
                   $('[data-hs-stepper-finish-btn]').css('display', 'block');
-                  $(".reduce-course").css("width", "75%");
+                  $(".reduce-course").addClass("reduce-course2");
                   $(".vertical-stepper").css("display", "block");
+
+                } else if (currentIndex === 4) {
+                  $('[data-hs-stepper-next-btn]').css('display', 'none');
+                  $('[data-hs-stepper-finish-btn]').css('display', 'block');
+                  $(".reduce-course").removeClass("reduce-course2");
+                  $(".vertical-stepper").css("display", "none");
 
                 }
               });

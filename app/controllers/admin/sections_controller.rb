@@ -28,10 +28,12 @@ class Admin::SectionsController < ApplicationController
     @section = Sections.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength
     @section = Section.new(section_params)
+    puts "Request Format: #{request.format}"
     respond_to do |format|
       if @section.save
+        format.html { redirect_to admin_sections_path }
         format.turbo_stream
         @form_cleared = true
 

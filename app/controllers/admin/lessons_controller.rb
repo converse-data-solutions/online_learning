@@ -19,13 +19,11 @@ class Admin::LessonsController < ApplicationController
 
   def create
     @lesson = Lesson.new(lesson_params)
-    byebug
     respond_to do |format|
       if @lesson.save
+        format.html { redirect_to admin_lessons_path }
         format.turbo_stream
-        @form_cleared = true
       else
-        puts "Section not found"
         format.html { render :new }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end

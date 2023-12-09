@@ -90,12 +90,11 @@
   });
 
   slideStepper(`step-${active.stepper}`);
-}
-$(document).ready(function () {
+  }
+  $(document).ready(function () {
   stepperLoop();
   $(document).on("turbo:render", function () {
     stepperLoop();
   });
-});
-
+  });
 </script>
