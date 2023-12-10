@@ -18,14 +18,20 @@ class Admin::UsersController < ApplicationController
 
   def create
     @new_admin = User.new(admin_params)
-
-    if @new_admin.save && @new_admin.add_role(user_role[:role])
-      # @new_admin.save
-      admin_save
-    else
-      admin_save_error
+  
+    respond_to do |format|
+      if @new_admin.save && @new_admin.add_role(admin_params[:role])
+        redirect_to admin_users_path
+        flash[:notice] = 'Admin user created successfully.'
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @new_admin }) }
+        flash[:alert] = 'Failed to create admin user.'
+      end
     end
   end
+  
+  
+  
 
   def edit; end
 
@@ -95,7 +101,7 @@ class Admin::UsersController < ApplicationController
   # end
 
   def admin_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :deleted, :current_type)
+    params.require(:user).permit(:email, :password, :password_confirmation, :deleted, :current_type, :role)
   end
 
   def user_role

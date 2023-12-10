@@ -3,8 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
 gem 'cancan'
+gem 'client_side_validations', '~> 22.1', '>= 22.1.1'
 gem 'devise'
 gem 'foreman', '~> 0.87.2'
+gem 'jquery-rails', '~> 4.6'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'

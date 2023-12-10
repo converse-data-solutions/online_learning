@@ -13,6 +13,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
+  validates :role, presence: true
+  validates :current_type, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
+
   enum current_type: {
     visitor: 0,
     enrolled: 1,

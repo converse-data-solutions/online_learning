@@ -1,6 +1,4 @@
-<%= content_for :head do %>
-  <%= javascript_import_module_tag "controllers/validation" %>
-<% end %>
+
 <div class="flex flex-col w-full">
   <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-row sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
     <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px]  font-medium">User Management - Admin</div>
@@ -25,40 +23,9 @@
             <div class="px-6 py-6 lg:px-8">
               <h3 class="mb-4 sm:mb-7 md:mb-10 text-[26px] font-semibold text-[#0BC08B] dark:text-white text-center">New User Management</h3>
               <div class="lg:w-[86%] sm:w-[95%] w-[90%] mr-auto lg:ml-10 ml-5">
-                <%= form_for User.new, url: admin_users_path, class: "space-y-6", method: :post do |f| %>
-                  <div class="mb-4 flex flex-col sm:flex-row">
-                    <label for="email" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-                    <div class="w-full sm:w-[50%] flex flex-col">
-                      <%= f.email_field :email, class: "w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
-                      <div class="error" id="email-error", style="color: red;"></div>
-                    </div>
-                  </div>
-                  <div class="mb-4 flex flex-col sm:flex-row">
-                    <label for="Role" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Role</label>
-                    <%= f.select :role, options_for_select(['admin', 'student']), {}, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 outline-none block w-full sm:w-[50%] p-2.5 rounded-[7px]' %>
-                  </div>
-                  <div class="mb-4 flex flex-col sm:flex-row">
-                    <label for="Current Type" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Current Type</label>
-                    <%= f.select :current_type, User.current_types.keys.map { |type| [type.humanize, type] }, {}, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-0 focus:ring-offset-0 focus:border-gray-200 w-full sm:w-[50%] block p-2.5 rounded-[7px]" %>
-                  </div>
-                  <div class="mb-4 flex flex-col sm:flex-row">
-                    <label for="password" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-                    <div class="w-full sm:w-[50%] flex flex-col">
-                      <%= f.password_field :password, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
-                      <div class="error" id="password-error", style="color: red;"></div>
-                    </div>
-                  </div>
-                  <div class="mb-4 flex flex-col sm:flex-row">
-                    <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[50%]">Confirmation Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-                    <div class="w-full sm:w-[50%] flex flex-col">
-                      <%= f.password_field :password_confirmation, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
-                      <div class="error" id="password-confirmation-error", style="color: red;"></div>
-                    </div>
-                  </div>
-                  <div class="w-1/5 mx-auto mt-4 sm:mt-6">
-                    <%= f.submit "Create", class: 'w-full text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
-                  </div>
-                <% end %>
+                <div class="" id="admin-form">
+                  <%= render partial: 'admin/users/form', locals: { user: @new_admin } %>
+                </div>
               </div>
             </div>
           </div>
