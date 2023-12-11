@@ -2,10 +2,10 @@
 # ClientSideValidations Initializer
 
 # Disabled validators
-# ClientSideValidations::Config.disabled_validators = []
+ClientSideValidations::Config.disabled_validators = []
 
 # Uncomment to validate number format with current I18n locale
-# ClientSideValidations::Config.number_format_with_locale = true
+ClientSideValidations::Config.number_format_with_locale = true
 
 # Uncomment the following block if you want each input field to have the validation messages attached.
 #

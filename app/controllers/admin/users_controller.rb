@@ -3,9 +3,15 @@
 # This is an Admin User controller
 class Admin::UsersController < ApplicationController
   # before_action :authenticate_user!
-  before_action :user_assignment, only: %i[edit update destroy]
+  before_action :user_assignment, only: %i[edit update destroy show]
   def index
-    @users = User.all
+    # @users = User.all
+    @users = User.search_by_name_and_email(params[:search])
+    respond_to do |format|
+      format.json { render json: @users }
+      format.html { render :index }
+      format.js { render partial: 'tablebody', locals: { users: @users }, content_type: 'text/javascript' }
+    end
   end
 
   def student_index
@@ -17,39 +23,43 @@ class Admin::UsersController < ApplicationController
   end
 
   def create
-    @new_admin = User.new(admin_params)
-  
+    @user = User.new(admin_params)
     respond_to do |format|
-      if @new_admin.save && @new_admin.add_role(admin_params[:role])
-        redirect_to admin_users_path
-        flash[:notice] = 'Admin user created successfully.'
+      if @user.add_role_and_save(admin_params[:role])
+        format.turbo_stream { render turbo_stream: turbo_stream.('open--user-edit-form', partial: 'admin/users/form', locals: { user: @user }) }
+        format.json { render :show, status: :created, location: @user }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @new_admin }) }
-        flash[:alert] = 'Failed to create admin user.'
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def edit; end
+
+
+  def update
+    if @user == current_user
+      flash[:alert] = 'You cannot change your own status.'
+    else
+      respond_to do |format|
+        if @user.update(admin_params)
+          format.turbo_stream { render turbo_stream: turbo_stream.replace('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.turbo_stream { render turbo_stream: turbo_stream.replace('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
   
-  
-  
-
-  def edit; end
-
-  def update
-    if @user == current_user
-      handle_own_status_change
-    else
-      handle_user_status_change
-    end
-
-    redirect_to admin_users_path
-  end
 
   def destroy
     if @user == current_user
       flash[:alert] = 'You cannot delete yourself.'
     else
-      @user.update(deleted: true)
+      @user.destroy
       flash[:notice] = 'User deleted successfully.'
     end
 
@@ -63,7 +73,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def admin_save
-    @new_admin.send_reset_password_instructions
+    @user.send_reset_password_instructions
     flash[:notice] = 'Admin user created successfully.'
     redirect_to admin_users_path
   end
@@ -101,7 +111,7 @@ class Admin::UsersController < ApplicationController
   # end
 
   def admin_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :deleted, :current_type, :role)
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :deleted, :current_type, :role)
   end
 
   def user_role

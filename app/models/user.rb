@@ -8,13 +8,14 @@ class User < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :ratings, as: :rateable, dependent: :destroy
   rolify before_add: :remove_previouse_role
+  accepts_nested_attributes_for :profile # Make sure to add this line if you want to create profiles alongside users
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
-  validates :role, presence: true
-  validates :current_type, presence: true
+  validates :name, presence: true
   validates :email, presence: true
   validates :password, presence: true
   validates :password_confirmation, presence: true
@@ -41,6 +42,29 @@ class User < ApplicationRecord
     entrollments.where(course:).exists?
   end
 
+  def add_role_and_save(role)
+    add_role(role)
+    save
+  end
+
+  def update_with_role(params)
+    if add_role(params[:role]) && update(deleted: params[:deleted], current_type: params[:current_type]) # rubocop:disable Style/GuardClause
+      return true # rubocop:disable Style/RedundantReturn
+    else
+      errors.add(:base, 'User update failed')
+      return false # rubocop:disable Style/RedundantReturn
+    end
+  end
+
+  def self.search_by_name_and_email(query)
+    if query.present?
+      search_query = "%#{query}%"
+      where('name LIKE ? OR email LIKE ?', search_query, search_query)
+    else
+      all
+    end
+  end
+
   private
 
   def assign_default_role
@@ -53,7 +77,7 @@ class User < ApplicationRecord
   end
 
   scope :active, -> { where(deleted: false) }
-  def self.find_for_authentication(conditions)
+  def self.find_for_authentication(conditions) # rubocop:disable Lint/IneffectiveAccessModifier
     super(conditions.merge(deleted: false))
   end
 end
