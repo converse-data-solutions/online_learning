@@ -26,7 +26,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(admin_params)
     respond_to do |format|
       if @user.add_role_and_save(admin_params[:role])
-        format.turbo_stream { render turbo_stream: turbo_stream.('open--user-edit-form', partial: 'admin/users/form', locals: { user: @user }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
         format.json { render :show, status: :created, location: @user }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
