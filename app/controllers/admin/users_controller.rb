@@ -48,6 +48,7 @@ class Admin::UsersController < ApplicationController
         if @user.update(admin_params)
           format.turbo_stream { render turbo_stream: turbo_stream.replace('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) }
           format.json { render :show, status: :ok, location: @user }
+          redirect_to admin_users_path
         else
           format.turbo_stream { render turbo_stream: turbo_stream.replace('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) }
           format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -63,9 +64,8 @@ class Admin::UsersController < ApplicationController
     else
       @user.destroy
       flash[:notice] = 'User deleted successfully.'
+      redirect_to admin_users_path
     end
-
-    redirect_to admin_users_path
   end
 
   private

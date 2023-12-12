@@ -16,7 +16,7 @@
     <div class="mb-4 flex flex-col sm:flex-row">
       <label for="email" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="w-full sm:w-[50%] flex flex-col">
-        <%= f.email_field :email, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
+        <%= f.email_field :email, class: "w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
         <% if @user&.errors&.any? %>
           <% if @user.errors[:email].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -30,7 +30,7 @@
     <div class="mb-4 flex flex-col sm:flex-row">
       <label for="password" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="w-full sm:w-[50%] flex flex-col">
-        <%= f.password_field :password, class: "validate bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+        <%= f.password_field :password, class: "w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
         <% if @user&.errors&.any? %>
           <% if @user.errors[:password].any? %>
             <div class="text-red-600 text-sm mt-1">
