@@ -35,7 +35,9 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    render layout: false
+  end
 
 
   def update

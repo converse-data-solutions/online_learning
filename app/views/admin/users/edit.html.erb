@@ -1,26 +1,60 @@
-<h1>Admin Users</h1>
-<%= form_for [:admin, @user] do |f| %>
-  <h2>Update User</h2>
-  <div>
-    <%= f.label :email %>
-    <br>
-    <%= f.email_field :email, required: true %>
-  </div>
-  <div>
-    <%= f.label :role %>
-    <br>
-    <%= f.select :role, ['admin', 'student'] %>
-  </div>
-  <div>
-    <%= f.label :current_type %>
-    <br>
-    <%= f.select :current_type, User.current_types.keys.map { |type| [type.humanize, type] } %>
-  </div>
-  <div>
-    <%= f.label :deleted, 'Status:' %>
-    <br>
-    <%= f.select :deleted, [['Active', false], ['Inactive', true]], {}, required: true %>
-  </div>
-  <%= f.submit "Update Admin User", class: 'btn btn-primary' %>
-<% end %>
-
+<div class="p-7 space-y-6 lg:w-[86%] sm:w-[95%] w-[90%] mr-auto lg:ml-10 ml-5">
+  <%= form_for [:admin, @user] do |f| %>
+    <div class="mb-4 flex flex-col sm:flex-row">
+      <label for="name" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+      <div class="w-full sm:w-[50%] flex flex-col">
+        <%= f.text_field :name, class: "w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
+        <% if @user&.errors&.any? %>
+          <% if @user.errors[:name].any? %>
+            <div class="text-red-600 text-sm mt-1">
+              <%= @user.errors.full_messages_for(:name).join(', ') %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="mb-4 flex flex-col sm:flex-row">
+      <label for="email" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+      <div class="w-full sm:w-[50%] flex flex-col">
+        <%= f.email_field :email, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
+        <% if @user&.errors&.any? %>
+          <% if @user.errors[:email].any? %>
+            <div class="text-red-600 text-sm mt-1">
+              <%= @user.errors.full_messages_for(:email).join(', ') %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <%= f.hidden_field :role, value: 'admin' %>
+    <div class="mb-4 flex flex-col sm:flex-row">
+      <label for="password" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+      <div class="w-full sm:w-[50%] flex flex-col">
+        <%= f.password_field :password, class: "validate bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+        <% if @user&.errors&.any? %>
+          <% if @user.errors[:password].any? %>
+            <div class="text-red-600 text-sm mt-1">
+              <%= @user.errors.full_messages_for(:password).join(', ') %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="mb-4 flex flex-col sm:flex-row">
+      <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[50%]">Confirmation Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+      <div class="w-full sm:w-[50%] flex flex-col">
+        <%= f.password_field :password_confirmation, class: "validate bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+        <% if @user&.errors&.any? %>
+          <% if @user.errors[:password_confirmation].any? %>
+            <div class="text-red-600 text-sm mt-1">
+              <%= @user.errors.full_messages_for(:password_confirmation).join(', ') %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="w-1/5 mx-auto mt-4 sm:mt-6">
+      <%= f.submit "Update", class: 'w-full text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
+    </div>
+  <% end %>
+</div>
