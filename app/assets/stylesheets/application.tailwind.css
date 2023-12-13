@@ -12,6 +12,9 @@
 
 */
 
+.message{
+  display: none;
+}
 
 .fa-2x {
   font-size: 2em;

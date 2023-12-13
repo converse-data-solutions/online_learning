@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_16_115851) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_11_085739) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_115851) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "amount"
   end
 
   create_table "entrollment_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -141,6 +142,32 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_115851) do
     t.index ["course_id"], name: "index_sections_on_course_id"
   end
 
+  create_table "subscription_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "subscription_id", null: false
+    t.string "stripe_subscription_id"
+    t.integer "amount"
+    t.datetime "paid_at"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_id"], name: "index_subscription_details_on_subscription_id"
+    t.index ["user_id"], name: "index_subscription_details_on_user_id"
+  end
+
+  create_table "subscriptions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "paid_until"
+    t.string "stripe_customer_ref"
+    t.string "stripe_subscription_ref"
+    t.datetime "next_invoice_on"
+    t.bigint "user_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -157,6 +184,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_115851) do
     t.string "uid"
     t.string "provider"
     t.integer "current_type", default: 0
+    t.string "name"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -183,4 +211,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_115851) do
   add_foreign_key "profiles", "users"
   add_foreign_key "ratings", "users"
   add_foreign_key "sections", "courses"
+  add_foreign_key "subscription_details", "subscriptions"
+  add_foreign_key "subscription_details", "users"
+  add_foreign_key "subscriptions", "users"
 end

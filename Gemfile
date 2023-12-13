@@ -3,8 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.2'
 gem 'cancan'
+gem 'client_side_validations', '~> 22.1', '>= 22.1.1'
 gem 'devise'
 gem 'foreman', '~> 0.87.2'
+gem 'jquery-rails', '~> 4.6'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
@@ -64,8 +66,8 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'byebug', '~> 11.1', '>= 11.1.3'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'pry', '~> 0.14.2'
   gem 'htmlbeautifier'
+  gem 'pry', '~> 0.14.2'
 end
 
 group :development do
