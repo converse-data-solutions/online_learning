@@ -1,9 +1,7 @@
 function editPopup(){
   $(".edit-user-model").click(function(){
-    var id = $(this).data('user-id');
-    console.log(id);
-    var url = $(this).data('url');
-    console.log(url);
+    let id = $(this).data('user-id');
+    let url = $(this).data('url');
     $.ajax({
       method: 'GET',
       url: url,
@@ -27,7 +25,6 @@ function editPopup(){
 function deletePopup(){
   $(".send-delete-user").click(function(){
     let id = $(this).data('user-id');
-    console.log(id);
     $("#delete-user-model").attr("data-user-id", id);
     $("#delete-user-model").attr("href", `users/${id}`);
   });
@@ -35,7 +32,7 @@ function deletePopup(){
 
 function tableSearch() {
   $('#user_search').on('input', function() {
-    var searchValue = $(this).val();
+    let searchValue = $(this).val();
     $.ajax({
       url: '/admin/users',
       type: 'GET',

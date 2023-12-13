@@ -72,7 +72,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_assignment
-    @user = User.find(params[:id])
+    @user = User.find_by(params[:id])
   end
 
   def admin_params
