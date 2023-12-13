@@ -1,4 +1,3 @@
-<%= turbo_frame_tag "edit-user-popup" do %>
   <!-- Modal body -->
   <div class="p-7 space-y-6 lg:w-[86%] sm:w-[95%] w-[90%] mr-auto lg:ml-10 ml-5">
     <%= form_for(user, url: admin_user_path(user), html: { class: "validate", id: "user-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
@@ -60,4 +59,3 @@
       </div>
     <% end %>
   </div>
-<% end %>

@@ -3,7 +3,7 @@
 # This is an Admin User controller
 class Admin::UsersController < ApplicationController
   # before_action :authenticate_user!
-  before_action :user_assignment, only: %i[edit update destroy show]
+  before_action :set_user, only: %i[edit update destroy show]
   def index
     @users = User.search_by_name_and_email(params[:search])
     respond_to do |format|
@@ -49,8 +49,7 @@ class Admin::UsersController < ApplicationController
       respond_to do |format|
         if @user.update(admin_params)
           format.turbo_stream { redirect_to admin_users_path }
-          format.json { render :show, status: :ok, location: @user }
-          redirect_to admin_users_path
+          format.json { render :show, status: :ok, location: admin_user_url(@user) }
         else
           format.turbo_stream { render turbo_stream: turbo_stream.replace('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) }
           format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -63,16 +62,18 @@ class Admin::UsersController < ApplicationController
     if @user == current_user
       flash[:alert] = 'You cannot delete yourself.'
     else
-      @user.destroy
-      flash[:notice] = 'User deleted successfully.'
-      redirect_to admin_users_path
+      respond_to do |format|
+        @user.destroy
+        redirect_to admin_users_path
+        format.json { head :no_content }
+      end
     end
   end
 
   private
 
-  def user_assignment
-    @user = User.find_by(params[:id])
+  def set_user
+    @user = User.find(params[:id])
   end
 
   def admin_params
