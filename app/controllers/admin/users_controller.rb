@@ -62,7 +62,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.update(deleted: true)
         format.turbo_stream { redirect_to admin_users_path }
-        format.json { head :no_content }
+        format.json { render :show, status: :ok, location: admin_user_url(@user), notice: 'User was successfully destroyed.' }
       else
         @user == current_user
           format.turbo_stream { redirect_to admin_users_path, notice: 'You cannot delete yourself.' }
