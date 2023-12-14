@@ -17,8 +17,8 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true
-  validates :password, presence: true
-  validates :password_confirmation, presence: true
+  validates :password, :password_confirmation, presence: true, on: :create
+  validates :password, :password_confirmation, presence: true, allow_nil: true, on: :update
 
   enum current_type: {
     visitor: 0,

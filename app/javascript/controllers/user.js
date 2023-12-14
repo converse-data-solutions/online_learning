@@ -13,6 +13,7 @@ function editPopup(){
       },
 
       success: function(res){
+        console.log(res);
         Turbo.renderStreamMessage(res)
       },
       error: function(){
