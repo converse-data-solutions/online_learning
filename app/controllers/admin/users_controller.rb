@@ -9,7 +9,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       format.json { render json: @users }
       format.html { render :index }
-      format.js
+      format.turbo_stream
     end
   end
 
@@ -43,29 +43,25 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    if @user == current_user
-      flash[:alert] = 'You cannot change your own status.'
-    else
-      respond_to do |format|
-        if @user.update(admin_params)
-          format.turbo_stream { redirect_to admin_users_path }
-          format.json { render :show, status: :ok, location: admin_user_url(@user) }
-        else
-          format.turbo_stream { render turbo_stream: turbo_stream.replace('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @user.update(admin_params)
+        format.turbo_stream { redirect_to admin_users_path, notice: 'User updated successfully' }
+        format.json { render :show, status: :ok, location: admin_user_url(@user) }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    if @user == current_user
-      flash[:alert] = 'You cannot delete yourself.'
-    else
-      respond_to do |format|
-        @user.destroy
-        redirect_to admin_users_path
-        format.json { head :no_content }
+    respond_to do |format|
+      if @user.update(deleted: true)
+        format.turbo_stream { redirect_to admin_users_path, notice: 'User deleted successfully' }
+        format.json { render :show, status: :ok, location: admin_user_url(@user) }
+      else
+        format.turbo_stream { redirect_to admin_users_path, notice: 'User destroy failed' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end

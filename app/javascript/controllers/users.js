@@ -37,8 +37,11 @@ function tableSearch() {
       url: '/admin/users',
       type: 'GET',
       data: { search: searchValue },
-      dataType: 'script',
-      success: function() {
+      headers: {
+        "Accept": "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function(res) {
+        Turbo.renderStreamMessage(res)
       },
       error: function() {
         console.log('Error fetching data');
@@ -55,7 +58,19 @@ $(document).ready(function() {
   $(document).on("turbo:render", function () {
     editPopup();
     deletePopup();
-    tableSearch();
-    
+    tableSearch();    
   })
 })
+
+
+
+addEventListener("turbo:before-stream-render", ((event) => {
+
+  const fallbackToDefaultActions = event.detail.render
+
+  event.detail.render = function (streamElement) {
+    fallbackToDefaultActions(streamElement)
+    initModals();
+    editPopup();
+  }
+}));
