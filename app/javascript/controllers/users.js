@@ -13,7 +13,6 @@ function editPopup(){
       },
 
       success: function(res){
-        console.log(res);
         Turbo.renderStreamMessage(res)
       },
       error: function(){
@@ -63,13 +62,9 @@ $(document).ready(function() {
   })
 })
 
-// $(document).on("turbo:after-stream-render", function () {
-//   console.log("rendered......")
-//   initModals()
-// })
+
 
 addEventListener("turbo:before-stream-render", ((event) => {
-  console.log("rendered......")
 
   const fallbackToDefaultActions = event.detail.render
 

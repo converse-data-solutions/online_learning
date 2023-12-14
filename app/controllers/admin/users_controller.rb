@@ -67,7 +67,7 @@ class Admin::UsersController < ApplicationController
     else
       respond_to do |format|
         @user.destroy
-        redirect_to admin_users_path
+        format.turbo_stream { redirect_to admin_users_path }
         format.json { head :no_content }
       end
     end
