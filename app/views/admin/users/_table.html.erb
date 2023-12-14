@@ -1,5 +1,5 @@
 <% @users.each do |user| %>
-  <% if user.has_role?(:admin) %>
+  <% if user.has_role?(:admin) && user.deleted == false %>
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <th scope="row" class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181] whitespace-nowrap dark:text-white">
         <%= user.id %>

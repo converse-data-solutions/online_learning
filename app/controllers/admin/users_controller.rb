@@ -59,16 +59,14 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    if @user == current_user
-      respond_to do |format|
-        format.turbo_stream { redirect_to admin_users_path, notice: 'You cannot delete yourself.' }
-        format.json { render :show, status: :ok, location: admin_user_url(@user) }
-      end
-    else
-      respond_to do |format|
-        @user.destroy
+    respond_to do |format|
+      if @user.update(deleted: true)
         format.turbo_stream { redirect_to admin_users_path }
         format.json { head :no_content }
+      else
+        @user == current_user
+          format.turbo_stream { redirect_to admin_users_path, notice: 'You cannot delete yourself.' }
+          format.json { render :show, status: :ok, location: admin_user_url(@user) }
       end
     end
   end
