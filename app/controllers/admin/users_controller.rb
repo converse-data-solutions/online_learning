@@ -60,7 +60,10 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     if @user == current_user
-      flash[:alert] = 'You cannot delete yourself.'
+      respond_to do |format|
+        format.turbo_stream { redirect_to admin_users_path, notice: 'You cannot delete yourself.' }
+        format.json { render :show, status: :ok, location: admin_user_url(@user) }
+      end
     else
       respond_to do |format|
         @user.destroy
