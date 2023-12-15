@@ -1,0 +1,46 @@
+<% @students.each do |user| %>
+  <% if user.has_role?(:student) && user.deleted == false %>
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+      <th scope="row" class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181] whitespace-nowrap dark:text-white">
+        <%= user.id %>
+      </th>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= user.name %>
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= user.email %>
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        ***********
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= user.gender %>
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= user.dataofbirth %>
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= user.contact_number %>
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= user.emergency_contact_name %>
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= user.emergency_contact_number %>
+      </td>
+      <td class="px-6 py-4 flex gap-4">
+        <button data-modal-target="large-modal" data-modal-toggle="large-modal" data-turbo-frame="edit-user-popup-frame" data-action="click->modal#toggle" data-url="<%= edit_admin_student_path(user) %>" data-user-id="<%= user.id %>" class="block w-full md:w-auto edit-user-model" type="button">
+          <img src="<%= asset_path("pencil.png") %>" alt="...">
+        </button>
+        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-action="click->modal#toggle" data-user-id="<%= user.id %>" class="block send-delete-user" type="button">
+          <img src="<%= asset_path("delete.png") %>" alt="...">
+        </button>
+      </td>
+    </tr>
+  <% end%>
+<% end %>
+
+<script>
+  $("#modal-close-btn").click();
+  $("#detele-modal-btn").click();
+</script>

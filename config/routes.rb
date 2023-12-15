@@ -49,6 +49,9 @@ Rails.application.routes.draw do
     get 'users/student_index', to: 'users#student_index', as: :student_index
   end
 
+  namespace :admin do
+    resources :students, only: %i[index edit update create destroy new]
+  end
 
   namespace :admin do
     resources :users do

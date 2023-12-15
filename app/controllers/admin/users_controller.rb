@@ -13,10 +13,6 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def student_index
-    @users = User.all
-  end
-
   def new
     @user = User.new
   end
