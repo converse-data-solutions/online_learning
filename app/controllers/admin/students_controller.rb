@@ -22,7 +22,7 @@ class Admin::StudentsController < ApplicationController
         format.turbo_stream { redirect_to admin_students_path }
         format.json { render :show, status: :created, location: admin_student_url(@student) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { student: @student }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/students/form', locals: { student: @student }) }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
@@ -38,11 +38,11 @@ class Admin::StudentsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @user.update(student_params)
+      if @student.update(student_params)
         format.turbo_stream { redirect_to admin_students_path, notice: 'User updated successfully' }
         format.json { render :show, status: :ok, location: admin_student_url(@student) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { student: @student }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-student-popup', partial: 'admin/students/edit', locals: { student: @student }) }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
@@ -67,7 +67,7 @@ class Admin::StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation, :deleted, :current_type, :role, :dateofbirth, :emergency_contact_name, :emergency_contact_number)
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :deleted, :current_type, :role, :dataofbirth, :emergency_contact_name, :emergency_contact_number, :occupation, :education, :addresses, :contact_number)
   end
 
   def user_role

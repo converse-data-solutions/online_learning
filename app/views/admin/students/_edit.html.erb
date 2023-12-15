@@ -1,61 +1,132 @@
   <!-- Modal body -->
-  <div class="p-7 space-y-6 lg:w-[86%] sm:w-[95%] w-[90%] mr-auto lg:ml-10 ml-5">
-    <%= form_for(user, url: admin_student_path(student), html: { class: "validate", id: "user-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
-      <div class="mb-4 flex flex-col sm:flex-row">
-        <label for="name" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-        <div class="w-full sm:w-[50%] flex flex-col">
-          <%= f.text_field :name, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
-          <% if user&.errors&.any? %>
-            <% if user.errors[:name].any? %>
+<div class="p-7 space-y-6 lg:w-[86%] sm:w-[95%] w-[90%] mr-auto lg:ml-10 ml-5">
+  <%= form_for(student, url: admin_student_path(student), html: { class: "validate", id: "user-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
+    <div class= "flex w-[100%] gap-[50px]">
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+        <div class=" flex flex-col">
+          <%= f.text_field :name, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+          <% if student&.errors&.any? %>
+            <% if student.errors[:name].any? %>
               <div class="text-red-600 text-sm mt-1">
-                <%= user.errors.full_messages_for(:name).join(', ') %>
+                <%= student.errors.full_messages_for(:name).join(', ') %>
               </div>
             <% end %>
           <% end %>
         </div>
       </div>
-      <div class="mb-4 flex flex-col sm:flex-row">
-        <label for="email" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-        <div class="w-full sm:w-[50%] flex flex-col">
-          <%= f.email_field :email, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
-          <% if user&.errors&.any? %>
-            <% if user.errors[:email].any? %>
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="email" class=" block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+        <div class="flex flex-col">
+          <%= f.email_field :email, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+          <% if student&.errors&.any? %>
+            <% if student.errors[:email].any? %>
               <div class="text-red-600 text-sm mt-1">
-                <%= user.errors.full_messages_for(:email).join(', ') %>
+                <%= student.errors.full_messages_for(:email).join(', ') %>
               </div>
             <% end %>
           <% end %>
         </div>
       </div>
-      <%= f.hidden_field :role, value: 'admin' %>
-      <div class="mb-4 flex flex-col sm:flex-row">
-        <label for="password" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-        <div class="w-full sm:w-[50%] flex flex-col">
-          <%= f.password_field :password, class: "validate bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
-          <% if user&.errors&.any? %>
-            <% if user.errors[:password].any? %>
+    </div>
+    <div class= "flex w-[100%] gap-[50px]">
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="password" class=" block mb-2 text-lg font-medium text-[#000]">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+        <div class=" flex flex-col">
+          <%= f.text_field :password, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+          <% if student&.errors&.any? %>
+            <% if student.errors[:password].any? %>
               <div class="text-red-600 text-sm mt-1">
-                <%= user.errors.full_messages_for(:password).join(', ') %>
+                <%= student.errors.full_messages_for(:password).join(', ') %>
               </div>
             <% end %>
           <% end %>
         </div>
       </div>
-      <div class="mb-4 flex flex-col sm:flex-row">
-        <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[50%]">Confirmation Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-        <div class="w-full sm:w-[50%] flex flex-col">
-          <%= f.password_field :password_confirmation, class: "validate bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
-          <% if user&.errors&.any? %>
-            <% if user.errors[:password_confirmation].any? %>
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="passwod_confirmation" class=" block mb-2 text-lg font-medium text-[#000]">Password Confirmation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+        <div class="flex flex-col">
+          <%= f.text_field :password_confirmation, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+          <% if student&.errors&.any? %>
+            <% if student.errors[:password_confirmation].any? %>
               <div class="text-red-600 text-sm mt-1">
-                <%= user.errors.full_messages_for(:password_confirmation).join(', ') %>
+                <%= student.errors.full_messages_for(:password_confirmation).join(', ') %>
               </div>
             <% end %>
           <% end %>
         </div>
       </div>
-      <div class="w-1/2 md:w-1/5 mx-auto mt-4 sm:mt-6">
-        <%= f.submit "Update", class: 'w-full md:ml-[50px] ml-[20px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
+    </div>
+    <div class= "flex w-[100%] gap-[50px]">
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Course</label>
+        
       </div>
-    <% end %>
-  </div>
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="gender" class=" block mb-2 text-lg font-medium text-[#000]">Gender</label>
+        <div class="flex w-[50%]">
+          <%= f.radio_button :gender, value: "Male", class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+          <span>Male</span>
+          <%= f.radio_button :gender, value: "Female", class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true   %>
+          <span>Female</span>
+        </div>
+      </div>
+    </div>
+    <div class= "flex w-[100%] gap-[50px]">
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="dataofbirth" class=" block mb-2 text-lg font-medium text-[#000]">Date of Birth</label>
+        <div class=" flex flex-col">
+          <%= f.date_field :dataofbirth, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        </div>
+      </div>
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="contact number" class=" block mb-2 text-lg font-medium text-[#000]">Contact Number</label>
+        <div class="flex flex-col">
+          <%= f.number_field :contact_number, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        </div>
+      </div>
+    </div>
+    <div class= "flex w-[100%] gap-[50px]">
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="occupation" class=" block mb-2 text-lg font-medium text-[#000]">Occupation</label>
+        <div class=" flex flex-col">
+          <%= f.text_field :occupation, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        </div>
+      </div>
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="education" class=" block mb-2 text-lg font-medium text-[#000]">Education</label>
+        <div class="flex flex-col">
+          <%= f.text_field :education, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        </div>
+      </div>
+    </div>
+    <div class= "flex w-[100%] gap-[50px]">
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="addresses" class=" block mb-2 text-lg font-medium text-[#000]">Address</label>
+        <div class=" flex flex-col">
+          <%= f.text_field :addresses, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        </div>
+      </div>
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="emergency contact name" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Name</label>
+        <div class="flex flex-col">
+          <%= f.text_field :emergency_contact_name, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        </div>
+      </div>
+    </div>
+    <div class= "flex w-[100%] gap-[50px]">
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <label for="emergency contact number" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Number</label>
+        <div class="flex flex-col">
+          <%= f.number_field :emergency_contact_number, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        </div>
+      </div>
+      <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
+        <%= f.hidden_field :role, value: 'student' %>
+      </div>
+    </div>
+    <div class="w-1/2 md:w-1/5 mx-auto mt-4 sm:mt-6">
+      <%= f.submit "Update", class: 'w-full md:ml-[50px] ml-[20px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
+    </div>
+  <% end %>
+</div>
