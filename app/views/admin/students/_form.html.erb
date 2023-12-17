@@ -31,7 +31,7 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="password" class=" block mb-2 text-lg font-medium text-[#000]">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class=" flex flex-col">
-        <%= f.text_field :password, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.text_field :password, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true %>
         <% if student&.errors&.any? %>
           <% if student.errors[:password].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -44,7 +44,7 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="passwod_confirmation" class=" block mb-2 text-lg font-medium text-[#000]">Password Confirmation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="flex flex-col">
-        <%= f.text_field :password_confirmation, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.text_field :password_confirmation, class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true %>
         <% if student&.errors&.any? %>
           <% if student.errors[:password_confirmation].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -58,15 +58,18 @@
   <div class= "flex w-[100%] gap-[50px]">
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Course</label>
-     
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
-      <label for="gender" class=" block mb-2 text-lg font-medium text-[#000]">Gender</label>
+      <label for="gender" class="block mb-2 text-lg font-medium text-[#000]">Gender</label>
       <div class="flex w-[50%]">
-        <%= f.radio_button :gender, value: "Male", class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
-        <span>Male</span>
-        <%= f.radio_button :gender, value: "Female", class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true   %>
-        <span>Female</span>
+        <label class="flex items-center">
+          <%= f.radio_button :gender, "Male" %>
+          <span class="text-sm">Male</span>
+        </label>
+        <label class="flex items-center">
+          <%= f.radio_button :gender, "Female" %>
+          <span class="text-sm">Female</span>
+        </label>
       </div>
     </div>
   </div>

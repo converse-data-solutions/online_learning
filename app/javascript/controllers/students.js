@@ -27,7 +27,9 @@ function editModelPopup(){
 };
 
 function deletePopup(){
+  console.log("processed.....");
   $(".send-delete-student").click(function(){
+    console.log("processed Loading.....");
     let id = $(this).data('user-id');
     $("#delete-student-model").attr("data-user-id", id);
     $("#delete-student-model").attr("href", `students/${id}`);
@@ -62,7 +64,7 @@ $(document).ready(function() {
   $(document).on("turbo:render", function () {
     editModelPopup();
     deletePopup();
-    studentTableSearch();    
+    studentTableSearch()
   })
 })
 

@@ -60,15 +60,18 @@
     <div class= "flex w-[100%] gap-[50px]">
       <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
         <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Course</label>
-        
       </div>
       <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
-        <label for="gender" class=" block mb-2 text-lg font-medium text-[#000]">Gender</label>
+        <label for="gender" class="block mb-2 text-lg font-medium text-[#000]">Gender</label>
         <div class="flex w-[50%]">
-          <%= f.radio_button :gender, value: "Male", class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
-          <span>Male</span>
-          <%= f.radio_button :gender, value: "Female", class: "validate w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true   %>
-          <span>Female</span>
+          <label class="flex items-center">
+            <%= f.radio_button :gender, "Male" %>
+            <span class="text-sm">Male</span>
+          </label>
+          <label class="flex items-center">
+            <%= f.radio_button :gender, "Female" %>
+            <span class="text-sm">Female</span>
+          </label>
         </div>
       </div>
     </div>
