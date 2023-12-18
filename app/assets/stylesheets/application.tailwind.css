@@ -19,11 +19,27 @@
   color: white;
 }
 
+.button-gradiant-hover{
+  transition:background, color 0.5s;
+}
+.button-gradiant-hover:hover {
+  background: linear-gradient(to left, #0082CE,  #0082CE, #31B978);
+  color: white;
+}
+
+.delete-gradiant-hover{
+  transition:background, color 0.5s;
+}
+.delete-gradiant-hover:hover {
+  background: linear-gradient( #0082CE,  #0082CE, #0082CE);
+  color: white;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-box-shadow: 0 0 0 30px #F9FAFB inset !important;
 }
 
 .table-container {

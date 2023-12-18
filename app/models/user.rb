@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :entrollments, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :ratings, as: :rateable, dependent: :destroy
+  has_many :user_courses
+  has_many :courses, through: :user_courses
   rolify before_add: :remove_previouse_role
   accepts_nested_attributes_for :profile # Make sure to add this line if you want to create profiles alongside users
 
@@ -16,7 +18,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, uniqueness: true
   validates :password, :password_confirmation, presence: true, on: :create
   validates :password, :password_confirmation, presence: true, allow_nil: true, on: :update
 

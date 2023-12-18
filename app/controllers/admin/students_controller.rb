@@ -4,6 +4,10 @@ class Admin::StudentsController < ApplicationController
   before_action :set_student, only: %i[edit update destroy show]
   def index
     @students = User.search_by_name_and_email(params[:search])
+
+    # Filter users based on the condition
+    @students = @students.select { |user| user.has_role?(:student) && user.deleted == false }
+
     respond_to do |format|
       format.json { render json: @students }
       format.html { render :index }

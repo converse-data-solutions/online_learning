@@ -6,6 +6,8 @@ class Course < ApplicationRecord
   has_many :entrollment, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :ratings, as: :rateable, dependent: :destroy
+  has_many :user_courses
+  has_many :users, through: :user_courses
 
   # validations
   validates :course_name,
