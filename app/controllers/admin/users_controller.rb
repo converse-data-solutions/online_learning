@@ -21,7 +21,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     @user = User.new(admin_params)
     respond_to do |format|
       if @user.add_role_and_save(admin_params[:role])

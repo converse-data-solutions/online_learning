@@ -10,7 +10,10 @@
       <%= user.email %>
     </td>
     <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
-      ***********
+      <% user.user_courses.each do |user_course| %>
+        <%= user_course.course.course_name %>
+        <%= ', ' unless user.user_courses.last == user_course %>
+      <% end %>
     </td>
     <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
       <%= user.gender %>

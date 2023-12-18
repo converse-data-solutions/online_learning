@@ -23,7 +23,7 @@ class Admin::StudentsController < ApplicationController
     @student = User.new(student_params)
     respond_to do |format|
       if @student.add_role_and_save(student_params[:role])
-        format.turbo_stream { redirect_to admin_students_path }
+        redirect_to admin_students_path
         format.json { render :show, status: :created, location: admin_student_url(@student) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/students/form', locals: { student: @student }) }
@@ -71,7 +71,7 @@ class Admin::StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation, :gender, :deleted, :current_type, :role, :dataofbirth, :emergency_contact_name, :emergency_contact_number, :occupation, :education, :addresses, :contact_number)
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :gender, :deleted, :current_type, :role, :dataofbirth, :emergency_contact_name, :emergency_contact_number, :occupation, :education, :addresses, :contact_number, course_ids: [])
   end
 
   def user_role

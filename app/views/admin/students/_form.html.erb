@@ -1,9 +1,137 @@
+    <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  .dropdown {
+    position: relative;
+    margin-bottom: 20px;
+
+    .dropdown-list {
+      padding: 25px 20px;
+      background: #fff;
+      position: absolute;
+      border-radius: 8px;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 11px rgba(0, 0, 0, 0.1);
+      font-size: 16px;
+      font-weight: 500;
+      color: #818181;
+      top: 50px;
+      left: 0;
+      right: 0;
+      border: 1px solid #cccccc;
+      max-height: 223px;
+      overflow-y: auto;
+      background: #fff;
+      display: none;
+      z-index: 10;
+    }
+
+    .checkbox {
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .dropdown-label {
+      display: block;
+      height: 44px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #818181;
+      line-height: 42px;
+      background: #fff;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      padding: 0 40px 0 20px;
+      cursor: pointer;
+      position: relative;
+
+      &:before {
+        content: "▼";
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.25s;
+        transform-origin: center center;
+      }
+    }
+    &.open-dropdown {
+      .dropdown-list {
+        display: block;
+      }
+      .checkbox {
+        transition: 2s opacity 2s;
+        opacity: 1;
+      }
+      .dropdown-label:before {
+        transform: translateY(-50%) rotate(-180deg);
+      }
+    }
+  }
+
+  .checkbox {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .checkbox:hover{
+      background-color: #f5f5f5;
+    }
+
+    .checkbox-custom {
+      display: none;
+    }
+
+    .checkbox-custom-label {
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+
+    .checkbox-custom + .checkbox-custom-label:before {
+      content: "";
+      background: transparent;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      text-align: center;
+      width: 12px;
+      height: 12px;
+      border: 1px solid black;
+      border-radius: 2px;
+      margin-top: -2px;
+    }
+
+    .checkbox-custom:checked + .checkbox-custom-label:after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 4px;
+      height: 4px;
+      padding: 2px;
+      transform: rotate(45deg);
+      text-align: center;
+      border: solid #000;
+      border-width: 0 2px 2px 0;
+    }
+    .checkbox-custom-label {
+      line-height: 16px;
+      font-size: 16px;
+      font-weight: 500;
+      margin-right: 0;
+      margin-left: 0;
+      color: #818181;
+    }
+  }
+</style>
 <%= form_for User.new, url: admin_students_path, html: { class: "validate", id: "user-admin-form" }, validate: true, method: :post do |f| %>
   <div class= "flex w-[100%] gap-[50px]">
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class=" flex flex-col">
-        <%= f.text_field :name, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.text_field :name, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
         <% if student&.errors&.any? %>
           <% if student.errors[:name].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -16,7 +144,7 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="email" class=" block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="flex flex-col">
-        <%= f.email_field :email, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.email_field :email, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
         <% if student&.errors&.any? %>
           <% if student.errors[:email].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -31,7 +159,7 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="password" class=" block mb-2 text-lg font-medium text-[#000]">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class=" flex flex-col">
-        <%= f.text_field :password, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true %>
+        <%= f.text_field :password, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true %>
         <% if student&.errors&.any? %>
           <% if student.errors[:password].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -44,7 +172,7 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="passwod_confirmation" class=" block mb-2 text-lg font-medium text-[#000]">Password Confirmation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="flex flex-col">
-        <%= f.text_field :password_confirmation, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true %>
+        <%= f.text_field :password_confirmation, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true %>
         <% if student&.errors&.any? %>
           <% if student.errors[:password_confirmation].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -58,6 +186,26 @@
   <div class= "flex w-[100%] gap-[50px]">
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Course</label>
+      <div class="w-[50%]">
+        <%#= collection_select(:course_ids, :course_name, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+        <%#= f.collection_check_boxes(:course_ids, Course.all, :id, :course_name, { }, { class: "your-css-classes-here" }) %>
+        <div class="dropdown">
+          <label class="dropdown-label">Select Options</label>
+          <div class="dropdown-list">
+            <div class="checkbox">
+              <input type="checkbox" name="dropdown-group-all" class="check-all checkbox-custom" id="checkbox-main" />
+              <label for="checkbox-main" class="checkbox-custom-label">Selection All</label>
+            </div>
+            <% Course.all.each do |course| %>
+              <div class="checkbox">
+                <%= f.check_box :course_ids, { multiple: true }, course.id, nil %>
+                <%# <input type="checkbox" name="dropdown-group course_ids[course_name]" class="check checkbox-custom" id="checkbox-custom" /> %>
+                <label for="checkbox-custom_<%= course.id %>" class="checkbox-custom-label"><%= course.course_name %></label>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="gender" class="block mb-2 text-lg font-medium text-[#000]">Gender</label>
@@ -77,13 +225,13 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="dataofbirth" class=" block mb-2 text-lg font-medium text-[#000]">Date of Birth</label>
       <div class=" flex flex-col w-[47%]">
-        <%= f.date_field :dataofbirth, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.date_field :dataofbirth, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="contact number" class=" block mb-2 text-lg font-medium text-[#000]">Contact Number</label>
       <div class="flex flex-col">
-        <%= f.number_field :contact_number, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.number_field :contact_number, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
       </div>
     </div>
   </div>
@@ -91,13 +239,13 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="occupation" class=" block mb-2 text-lg font-medium text-[#000]">Occupation</label>
       <div class=" flex flex-col">
-        <%= f.text_field :occupation, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.text_field :occupation, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="education" class=" block mb-2 text-lg font-medium text-[#000]">Education</label>
       <div class="flex flex-col">
-        <%= f.text_field :education, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.text_field :education, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
       </div>
     </div>
   </div>
@@ -105,13 +253,13 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="address" class=" block mb-2 text-lg font-medium text-[#000]">Address</label>
       <div class=" flex flex-col">
-        <%= f.text_field :addresses, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.text_field :addresses, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="emergency contact name" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Name</label>
       <div class="flex flex-col">
-        <%= f.text_field :emergency_contact_name, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.text_field :emergency_contact_name, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
       </div>
     </div>
   </div>
@@ -119,7 +267,7 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
       <label for="emergency contact number" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Number</label>
       <div class="flex flex-col">
-        <%= f.number_field :emergency_contact_number, class: "validate w-full bg-gray-50 border border-gray-300 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.number_field :emergency_contact_number, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full md:w-[50%] justify-between">
@@ -130,3 +278,77 @@
     <%= f.submit "CREATE", class: 'button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
   </div>
 <% end %>
+<script>
+  function checkboxDropdown(el) {
+    var $el = $(el);
+
+    function updateStatus(label, result) {
+      if (!result.length) {
+        label.html("Select Options");
+      }
+    }
+
+    $el.each(function (i, element) {
+      var $list = $(this).find(".dropdown-list"),
+        $label = $(this).find(".dropdown-label"),
+        $checkAll = $(this).find(".check-all"),
+        $inputs = $(this).find(".check"),
+        defaultChecked = $(this).find("input[type=checkbox]:checked"),
+        result = [];
+
+      updateStatus($label, result);
+      if (defaultChecked.length) {
+        defaultChecked.each(function () {
+          result.push($(this).next().text());
+          $label.html(result.join(", "));
+        });
+      }
+
+      $label.on("click", () => {
+        $(this).toggleClass("open-dropdown");
+      });
+
+      $checkAll.on("change", function () {
+        var checked = $(this).is(":checked");
+        var checkedText = $(this).next().text();
+        result = [];
+        if (checked) {
+          result.push(checkedText);
+          $label.html(result);
+          $inputs.prop("checked", false);
+        } else {
+          $label.html(result);
+        }
+        updateStatus($label, result);
+      });
+
+      $inputs.on("change", function () {
+        var checked = $(this).is(":checked");
+        var checkedText = $(this).next().text();
+        if ($checkAll.is(":checked")) {
+          result = [];
+        }
+        if (checked) {
+          result.push(checkedText);
+          $label.html(result.join(", "));
+          $checkAll.prop("checked", false);
+        } else {
+          let index = result.indexOf(checkedText);
+          if (index >= 0) {
+            result.splice(index, 1);
+          }
+          $label.html(result.join(", "));
+        }
+        updateStatus($label, result);
+      });
+
+      $(document).on("click touchstart", (e) => {
+        if (!$(e.target).closest($(this)).length) {
+          $(this).removeClass("open-dropdown");
+        }
+      });
+    });
+  }
+
+  checkboxDropdown(".dropdown");
+</script>
