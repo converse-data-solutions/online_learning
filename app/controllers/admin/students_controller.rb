@@ -3,9 +3,7 @@
 class Admin::StudentsController < ApplicationController
   before_action :set_student, only: %i[edit update destroy show]
   def index
-    @students = User.search_by_name_and_email(params[:search])
-
-    # Filter users based on the condition
+    @students = User.includes(user_courses: [:course]).search_by_name_and_email(params[:search])
     @students = @students.select { |user| user.has_role?(:student) && user.deleted == false }
 
     respond_to do |format|
@@ -19,11 +17,11 @@ class Admin::StudentsController < ApplicationController
     @student = User.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     @student = User.new(student_params)
     respond_to do |format|
       if @student.add_role_and_save(student_params[:role])
-        redirect_to admin_students_path
+        format.turbo_stream { redirect_to admin_students_path, notice: 'Student created successfully' }
         format.json { render :show, status: :created, location: admin_student_url(@student) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/students/form', locals: { student: @student }) }
@@ -36,14 +34,14 @@ class Admin::StudentsController < ApplicationController
     render layout: false
     return if @student
 
-    flash[:alert] = 'User not found.'
+    flash[:alert] = 'Student not found.'
     redirect_to admin_students_path
   end
 
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.turbo_stream { redirect_to admin_students_path, notice: 'User updated successfully' }
+        format.turbo_stream { redirect_to admin_students_path, notice: 'Student updated successfully' }
         format.json { render :show, status: :ok, location: admin_student_url(@student) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.update('edit-student-popup', partial: 'admin/students/edit', locals: { student: @student }) }
@@ -67,7 +65,7 @@ class Admin::StudentsController < ApplicationController
   private
 
   def set_student
-    @student = User.find(params[:id])
+    @student = User.find_by(params[:id])
   end
 
   def student_params

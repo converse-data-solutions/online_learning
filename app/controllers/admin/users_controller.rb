@@ -6,8 +6,6 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy show]
   def index
     @users = User.search_by_name_and_email(params[:search])
-
-    # Filter users based on the condition
     @users = @users.select { |user| user.has_role?(:admin) && user.deleted == false }
 
     respond_to do |format|
@@ -25,7 +23,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(admin_params)
     respond_to do |format|
       if @user.add_role_and_save(admin_params[:role])
-        redirect_to admin_users_path
+        format.turbo_stream { redirect_to admin_users_path, notice: 'User created successfully' }
         format.json { render :show, status: :created, location: admin_user_url(@user) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }

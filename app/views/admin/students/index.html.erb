@@ -2,7 +2,7 @@
   <%= javascript_import_module_tag "controllers/students" %>
 <% end %>
 <div class="flex flex-col w-full">
-  <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-row sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
+  <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
     <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px]  font-medium">Student Management - Admin</div>
     <div>
       <!-- Modal toggle -->
@@ -11,7 +11,7 @@
       </button>
       <!-- Main modal -->
       <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
-        <div class="relative w-full lg:max-w-[90rem] sm:max-w-[32rem] max-h-full max-w-[20rem] ml-[42px] sm:ml-[25px] md:ml-[0px]">
+        <div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
           <!-- Modal content -->
           <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <%= link_to admin_students_path do %>
@@ -97,7 +97,7 @@
       </tbody>
     </table>
     <div id="large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
-      <div class="relative w-full lg:max-w-[90rem] sm:max-w-[32rem] max-h-full max-w-[20rem] ml-[42px] sm:ml-[25px] md:ml-[0px]">
+      <div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
           <!-- Modal header -->
@@ -131,8 +131,8 @@
           <div class="px-6 pb-6 pt-2">
             <h3 class="mb-5 text-base font-medium text-[#818181] dark:text-gray-400 mt-4 ">Are you sure you want to delete this product?</h3>
             <div class="flex justify-start">
-            <%= link_to 'DELETE', "", data: { turbo_method: :delete }, class: "w-[150px] h-[42px] mr-2 text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-lg text-[16px] block items-center px-9 py-2.5 text-center mr-2 delete-gradiant-hover", id:"delete-student-model" %>
-            <button data-modal-hide="popup-modal" type="button" class="w-[150px] h-[42px] text-white rounded-lg border bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-base font-medium px-9 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 delete-gradiant-hover">CANCEL</button>
+              <%= link_to 'DELETE', "", data: { turbo_method: :delete }, class: "w-[150px] h-[42px] mr-2 text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-lg text-[16px] block items-center px-9 py-2.5 text-center mr-2 delete-gradiant-hover", id:"delete-student-model" %>
+              <button data-modal-hide="popup-modal" type="button" class="w-[150px] h-[42px] text-white rounded-lg border bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-base font-medium px-9 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 delete-gradiant-hover">CANCEL</button>
             </div>
           </div>
         </div>
