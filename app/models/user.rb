@@ -17,13 +17,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
-  validates :username, presence: true
+  validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, :password_confirmation, presence: true, on: :create
   validates :password, :password_confirmation, presence: true, allow_nil: true, on: :update
 
-  scope :admins, -> { where(deleted: false).joins(:roles).where(roles: { name: 'admin' }) }
-  scope :students, -> { where(deleted: false).joins(:roles).where(roles: { name: 'student' }) }
+  scope :admin, -> { where(deleted: false).joins(:roles).where(roles: { name: 'admin' }) }
+  scope :student, -> { where(deleted: false).joins(:roles).where(roles: { name: 'student' }) }
 
   enum current_type: {
     visitor: 0,
@@ -64,7 +64,7 @@ class User < ApplicationRecord
   def self.search_by_name_and_email(query)
     if query.present?
       search_query = "%#{query}%"
-      where('name LIKE ? OR email LIKE ?', search_query, search_query)
+      where('users.name LIKE ? OR email LIKE ?', search_query, search_query)
     else
       all
     end

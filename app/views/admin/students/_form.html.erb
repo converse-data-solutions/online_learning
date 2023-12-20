@@ -1,13 +1,13 @@
 <%= form_for User.new, url: admin_students_path, html: { class: "validate", id: "user-admin-form" }, validate: true, method: :post do |f| %>
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-      <label for="username" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+      <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class=" flex flex-col">
-        <%= f.text_field :username, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <%= f.text_field :name, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
         <% if student&.errors&.any? %>
-          <% if student.errors[:username].any? %>
+          <% if student.errors[:name].any? %>
             <div class="text-red-600 text-sm mt-1">
-              <%= student.errors.full_messages_for(:username).join(', ') %>
+              <%= student.errors.full_messages_for(:name).join(', ') %>
             </div>
           <% end %>
         <% end %>
@@ -31,7 +31,7 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="password" class=" block mb-2 text-lg font-medium text-[#000]">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class=" flex flex-col">
-        <%= f.text_field :password, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true %>
+        <%= f.password_field :password, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true %>
         <% if student&.errors&.any? %>
           <% if student.errors[:password].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -44,7 +44,7 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="passwod_confirmation" class="w-full sm:w-[40%] lg:w-[46%]  block mb-2 text-lg font-medium text-[#000]">Password Confirmation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="flex flex-col">
-        <%= f.text_field :password_confirmation, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true %>
+        <%= f.password_field :password_confirmation, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true %>
         <% if student&.errors&.any? %>
           <% if student.errors[:password_confirmation].any? %>
             <div class="text-red-600 text-sm mt-1">
