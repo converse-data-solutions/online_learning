@@ -17,10 +17,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
-  validates :name, presence: true
+  validates :username, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, :password_confirmation, presence: true, on: :create
   validates :password, :password_confirmation, presence: true, allow_nil: true, on: :update
+
+  scope :admins, -> { where(deleted: false).joins(:roles).where(roles: { name: 'admin' }) }
+  scope :students, -> { where(deleted: false).joins(:roles).where(roles: { name: 'student' }) }
 
   enum current_type: {
     visitor: 0,

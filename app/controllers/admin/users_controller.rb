@@ -6,8 +6,7 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy show]
   def index
     @users = User.search_by_name_and_email(params[:search])
-    @users = @users.select { |user| user.has_role?(:admin) && user.deleted == false }
-
+    @users = @users.admins
     respond_to do |format|
       format.json { render json: @users }
       format.html { render :index }
@@ -71,7 +70,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def admin_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation, :deleted, :current_type, :role)
+    params.require(:user).permit(:email, :username, :password, :password_confirmation, :deleted, :current_type, :role)
   end
 
   def user_role

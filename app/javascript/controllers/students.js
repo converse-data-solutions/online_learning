@@ -1,10 +1,7 @@
-console.log("Loaded students.js");
 function editModelPopup() {
   $(".edit-student-model").click(function () {
     let id = $(this).data("user-id");
-    console.log(id);
     let url = $(this).data("url");
-    console.log(url);
     $.ajax({
       method: "GET",
       url: url,
@@ -17,7 +14,6 @@ function editModelPopup() {
 
       success: function (res) {
         Turbo.renderStreamMessage(res);
-        console.log(res);
       },
       error: function () {
         console.log("Error fetching data");
@@ -158,5 +154,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     fallbackToDefaultActions(streamElement);
     initModals();
     editModelPopup();
+    deletePopup();
   };
 });

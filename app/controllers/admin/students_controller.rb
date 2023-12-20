@@ -4,8 +4,7 @@ class Admin::StudentsController < ApplicationController
   before_action :set_student, only: %i[edit update destroy show]
   def index
     @students = User.includes(user_courses: [:course]).search_by_name_and_email(params[:search])
-    @students = @students.select { |user| user.has_role?(:student) && user.deleted == false }
-
+    @students = @students.students
     respond_to do |format|
       format.json { render json: @students }
       format.html { render :index }
@@ -69,7 +68,7 @@ class Admin::StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation, :gender, :deleted, :current_type, :role, :dataofbirth, :emergency_contact_name, :emergency_contact_number, :occupation, :education, :addresses, :contact_number, course_ids: [])
+    params.require(:user).permit(:email, :username, :password, :password_confirmation, :gender, :deleted, :current_type, :role, :dataofbirth, :emergency_contact_name, :emergency_contact_number, :occupation, :education, :addresses, :contact_number, course_ids: [])
   end
 
   def user_role

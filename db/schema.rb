@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_18_071655) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_20_140447) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -193,7 +193,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_071655) do
     t.string "uid"
     t.string "provider"
     t.integer "current_type", default: 0
-    t.string "name"
+    t.string "username"
     t.date "dataofbirth"
     t.string "emergency_contact_name"
     t.bigint "emergency_contact_number"
