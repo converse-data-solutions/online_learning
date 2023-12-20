@@ -1,12 +1,12 @@
 <%= form_for User.new, url: admin_users_path, html: { class: "validate", id: "user-admin-form" }, validate: true, method: :post do |f| %>
   <div class="mb-4 flex flex-col sm:flex-row">
-    <label for="username" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <label for="name" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.text_field :username, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+      <%= f.text_field :name, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
       <% if user&.errors&.any? %>
-        <% if user.errors[:username].any? %>
+        <% if user.errors[:name].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= user.errors.full_messages_for(:username).join(', ') %>
+            <%= user.errors.full_messages_for(:name).join(', ') %>
           </div>
         <% end %>
       <% end %>
