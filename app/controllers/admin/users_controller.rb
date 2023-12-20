@@ -6,6 +6,7 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy show]
   def index
     @users = User.search_by_name_and_email(params[:search])
+    @users = @users.admins
     respond_to do |format|
       format.json { render json: @users }
       format.html { render :index }
@@ -13,19 +14,15 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def student_index
-    @users = User.all
-  end
-
   def new
     @user = User.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     @user = User.new(admin_params)
     respond_to do |format|
       if @user.add_role_and_save(admin_params[:role])
-        format.turbo_stream { redirect_to admin_users_path }
+        format.turbo_stream { redirect_to admin_users_path, notice: 'User created successfully' }
         format.json { render :show, status: :created, location: admin_user_url(@user) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
@@ -73,7 +70,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def admin_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation, :deleted, :current_type, :role)
+    params.require(:user).permit(:email, :username, :password, :password_confirmation, :deleted, :current_type, :role)
   end
 
   def user_role

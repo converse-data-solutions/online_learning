@@ -9,6 +9,7 @@
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.turbo.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/preline@2.0.0/dist/preline.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
@@ -105,7 +106,7 @@
                           <span class="nav-text main items-center justify-between mt-[7px] title text-lg font-medium font-['Poppins'] link-clr" style="display: flex;">Student Management<img src="<%= asset_path("down.png") %>" class="mr-4 change-position" alt="...">
                             <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-2/4 mx-auto">
                               <li class="flex justify-center"><a href="#" class="block font-medium font-[Poppins] text-[15px]">Attendance Details </a></li>
-                              <li class="flex justify-center"><a href="#" class="block font-medium font-[Poppins] text-[15px]"><%= link_to "Student Management", admin_student_index_path %></a></li>
+                              <li class="flex justify-center"><a href="#" class="block font-medium font-[Poppins] text-[15px]"><%= link_to "Student Management", admin_students_path %></a></li>
                             </ul>
                           </span>
                         </a>
@@ -169,7 +170,7 @@
                               <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                 <img src="<%= asset_path("search.png") %>">
                               </div>
-                              <input type="text" name="email" id="topbar-search" class="border-0 text-base font-medium border-gray-300 text-gray-900 sm:text-sm  block w-full pl-12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:ring-0" placeholder="Search here...">
+                              <input type="text" name="email" id="topbar-search" class="border-0 text-base font-medium border-gray-300 text-[#818181] sm:text-sm  block w-full pl-12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:ring-0" placeholder="Search here..." autocomplete="off">
                             </div>
                           </form>
                         </div>

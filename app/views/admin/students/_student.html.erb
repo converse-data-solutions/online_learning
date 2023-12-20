@@ -1,0 +1,22 @@
+<div id="<%= dom_id student %>">
+  <p>
+    <strong>Email:</strong>
+    <%= user.email %>
+  </p>
+  <p>
+    <strong>Name:</strong>
+    <%= user.username %>
+  </p>
+  <p>
+    <strong>Role:</strong>
+    <%= user.has_role?(:admin) ? 'Admin' : 'Student' %>
+  </p>
+  <p>
+    <strong>Current Type:</strong>
+    <%= user.current_type %>
+  </p>
+  <p>
+    <strong>Status:</strong>
+    <%= user.deleted? ? 'Inactive' : 'Active' %>
+  </p>
+</div>

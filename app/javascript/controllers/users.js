@@ -72,5 +72,6 @@ addEventListener("turbo:before-stream-render", ((event) => {
     fallbackToDefaultActions(streamElement)
     initModals();
     editPopup();
+    deletePopup();
   }
 }));
