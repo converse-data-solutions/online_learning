@@ -860,6 +860,7 @@ input[type="file"] {
     padding: 0 40px 0 20px;
     cursor: pointer;
     position: relative;
+    overflow: auto;
 
     &:before {
       content: "▼";

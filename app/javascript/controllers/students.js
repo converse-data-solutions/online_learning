@@ -54,98 +54,98 @@ function studentTableSearch() {
 
 // Dropdown with checkboxes
 function dropdownCheckBoxes() {
-function checkboxDropdown(el) {
-  var $el = $(el);
+  function checkboxDropdown(el) {
+    var $el = $(el);
 
-  function updateStatus(label, result) {
-    if (!result.length) {
-      label.html("Select Options");
-    }
+    $el.each(function () {
+      var $list = $(this).find(".dropdown-list"),
+        $label = $(this).find(".dropdown-label"),
+        $checkAll = $(this).find(".check-all"),
+        $inputs = $(this).find(".checkbox input[type='checkbox']"),
+        result = [];
+
+      function updateStatus() {
+        if (!result.length) {
+          $label.html("Select Options");
+        }
+      }
+
+      function updateLabel() {
+        $label.html(result.join(", "));
+        updateStatus();
+      }
+
+      $inputs.on("change", function () {
+        var checkedText = $(this).next().text();
+
+        if ($(this).is(":checked")) {
+          result.push(checkedText);
+        } else {
+          result = result.filter((item) => item !== checkedText);
+        }
+
+        updateLabel();
+      });
+
+      $checkAll.on("change", function () {
+        result = [];
+
+        if ($(this).is(":checked")) {
+          $inputs.prop("checked", true);
+          result.push($(this).next().text());
+        } else {
+          $inputs.prop("checked", false);
+        }
+
+        updateLabel();
+      });
+
+      // Initial setup
+      $inputs.each(function () {
+        if ($(this).is(":checked")) {
+          result.push($(this).next().text());
+        }
+      });
+
+      console.log("Initial Values:", result); // Add this line for debugging
+
+      updateLabel();
+
+      $label.on("click", function () {
+        $el.toggleClass("open-dropdown");
+      });
+
+      $(document).on("click touchstart", function (e) {
+        if (!$(e.target).closest($el).length) {
+          $el.removeClass("open-dropdown");
+        }
+      });
+    });
   }
 
-  $el.each(function (i, element) {
-    var $list = $(this).find(".dropdown-list"),
-      $label = $(this).find(".dropdown-label"),
-      $checkAll = $(this).find(".check-all"),
-      $inputs = $(this).find(".check"),
-      defaultChecked = $(this).find("input[type=checkbox]:checked"),
-      result = [];
-
-    updateStatus($label, result);
-    if (defaultChecked.length) {
-      defaultChecked.each(function () {
-        result.push($(this).next().text());
-        $label.html(result.join(", "));
-      });
-    }
-
-    $label.on("click", () => {
-      $(this).toggleClass("open-dropdown");
-    });
-
-    $checkAll.on("change", function () {
-      var checked = $(this).is(":checked");
-      var checkedText = $(this).next().text();
-      result = [];
-      if (checked) {
-        result.push(checkedText);
-        $label.html(result);
-        $inputs.prop("checked", false);
-      } else {
-        $label.html(result);
-      }
-      updateStatus($label, result);
-    });
-
-    $inputs.on("change", function () {
-      var checked = $(this).is(":checked");
-      var checkedText = $(this).next().text();
-      if ($checkAll.is(":checked")) {
-        result = [];
-      }
-      if (checked) {
-        result.push(checkedText);
-        $label.html(result.join(", "));
-        $checkAll.prop("checked", false);
-      } else {
-        let index = result.indexOf(checkedText);
-        if (index >= 0) {
-          result.splice(index, 1);
-        }
-        $label.html(result.join(", "));
-      }
-      updateStatus($label, result);
-    });
-
-    $(document).on("click touchstart", (e) => {
-      if (!$(e.target).closest($(this)).length) {
-        $(this).removeClass("open-dropdown");
-      }
-    });
-  });
-}
-
-checkboxDropdown(".dropdown");
-  
+  checkboxDropdown(".dropdown");
 }
 // datepicker
-function customDatePicker(){
-$(function () {
-  $("#datepicker").datepicker({
-    dateFormat: "dd-mm-yy",
-    duration: "fast",
-  });
-});
-}
-
-function customEditDatePicker(){
+function customDatePicker() {
   $(function () {
-    $("#editdatepicker").datepicker({
+    $("#datepicker").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
     });
   });
-  }
+}
+
+function customEditDatePicker() {
+  $(function () {
+    var initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
+
+    $("#editdatepicker").datepicker({
+      dateFormat: "dd-mm-yy", // Update this if needed
+      duration: "fast",
+      defaultDate: initialDate,
+    });
+  });
+}
 
 //initialize script
 
