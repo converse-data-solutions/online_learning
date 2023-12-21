@@ -175,5 +175,8 @@ addEventListener("turbo:before-stream-render", (event) => {
     initModals();
     editModelPopup();
     deletePopup();
+    dropdownCheckBoxes();
+    customDatePicker();
+    customEditDatePicker();
   };
 });
