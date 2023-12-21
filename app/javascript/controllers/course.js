@@ -135,17 +135,55 @@ function clearFormOnSubmit() {
   });
 }
 
+// Course Edit Popup
+function courseEditPopup(){
+  $(".edit-course-model").click(function(){
+    let id = $(this).data('course-id');
+    let url = $(this).data('url');
+    $.ajax({
+      method: 'GET',
+      url: url,
+      data: {
+        user_id: id,
+      },
+      headers: {
+        "Accept": "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+
+      success: function(res){
+        Turbo.renderStreamMessage(res)
+      },
+      error: function(){
+        console.log('Error fetching data');
+      }
+    });
+  });
+};
+
+// Course Delete Popup
+function courseDeletePopup(){
+  $(".send-delete-course").click(function(){
+    let id = $(this).data('course-id');
+    $("#delete-course-model").attr("data-course-id", id);
+    $("#delete-course-model").attr("href", `courses/${id}`);
+  });
+}
+
 
 $(document).ready(function () {
   courseSubmit();
   tableForm();
   tableSearch();
   collectionSelect();
+  courseEditPopup();
+  courseDeletePopup();
 
   $(document).on("turbo:render", function () {
     courseSubmit();
     tableForm();
     tableSearch();
+    courseEditPopup();
+    courseDeletePopup();
 
     if ($("#stepper-loader").length > 0) {
       new HSStepper($("#stepper-loader")[0]);

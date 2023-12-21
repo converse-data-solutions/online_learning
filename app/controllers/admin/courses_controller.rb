@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # This is an Admin Course controller
-class Admin::CoursesController < ApplicationController
+class Admin::CoursesController < ApplicationController # rubocop:disable Style/ClassAndModuleChildren
   # before_action :authenticate_admin!
   require 'will_paginate/array'
-  def index
+  def index # rubocop:disable Metrics/MethodLength
     @courses = []
     Course.all.each do |course|
       @courses.push(course)
@@ -12,6 +12,11 @@ class Admin::CoursesController < ApplicationController
     @courses = @courses.paginate(page: params[:page], per_page: 5)
     @sections = Course.last.sections
     @lessons = Lesson.all
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @courses }
+      format.turbo_stream
+    end
   end
 
   def new
@@ -20,10 +25,14 @@ class Admin::CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
-    if @course.save
-      head :no_content
-    else
-      flash[:error] = @course.errors.full_messages
+    respond_to do |format|
+      if @course.save
+        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course created successfully' }
+        format.json { render :show, status: :created, location: @course }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('new-course-popup', partial: 'admin/courses/new', locals: { course: @course }) }
+        format.json { render json: @course.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -31,20 +40,30 @@ class Admin::CoursesController < ApplicationController
     @course = Course.find(params[:id])
   end
 
-  def update
+  def update # rubocop:disable Metrics/AbcSize
     @course = Course.find(params[:id])
-    if @course.update(course_params)
-      redirect_to admin_courses_path
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @course.update(course_params)
+        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course updated successfully' }
+        format.json { render :show, status: :ok, location: admin_course_url(@course) }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-course-popup', partial: 'admin/courses/edit', locals: { course: @course }) }
+        format.json { render json: @course.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-  def destroy
+  def destroy # rubocop:disable Metrics/AbcSize
     @course = Course.find(params[:id])
-    return unless @course.destroy
-
-    redirect_to admin_courses_path
+    respond_to do |format|
+      if @course.destroy
+        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course deleted successfully' }
+        format.json { render :show, status: :ok, location: admin_course_url(@course) }
+      else
+        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course destroy failed' }
+        format.json { render json: @course.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def show
