@@ -99,8 +99,15 @@
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="contact number" class=" block mb-2 text-lg font-medium text-[#000]">Contact Number</label>
-      <div class="flex flex-col">
-        <%= f.number_field :contact_number, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+      <div class="flex flex-col w-[54%]">
+        <%= f.text_field :contact_number, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <% if student&.errors&.any? %>
+          <% if student.errors[:contact_number].any? %>
+            <div class="text-red-600 text-sm mt-1">
+              <%= student.errors.full_messages_for(:emergency_contact_number).join(', ') %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -135,8 +142,15 @@
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="emergency contact number" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Number</label>
-      <div class="flex flex-col">
-        <%= f.number_field :emergency_contact_number, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+      <div class="flex flex-col w-[54%]">
+        <%= f.text_field :emergency_contact_number, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+        <% if student&.errors&.any? %>
+          <% if student.errors[:emergency_contact_number].any? %>
+            <div class="text-red-600 text-sm mt-1">
+              <%= student.errors.full_messages_for(:emergency_contact_number).join(', ') %>
+            </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">

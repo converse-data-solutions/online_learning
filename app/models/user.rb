@@ -21,6 +21,12 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password, :password_confirmation, presence: true, on: :create
   validates :password, :password_confirmation, presence: true, allow_nil: true, on: :update
+  validates :contact_number, numericality: { only_integer: true, greater_than_or_equal_to: 0 },
+                             length: { is: 10 },
+                             allow_blank: true
+  validates :emergency_contact_number, numericality: { only_integer: true, greater_than_or_equal_to: 0 },
+                                       length: { is: 10 },
+                                       allow_blank: true
 
   scope :admin, -> { where(deleted: false).joins(:roles).where(roles: { name: 'admin' }) }
   scope :student, -> { where(deleted: false).joins(:roles).where(roles: { name: 'student' }) }
