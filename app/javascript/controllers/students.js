@@ -53,6 +53,7 @@ function studentTableSearch() {
 }
 
 // Dropdown with checkboxes
+function dropdownCheckBoxes() {
 function checkboxDropdown(el) {
   var $el = $(el);
 
@@ -125,13 +126,26 @@ function checkboxDropdown(el) {
 }
 
 checkboxDropdown(".dropdown");
+  
+}
 // datepicker
+function customDatePicker(){
 $(function () {
   $("#datepicker").datepicker({
     dateFormat: "dd-mm-yy",
     duration: "fast",
   });
 });
+}
+
+function customEditDatePicker(){
+  $(function () {
+    $("#editdatepicker").datepicker({
+      dateFormat: "dd-mm-yy",
+      duration: "fast",
+    });
+  });
+  }
 
 //initialize script
 
@@ -139,11 +153,17 @@ $(document).ready(function () {
   editModelPopup();
   deletePopup();
   studentTableSearch();
+  dropdownCheckBoxes();
+  customDatePicker();
+  customEditDatePicker();
 
   $(document).on("turbo:render", function () {
     editModelPopup();
     deletePopup();
     studentTableSearch();
+    dropdownCheckBoxes();
+    customDatePicker();
+    customEditDatePicker();
   });
 });
 
