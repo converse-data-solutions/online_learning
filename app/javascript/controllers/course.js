@@ -128,7 +128,7 @@ $(document).on("change", ".fileUploadWrap input[type='file']", function () {
 });
 
 function clearFormOnSubmit() {
-  $("#stepper_section-form").on("submit", function(event) {
+  $("#stepper_section-form").on("submit", function (event) {
     event.preventDefault();
 
     this.reset();
@@ -136,39 +136,58 @@ function clearFormOnSubmit() {
 }
 
 // Course Edit Popup
-function courseEditPopup(){
-  $(".edit-course-model").click(function(){
-    let id = $(this).data('course-id');
-    let url = $(this).data('url');
+function courseEditPopup() {
+  $(".edit-course-model").click(function () {
+    let id = $(this).data("course-id");
+    let url = $(this).data("url");
     $.ajax({
-      method: 'GET',
+      method: "GET",
       url: url,
       data: {
         user_id: id,
       },
       headers: {
-        "Accept": "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function(res){
-        Turbo.renderStreamMessage(res)
+      success: function (res) {
+        Turbo.renderStreamMessage(res);
       },
-      error: function(){
-        console.log('Error fetching data');
-      }
+      error: function () {
+        console.log("Error fetching data");
+      },
     });
   });
-};
+}
 
 // Course Delete Popup
-function courseDeletePopup(){
-  $(".send-delete-course").click(function(){
-    let id = $(this).data('course-id');
+function courseDeletePopup() {
+  $(".send-delete-course").click(function () {
+    let id = $(this).data("course-id");
     $("#delete-course-model").attr("data-course-id", id);
     $("#delete-course-model").attr("href", `courses/${id}`);
   });
 }
 
+function courseTableSearch() {
+  $("#course_search").on("input", function () {
+    let searchValue = $(this).val();
+    $.ajax({
+      url: "/admin/courses",
+      type: "GET",
+      data: { search: searchValue },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function (res) {
+        Turbo.renderStreamMessage(res);
+      },
+      error: function () {
+        console.log("Error fetching data");
+      },
+    });
+  });
+}
 
 $(document).ready(function () {
   courseSubmit();
@@ -177,6 +196,7 @@ $(document).ready(function () {
   collectionSelect();
   courseEditPopup();
   courseDeletePopup();
+  courseTableSearch();
 
   $(document).on("turbo:render", function () {
     courseSubmit();
@@ -184,9 +204,22 @@ $(document).ready(function () {
     tableSearch();
     courseEditPopup();
     courseDeletePopup();
+    courseTableSearch();
 
     if ($("#stepper-loader").length > 0) {
       new HSStepper($("#stepper-loader")[0]);
     }
   });
+});
+
+addEventListener("turbo:before-stream-render", (event) => {
+  const fallbackToDefaultActions = event.detail.render;
+  console.log("fallbackToDefaultActions");
+
+  event.detail.render = function (streamElement) {
+    fallbackToDefaultActions(streamElement);
+    initModals();
+    courseEditPopup();
+    courseDeletePopup();
+  };
 });
