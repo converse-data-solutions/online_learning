@@ -4,12 +4,12 @@
 class Admin::CoursesController < ApplicationController # rubocop:disable Style/ClassAndModuleChildren
   # before_action :authenticate_admin!
   require 'will_paginate/array'
-  def index # rubocop:disable Metrics/MethodLength
+  def index # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     @courses = []
     Course.all.each do |course|
       @courses.push(course)
     end
-    @courses = @courses.paginate(page: params[:page], per_page: 5)
+    @courses = Course.search_by_course_name(params[:search]).paginate(page: params[:page], per_page: 5)
     @sections = Course.last.sections
     @lessons = Lesson.all
     respond_to do |format|
