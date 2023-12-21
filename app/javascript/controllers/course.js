@@ -32,12 +32,12 @@ function tableForm() {
 }
 
 // Stepper Course Submit
-function courseSubmit() {
-  $(".next-btn").click(function () {
-    $("#new_course").submit();
-    event.preventDefault();
-  });
-}
+// function courseSubmit() {
+//   $(".next-btn").click(function () {
+//     $("#new_course").submit();
+//     event.preventDefault();
+//   });
+// }
 
 // Collection-Select Style
 function collectionSelect() {
@@ -190,7 +190,7 @@ function courseTableSearch() {
 }
 
 $(document).ready(function () {
-  courseSubmit();
+  // courseSubmit();
   tableForm();
   tableSearch();
   collectionSelect();
@@ -199,7 +199,7 @@ $(document).ready(function () {
   courseTableSearch();
 
   $(document).on("turbo:render", function () {
-    courseSubmit();
+    // courseSubmit();
     tableForm();
     tableSearch();
     courseEditPopup();
