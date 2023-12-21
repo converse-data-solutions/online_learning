@@ -1,0 +1,33 @@
+<%= form_for Course.new, url: admin_courses_path, html: { class: "validate", id: "admin-course-form" }, method: :post do |f| %>
+  <div class="flex justify-between flex-col sm:flex-row">
+    <label for="course-name" class="block mb-2 text-lg font-medium text-[#000]">Course</label>
+    <div class="flex flex-col mb-4">
+      <%= f.text_field :course_name, class: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+      <% if course&.errors&.any? %>
+        <% if course.errors[:course_name].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= course.errors.full_messages_for(:course_name).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="mb-4 flex justify-between flex-col sm:flex-row">
+    <label for="description" class="block mb-2 text-lg font-medium text-[#000]">Description
+      <span class="text-[#C6C6C6] text-[15px] font-medium">(optional)</span>
+    </label>
+    <div class="flex flex-col">
+      <%= f.text_field :description, class: 'border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200  block w-full h-[110px] p-2.5 rounded-[7px]' %>
+      <% if course&.errors&.any? %>
+        <% if course.errors[:description].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= course.errors.full_messages_for(:description).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <%= f.submit "Save", class: "w-full ml-[50px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" %>
+  </div>
+<% end %>

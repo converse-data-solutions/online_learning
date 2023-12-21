@@ -30,7 +30,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
         format.turbo_stream { redirect_to admin_courses_path, notice: 'Course created successfully' }
         format.json { render :show, status: :created, location: @course }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('new-course-popup', partial: 'admin/courses/new', locals: { course: @course }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-course-form', partial: 'admin/courses/form', locals: { course: @course }) }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end

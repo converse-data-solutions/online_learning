@@ -78,18 +78,9 @@
                       <!-- First Contnet -->
                       <div data-hs-stepper-content-item='{"index": 1}'>
                         <div class="p-4 sm:mt-[9rem] sm:mx-auto mx-0 sm:mb-[12rem] mt-[4rem] mb-[3rem] md:w-[48%] sm:w-9/12 w-full">
-                          <%= form_for Course.new, url: admin_courses_path, class: "space-y-6 w-[80%]", method: :post do |f| %>
-                            <div class="flex justify-between flex-col sm:flex-row">
-                              <label for="course-name" class="block mb-2 text-lg font-medium text-[#000]">Course</label>
-                              <%= f.text_field :course_name, class: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block sm:w-1/2 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
-                            </div>
-                            <div class="mb-4 flex justify-between flex-col sm:flex-row">
-                              <label for="description" class="block mb-2 text-lg font-medium text-[#000]">Description
-                                <span class="text-[#C6C6C6] text-[15px] font-medium">(optional)</span>
-                              </label>
-                              <%= f.text_field :description, class: 'border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200  block sm:w-1/2 w-full h-[110px] p-2.5 rounded-[7px]' %>
-                            </div>
-                          <% end %>
+                          <div class="" id="course-form">
+                            <%= render partial: "admin/courses/form", locals: {course: @course} %>
+                          </div>
                         </div>
                       </div>
                       <!-- End First Contnet -->
@@ -304,7 +295,7 @@
               const currentIndex = stepperInstance.currentIndex + 1;
               console.log(currentIndex);
 
-              if (currentIndex === 3) {
+              if (currentIndex === 4) {
                 $.ajax({
                   url: "/admin/courses/sections/all",
                   type: "GET",
