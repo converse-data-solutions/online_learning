@@ -1,5 +1,4 @@
 function stepperLoop() {
-  console.log("stepper loop");
   const active = {
     stepper: 1,
   };

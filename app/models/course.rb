@@ -13,7 +13,7 @@ class Course < ApplicationRecord
   validates :course_name, presence: true
   # presence: { message: 'Please enter the Course name' },
   # uniqueness: { message: 'Course name already exists.' }
-  validates :description, presence: true
+  # validates :description, presence: true
   # presence: { message: 'Please enter the Course description' }
 
   def self.search_by_course_name(query)

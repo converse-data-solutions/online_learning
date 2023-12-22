@@ -1,6 +1,6 @@
 <!-- Modal body -->
 <div class="p-7 space-y-6 w-[75%] mr-auto ml-auto">
-  <%= form_for(course, url: admin_course_path(course), method: :patch) do |f| %>
+  <%= form_for(course, url: admin_course_path(course), html: { class: "validate", id: "admin-course-edit-form" }, method: :patch) do |f| %>
     <div class="flex mb-3 justify-between flex-col md:flex-row">
       <label for="course-name" class="block mb-2 text-[18px] font-medium text-[#000]">Course</label>
       <div class="flex flex-col">
