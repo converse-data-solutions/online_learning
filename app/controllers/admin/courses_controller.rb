@@ -21,15 +21,19 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
 
   def new
     @course = Course.new
+    @show_edit_form = true
   end
 
-  def create
+  def create # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     @course = Course.new(course_params)
     respond_to do |format|
       if @course.save
-        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course created successfully' }
+        @show_edit_form = false
+        format.html
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-course-form', partial: 'admin/courses/edit', locals: { course: Course.last }), notice: 'Course created successfully' }
         format.json { render :show, status: :created, location: @course }
       else
+        format.html
         format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-course-form', partial: 'admin/courses/form', locals: { course: @course }) }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end

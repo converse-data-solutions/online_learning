@@ -79,7 +79,11 @@
                       <div data-hs-stepper-content-item='{"index": 1}'>
                         <div class="p-4 sm:mt-[9rem] sm:mx-auto mx-0 sm:mb-[12rem] mt-[4rem] mb-[3rem] md:w-[48%] sm:w-9/12 w-full">
                           <div class="" id="course-form">
-                            <%= render partial: "admin/courses/form", locals: {course: @course} %>
+                            <% if @show_edit_form %>
+                              <%= render partial: "admin/courses/edit", locals: {course: @course} %>
+                            <% else %>
+                              <%= render partial: "admin/courses/form", locals: {course: Course.new} %>
+                            <% end %>
                           </div>
                         </div>
                       </div>
@@ -179,7 +183,7 @@
                       </svg>
                       Back
                     </button>
-                    <button type="button" class="py-2 px-10 text-[#fff] inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] disabled:opacity-50 disabled:pointer-events-none next-btn" data-hs-stepper-next-btn> Next </button>
+                    <button type="button" class="py-2 px-10 text-[#fff] inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] disabled:opacity-50 disabled:pointer-events-none next-btn" data-hs-stepper-next-btn > Next </button>
                     <button type="button" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-finish-btn style="display: none;"> Finish </button>
                     <button type="reset" class="py-2 px-3 hidden items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-reset-btn style="display: none;"> Reset </button>
                   </div>
@@ -278,55 +282,161 @@
   </div>
 </div>
 <script>
-  $(document).ready( function () {
-      if (typeof HSStepper !== 'undefined') {
-         setTimeout(function () {
-        const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
-        console.log(stepperElement);
+  $(document).ready(function() {
+  	// stepper initiliazation
+  	if (typeof HSStepper !== 'undefined') {
+  		setTimeout(function() {
+  			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
+  			let errorState = 1
+  			stepperElement.disableButtons()
+  			$("#course-name").on("keyup", function() {
+  				if ($(this).val().length > 2) {
+  					stepperElement.enableButtons();
+  				} else {
+  					stepperElement.disableButtons();
+  				}
+  			});
 
-        if (stepperElement) {
-          try {
-            const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
-            console.log(stepperInstance);
 
-            $('[data-hs-stepper-next-btn]').on('click', function () {
-              stepperInstance.on('next');
+  			if (stepperElement) {
+  				try {
+  					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
+  					console.log("testing index........", stepperInstance);
 
-              const currentIndex = stepperInstance.currentIndex + 1;
-              console.log(currentIndex);
+  					$('[data-hs-stepper-next-btn]').on('click', function() {
 
-              if (currentIndex === 4) {
-                $.ajax({
-                  url: "/admin/courses/sections/all",
-                  type: "GET",
+  						stepperInstance.on('next');
 
-                  success: function (response) {},
-                  error: function (xhr, status, error) {},
-                });
-                console.log("ajax called");
-                $('[data-hs-stepper-next-btn]').css('display', 'none');
-                $('[data-hs-stepper-finish-btn]').css('display', 'block');
-                $(".reduce-course").addClass("reduce-course2");
-                $(".vertical-stepper").css("display", "block");
+  						const currentIndex = stepperInstance.currentIndex;
+  						console.log(currentIndex);
+  						console.log("current index", currentIndex);
+  						if (currentIndex === 2) {
+  							$.ajax({
+  								type: "POST",
+  								url: $("#admin-course-form").attr("action"),
+  								data: $("#admin-course-form").serialize(),
+  								// dataType: "script", // This is important for Turbo Streams
+  								headers: {
+  									Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+  								},
+  								success: function(data) {
+  									Turbo.renderStreamMessage(data);
+  								},
+  								error: function(data) {
+  									console.log("Error on feching data");
 
-              } else if (currentIndex === 4) {
-                $('[data-hs-stepper-next-btn]').css('display', 'none');
-                $('[data-hs-stepper-finish-btn]').css('display', 'block');
-                $(".reduce-course").removeClass("reduce-course2");
-                $(".vertical-stepper").css("display", "none");
+  								},
+  							});
+  						}
+  						if (currentIndex === 3) {
+  							console.log("ffdgdgdf", stepperInstance.currentIndex);
+  							$("button").removeClass('header1');
+  						}
+  						if (currentIndex === 3) {
+  							console.log("current index is 3");
+  							$.ajax({
+  								url: "/admin/courses/sections/all",
+  								type: "GET",
 
-              }
-            });
+  								success: function(response) {},
+  								error: function(xhr, status, error) {},
+  							});
+  							console.log("ajax called");
+  							$('[data-hs-stepper-next-btn]').css('display', 'none');
+  							$('[data-hs-stepper-finish-btn]').css('display', 'block');
+  							$(".reduce-course").addClass("reduce-course2");
+  							$(".vertical-stepper").css("display", "block");
 
-          } catch (error) {
-            console.error("Error initializing HSStepper:", error);
-          }
-        } else {
-          console.error("Element with data-hs-stepper not found");
-        }
-      }, 1000);
-      } else {
-        console.error("HSStepper not defined. Make sure preline.js is loaded.");
-      }
-    });
+  						} else if (currentIndex < 3) {
+
+  							$('[data-hs-stepper-next-btn]').css('display', 'block');
+  							$('[data-hs-stepper-finish-btn]').css('display', 'none');
+  							$(".reduce-course").removeClass("reduce-course2");
+  							$(".vertical-stepper").css("display", "none");
+
+  						}
+  					});
+
+  					$('[data-hs-stepper-back-btn]').on('click', function() {
+  						stepperInstance.on('back');
+
+  						const backButtonIndex = stepperInstance.currentIndex;
+
+
+
+
+  						if (backButtonIndex < 3) {
+  							$('[data-hs-stepper-next-btn]').css('display', 'block');
+  							$('[data-hs-stepper-finish-btn]').css('display', 'none');
+  							$(".reduce-course").removeClass("reduce-course2");
+  							$(".vertical-stepper").css("display", "none");
+
+  						}
+  					})
+
+
+
+  				} catch (error) {
+  					console.error("Error initializing HSStepper:", error);
+  				}
+  			} else {
+  				console.error("Element with data-hs-stepper not found");
+  			}
+  		}, 1000);
+  	} else {
+  		console.error("HSStepper not defined. Make sure preline.js is loaded.");
+  	}
+  });
+
+
+
+
+  // function courseCreateOnNext() {
+
+  //   $(".header1").on("click", function (event) {
+  //     event.preventDefault();
+  //     $.ajax({
+  //       type: "POST",
+  //       url: $("#admin-course-form").attr("action"),
+  //       data: $("#admin-course-form").serialize(),
+  //       // dataType: "script", // This is important for Turbo Streams
+  //       headers: {
+  //         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+  //       },
+  //       success: function (data) {
+  //         Turbo.renderStreamMessage(data);
+  //       },
+  //       error: function (data) {
+  //         console.log("Error on feching data");
+
+  //       },
+  //     });
+  //   });
+  // }
+
+
+
+  function courseEditOnNext() {
+  	console.log("courseEditOnNext");
+  	$("[data-hs-stepper-next-btn]").on("click", function(event) {
+
+  		event.preventDefault();
+  		$.ajax({
+
+  			type: "PUT",
+  			url: $("#admin-course-edit-form").attr("action"),
+  			data: $("#admin-course-edit-form").serialize(),
+  			// dataType: "script", // This is important for Turbo Streams
+  			headers: {
+  				Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+  			},
+  			success: function(data) {
+  				Turbo.renderStreamMessage(data);
+  			},
+  			error: function(data) {
+  				console.log("Error on feching data");
+  			}
+  		})
+  	})
+  }
 </script>
