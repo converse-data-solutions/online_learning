@@ -88,7 +88,7 @@
                         </div>
                       </div>
                       <!-- End First Contnet -->
-                      <!-- First Contnet -->
+                      <!-- Second Contnet -->
                       <div data-hs-stepper-content-item='{"index": 2}' style="display: none;">
                         <div class="p-4 h-[50vh]">
                           <div class="relative overflow-x-auto w-[90%] mx-auto h-[50vh]">
@@ -126,7 +126,7 @@
                                       </div>
                                     </td>
                                     <td>
-                                      <div class=""> <%= f.submit "log in", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px] submit_section" %> </div>
+                                      <div class=""> <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px] submit_section" %> </div>
                                     </td>
                                   <% end %>
                                 </tr>
@@ -138,8 +138,8 @@
                           </div>
                         </div>
                       </div>
-                      <!-- End First Contnet -->
-                      <!-- First Contnet -->
+                      <!-- End Second Contnet -->
+                      <!-- Third Contnet -->
                       <div data-hs-stepper-content-item='{"index": 3, "isFinal": true}' style="display: none;">
                         <div class="p-4 h-[100%]">
                           <div class="relative overflow-x-auto mt-4 w-[90%] mx-auto h-[45vh]">
@@ -167,7 +167,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- End First Contnet -->
+                  <!-- End Third Contnet -->
                   <!-- Final Contnet -->
                   <div data-hs-stepper-content-item='{"isFinal": true}' style="display: none;">
                     <div class="p-4 h-48 bg-gray-50 flex justify-center items-center border border-dashed border-gray-200 rounded-xl">
@@ -287,15 +287,15 @@
   	if (typeof HSStepper !== 'undefined') {
   		setTimeout(function() {
   			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
-  			let errorState = 1
-  			stepperElement.disableButtons()
-  			$("#course-name").on("keyup", function() {
-  				if ($(this).val().length > 2) {
-  					stepperElement.enableButtons();
-  				} else {
-  					stepperElement.disableButtons();
-  				}
-  			});
+  			// let errorState = 1
+  			// stepperElement.disableButtons()
+  			// $("#course-name").on("keyup", function() {
+  			// 	if ($(this).val().length > 2) {
+  			// 		stepperElement.enableButtons();
+  			// 	} else {
+  			// 		stepperElement.disableButtons();
+  			// 	}
+  			// });
 
 
   			if (stepperElement) {
@@ -310,24 +310,24 @@
   						const currentIndex = stepperInstance.currentIndex;
   						console.log(currentIndex);
   						console.log("current index", currentIndex);
-  						if (currentIndex === 2) {
-  							$.ajax({
-  								type: "POST",
-  								url: $("#admin-course-form").attr("action"),
-  								data: $("#admin-course-form").serialize(),
-  								// dataType: "script", // This is important for Turbo Streams
-  								headers: {
-  									Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-  								},
-  								success: function(data) {
-  									Turbo.renderStreamMessage(data);
-  								},
-  								error: function(data) {
-  									console.log("Error on feching data");
+  						// if (currentIndex === 2) {
+  						// 	$.ajax({
+  						// 		type: "POST",
+  						// 		url: $("#admin-course-form").attr("action"),
+  						// 		data: $("#admin-course-form").serialize(),
+  						// 		// dataType: "script", // This is important for Turbo Streams
+  						// 		headers: {
+  						// 			Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+  						// 		},
+  						// 		success: function(data) {
+  						// 			Turbo.renderStreamMessage(data);
+  						// 		},
+  						// 		error: function(data) {
+  						// 			console.log("Error on feching data");
 
-  								},
-  							});
-  						}
+  						// 		},
+  						// 	});
+  						// }
   						if (currentIndex === 3) {
   							console.log("ffdgdgdf", stepperInstance.currentIndex);
   							$("button").removeClass('header1');
