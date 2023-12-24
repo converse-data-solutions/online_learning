@@ -53,10 +53,12 @@ input:-webkit-autofill:active {
 
 input:-internal-autofill-selected {
   background-color: #fff !important;
+  color: #818181 !important;
 }
 
 input:-webkit-autofill {
   background-color: #fff !important;
+  color: #818181 !important;
 }
 
 .message {
@@ -889,9 +891,23 @@ input[type="file"] {
 [type="checkbox"]:checked {
   background-color: #0bc08b;
   border-color: #0bc08b;
+  color: #0bc08b !important;
 }
+
+[type="checkbox"]:checked:active {
+  background-color: #0bc08b;
+  border-color: #0bc08b;
+  color: #0bc08b !important;
+}
+[type="checkbox"]:checked:visited {
+  background-color: #0bc08b;
+  border-color: #0bc08b;
+  color: #0bc08b !important;
+}
+
 [type="checkbox"] {
   border: 1px solid #0bc08b;
+  color: #0bc08b;
 }
 
 [type="checkbox"]:checked:focus,
@@ -900,6 +916,8 @@ input[type="file"] {
 [type="radio"]:checked:focus,
 [type="radio"]:checked:hover,
 [type="checkbox"]:focus-visible,
+[type="checkbox"]:visited,
+[type="radio"]:active,
 [type="radio"]:focus-visible {
   background-color: #0bc08b !important;
   border-color: #0bc08b !important;
@@ -909,6 +927,7 @@ input[type="file"] {
   border: none !important;
   outline-offset: unset !important;
   box-shadow: none !important;
+  color: #0bc08b !important;
 }
 
 [type="checkbox"]:checked:focus {

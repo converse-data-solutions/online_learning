@@ -15,7 +15,7 @@ class Admin::StudentsController < ApplicationController
     @student = User.new
   end
 
-  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Lint/RedundantCopDisableDirective
     @student = User.new(student_params)
     respond_to do |format|
       if @student.add_role_and_save(student_params[:role])
