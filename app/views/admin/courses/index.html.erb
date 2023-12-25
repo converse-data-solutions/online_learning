@@ -351,17 +351,15 @@
   	if (typeof HSStepper !== 'undefined') {
   		setTimeout(function() {
   			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
-  			// let errorState = 1
-  			// stepperElement.disableButtons()
-  			// $("#course-name").on("keyup", function() {
-  			// 	if ($(this).val().length > 2) {
-  			// 		stepperElement.enableButtons();
-  			// 	} else {
-  			// 		stepperElement.disableButtons();
-  			// 	}
-  			// });
-
-
+  			let errorState = 1
+  			stepperElement.disableButtons()
+  			$("#course-name").on("keyup", function() {
+  				if ($(this).val().length > 2) {
+  					stepperElement.enableButtons();
+  				} else {
+  					stepperElement.disableButtons();
+  				}
+  			});
   			if (stepperElement) {
   				try {
   					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
@@ -374,24 +372,23 @@
   						const currentIndex = stepperInstance.currentIndex;
   						console.log(currentIndex);
   						console.log("current index", currentIndex);
-  						// if (currentIndex === 2) {
-  						// 	$.ajax({
-  						// 		type: "POST",
-  						// 		url: $("#admin-course-form").attr("action"),
-  						// 		data: $("#admin-course-form").serialize(),
-  						// 		// dataType: "script", // This is important for Turbo Streams
-  						// 		headers: {
-  						// 			Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-  						// 		},
-  						// 		success: function(data) {
-  						// 			Turbo.renderStreamMessage(data);
-  						// 		},
-  						// 		error: function(data) {
-  						// 			console.log("Error on feching data");
-
-  						// 		},
-  						// 	});
-  						// }
+  						if (currentIndex === 2) {
+  							$.ajax({
+  								type: "POST",
+  								url: $("#admin-course-form").attr("action"),
+  								data: $("#admin-course-form").serialize(),
+  								// dataType: "script", // This is important for Turbo Streams
+  								headers: {
+  									Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+  								},
+  								success: function(data) {
+  									Turbo.renderStreamMessage(data);
+  								},
+  								error: function(data) {
+  									console.log("Error on feching data");
+  								},
+  							});
+  						}
   						if (currentIndex === 3) {
   							console.log("ffdgdgdf", stepperInstance.currentIndex);
   							$("button").removeClass('header1');
@@ -401,7 +398,6 @@
   							$.ajax({
   								url: "/admin/courses/sections/all",
   								type: "GET",
-
   								success: function(response) {},
   								error: function(xhr, status, error) {},
   							});
@@ -410,25 +406,40 @@
   							$('[data-hs-stepper-finish-btn]').css('display', 'block');
   							$(".reduce-course").addClass("reduce-course2");
   							$(".vertical-stepper").css("display", "block");
-
   						} else if (currentIndex < 3) {
-
   							$('[data-hs-stepper-next-btn]').css('display', 'block');
   							$('[data-hs-stepper-finish-btn]').css('display', 'none');
   							$(".reduce-course").removeClass("reduce-course2");
   							$(".vertical-stepper").css("display", "none");
-
   						}
   					});
 
   					$('[data-hs-stepper-back-btn]').on('click', function() {
   						stepperInstance.on('back');
+              console.log("Back button enabled");
 
   						const backButtonIndex = stepperInstance.currentIndex;
+              console.log("back button index", backButtonIndex);
 
-
-
-
+              if (backButtonIndex === 1) {
+                $("[data-hs-stepper-next-btn]").on("click", function() {
+                  $.ajax({
+  								  type: "PATCH",
+  								  url: $("#admin-course-edit-form").attr("action"),
+  								  data: $("#admin-course-edit-form").serialize(),
+  								  // dataType: "script", // This is important for Turbo Streams
+  								  headers: {
+  								  	Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+  								  },
+  								  success: function(data) {
+  								  	Turbo.renderStreamMessage(data);
+  								  },
+  								  error: function(data) {
+  								  	console.log("Error on feching data");
+  								  },
+  							  });
+                })
+              }
   						if (backButtonIndex < 3) {
   							$('[data-hs-stepper-next-btn]').css('display', 'block');
   							$('[data-hs-stepper-finish-btn]').css('display', 'none');
@@ -437,9 +448,6 @@
 
   						}
   					})
-
-
-
   				} catch (error) {
   					console.error("Error initializing HSStepper:", error);
   				}
@@ -480,27 +488,27 @@
 
 
 
-  function courseEditOnNext() {
-  	console.log("courseEditOnNext");
-  	$("[data-hs-stepper-next-btn]").on("click", function(event) {
+  // function courseEditOnNext() {
+  // 	console.log("courseEditOnNext");
+  // 	$("[data-hs-stepper-next-btn]").on("click", function(event) {
 
-  		event.preventDefault();
-  		$.ajax({
+  // 		event.preventDefault();
+  // 		$.ajax({
 
-  			type: "PUT",
-  			url: $("#admin-course-edit-form").attr("action"),
-  			data: $("#admin-course-edit-form").serialize(),
-  			// dataType: "script", // This is important for Turbo Streams
-  			headers: {
-  				Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-  			},
-  			success: function(data) {
-  				Turbo.renderStreamMessage(data);
-  			},
-  			error: function(data) {
-  				console.log("Error on feching data");
-  			}
-  		})
-  	})
-  }
+  // 			type: "PUT",
+  // 			url: $("#admin-course-edit-form").attr("action"),
+  // 			data: $("#admin-course-edit-form").serialize(),
+  // 			// dataType: "script", // This is important for Turbo Streams
+  // 			headers: {
+  // 				Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+  // 			},
+  // 			success: function(data) {
+  // 				Turbo.renderStreamMessage(data);
+  // 			},
+  // 			error: function(data) {
+  // 				console.log("Error on feching data");
+  // 			}
+  // 		})
+  // 	})
+  // }
 </script>
