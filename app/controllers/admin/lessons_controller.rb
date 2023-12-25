@@ -2,7 +2,7 @@
 
 # This is an Admin Lesson controller
 class Admin::LessonsController < ApplicationController
-  before_action :lesson_assignment, only: %i[show edit update destroy]
+  before_action :set_lesson, only: %i[show edit update destroy]
   require 'will_paginate/array'
 
   def index
@@ -33,9 +33,15 @@ class Admin::LessonsController < ApplicationController
   def edit; end
 
   def update
-    @lesson = Lesson.find(params[:id])
-    @lesson.update(lesson_params)
-    head :no_content
+    respond_to do |format|
+      if @lesson.update(lesson_params)
+        format.turbo_stream
+        format.json { render :show, status: :ok, location: admin_lesson_url(@lesson) }
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.update('steeper-edit-lesson-popup', partial: 'admin/lessons/edit', locals: { lesson: @lesson }) }
+        format.json { render json: @lesson.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
@@ -62,7 +68,7 @@ class Admin::LessonsController < ApplicationController
     @section = Section.find(params[:section_id])
   end
 
-  def lesson_assignment
+  def set_lesson
     @lesson = Lesson.find(params[:id])
   end
 

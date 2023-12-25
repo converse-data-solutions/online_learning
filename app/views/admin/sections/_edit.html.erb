@@ -3,7 +3,7 @@
     <div class="flex mb-3 justify-between flex-col md:flex-row">
       <label for="title" class="block mb-2 text-[18px] font-medium text-[#000]">Title</label>
       <div class="w-full sm:w-[50%] flex flex-col">
-        <%= f.text_field :title, class: "bg-[#F5F5F5] text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full md:w-1/2 p-2.5 border-0 rounded mb-4" %>
+        <%= f.text_field :title, class: "bg-[#F5F5F5] text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 border-0 rounded mb-4" %>
         <% if section&.errors&.any? %>
           <% if section.errors[:title].any? %>
             <div class="text-red-600 text-sm mt-1">

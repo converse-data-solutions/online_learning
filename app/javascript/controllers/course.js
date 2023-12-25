@@ -162,7 +162,7 @@ function courseDeletePopup() {
 }
 
 // Course Steeper Section Edit Popup
-function courseSteeperEditPopup() {
+function steeperSectionEditPopup() {
   $(".edit-stepper-section-modal").click(function () {
     let id = $(this).data("section-id");
     let url = $(this).data("url");
@@ -187,11 +187,45 @@ function courseSteeperEditPopup() {
 }
 
 // Course Stepper Section Delete Popup
-function courseSteeperDeletePopup() {
+function steeperSectionDeletePopup() {
   $(".send-stepper-delete-section").click(function () {
     let id = $(this).data("section-id");
     $("#steeper-delete-section-modal").attr("data-section-id", id);
     $("#steeper-delete-section-modal").attr("href", `sections/${id}`);
+  });
+}
+
+// Course Steeper Lesson Edit Popup
+function steeperLessonEditPopup() {
+  $(".edit-stepper-lesson-modal").click(function () {
+    let id = $(this).data("lesson-id");
+    let url = $(this).data("url");
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        user_id: id,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+
+      success: function (res) {
+        Turbo.renderStreamMessage(res);
+      },
+      error: function () {
+        console.log("Error fetching data");
+      },
+    });
+  });
+}
+
+// Course Stepper Lesson Delete Popup
+function steeperLessonDeletePopup() {
+  $(".send-stepper-delete-lesson").click(function () {
+    let id = $(this).data("lesson-id");
+    $("#steeper-delete-lesson-modal").attr("data-lesson-id", id);
+    $("#steeper-delete-lesson-modal").attr("href", `lessons/${id}`);
   });
 }
 
@@ -223,8 +257,10 @@ $(document).ready(function () {
   courseEditPopup();
   courseDeletePopup();
   courseTableSearch();
-  courseSteeperEditPopup();
-  courseSteeperDeletePopup();
+  steeperSectionEditPopup();
+  steeperSectionDeletePopup();
+  steeperLessonEditPopup();
+  steeperLessonDeletePopup();
 
   $(document).on("turbo:render", function () {
     tableForm();
@@ -232,8 +268,10 @@ $(document).ready(function () {
     courseEditPopup();
     courseDeletePopup();
     courseTableSearch();
-    courseSteeperEditPopup();
-    courseSteeperDeletePopup();
+    steeperSectionEditPopup();
+    steeperSectionDeletePopup();
+    steeperLessonEditPopup();
+    steeperLessonDeletePopup();
 
     if ($("#stepper-loader").length > 0) {
       new HSStepper($("#stepper-loader")[0]);
@@ -250,5 +288,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     initModals();
     courseEditPopup();
     courseDeletePopup();
+    steeperLessonEditPopup();
+    steeperLessonDeletePopup();
   };
 });
