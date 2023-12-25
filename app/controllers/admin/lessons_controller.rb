@@ -21,6 +21,7 @@ class Admin::LessonsController < ApplicationController
     @lesson = Lesson.new(lesson_params)
     respond_to do |format|
       if @lesson.save
+        @form_cleared = true
         format.html { redirect_to admin_lessons_path }
         format.turbo_stream
       else
