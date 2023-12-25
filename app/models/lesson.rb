@@ -14,8 +14,6 @@ class Lesson < ApplicationRecord
     Section.includes(:lessons).where(course_id: section.course_id)
   end
 
-  validates :title,
-            presence: { message: 'Please enter the Lesson title' }
-  validates :description,
-            presence: { message: 'Please enter the Lesson description' }
+  validates :title, presence: true
+  # validates :description, presence: true
 end
