@@ -1,0 +1,24 @@
+<div class="p-7 space-y-6 w-[75%] mr-auto ml-5">
+  <%= form_for([:admin, Course.last, section], url: admin_course_section_path(Course.last, section), method: :patch) do |f| %>
+    <div class="flex mb-3 justify-between flex-col md:flex-row">
+      <label for="title" class="block mb-2 text-[18px] font-medium text-[#000]">Title</label>
+      <div class="w-full sm:w-[50%] flex flex-col">
+        <%= f.text_field :title, class: "bg-[#F5F5F5] text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full md:w-1/2 p-2.5 border-0 rounded mb-4" %>
+        <% if section&.errors&.any? %>
+          <% if section.errors[:title].any? %>
+            <div class="text-red-600 text-sm mt-1">
+              <%= section.errors.full_messages_for(:title).join(', ') %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="mb-4 flex justify-between flex-col md:flex-row">
+      <label for="description" class="block mb-2 text-[18px] font-medium text-[#000]">Description<span class="text-[15px] font-medium text-[#C6C6C6]">(optional)</span></label>
+      <%= f.text_field :description, class: 'bg-[#F5F5F5] border-0 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full md:w-1/2 h-[110px] p-2.5 rounded-[7px]' %>
+    </div>
+    <div class="w-1/2 md:w-1/5 mx-auto mt-7">
+      <%= f.submit "UPDATE", class: 'w-full md:ml-[50px] ml-[20px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
+    </div>
+  <% end %>
+</div>
