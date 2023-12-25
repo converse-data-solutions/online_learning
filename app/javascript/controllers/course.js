@@ -31,14 +31,6 @@ function tableForm() {
   });
 }
 
-// Stepper Course Submit
-// function courseSubmit() {
-//   $(".next-btn").click(function () {
-//     $("#new_course").submit();
-//     event.preventDefault();
-//   });
-// }
-
 // Collection-Select Style
 function collectionSelect() {
   $(".custom-select").each(function () {
@@ -169,6 +161,41 @@ function courseDeletePopup() {
   });
 }
 
+// Course Steeper Section Edit Popup
+function courseSteeperEditPopup() {
+  $(".edit-stepper-section-modal").click(function () {
+    let id = $(this).data("section-id");
+    let url = $(this).data("url");
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        user_id: id,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+
+      success: function (res) {
+        Turbo.renderStreamMessage(res);
+      },
+      error: function () {
+        console.log("Error fetching data");
+      },
+    });
+  });
+}
+
+// Course Stepper Section Delete Popup
+function courseSteeperDeletePopup() {
+  $(".send-stepper-delete-section").click(function () {
+    let id = $(this).data("section-id");
+    $("#steeper-delete-section-modal").attr("data-section-id", id);
+    $("#steeper-delete-section-modal").attr("href", `sections/${id}`);
+  });
+}
+
+// Course index table search
 function courseTableSearch() {
   $("#course_search").on("input", function () {
     let searchValue = $(this).val();
@@ -190,21 +217,23 @@ function courseTableSearch() {
 }
 
 $(document).ready(function () {
-  // courseSubmit();
   tableForm();
   tableSearch();
   collectionSelect();
   courseEditPopup();
   courseDeletePopup();
   courseTableSearch();
+  courseSteeperEditPopup();
+  courseSteeperDeletePopup();
 
   $(document).on("turbo:render", function () {
-    // courseSubmit();
     tableForm();
     tableSearch();
     courseEditPopup();
     courseDeletePopup();
     courseTableSearch();
+    courseSteeperEditPopup();
+    courseSteeperDeletePopup();
 
     if ($("#stepper-loader").length > 0) {
       new HSStepper($("#stepper-loader")[0]);

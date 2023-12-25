@@ -8,9 +8,6 @@ class Section < ApplicationRecord
   has_many :ratings, as: :rateable, dependent: :destroy
 
   # validations
-  validates :title,
-            presence: { message: 'Please enter the Section title' },
-            uniqueness: { message: 'already exists.' }
-  validates :description,
-            presence: { message: 'Please enter the Section description' }
+  validates :title, presence: true
+  validates :description, presence: true
 end

@@ -2,7 +2,7 @@
 
 # This is an Admin Section controller
 class Admin::SectionsController < ApplicationController
-  before_action :section_assignment, only: %i[show edit update]
+  before_action :set_section, only: %i[show edit update]
   require 'will_paginate/array'
 
   def all
@@ -47,9 +47,14 @@ class Admin::SectionsController < ApplicationController
   def edit; end
 
   def update
-    @section = Section.find(params[:id])
-    @section.update(section_params)
-    head :no_content
+    respond_to do |format|
+      if @section.update(section_params)
+        format.turbo_stream
+      else
+        format.turbo_stream { render turbo_stream: turbo_stream.update('steeper-edit-section-popup', partial: 'admin/sections/edit', locals: { section: @section }) }
+        format.json { render json: @section.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def show; end
@@ -65,7 +70,7 @@ class Admin::SectionsController < ApplicationController
     @course = Course.find(params[:course_id])
   end
 
-  def section_assignment
+  def set_section
     @section = Section.find(params[:id])
   end
 
