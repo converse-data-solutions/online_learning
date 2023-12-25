@@ -888,6 +888,10 @@ input[type="file"] {
   }
 }
 
+[type=radio] {
+  color: #0bc08b !important;
+}
+
 [type="checkbox"]:checked {
   background-color: #0bc08b;
   border-color: #0bc08b;
