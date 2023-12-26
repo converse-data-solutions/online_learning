@@ -17,7 +17,7 @@
       <span class="text-[#C6C6C6] text-[15px] font-medium">(optional)</span>
     </label>
     <div class="flex flex-col">
-      <%= f.text_field :description, class: 'border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200  block w-full h-[110px] p-2.5 rounded-[7px]' %>
+      <%= f.text_area :description, class: 'resize-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200  block w-[292px] h-[110px] p-2.5 rounded-[7px]' %>
       <% if course&.errors&.any? %>
         <% if course.errors[:description].any? %>
           <div class="text-red-600 text-sm mt-1">
