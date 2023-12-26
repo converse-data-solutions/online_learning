@@ -1,3 +1,4 @@
+// Custom Right-Stepper
 function stepperLoop() {
   const active = {
     stepper: 1,
@@ -63,3 +64,6 @@ $(document).ready(function () {
     stepperLoop();
   });
 });
+
+$("#section-modal-close-btn").click();
+$("#section-detele-modal-btn").click();
