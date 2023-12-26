@@ -26,8 +26,8 @@
                   <h3 class="mb-14 font-semibold text-[26px] text-[#31B978] dark:text-white text-center">NEW COURSE</h3>
                   <div data-hs-stepper id="stepper-loader">
                     <!-- Stepper Nav -->
-                    <ul class="relative flex flex-row gap-x-2 w-[60%] md:mx-auto sm:mr-auto">
-                      <li class="flex pl-24 items-center gap-x-2 shrink basis-0 flex-1 group" data-hs-stepper-nav-item='{"index": 1}'>
+                    <ul  class="relative flex flex-row gap-x-2 w-[60%] md:mx-auto sm:mr-auto">
+                      <li class="custom-stepper-btn flex pl-24 items-center gap-x-2 shrink basis-0 flex-1 group" data-hs-stepper-nav-item='{"index": 1}' data-index="1" >
                         <span class="min-w-[28px] min-h-[28px] group flex flex-col items-center text-xs align-middle">
                           <span class="hs-stepper-active:border hs-stepper-active:p-2 hs-stepper-active:rounded">
                             <span class="w-6 h-6 flex justify-center items-center flex-shrink-0 bg-[#C1C9D2] font-medium text-gray-800 rounded-full group-focus:bg-gray-200 dark:bg-gray-700 dark:text-white dark:group-focus:bg-gray-600 hs-stepper-active:bg-blue-600 hs-stepper-active:text-white hs-stepper-success:bg-blue-600 hs-stepper-success:text-white hs-stepper-completed:bg-teal-500 hs-stepper-completed:group-focus:bg-teal-600">
@@ -42,7 +42,7 @@
                         </span>
                         <div class="w-full h-[3px] mb-6 flex-1 bg-gray-200 group-last:hidden hs-stepper-success:bg-blue-600 hs-stepper-completed:bg-teal-600"></div>
                       </li>
-                      <li class="flex items-center gap-x-2 shrink basis-0 flex-1 group" data-hs-stepper-nav-item='{"index": 2}'>
+                      <li  class="custom-stepper-btn flex items-center gap-x-2 shrink basis-0 flex-1 group" data-hs-stepper-nav-item='{"index": 2}' data-index="2">
                         <span class="min-w-[28px] min-h-[28px] group flex flex-col items-center text-xs align-middle">
                           <span class="hs-stepper-active:border hs-stepper-active:p-2 hs-stepper-active:rounded">
                             <span class="w-6 h-6 flex justify-center items-center flex-shrink-0 bg-[#C1C9D2] font-medium text-gray-800 rounded-full group-focus:bg-gray-200 dark:bg-gray-700 dark:text-white dark:group-focus:bg-gray-600 hs-stepper-active:bg-blue-600 hs-stepper-active:text-white hs-stepper-success:bg-blue-600 hs-stepper-success:text-white hs-stepper-completed:bg-teal-500 hs-stepper-completed:group-focus:bg-teal-600">
@@ -56,7 +56,7 @@
                         </span>
                         <div class="w-full h-[3px] mb-6 flex-1 bg-gray-200 group-last:hidden hs-stepper-success:bg-blue-600 hs-stepper-completed:bg-teal-600"></div>
                       </li>
-                      <li class="flex items-center gap-x-2 shrink flex-1 basis-0 group" data-hs-stepper-nav-item='{"index": 3}'>
+                      <li  class="custom-stepper-btn flex items-center gap-x-2 shrink flex-1 basis-0 group" data-hs-stepper-nav-item='{"index": 3}' data-index="3">
                         <span class="min-w-[28px] min-h-[28px] group flex flex-col items-center text-xs align-middle">
                           <span class="hs-stepper-active:border hs-stepper-active:p-2 hs-stepper-active:rounded">
                             <span class="w-6 h-6 flex justify-center items-center flex-shrink-0 bg-[#C1C9D2] font-medium text-gray-800 rounded-full group-focus:bg-gray-200 dark:bg-gray-700 dark:text-white dark:group-focus:bg-gray-600 hs-stepper-active:bg-blue-600 hs-stepper-active:text-white hs-stepper-success:bg-blue-600 hs-stepper-success:text-white hs-stepper-completed:bg-teal-500 hs-stepper-completed:group-focus:bg-teal-600">
@@ -124,7 +124,7 @@
                                   <!-- Modal header -->
                                   <div class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
                                     <h3 class="text-xl font-semibold text-[26px] text-[#31B978] text-center flex justify-center w-full"> EDIT Section </h3>
-                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="steeper-section-large-modal">
+                                    <button type="button" id="section-modal-close-btn" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="steeper-section-large-modal">
                                       <svg class="w-7 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                         <path stroke="#31B978" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" /> </svg> <span class="sr-only">Close modal</span> </button>
                                   </div>
@@ -138,7 +138,7 @@
                               <div class="relative w-full max-w-[42rem] max-h-full shadow-md">
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                   <h4 class="text-[20px] font-medium pt-6 pl-6 text-[#31B978]">Confirm Deletion</h4>
-                                  <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="stepper-section-popup-modal">
+                                  <button type="button" id="section-detele-modal-btn" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="stepper-section-popup-modal">
                                     <svg class="w-7 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" /> </svg> <span class="sr-only">Close modal</span> </button>
                                   <div class="px-6 pb-6 pt-2">
@@ -233,7 +233,7 @@
                       Back
                     </button>
                     <button type="button" class="py-2 px-10 text-[#fff] inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] disabled:opacity-50 disabled:pointer-events-none next-btn" data-hs-stepper-next-btn > Next </button>
-                    <button type="button" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-finish-btn style="display: none;"> Finish </button>
+                    <button type="button" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none"  style="display: none;"> Finish </button>
                     <button type="reset" class="py-2 px-3 hidden items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-reset-btn style="display: none;"> Reset </button>
                   </div>
                   <!-- End Button Group -->
@@ -331,169 +331,158 @@
   </div>
 </div>
 <script>
-  $(document).ready(function() {
-  	// stepper initiliazation
-  	if (typeof HSStepper !== 'undefined') {
-  		setTimeout(function() {
-  			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
-  			let errorState = 1
-  			// stepperElement.disableButtons()
-  			// $("#course-name").on("keyup", function() {
-  			// 	if ($(this).val().length > 2) {
-  			// 		stepperElement.enableButtons();
-  			// 	} else {
-  			// 		stepperElement.disableButtons();
-  			// 	}
-  			// });
-  			if (stepperElement) {
-  				try {
-  					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
-  					console.log("testing index........", stepperInstance);
 
-  					$('[data-hs-stepper-next-btn]').on('click', function() {
+$(document).ready(function() {
+  let currentIndex = 1; // Set initial index
 
-  						stepperInstance.on('next');
+  $(".custom-stepper-btn").on("click", function() {
+    const stepper = HSStepper.getInstance('[data-hs-stepper]');
+    const clickedIndex = parseInt($(this).attr("data-index"));
 
-  						const currentIndex = stepperInstance.currentIndex;
-  						console.log(currentIndex);
-  						console.log("current index", currentIndex);
-  						if (currentIndex === 2) {
-  							$.ajax({
-  								type: "POST",
-  								url: $("#admin-course-form").attr("action"),
-  								data: $("#admin-course-form").serialize(),
-  								// dataType: "script", // This is important for Turbo Streams
-  								headers: {
-  									Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-  								},
-  								success: function(data) {
-  									Turbo.renderStreamMessage(data);
-  								},
-  								error: function(data) {
-  									console.log("Error on feching data");
-  								},
-  							});
-  						}
-  						if (currentIndex === 3) {
-  							console.log("ffdgdgdf", stepperInstance.currentIndex);
-  							$("button").removeClass('header1');
-  						}
-  						if (currentIndex === 3) {
-  							console.log("current index is 3");
-  							$.ajax({
-  								url: "/admin/courses/sections/all",
-  								type: "GET",
-  								success: function(response) {},
-  								error: function(xhr, status, error) {},
-  							});
-  							console.log("ajax called");
-  							$('[data-hs-stepper-next-btn]').css('display', 'none');
-  							$('[data-hs-stepper-finish-btn]').css('display', 'block');
-  							$(".reduce-course").addClass("reduce-course2");
-  							$(".vertical-stepper").css("display", "block");
-  						} else if (currentIndex < 3) {
-  							$('[data-hs-stepper-next-btn]').css('display', 'block');
-  							$('[data-hs-stepper-finish-btn]').css('display', 'none');
-  							$(".reduce-course").removeClass("reduce-course2");
-  							$(".vertical-stepper").css("display", "none");
-  						}
-  					});
+    console.log("current index................", currentIndex);
 
-  					$('[data-hs-stepper-back-btn]').on('click', function() {
-  						stepperInstance.on('back');
-              console.log("Back button enabled");
+    if (clickedIndex > currentIndex) {
+      // Move forward
+      for (let i = currentIndex; i < clickedIndex; i++) {
+        stepper.goToNext();
+      }
+    } else if (clickedIndex < currentIndex) {
+      // Go back to the desired step
+      stepper.currentIndex = clickedIndex - 1;
+      stepper.goToNext();
+    }
 
-  						const backButtonIndex = stepperInstance.currentIndex;
-              console.log("back button index", backButtonIndex);
-
-              if (backButtonIndex === 1) {
-                $("[data-hs-stepper-next-btn]").on("click", function() {
-                  $.ajax({
-  								  type: "PATCH",
-  								  url: $("#admin-course-edit-form").attr("action"),
-  								  data: $("#admin-course-edit-form").serialize(),
-  								  // dataType: "script", // This is important for Turbo Streams
-  								  headers: {
-  								  	Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-  								  },
-  								  success: function(data) {
-  								  	Turbo.renderStreamMessage(data);
-  								  },
-  								  error: function(data) {
-  								  	console.log("Error on feching data");
-  								  },
-  							  });
-                })
-              }
-  						if (backButtonIndex < 3) {
-  							$('[data-hs-stepper-next-btn]').css('display', 'block');
-  							$('[data-hs-stepper-finish-btn]').css('display', 'none');
-  							$(".reduce-course").removeClass("reduce-course2");
-  							$(".vertical-stepper").css("display", "none");
-
-  						}
-  					})
-  				} catch (error) {
-  					console.error("Error initializing HSStepper:", error);
-  				}
-  			} else {
-  				console.error("Element with data-hs-stepper not found");
-  			}
-  		}, 1000);
-  	} else {
-  		console.error("HSStepper not defined. Make sure preline.js is loaded.");
-  	}
+    currentIndex = clickedIndex; // Update currentIndex for the next click
   });
-  $("#course-modal-close-btn").click();
-  $("#course-detele-modal-btn").click();
+});
+
+    $(document).ready(function() {
+    	// stepper initiliazation
+    	if (typeof HSStepper !== 'undefined') {
+    		setTimeout(function() {
+    			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
+    			let errorState = 1
+    			stepperElement.disableButtons()
+    			$("#course-name").on("keyup", function() {
+    				if ($(this).val().length > 2) {
+    					stepperElement.enableButtons();
+    				} else {
+    					stepperElement.disableButtons();
+    				}
+    			});
+    			if (stepperElement) {
+    				try {
+    					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
+    					console.log("testing index........", stepperInstance);
 
 
-  // function courseCreateOnNext() {
+                  $(".custom-stepper-btn").on("click", function() {
+                    let  = $(".custom-stepper-btn").attr("data-hs-stepper-nav-item")
+                    console.log("nett steppereeeee", currentIndex);
+                    if (currentIndex == 1) {
+                      currentIndex.goToNext();
+                    }
+                  })
 
-  //   $(".header1").on("click", function (event) {
-  //     event.preventDefault();
-  //     $.ajax({
-  //       type: "POST",
-  //       url: $("#admin-course-form").attr("action"),
-  //       data: $("#admin-course-form").serialize(),
-  //       // dataType: "script", // This is important for Turbo Streams
-  //       headers: {
-  //         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-  //       },
-  //       success: function (data) {
-  //         Turbo.renderStreamMessage(data);
-  //       },
-  //       error: function (data) {
-  //         console.log("Error on feching data");
+              
 
-  //       },
-  //     });
-  //   });
-  // }
+    					$('[data-hs-stepper-next-btn]').on('click', function() {
 
+    						stepperInstance.on('next');
 
+    						const currentIndex = stepperInstance.currentIndex;
+    						console.log(currentIndex);
+    						console.log("current index", currentIndex);
+    						if (currentIndex === 2) {
+    							$.ajax({
+    								type: "POST",
+    								url: $("#admin-course-form").attr("action"),
+    								data: $("#admin-course-form").serialize(),
+    								// dataType: "script", // This is important for Turbo Streams
+    								headers: {
+    									Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+    								},
+    								success: function(data) {
+    									Turbo.renderStreamMessage(data);
+    								},
+    								error: function(data) {
+    									console.log("Error on feching data");
+    								},
+    							});
+    						}
+    						if (currentIndex === 3) {
+    							console.log("ffdgdgdf", stepperInstance.currentIndex);
+    							$("button").removeClass('header1');
+    						}
+    						if (currentIndex === 3) {
+    							console.log("current index is 3");
+    							$.ajax({
+    								url: "/admin/courses/sections/all",
+    								type: "GET",
+    								success: function(response) {},
+    								error: function(xhr, status, error) {},
+    							});
+    							console.log("ajax called");
+    							$('[data-hs-stepper-next-btn]').css('display', 'none');
+    							$('[data-hs-stepper-finish-btn]').css('display', 'block');
+    							$(".reduce-course").addClass("reduce-course2");
+    							$(".vertical-stepper").css("display", "block");
+    						} else if (currentIndex < 3) {
+    							$('[data-hs-stepper-next-btn]').css('display', 'block');
+    							$('[data-hs-stepper-finish-btn]').css('display', 'none');
+    							$(".reduce-course").removeClass("reduce-course2");
+    							$(".vertical-stepper").css("display", "none");
+    						}
+    					});
 
-  // function courseEditOnNext() {
-  // 	console.log("courseEditOnNext");
-  // 	$("[data-hs-stepper-next-btn]").on("click", function(event) {
+    					$('[data-hs-stepper-back-btn]').on('click', function() {
+    						stepperInstance.on('back');
+             console.log("Back button enabled");
 
-  // 		event.preventDefault();
-  // 		$.ajax({
+    						const backButtonIndex = stepperInstance.currentIndex;
+             console.log("back button index", backButtonIndex);
 
-  // 			type: "PUT",
-  // 			url: $("#admin-course-edit-form").attr("action"),
-  // 			data: $("#admin-course-edit-form").serialize(),
-  // 			// dataType: "script", // This is important for Turbo Streams
-  // 			headers: {
-  // 				Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-  // 			},
-  // 			success: function(data) {
-  // 				Turbo.renderStreamMessage(data);
-  // 			},
-  // 			error: function(data) {
-  // 				console.log("Error on feching data");
-  // 			}
-  // 		})
-  // 	})
-  // }
+             if (backButtonIndex === 1) {
+               $("[data-hs-stepper-next-btn]").on("click", function() {
+                  $.ajax({
+    								  type: "PATCH",
+    								  url: $("#admin-course-edit-form").attr("action"),
+    								  data: $("#admin-course-edit-form").serialize(),
+    								  // dataType: "script", // This is important for Turbo Streams
+    								  headers: {
+    								  	Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+    								  },
+    								  success: function(data) {
+    								  	Turbo.renderStreamMessage(data);
+    								  },
+    								  error: function(data) {
+    								  	console.log("Error on feching data");
+    								  },
+    							  });
+               })
+             }
+    						if (backButtonIndex < 3) {
+    							$('[data-hs-stepper-next-btn]').css('display', 'block');
+    							$('[data-hs-stepper-finish-btn]').css('display', 'none');
+    							$(".reduce-course").removeClass("reduce-course2");
+    							$(".vertical-stepper").css("display", "none");
+
+    						}
+    					})
+    				} catch (error) {
+    					console.error("Error initializing HSStepper:", error);
+    				}
+    			} else {
+    				console.error("Element with data-hs-stepper not found");
+    			}
+    		}, 1000);
+    	} else {
+    		console.error("HSStepper not defined. Make sure preline.js is loaded.");
+    	}
+    });
+    $("#course-modal-close-btn").click();
+    $("#course-detele-modal-btn").click();
+    $("#section-modal-close-btn").click();
+    $("#section-detele-modal-btn").click();
+
 </script>
