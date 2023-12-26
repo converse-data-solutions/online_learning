@@ -1,9 +1,9 @@
 <tr id="lesson_create_form">
   <%= form_for Lesson.new, url: admin_lessons_path(section_id), method: :post, html: { class: "custom-lesson" } do |f| %>
-    <td><%= f.text_field :section_id, value: section_id %></td>
+    <%= f.hidden_field :section_id, value: section_id %>
     <td>
       <div class="">
-        <%= f.text_field :title, class: "w-[110px] sm:w-[110px] md:w-[110px] lg:w-[110px] xl:w-[200px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block p-2.5" %>
+        <%= f.text_field :title, id:"title", class: "w-[110px] sm:w-[110px] md:w-[110px] lg:w-[110px] xl:w-[200px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block p-2.5" %>
       </div>
     </td>
     <td>
@@ -32,7 +32,7 @@
       </div>
     </td>
     <td>
-      <div class=""> <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px] submit_section" %> </div>
+      <div class=""> <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px] submit_lesson" %> </div>
     <% end %>
   </td>
 </tr>
