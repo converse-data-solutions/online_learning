@@ -119,14 +119,6 @@ $(document).on("change", ".fileUploadWrap input[type='file']", function () {
   }
 });
 
-function clearFormOnSubmit() {
-  $("#stepper_section-form").on("submit", function (event) {
-    event.preventDefault();
-
-    this.reset();
-  });
-}
-
 // Course Edit Popup
 function courseEditPopup() {
   $(".edit-course-model").click(function () {

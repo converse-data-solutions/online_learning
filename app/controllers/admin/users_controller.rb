@@ -20,6 +20,7 @@ class Admin::UsersController < ApplicationController
 
   def create # rubocop:disable Metrics/AbcSize
     @user = User.new(admin_params)
+    puts "Request Format: #{request.format}"
     respond_to do |format|
       if @user.add_role_and_save(admin_params[:role])
         format.turbo_stream { redirect_to admin_users_path, notice: 'User created successfully' }
