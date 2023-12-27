@@ -77,6 +77,11 @@
                     <div class="mt-5 sm:mt-8">
                       <!-- First Contnet -->
                       <div data-hs-stepper-content-item='{"index": 1}'>
+                        <div class="flex justify-center">
+                          <p class="text-red-600 text-lg font-semibold mt-2 hidden" id="error-state">
+                            Please create the course before moving to the next step.
+                          </p>
+                        </div>
                         <div class="p-4 sm:mt-[9rem] sm:mx-auto mx-0 sm:mb-[12rem] mt-[4rem] mb-[3rem] md:w-[48%] sm:w-9/12 w-full">
                           <div class="" id="course-form">
                             <% if @show_edit_form %>
@@ -339,156 +344,79 @@
 <script>
   $(document).ready(function() {
 
-    let course_id = $("#admin-course-form").attr("data-course-id");
-    console.log("course id................", course_id);
+    // let course_id = $("#admin-course-form").attr("data-course-id");
+    // console.log("course id................", course_id);
+    $(".custom-stepper-btn").on("click", function() {
+      const stepper = HSStepper.getInstance('[data-hs-stepper]');
+      let targetIndex = parseInt($(this).attr("data-index")); // Parse the string to an integer
 
+      let currentIndex = stepper.currentIndex;
 
-   $(".custom-stepper-btn").on("click", function() {
-     const stepper = HSStepper.getInstance('[data-hs-stepper]');
-     let targetIndex = parseInt($(this).attr("data-index")); // Parse the string to an integer
+      console.log("current index................", currentIndex);
+      console.log("target index................", targetIndex);
 
-     let currentIndex = stepper.currentIndex;
+      let different = targetIndex - currentIndex;
+      if (different == 0)
+        return
 
-     console.log("current index................", currentIndex);
-     console.log("target index................", targetIndex);
+      if (currentIndex === 1) {
+        if (isCreateMode()) {
+          // Check if it's in "create" mode, and the course is not created
+          if (!isCourseCreated()) {
+            // alert("Please create the course before moving to the next step.");
+            $("#error-state").css("display", "block").fadeOut(5000);
+            return;
+          }
+        }
+      }
 
-    let different = targetIndex - currentIndex;
-    if (different == 0)
-      return
+      if (targetIndex == 3) {
+          callAllSections();
+      }
+      if (currentIndex == 3) {
+        stepper.setCompleteItem()
+        // stepper.unsetCompletedItem()
+        $(".reduce-course").removeClass("reduce-course2");
+        $(".vertical-stepper").css("display", "none");
+      }
 
-    if (currentIndex == 1) {
-       //check form submitted
+      if (currentIndex == 3 && targetIndex == 2){
+        $(".reduce-course").removeClass("reduce-course2");
+     	  $(".vertical-stepper").css("display", "none");
+      }
 
-    }
-    if (targetIndex == 3) {
-        callAllSections();
-    }
-    if (currentIndex == 3) {
-      stepper.setCompleteItem()
-      // stepper.unsetCompletedItem()
-      $(".reduce-course").removeClass("reduce-course2");
-      $(".vertical-stepper").css("display", "none");
-    }
-
-    $("[data-hs-stepper-back-btn]").on("click", function() {
-      console.log("entered into back button", targetIndex);
-      if (targetIndex == 3){
-        callAllSections();
-        $(".reduce-course").addClass("reduce-course2");
-        $(".vertical-stepper").css("display", "block");
+      if (different > 0) {
+        for (let i = 0; i < different; i++) {
+          stepper.nextBtn.click()
+        }
+      } else {
+        different = Math.abs(different)
+        for (let i = 0; i < different; i++) {
+          stepper.backBtn.click()
+        }
       }
     });
-
-    if (currentIndex == 3 && targetIndex == 2){
-      $(".reduce-course").removeClass("reduce-course2");
-   	  $(".vertical-stepper").css("display", "none");
-    }
-    
-    if (different > 0) {
-      
-      for (let i = 0; i < different; i++) {
-        stepper.nextBtn.click()
-      }
-    } else {
-      different = Math.abs(different)
-      for (let i = 0; i < different; i++) {
-        stepper.backBtn.click()
-      }
-    }
-  });
   });
 
-    function courseSubmitted(){
-      $("#admin-course-form").submit(function(e) {
-        e.preventDefault();
-        console.log("form submitted");
-        alert("form submitted");
-      });
-    }
-
-
-
-
-
-      //  $(document).ready(function() {
-      //  	// stepper initiliazation
-      //  	if (typeof HSStepper !== 'undefined') {
-      //  		setTimeout(function() {
-      //  			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
-      //  			let errorState = 1
-      //  			stepperElement.disableButtons()
-      //  			$("#course-name").on("keyup", function() {
-      //  				if ($(this).val().length > 2) {
-      //  					stepperElement.enableButtons();
-      //  				} else {
-      //  					stepperElement.disableButtons();
-      //  				}
-      //  			});
-      //  			if (stepperElement) {
-      //  				try {
-      //  					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
-      //  					console.log("testing index........", stepperInstance);
-
-      //  					$('[data-hs-stepper-next-btn]').on('click', function() {
-
-      //  						stepperInstance.on('next');
-
-      //  						const currentIndex = stepperInstance.currentIndex;
-      //  						console.log(currentIndex);
-      //  						console.log("current index", currentIndex);
-      //  						if (currentIndex === 2) {
-      //                  createCourse();
-      //  						}
-      //  						if (currentIndex === 3) {
-      //  							console.log("ffdgdgdf", stepperInstance.currentIndex);
-      //  							$("button").removeClass('header1');
-      //  						}
-      //  						if (currentIndex === 3) {
-      //  							console.log("current index is 3");
-      //                callAllSections();
-
-      //  						} else if (currentIndex < 3) {
-      //  							$(".reduce-course").removeClass("reduce-course2");
-      //  							$(".vertical-stepper").css("display", "none");
-      //  						}
-      //  					});
-
-      //  					$('[data-hs-stepper-back-btn]').on('click', function() {
-      //  						stepperInstance.on('back');
-      //           console.log("Back button enabled");
-
-      //  						const backButtonIndex = stepperInstance.currentIndex;
-      //           console.log("back button index", backButtonIndex);
-
-      //           if (backButtonIndex === 1) {
-      //             $("[data-hs-stepper-next-btn]").on("click", function() {
-                    
-      //             })
-      //           }
-      //  						if (backButtonIndex < 3) {
-      //  							$(".reduce-course").removeClass("reduce-course2");
-      //  							$(".vertical-stepper").css("display", "none");
-
-      //  						}
-      //  					})
-      //  				} catch (error) {
-      //  					console.error("Error initializing HSStepper:", error);
-      //  				}
-      //  			} else {
-      //  				console.error("Element with data-hs-stepper not found");
-      //  			}
-      //  		}, 1000);
-      //  	} else {
-      //  		console.error("HSStepper not defined. Make sure preline.js is loaded.");
-      //  	}
-      //  });
-     $("#course-modal-close-btn").click();
-     $("#course-detele-modal-btn").click();
-     $("#section-modal-close-btn").click();
-     $("#section-detele-modal-btn").click();
+  function isCourseCreated() {
+    // Add your logic here to check if the course is created
+    let course_id = $("#admin-course-form").attr("data-course-id");
+    return course_id && course_id !== "undefined";
+  }
+  // Function to check if the form is in "create" mode
+  function isCreateMode() {
+    return $("#admin-course-form").length > 0;
+  }
+  function courseSubmitted(){
+    $("#admin-course-form").submit(function(e) {
+      e.preventDefault();
+      console.log("form submitted");
+      alert("form submitted");
+    });
+  }
 
   function callAllSections(){
-    $.ajax({
+  $.ajax({
   		url: "/admin/courses/sections/all",
   		type: "GET",
   		success: function(response) {},
@@ -498,4 +426,71 @@
   	$(".reduce-course").addClass("reduce-course2");
   	$(".vertical-stepper").css("display", "block");
   }
+  $("#course-modal-close-btn").click();
+  $("#course-detele-modal-btn").click();
+  $("#section-modal-close-btn").click();
+  $("#section-detele-modal-btn").click();
+
+
+  $(document).ready(function() {
+  	// stepper initiliazation
+  	if (typeof HSStepper !== 'undefined') {
+  		setTimeout(function() {
+  			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
+  			let errorState = 1
+        stepperElement.disableButtons()
+    		$("#course-name").on("keyup", function() {
+    			if ($(this).val().length > 2) {
+    				stepperElement.enableButtons();
+    			} else {
+    				stepperElement.disableButtons();
+    			}
+    		});
+  			if (stepperElement) {
+  				try {
+  					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
+  					console.log("testing index........", stepperInstance);
+  					$('[data-hs-stepper-next-btn]').on('click', function() {
+  						stepperInstance.on('next');
+  						const currentIndex = stepperInstance.currentIndex;
+  						console.log(currentIndex);
+  						console.log("current index", currentIndex);
+              if (currentIndex === 2) {
+
+              }
+  						if (currentIndex === 3) {
+  							console.log("ffdgdgdf", stepperInstance.currentIndex);
+  							$("button").removeClass('header1');
+  						}
+  						if (currentIndex === 3) {
+  							console.log("current index is 3");
+  							callAllSections();
+  						} else if (currentIndex < 3) {
+  							$(".reduce-course").removeClass("reduce-course2");
+  							$(".vertical-stepper").css("display", "none");
+  						}
+  					});
+  					$('[data-hs-stepper-back-btn]').on('click', function() {
+  						stepperInstance.on('back');
+            console.log("Back button enabled");
+  				    const backButtonIndex = stepperInstance.currentIndex;
+            console.log("back button index", backButtonIndex);
+  						if (backButtonIndex < 3) {
+  							$('[data-hs-stepper-next-btn]').css('display', 'block');
+  							$('[data-hs-stepper-finish-btn]').css('display', 'none');
+  							$(".reduce-course").removeClass("reduce-course2");
+  							$(".vertical-stepper").css("display", "none");
+  						}
+  					})
+  				} catch (error) {
+  					console.error("Error initializing HSStepper:", error);
+  				}
+  			} else {
+  				console.error("Element with data-hs-stepper not found");
+  			}
+  		}, 1000);
+  	} else {
+  		console.error("HSStepper not defined. Make sure preline.js is loaded.");
+  	}
+  });
 </script>
