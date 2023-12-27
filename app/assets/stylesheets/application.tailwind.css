@@ -593,6 +593,10 @@ nav.main-menu li.active > a,
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
 }
 
+.next-btn{
+  display: block !important;
+}
+
 /* Navbar icon rotation */
 .rotate-180 {
   transform: rotate(180deg);

@@ -42,7 +42,7 @@
                         </span>
                         <div class="w-full h-[3px] mb-6 flex-1 bg-gray-200 group-last:hidden hs-stepper-success:bg-blue-600 hs-stepper-completed:bg-teal-600"></div>
                       </li>
-                      <li  class="custom-stepper-btn flex items-center gap-x-2 shrink basis-0 flex-1 group" data-hs-stepper-nav-item='{"index": 2}' data-index="2">
+                      <li class="custom-stepper-btn flex items-center gap-x-2 shrink basis-0 flex-1 group" data-hs-stepper-nav-item='{"index": 2}' data-index="2">
                         <span class="min-w-[28px] min-h-[28px] group flex flex-col items-center text-xs align-middle">
                           <span class="hs-stepper-active:border hs-stepper-active:p-2 hs-stepper-active:rounded">
                             <span class="w-6 h-6 flex justify-center items-center flex-shrink-0 bg-[#C1C9D2] font-medium text-gray-800 rounded-full group-focus:bg-gray-200 dark:bg-gray-700 dark:text-white dark:group-focus:bg-gray-600 hs-stepper-active:bg-blue-600 hs-stepper-active:text-white hs-stepper-success:bg-blue-600 hs-stepper-success:text-white hs-stepper-completed:bg-teal-500 hs-stepper-completed:group-focus:bg-teal-600">
@@ -179,6 +179,9 @@
                             <%= render partial: 'admin/lessons/table', locals: { lessons: @lessons, section_id: @section_id } %>
                           </tbody>
                         </table>
+                        <div class="flex flex-col">
+                              <%# = render partial: 'admin/lessons/form', locals: { section_id: @section_id} %>
+                        </div>
                         <div id="steeper-lesson-large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
                           <div class="relative w-full max-w-[54rem] max-h-full">
                             <!-- Modal content -->
@@ -332,42 +335,83 @@
   </div>
 </div>
 <script>
-  //  $(document).ready(function() {
-  //   $(".custom-stepper-btn").on("click", function() {
-  //     const stepper = HSStepper.getInstance('[data-hs-stepper]');
-  //     let currentIndex = parseInt($(this).attr("data-index")); // Parse the string to an integer
-
-  //     console.log("current index................", currentIndex);
-
-  //     // Use stepper.goToNext() directly
-  //     stepper.goToNext();
-  //   });
-  // });
-
-  $(document).ready(function() {
-    let currentIndex = 1;
-
+   $(document).ready(function() {
     $(".custom-stepper-btn").on("click", function() {
       const stepper = HSStepper.getInstance('[data-hs-stepper]');
-      const clickedIndex = parseInt($(this).attr("data-index"));
+      let targetIndex = parseInt($(this).attr("data-index")); // Parse the string to an integer
 
-      console.log("current index................", stepper.currentIndex);
+      let currentIndex = stepper.currentIndex;
 
-      if (clickedIndex > currentIndex) {
-        for (let i = currentIndex; i < clickedIndex; i++) {
-          if (i === 1) {
+      console.log("current index................", currentIndex);
+      console.log("target index................", targetIndex);
 
-          }
-          stepper.goToNext();
+      if (currentIndex == targetIndex)
+        return 
+
+        if (currentIndex == 1) {
+          //check form submitted
         }
-      } else if (clickedIndex < currentIndex) {
-        stepper.currentIndex = clickedIndex - 1;
-        stepper.goToNext();
+
+      if (currentIndex == 3) {
+        stepper.setCompleteItem()
+        // stepper.unsetCompletedItem()
       }
 
-      currentIndex = clickedIndex;
+      // Use stepper.goToNext() directly
+      stepper.currentIndex = targetIndex - 1;
+
+      console.log("Moving index to ", stepper.currentIndex+1)
+
+      stepper.goToNext();
     });
   });
+
+  // $(document).ready(function() {
+  //   let currentIndex = 1;
+
+  //   $(".custom-stepper-btn").on("click", function() {
+  //     const stepper = HSStepper.getInstance('[data-hs-stepper]');
+  //     const clickedIndex = parseInt($(this).attr("data-index"));
+
+
+  //     console.log("current index................", stepper.currentIndex);
+
+  //     if (clickedIndex > currentIndex) {
+  //       for (let i = currentIndex; i < clickedIndex; i++) {
+  //         if (clickedIndex   == 1){
+  //           console.log("first step", currentIndex, clickedIndex);
+  //             $("#course-name").on("keyup", function() {
+  //               if ($(this).val().length > 2) {
+  //                 $(".custom-stepper-btn").on("click", function() {
+  //                   createCourse();
+  //                   stepper.goToNext();
+  //                 })
+  //               }
+  //             // })
+  //           }) 
+  //         } else if (clickedIndex == 2){
+  //           console.log("first step", currentIndex, clickedIndex);
+            
+  //           $(".custom-stepper-btn").on("click", function() {
+  //             callAllSections();
+  //           })
+  //         }else if (clickedIndex == 3){
+  //           console.log("first step", currentIndex, clickedIndex);
+  //           $(".custom-stepper-btn").on("click", function() {
+  //             callAllSections();
+  //           })
+  //         }
+
+  //         // stepper.goToNext();
+  //       }
+  //     } else if (clickedIndex < currentIndex) {
+  //       stepper.currentIndex = clickedIndex - 1;
+  //       stepper.goToNext();
+  //     }
+
+  //     currentIndex = clickedIndex;
+  //   });
+  // });
 
 
 
@@ -412,8 +456,6 @@
                     callAllSections();
       							
       						} else if (currentIndex < 3) {
-      							// $('[data-hs-stepper-next-btn]').css('display', 'block');
-      							// $('[data-hs-stepper-finish-btn]').css('display', 'none');
       							$(".reduce-course").removeClass("reduce-course2");
       							$(".vertical-stepper").css("display", "none");
       						}
@@ -446,8 +488,6 @@
                  })
                }
       						if (backButtonIndex < 3) {
-      							$('[data-hs-stepper-next-btn]').css('display', 'block');
-      							$('[data-hs-stepper-finish-btn]').css('display', 'none');
       							$(".reduce-course").removeClass("reduce-course2");
       							$(".vertical-stepper").css("display", "none");
 
@@ -496,8 +536,6 @@ function callAllSections(){
 		error: function(xhr, status, error) {},
 	});
 	console.log("ajax called");
-	// $('[data-hs-stepper-next-btn]').css('display', 'none');
-	// $('[data-hs-stepper-finish-btn]').css('display', 'block');
 	$(".reduce-course").addClass("reduce-course2");
 	$(".vertical-stepper").css("display", "block");
 }
