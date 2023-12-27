@@ -25,7 +25,7 @@ class Admin::LessonsController < ApplicationController
         format.html { redirect_to admin_lessons_path }
         format.turbo_stream
       else
-        format.html { render :new }
+        format.html { render turbo_stream: turbo_stream.replace('lesson-admin-form', partial: 'admin/lessons/form', locals: { lesson: @lesson }) }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
