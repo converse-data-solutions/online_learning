@@ -305,8 +305,10 @@
           </button>
         </div>
         <!-- Modal body -->
-        <%= turbo_frame_tag "edit-course-popup" do %>
-        <% end %>
+        <div class="p-7 space-y-6 w-[75%] mr-auto ml-auto">
+          <%= turbo_frame_tag "edit-course-popup" do %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -336,6 +338,11 @@
 </div>
 <script>
   $(document).ready(function() {
+
+    let course_id = $("#admin-course-form").attr("data-course-id");
+    console.log("course id................", course_id);
+
+
    $(".custom-stepper-btn").on("click", function() {
      const stepper = HSStepper.getInstance('[data-hs-stepper]');
      let targetIndex = parseInt($(this).attr("data-index")); // Parse the string to an integer
@@ -345,204 +352,140 @@
      console.log("current index................", currentIndex);
      console.log("target index................", targetIndex);
 
-     if (currentIndex == targetIndex)
-       return
+    let different = targetIndex - currentIndex;
+    if (different == 0)
+      return
 
+    if (currentIndex == 1) {
+       //check form submitted
 
-       if (currentIndex == 1) {
-         //check form submitted
-         createCourse();
-
-
-       }
-
-       if (currentIndex == 2) {
+    }
+    if (targetIndex == 3) {
         callAllSections();
-       }
+    }
+    if (currentIndex == 3) {
+      stepper.setCompleteItem()
+      // stepper.unsetCompletedItem()
+      $(".reduce-course").removeClass("reduce-course2");
+      $(".vertical-stepper").css("display", "none");
+    }
 
-       if (currentIndex == 2 && targetIndex == 1){
-        $(".reduce-course").removeClass("reduce-course2");
-     	   $(".vertical-stepper").css("display", "none");
-       }
-
-     if (currentIndex == 3) {
-       stepper.setCompleteItem()
-       // stepper.unsetCompletedItem()
-       $(".reduce-course").removeClass("reduce-course2");
-     	   $(".vertical-stepper").css("display", "none");
-     }
-
-     // Use stepper.goToNext() directly
-     stepper.currentIndex = targetIndex - 1;
-
-
-     console.log("Moving index to ", stepper.currentIndex+1)
-
-     stepper.goToNext();
-   });
+    $("[data-hs-stepper-back-btn]").on("click", function() {
+      console.log("entered into back button", targetIndex);
+      if (targetIndex == 3){
+        callAllSections();
+        $(".reduce-course").addClass("reduce-course2");
+        $(".vertical-stepper").css("display", "block");
+      }
     });
 
-    // $(document).ready(function() {
-    //   let currentIndex = 1;
+    if (currentIndex == 3 && targetIndex == 2){
+      $(".reduce-course").removeClass("reduce-course2");
+   	  $(".vertical-stepper").css("display", "none");
+    }
+    
+    if (different > 0) {
+      
+      for (let i = 0; i < different; i++) {
+        stepper.nextBtn.click()
+      }
+    } else {
+      different = Math.abs(different)
+      for (let i = 0; i < different; i++) {
+        stepper.backBtn.click()
+      }
+    }
+  });
+  });
 
-    //   $(".custom-stepper-btn").on("click", function() {
-    //     const stepper = HSStepper.getInstance('[data-hs-stepper]');
-    //     const clickedIndex = parseInt($(this).attr("data-index"));
-
-
-    //     console.log("current index................", stepper.currentIndex);
-
-    //     if (clickedIndex > currentIndex) {
-    //       for (let i = currentIndex; i < clickedIndex; i++) {
-    //         if (clickedIndex   == 1){
-    //           console.log("first step", currentIndex, clickedIndex);
-    //             $("#course-name").on("keyup", function() {
-    //               if ($(this).val().length > 2) {
-    //                 $(".custom-stepper-btn").on("click", function() {
-    //                   createCourse();
-    //                   stepper.goToNext();
-    //                 })
-    //               }
-    //             // })
-    //           })
-    //         } else if (clickedIndex == 2){
-    //           console.log("first step", currentIndex, clickedIndex);
-
-    //           $(".custom-stepper-btn").on("click", function() {
-    //             callAllSections();
-    //           })
-    //         }else if (clickedIndex == 3){
-    //           console.log("first step", currentIndex, clickedIndex);
-    //           $(".custom-stepper-btn").on("click", function() {
-    //             callAllSections();
-    //           })
-    //         }
-
-    //         // stepper.goToNext();
-    //       }
-    //     } else if (clickedIndex < currentIndex) {
-    //       stepper.currentIndex = clickedIndex - 1;
-    //       stepper.goToNext();
-    //     }
-
-    //     currentIndex = clickedIndex;
-    //   });
-    // });
+    function courseSubmitted(){
+      $("#admin-course-form").submit(function(e) {
+        e.preventDefault();
+        console.log("form submitted");
+        alert("form submitted");
+      });
+    }
 
 
 
 
 
+      //  $(document).ready(function() {
+      //  	// stepper initiliazation
+      //  	if (typeof HSStepper !== 'undefined') {
+      //  		setTimeout(function() {
+      //  			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
+      //  			let errorState = 1
+      //  			stepperElement.disableButtons()
+      //  			$("#course-name").on("keyup", function() {
+      //  				if ($(this).val().length > 2) {
+      //  					stepperElement.enableButtons();
+      //  				} else {
+      //  					stepperElement.disableButtons();
+      //  				}
+      //  			});
+      //  			if (stepperElement) {
+      //  				try {
+      //  					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
+      //  					console.log("testing index........", stepperInstance);
 
-     $(document).ready(function() {
-     	// stepper initiliazation
-     	if (typeof HSStepper !== 'undefined') {
-     		setTimeout(function() {
-     			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
-     			let errorState = 1
-     			stepperElement.disableButtons()
-     			$("#course-name").on("keyup", function() {
-     				if ($(this).val().length > 2) {
-     					stepperElement.enableButtons();
-     				} else {
-     					stepperElement.disableButtons();
-     				}
-     			});
-     			if (stepperElement) {
-     				try {
-     					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
-     					console.log("testing index........", stepperInstance);
+      //  					$('[data-hs-stepper-next-btn]').on('click', function() {
 
-     					$('[data-hs-stepper-next-btn]').on('click', function() {
+      //  						stepperInstance.on('next');
 
-     						stepperInstance.on('next');
+      //  						const currentIndex = stepperInstance.currentIndex;
+      //  						console.log(currentIndex);
+      //  						console.log("current index", currentIndex);
+      //  						if (currentIndex === 2) {
+      //                  createCourse();
+      //  						}
+      //  						if (currentIndex === 3) {
+      //  							console.log("ffdgdgdf", stepperInstance.currentIndex);
+      //  							$("button").removeClass('header1');
+      //  						}
+      //  						if (currentIndex === 3) {
+      //  							console.log("current index is 3");
+      //                callAllSections();
 
-     						const currentIndex = stepperInstance.currentIndex;
-     						console.log(currentIndex);
-     						console.log("current index", currentIndex);
-     						if (currentIndex === 2) {
-                     createCourse();
-     						}
-     						if (currentIndex === 3) {
-     							console.log("ffdgdgdf", stepperInstance.currentIndex);
-     							$("button").removeClass('header1');
-     						}
-     						if (currentIndex === 3) {
-     							console.log("current index is 3");
-                   callAllSections();
+      //  						} else if (currentIndex < 3) {
+      //  							$(".reduce-course").removeClass("reduce-course2");
+      //  							$(".vertical-stepper").css("display", "none");
+      //  						}
+      //  					});
 
-     						} else if (currentIndex < 3) {
-     							$(".reduce-course").removeClass("reduce-course2");
-     							$(".vertical-stepper").css("display", "none");
-     						}
-     					});
+      //  					$('[data-hs-stepper-back-btn]').on('click', function() {
+      //  						stepperInstance.on('back');
+      //           console.log("Back button enabled");
 
-     					$('[data-hs-stepper-back-btn]').on('click', function() {
-     						stepperInstance.on('back');
-              console.log("Back button enabled");
+      //  						const backButtonIndex = stepperInstance.currentIndex;
+      //           console.log("back button index", backButtonIndex);
 
-     						const backButtonIndex = stepperInstance.currentIndex;
-              console.log("back button index", backButtonIndex);
+      //           if (backButtonIndex === 1) {
+      //             $("[data-hs-stepper-next-btn]").on("click", function() {
+                    
+      //             })
+      //           }
+      //  						if (backButtonIndex < 3) {
+      //  							$(".reduce-course").removeClass("reduce-course2");
+      //  							$(".vertical-stepper").css("display", "none");
 
-              if (backButtonIndex === 1) {
-                $("[data-hs-stepper-next-btn]").on("click", function() {
-                   $.ajax({
-     								  type: "PATCH",
-     								  url: $("#admin-course-edit-form").attr("action"),
-     								  data: $("#admin-course-edit-form").serialize(),
-     								  // dataType: "script", // This is important for Turbo Streams
-     								  headers: {
-     								  	Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-     								  },
-     								  success: function(data) {
-     								  	Turbo.renderStreamMessage(data);
-     								  },
-     								  error: function(data) {
-     								  	console.log("Error on feching data");
-     								  },
-     							  });
-                })
-              }
-     						if (backButtonIndex < 3) {
-     							$(".reduce-course").removeClass("reduce-course2");
-     							$(".vertical-stepper").css("display", "none");
-
-     						}
-     					})
-     				} catch (error) {
-     					console.error("Error initializing HSStepper:", error);
-     				}
-     			} else {
-     				console.error("Element with data-hs-stepper not found");
-     			}
-     		}, 1000);
-     	} else {
-     		console.error("HSStepper not defined. Make sure preline.js is loaded.");
-     	}
-     });
+      //  						}
+      //  					})
+      //  				} catch (error) {
+      //  					console.error("Error initializing HSStepper:", error);
+      //  				}
+      //  			} else {
+      //  				console.error("Element with data-hs-stepper not found");
+      //  			}
+      //  		}, 1000);
+      //  	} else {
+      //  		console.error("HSStepper not defined. Make sure preline.js is loaded.");
+      //  	}
+      //  });
      $("#course-modal-close-btn").click();
      $("#course-detele-modal-btn").click();
      $("#section-modal-close-btn").click();
      $("#section-detele-modal-btn").click();
-
-
-  function createCourse(){
-    $.ajax({
-  		type: "POST",
-  		url: $("#admin-course-form").attr("action"),
-  		data: $("#admin-course-form").serialize(),
-  		// dataType: "script", // This is important for Turbo Streams
-  		headers: {
-  			Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-  		},
-  		success: function(data) {
-  			Turbo.renderStreamMessage(data);
-  		},
-  		error: function(data) {
-  			console.log("Error on feching data");
-  		},
-  	});
-  }
 
   function callAllSections(){
     $.ajax({
