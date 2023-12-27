@@ -112,6 +112,7 @@
                                 <% @sections.each do |section| %>
                                   <%= render partial: "admin/sections/table", locals: {section: section} %>
                                 <% end %>
+                                <tr id="add-new-row"></tr>
                               </tbody>
                             </table>
                             <div class="display-section hidden bg-[#EDEDED]" id="section_create_form">
@@ -331,158 +332,173 @@
   </div>
 </div>
 <script>
+  //  $(document).ready(function() {
+  //   $(".custom-stepper-btn").on("click", function() {
+  //     const stepper = HSStepper.getInstance('[data-hs-stepper]');
+  //     let currentIndex = parseInt($(this).attr("data-index")); // Parse the string to an integer
 
-$(document).ready(function() {
-  let currentIndex = 1; // Set initial index
+  //     console.log("current index................", currentIndex);
 
-  $(".custom-stepper-btn").on("click", function() {
-    const stepper = HSStepper.getInstance('[data-hs-stepper]');
-    const clickedIndex = parseInt($(this).attr("data-index"));
+  //     // Use stepper.goToNext() directly
+  //     stepper.goToNext();
+  //   });
+  // });
 
-    console.log("current index................", currentIndex);
+  $(document).ready(function() {
+    let currentIndex = 1;
 
-    if (clickedIndex > currentIndex) {
-      // Move forward
-      for (let i = currentIndex; i < clickedIndex; i++) {
+    $(".custom-stepper-btn").on("click", function() {
+      const stepper = HSStepper.getInstance('[data-hs-stepper]');
+      const clickedIndex = parseInt($(this).attr("data-index"));
+
+      console.log("current index................", stepper.currentIndex);
+
+      if (clickedIndex > currentIndex) {
+        for (let i = currentIndex; i < clickedIndex; i++) {
+          if (i === 1) {
+
+          }
+          stepper.goToNext();
+        }
+      } else if (clickedIndex < currentIndex) {
+        stepper.currentIndex = clickedIndex - 1;
         stepper.goToNext();
       }
-    } else if (clickedIndex < currentIndex) {
-      // Go back to the desired step
-      stepper.currentIndex = clickedIndex - 1;
-      stepper.goToNext();
-    }
 
-    currentIndex = clickedIndex; // Update currentIndex for the next click
-  });
-});
-
-    $(document).ready(function() {
-    	// stepper initiliazation
-    	if (typeof HSStepper !== 'undefined') {
-    		setTimeout(function() {
-    			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
-    			let errorState = 1
-    			stepperElement.disableButtons()
-    			$("#course-name").on("keyup", function() {
-    				if ($(this).val().length > 2) {
-    					stepperElement.enableButtons();
-    				} else {
-    					stepperElement.disableButtons();
-    				}
-    			});
-    			if (stepperElement) {
-    				try {
-    					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
-    					console.log("testing index........", stepperInstance);
-
-
-                  $(".custom-stepper-btn").on("click", function() {
-                    let  = $(".custom-stepper-btn").attr("data-hs-stepper-nav-item")
-                    console.log("nett steppereeeee", currentIndex);
-                    if (currentIndex == 1) {
-                      currentIndex.goToNext();
-                    }
-                  })
-
-              
-
-    					$('[data-hs-stepper-next-btn]').on('click', function() {
-
-    						stepperInstance.on('next');
-
-    						const currentIndex = stepperInstance.currentIndex;
-    						console.log(currentIndex);
-    						console.log("current index", currentIndex);
-    						if (currentIndex === 2) {
-    							$.ajax({
-    								type: "POST",
-    								url: $("#admin-course-form").attr("action"),
-    								data: $("#admin-course-form").serialize(),
-    								// dataType: "script", // This is important for Turbo Streams
-    								headers: {
-    									Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-    								},
-    								success: function(data) {
-    									Turbo.renderStreamMessage(data);
-    								},
-    								error: function(data) {
-    									console.log("Error on feching data");
-    								},
-    							});
-    						}
-    						if (currentIndex === 3) {
-    							console.log("ffdgdgdf", stepperInstance.currentIndex);
-    							$("button").removeClass('header1');
-    						}
-    						if (currentIndex === 3) {
-    							console.log("current index is 3");
-    							$.ajax({
-    								url: "/admin/courses/sections/all",
-    								type: "GET",
-    								success: function(response) {},
-    								error: function(xhr, status, error) {},
-    							});
-    							console.log("ajax called");
-    							$('[data-hs-stepper-next-btn]').css('display', 'none');
-    							$('[data-hs-stepper-finish-btn]').css('display', 'block');
-    							$(".reduce-course").addClass("reduce-course2");
-    							$(".vertical-stepper").css("display", "block");
-    						} else if (currentIndex < 3) {
-    							$('[data-hs-stepper-next-btn]').css('display', 'block');
-    							$('[data-hs-stepper-finish-btn]').css('display', 'none');
-    							$(".reduce-course").removeClass("reduce-course2");
-    							$(".vertical-stepper").css("display", "none");
-    						}
-    					});
-
-    					$('[data-hs-stepper-back-btn]').on('click', function() {
-    						stepperInstance.on('back');
-             console.log("Back button enabled");
-
-    						const backButtonIndex = stepperInstance.currentIndex;
-             console.log("back button index", backButtonIndex);
-
-             if (backButtonIndex === 1) {
-               $("[data-hs-stepper-next-btn]").on("click", function() {
-                  $.ajax({
-    								  type: "PATCH",
-    								  url: $("#admin-course-edit-form").attr("action"),
-    								  data: $("#admin-course-edit-form").serialize(),
-    								  // dataType: "script", // This is important for Turbo Streams
-    								  headers: {
-    								  	Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-    								  },
-    								  success: function(data) {
-    								  	Turbo.renderStreamMessage(data);
-    								  },
-    								  error: function(data) {
-    								  	console.log("Error on feching data");
-    								  },
-    							  });
-               })
-             }
-    						if (backButtonIndex < 3) {
-    							$('[data-hs-stepper-next-btn]').css('display', 'block');
-    							$('[data-hs-stepper-finish-btn]').css('display', 'none');
-    							$(".reduce-course").removeClass("reduce-course2");
-    							$(".vertical-stepper").css("display", "none");
-
-    						}
-    					})
-    				} catch (error) {
-    					console.error("Error initializing HSStepper:", error);
-    				}
-    			} else {
-    				console.error("Element with data-hs-stepper not found");
-    			}
-    		}, 1000);
-    	} else {
-    		console.error("HSStepper not defined. Make sure preline.js is loaded.");
-    	}
+      currentIndex = clickedIndex;
     });
-    $("#course-modal-close-btn").click();
-    $("#course-detele-modal-btn").click();
-    $("#section-modal-close-btn").click();
-    $("#section-detele-modal-btn").click();
+  });
 
+
+
+
+
+
+      $(document).ready(function() {
+      	// stepper initiliazation
+      	if (typeof HSStepper !== 'undefined') {
+      		setTimeout(function() {
+      			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
+      			let errorState = 1
+      			// stepperElement.disableButtons()
+      			// $("#course-name").on("keyup", function() {
+      			// 	if ($(this).val().length > 2) {
+      			// 		stepperElement.enableButtons();
+      			// 	} else {
+      			// 		stepperElement.disableButtons();
+      			// 	}
+      			// });
+      			if (stepperElement) {
+      				try {
+      					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
+      					console.log("testing index........", stepperInstance);
+
+      					$('[data-hs-stepper-next-btn]').on('click', function() {
+
+      						stepperInstance.on('next');
+
+      						const currentIndex = stepperInstance.currentIndex;
+      						console.log(currentIndex);
+      						console.log("current index", currentIndex);
+      						if (currentIndex === 2) {
+                      createCourse();
+      						}
+      						if (currentIndex === 3) {
+      							console.log("ffdgdgdf", stepperInstance.currentIndex);
+      							$("button").removeClass('header1');
+      						}
+      						if (currentIndex === 3) {
+      							console.log("current index is 3");
+                    callAllSections();
+      							
+      						} else if (currentIndex < 3) {
+      							// $('[data-hs-stepper-next-btn]').css('display', 'block');
+      							// $('[data-hs-stepper-finish-btn]').css('display', 'none');
+      							$(".reduce-course").removeClass("reduce-course2");
+      							$(".vertical-stepper").css("display", "none");
+      						}
+      					});
+
+      					$('[data-hs-stepper-back-btn]').on('click', function() {
+      						stepperInstance.on('back');
+               console.log("Back button enabled");
+
+      						const backButtonIndex = stepperInstance.currentIndex;
+               console.log("back button index", backButtonIndex);
+
+               if (backButtonIndex === 1) {
+                 $("[data-hs-stepper-next-btn]").on("click", function() {
+                    $.ajax({
+      								  type: "PATCH",
+      								  url: $("#admin-course-edit-form").attr("action"),
+      								  data: $("#admin-course-edit-form").serialize(),
+      								  // dataType: "script", // This is important for Turbo Streams
+      								  headers: {
+      								  	Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      								  },
+      								  success: function(data) {
+      								  	Turbo.renderStreamMessage(data);
+      								  },
+      								  error: function(data) {
+      								  	console.log("Error on feching data");
+      								  },
+      							  });
+                 })
+               }
+      						if (backButtonIndex < 3) {
+      							$('[data-hs-stepper-next-btn]').css('display', 'block');
+      							$('[data-hs-stepper-finish-btn]').css('display', 'none');
+      							$(".reduce-course").removeClass("reduce-course2");
+      							$(".vertical-stepper").css("display", "none");
+
+      						}
+      					})
+      				} catch (error) {
+      					console.error("Error initializing HSStepper:", error);
+      				}
+      			} else {
+      				console.error("Element with data-hs-stepper not found");
+      			}
+      		}, 1000);
+      	} else {
+      		console.error("HSStepper not defined. Make sure preline.js is loaded.");
+      	}
+      });
+      $("#course-modal-close-btn").click();
+      $("#course-detele-modal-btn").click();
+      $("#section-modal-close-btn").click();
+      $("#section-detele-modal-btn").click();
+
+
+function createCourse(){
+  $.ajax({
+		type: "POST",
+		url: $("#admin-course-form").attr("action"),
+		data: $("#admin-course-form").serialize(),
+		// dataType: "script", // This is important for Turbo Streams
+		headers: {
+			Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+		},
+		success: function(data) {
+			Turbo.renderStreamMessage(data);
+		},
+		error: function(data) {
+			console.log("Error on feching data");
+		},
+	});
+}
+
+function callAllSections(){
+  $.ajax({
+		url: "/admin/courses/sections/all",
+		type: "GET",
+		success: function(response) {},
+		error: function(xhr, status, error) {},
+	});
+	console.log("ajax called");
+	// $('[data-hs-stepper-next-btn]').css('display', 'none');
+	// $('[data-hs-stepper-finish-btn]').css('display', 'block');
+	$(".reduce-course").addClass("reduce-course2");
+	$(".vertical-stepper").css("display", "block");
+}
 </script>

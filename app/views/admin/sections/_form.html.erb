@@ -15,3 +15,10 @@
     <div class=""> <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px] submit_section" %> </div>
   </td>
 <% end %>
+<script>
+  $(document).on('turbo:submit-end', function (event) {
+    if (event.detail.success) {
+      $('#stepper_section-form')[0].reset();
+    }
+  });
+</script>

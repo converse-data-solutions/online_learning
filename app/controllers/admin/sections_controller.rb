@@ -33,9 +33,14 @@ class Admin::SectionsController < ApplicationController
     puts "Request Format: #{request.format}"
     respond_to do |format|
       if @section.save
-        format.turbo_stream { render turbo_stream: turbo_stream.replace( "stepper_section-form", partial: "admin/sections/form", locals: { section: Section.new })}
-        format.json { render :show, status: :created, location: @section }
+        format.html { redirect_to admin_sections_path }
+        format.turbo_stream
+        # @form_cleared = true
+
+        # format.turbo_stream { render turbo_stream: turbo_stream.append("data-append-section", partial: "admin/sections/table", locals: { section: @section }) }
+        # format.json { render :show, status: :created, location: @section }
       else
+        # format.html { render :new }
         format.turbo_stream { render turbo_stream: turbo_stream.replace('section-admin-form', partial: 'admin/sections/form', locals: { section: @section }) }
         format.json { render json: @section.errors, status: :unprocessable_entity }
       end
