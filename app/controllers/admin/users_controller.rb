@@ -18,7 +18,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new
   end
 
-  def create # rubocop:disable Metrics/AbcSize
+  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @user = User.new(admin_params)
     puts "Request Format: #{request.format}"
     respond_to do |format|
