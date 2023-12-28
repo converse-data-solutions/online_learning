@@ -1,5 +1,5 @@
 <tbody class="overflow-auto filter-table-data" id="lessonTable">
-  <% lessons.includes(clip_attachment: :blob, attachments_attachments: :blob).each do |lesson| %>
+  <% @lessons.includes(clip_attachment: :blob, attachments_attachments: :blob).each do |lesson| %>
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"  >
       <td class="px-6 py-4 font-medium text-[15px] text-[#818181]">
         <%= lesson.title %>
@@ -31,8 +31,6 @@
       </td>
     </tr>
   <% end %>
-    <%= render partial: 'admin/lessons/form', locals: { section_id: @section_id} %>
-</tbody>
 <script>
    $("#section-modal-close-btn").click();
     $("#section-detele-modal-btn").click();

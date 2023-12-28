@@ -5,27 +5,36 @@ class Admin::LessonsController < ApplicationController
   before_action :set_lesson, only: %i[show edit update destroy]
   require 'will_paginate/array'
 
-  def index
-    @lessons = []
-    Lesson.all.includes(:section, clip_attachment: :blob, attachments_attachments: :blob).each do |lesson|
-      @lessons.push(lesson)
+  def index # rubocop:disable Metrics/MethodLength
+    if params[:section_id].present?
+      @section = Section.find(params[:section_id])
+      @lessons = @section.lessons.includes(clip_attachment: :blob, attachments_attachments: :blob)
+      respond_to(&:js)
+    else
+      @lessons = []
+      Lesson.all.includes(:section, clip_attachment: :blob, attachments_attachments: :blob).each do |lesson|
+        @lessons.push(lesson)
+      end
+      @lessons = @lessons.paginate(page: params[:page], per_page: 5)
     end
-    @lessons = @lessons.paginate(page: params[:page], per_page: 5)
   end
 
   def new
     @lesson = Lesson.new
   end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @lesson = Lesson.new(lesson_params)
+
     respond_to do |format|
       if @lesson.save
-        @form_cleared = true
-        format.html { redirect_to admin_lessons_path }
-        format.turbo_stream
+        @lessons = Lesson.where(section_id: @lesson.section_id)
+
+        format.html { redirect_to your_redirect_path, notice: 'Lesson was successfully created.' }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('lessonTable', partial: 'admin/lessons/table', locals: { lessons: @lessons }) }
       else
-        format.html { render turbo_stream: turbo_stream.replace('lesson-admin-form', partial: 'admin/lessons/form', locals: { lesson: @lesson }) }
+        format.html { render partial: 'admin/lessons/form', locals: { lesson: @lesson }, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('lesson-admin-form', partial: 'admin/lessons/form', locals: { lesson: @lesson }) }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
@@ -52,14 +61,18 @@ class Admin::LessonsController < ApplicationController
 
   def show; end
 
-
-  def alter_lesson
+  def alter_lesson # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @lessons = Lesson.where(section_id: params[:section_id])
     @section = Section.find(params[:section_id])
     @section_id = @section.id
     puts "Request Format: #{request.format}"
     respond_to do |format|
-      format.turbo_stream
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace('lessonTable', partial: 'admin/lessons/table', locals: { section_id: @section_id }),
+          turbo_stream.replace('lesson-admin-form', partial: 'admin/lessons/form', locals: { section_id: @section_id })
+        ]
+      end
     end
   end
 

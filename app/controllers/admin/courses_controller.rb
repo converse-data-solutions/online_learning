@@ -11,7 +11,12 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     end
     @courses = Course.search_by_course_name(params[:search]).paginate(page: params[:page], per_page: 5)
     @sections = Course.last.sections
-    @lessons = Lesson.all
+    if params[:section_id].present?
+      @section = Section.find(params[:section_id])
+      @lessons = @section.lessons
+    else
+      @lessons = Lesson.all
+    end
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @courses }
