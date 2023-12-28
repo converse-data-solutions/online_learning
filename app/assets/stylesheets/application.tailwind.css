@@ -15,16 +15,28 @@
   transition: background, color 0.5s;
 }
 .gradiant-hover:hover {
-  background: linear-gradient(to right, #0082ce, #0082ce, #31b978);
+  background: linear-gradient(to left, #31b978, #0082ce, #0082ce); /* Set the initial gradient */
+  background-size: 200% 100%; /* Set the size to accommodate the transition */
+  transition: background-position 3s;
   color: white;
+}
+
+.gradiant-hover:hover {
+  background-position: 100% 0; /* Move the gradient to the right on hover */
 }
 
 .button-gradiant-hover {
   transition: background, color 0.5s;
 }
 .button-gradiant-hover:hover {
-  background: linear-gradient(to left, #0082ce, #0082ce, #31b978);
+  background: linear-gradient(to right, #31b978, #0082ce, #0082ce); /* Set the initial gradient */
+  background-size: 200% 100%; /* Set the size to accommodate the transition */
+  transition: background-position 3s;
   color: white;
+}
+
+.button-gradiant-hover:hover {
+  background-position: 100% 0; /* Move the gradient to the right on hover */
 }
 
 .delete-gradiant-hover {
