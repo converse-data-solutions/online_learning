@@ -55,8 +55,15 @@ class Admin::LessonsController < ApplicationController
   end
 
   def destroy
-    @lesson.destroy
-    redirect_to admin_lessons_path
+    respond_to do |format|
+      if @lesson.destroy
+        format.turbo_stream
+        format.json { render :show, status: :ok, location: admin_lesson_url(@lesson) }
+      else
+        format.turbo_stream
+        format.json { render json: @lesson.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def show; end
