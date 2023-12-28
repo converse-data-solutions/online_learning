@@ -28,19 +28,13 @@ class Admin::SectionsController < ApplicationController
     @section = Sections.new
   end
 
-  def create # rubocop:disable Metrics/MethodLength
+  def create
     @section = Section.new(section_params)
-    puts "Request Format: #{request.format}"
     respond_to do |format|
       if @section.save
         format.html { redirect_to admin_sections_path }
         format.turbo_stream
-        # @form_cleared = true
-
-        # format.turbo_stream { render turbo_stream: turbo_stream.append("data-append-section", partial: "admin/sections/table", locals: { section: @section }) }
-        # format.json { render :show, status: :created, location: @section }
       else
-        # format.html { render :new }
         format.turbo_stream { render turbo_stream: turbo_stream.replace('section-admin-form', partial: 'admin/sections/form', locals: { section: @section }) }
         format.json { render json: @section.errors, status: :unprocessable_entity }
       end
