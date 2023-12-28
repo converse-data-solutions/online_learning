@@ -34,7 +34,7 @@ class Admin::LessonsController < ApplicationController
         format.turbo_stream { render turbo_stream: turbo_stream.replace('lessonTable', partial: 'admin/lessons/table', locals: { lessons: @lessons }) }
       else
         format.html { render partial: 'admin/lessons/form', locals: { lesson: @lesson }, status: :unprocessable_entity }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('lesson-admin-form', partial: 'admin/lessons/form', locals: { lesson: @lesson }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('lesson-admin-form', partial: 'admin/lessons/form', locals: { section_id: @lesson.section_id, lesson: @lesson }) }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
