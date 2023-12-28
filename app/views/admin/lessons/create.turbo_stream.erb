@@ -1,1 +1,1 @@
-<%= turbo_stream.before "lesson_create_form", partial: "admin/lessons/table", locals: { lesson: @lesson } %>
+<%= turbo_stream.replace "lesson-admin-for", partial: "admin/lessons/form", locals: { lessons: @lessons, section_id: @section_id } %>
