@@ -20,6 +20,7 @@
   $(document).on('turbo:submit-end', function (event) {
     if (event.detail.success) {
       $('#lesson-admin-form')[0].reset();
+      $("#lesson-admin-form file").val('');
     }
   });
 </script>

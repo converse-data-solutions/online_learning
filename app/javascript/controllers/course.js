@@ -137,7 +137,7 @@ function courseEditPopup() {
       method: "GET",
       url: url,
       data: {
-        user_id: id,
+        course_id: id,
       },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
