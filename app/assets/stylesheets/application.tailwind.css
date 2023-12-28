@@ -15,7 +15,7 @@
   transition: background, color 0.5s;
 }
 .gradiant-hover:hover {
-  background: linear-gradient(to left, #31b978, #0082ce, #0082ce); /* Set the initial gradient */
+  background: linear-gradient(to left, #0082ce, #0082ce, #31b978); /* Set the initial gradient */
   background-size: 200% 100%; /* Set the size to accommodate the transition */
   transition: background-position 3s;
   color: white;
@@ -430,7 +430,7 @@ nav.main-menu li.active > a,
   color: #000 !important;
 }
 
-.stepper-formatter{
+.stepper-formatter2{
   width: 100% !important;
   margin-left: 0 !important;
   margin-right: 0 !important;

@@ -26,7 +26,7 @@
                   <h3 class="mb-14 font-semibold text-[26px] text-[#31B978] dark:text-white text-center">NEW COURSE</h3>
                   <div data-hs-stepper id="stepper-loader">
                     <!-- Stepper Nav -->
-                    <ul  class="relative flex flex-row gap-x-2 w-[60%] md:mx-auto sm:mr-auto">
+                    <ul  class="relative flex flex-row gap-x-2 w-[60%] md:mx-auto sm:mr-auto stepper-formatter">
                       <li class="custom-stepper-btn flex pl-24 items-center gap-x-2 shrink basis-0 flex-1 group" data-hs-stepper-nav-item='{"index": 1}' data-index="1" >
                         <span class="min-w-[28px] min-h-[28px] group flex flex-col items-center text-xs align-middle">
                           <span class="hs-stepper-active:border hs-stepper-active:p-2 hs-stepper-active:rounded">
@@ -245,7 +245,7 @@
                       </svg>
                       Back
                     </button>
-                    <button type="button" class="py-2 px-10 text-[#fff] inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] disabled:opacity-50 disabled:pointer-events-none next-btn" data-hs-stepper-next-btn > Next </button>
+                    <button type="button" class="py-2 px-10 text-[#fff] inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] disabled:opacity-50 disabled:pointer-events-none next-btn button-gradiant-hover" data-hs-stepper-next-btn > Next </button>
                     <button type="button" class="py-2 px-3 inline-flex items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none"  style="display: none;"> Finish </button>
                     <button type="reset" class="py-2 px-3 hidden items-center gap-x-1 text-sm font-semibold rounded-lg border border-transparent bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-white disabled:opacity-50 disabled:pointer-events-none" data-hs-stepper-reset-btn style="display: none;"> Reset </button>
                   </div>
@@ -385,6 +385,7 @@
       }
 
       if (currentIndex == 3 && targetIndex == 2){
+        $(".stepper-formatter").removeClass("stepper-formatter2");
         $(".reduce-course").removeClass("reduce-course2");
      	  $(".vertical-stepper").css("display", "none");
       }
@@ -427,6 +428,7 @@
   		error: function(xhr, status, error) {},
   	});
   	console.log("ajax called");
+    $(".stepper-formatter").addClass("stepper-formatter2");
   	$(".reduce-course").addClass("reduce-course2");
   	$(".vertical-stepper").css("display", "block");
   }
@@ -480,8 +482,7 @@
   				    const backButtonIndex = stepperInstance.currentIndex;
             console.log("back button index", backButtonIndex);
   						if (backButtonIndex < 3) {
-  							$('[data-hs-stepper-next-btn]').css('display', 'block');
-  							$('[data-hs-stepper-finish-btn]').css('display', 'none');
+  							$(".stepper-formatter").removeClass("stepper-formatter2");
   							$(".reduce-course").removeClass("reduce-course2");
   							$(".vertical-stepper").css("display", "none");
   						}
