@@ -1,24 +1,21 @@
 <%= form_for Section.new, url: admin_course_sections_path(course_id: Course.last.id), method: :post, html: { class: "custom-section", id: "stepper_section-form" }, format: :turbo_stream do |f| %>
-  <div class=""><%= f.hidden_field :course_id, value: Course.last.id, class: "hide_course" %></div>
-  <td>
-    <div class="w-100%">
-      <%= f.text_field :title, id:"section_title", class: "hide_title w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200" %>
-
-    </div>
-  </td>
-  <td>  
-    <div class="w-100%">
-      <%= f.text_field :description, class: 'hide_description w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block focus:ring-0 focus:ring-offset-0 focus:border-gray-200 p-2.5 rounded-[7px]' %>
-    </div>
-  </td>
-  <td>
-    <div class=""> <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px] submit_section" %> </div>
-  </td>
+  <%= f.hidden_field :course_id, value: Course.last.id, class: "hide_course" %>
+  <%= f.text_field :title, id:"section_title", class: "hide_title w-[33%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 p-2.5 focus:border-gray-200" %>
+  <% if section&.errors&.any? %>
+    <% puts section.errors.full_messages %>
+    <% if section.errors[:title].any? %>
+      < class="text-red-600 text-sm mt-1">
+        <%= section.errors.full_messages_for(:title).join(', ') %>
+      </div>
+    <% end %>
+  <% end %>
+  <%= f.text_field :description, class: 'hide_description w-[40%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block focus:ring-0 focus:ring-offset-0 focus:border-gray-200 p-2.5 rounded-[7px]' %>
+  <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px] submit_section" %>
 <% end %>
-<script>
+<%# <script>
   $(document).on('turbo:submit-end', function (event) {
     if (event.detail.success) {
       $('#stepper_section-form')[0].reset();
     }
   });
-</script>
+</script> %>

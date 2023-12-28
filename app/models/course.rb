@@ -10,7 +10,7 @@ class Course < ApplicationRecord
   has_many :users, through: :user_courses
 
   # validations
-  validates :course_name, presence: true
+  validates :course_name, presence: true, uniqueness: true
   # presence: { message: 'Please enter the Course name' },
   # uniqueness: { message: 'Course name already exists.' }
   # validates :description, presence: true
