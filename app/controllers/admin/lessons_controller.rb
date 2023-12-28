@@ -48,7 +48,7 @@ class Admin::LessonsController < ApplicationController
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_lesson_url(@lesson) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.update('steeper-edit-lesson-popup', partial: 'admin/lessons/edit', locals: { lesson: @lesson }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.update('steeper-edit-lesson-popup', partial: 'admin/lessons/edit', locals: { lesson: @lesson, section: @section }) }
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end

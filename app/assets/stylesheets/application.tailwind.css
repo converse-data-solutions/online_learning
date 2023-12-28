@@ -812,7 +812,7 @@ input[type="file"] {
   transition-duration: 0.5s;
 }
 .text-active {
-  color: #000;
+  color: #0bc08b;
   transition-duration: 0.5s;
 }
 .text-fineshed {

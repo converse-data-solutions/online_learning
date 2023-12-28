@@ -1,4 +1,4 @@
-<div class="p-7 space-y-6 w-[75%] mr-auto ml-5">
+<div class="p-7 space-y-6 w-[75%] mr-auto ml-auto">
   <%= form_for([:admin, Course.last, section], url: admin_course_section_path(Course.last, section), method: :patch) do |f| %>
     <div class="flex mb-3 justify-between flex-col md:flex-row">
       <label for="title" class="block mb-2 text-[18px] font-medium text-[#000]">Title</label>

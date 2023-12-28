@@ -22,12 +22,21 @@ function tableSearch() {
 }
 
 // Stepper Table New Form
-function tableForm() {
+function tableSectionForm() {
   $(".display-section-button").click(function () {
     $(".display-section").toggle();
   });
   $(".display-lesson-button").click(function () {
     $(".display-lesson").show();
+  });
+}
+
+function tableLessonForm() {
+  $(".display-lesson-button").click(function () {
+    $(".display-lesson").toggle();
+  });
+  $(".display-section-button").click(function () {
+    $(".display-section").hide();
   });
 }
 
@@ -243,7 +252,7 @@ function courseTableSearch() {
 }
 
 $(document).ready(function () {
-  tableForm();
+  tableSectionForm();
   tableSearch();
   collectionSelect();
   courseEditPopup();
@@ -255,7 +264,7 @@ $(document).ready(function () {
   steeperLessonDeletePopup();
 
   $(document).on("turbo:render", function () {
-    tableForm();
+    tableSectionForm();
     tableSearch();
     courseEditPopup();
     courseDeletePopup();

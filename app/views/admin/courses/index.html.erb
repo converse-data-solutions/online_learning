@@ -74,7 +74,7 @@
                     </ul>
                     <!-- End Stepper Nav -->
                     <!-- Stepper Content -->
-                    <div class="mt-5 sm:mt-8">
+                    <div class="mt-5 sm:mt-0">
                       <!-- First Contnet -->
                       <div data-hs-stepper-content-item='{"index": 1}'>
                         <div class="flex justify-center">
@@ -82,7 +82,7 @@
                             Please create the course before moving to the next step.
                           </p>
                         </div>
-                        <div class="p-4 sm:mt-[9rem] sm:mx-auto mx-0 sm:mb-[12rem] mt-[4rem] mb-[3rem] md:w-[48%] sm:w-9/12 w-full">
+                        <div class="p-4 sm:mt-[9rem] sm:mx-auto mx-0 sm:mb-[8rem] mt-[4rem] mb-[3rem] md:w-[48%] sm:w-9/12 w-full">
                           <div class="" id="course-form">
                             <% if @show_edit_form %>
                               <%= render partial: "admin/courses/edit", locals: {course: @course} %>
@@ -95,7 +95,7 @@
                       <!-- End First Contnet -->
                       <!-- Second Contnet -->
                       <div data-hs-stepper-content-item='{"index": 2}' style="display: none;">
-                        <div class="p-4 h-[50vh]">
+                        <div class="p-4 h-[50vh] mt-0 md:mt-[2rem]">
                           <div class="relative overflow-x-auto w-[90%] mx-auto h-[50vh]">
                             <span class="text-[16px] font-medium text-[#000]">Course:<span class='pl-3 text-[15px] text-[#818181] font-medium'><%= Course.last.course_name %></span>
                             </span>
@@ -129,7 +129,7 @@
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                   <!-- Modal header -->
                                   <div class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
-                                    <h3 class="text-xl font-semibold text-[26px] text-[#31B978] text-center flex justify-center w-full"> EDIT Section </h3>
+                                    <h3 class="text-xl font-semibold text-[26px] text-[#31B978] text-center flex justify-center w-full"> EDIT SECTION </h3>
                                     <button type="button" id="section-modal-close-btn" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="steeper-section-large-modal">
                                       <svg class="w-7 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                         <path stroke="#31B978" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" /> </svg> <span class="sr-only">Close modal</span> </button>
@@ -174,18 +174,17 @@
                           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto">
                             <thead class="text-xs text-[#000] bg-[#EDEDED] dark:text-gray-400">
                               <tr>
-                                <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Title </th>
-                                <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Description </th>
-                                <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Clip           </th>
-                                <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Attachments </th>
-                                <th scope="col" class="px-6 py-5 font-medium text-[18px]"> Action </th>
+                                <th scope="col" class="w-[20%] px-6 py-5 font-medium text-[18px]"> Title </th>
+                                <th scope="col" class="w-[25%] px-6 py-5 font-medium text-[18px]"> Description </th>
+                                <th scope="col" class="w-[25%] px-6 py-5 font-medium text-[18px]"> Clip           </th>
+                                <th scope="col" class="w-[20%] px-6 py-5 font-medium text-[18px]"> Attachments </th>
+                                <th scope="col" class="w-[10%] px-6 py-5 font-medium text-[18px]"> Action </th>
                               </tr>
                             </thead>
                             <%= render partial: 'admin/lessons/table', locals: { lessons: @lessons } %>
-                            <tr class="" id="lesson-data-append">
                             </tbody>
                           </table>
-                          <div class="flex flex-col">
+                          <div class="display-lesson hidden bg-[#EDEDED]">
                             <%= render partial: 'admin/lessons/form', locals: { section_id: @section_id } %>
                           </div>
                           <div id="steeper-lesson-large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
@@ -220,7 +219,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="flex display-lesson-button">
+                          <div class="flex">
                             <span class="text-[35px] text-gray-500 text-center bg-[#F2F2F2] lg:w-[5%] md:w-[15%] sm:w-[25%] w-[35%] display-lesson-button">+</span>
                           </div>
                         </div>
@@ -253,7 +252,7 @@
                 <!-- End Stepper -->
               </div>
             </div>
-            <div class="w-[100%] md:w-[25%] h-[52.25rem] bg-[#DEDEDE] hidden vertical-stepper">
+            <div class="w-[100%] md:w-[25%] h-[49rem] bg-[#f7f7f7] hidden vertical-stepper rounded-r-lg">
               <div class="w-[100%] h-[82vh] mt-4 mb-4 overflow-auto" id="sections-loop">
               </div>
             </div>
