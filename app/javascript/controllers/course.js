@@ -277,7 +277,17 @@ function topStepper(){
       console.log("lsst gfdfggggfdfgdfgdg");
     }
     if (targetIndex == 3) {
-        callAllSections();
+      $.ajax({
+        url: "/admin/courses/sections/all",
+        type: "GET",
+        dataType: "script",
+        success: function(response) {},
+        error: function(xhr, status, error) {},
+      });
+      console.log("ajax called");
+      $(".stepper-formatter").addClass("stepper-formatter2");
+      $(".reduce-course").addClass("reduce-course2");
+      $(".vertical-stepper").css("display", "block");
     }
     if (currentIndex == 3) {
       stepper.setCompleteItem()
@@ -368,12 +378,31 @@ function bottomStepper(){
 							$("button").removeClass('header1');
 						}
 						if (currentIndex === 3) {
-							callAllSections();
+							$.ajax({
+                url: "/admin/courses/sections/all",
+                type: "GET",
+                dataType: "script",
+                success: function(response) {},
+                error: function(xhr, status, error) {},
+              });
+              console.log("ajax called");
+              $(".stepper-formatter").addClass("stepper-formatter2");
+              $(".reduce-course").addClass("reduce-course2");
+              $(".vertical-stepper").css("display", "block");
 						} else if (currentIndex < 3) {
 							$(".reduce-course").removeClass("reduce-course2");
 							$(".vertical-stepper").css("display", "none");
 						}
 					});
+          $('[data-hs-stepper-back-btn]').on('click', function() {
+            stepperInstance.on('back');
+            const backButtonIndex = stepperInstance.currentIndex;
+            if (backButtonIndex < 3) {
+              $(".stepper-formatter").removeClass("stepper-formatter2");
+              $(".reduce-course").removeClass("reduce-course2");
+              $(".vertical-stepper").css("display", "none");
+            }
+          })
 				} catch (error) {
 					console.error("Error initializing HSStepper:", error);
 				}
