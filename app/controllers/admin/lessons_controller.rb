@@ -5,7 +5,7 @@ class Admin::LessonsController < ApplicationController
   before_action :set_lesson, only: %i[show edit update destroy]
   require 'will_paginate/array'
 
-  def index # rubocop:disable Metrics/MethodLength
+  def index # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     if params[:section_id].present?
       @section = Section.find(params[:section_id])
       @lessons = @section.lessons.includes(clip_attachment: :blob, attachments_attachments: :blob)
@@ -65,8 +65,6 @@ class Admin::LessonsController < ApplicationController
       end
     end
   end
-
-  def show; end
 
   def alter_lesson # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @lessons = Lesson.where(section_id: params[:section_id])
