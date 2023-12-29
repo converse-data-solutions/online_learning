@@ -258,8 +258,6 @@ function topStepper(){
     const stepper = HSStepper.getInstance('[data-hs-stepper]');
     let targetIndex = parseInt($(this).attr("data-index")); // Parse the string to an integer
     let currentIndex = stepper.currentIndex;
-    console.log("current index................", currentIndex);
-    console.log("target index................", targetIndex);
     let different = targetIndex - currentIndex;
     if (different == 0)
       return
@@ -273,9 +271,6 @@ function topStepper(){
         }
       }
     }
-    if (targetIndex= 2){
-      console.log("lsst gfdfggggfdfgdfgdg");
-    }
     if (targetIndex == 3) {
       $.ajax({
         url: "/admin/courses/sections/all",
@@ -284,7 +279,6 @@ function topStepper(){
         success: function(response) {},
         error: function(xhr, status, error) {},
       });
-      console.log("ajax called");
       $(".stepper-formatter").addClass("stepper-formatter2");
       $(".reduce-course").addClass("reduce-course2");
       $(".vertical-stepper").css("display", "block");
@@ -325,13 +319,7 @@ function isCourseCreated() {
 function isCreateMode() {
   return $("#admin-course-form").length > 0;
 }
-function courseSubmitted(){
-  $("#admin-course-form").submit(function(e) {
-    e.preventDefault();
-    console.log("form submitted");
-    alert("form submitted");
-  });
-}
+
 
 // Ajax call for right side stepper section load
 
@@ -343,7 +331,6 @@ function callAllSections(){
   		success: function(response) {},
   		error: function(xhr, status, error) {},
   });
-  console.log("ajax called");
   $(".stepper-formatter").addClass("stepper-formatter2");
   $(".reduce-course").addClass("reduce-course2");
   $(".vertical-stepper").css("display", "block");
@@ -385,7 +372,6 @@ function bottomStepper(){
                 success: function(response) {},
                 error: function(xhr, status, error) {},
               });
-              console.log("ajax called");
               $(".stepper-formatter").addClass("stepper-formatter2");
               $(".reduce-course").addClass("reduce-course2");
               $(".vertical-stepper").css("display", "block");
@@ -460,4 +446,17 @@ addEventListener("turbo:before-stream-render", (event) => {
     steeperLessonEditPopup();
     steeperLessonDeletePopup();
   };
+});
+
+$(document).on('turbo:submit-end', function (event) {
+  if (event.detail.success) {
+    $('#lesson-admin-form')[0].reset();
+    $("#lesson-admin-form file").val('');
+  }
+});
+
+$(document).on('turbo:submit-end', function (event) {
+  if (event.detail.success) {
+    $('#stepper_section-form')[0].reset();
+  }
 });

@@ -46,11 +46,11 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   end
 
   def edit
-    @course = Course.last
+    @course = Course.find(params[:id])
   end
 
   def update # rubocop:disable Metrics/AbcSize
-    @course = Course.last
+    @course = Course.find(params[:id])
     respond_to do |format|
       if @course.update(course_params)
         format.turbo_stream { redirect_to admin_courses_path, notice: 'Course updated successfully' }

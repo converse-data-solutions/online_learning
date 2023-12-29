@@ -34,6 +34,8 @@ class Admin::SectionsController < ApplicationController
     @section = Section.new(section_params)
     respond_to do |format|
       if @section.save
+        @sections = Course.last.sections
+        @section = Section.find_by(id: @section.id)
         format.html { redirect_to admin_sections_path }
         format.turbo_stream
       else

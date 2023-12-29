@@ -12,10 +12,3 @@
   <%= f.text_field :description, class: 'hide_description w-[40%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block focus:ring-0 focus:ring-offset-0 focus:border-gray-200 p-2.5 rounded-[7px]' %>
   <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px] submit_section" %>
 <% end %>
-<script>
-  $(document).on('turbo:submit-end', function (event) {
-    if (event.detail.success) {
-      $('#stepper_section-form')[0].reset();
-    }
-  });
-</script>
