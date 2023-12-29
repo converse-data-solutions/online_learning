@@ -12,7 +12,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @courses = Course.search_by_course_name(params[:search]).paginate(page: params[:page], per_page: 5)
     @sections = Course.last.sections
     if params[:section_id].present?
-      @section = Section.find(params[:section_id])
+      @section = Section.find_by(id: params[:id])
       @lessons = @section.lessons
     else
       @lessons = Lesson.all
@@ -46,11 +46,11 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   end
 
   def edit
-    @course = Course.find(params[:id])
+    @course = Course.find_by(id: params[:id])
   end
 
   def update # rubocop:disable Metrics/AbcSize
-    @course = Course.find(params[:id])
+    @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course.update(course_params)
         format.turbo_stream { redirect_to admin_courses_path, notice: 'Course updated successfully' }
@@ -63,9 +63,9 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   end
 
   def destroy # rubocop:disable Metrics/AbcSize
-    @course = Course.find(params[:id])
+    @course = Course.find_by(id: params[:id])
     respond_to do |format|
-      if @course.destroy
+      if @course&.destroy
         format.turbo_stream { redirect_to admin_courses_path, notice: 'Course deleted successfully' }
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else

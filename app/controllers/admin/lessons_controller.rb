@@ -7,7 +7,7 @@ class Admin::LessonsController < ApplicationController
 
   def index # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     if params[:section_id].present?
-      @section = Section.find(params[:section_id])
+      @section = Section.find_by(id: params[:id])
       @lessons = @section.lessons.includes(clip_attachment: :blob, attachments_attachments: :blob)
       respond_to(&:js)
     else
@@ -68,7 +68,7 @@ class Admin::LessonsController < ApplicationController
 
   def alter_lesson # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @lessons = Lesson.where(section_id: params[:section_id])
-    @section = Section.find(params[:section_id])
+    @section = Section.find_by(id: params[:section_id])
     @section_id = @section.id
     puts "Request Format: #{request.format}"
     respond_to do |format|
@@ -84,11 +84,11 @@ class Admin::LessonsController < ApplicationController
   private
 
   def section_assignment
-    @section = Section.find(params[:section_id])
+    @section = Section.find_by(id: params[:id])
   end
 
   def set_lesson
-    @lesson = Lesson.find(params[:id])
+    @lesson = Lesson.find_by(id: params[:id])
   end
 
   def lesson_params

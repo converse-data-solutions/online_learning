@@ -59,18 +59,18 @@ class Admin::SectionsController < ApplicationController
   end
 
   def destroy
-    @section = Section.find(params[:id])
+    @section = Section.find_by(id: params[:id])
     @section.destroy
   end
 
   private
 
   def course_assignment
-    @course = Course.find(params[:course_id])
+    @course = Course.find_by(id: params[:id])
   end
 
   def set_section
-    @section = Section.find(params[:id])
+    @section = Section.find_by(id: params[:id])
   end
 
   def section_params
