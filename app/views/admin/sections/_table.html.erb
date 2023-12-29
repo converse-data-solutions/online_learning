@@ -1,3 +1,4 @@
+<% sections.each do |section| %>
 <tr id="data_append_section" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 data_append_section_cls">
   <td class="px-6 py-4 font-medium text-[15px] text-[#818181]">
     <%= section.title %>
@@ -10,3 +11,4 @@
     <button data-modal-target="stepper-section-popup-modal" data-modal-toggle="stepper-section-popup-modal" data-action="click->modal#toggle" data-section-id="<%= section.id %>" class="block send-stepper-delete-section" type="button"> <img src="<%= asset_path("delete.png") %>" alt="..." , class="del-img"> </button>
   </td>
 </tr>
+<% end %>

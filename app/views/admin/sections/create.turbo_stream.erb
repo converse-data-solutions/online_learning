@@ -1,1 +1,2 @@
-<%= turbo_stream.before "add-new-row", partial: "admin/sections/table", locals: {section: @section} %>
+<%= turbo_stream.append "sections-body", partial: "admin/sections/table", locals: { sections: @sections } %>
+<%= turbo_stream.update "steeper-edit-section-popup", partial: "admin/sections/edit", locals: { section: @section } %>

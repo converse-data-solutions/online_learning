@@ -107,7 +107,6 @@ function dropdownCheckBoxes() {
         }
       });
 
-      console.log("Initial Values:", result); // Add this line for debugging
 
       updateLabel();
 

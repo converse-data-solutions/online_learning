@@ -16,11 +16,3 @@
   </div>
   <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px] submit_lesson" %>
 <% end %>
-<script>
-  $(document).on('turbo:submit-end', function (event) {
-    if (event.detail.success) {
-      $('#lesson-admin-form')[0].reset();
-      $("#lesson-admin-form file").val('');
-    }
-  });
-</script>
