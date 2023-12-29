@@ -251,6 +251,141 @@ function courseTableSearch() {
   });
 }
 
+// Course Top stepper functionality
+
+function topStepper(){
+  $(".custom-stepper-btn").on("click", function() {
+    const stepper = HSStepper.getInstance('[data-hs-stepper]');
+    let targetIndex = parseInt($(this).attr("data-index")); // Parse the string to an integer
+    let currentIndex = stepper.currentIndex;
+    console.log("current index................", currentIndex);
+    console.log("target index................", targetIndex);
+    let different = targetIndex - currentIndex;
+    if (different == 0)
+      return
+    if (currentIndex === 1) {
+      if (isCreateMode()) {
+        // Check if it's in "create" mode, and the course is not created
+        if (!isCourseCreated()) {
+          // alert("Please create the course before moving to the next step.");
+          $("#error-state").css("display", "block").fadeOut(5000);
+          return;
+        }
+      }
+    }
+    if (targetIndex= 2){
+      console.log("lsst gfdfggggfdfgdfgdg");
+    }
+    if (targetIndex == 3) {
+        callAllSections();
+    }
+    if (currentIndex == 3) {
+      stepper.setCompleteItem()
+      // stepper.unsetCompletedItem()
+      $(".reduce-course").removeClass("reduce-course2");
+      $(".vertical-stepper").css("display", "none");
+    }
+    if (currentIndex == 3 && targetIndex == 2){
+      $(".stepper-formatter").removeClass("stepper-formatter2");
+      $(".reduce-course").removeClass("reduce-course2");
+   	  $(".vertical-stepper").css("display", "none");
+    }
+    if (different > 0) {
+      for (let i = 0; i < different; i++) {
+        stepper.nextBtn.click()
+      }
+    } else {
+      different = Math.abs(different)
+      for (let i = 0; i < different; i++) {
+        stepper.backBtn.click()
+      }
+    }
+  });
+}
+
+// Course create stepper Validation
+
+
+function isCourseCreated() {
+  // Add your logic here to check if the course is created
+  let course_id = $("#admin-course-form").attr("data-course-id");
+  return course_id && course_id !== "undefined";
+}
+// Function to check if the form is in "create" mode
+function isCreateMode() {
+  return $("#admin-course-form").length > 0;
+}
+function courseSubmitted(){
+  $("#admin-course-form").submit(function(e) {
+    e.preventDefault();
+    console.log("form submitted");
+    alert("form submitted");
+  });
+}
+
+// Ajax call for right side stepper section load
+
+function callAllSections(){
+  $.ajax({
+  		url: "/admin/courses/sections/all",
+  		type: "GET",
+      dataType: "script",
+  		success: function(response) {},
+  		error: function(xhr, status, error) {},
+  });
+  console.log("ajax called");
+  $(".stepper-formatter").addClass("stepper-formatter2");
+  $(".reduce-course").addClass("reduce-course2");
+  $(".vertical-stepper").css("display", "block");
+}
+
+// Bottom stepper button click events
+
+function bottomStepper(){
+  if (typeof HSStepper !== 'undefined') {
+		setTimeout(function() {
+			const stepperElement = HSStepper.getInstance('[data-hs-stepper]');
+			let errorState = 1
+      stepperElement.disableButtons()
+  		$("#course-name").on("keyup", function() {
+  			if ($(this).val().length > 2) {
+  				stepperElement.enableButtons();
+  			} else {
+  				stepperElement.disableButtons();
+  			}
+  		});
+			if (stepperElement) {
+				try {
+					const stepperInstance = HSStepper.getInstance('[data-hs-stepper]');
+					$('[data-hs-stepper-next-btn]').on('click', function() {
+						stepperInstance.on('next');
+						const currentIndex = stepperInstance.currentIndex;
+						console.log(currentIndex);
+						console.log("current index", currentIndex);
+            if (currentIndex === 2) {
+            }
+						if (currentIndex === 3) {
+							$("button").removeClass('header1');
+						}
+						if (currentIndex === 3) {
+							callAllSections();
+						} else if (currentIndex < 3) {
+							$(".reduce-course").removeClass("reduce-course2");
+							$(".vertical-stepper").css("display", "none");
+						}
+					});
+				} catch (error) {
+					console.error("Error initializing HSStepper:", error);
+				}
+			} else {
+				console.error("Element with data-hs-stepper not found");
+			}
+		}, 1000);
+	} else {
+		console.error("HSStepper not defined. Make sure preline.js is loaded.");
+	}
+}
+
 $(document).ready(function () {
   tableSectionForm();
   tableSearch();
@@ -262,6 +397,8 @@ $(document).ready(function () {
   steeperSectionDeletePopup();
   steeperLessonEditPopup();
   steeperLessonDeletePopup();
+  topStepper();
+  bottomStepper();
 
   $(document).on("turbo:render", function () {
     tableSectionForm();
@@ -273,6 +410,8 @@ $(document).ready(function () {
     steeperSectionDeletePopup();
     steeperLessonEditPopup();
     steeperLessonDeletePopup();
+    topStepper();
+    bottomStepper();
 
     if ($("#stepper-loader").length > 0) {
       new HSStepper($("#stepper-loader")[0]);

@@ -17,9 +17,7 @@ class Admin::SectionsController < ApplicationController
     else
       @sections = []
       @sections = Section.all.includes(:course)
-      #.each do |section|
-        # @sections.push(section)
-      # end
+      
       @sections = @sections.paginate(page: params[:page], per_page: 5)
     end
   end
@@ -57,8 +55,6 @@ class Admin::SectionsController < ApplicationController
       end
     end
   end
-
-  def show; end
 
   def destroy
     @section = Section.find(params[:id])

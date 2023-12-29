@@ -75,10 +75,6 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     end
   end
 
-  def show
-    @course = Course.find(params[:id])
-  end
-
   private
 
   def course_params
