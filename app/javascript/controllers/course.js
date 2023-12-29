@@ -430,7 +430,5 @@ addEventListener("turbo:before-stream-render", (event) => {
     courseDeletePopup();
     steeperLessonEditPopup();
     steeperLessonDeletePopup();
-    topStepper();
-    bottomStepper();
   };
 });
