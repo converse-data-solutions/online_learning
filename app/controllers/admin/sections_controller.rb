@@ -26,6 +26,10 @@ class Admin::SectionsController < ApplicationController
 
   def new
     @section = Sections.new
+    respond_to do |format|
+      format.html # This will render the new.html.erb view
+      format.turbo_stream # This will render the new.turbo_stream.erb view
+    end
   end
 
   def create
