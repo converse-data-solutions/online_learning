@@ -1,5 +1,5 @@
 function editModelPopup() {
-  $(".edit-student-model").click(function () {
+  $(".edit-student-model").click(function() {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
     $.ajax({
@@ -12,10 +12,10 @@ function editModelPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
       },
     });
@@ -24,7 +24,7 @@ function editModelPopup() {
 
 function deletePopup() {
   console.log("processed.....");
-  $(".send-delete-student").click(function () {
+  $(".send-delete-student").click(function() {
     console.log("processed Loading.....");
     let id = $(this).data("user-id");
     $("#delete-student-model").attr("data-user-id", id);
@@ -33,19 +33,21 @@ function deletePopup() {
 }
 
 function studentTableSearch() {
-  $("#student_search").on("input", function () {
+  $("#student_search").on("input", function() {
     let searchValue = $(this).val();
     $.ajax({
       url: "/admin/students",
       type: "GET",
-      data: { search: searchValue },
+      data: {
+        search: searchValue
+      },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
       },
     });
@@ -57,7 +59,7 @@ function dropdownCheckBoxes() {
   function checkboxDropdown(el) {
     var $el = $(el);
 
-    $el.each(function () {
+    $el.each(function() {
       var $list = $(this).find(".dropdown-list"),
         $label = $(this).find(".dropdown-label"),
         $checkAll = $(this).find(".check-all"),
@@ -75,7 +77,7 @@ function dropdownCheckBoxes() {
         updateStatus();
       }
 
-      $inputs.on("change", function () {
+      $inputs.on("change", function() {
         var checkedText = $(this).next().text();
 
         if ($(this).is(":checked")) {
@@ -87,7 +89,7 @@ function dropdownCheckBoxes() {
         updateLabel();
       });
 
-      $checkAll.on("change", function () {
+      $checkAll.on("change", function() {
         result = [];
 
         if ($(this).is(":checked")) {
@@ -101,7 +103,7 @@ function dropdownCheckBoxes() {
       });
 
       // Initial setup
-      $inputs.each(function () {
+      $inputs.each(function() {
         if ($(this).is(":checked")) {
           result.push($(this).next().text());
         }
@@ -110,11 +112,11 @@ function dropdownCheckBoxes() {
 
       updateLabel();
 
-      $label.on("click", function () {
+      $label.on("click", function() {
         $el.toggleClass("open-dropdown");
       });
 
-      $(document).on("click touchstart", function (e) {
+      $(document).on("click touchstart", function(e) {
         if (!$(e.target).closest($el).length) {
           $el.removeClass("open-dropdown");
         }
@@ -126,7 +128,7 @@ function dropdownCheckBoxes() {
 }
 // datepicker
 function customDatePicker() {
-  $(function () {
+  $(function() {
     $("#datepicker").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
@@ -135,7 +137,7 @@ function customDatePicker() {
 }
 
 function customEditDatePicker() {
-  $(function () {
+  $(function() {
     var initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
 
     $("#editdatepicker").datepicker({
@@ -148,7 +150,7 @@ function customEditDatePicker() {
 
 //initialize script
 
-$(document).ready(function () {
+$(document).ready(function() {
   editModelPopup();
   deletePopup();
   studentTableSearch();
@@ -156,7 +158,7 @@ $(document).ready(function () {
   customDatePicker();
   customEditDatePicker();
 
-  $(document).on("turbo:render", function () {
+  $(document).on("turbo:render", function() {
     editModelPopup();
     deletePopup();
     studentTableSearch();
@@ -169,7 +171,7 @@ $(document).ready(function () {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function (streamElement) {
+  event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
     editModelPopup();

@@ -15,5 +15,4 @@ class Lesson < ApplicationRecord
   end
 
   validates :title, presence: true
-  # validates :description, presence: true
 end
