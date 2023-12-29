@@ -114,9 +114,7 @@
                                 </tr>
                               </thead>
                               <tbody class="overflow-auto filter-table-data" id="sections-body">
-                                <% @sections.each do |section| %>
-                                  <%= render partial: "admin/sections/table", locals: {section: section} %>
-                                <% end %>
+                              
                                 <tr id="add-new-row"></tr>
                               </tbody>
                             </table>
