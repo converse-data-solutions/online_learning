@@ -165,6 +165,7 @@ function courseDeletePopup() {
 // Course Steeper Section Edit Popup
 function steeperSectionEditPopup() {
   $(".edit-stepper-section-modal").click(function() {
+    console.log("processed.....");
     let id = $(this).data("section-id");
     let url = $(this).data("url");
     $.ajax({
