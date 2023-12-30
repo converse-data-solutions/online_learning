@@ -12,7 +12,7 @@ class Admin::LessonsController < ApplicationController
       respond_to(&:js)
     else
       @lessons = []
-      Lesson.all.includes(:section, clip_attachment: :blob, attachments_attachments: :blob).each do |lesson|
+      Lesson.includes(:section, clip_attachment: :blob, attachments_attachments: :blob).each do |lesson|
         @lessons.push(lesson)
       end
       @lessons = @lessons.paginate(page: params[:page], per_page: 5)
@@ -56,7 +56,7 @@ class Admin::LessonsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      if @lesson.destroy
+      if @lesson&.destroy
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_lesson_url(@lesson) }
       else
@@ -66,11 +66,10 @@ class Admin::LessonsController < ApplicationController
     end
   end
 
-  def alter_lesson # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+  def alter_lesson # rubocop:disable Metrics/MethodLength
     @lessons = Lesson.where(section_id: params[:section_id])
     @section = Section.find_by(id: params[:section_id])
     @section_id = @section.id
-    puts "Request Format: #{request.format}"
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
