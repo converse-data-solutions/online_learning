@@ -80,56 +80,91 @@ function selectFilter() {
 }
 
 // Form submission
-function sectionNewForm(){
-$("#section-form").submit(function(event) {
-  event.preventDefault();
+function sectionNewForm() {
+  $("#section-form").submit(function (event) {
+    event.preventDefault();
 
-  $.ajax({
-    url: $("#section-form").attr("action"),
-    type: $("#section-form").attr("method"),
-    data: new FormData($("#section-form")[0]),
-    processData: false,
-    contentType: false,
-    success: function(response) {
-     
-      location.reload();
-    },
-    error: function(error) {
-    }
+    $.ajax({
+      url: $("#section-form").attr("action"),
+      type: $("#section-form").attr("method"),
+      data: new FormData($("#section-form")[0]),
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        location.reload();
+      },
+      error: function (error) {},
+    });
   });
-});
 }
 
-function sectionEditForm(){
-$("#section-edit-form").submit(function(event) {
-  event.preventDefault();
 
-  $.ajax({
-    url: $("#section-edit-form").attr("action"),
-    type: $("#section-edit-form").attr("method"),
-    data: new FormData($("#section-edit-form")[0]),
-    processData: false,
-    contentType: false,
-    success: function(response) {
 
-      location.reload();
-    },
-    error: function(error) {
-    }
+function sectionEditForm() {
+  $("#section-edit-form").submit(function (event) {
+    event.preventDefault();
+
+    $.ajax({
+      url: $("#section-edit-form").attr("action"),
+      type: $("#section-edit-form").attr("method"),
+      data: new FormData($("#section-edit-form")[0]),
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        location.reload();
+      },
+      error: function (error) {},
+    });
   });
-});
+}
+
+function sectionEditPopup() {
+  $(".edit-section-modal").click(function() {
+    let id = $(this).data("section-id");
+    let url = $(this).data("url");
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        user_id: id,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+
+      success: function(res) {
+        Turbo.renderStreamMessage(res);
+      },
+      error: function() {
+        console.log("Error fetching data");
+      },
+    });
+  });
+}
+
+// Course Stepper Section Delete Popup
+function sectionDeletePopup() {
+  $(".send-delete-section").click(function() {
+    let id = $(this).data("section-id");
+    $("#delete-section-modal").attr("data-section-id", id);
+    $("#delete-section-modal").attr("href", `sections/${id}`);
+  });
 }
 
 $(document).ready(function () {
   collectionSelect();
   selectFilter();
-  sectionNewForm();
+  // sectionNewForm();
   sectionEditForm();
+  sectionEditPopup();
+  sectionDeletePopup();
 
   $(document).on("turbo:render", function () {
     selectFilter();
-    sectionNewForm();
+    // sectionNewForm();
     sectionEditForm();
+    sectionEditPopup();
+    sectionDeletePopup();
   });
 });
 

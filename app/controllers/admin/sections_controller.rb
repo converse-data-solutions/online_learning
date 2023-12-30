@@ -35,7 +35,7 @@ class Admin::SectionsController < ApplicationController
       if @section.save
         @sections = @section.course.sections
         @section = Section.find_by(id: @section.id)
-        format.html { redirect_to admin_sections_path }
+        format.html
         format.turbo_stream
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('section-admin-form', partial: 'admin/sections/form', locals: { section: @section }) }
