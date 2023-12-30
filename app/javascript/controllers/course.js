@@ -165,7 +165,6 @@ function courseDeletePopup() {
 // Course Steeper Section Edit Popup
 function steeperSectionEditPopup() {
   $(".edit-stepper-section-modal").click(function() {
-    console.log("processed.....");
     let id = $(this).data("section-id");
     let url = $(this).data("url");
     $.ajax({
@@ -268,7 +267,6 @@ function topStepper() {
       if (isCreateMode()) {
         // Check if it's in "create" mode, and the course is not created
         if (!isCourseCreated()) {
-          // alert("Please create the course before moving to the next step.");
           $("#error-state").css("display", "block").fadeOut(5000);
           return;
         }
@@ -360,8 +358,6 @@ function bottomStepper() {
           $('[data-hs-stepper-next-btn]').on('click', function() {
             stepperInstance.on('next');
             const currentIndex = stepperInstance.currentIndex;
-            console.log(currentIndex);
-            console.log("current index", currentIndex);
             if (currentIndex === 2) {}
             if (currentIndex === 3) {
               $("button").removeClass('header1');

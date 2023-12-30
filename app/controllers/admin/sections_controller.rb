@@ -59,7 +59,15 @@ class Admin::SectionsController < ApplicationController
 
   def destroy
     @section = Section.find_by(id: params[:id])
-    @section.destroy
+    respond_to do |format|
+      if @section&.destroy
+        format.turbo_stream
+        format.json { render :show, status: :ok, location: admin_section_url(@section) }
+      else
+        format.turbo_stream
+        format.json { render json: @section.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
