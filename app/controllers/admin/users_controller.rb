@@ -4,14 +4,19 @@
 class Admin::UsersController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_user, only: %i[edit update destroy show]
-  def index
-    @users = User.admin.search_by_name_and_email(params[:search])
+  def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    @users = []
+    User.all.each do |user|
+      @users.push(user)
+    end
+    @users = User.admin.search_by_name_and_email(params[:search]).paginate(page: params[:page], per_page: 5)
     # @users = @users.admin
     respond_to do |format|
       format.json { render json: @users }
       format.html { render :index }
       format.turbo_stream
     end
+    @user = User.new
   end
 
   def new
@@ -25,7 +30,7 @@ class Admin::UsersController < ApplicationController
         format.turbo_stream { redirect_to admin_users_path, notice: 'User created successfully' }
         format.json { render :show, status: :created, location: admin_user_url(@user) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) } # rubocop:disable Layout/LineLength
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

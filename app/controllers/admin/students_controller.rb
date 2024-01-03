@@ -3,7 +3,11 @@
 class Admin::StudentsController < ApplicationController
   before_action :set_student, only: %i[edit update destroy show]
   def index
-    @students = User.student.includes(user_courses: [:course]).search_by_name_and_email(params[:search])
+    @students = []
+    User.all.each do |user|
+      @students.push(user)
+    end
+    @students = User.student.includes(user_courses: [:course]).search_by_name_and_email(params[:search]).paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.json { render json: @students }
       format.html { render :index }
