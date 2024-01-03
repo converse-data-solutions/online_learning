@@ -16,7 +16,6 @@ class Admin::UsersController < ApplicationController
       format.html { render :index }
       format.turbo_stream
     end
-    @user = User.new
   end
 
   def new
@@ -30,7 +29,8 @@ class Admin::UsersController < ApplicationController
         format.turbo_stream { redirect_to admin_users_path, notice: 'User created successfully' }
         format.json { render :show, status: :created, location: admin_user_url(@user) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) } # rubocop:disable Layout/LineLength
+        # format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) } # rubocop:disable Layout/LineLength
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

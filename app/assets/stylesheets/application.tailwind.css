@@ -1081,9 +1081,11 @@ input[type="file"] {
   border: 1px solid #0bc08b !important;
 }
 .checkbox-custom:checked + .checkbox-custom-label:after {
-  top: 1px !important;
+  top: 2px !important;
+  left: 5px !important;
   height: 9px !important;
-  border: solid #0bc08b !important;
+  border-bottom: 1px solid #0bc08b !important;
+  border-right: 1px solid #0bc08b !important;
 }
 
 .ui-datepicker-month {
