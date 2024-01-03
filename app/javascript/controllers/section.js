@@ -151,6 +151,30 @@ function sectionDeletePopup() {
   });
 }
 
+// Section table search
+function sectionTableSearch() {
+  $("#section_search").on("input", function() {
+    let searchValue = $(this).val();
+    $.ajax({
+      url: "/admin/sections",
+      type: "GET",
+      data: {
+        search: searchValue
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function(res) {
+        Turbo.renderStreamMessage(res);
+      },
+      error: function() {
+        console.log("Error fetching data");
+      },
+    });
+  });
+}
+
+
 $(document).ready(function () {
   collectionSelect();
   selectFilter();
@@ -158,13 +182,16 @@ $(document).ready(function () {
   sectionEditForm();
   sectionEditPopup();
   sectionDeletePopup();
+  sectionTableSearch();
 
   $(document).on("turbo:render", function () {
     selectFilter();
+    collectionSelect();
     // sectionNewForm();
     sectionEditForm();
     sectionEditPopup();
     sectionDeletePopup();
+    sectionTableSearch();
   });
 });
 

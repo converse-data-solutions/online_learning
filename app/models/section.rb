@@ -9,4 +9,13 @@ class Section < ApplicationRecord
 
   # validations
   validates :title, presence: true
+
+  def self.search_by_section_title(query)
+    if query.present?
+      search_query = "%#{query}%"
+      where('title LIKE ?', search_query)
+    else
+      all
+    end
+  end
 end

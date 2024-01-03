@@ -303,7 +303,7 @@ nav.main-menu li.active > a,
 }
 
 .pagination a {
-  color: #333;
+  color: #818181;
   padding: 5px 15px;
   margin: 0 5px;
   border-radius: 7px;
@@ -311,6 +311,7 @@ nav.main-menu li.active > a,
   border-radius: 3px;
   font-family: "Poppins", sans-serif;
   font-size: 15px;
+  font-weight: 500;
 }
 
 .pagination .current {
@@ -642,6 +643,11 @@ nav.main-menu li.active > a,
 
 /* Select */
 
+.custom-select-border{
+  border: 1px solid #CCCCCC !important;
+  width: 18.25rem !important;
+}
+
 .custom-select-wrapper {
   position: relative;
   display: inline-block;
@@ -653,13 +659,14 @@ nav.main-menu li.active > a,
 .custom-select {
   position: relative;
   display: inline-block;
-  width: 14rem;
+  width: 360px;
+  height: 45px;
 }
 
 .custom-select-trigger {
   position: relative;
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: #818181;
   border-radius: 4px;
@@ -725,7 +732,7 @@ nav.main-menu li.active > a,
   position: relative;
   display: block;
   padding: 5px 22px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: #818181;
   cursor: pointer;

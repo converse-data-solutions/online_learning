@@ -9,7 +9,7 @@ class Admin::SectionsController < ApplicationController
     @sections = Course.last.sections
   end
 
-  def index
+  def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     if params[:course_id].present?
       @course = Course.find(params[:course_id])
       @sections = @course.sections
@@ -17,7 +17,12 @@ class Admin::SectionsController < ApplicationController
     else
       @sections = []
       @sections = Section.all.includes(:course)
-      @sections = @sections.paginate(page: params[:page], per_page: 5)
+      @sections = @sections.search_by_section_title(params[:search]).paginate(page: params[:page], per_page: 5)
+    end
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+      format.json { render json: @sections }
     end
   end
 
@@ -29,7 +34,7 @@ class Admin::SectionsController < ApplicationController
     end
   end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @section = Section.new(section_params)
     respond_to do |format|
       if @section.save
@@ -38,7 +43,12 @@ class Admin::SectionsController < ApplicationController
         format.html
         format.turbo_stream
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('section-admin-form', partial: 'admin/sections/form', locals: { section: @section }) }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace('section-admin-form', partial: 'admin/sections/form', locals: { section: @section }),
+            turbo_stream.replace('section-index-form', partial: 'admin/sections/sectionform', locals: { section: @section })
+          ]
+        end
         format.json { render json: @section.errors, status: :unprocessable_entity }
       end
     end
