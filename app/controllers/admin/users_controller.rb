@@ -43,10 +43,10 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end
 
-  def update
+  def update # rubocop:disable Metrics/AbcSize
     respond_to do |format|
       if @user.update(admin_params)
-        format.turbo_stream { redirect_to admin_users_path, notice: 'User updated successfully' }
+        format.turbo_stream
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) }
@@ -55,13 +55,14 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy # rubocop:disable Metrics/AbcSize
     respond_to do |format|
       if @user&.update(deleted: true)
-        format.turbo_stream { redirect_to admin_users_path, notice: 'User deleted successfully' }
+        # format.turbo_stream { flash[:notice] = 'User deleted successfully' }
+        format.turbo_stream { redirect_to admin_users_path flash[:notice] = "user deleted succesfully" }
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else
-        format.turbo_stream { redirect_to admin_users_path, notice: 'User destroy failed' }
+        format.turbo_stream { redirect_to admin_users_path, flash[:notice] = 'User destroy failed' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

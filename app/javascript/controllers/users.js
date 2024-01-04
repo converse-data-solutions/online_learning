@@ -122,12 +122,14 @@ $(document).ready(function () {
   deletePopup();
   tableSearch();
   formValidation();
+  initModals();
 
   $(document).on("turbo:render", function () {
     editPopup();
     deletePopup();
     tableSearch();
     formValidation();
+    initModals();
   });
 });
 
