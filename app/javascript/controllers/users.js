@@ -137,7 +137,6 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
-    editPopup();
-    deletePopup();
+    
   };
 });

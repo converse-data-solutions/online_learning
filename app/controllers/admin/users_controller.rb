@@ -7,7 +7,7 @@ class Admin::UsersController < ApplicationController
   def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     get_users
     respond_to do |format|
-      format.json { render json: @users }
+      format.json { render json: { data: @users, total_count: User.count } }
       format.html { render :index }
       format.turbo_stream
     end
@@ -22,8 +22,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.valid? && @user.add_role_and_save(admin_params[:role])
         get_users
-        flash[:notice] = "Post successfully created."
-        format.turbo_stream { flash[:notice] = 'Quote was successfully created.' }
+        format.turbo_stream
         format.json { render :show, status: :created, location: admin_user_url(@user) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
@@ -44,10 +43,11 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.update(admin_params)
         get_users
-        format.turbo_stream
+        # format.turbo_stream
+        format.turbo_stream { render turbo_stream: turbo_stream.append('user-table', partial: "shared/flash", locals: { message: 'User was successfully updated.', type: 'notice'} )} # rubocop:disable Style/StringLiterals,Layout/LineLength,Layout/SpaceInsideHashLiteralBraces
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) } # rubocop:disable Layout/LineLength
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +57,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user&.update(deleted: true)
         # format.turbo_stream { flash[:notice] = 'User deleted successfully' }
-        format.turbo_stream { redirect_to admin_users_path flash[:notice] = "user deleted succesfully" }
+        format.turbo_stream { redirect_to admin_users_path flash[:notice] = "user deleted succesfully" } # rubocop:disable Style/StringLiterals
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else
         format.turbo_stream { redirect_to admin_users_path, flash[:notice] = 'User destroy failed' }
@@ -69,7 +69,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def get_users
-    @users = User.admin.search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: 5)
+    @users = User.admin.search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: params[:per_page] || 5)
   end
 
   def set_user
