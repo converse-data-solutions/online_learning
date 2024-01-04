@@ -23,7 +23,7 @@ class Admin::StudentsController < ApplicationController
     @student = User.new(student_params)
     respond_to do |format|
       if @student.add_role_and_save(student_params[:role])
-        format.turbo_stream { redirect_to admin_students_path, notice: 'Student created successfully' }
+        redirect_to admin_students_path
         format.json { render :show, status: :created, location: @student }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/students/form', locals: { student: @student }) }

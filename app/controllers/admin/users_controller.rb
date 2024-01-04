@@ -22,14 +22,13 @@ class Admin::UsersController < ApplicationController
     @user = User.new
   end
 
-  def create # rubocop:disable Metrics/AbcSize
+  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @user = User.new(admin_params)
     respond_to do |format|
       if @user.add_role_and_save(admin_params[:role])
-        format.turbo_stream { redirect_to admin_users_path, notice: 'User created successfully' }
+        format.turbo_stream { redirect_to admin_users_path flash[:notice] = "user create succesfully" }
         format.json { render :show, status: :created, location: admin_user_url(@user) }
       else
-        # format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) } # rubocop:disable Layout/LineLength
         format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -58,7 +57,7 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     respond_to do |format|
-      if @user.update(deleted: true)
+      if @user&.update(deleted: true)
         format.turbo_stream { redirect_to admin_users_path, notice: 'User deleted successfully' }
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else

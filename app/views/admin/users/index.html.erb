@@ -116,3 +116,9 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+     $(function(){
+        var notice = "<%= flash[:notice] %>"
+         $.notify(notice, "success" );
+     })
+</script>
