@@ -3,13 +3,9 @@
 class Admin::StudentsController < ApplicationController
   before_action :set_student, only: %i[edit update destroy show]
   def index
-    @students = []
-    User.all.each do |user|
-      @students.push(user)
-    end
-    @students = User.student.includes(user_courses: [:course]).search_by_name_and_email(params[:search]).paginate(page: params[:page], per_page: 5)
+    get_students
     respond_to do |format|
-      format.json { render json: @students }
+      format.json { render json: { data: @students, total_count: User.count } }
       format.html { render :index }
       format.turbo_stream
     end
@@ -66,6 +62,10 @@ class Admin::StudentsController < ApplicationController
   end
 
   private
+
+  def get_students
+    @students = User.student.includes(user_courses: [:course]).search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: params[:per_page] || 5)
+  end
 
   def set_student
     @student = User.find(params[:id])
