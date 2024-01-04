@@ -43,8 +43,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.update(admin_params)
         get_users
-        # format.turbo_stream
-        format.turbo_stream { render turbo_stream: turbo_stream.append('user-table', partial: "shared/flash", locals: { message: 'User was successfully updated.', type: 'notice'} )} # rubocop:disable Style/StringLiterals,Layout/LineLength,Layout/SpaceInsideHashLiteralBraces
+        format.turbo_stream
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) } # rubocop:disable Layout/LineLength
@@ -53,11 +52,17 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def destroy # rubocop:disable Metrics/AbcSize
+  def destroy # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     respond_to do |format|
       if @user&.update(deleted: true)
-        # format.turbo_stream { flash[:notice] = 'User deleted successfully' }
-        format.turbo_stream { redirect_to admin_users_path flash[:notice] = "user deleted succesfully" } # rubocop:disable Style/StringLiterals
+        get_users
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'User was successfully destroyed.', type: 'notice' }),
+            turbo_stream.update('user-table', partial: 'admin/users/table', locals: { users: @users })
+          ]
+        end
+        # format.turbo_stream { render turbo_stream: turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'User was successfully destroyed.', type: 'notice' }) }
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else
         format.turbo_stream { redirect_to admin_users_path, flash[:notice] = 'User destroy failed' }
