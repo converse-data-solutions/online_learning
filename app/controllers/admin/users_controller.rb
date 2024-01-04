@@ -5,12 +5,7 @@ class Admin::UsersController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_user, only: %i[edit update destroy show]
   def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-    @users = []
-    User.all.each do |user|
-      @users.push(user)
-    end
-    @users = User.admin.search_by_name_and_email(params[:search]).paginate(page: params[:page], per_page: 5)
-    # @users = @users.admin
+    get_users
     respond_to do |format|
       format.json { render json: @users }
       format.html { render :index }
@@ -25,8 +20,9 @@ class Admin::UsersController < ApplicationController
   def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @user = User.new(admin_params)
     respond_to do |format|
-      if @user.add_role_and_save(admin_params[:role])
-        format.turbo_stream { redirect_to admin_users_path flash[:notice] = "user create succesfully" }
+      if @user.valid? && @user.add_role_and_save(admin_params[:role])
+        get_users
+        format.turbo_stream { flash[:notice] = 'Quote was successfully created.' }
         format.json { render :show, status: :created, location: admin_user_url(@user) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
@@ -46,6 +42,7 @@ class Admin::UsersController < ApplicationController
   def update # rubocop:disable Metrics/AbcSize
     respond_to do |format|
       if @user.update(admin_params)
+        get_users
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else
@@ -69,6 +66,10 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
+  def get_users
+    @users = User.admin.search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: 5)
+  end
 
   def set_user
     @user = User.find(params[:id])

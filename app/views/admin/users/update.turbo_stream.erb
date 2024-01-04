@@ -1,1 +1,4 @@
-<%#= render turbo_stream.replace('edit-user-popup', partial: '', locals: { user: @user }) %>
+<%= turbo_stream.update "user-table", partial: "admin/users/table", locals: { users: @users } %>
+
+
+  <%#= render turbo_stream.replace('edit-user-popup', partial: '', locals: { user: @user }) %>
