@@ -23,13 +23,14 @@ class Admin::StudentsController < ApplicationController
     @student = User.new(student_params)
     respond_to do |format|
       if @student.add_role_and_save(student_params[:role])
-        format turbo_stream
-        format.json { render :show, status: :created, location: @student }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/students/show', locals: { student: @student }) }
+        format.json { render :show, status: :created, location: admin_student_url(@student) }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/students/form', locals: { student: @student }) }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   def edit

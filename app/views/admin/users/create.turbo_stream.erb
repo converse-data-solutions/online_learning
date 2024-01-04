@@ -1,2 +1,3 @@
 <%= turbo_stream.update "user-table", partial: "admin/users/table", locals: { users: @users } %>
 <%= turbo_stream.replace "user-admin-form", partial: "admin/users/form", locals: { user: User.new } %>
+<% byebug %>

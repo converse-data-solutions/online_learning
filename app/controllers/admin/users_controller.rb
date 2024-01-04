@@ -22,6 +22,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       if @user.valid? && @user.add_role_and_save(admin_params[:role])
         get_users
+        flash[:notice] = "Post successfully created."
         format.turbo_stream { flash[:notice] = 'Quote was successfully created.' }
         format.json { render :show, status: :created, location: admin_user_url(@user) }
       else
