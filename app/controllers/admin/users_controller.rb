@@ -7,7 +7,7 @@ class Admin::UsersController < ApplicationController
   def index
     get_users
     respond_to do |format|
-      format.json { render json: { data: @users, total_count: User.count } }
+      format.json { render json: { data: @users, total_count: User.admin.count } }
       format.html { render :index }
       format.turbo_stream
     end
