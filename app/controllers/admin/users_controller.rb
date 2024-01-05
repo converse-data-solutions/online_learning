@@ -17,16 +17,15 @@ class Admin::UsersController < ApplicationController
     @user = User.new
   end
 
-  def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+  def create
     @user = User.new(admin_params)
     respond_to do |format|
       if @user.valid? && @user.add_role_and_save(admin_params[:role])
         get_users
         format.turbo_stream
-        format.json { render :show, status: :created, location: admin_user_url(@user) }
+        format.json { render_created_user }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render_invalid_user(format)
       end
     end
   end
@@ -39,7 +38,7 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end
 
-  def update # rubocop:disable
+  def update
     respond_to do |format|
       if @user.update(admin_params)
         get_users
@@ -52,17 +51,11 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def destroy # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+  def destroy
     respond_to do |format|
       if @user&.update(deleted: true)
         get_users
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'User was successfully destroyed.', type: 'notice' }),
-            turbo_stream.update('user-table', partial: 'admin/users/table', locals: { users: @users })
-          ]
-        end
-        # format.turbo_stream { render turbo_stream: turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'User was successfully destroyed.', type: 'notice' }) }
+        format.turbo_stream { render_destroy_success }
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else
         format.turbo_stream { redirect_to admin_users_path, flash[:notice] = 'User destroy failed' }
@@ -72,6 +65,22 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
+  def render_created_user
+    render json: @user, status: :created, location: admin_user_url(@user)
+  end
+
+  def render_invalid_user(format)
+    format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
+    format.json { render json: @user.errors, status: :unprocessable_entity }
+  end
+
+  def render_destroy_success
+    render turbo_stream: [
+      turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'User was successfully destroyed.', type: 'notice' }),
+      turbo_stream.update('user-table', partial: 'admin/users/table', locals: { users: @users })
+    ]
+  end
 
   def get_users
     @users = User.admin.search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: params[:per_page] || 5)
