@@ -83,7 +83,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def get_users
-    @users = User.admin.search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: params[:per_page] || 5)
+    @users = User.admin.order(name: :asc).search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: params[:per_page] || 5)
   end
 
   def set_user
