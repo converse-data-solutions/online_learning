@@ -119,27 +119,6 @@ function formValidation() {
   });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function editFormValidation() {
   function validateName() {
     let name = $("#edit_user_name").val().trim();
@@ -178,12 +157,13 @@ function editFormValidation() {
     }
   }
 
-  $(document).on("input", "#edit_user_name", validateName);
-  $(document).on("input", "#edit_user_email", validateEmail);
-  $(document).on("input", "#edit_user_password", validatePassword);
-  $(document).on("input", "#edit_user_password_confirmation", validatePasswordConfirmation);
+  $("#edit-user-popup").on("input", "#edit_user_name", validateName);
+  $("#edit-user-popup").on("input", "#edit_user_email", validateEmail);
+  $("#edit-user-popup").on("input", "#edit_user_password", validatePassword);
+  $("#edit-user-popup").on("input", "#edit_user_password_confirmation", validatePasswordConfirmation);
 
-  $(document).on("submit", "#user-admin-edit-form", function (event) {
+  $("#edit-user-popup").on("submit", "#user-admin-edit-form", function (event) {
+    console.log("form submitted");
     validateName();
     validateEmail();
     validatePassword();
@@ -199,22 +179,6 @@ function editFormValidation() {
     }
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 $(document).ready(function () {
