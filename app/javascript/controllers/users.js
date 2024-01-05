@@ -14,6 +14,7 @@ function editPopup() {
 
       success: function (res) {
         Turbo.renderStreamMessage(res);
+        editFormValidation();
       },
       error: function () {
         console.log("Error fetching data");
@@ -51,6 +52,7 @@ function tableSearch() {
 }
 
 function formValidation() {
+  console.log("loaded.....******");
   function validateName() {
     let name = $("#user_name").val();
     let namecheck = validator.isAlpha(name);
@@ -116,6 +118,104 @@ function formValidation() {
     }
   });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function editFormValidation() {
+  function validateName() {
+    let name = $("#edit_user_name").val().trim();
+    if (!name) {
+      $("#edit-name-error").text("Name can't be blank");
+    } else {
+      $("#edit-name-error").text("");
+    }
+  }
+
+  function validateEmail() {
+    let email = $("#edit_user_email").val().trim();
+    if (!validator.isEmail(email)) {
+      $("#edit-email-error").text("Email can't be blank");
+    } else {
+      $("#edit-email-error").text("");
+    }
+  }
+
+  function validatePassword() {
+    let password = $("#edit_user_password").val();
+    if (!password) {
+      $("#edit-password-error").text("Password can't be blank");
+    } else {
+      $("#edit-password-error").text("");
+    }
+  }
+
+  function validatePasswordConfirmation() {
+    let password = $("#edit_user_password").val();
+    let password_confirmation = $("#edit_user_password_confirmation").val();
+    if (!validator.equals(password, password_confirmation)) {
+      $("#edit-password-confirmation-error").text("Password Confirmation dosen't match Password");
+    } else {
+      $("#edit-password-confirmation-error").text("");
+    }
+  }
+
+  $(document).on("input", "#edit_user_name", validateName);
+  $(document).on("input", "#edit_user_email", validateEmail);
+  $(document).on("input", "#edit_user_password", validatePassword);
+  $(document).on("input", "#edit_user_password_confirmation", validatePasswordConfirmation);
+
+  $(document).on("submit", "#user-admin-edit-form", function (event) {
+    validateName();
+    validateEmail();
+    validatePassword();
+    validatePasswordConfirmation();
+
+    if (
+      $("#edit-name-error").text() ||
+      $("#edit-email-error").text() ||
+      $("#edit-password-error").text() ||
+      $("#edit-password-confirmation-error").text()
+    ) {
+      event.preventDefault();
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $(document).ready(function () {
   editPopup();

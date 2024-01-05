@@ -169,3 +169,10 @@ $(document).ready(function () {
     navDropdown();
   });
 });
+
+jQuery(function($){
+  $("button").click(function(){
+  $("#overlay").fadeIn(300);
+  $("#overlay").delay(300).fadeOut(300);
+  })
+});

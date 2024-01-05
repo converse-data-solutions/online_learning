@@ -31,7 +31,7 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="password" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.password_field :password, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+      <%= f.password_field :password, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"%>
       <div class="text-red-600 text-sm mt-1" id="password-error"></div>
       <% if user&.errors&.any? %>
         <% if user&.errors[:password].any? %>
@@ -57,6 +57,6 @@
     </div>
   </div>
   <div class="w-1/5 mx-auto mt-4 sm:mt-6">
-    <%= f.submit "CREATE", class: 'button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
+    <%= f.submit "CREATE", class: 'button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 loader-btn' %>
   </div>
 <% end %>

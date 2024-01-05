@@ -4,7 +4,7 @@
 class Admin::UsersController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_user, only: %i[edit update destroy show]
-  def index # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+  def index
     get_users
     respond_to do |format|
       format.json { render json: { data: @users, total_count: User.count } }
@@ -39,7 +39,7 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end
 
-  def update # rubocop:disable Metrics/AbcSize
+  def update # rubocop:disable
     respond_to do |format|
       if @user.update(admin_params)
         get_users
