@@ -68,33 +68,24 @@
   color: white;
 }
 
-.button-gradiant-hover-cancel:hover{
+.button-gradiant-hover:hover {
   background-position: 100% 0; /* Move the gradient to the right on hover */
 }
 
 .button-gradiant-hover-cancel {
   transition: background, color 0.5s;
 }
-
-
 .button-gradiant-hover-cancel:hover {
   background: linear-gradient(to right, #EDEDED, #FFFFFF, #FFFFFF); /* Set the initial gradient */
   background-size: 200% 100%; /* Set the size to accommodate the transition */
   transition: background-position 3s;
   color: #000;
 }
-
-.button-gradiant-hover:hover {
+.button-gradiant-hover-cancel:hover{
   background-position: 100% 0; /* Move the gradient to the right on hover */
 }
-/* 
-.delete-gradiant-hover {
-  transition: background, color 0.5s;
-}
-.delete-gradiant-hover:hover {
-  background: linear-gradient(#0082ce, #0082ce, #0082ce);
-  color: white;
-} */
+
+
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

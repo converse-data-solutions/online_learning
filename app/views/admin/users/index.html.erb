@@ -8,7 +8,7 @@
     <div>
       <!-- Modal toggle -->
       <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px] gradiant-hover loader-btn" type="button">
-        + ADD NEW
+        <span class="font-semibold text-base">+ </span>ADD NEW
       </button>
       <!-- Main modal -->
       <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
@@ -23,7 +23,7 @@
             </button>
             <div class="px-6 py-6 lg:px-8">
               <h3 class="mb-4 sm:mb-7 md:mb-10 text-[26px] font-semibold text-[#0BC08B] dark:text-white text-center">NEW USER MANAGEMENT</h3>
-              <div class="lg:w-[86%] sm:w-[95%] w-[90%] mr-auto lg:ml-auto ml-5">
+              <div class="lg:w-[95%] sm:w-[95%] w-[90%] mr-auto lg:ml-auto ml-5">
                 <div class="" id="admin-form">
                   <%= render partial: 'admin/users/form', locals: { user: @user } %>
                 </div>
