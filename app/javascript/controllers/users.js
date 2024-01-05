@@ -1,5 +1,5 @@
 function editPopup() {
-  $(".edit-user-model").click(function () {
+  $(".edit-user-model").click(function() {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
     $.ajax({
@@ -12,11 +12,11 @@ function editPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
         editFormValidation();
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
       },
     });
@@ -24,7 +24,7 @@ function editPopup() {
 }
 
 function deletePopup() {
-  $(".send-delete-user").click(function () {
+  $(".send-delete-user").click(function() {
     let id = $(this).data("user-id");
     $("#delete-user-model").attr("data-user-id", id);
     $("#delete-user-model").attr("href", `users/${id}`);
@@ -32,19 +32,21 @@ function deletePopup() {
 }
 
 function tableSearch() {
-  $("#user_search").on("input", function () {
+  $("#user_search").on("input", function() {
     let searchValue = $(this).val();
     $.ajax({
       url: "/admin/users",
       type: "GET",
-      data: { search: searchValue },
+      data: {
+        search: searchValue
+      },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
       },
     });
@@ -53,6 +55,7 @@ function tableSearch() {
 
 function formValidation() {
   console.log("loaded.....******");
+
   function validateName() {
     let name = $("#user_name").val();
     let namecheck = validator.isAlpha(name);
@@ -102,7 +105,7 @@ function formValidation() {
   $("#user_password").on("input", validatePassword);
   $("#user_password_confirmation").on("input", validatePasswordConfirmation);
 
-  $("#user-admin-form").on("submit", function (event) {
+  $("#user-admin-form").on("submit", function(event) {
     validateName();
     validateEmail();
     validatePassword();
@@ -162,7 +165,7 @@ function editFormValidation() {
   $("#edit-user-popup").on("input", "#edit_user_password", validatePassword);
   $("#edit-user-popup").on("input", "#edit_user_password_confirmation", validatePasswordConfirmation);
 
-  $("#edit-user-popup").on("submit", "#user-admin-edit-form", function (event) {
+  $("#edit-user-popup").on("submit", "#user-admin-edit-form", function(event) {
     console.log("form submitted");
     validateName();
     validateEmail();
@@ -181,13 +184,13 @@ function editFormValidation() {
 }
 
 
-$(document).ready(function () {
+$(document).ready(function() {
   editPopup();
   deletePopup();
   tableSearch();
   formValidation();
 
-  $(document).on("turbo:render", function () {
+  $(document).on("turbo:render", function() {
     editPopup();
     deletePopup();
     tableSearch();
@@ -198,10 +201,10 @@ $(document).ready(function () {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function (streamElement) {
+  event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
     editPopup();
-    
+
   };
 });
