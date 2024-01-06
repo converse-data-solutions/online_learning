@@ -112,7 +112,7 @@ function initNavbarHamburger() {
 }
 
 function loader() {
-  $("button").click(function () {
+  $("loader-btn").click(function () {
     $("#overlay").fadeIn(300);
     $("#overlay").delay(300).fadeOut(300);
   });

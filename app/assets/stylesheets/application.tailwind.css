@@ -366,6 +366,17 @@ nav.main-menu li.active > a,
   font-style: normal;
 }
 
+.pagination a:hover {
+  background: linear-gradient(to right, #1ab69c, #31b978);
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 7px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+}
+
 .pagination .previous,
 .pagination .next {
   margin: 0 5px;
