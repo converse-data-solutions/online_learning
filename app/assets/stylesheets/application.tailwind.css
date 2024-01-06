@@ -12,12 +12,12 @@
 
 */
 
-#overlay{	
+#overlay {
   position: fixed;
   top: 0;
   z-index: 1050;
   width: 100%;
-  height:100%;
+  height: 100%;
   display: none;
   backdrop-filter: contrast(0.5);
 }
@@ -25,7 +25,7 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
 }
 .spinner {
   width: 40px;
@@ -36,19 +36,24 @@
   animation: sp-anime 0.8s infinite linear;
 }
 @keyframes sp-anime {
-  100% { 
-    transform: rotate(360deg); 
+  100% {
+    transform: rotate(360deg);
   }
 }
-.is-hide{
-  display:none;
+.is-hide {
+  display: none;
 }
 
 .gradiant-hover {
   transition: background, color 0.5s;
 }
 .gradiant-hover:hover {
-  background: linear-gradient(to left, #0082ce, #0082ce, #31b978); /* Set the initial gradient */
+  background: linear-gradient(
+    to left,
+    #0082ce,
+    #0082ce,
+    #31b978
+  ); /* Set the initial gradient */
   background-size: 200% 100%; /* Set the size to accommodate the transition */
   transition: background-position 3s;
   color: white;
@@ -62,7 +67,12 @@
   transition: background, color 0.5s;
 }
 .button-gradiant-hover:hover {
-  background: linear-gradient(to right, #31b978, #0082ce, #0082ce); /* Set the initial gradient */
+  background: linear-gradient(
+    to right,
+    #31b978,
+    #0082ce,
+    #0082ce
+  ); /* Set the initial gradient */
   background-size: 200% 100%; /* Set the size to accommodate the transition */
   transition: background-position 3s;
   color: white;
@@ -76,16 +86,19 @@
   transition: background, color 0.5s;
 }
 .button-gradiant-hover-cancel:hover {
-  background: linear-gradient(to right, #EDEDED, #FFFFFF, #FFFFFF); /* Set the initial gradient */
+  background: linear-gradient(
+    to right,
+    #ededed,
+    #ffffff,
+    #ffffff
+  ); /* Set the initial gradient */
   background-size: 200% 100%; /* Set the size to accommodate the transition */
   transition: background-position 3s;
   color: #000;
 }
-.button-gradiant-hover-cancel:hover{
+.button-gradiant-hover-cancel:hover {
   background-position: 100% 0; /* Move the gradient to the right on hover */
 }
-
-
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -475,15 +488,15 @@ nav.main-menu li.active > a,
   margin-right: auto !important;
 }
 
-.success .change-step-color{
+.success .change-step-color {
   color: #31b978 !important;
 }
 
-.active .change-step-color{
+.active .change-step-color {
   color: #000 !important;
 }
 
-.stepper-formatter2{
+.stepper-formatter2 {
   width: 100% !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
@@ -672,7 +685,7 @@ nav.main-menu li.active > a,
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
 }
 
-.next-btn{
+.next-btn {
   display: block !important;
 }
 
@@ -694,8 +707,8 @@ nav.main-menu li.active > a,
 
 /* Select */
 
-.custom-select-border{
-  border: 1px solid #CCCCCC !important;
+.custom-select-border {
+  border: 1px solid #cccccc !important;
   width: 18.25rem !important;
 }
 
@@ -963,6 +976,10 @@ input[type="file"] {
       transform-origin: center center;
     }
   }
+
+  .edit-dropdown {
+    border: none !important;
+  }
   &.open-dropdown {
     .dropdown-list {
       display: block;
@@ -977,8 +994,9 @@ input[type="file"] {
   }
 }
 
-[type=radio] {
+[type="radio"] {
   color: #0bc08b !important;
+  border: 1px solid #0bc08b !important;
 }
 
 [type="checkbox"]:checked {
@@ -1165,6 +1183,10 @@ input[type="file"] {
   border: 1px solid #cccccc;
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
+}
+
+.edit-datepicker {
+  border: none !important;
 }
 .datepicker-input:focus {
   outline: none !important;

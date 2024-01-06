@@ -79,14 +79,16 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="gender" class="block mb-2 text-lg font-medium text-[#000]">Gender</label>
       <div class="flex w-[57%] lg:w-[55%]">
-        <label class="flex items-center">
-          <%= f.radio_button :gender, "Male", checked: true %>
-          <span class="text-sm ml-4">Male</span>
-        </label>
-        <label class="flex items-center ml-2">
-          <%= f.radio_button :gender, "Female" %>
-          <span class="text-sm ml-4">Female</span>
-        </label>
+        <div class="flex w-[70%] justify-between">
+          <label class="flex items-center">
+            <%= f.radio_button :gender, "Male", checked: true %>
+            <span class="text-base font-medium ml-4">Male</span>
+          </label>
+          <label class="flex items-center ml-2">
+            <%= f.radio_button :gender, "Female" %>
+            <span class="text-base font-medium ml-4">Female</span>
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -94,7 +96,7 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="dataofbirth" class=" block mb-2 text-lg font-medium text-[#000]">Date of Birth</label>
       <div class="input-wrapper flex flex-col w-full sm:w-[57%] lg:w-[55%]">
-      <%= f.text_field :dataofbirth, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg', id: 'datepicker', autocomplete: 'off', value: @student&.dataofbirth %>
+        <%= f.text_field :dataofbirth, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg', id: 'datepicker', autocomplete: 'off', value: @student&.dataofbirth %>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
