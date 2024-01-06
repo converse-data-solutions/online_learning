@@ -412,6 +412,10 @@ nav.main-menu li.active > a,
 .pagination .next_page {
   font-size: 0;
 }
+.pagination .previous_page:hover,
+.pagination .next_page:hover {
+  font-size: 0;
+}
 
 .pagination .previous_page::before {
   content: "\003C";

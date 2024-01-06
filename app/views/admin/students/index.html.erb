@@ -1,5 +1,6 @@
 <%= content_for :head do %>
   <%= javascript_import_module_tag "controllers/students" %>
+  <%= javascript_import_module_tag "controllers/notify" %>
 <% end %>
 <div class="flex flex-col w-full" id="student index">
   <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
@@ -140,3 +141,7 @@
     <%= will_paginate(@students) %>
   </div>
 </div>
+<script>
+  $("#modal-close-btn").click();
+  $("#detele-modal-btn").click();
+</script>

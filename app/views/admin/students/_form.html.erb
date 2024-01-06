@@ -1,4 +1,4 @@
-<%= form_for User.new, url: admin_students_path, html: { class: "validate", id: "user-admin-form" }, validate: true, method: :post do |f| %>
+<%= form_for student || User.new, url: admin_students_path, html: { class: "validate", id: "user-admin-form" }, validate: true, method: :post do |f| %>
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
