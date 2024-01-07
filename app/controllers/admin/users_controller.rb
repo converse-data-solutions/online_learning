@@ -5,7 +5,7 @@ class Admin::UsersController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_user, only: %i[edit update destroy show]
   def index
-    get_users
+    @users = User.get_users(params)
     respond_to do |format|
       format.json { render json: { data: @users, total_count: User.admin.count } }
       format.html { render :index }
@@ -21,9 +21,9 @@ class Admin::UsersController < ApplicationController
     @user = User.new(admin_params)
     respond_to do |format|
       if @user.valid? && @user.add_role_and_save(admin_params[:role])
-        get_users
+        @users = User.get_users(params)
         format.turbo_stream
-        format.json { render_created_user }
+        format.json { render :create }
       else
         render_invalid_user(format)
       end
@@ -41,9 +41,9 @@ class Admin::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(admin_params)
-        get_users
+        @users = User.get_users(params)
         format.turbo_stream
-        format.json { render :show, status: :ok, location: admin_user_url(@user) }
+        format.json { render :show }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) } # rubocop:disable Layout/LineLength
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -54,9 +54,9 @@ class Admin::UsersController < ApplicationController
   def destroy
     respond_to do |format|
       if @user&.update(deleted: true)
-        get_users
+        @users = User.get_users(params)
         format.turbo_stream { render_destroy_success }
-        format.json { render :show, status: :ok, location: admin_user_url(@user) }
+        format.json { render :show }
       else
         format.turbo_stream { redirect_to admin_users_path, flash[:notice] = 'User destroy failed' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -65,10 +65,6 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-
-  def render_created_user
-    render json: @user, status: :created, location: admin_user_url(@user)
-  end
 
   def render_invalid_user(format)
     format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
@@ -82,12 +78,8 @@ class Admin::UsersController < ApplicationController
     ]
   end
 
-  def get_users
-    @users = User.admin.order(name: :asc).search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: params[:per_page] || 5)
-  end
-
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
   end
 
   def admin_params

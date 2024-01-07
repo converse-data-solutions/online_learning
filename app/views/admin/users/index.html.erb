@@ -46,7 +46,7 @@
       </div>
     <% end %>
   </div>
-  <div class="relative overflow-x-auto shadow-sm lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
+  <div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
     <table class="w-full text-sm text-left text-gray-500 ml-[47px] sm:ml-[63px] lg:ml-0 md:ml-[26px] dark:text-gray-400 overflow-auto table-auto">
       <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
         <tr>
@@ -110,9 +110,9 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="mt-4 ml-4">
-    <%= will_paginate(@users) %>
+    <div class="mt-4">
+      <%= will_paginate(@users) %>
+    </div>
   </div>
 </div>
 <script>
