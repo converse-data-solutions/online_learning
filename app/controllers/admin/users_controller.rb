@@ -38,14 +38,19 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end
 
-  def update
+  def update # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     respond_to do |format|
       if @user.update(admin_params)
         get_users
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) } # rubocop:disable Layout/LineLength
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }),
+            turbo_stream.append('user-table', partial: 'shared/failed', locals: { message: 'User update failed.', type: 'notice' })
+          ]
+        end
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -58,7 +63,7 @@ class Admin::UsersController < ApplicationController
         format.turbo_stream { render_destroy_success }
         format.json { render :show, status: :ok, location: admin_user_url(@user) }
       else
-        format.turbo_stream { redirect_to admin_users_path, flash[:notice] = 'User destroy failed' }
+        format.turbo_stream { render turbo_stream: turbo_stream.append('user-table', partial: 'shared/failed', locals: { message: 'User destroy failed.', type: 'notice' }) }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -71,7 +76,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def render_invalid_user(format)
-    format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
+    format.turbo_stream do
+      render turbo_stream: [
+        turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }),
+        turbo_stream.append('user-table', partial: 'shared/failed', locals: { message: 'User creation failed.', type: 'notice' })
+      ]
+    end
     format.json { render json: @user.errors, status: :unprocessable_entity }
   end
 
