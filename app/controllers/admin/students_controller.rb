@@ -68,7 +68,7 @@ class Admin::StudentsController < ApplicationController
   end
 
   def set_student
-    @student = User.find(params[:id])
+    @student = User.find_by(id: params[:id])
   end
 
   def student_params
