@@ -207,7 +207,6 @@ function formValidation() {
         $("#contact-number-error").text("");
       }
     } else {
-      // If contact number is blank, no validation error
       $("#contact-number-error").text("");
     }
   }
@@ -224,7 +223,6 @@ function formValidation() {
         $("#emergency-contact-number-error").text("");
       }
     } else {
-      // If contact number is blank, no validation error
       $("#emergency-contact-number-error").text("");
     }
   }
@@ -257,6 +255,106 @@ function formValidation() {
   });
 }
 
+// Edit form validation
+function editFormValidation() {
+  function validateName() {
+    let name = $("#edit_user_name").val().trim();
+    if (!name) {
+      $("#edit-name-error").text("Name can't be blank");
+    } else {
+      $("#edit-name-error").text("");
+    }
+  }
+
+  function validateEmail() {
+    let email = $("#edit_user_email").val().trim();
+    if (!validator.isEmail(email)) {
+      $("#edit-email-error").text("Email can't be blank");
+    } else {
+      $("#edit-email-error").text("");
+    }
+  }
+
+  function validatePassword() {
+    let password = $("#edit_user_password").val();
+    if (!password) {
+      $("#edit-password-error").text("Password can't be blank");
+    } else {
+      $("#edit-password-error").text("");
+    }
+  }
+
+  function validatePasswordConfirmation() {
+    let password = $("#edit_user_password").val();
+    let password_confirmation = $("#edit_user_password_confirmation").val();
+    if (!validator.equals(password, password_confirmation)) {
+      $("#edit-password-confirmation-error").text("Password Confirmation dosen't match Password");
+    } else {
+      $("#edit-password-confirmation-error").text("");
+    }
+  }
+
+  function validateContactNumber() {
+    let contactNumber = $("#edit_user_contact_number").val();
+
+    if (contactNumber) {
+      if (!validator.isNumeric(contactNumber) || contactNumber.length !== 10) {
+        $("#edit-contact-number-error").text(
+          "Contact Number must be a 10-digit number"
+        );
+      } else {
+        $("#edit-contact-number-error").text("");
+      }
+    } else {
+      $("#edit-contact-number-error").text("");
+    }
+  }
+
+  function validateEmergencyContactNumber() {
+    let emergencycontactNumber = $("#edit_user_emergency_contact_number").val();
+
+    if (emergencycontactNumber) {
+      if (!validator.isNumeric(emergencycontactNumber) || emergencycontactNumber.length !== 10) {
+        $("#edit-emergency-contact-number-error").text(
+          "Emergency Contact Number must be a 10-digit number"
+        );
+      } else {
+        $("#edit-emergency-contact-number-error").text("");
+      }
+    } else {
+      $("#edit-emergency-contact-number-error").text("");
+    }
+  }
+
+  $("#edit-student-popup").on("input", "#edit_user_name", validateName);
+  $("#edit-student-popup").on("input", "#edit_user_email", validateEmail);
+  $("#edit-student-popup").on("input", "#edit_user_password", validatePassword);
+  $("#edit-student-popup").on("input", "#edit_user_password_confirmation", validatePasswordConfirmation);
+  $("#edit-student-popup").on("input", "#edit_user_contact_number", validateContactNumber);
+  $("#edit-student-popup").on("input", "#edit_user_emergency_contact_number", validateEmergencyContactNumber);
+
+  $("#edit-student-popup").on("submit", "#user-admin-edit-form", function(event) {
+    console.log("form submitted");
+    validateName();
+    validateEmail();
+    validatePassword();
+    validatePasswordConfirmation();
+    validateContactNumber();
+    validateEmergencyContactNumber();
+
+    if (
+      $("#edit-name-error").text() ||
+      $("#edit-email-error").text() ||
+      $("#edit-password-error").text() ||
+      $("#edit-password-confirmation-error").text() ||
+      $("#edit-contact-number-error").text() ||
+      $("#edit-emergency-contact-number-error").text()
+    ) {
+      event.preventDefault();
+    }
+  });
+}
+
 //initialize script
 
 $(document).ready(function () {
@@ -267,6 +365,7 @@ $(document).ready(function () {
   customDatePicker();
   customEditDatePicker();
   formValidation();
+  editFormValidation();
 
   $(document).on("turbo:render", function () {
     editModelPopup();
@@ -276,6 +375,7 @@ $(document).ready(function () {
     customDatePicker();
     customEditDatePicker();
     formValidation();
+    editFormValidation();
   });
 });
 
