@@ -2,6 +2,7 @@ function editPopup() {
   $(".edit-user-model").click(function() {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
+    $("#overlay").show()
     $.ajax({
       method: "GET",
       url: url,
@@ -14,11 +15,14 @@ function editPopup() {
 
       success: function(res) {
         Turbo.renderStreamMessage(res);
+        $("#overlay").hide()
         editFormValidation();
-        loader();
+      },
+      done: function() {
       },
       error: function() {
         console.log("Error fetching data");
+        $("#overlay").hide();
       },
     });
   });
@@ -41,6 +45,7 @@ function tableSearch() {
     console.log(e.keyCode);
     delayTimer = setTimeout(function() {
       let searchValue = $("#user_search").val();
+      $("#overlay").show();
 
       $.ajax({
         url: "/admin/users",
@@ -55,23 +60,19 @@ function tableSearch() {
           Turbo.renderStreamMessage(res);
           var newURL = window.location.protocol + "//" + window.location.host + window.location.pathname + '?search=' + encodeURIComponent(searchValue);
           window.history.pushState({ path: newURL }, '', newURL);
-          
-
+          $("#overlay").hide();
 
         },
         error: function() {
           console.log("Error fetching data");
+          $("#overlay").hide();
+
         },
       });
     }, 500);
   });
 }
 
-function loader() {
-  console.log("loader");
-    $("#overlay").fadeIn(300);
-    $("#overlay").delay(300).fadeOut(300);
-}
 
 function formValidation() {
 
@@ -214,6 +215,14 @@ $(document).ready(function() {
     deletePopup();
     tableSearch();
     formValidation();
+
+  });
+
+  $(document).on("turbo:before-render", function() {
+    $("#overlay").show()
+  });
+  $(document).on("turbo:after-render", function() {
+    $("#overlay").hide()
   });
 });
 
@@ -224,6 +233,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     fallbackToDefaultActions(streamElement);
     initModals();
     editPopup();
+
 
   };
 });
