@@ -123,7 +123,7 @@ $(document).ready(function () {
   initNavbarTitle();
   initNavbarHamburger();
   activeClass();
-  loader();
+  // loader();
 
   $(".dropdownProfile").click(function () {
     $("#menuShow").toggle();
@@ -155,7 +155,7 @@ $(document).ready(function () {
     initNavbarTitle();
     initNavbarHamburger();
     activeClass();
-    loader();
+    // loader();
     var storedStates = localStorage.getItem("dropdownStates");
     if (storedStates) {
       var dropdownStates = JSON.parse(storedStates);

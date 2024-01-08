@@ -31,30 +31,43 @@ function deletePopup() {
   });
 }
 
+
 function tableSearch() {
-  $("#user_search").on("input", function() {
-    let searchValue = $(this).val();
-    $.ajax({
-      url: "/admin/users",
-      type: "GET",
-      data: {
-        search: searchValue
-      },
-      headers: {
-        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-      },
-      success: function(res) {
-        Turbo.renderStreamMessage(res);
-      },
-      error: function() {
-        console.log("Error fetching data");
-      },
-    });
+  let delayTimer;
+
+  $("#user_search").keyup(function(e) {
+    clearTimeout(delayTimer);
+    console.log(e.keyCode);
+    delayTimer = setTimeout(function() {
+      let searchValue = $("#user_search").val();
+
+      $.ajax({
+        url: "/admin/users",
+        type: "GET",
+        data: {
+          search: searchValue
+        },
+        headers: {
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function(res) {
+          Turbo.renderStreamMessage(res);
+          var newURL = window.location.protocol + "//" + window.location.host + window.location.pathname + '?search=' + encodeURIComponent(searchValue);
+          window.history.pushState({ path: newURL }, '', newURL);
+          
+
+
+        },
+        error: function() {
+          console.log("Error fetching data");
+        },
+      });
+    }, 500);
   });
 }
 
+
 function formValidation() {
-  console.log("loaded.....******");
 
   function validateName() {
     let name = $("#user_name").val();

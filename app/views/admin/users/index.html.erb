@@ -47,27 +47,29 @@
     <% end %>
   </div>
   <div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
-    <table class="w-full text-sm text-left text-gray-500 ml-[47px] sm:ml-[63px] lg:ml-0 md:ml-[26px] dark:text-gray-400 overflow-auto table-auto">
-      <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
-        <tr>
-          <th scope="col" class="truncate px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Name 
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Email
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Password
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Action
-          </th>
-        </tr>
-      </thead>
-      <tbody class="overflow-auto" id="user-table">
-        <%= render partial: "admin/users/table", locals: { users: @users } %>
-      </tbody>
-    </table>
+    <div class="bg-white dark:bg-gray-800 h-[589px]">
+      <table class="w-full text-sm text-left text-gray-500 ml-[47px] sm:ml-[63px] lg:ml-0 md:ml-[26px] dark:text-gray-400 overflow-auto table-auto">
+        <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
+          <tr>
+            <th scope="col" class="truncate px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Name 
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Email
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Password
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody class="overflow-auto" id="user-table">
+          <%= render partial: "admin/users/table", locals: { users: @users } %>
+        </tbody>
+      </table>
+    </div>
     <div id="large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
       <div class="relative w-full lg:max-w-[52rem] sm:max-w-[32rem] max-h-full max-w-[20rem] ml-[42px] sm:ml-[25px] md:ml-[0px]">
         <!-- Modal content -->
