@@ -15,6 +15,7 @@ function editPopup() {
       success: function(res) {
         Turbo.renderStreamMessage(res);
         editFormValidation();
+        loader();
       },
       error: function() {
         console.log("Error fetching data");
@@ -66,6 +67,11 @@ function tableSearch() {
   });
 }
 
+function loader() {
+  console.log("loader");
+    $("#overlay").fadeIn(300);
+    $("#overlay").delay(300).fadeOut(300);
+}
 
 function formValidation() {
 

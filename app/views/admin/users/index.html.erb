@@ -37,7 +37,7 @@
   <div class="flex items-center justify-between pt-10 md:pt-9 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row  ">
     <div class="text-[#0BC08B] text-[20px] font-medium sm:ml-[0px] ml-[25px] mb-4 sm:mb-0">User Management Lists</div>
     <label for="table-search " class="sr-only">Search</label>
-    <%= form_tag admin_users_path, method: :get, id: "user_search_form" do %>
+    <%= form_tag admin_users_path, method: :get, id: "user_search_form", data: { turbo_stream: true } do %>
       <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <img src="<%= asset_path("search.png") %>">
@@ -112,8 +112,8 @@
         </div>
       </div>
     </div>
-    <div class="mt-4">
-      <%= will_paginate(@users) %>
+    <div class="mt-4" id="render-pagination">
+      <%= render partial: 'admin/users/paginate', locals: { users: @users } %>
     </div>
   </div>
 </div>

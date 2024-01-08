@@ -112,10 +112,9 @@ function initNavbarHamburger() {
 }
 
 function loader() {
-  $(".loader-btn").click(function () {
+  console.log("loader");
     $("#overlay").fadeIn(300);
     $("#overlay").delay(300).fadeOut(300);
-  });
 }
 
 $(document).ready(function () {
