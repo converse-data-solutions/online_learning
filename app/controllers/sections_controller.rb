@@ -9,7 +9,7 @@ class SectionsController < ApplicationController
 
   def show
     @course = Course.find(params[:course_id])
-    @section = @course.sections.find(params[:id])
+    @section = @course.sections.find_by(id: params[:id])
     @comments = @section.comments
     @comment = Comment.new
   end

@@ -23,12 +23,12 @@ class CommentsController < ApplicationController
 
   def edit
     @course = Course.find(params[:course_id])
-    @comment = @course.comments.find(params[:id])
+    @comment = @course.comments.find_by(id: params[:id])
   end
 
   def update
     @course = Course.find(params[:course_id])
-    @comment = @course.comments.find(params[:id])
+    @comment = @course.comments.find_by(id: params[:id])
 
     if @comment.update(comment_params)
       redirect_to @course, notice: 'Comment updated successfully'
@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @course = Course.find(params[:course_id])
-    @comment = @course.comments.find(params[:id])
+    @comment = @course.comments.find_by(id: params[:id])
     @comment.destroy
 
     redirect_to @course, notice: 'Comment deleted successfully'

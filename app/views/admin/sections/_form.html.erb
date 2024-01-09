@@ -3,7 +3,7 @@
   <%= f.text_field :title, id:"section_title", class: "hide_title w-[33%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 p-2.5 focus:border-gray-200" %>
   <% if section&.errors&.any? %>
     <% if section.errors[:title].any? %>
-      < class="text-red-600 text-sm mt-1">
+      <div class="text-red-600 text-sm mt-1">
         <%= section.errors.full_messages_for(:title).join(', ') %>
       </div>
     <% end %>

@@ -9,7 +9,7 @@ class LessonsController < ApplicationController
   end
 
   def show
-    @lesson = Lesson.find(params[:id])
+    @lesson = Lesson.find_by(id: params[:id])
     @sections = Lesson.where(section_id: @lesson.section_id)
     @course = @lesson.section.course
     @entrollment = @course.entrollment.pluck(:id)

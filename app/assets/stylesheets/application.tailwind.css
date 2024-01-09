@@ -11,6 +11,39 @@
 }
 
 */
+
+#overlay{	
+  position: fixed;
+  top: 0;
+  z-index: 1050;
+  width: 100%;
+  height:100%;
+  display: none;
+  backdrop-filter: contrast(0.5);
+}
+.cv-spinner {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px #ddd solid;
+  border-top: 4px #2e93e6 solid;
+  border-radius: 50%;
+  animation: sp-anime 0.8s infinite linear;
+}
+@keyframes sp-anime {
+  100% { 
+    transform: rotate(360deg); 
+  }
+}
+.is-hide{
+  display:none;
+}
+
 .gradiant-hover {
   transition: background, color 0.5s;
 }
@@ -39,19 +72,27 @@
   background-position: 100% 0; /* Move the gradient to the right on hover */
 }
 
-.delete-gradiant-hover {
+.button-gradiant-hover-cancel {
   transition: background, color 0.5s;
 }
-.delete-gradiant-hover:hover {
-  background: linear-gradient(#0082ce, #0082ce, #0082ce);
-  color: white;
+.button-gradiant-hover-cancel:hover {
+  background: linear-gradient(to right, #EDEDED, #FFFFFF, #FFFFFF); /* Set the initial gradient */
+  background-size: 200% 100%; /* Set the size to accommodate the transition */
+  transition: background-position 3s;
+  color: #000;
 }
+.button-gradiant-hover-cancel:hover{
+  background-position: 100% 0; /* Move the gradient to the right on hover */
+}
+
+
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #f9fafb inset !important;
+  -webkit-box-shadow: 0 0 0 30px #ffffff inset !important;
+  -webkit-text-fill-color: #818181 !important;
 }
 
 .table-container {
@@ -120,6 +161,10 @@ nav.main-menu.expanded {
 
 .main-menu > ul {
   /* margin: 7px 0; */
+}
+
+.current-screen-color{
+  color: #0bc08b !important;
 }
 
 .main-menu li {
@@ -302,7 +347,7 @@ nav.main-menu li.active > a,
 }
 
 .pagination a {
-  color: #333;
+  color: #818181;
   padding: 5px 15px;
   margin: 0 5px;
   border-radius: 7px;
@@ -310,6 +355,7 @@ nav.main-menu li.active > a,
   border-radius: 3px;
   font-family: "Poppins", sans-serif;
   font-size: 15px;
+  font-weight: 500;
 }
 
 .pagination .current {
@@ -324,6 +370,7 @@ nav.main-menu li.active > a,
   font-style: normal;
 }
 
+
 .pagination .previous,
 .pagination .next {
   margin: 0 5px;
@@ -333,6 +380,7 @@ nav.main-menu li.active > a,
   pointer-events: none;
   margin-top: -3px;
   padding: 8px 15px;
+  color: #818181 !important;
 }
 .pagination .previous_page {
   margin-right: 5px;
@@ -340,6 +388,10 @@ nav.main-menu li.active > a,
 
 .pagination .next_page {
   margin-left: 5px;
+}
+
+.pagination .disabled::before {
+  color: #0bc08b59 !important;
 }
 
 .pagination .previous_page,
@@ -641,6 +693,11 @@ nav.main-menu li.active > a,
 
 /* Select */
 
+.custom-select-border{
+  border: 1px solid #CCCCCC !important;
+  width: 18.25rem !important;
+}
+
 .custom-select-wrapper {
   position: relative;
   display: inline-block;
@@ -652,13 +709,14 @@ nav.main-menu li.active > a,
 .custom-select {
   position: relative;
   display: inline-block;
-  width: 14rem;
+  width: 360px;
+  height: 45px;
 }
 
 .custom-select-trigger {
   position: relative;
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: #818181;
   border-radius: 4px;
@@ -724,7 +782,7 @@ nav.main-menu li.active > a,
   position: relative;
   display: block;
   padding: 5px 22px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   color: #818181;
   cursor: pointer;
@@ -1057,9 +1115,11 @@ input[type="file"] {
   border: 1px solid #0bc08b !important;
 }
 .checkbox-custom:checked + .checkbox-custom-label:after {
-  top: 1px !important;
+  top: 2px !important;
+  left: 5px !important;
   height: 9px !important;
-  border: solid #0bc08b !important;
+  border-bottom: 1px solid #0bc08b !important;
+  border-right: 1px solid #0bc08b !important;
 }
 
 .ui-datepicker-month {

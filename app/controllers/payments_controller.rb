@@ -6,7 +6,7 @@ class PaymentsController < ApplicationController
   end
 
   def invoice
-    @payment = Payment.find(params[:id])
+    @payment = Payment.find_by(id: params[:id])
     respond_to do |format|
       format.html
       format.pdf do
