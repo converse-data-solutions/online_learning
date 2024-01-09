@@ -43,7 +43,7 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
   def self.get_users(params)
-    User.admin.order(name: :asc).search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
+    User.admin.order(name: :asc).search_by_name_and_email(params[:search]).paginate(page: params[:page].presence || 1, per_page: params[:per_page].presence || 10)
   end
 
   def self.from_omniauth(auth)

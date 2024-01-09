@@ -1,3 +1,4 @@
 <%= turbo_stream.update "user-table", partial: "admin/users/table", locals: { users: @users } %>
 <%= turbo_stream.update "edit-user-popup", partial: "admin/users/edit", locals: { user: @user } %>
 <%= turbo_stream.append "user-table", partial: "shared/flash", locals: { message: 'User was successfully updated.', type: 'notice' } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/users/paginate", locals: { users: @users } %>

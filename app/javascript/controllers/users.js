@@ -1,26 +1,30 @@
 function editPopup() {
-  $(".edit-user-model").click(function() {
+  $(".edit-user-model").click(function () {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
-    $("#overlay").show()
+    // let searchParams = new URLSearchParams(window.location.search);
+    // let page = parseInt(searchParams.get("page")) || 1;
+    // let search = searchParams.get("search") || "";
+    $("#overlay").show();
     $.ajax({
       method: "GET",
       url: url,
       data: {
         user_id: id,
+        // page: page,
+        // search: search,
       },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function(res) {
+      success: function (res) {
         Turbo.renderStreamMessage(res);
-        $("#overlay").hide()
+        $("#overlay").hide();
         editFormValidation();
       },
-      done: function() {
-      },
-      error: function() {
+      done: function () {},
+      error: function () {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -29,21 +33,52 @@ function editPopup() {
 }
 
 function deletePopup() {
-  $(".send-delete-user").click(function() {
+  $(".send-delete-user").click(function () {
+    let search = window.location.search.split("&search=");
+    console.log("serach values", search);
+    let page = window.location.search.split("&page=");
+    console.log("page values", page);
+    let per_page = window.location.search.split("&per_page=");
+    console.log("per_page values", per_page);
+    let url;
+
+    if (page !== undefined && search !== undefined) {
+      url = ["?search=" + search[1]] + ["&page=" + page[1]];
+      console.log(url);
+    } else if (search !== undefined) {
+      url = ["?search=" + search[1]];
+    } else if (page !== undefined) {
+      url = ["?page=" + page[1]];
+    } else if (per_page !== undefined) {
+      url = ["?per_page=" + per_page[1]];
+    } else if (page !== undefined && per_page !== undefined) {
+      url = ["?per_page=" + per_page[1]] + ["&page=" + page[1]];
+    } else if (search !== undefined && per_page !== undefined) {
+      url = ["?search=" + search[1]] + ["&per_page=" + per_page[1]];
+    } else if (
+      page !== undefined &&
+      search !== undefined &&
+      per_page !== undefined
+    ) {
+      url =
+        ["?search=" + search[1]] +
+        ["&page=" + page[1]] +
+        ["&per_page=" + per_page[1]];
+    }
+
     let id = $(this).data("user-id");
     $("#delete-user-model").attr("data-user-id", id);
-    $("#delete-user-model").attr("href", `users/${id}`);
+    $("#delete-user-model").attr("href", `users/${id}${url}`);
   });
 }
-
 
 function tableSearch() {
   let delayTimer;
 
-  $("#user_search").keyup(function(e) {
+  $("#user_search").on("input", function (e) {
     clearTimeout(delayTimer);
     console.log(e.keyCode);
-    delayTimer = setTimeout(function() {
+    delayTimer = setTimeout(function () {
       let searchValue = $("#user_search").val();
       $("#overlay").show();
 
@@ -51,34 +86,37 @@ function tableSearch() {
         url: "/admin/users",
         type: "GET",
         data: {
-          search: searchValue
+          search: searchValue,
         },
         headers: {
-          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function(res) {
+        success: function (res) {
           Turbo.renderStreamMessage(res);
-          var newURL = window.location.protocol + "//" + window.location.host + window.location.pathname + '?search=' + encodeURIComponent(searchValue);
-          window.history.pushState({ path: newURL }, '', newURL);
+          var newURL =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?search=" +
+            encodeURIComponent(searchValue);
+          window.history.pushState({ path: newURL }, "", newURL);
           $("#overlay").hide();
-
         },
-        error: function() {
+        error: function () {
           console.log("Error fetching data");
           $("#overlay").hide();
-
         },
       });
     }, 500);
   });
 }
 
-
 function formValidation() {
-
   function validateName() {
     let name = $("#user_name").val();
-    let namecheck = validator.isAlpha(name);
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
 
     if (!namecheck) {
       $("#name-error").text("Name can't be blank");
@@ -125,7 +163,7 @@ function formValidation() {
   $("#user_password").on("input", validatePassword);
   $("#user_password_confirmation").on("input", validatePasswordConfirmation);
 
-  $("#user-admin-form").on("submit", function(event) {
+  $("#user-admin-form").on("submit", function (event) {
     validateName();
     validateEmail();
     validatePassword();
@@ -146,6 +184,17 @@ function editFormValidation() {
   function validateName() {
     let name = $("#edit_user_name").val().trim();
     if (!name) {
+      $("#edit-name-error").text("Name can't be blank");
+    } else {
+      $("#edit-name-error").text("");
+    }
+  }
+
+  function validateName() {
+    let name = $("#edit_user_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!namecheck) {
       $("#edit-name-error").text("Name can't be blank");
     } else {
       $("#edit-name-error").text("");
@@ -174,7 +223,9 @@ function editFormValidation() {
     let password = $("#edit_user_password").val();
     let password_confirmation = $("#edit_user_password_confirmation").val();
     if (!validator.equals(password, password_confirmation)) {
-      $("#edit-password-confirmation-error").text("Password Confirmation dosen't match Password");
+      $("#edit-password-confirmation-error").text(
+        "Password Confirmation dosen't match Password"
+      );
     } else {
       $("#edit-password-confirmation-error").text("");
     }
@@ -183,9 +234,13 @@ function editFormValidation() {
   $("#edit-user-popup").on("input", "#edit_user_name", validateName);
   $("#edit-user-popup").on("input", "#edit_user_email", validateEmail);
   $("#edit-user-popup").on("input", "#edit_user_password", validatePassword);
-  $("#edit-user-popup").on("input", "#edit_user_password_confirmation", validatePasswordConfirmation);
+  $("#edit-user-popup").on(
+    "input",
+    "#edit_user_password_confirmation",
+    validatePasswordConfirmation
+  );
 
-  $("#edit-user-popup").on("submit", "#user-admin-edit-form", function(event) {
+  $("#edit-user-popup").on("submit", "#user-admin-edit-form", function (event) {
     console.log("form submitted");
     validateName();
     validateEmail();
@@ -203,37 +258,33 @@ function editFormValidation() {
   });
 }
 
-
-$(document).ready(function() {
+$(document).ready(function () {
   editPopup();
   deletePopup();
   tableSearch();
   formValidation();
 
-  $(document).on("turbo:render", function() {
+  $(document).on("turbo:render", function () {
     editPopup();
     deletePopup();
     tableSearch();
     formValidation();
-
   });
 
-  $(document).on("turbo:before-render", function() {
-    $("#overlay").show()
+  $(document).on("turbo:before-render", function () {
+    $("#overlay").show();
   });
-  $(document).on("turbo:after-render", function() {
-    $("#overlay").hide()
+  $(document).on("turbo:after-render", function () {
+    $("#overlay").hide();
   });
 });
 
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function(streamElement) {
+  event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
     editPopup();
-
-
   };
 });

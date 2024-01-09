@@ -58,6 +58,9 @@
         <% end %>
       </div>
     </div>
+    <%= hidden_field_tag :page, params[:page]%>
+    <%= hidden_field_tag :per_page, params[:per_page]%>
+    <%= hidden_field_tag :search, params[:search]%>
     <div class="w-1/2 md:w-2/5 mx-auto mt-4 sm:mt-6">
       <%= f.submit "UPDATE", class: 'button-gradiant-hover w-[150px] h-[42px] md:ml-[50px] ml-[20px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-[7px] text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 button-gradiant-hover loader-btn' %>
     </div>
