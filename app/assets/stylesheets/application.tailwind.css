@@ -163,6 +163,10 @@ nav.main-menu.expanded {
   /* margin: 7px 0; */
 }
 
+.current-screen-color{
+  color: #0bc08b !important;
+}
+
 .main-menu li {
   position: relative;
   display: block;
