@@ -81,7 +81,7 @@ class Admin::StudentsController < ApplicationController
   private
 
   def get_students
-    @students = User.student.order(name: :asc).includes(user_courses: [:course]).search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: params[:per_page] || 5)
+    @students = User.student.order(name: :asc).includes(user_courses: [:course]).search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
   end
 
   def set_student

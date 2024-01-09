@@ -48,52 +48,54 @@
       </div>
     <% end %>
   </div>
-  <div class="relative table-container shadow-sm lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
-    <table class="w-full text-sm text-left text-gray-500 ml-[47px] sm:ml-[63px] lg:ml-0 md:ml-[26px] dark:text-gray-400 overflow-auto table-auto">
-      <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Name
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Email
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Course
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Gender
-          </th>
-          <th scope="col" class="whitespace-nowrap px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Date Of Birth
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Phone No
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Occupation
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Education
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Address
-          </th>
-          <th scope="col" class="whitespace-nowrap px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Emergency Contact Name
-          </th>
-          <th scope="col" class="whitespace-nowrap px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Emergency Contact No
-          </th>
-          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-            Action
-          </th>
-        </tr>
-      </thead>
-      <tbody class="overflow-auto" id="user-table">
-        <%= render partial: "admin/students/table", locals: { students: @students } %>
-      </tbody>
-    </table>
+  <div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
+    <div class="bg-white dark:bg-gray-800 h-[610px] relative overflow-x-auto lg:overflow-x-scroll mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
+      <table class="w-full text-sm text-left text-gray-500 ml-[47px] sm:ml-[63px] lg:ml-0 md:ml-[26px] dark:text-gray-400 overflow-auto table-auto">
+        <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Name
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Email
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Course
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Gender
+            </th>
+            <th scope="col" class="whitespace-nowrap px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Date Of Birth
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Phone No
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Occupation
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Education
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Address
+            </th>
+            <th scope="col" class="whitespace-nowrap px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Emergency Contact Name
+            </th>
+            <th scope="col" class="whitespace-nowrap px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Emergency Contact No
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody class="overflow-auto" id="user-table">
+          <%= render partial: "admin/students/table", locals: { students: @students } %>
+        </tbody>
+      </table>
+    </div>
     <div id="large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
       <div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
         <!-- Modal content -->
@@ -137,8 +139,8 @@
       </div>
     </div>
   </div>
-  <div class="mt-4 ml-5">
-    <%= will_paginate(@students) %>
+  <div class="mt-4 ml-5" id="render-pagination" >
+    <%= render partial: 'admin/students/paginate', locals: { students: @students } %>
   </div>
 </div>
 <script>
