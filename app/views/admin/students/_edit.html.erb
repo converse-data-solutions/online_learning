@@ -6,8 +6,7 @@
         <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= f.text_field :name, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_name", validate: true %>
-                  <div class="text-red-600 text-sm mt-1" id="edit-name-error"></div>
-
+          <div class="text-red-600 text-sm mt-1" id="edit-name-error"></div>
           <% if student&.errors&.any? %>
             <% if student.errors[:name].any? %>
               <div class="text-red-600 text-sm mt-1">
@@ -21,8 +20,7 @@
         <label for="email" class=" block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= f.email_field :email, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_email", validate: true %>
-                  <div class="text-red-600 text-sm mt-1" id="edit-email-error"></div>
-
+          <div class="text-red-600 text-sm mt-1" id="edit-email-error"></div>
           <% if student&.errors&.any? %>
             <% if student.errors[:email].any? %>
               <div class="text-red-600 text-sm mt-1">
@@ -38,8 +36,7 @@
         <label for="password" class=" block mb-2 text-lg font-medium text-[#000]">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= f.password_field :password, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_password", autocomplete: "new-password", validate: true %>
-                  <div class="text-red-600 text-sm mt-1" id="edit-password-error"></div>
-
+          <div class="text-red-600 text-sm mt-1" id="edit-password-error"></div>
           <% if student&.errors&.any? %>
             <% if student.errors[:password].any? %>
               <div class="text-red-600 text-sm mt-1">
@@ -53,6 +50,7 @@
         <label for="passwod_confirmation" class="w-full sm:w-[40%] lg:w-[46%]  block mb-2 text-lg font-medium text-[#000]">Password Confirmation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= f.password_field :password_confirmation, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_password_confirmation", autocomplete: "new-password", validate: true %>
+          <div class="text-red-600 text-sm mt-1" id="edit-password-confirmation-error"></div>
           <% if student&.errors&.any? %>
             <% if student.errors[:password_confirmation].any? %>
               <div class="text-red-600 text-sm mt-1">
@@ -109,6 +107,14 @@
         <label for="contact number" class=" block mb-2 text-lg font-medium text-[#000]">Contact Number</label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= f.text_field :contact_number, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_contact_number", validate: true %>
+          <div class="text-red-600 text-sm mt-1" id="edit-contact-number-error"></div>
+          <% if student&.errors&.any? %>
+            <% if student.errors[:contact_number].any? %>
+              <div class="text-red-600 text-sm mt-1">
+                <%= student.errors.full_messages_for(:emergency_contact_number).join(', ') %>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -136,7 +142,7 @@
       <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
         <label for="emergency contact name" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Name</label>
         <div class="w-full sm:w-[55%] flex flex-col">
-          <%= f.text_field :emergency_contact_name, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_emergency_contact_name", validate: true %>
+          <%= f.text_field :emergency_contact_name, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
         </div>
       </div>
     </div>
@@ -144,7 +150,15 @@
       <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
         <label for="emergency contact number" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Number</label>
         <div class="w-full sm:w-[55%] flex flex-col">
-          <%= f.text_field :emergency_contact_number, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+          <%= f.text_field :emergency_contact_number, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_emergency_contact_number", validate: true %>
+          <div class="text-red-600 text-sm mt-1" id="edit-emergency-contact-number-error"></div>
+          <% if student&.errors&.any? %>
+            <% if student.errors[:emergency_contact_number].any? %>
+              <div class="text-red-600 text-sm mt-1">
+                <%= student.errors.full_messages_for(:emergency_contact_number).join(', ') %>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
       <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
