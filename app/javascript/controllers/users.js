@@ -2,17 +2,17 @@ function editPopup() {
   $(".edit-user-model").click(function () {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
-    // let searchParams = new URLSearchParams(window.location.search);
-    // let page = parseInt(searchParams.get("page")) || 1;
-    // let search = searchParams.get("search") || "";
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
     $("#overlay").show();
     $.ajax({
       method: "GET",
       url: url,
       data: {
         user_id: id,
-        // page: page,
-        // search: search,
+        page: page,
+        search: search,
       },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
@@ -22,6 +22,8 @@ function editPopup() {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
         editFormValidation();
+        console.log("page value", page);
+        console.log("search value", search);
       },
       done: function () {},
       error: function () {
@@ -34,41 +36,41 @@ function editPopup() {
 
 function deletePopup() {
   $(".send-delete-user").click(function () {
-    let search = window.location.search.split("&search=");
-    console.log("serach values", search);
-    let page = window.location.search.split("&page=");
-    console.log("page values", page);
-    let per_page = window.location.search.split("&per_page=");
-    console.log("per_page values", per_page);
-    let url;
+    // let search = window.location.search.split("&search=");
+    // console.log("serach values", search);
+    // let page = window.location.search.split("&page=");
+    // console.log("page values", page);
+    // let per_page = window.location.search.split("&per_page=");
+    // console.log("per_page values", per_page);
+    // let url;
 
-    if (page !== undefined && search !== undefined) {
-      url = ["?search=" + search[1]] + ["&page=" + page[1]];
-      console.log(url);
-    } else if (search !== undefined) {
-      url = ["?search=" + search[1]];
-    } else if (page !== undefined) {
-      url = ["?page=" + page[1]];
-    } else if (per_page !== undefined) {
-      url = ["?per_page=" + per_page[1]];
-    } else if (page !== undefined && per_page !== undefined) {
-      url = ["?per_page=" + per_page[1]] + ["&page=" + page[1]];
-    } else if (search !== undefined && per_page !== undefined) {
-      url = ["?search=" + search[1]] + ["&per_page=" + per_page[1]];
-    } else if (
-      page !== undefined &&
-      search !== undefined &&
-      per_page !== undefined
-    ) {
-      url =
-        ["?search=" + search[1]] +
-        ["&page=" + page[1]] +
-        ["&per_page=" + per_page[1]];
-    }
+    // if (page !== undefined && search !== undefined) {
+    //   url = ["?search=" + search[1]] + ["&page=" + page[1]];
+    //   console.log(url);
+    // } else if (search !== undefined) {
+    //   url = ["?search=" + search[1]];
+    // } else if (page !== undefined) {
+    //   url = ["?page=" + page[1]];
+    // } else if (per_page !== undefined) {
+    //   url = ["?per_page=" + per_page[1]];
+    // } else if (page !== undefined && per_page !== undefined) {
+    //   url = ["?per_page=" + per_page[1]] + ["&page=" + page[1]];
+    // } else if (search !== undefined && per_page !== undefined) {
+    //   url = ["?search=" + search[1]] + ["&per_page=" + per_page[1]];
+    // } else if (
+    //   page !== undefined &&
+    //   search !== undefined &&
+    //   per_page !== undefined
+    // ) {
+    //   url =
+    //     ["?search=" + search[1]] +
+    //     ["&page=" + page[1]] +
+    //     ["&per_page=" + per_page[1]];
+    // }
 
     let id = $(this).data("user-id");
     $("#delete-user-model").attr("data-user-id", id);
-    $("#delete-user-model").attr("href", `users/${id}${url}`);
+    $("#delete-user-model").attr("href", `users/${id}`);
   });
 }
 

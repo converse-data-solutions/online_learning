@@ -51,14 +51,19 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     respond_to do |format|
       if @user&.update(deleted: true)
         @users = User.get_users(params)
         format.turbo_stream { render_destroy_success }
         format.json { render :show }
       else
-        format.turbo_stream { redirect_to admin_users_path, flash[:notice] = 'User destroy failed' }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'User was successfully destroyed.', type: 'notice' }), # rubocop:disable Layout/LineLength
+            turbo_stream.update('render-pagination', partial: 'admin/users/pagination', locals: { users: @users })
+          ]
+        end
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
