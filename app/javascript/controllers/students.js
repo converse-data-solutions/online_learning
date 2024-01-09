@@ -2,11 +2,16 @@ function editModelPopup() {
   $(".edit-student-model").click(function () {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
     $.ajax({
       method: "GET",
       url: url,
       data: {
         user_id: id,
+        page: page,
+        search: search,
       },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
@@ -25,10 +30,31 @@ function editModelPopup() {
 function deletePopup() {
   console.log("processed.....");
   $(".send-delete-student").click(function () {
-    console.log("processed Loading.....");
     let id = $(this).data("user-id");
+    console.log("id", id);
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
+    let per_page = parseInt(searchParams.get("per_page")) || 10;
+
+    let baseUrl = `users/${id}`;
+
+    // Add params only if they are not empty
+    if (page !== 1) {
+      baseUrl += `?page=${page}`;
+    }
+
+    if (search !== "") {
+      baseUrl += (page === 1 ? "?" : "&") + `search=${search}`;
+    }
+
+    if (per_page !== 10) {
+      baseUrl += (page === 1 && search === "") ? "?" : "&";
+      baseUrl += `per_page=${per_page}`;
+    }
+
     $("#delete-student-model").attr("data-user-id", id);
-    $("#delete-student-model").attr("href", `students/${id}`);
+    $("#delete-student-model").attr("href", baseUrl);
   });
 }
 

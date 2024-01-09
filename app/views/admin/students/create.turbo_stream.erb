@@ -1,3 +1,4 @@
 <%= turbo_stream.update "user-table", partial: "admin/students/table", locals: { students: @students } %>
-<%= turbo_stream.replace "user-admin-form", partial: "admin/students/form", locals: { student: User.new } %>
+<%= turbo_stream.update "user-admin-form", partial: "admin/students/form", locals: { student: User.new } %>
 <%= turbo_stream.append "user-table", partial: "shared/flash", locals: { message: 'Student was successfully created.', type: 'notice' } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/students/paginate", locals: { students: @students } %>

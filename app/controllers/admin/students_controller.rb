@@ -3,7 +3,7 @@
 class Admin::StudentsController < ApplicationController
   before_action :set_student, only: %i[edit update destroy show]
   def index
-    get_students
+    @students = User.get_students(params)
     respond_to do |format|
       format.json { render json: { data: @students, total_count: User.student.count } }
       format.html { render :index }
@@ -19,7 +19,7 @@ class Admin::StudentsController < ApplicationController
     @student = User.new(student_params)
     respond_to do |format|
       if @student.add_role_and_save(student_params[:role])
-        get_students
+        @students = User.get_students(params)
         format.turbo_stream
         format.json { render :show, status: :created, location: admin_student_url(@student) }
       else
@@ -45,7 +45,7 @@ class Admin::StudentsController < ApplicationController
   def update # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     respond_to do |format|
       if @student.update(student_params)
-        get_students
+        @students = User.get_students(params)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_student_url(@student) }
       else
@@ -62,8 +62,8 @@ class Admin::StudentsController < ApplicationController
 
   def destroy # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     respond_to do |format|
-      if @student.update(deleted: true)
-        get_students
+      if @student&.update(deleted: true)
+        @students = User.get_students(params)
         format.turbo_stream do
           render turbo_stream: [
            turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'Student was successfully destroyed.', type: 'notice' }),  # rubocop:disable Layout/FirstArrayElementIndentation
@@ -79,10 +79,6 @@ class Admin::StudentsController < ApplicationController
   end
 
   private
-
-  def get_students
-    @students = User.student.order(name: :asc).includes(user_courses: [:course]).search_by_name_and_email(params[:search]).paginate(page: params[:page] || 1, per_page: params[:per_page] || 10)
-  end
 
   def set_student
     @student = User.find(params[:id])
