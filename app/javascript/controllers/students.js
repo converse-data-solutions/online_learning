@@ -5,6 +5,7 @@ function editModelPopup() {
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
     let search = searchParams.get("search") || "";
+    $("#overlay").show();
     $.ajax({
       method: "GET",
       url: url,
@@ -19,9 +20,12 @@ function editModelPopup() {
 
       success: function (res) {
         Turbo.renderStreamMessage(res);
+        $("#overlay").hide();
+        editFormValidation();
       },
       error: function () {
         console.log("Error fetching data");
+        $("#overlay").hide();
       },
     });
   });
@@ -37,24 +41,24 @@ function deletePopup() {
     let search = searchParams.get("search") || "";
     let per_page = parseInt(searchParams.get("per_page")) || 10;
 
-    let baseUrl = `users/${id}`;
+    let delUrl = `students/${id}`;
 
-    // Add params only if they are not empty
-    if (page !== 1) {
-      baseUrl += `?page=${page}`;
+    if (search !==1 ){
+      delUrl += `?page=${page}`;
     }
 
     if (search !== "") {
-      baseUrl += (page === 1 ? "?" : "&") + `search=${search}`;
+      delUrl += (page === 1 ? "?" : "&") + `search=${search}`;
     }
 
     if (per_page !== 10) {
-      baseUrl += (page === 1 && search === "") ? "?" : "&";
-      baseUrl += `per_page=${per_page}`;
+      delUrl += (page === 1 && search === "") ? "?" : "&";
+      delUrl += `per_page=${per_page}`;
     }
 
+    
     $("#delete-student-model").attr("data-user-id", id);
-    $("#delete-student-model").attr("href", baseUrl);
+    $("#delete-student-model").attr("href", delUrl);
   });
 }
 
@@ -65,7 +69,7 @@ function studentTableSearch() {
     clearTimeout(delayTimer);
     delayTimer = setTimeout(function() {
       let searchValue = $("#student_search").val();
-
+      $("#overlay").show();
       $.ajax({
         url: "/admin/students",
         type: "GET",
@@ -79,10 +83,12 @@ function studentTableSearch() {
           Turbo.renderStreamMessage(res);
           var newURL = window.location.protocol + "//" + window.location.host + window.location.pathname + '?search=' + encodeURIComponent(searchValue);
           window.history.pushState({ path: newURL }, '', newURL);
+          $("#overlay").hide();
 
         },
         error: function() {
           console.log("Error fetching data");
+          $("#overlay").hide();
 
         },
       });
@@ -412,6 +418,13 @@ $(document).ready(function () {
     customEditDatePicker();
     formValidation();
     editFormValidation();
+  });
+
+  $(document).on("turbo:before-render", function () {
+    $("#overlay").show();
+  });
+  $(document).on("turbo:after-render", function () {
+    $("#overlay").hide();
   });
 });
 
