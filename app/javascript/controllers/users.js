@@ -22,8 +22,7 @@ function editPopup() {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
         editFormValidation();
-        console.log("page value", page);
-        console.log("search value", search);
+
       },
       done: function () {},
       error: function () {
@@ -37,7 +36,6 @@ function editPopup() {
 function deletePopup() {
   $(".send-delete-user").click(function () {
     let id = $(this).data("user-id");
-    console.log("id", id);
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
     let search = searchParams.get("search") || "";
@@ -71,7 +69,6 @@ function tableSearch() {
 
   $("#user_search").on("input", function (e) {
     clearTimeout(delayTimer);
-    console.log(e.keyCode);
     delayTimer = setTimeout(function () {
       let searchValue = $("#user_search").val();
       $("#overlay").show();
@@ -237,7 +234,6 @@ function editFormValidation() {
   );
 
   $("#edit-user-popup").on("submit", "#user-admin-edit-form", function (event) {
-    console.log("form submitted");
     validateName();
     validateEmail();
     validatePassword();
