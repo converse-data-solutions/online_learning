@@ -55,7 +55,7 @@ class User < ApplicationRecord
     page = (page && page.positive?) ? page : 1
     per_page = (params[:per_page].presence&.to_i || 10).to_i
     per_page = (per_page && per_page.positive?) ? per_page : 10
-    User.admin.order(name: :asc).search_by_name_and_email(params[:search]).paginate(page: page, per_page: per_page)
+    User.student.order(name: :asc).search_by_name_and_email(params[:search]).includes(user_courses: [:course]).paginate(page: page, per_page: per_page)
   end
 
   def self.from_omniauth(auth)

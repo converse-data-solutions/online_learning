@@ -32,7 +32,6 @@ class Admin::StudentsController < ApplicationController
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
-    
   end
 
   def edit
