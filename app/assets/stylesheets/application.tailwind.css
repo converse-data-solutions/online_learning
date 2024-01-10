@@ -146,13 +146,13 @@ input:-webkit-autofill {
 
 .main-menu:hover,
 nav.main-menu.expanded {
-  width: 290px;
+  width: 295px;
   overflow: visible;
 }
 
 .main-menu:hover,
 .main-page.expanded {
-  width: 290px;
+  width: 295px;
   overflow: visible;
 }
 
@@ -179,7 +179,7 @@ nav.main-menu.expanded {
 .main-menu li {
   position: relative;
   display: block;
-  width: 290px;
+  width: 295px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -289,7 +289,7 @@ nav.main-menu li.active > a,
 
 .main-menu2 {
   overflow: visible;
-  width: 290px;
+  width: 295px;
 }
 
 .main-nav {
