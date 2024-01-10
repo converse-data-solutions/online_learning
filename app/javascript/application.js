@@ -112,10 +112,9 @@ function initNavbarHamburger() {
 }
 
 function loader() {
-  $(".loader-btn").click(function () {
+  console.log("loader");
     $("#overlay").fadeIn(300);
     $("#overlay").delay(300).fadeOut(300);
-  });
 }
 
 $(document).ready(function () {
@@ -123,7 +122,6 @@ $(document).ready(function () {
   initNavbarTitle();
   initNavbarHamburger();
   activeClass();
-  loader();
 
   $(".dropdownProfile").click(function () {
     $("#menuShow").toggle();
@@ -155,7 +153,6 @@ $(document).ready(function () {
     initNavbarTitle();
     initNavbarHamburger();
     activeClass();
-    loader();
     var storedStates = localStorage.getItem("dropdownStates");
     if (storedStates) {
       var dropdownStates = JSON.parse(storedStates);

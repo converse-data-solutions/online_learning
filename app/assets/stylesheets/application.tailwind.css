@@ -99,6 +99,11 @@
 .button-gradiant-hover-cancel:hover {
   background-position: 100% 0; /* Move the gradient to the right on hover */
 }
+.button-gradiant-hover-cancel:hover{
+  background-position: 100% 0; /* Move the gradient to the right on hover */
+}
+
+
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -174,6 +179,10 @@ nav.main-menu.expanded {
 
 .main-menu > ul {
   /* margin: 7px 0; */
+}
+
+.current-screen-color{
+  color: #0bc08b !important;
 }
 
 .main-menu li {
@@ -399,6 +408,7 @@ nav.main-menu li.active > a,
   pointer-events: none;
   margin-top: -3px;
   padding: 8px 15px;
+  color: #818181 !important;
 }
 .pagination .previous_page {
   margin-right: 5px;
@@ -406,6 +416,10 @@ nav.main-menu li.active > a,
 
 .pagination .next_page {
   margin-left: 5px;
+}
+
+.pagination .disabled::before {
+  color: #0bc08b59 !important;
 }
 
 .pagination .previous_page,

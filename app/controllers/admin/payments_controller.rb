@@ -19,11 +19,11 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def edit
-    @payment = Payment.find(params[:id])
+    @payment = Payment.find_by(id: params[:id])
   end
 
   def update
-    @payment = Payment.find(params[:id])
+    @payment = Payment.find_by(id: params[:id])
     if @payment.update(payment_params)
       redirect_to admin_payments_path
     else
@@ -32,13 +32,13 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def destroy
-    @payment = Payment.find(params[:id])
+    @payment = Payment.find_by(id: params[:id])
     @payment.destroy
     redirect_to admin_payments_path
   end
 
   def show
-    @payment = Payment.find(params[:id])
+    @payment = Payment.find_by(id: params[:id])
   end
 
   private

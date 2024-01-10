@@ -140,6 +140,9 @@
       <%= render partial: 'admin/students/paginate', locals: { students: @students } %>
     </div>
   </div>
+  <div class="mt-4 ml-5">
+    <%= will_paginate(@students) %>
+  </div>
 </div>
 <script>
   $("#modal-close-btn").click();

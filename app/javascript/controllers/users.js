@@ -1,64 +1,113 @@
 function editPopup() {
-  $(".edit-user-model").click(function() {
+  $(".edit-user-model").click(function () {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
+    $("#overlay").show();
     $.ajax({
       method: "GET",
       url: url,
       data: {
         user_id: id,
+        page: page,
+        search: search,
       },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function(res) {
+      success: function (res) {
         Turbo.renderStreamMessage(res);
+        $("#overlay").hide();
         editFormValidation();
+
       },
-      error: function() {
+      done: function () {},
+      error: function () {
         console.log("Error fetching data");
+        $("#overlay").hide();
       },
     });
   });
 }
 
 function deletePopup() {
-  $(".send-delete-user").click(function() {
+  $(".send-delete-user").click(function () {
     let id = $(this).data("user-id");
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
+    let per_page = parseInt(searchParams.get("per_page")) || 10;
+
+    // Construct the base URL
+    let baseUrl = `users/${id}`;
+
+    // Add params only if they are not empty
+    if (page !== 1) {
+      baseUrl += `?page=${page}`;
+    }
+
+    if (search !== "") {
+      baseUrl += (page === 1 ? "?" : "&") + `search=${search}`;
+    }
+
+    if (per_page !== 10) {
+      baseUrl += (page === 1 && search === "") ? "?" : "&";
+      baseUrl += `per_page=${per_page}`;
+    }
+
+    // Update the href attribute
     $("#delete-user-model").attr("data-user-id", id);
-    $("#delete-user-model").attr("href", `users/${id}`);
+    $("#delete-user-model").attr("href", baseUrl);
   });
 }
 
 function tableSearch() {
-  $("#user_search").on("input", function() {
-    let searchValue = $(this).val();
-    $.ajax({
-      url: "/admin/users",
-      type: "GET",
-      data: {
-        search: searchValue
-      },
-      headers: {
-        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-      },
-      success: function(res) {
-        Turbo.renderStreamMessage(res);
-      },
-      error: function() {
-        console.log("Error fetching data");
-      },
-    });
+  let delayTimer;
+
+  $("#user_search").on("input", function (e) {
+    clearTimeout(delayTimer);
+    delayTimer = setTimeout(function () {
+      let searchValue = $("#user_search").val();
+      $("#overlay").show();
+
+      $.ajax({
+        url: "/admin/users",
+        type: "GET",
+        data: {
+          search: searchValue,
+        },
+        headers: {
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function (res) {
+          Turbo.renderStreamMessage(res);
+          var newURL =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?search=" +
+            encodeURIComponent(searchValue);
+          window.history.pushState({ path: newURL }, "", newURL);
+          $("#overlay").hide();
+        },
+        error: function () {
+          console.log("Error fetching data");
+          $("#overlay").hide();
+        },
+      });
+    }, 500);
   });
 }
 
 function formValidation() {
-  console.log("loaded.....******");
-
   function validateName() {
     let name = $("#user_name").val();
-    let namecheck = validator.isAlpha(name);
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
 
     if (!namecheck) {
       $("#name-error").text("Name can't be blank");
@@ -105,7 +154,7 @@ function formValidation() {
   $("#user_password").on("input", validatePassword);
   $("#user_password_confirmation").on("input", validatePasswordConfirmation);
 
-  $("#user-admin-form").on("submit", function(event) {
+  $("#user-admin-form").on("submit", function (event) {
     validateName();
     validateEmail();
     validatePassword();
@@ -124,8 +173,21 @@ function formValidation() {
 
 function editFormValidation() {
   function validateName() {
-    let name = $("#edit_user_name").val().trim();
-    if (!name) {
+    let name = $("#edit_user_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!namecheck) {
+      $("#edit-name-error").text("Name can't be blank");
+    } else {
+      $("#edit-name-error").text("");
+    }
+  }
+
+  function validateName() {
+    let name = $("#edit_user_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!namecheck) {
       $("#edit-name-error").text("Name can't be blank");
     } else {
       $("#edit-name-error").text("");
@@ -154,7 +216,9 @@ function editFormValidation() {
     let password = $("#edit_user_password").val();
     let password_confirmation = $("#edit_user_password_confirmation").val();
     if (!validator.equals(password, password_confirmation)) {
-      $("#edit-password-confirmation-error").text("Password Confirmation dosen't match Password");
+      $("#edit-password-confirmation-error").text(
+        "Password Confirmation dosen't match Password"
+      );
     } else {
       $("#edit-password-confirmation-error").text("");
     }
@@ -163,10 +227,13 @@ function editFormValidation() {
   $("#edit-user-popup").on("input", "#edit_user_name", validateName);
   $("#edit-user-popup").on("input", "#edit_user_email", validateEmail);
   $("#edit-user-popup").on("input", "#edit_user_password", validatePassword);
-  $("#edit-user-popup").on("input", "#edit_user_password_confirmation", validatePasswordConfirmation);
+  $("#edit-user-popup").on(
+    "input",
+    "#edit_user_password_confirmation",
+    validatePasswordConfirmation
+  );
 
-  $("#edit-user-popup").on("submit", "#user-admin-edit-form", function(event) {
-    console.log("form submitted");
+  $("#edit-user-popup").on("submit", "#user-admin-edit-form", function (event) {
     validateName();
     validateEmail();
     validatePassword();
@@ -183,28 +250,34 @@ function editFormValidation() {
   });
 }
 
-
-$(document).ready(function() {
+$(document).ready(function () {
   editPopup();
   deletePopup();
   tableSearch();
   formValidation();
 
-  $(document).on("turbo:render", function() {
+  $(document).on("turbo:render", function () {
     editPopup();
     deletePopup();
     tableSearch();
     formValidation();
+  });
+
+  $(document).on("turbo:before-render", function () {
+    $("#overlay").show();
+  });
+  $(document).on("turbo:after-render", function () {
+    $("#overlay").hide();
   });
 });
 
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function(streamElement) {
+  event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
     editPopup();
-
+    deletePopup();
   };
 });
