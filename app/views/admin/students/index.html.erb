@@ -15,12 +15,12 @@
         <div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
           <!-- Modal content -->
           <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
-              <button type="button" id="student-create-close-btn" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
-                <svg class="w-8 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                  <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                </svg>
-                <span class="sr-only">Close modal</span>
-              </button>
+            <button type="button" id="student-create-close-btn" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+              <svg class="w-8 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
             <div class="px-6 py-6 lg:px-8">
               <h3 class="mb-4 sm:mb-7 md:mb-10 text-[26px] font-semibold text-[#0BC08B] dark:text-white text-center">NEW STUDENT</h3>
               <div class="lg:w-[95%] sm:w-[95%] w-[90%] mx-auto">
@@ -48,7 +48,7 @@
   </div>
   <div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
     <div class="bg-white dark:bg-gray-800 h-[610px] relative overflow-x-auto lg:overflow-x-scroll mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
-      <table class="w-full text-sm text-left text-gray-500 ml-[47px] sm:ml-[63px] lg:ml-0 md:ml-[26px] dark:text-gray-400 overflow-auto table-auto">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto">
         <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
           <tr>
             <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
@@ -112,7 +112,7 @@
           </div>
           <!-- Modal body -->
           <%= turbo_frame_tag "edit-student-popup" do %>
-          <% end %> 
+          <% end %>
         </div>
       </div>
     </div>
@@ -136,9 +136,9 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="mt-4 ml-5" id="render-pagination" >
-    <%= render partial: 'admin/students/paginate', locals: { students: @students } %>
+    <div class="mt-4 ml-[30px] lg:ml-0" id="render-pagination" >
+      <%= render partial: 'admin/students/paginate', locals: { students: @students } %>
+    </div>
   </div>
 </div>
 <script>

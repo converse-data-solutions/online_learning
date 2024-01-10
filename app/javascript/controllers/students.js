@@ -32,10 +32,8 @@ function editModelPopup() {
 }
 
 function deletePopup() {
-  console.log("processed.....");
   $(".send-delete-student").click(function () {
     let id = $(this).data("user-id");
-    console.log("id", id);
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
     let search = searchParams.get("search") || "";
@@ -191,7 +189,6 @@ function customEditDatePicker() {
 
 // Create form validation
 function formValidation() {
-  console.log("loaded.....******");
 
   function validateName() {
     let name = $("#user_name").val();
@@ -378,7 +375,6 @@ function editFormValidation() {
   $("#edit-student-popup").on("input", "#edit_user_emergency_contact_number", validateEmergencyContactNumber);
 
   $("#edit-student-popup").on("submit", "#user-admin-edit-form", function(event) {
-    console.log("form submitted");
     validateName();
     validateEmail();
     validatePassword();
