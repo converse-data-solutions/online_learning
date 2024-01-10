@@ -25,8 +25,8 @@ class Admin::StudentsController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-              turbo_stream.replace('user-admin-form', partial: 'admin/students/form', locals: { student: @student }),
-              turbo_stream.append('user-table', partial: 'shared/failed', locals: { message: 'Student creation failed.', type: 'notice' })
+            turbo_stream.replace('user-admin-form', partial: 'admin/students/form', locals: { student: @student }),
+            turbo_stream.append('user-table', partial: 'shared/failed', locals: { message: 'Student creation failed.', type: 'notice' })
           ]
         end
         format.json { render json: @student.errors, status: :unprocessable_entity }
