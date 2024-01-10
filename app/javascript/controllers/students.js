@@ -195,7 +195,7 @@ function formValidation() {
 
   function validateName() {
     let name = $("#user_name").val();
-    let namecheck = validator.isAlpha(name);
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
 
     if (!namecheck) {
       $("#name-error").text("Name can't be blank");
@@ -300,8 +300,10 @@ function formValidation() {
 // Edit form validation
 function editFormValidation() {
   function validateName() {
-    let name = $("#edit_user_name").val().trim();
-    if (!name) {
+    let name = $("#edit_user_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!namecheck) {
       $("#edit-name-error").text("Name can't be blank");
     } else {
       $("#edit-name-error").text("");
