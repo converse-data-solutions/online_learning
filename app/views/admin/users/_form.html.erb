@@ -1,12 +1,13 @@
-<%= form_for User.new, url: admin_users_path, html: { class: "validate", id: "user-admin-form" }, validate: true, method: :post do |f| %>
+<%= form_for user || User.new, url: admin_users_path, html: { class: "validate", id: "user-admin-form" }, validate: true, method: :post do |f| %>
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="name" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.text_field :name, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+      <%= f.text_field :name, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+      <div class="text-red-600 text-sm mt-1" id="name-error"></div>
       <% if user&.errors&.any? %>
-        <% if user.errors[:name].any? %>
+        <% if user&.errors[:name].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= user.errors.full_messages_for(:name).join(', ') %>
+            <%= user&.errors.full_messages_for(:name).join(', ') %>
           </div>
         <% end %>
       <% end %>
@@ -15,25 +16,27 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.email_field :email, class: "validate w-full bg-gray-50 border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+      <%= f.email_field :email, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true%>
+      <div class="text-red-600 text-sm mt-1" id="email-error"></div>
       <% if user&.errors&.any? %>
-        <% if user.errors[:email].any? %>
+        <% if user&.errors[:email].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= user.errors.full_messages_for(:email).join(', ') %>
+            <%= user&.errors.full_messages_for(:email).join(', ') %>
           </div>
         <% end %>
       <% end %>
     </div>
   </div>
-    <%= f.hidden_field :role, value: 'admin' %>
+  <%= f.hidden_field :role, value: 'admin' %>
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="password" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.password_field :password, class: "validate bg-gray-50 border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+      <%= f.password_field :password, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"%>
+      <div class="text-red-600 text-sm mt-1" id="password-error"></div>
       <% if user&.errors&.any? %>
-        <% if user.errors[:password].any? %>
+        <% if user&.errors[:password].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= user.errors.full_messages_for(:password).join(', ') %>
+            <%= user&.errors.full_messages_for(:password).join(', ') %>
           </div>
         <% end %>
       <% end %>
@@ -42,17 +45,21 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[45%]">Confirmation Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.password_field :password_confirmation, class: "validate bg-gray-50 border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+      <%= f.password_field :password_confirmation, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+      <div class="text-red-600 text-sm mt-1" id="password-confirmation-error"></div>
       <% if user&.errors&.any? %>
-        <% if user.errors[:password_confirmation].any? %>
+        <% if user&.errors[:password_confirmation].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= user.errors.full_messages_for(:password_confirmation).join(', ') %>
+            <%= user&.errors.full_messages_for(:password_confirmation).join(', ') %>
           </div>
         <% end %>
       <% end %>
     </div>
   </div>
+  <%= hidden_field_tag :page, params[:page]%>
+  <%= hidden_field_tag :per_page, params[:per_page]%>
+  <%= hidden_field_tag :search, params[:search]%>
   <div class="w-1/5 mx-auto mt-4 sm:mt-6">
-    <%= f.submit "CREATE", class: 'button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
+    <%= f.submit "CREATE", class: 'button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 loader-btn' %>
   </div>
 <% end %>

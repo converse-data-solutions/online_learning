@@ -35,7 +35,7 @@ class EntrollmentDetailsController < ApplicationController
   end
 
   def status_show
-    @lesson = Lesson.find(params[:id])
+    @lesson = Lesson.find_by(id: params[:id])
     @entrollment_detail = EntrollmentDetail.find_or_create_by(lesson: @lesson)
     @video_duration = @lesson.clip.metadata['duration'].to_i
     @current_time = @entrollment_detail.view_time.to_i

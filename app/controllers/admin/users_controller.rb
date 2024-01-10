@@ -5,10 +5,9 @@ class Admin::UsersController < ApplicationController
   # before_action :authenticate_user!
   before_action :set_user, only: %i[edit update destroy show]
   def index
-    @users = User.admin.search_by_name_and_email(params[:search])
-    # @users = @users.admin
+    @users = User.get_users(params)
     respond_to do |format|
-      format.json { render json: @users }
+      format.json { render json: { data: @users, total_count: User.admin.count } }
       format.html { render :index }
       format.turbo_stream
     end
@@ -18,15 +17,15 @@ class Admin::UsersController < ApplicationController
     @user = User.new
   end
 
-  def create # rubocop:disable Metrics/AbcSize
+  def create
     @user = User.new(admin_params)
     respond_to do |format|
-      if @user.add_role_and_save(admin_params[:role])
-        format.turbo_stream { redirect_to admin_users_path, notice: 'User created successfully' }
-        format.json { render :show, status: :created, location: admin_user_url(@user) }
+      if @user.valid? && @user.add_role_and_save(admin_params[:role])
+        @users = User.get_users(params)
+        format.turbo_stream
+        format.json { render :create }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render_invalid_user(format)
       end
     end
   end
@@ -42,22 +41,29 @@ class Admin::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(admin_params)
-        format.turbo_stream { redirect_to admin_users_path, notice: 'User updated successfully' }
-        format.json { render :show, status: :ok, location: admin_user_url(@user) }
+        @users = User.get_users(params)
+        format.turbo_stream
+        format.json { render :show }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-user-popup', partial: 'admin/users/edit', locals: { user: @user }) } # rubocop:disable Layout/LineLength
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def destroy
+  def destroy # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     respond_to do |format|
-      if @user.update(deleted: true)
-        format.turbo_stream { redirect_to admin_users_path, notice: 'User deleted successfully' }
-        format.json { render :show, status: :ok, location: admin_user_url(@user) }
+      if @user&.update(deleted: true)
+        @users = User.get_users(params)
+        format.turbo_stream { render_destroy_success }
+        format.json { render :show }
       else
-        format.turbo_stream { redirect_to admin_users_path, notice: 'User destroy failed' }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'User was successfully destroyed.', type: 'notice' }), # rubocop:disable Layout/LineLength
+            turbo_stream.update('render-pagination', partial: 'admin/users/pagination', locals: { users: @users })
+          ]
+        end
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -65,8 +71,20 @@ class Admin::UsersController < ApplicationController
 
   private
 
+  def render_invalid_user(format)
+    format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/users/form', locals: { user: @user }) }
+    format.json { render json: @user.errors, status: :unprocessable_entity }
+  end
+
+  def render_destroy_success
+    render turbo_stream: [
+      turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'User was successfully destroyed.', type: 'notice' }),
+      turbo_stream.update('user-table', partial: 'admin/users/table', locals: { users: @users })
+    ]
+  end
+
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
   end
 
   def admin_params
