@@ -79,7 +79,7 @@ function studentTableSearch() {
         },
         success: function(res) {
           Turbo.renderStreamMessage(res);
-          var newURL = window.location.protocol + "//" + window.location.host + window.location.pathname + '?search=' + encodeURIComponent(searchValue);
+          let newURL = window.location.protocol + "//" + window.location.host + window.location.pathname + '?search=' + encodeURIComponent(searchValue);
           window.history.pushState({ path: newURL }, '', newURL);
           $("#overlay").hide();
 
@@ -97,10 +97,10 @@ function studentTableSearch() {
 // Dropdown with checkboxes
 function dropdownCheckBoxes() {
   function checkboxDropdown(el) {
-    var $el = $(el);
+    let $el = $(el);
 
     $el.each(function () {
-      var $list = $(this).find(".dropdown-list"),
+      let $list = $(this).find(".dropdown-list"),
         $label = $(this).find(".dropdown-label"),
         $checkAll = $(this).find(".check-all"),
         $inputs = $(this).find(".checkbox input[type='checkbox']"),
@@ -118,7 +118,7 @@ function dropdownCheckBoxes() {
       }
 
       $inputs.on("change", function () {
-        var checkedText = $(this).next().text();
+        let checkedText = $(this).next().text();
 
         if ($(this).is(":checked")) {
           result.push(checkedText);
@@ -177,7 +177,7 @@ function customDatePicker() {
 
 function customEditDatePicker() {
   $(function () {
-    var initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
+    let initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
 
     $("#editdatepicker").datepicker({
       dateFormat: "dd-mm-yy", // Update this if needed
