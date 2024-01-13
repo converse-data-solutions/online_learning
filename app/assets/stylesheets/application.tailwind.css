@@ -438,7 +438,7 @@ nav.main-menu li.active > a,
   stroke: #0bc08b;
 }
 
-.homecontroller .actived {
+.actived {
   margin-left: 6px;
   background: linear-gradient(to right, #1ab69c, #31b978);
   color: #fff !important;

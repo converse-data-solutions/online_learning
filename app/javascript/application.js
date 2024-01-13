@@ -4,13 +4,6 @@ import "controllers";
 import videojs from "video.js";
 import "flowbite";
 
-function activeClass() {
-  $(".selected").on("click", function (e) {
-    $(".selected").removeClass("actived");
-    $(this).addClass("actived");
-  });
-}
-
 // Navbar Function
 
 function navDropdown() {
@@ -104,7 +97,6 @@ function initNavbarHamburger() {
     $(".main-menu").removeClass("main-menu2");
     $(".main-page").removeClass("main-page2");
     $(".main-nav").removeClass("main-nav2");
-    $(".actived").removeClass("actived");
     localStorage.removeItem("dropdownStates");
     localStorage.removeItem("navbarState");
     handleNavbar();
@@ -121,7 +113,6 @@ $(document).ready(function () {
   applyNavbarState();
   initNavbarTitle();
   initNavbarHamburger();
-  activeClass();
 
   $(".dropdownProfile").click(function () {
     $("#menuShow").toggle();
@@ -152,7 +143,6 @@ $(document).ready(function () {
     applyNavbarState();
     initNavbarTitle();
     initNavbarHamburger();
-    activeClass();
     var storedStates = localStorage.getItem("dropdownStates");
     if (storedStates) {
       var dropdownStates = JSON.parse(storedStates);

@@ -37,7 +37,8 @@
       <td class="px-6 py-4 max-w-[150px] truncate font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
         <%= user.emergency_contact_number %>
       </td>
-      <td class="px-6 py-4 flex gap-4">
+      <td class="px-6 min-w-[150px] py-4 flex gap-4">
+          <svg xmlns="http://www.w3.org/2000/svg" height="65" width="45" viewBox="0 0 101 101" id="Eye"><path d="M50.5 32.3c-16.6 0-32.7 15.9-33.4 16.5-.5.5-.7 1.1-.7 1.7s.3 1.2.7 1.7c.7.7 16.7 16.5 33.4 16.5s32.7-15.9 33.4-16.5c.4-.4.7-1.1.7-1.7s-.3-1.2-.7-1.7c-.7-.7-16.8-16.5-33.4-16.5zm0 31.6c-11.6 0-23.6-9.5-28.1-13.4 4.5-4 16.5-13.4 28.1-13.4s23.6 9.5 28.1 13.4c-4.5 4-16.5 13.4-28.1 13.4z" fill="#0bc08b" class="color000000 svgShape"></path><path d="M41.9 50.5c0 4.8 3.9 8.6 8.6 8.6s8.6-3.9 8.6-8.6-3.9-8.6-8.6-8.6-8.6 3.8-8.6 8.6zm12.4 0c0 2.1-1.7 3.8-3.8 3.8s-3.8-1.7-3.8-3.8 1.7-3.8 3.8-3.8 3.8 1.7 3.8 3.8z" fill="#0bc08b" class="color000000 svgShape"></path></svg>
         <button data-modal-target="large-modal" data-modal-toggle="large-modal" data-turbo-frame="edit-student-popup-frame" data-action="click->modal#toggle" data-url="<%= edit_admin_student_path(user) %>" data-user-id="<%= user.id %>" class="block w-full md:w-auto edit-student-model" type="button">
           <img src="<%= asset_path("pencil.png") %>" alt="...">
         </button>
