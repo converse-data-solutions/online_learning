@@ -21,20 +21,25 @@ function navDropdown() {
           : "rotate(0deg)",
       });
 
-    updateDropdownStates();
   });
 }
 
-function updateDropdownStates() {
-  var dropdownStates = {};
-
-  $(".main").each(function (index) {
-    var isOpen = $(this).parent().find(".sub").hasClass("dropdown-open");
-    dropdownStates[index] = isOpen ? "open" : "closed";
-  });
-
-  localStorage.setItem("dropdownStates", JSON.stringify(dropdownStates));
+function openDropdown(dropdown) {
+  const dropdownContent = dropdown.parent().find(".sub");
+  console.log("sdgdfgdgfdg");
+  dropdownContent.slideDown("fast");
 }
+
+
+
+function activeClass(){
+  $(".selected").on("click", function(){
+    $(".selected").removeClass("actived");
+    $(this).addClass("actived");
+  })
+}
+
+
 
 function handleNavbar() {
   $(".title").mouseenter(function () {
@@ -113,29 +118,27 @@ $(document).ready(function () {
   applyNavbarState();
   initNavbarTitle();
   initNavbarHamburger();
+  activeClass();
+  
+
+  if ($("#student-management").hasClass("openDropDown")) {
+    const studentManagement = $("#student-management");
+    openDropdown(studentManagement);
+  }
+
+  if ($("#course-management").hasClass("openDropDown")) {
+    const courseManagement = $("#course-management");
+    openDropdown(courseManagement);
+  }
+
+
+
+
+
 
   $(".dropdownProfile").click(function () {
     $("#menuShow").toggle();
   });
-  var storedStates = localStorage.getItem("dropdownStates");
-  if (storedStates) {
-    var dropdownStates = JSON.parse(storedStates);
-
-    $(".main").each(function (index) {
-      var isOpen = dropdownStates[index] === "open";
-      var el = $(this).parent().find(".sub");
-
-      if (isOpen) {
-        el.show();
-        $(this).find(".change-position").css({ transform: "rotate(180deg)" });
-        el.addClass("dropdown-open");
-      } else {
-        el.hide();
-        $(this).find(".change-position").css({ transform: "rotate(0deg)" });
-        el.removeClass("dropdown-open");
-      }
-    });
-  }
 
   navDropdown();
 
@@ -143,25 +146,23 @@ $(document).ready(function () {
     applyNavbarState();
     initNavbarTitle();
     initNavbarHamburger();
-    var storedStates = localStorage.getItem("dropdownStates");
-    if (storedStates) {
-      var dropdownStates = JSON.parse(storedStates);
-
-      $(".main").each(function (index) {
-        var isOpen = dropdownStates[index] === "open";
-        var el = $(this).parent().find(".sub");
-
-        if (isOpen) {
-          el.show();
-          $(this).find(".change-position").css({ transform: "rotate(180deg)" });
-          el.addClass("dropdown-open");
-        } else {
-          el.hide();
-          $(this).find(".change-position").css({ transform: "rotate(0deg)" });
-          el.removeClass("dropdown-open");
-        }
-      });
-    }
+    activeClass();
     navDropdown();
+
+    if ($("#student-management").hasClass("openDropDown")) {
+      const dropdownFee = $("#student-management");
+      openDropdown(dropdownFee);
+    }
+
+    if ($("#course-management").hasClass("openDropDown")) {
+      const courseManagement = $("#course-management");
+      openDropdown(courseManagement);
+    }
+
+
+
+
+
+
   });
 });

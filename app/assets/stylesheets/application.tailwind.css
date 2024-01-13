@@ -456,6 +456,10 @@ nav.main-menu li.active > a,
   color: #999;
 }
 
+.actived-link{
+  color: #0bc08b !important;
+}
+
 .main-menu li:hover .link-clr {
   color: #0bc08b;
 }
