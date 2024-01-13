@@ -39,34 +39,6 @@ function activeClass(){
   })
 }
 
-
-
-function handleNavbar() {
-  $(".title").mouseenter(function () {
-    $(".main-page").css({
-      width: "85%",
-      "margin-left": "auto",
-      transition: "all 0.2s linear",
-    });
-    $(".main-nav").css({
-      width: "85%",
-      transition: "all 0.2s linear",
-    });
-  });
-
-  $("#sidebar").mouseleave(function () {
-    $(".main-page").css({
-      width: "97%",
-      "margin-left": "auto",
-      transition: "all 0.2s linear",
-    });
-    $(".main-nav").css({
-      width: "97%",
-      transition: "all 0.2s linear",
-    });
-  });
-}
-
 function applyNavbarState() {
   var navbarState = localStorage.getItem("navbarState");
 
@@ -80,8 +52,11 @@ function applyNavbarState() {
   }
 }
 
+var expanded = false;
 function initNavbarTitle() {
   $(".title").click(function () {
+    expanded = true;
+    console.log(expanded);
     $(".title1").addClass("title11");
     $(".open").addClass("open1");
     $(".openmenu").css({ position: "absolute", right: "18px", top: "15px" });
@@ -92,19 +67,65 @@ function initNavbarTitle() {
   });
 }
 
+
+
+
+
 function initNavbarHamburger() {
   $(".hamburger").click(function (event) {
     event.stopPropagation();
-
+    expanded = false;
+    console.log("ladswsssssssss", expanded);
     $(".title1").removeClass("title11");
     $(".open").removeClass("open1");
     $(".openmenu").css({ position: "", right: "", top: "" });
     $(".main-menu").removeClass("main-menu2");
     $(".main-page").removeClass("main-page2");
     $(".main-nav").removeClass("main-nav2");
+    $(".sub").slideUp();
+    $(".actived").removeClass("actived");
+
     localStorage.removeItem("dropdownStates");
     localStorage.removeItem("navbarState");
-    handleNavbar();
+  });
+}
+
+function handleNavbar() {
+  initNavbarTitle();
+  initNavbarHamburger();
+  console.log("dsfdsfsfsf", expanded);
+  // if (expanded === false) {
+
+  $(".title").mouseenter(function () {
+    if (expanded === false) {
+      $(".main-page").css({
+        width: "85%",
+        "margin-left": "auto",
+        transition: "all 0.2s linear",
+      });
+      $(".main-nav").css({
+        width: "85%",
+        transition: "all 0.2s linear",
+      });
+    }
+    // $(".selected").addClassClass("actived");
+    // $(".sub").slideUp();
+  });
+
+  $("#sidebar").mouseleave(function () {
+    if (expanded === false) {
+      $(".main-page").css({
+        width: "97%",
+        "margin-left": "auto",
+        transition: "all 0.2s linear",
+      });
+      $(".main-nav").css({
+        width: "97%",
+        transition: "all 0.2s linear",
+      });
+      $(".actived").removeClass("actived");
+    }
+    
   });
 }
 
@@ -116,9 +137,8 @@ function loader() {
 
 $(document).ready(function () {
   applyNavbarState();
-  initNavbarTitle();
-  initNavbarHamburger();
   activeClass();
+  handleNavbar();
   
 
   if ($("#student-management").hasClass("openDropDown")) {
@@ -133,9 +153,6 @@ $(document).ready(function () {
 
 
 
-
-
-
   $(".dropdownProfile").click(function () {
     $("#menuShow").toggle();
   });
@@ -144,10 +161,9 @@ $(document).ready(function () {
 
   $(document).on("turbo:render", function () {
     applyNavbarState();
-    initNavbarTitle();
-    initNavbarHamburger();
     activeClass();
     navDropdown();
+    handleNavbar();
 
     if ($("#student-management").hasClass("openDropDown")) {
       const dropdownFee = $("#student-management");
@@ -157,12 +173,7 @@ $(document).ready(function () {
     if ($("#course-management").hasClass("openDropDown")) {
       const courseManagement = $("#course-management");
       openDropdown(courseManagement);
-    }
-
-
-
-
-
+    } 
 
   });
 });

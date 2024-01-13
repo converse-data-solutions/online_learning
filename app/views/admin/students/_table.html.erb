@@ -14,7 +14,32 @@
         <% end %>
       </td>
       <td class="px-6 min-w-[150px] py-4 flex gap-4">
-          <svg xmlns="http://www.w3.org/2000/svg" height="65" width="45" viewBox="0 0 101 101" id="Eye"><path d="M50.5 32.3c-16.6 0-32.7 15.9-33.4 16.5-.5.5-.7 1.1-.7 1.7s.3 1.2.7 1.7c.7.7 16.7 16.5 33.4 16.5s32.7-15.9 33.4-16.5c.4-.4.7-1.1.7-1.7s-.3-1.2-.7-1.7c-.7-.7-16.8-16.5-33.4-16.5zm0 31.6c-11.6 0-23.6-9.5-28.1-13.4 4.5-4 16.5-13.4 28.1-13.4s23.6 9.5 28.1 13.4c-4.5 4-16.5 13.4-28.1 13.4z" fill="#0bc08b" class="color000000 svgShape"></path><path d="M41.9 50.5c0 4.8 3.9 8.6 8.6 8.6s8.6-3.9 8.6-8.6-3.9-8.6-8.6-8.6-8.6 3.8-8.6 8.6zm12.4 0c0 2.1-1.7 3.8-3.8 3.8s-3.8-1.7-3.8-3.8 1.7-3.8 3.8-3.8 3.8 1.7 3.8 3.8z" fill="#0bc08b" class="color000000 svgShape"></path></svg>
+        <button data-modal-target="extralarge-modal" data-modal-toggle="extralarge-modal" data-user-id="<%= user.id %>" class="block w-full md:w-auto view-student-model" data-url="<%= admin_student_path(user) %>" type="button">
+          <svg fill="#0BC08B" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 width="28px" height="22px" viewBox="0 0 442.04 442.04"
+	 xml:space="preserve">
+            <g>
+              <g>
+                <path d="M221.02,341.304c-49.708,0-103.206-19.44-154.71-56.22C27.808,257.59,4.044,230.351,3.051,229.203
+			c-4.068-4.697-4.068-11.669,0-16.367c0.993-1.146,24.756-28.387,63.259-55.881c51.505-36.777,105.003-56.219,154.71-56.219
+			c49.708,0,103.207,19.441,154.71,56.219c38.502,27.494,62.266,54.734,63.259,55.881c4.068,4.697,4.068,11.669,0,16.367
+			c-0.993,1.146-24.756,28.387-63.259,55.881C324.227,321.863,270.729,341.304,221.02,341.304z M29.638,221.021
+			c9.61,9.799,27.747,27.03,51.694,44.071c32.83,23.361,83.714,51.212,139.688,51.212s106.859-27.851,139.688-51.212
+			c23.944-17.038,42.082-34.271,51.694-44.071c-9.609-9.799-27.747-27.03-51.694-44.071
+			c-32.829-23.362-83.714-51.212-139.688-51.212s-106.858,27.85-139.688,51.212C57.388,193.988,39.25,211.219,29.638,221.021z"/>
+              </g>
+              <g>
+                <path d="M221.02,298.521c-42.734,0-77.5-34.767-77.5-77.5c0-42.733,34.766-77.5,77.5-77.5c18.794,0,36.924,6.814,51.048,19.188
+			c5.193,4.549,5.715,12.446,1.166,17.639c-4.549,5.193-12.447,5.714-17.639,1.166c-9.564-8.379-21.844-12.993-34.576-12.993
+			c-28.949,0-52.5,23.552-52.5,52.5s23.551,52.5,52.5,52.5c28.95,0,52.5-23.552,52.5-52.5c0-6.903,5.597-12.5,12.5-12.5
+			s12.5,5.597,12.5,12.5C298.521,263.754,263.754,298.521,221.02,298.521z"/>
+              </g>
+              <g>
+                <path d="M221.02,246.021c-13.785,0-25-11.215-25-25s11.215-25,25-25c13.786,0,25,11.215,25,25S234.806,246.021,221.02,246.021z"/>
+              </g>
+            </g>
+          </svg>
+        </button>
         <button data-modal-target="large-modal" data-modal-toggle="large-modal" data-turbo-frame="edit-student-popup-frame" data-action="click->modal#toggle" data-url="<%= edit_admin_student_path(user) %>" data-user-id="<%= user.id %>" class="block w-full md:w-auto edit-student-model" type="button">
           <img src="<%= asset_path("pencil.png") %>" alt="...">
         </button>
@@ -25,13 +50,27 @@
     </tr>
   <% end %>
 <% else %>
-  <tr><td class="px-6 py-4"></td></tr>
-  <tr><td class="px-6 py-4"></td></tr>
-  <tr><td class="px-10 py-4"></td></tr>
-  <tr><td class="px-6 py-4"></td></tr>
-  <tr><td class="px-6 py-4"></td></tr>
-  <tr><td class="px-6 py-4"></td></tr>
-  <tr><td class="px-6 py-4"></td></tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-10 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
   <tr>
     <td colspan="12" class="px-6 py-4 font-semibold text-[12px] sm:text-[14px] md:text-[15px] lg:text-2xl text-[#818181] text-center">No data found</td>
   </tr>

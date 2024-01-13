@@ -60,6 +60,30 @@ function deletePopup() {
   });
 }
 
+function viewStudent(){
+
+  $(".view-student-model").click(function () {
+    let id = $(this).data("user-id");
+    let url = $(this).data("url");
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
+    $("#overlay").show();
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        user_id: id,
+        page: page,
+        search: search,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+    });
+  });
+}
+
 function studentTableSearch() {
   let delayTimer;
 
@@ -406,6 +430,8 @@ $(document).ready(function () {
   customEditDatePicker();
   formValidation();
   editFormValidation();
+  viewStudents();
+
 
   $(document).on("turbo:render", function () {
     editModelPopup();
@@ -416,6 +442,8 @@ $(document).ready(function () {
     customEditDatePicker();
     formValidation();
     editFormValidation();
+    viewStudents();
+
   });
 
   $(document).on("turbo:before-render", function () {

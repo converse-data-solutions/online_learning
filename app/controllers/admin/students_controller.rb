@@ -78,6 +78,8 @@ class Admin::StudentsController < ApplicationController
     end
   end
 
+  def show; end
+
   private
 
   def set_student
