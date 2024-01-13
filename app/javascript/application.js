@@ -82,19 +82,22 @@ function initNavbarHamburger() {
     $(".main-menu").removeClass("main-menu2");
     $(".main-page").removeClass("main-page2");
     $(".main-nav").removeClass("main-nav2");
-    $(".sub").slideUp();
-    $(".actived").removeClass("actived");
+    // $(".sub").slideUp();
+    // $(".actived").removeClass("actived");
 
     localStorage.removeItem("dropdownStates");
     localStorage.removeItem("navbarState");
   });
 }
 
+let currentUrl = window.location.pathname;
+console.log("current url", currentUrl);
+
+
 function handleNavbar() {
   initNavbarTitle();
   initNavbarHamburger();
   console.log("dsfdsfsfsf", expanded);
-  // if (expanded === false) {
 
   $(".title").mouseenter(function () {
     if (expanded === false) {
@@ -108,8 +111,10 @@ function handleNavbar() {
         transition: "all 0.2s linear",
       });
     }
-    // $(".selected").addClassClass("actived");
-    // $(".sub").slideUp();
+    if (currentUrl === "/admin/students"){
+      $("#student-management").addClass("actived");
+      $("#student-management").find(".sub").slideDown();
+    }
   });
 
   $("#sidebar").mouseleave(function () {
@@ -124,6 +129,7 @@ function handleNavbar() {
         transition: "all 0.2s linear",
       });
       $(".actived").removeClass("actived");
+      $(".sub").slideUp();
     }
     
   });
