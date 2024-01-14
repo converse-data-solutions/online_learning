@@ -1,5 +1,5 @@
 function editModelPopup() {
-  $(".edit-student-model").click(function () {
+  $(".edit-student-model").click(function() {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -18,12 +18,12 @@ function editModelPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
         editFormValidation();
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -32,7 +32,7 @@ function editModelPopup() {
 }
 
 function deletePopup() {
-  $(".send-delete-student").click(function () {
+  $(".send-delete-student").click(function() {
     let id = $(this).data("user-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -41,7 +41,7 @@ function deletePopup() {
 
     let delUrl = `students/${id}`;
 
-    if (search !==1 ){
+    if (search !== 1) {
       delUrl += `?page=${page}`;
     }
 
@@ -54,41 +54,39 @@ function deletePopup() {
       delUrl += `per_page=${per_page}`;
     }
 
-    
+
     $("#delete-student-model").attr("data-user-id", id);
     $("#delete-student-model").attr("href", delUrl);
   });
 }
 
-function viewStudents(){
+function viewStudents() {
 
-  $(".view-student-model").click(function () {
+  $(".view-student-model").click(function() {
     let id = $(this).data("user-id");
-    console.log("id", id);
     let url = $(this).data("url");
-    console.log("url", url);
-    // let searchParams = new URLSearchParams(window.location.search);
-    // let page = parseInt(searchParams.get("page")) || 1;
-    // let search = searchParams.get("search") || "";
-    // $("#overlay").show();
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
+    $("#overlay").show();
     $.ajax({
       method: "GET",
       url: url,
       data: {
-        // user_id: id,
-        // page: page,
-        // search: search,
+        user_id: id,
+        page: page,
+        search: search,
       },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
-        // $("#overlay").hide();
+        $("#overlay").hide();
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
-        // $("#overlay").hide();
+        $("#overlay").hide();
       }
     });
   });
@@ -114,7 +112,9 @@ function studentTableSearch() {
         success: function(res) {
           Turbo.renderStreamMessage(res);
           let newURL = window.location.protocol + "//" + window.location.host + window.location.pathname + '?search=' + encodeURIComponent(searchValue);
-          window.history.pushState({ path: newURL }, '', newURL);
+          window.history.pushState({
+            path: newURL
+          }, '', newURL);
           $("#overlay").hide();
 
         },
@@ -133,7 +133,7 @@ function dropdownCheckBoxes() {
   function checkboxDropdown(el) {
     let $el = $(el);
 
-    $el.each(function () {
+    $el.each(function() {
       let $list = $(this).find(".dropdown-list"),
         $label = $(this).find(".dropdown-label"),
         $checkAll = $(this).find(".check-all"),
@@ -151,7 +151,7 @@ function dropdownCheckBoxes() {
         updateStatus();
       }
 
-      $inputs.on("change", function () {
+      $inputs.on("change", function() {
         let checkedText = $(this).next().text();
 
         if ($(this).is(":checked")) {
@@ -163,7 +163,7 @@ function dropdownCheckBoxes() {
         updateLabel();
       });
 
-      $checkAll.on("change", function () {
+      $checkAll.on("change", function() {
         result = [];
 
         if ($(this).is(":checked")) {
@@ -177,7 +177,7 @@ function dropdownCheckBoxes() {
       });
 
       // Initial setup
-      $inputs.each(function () {
+      $inputs.each(function() {
         if ($(this).is(":checked")) {
           result.push($(this).next().text());
         }
@@ -185,11 +185,11 @@ function dropdownCheckBoxes() {
 
       updateLabel();
 
-      $label.on("click", function () {
+      $label.on("click", function() {
         $el.toggleClass("open-dropdown");
       });
 
-      $(document).on("click touchstart", function (e) {
+      $(document).on("click touchstart", function(e) {
         if (!$(e.target).closest($el).length) {
           $el.removeClass("open-dropdown");
         }
@@ -201,7 +201,7 @@ function dropdownCheckBoxes() {
 }
 // datepicker
 function customDatePicker() {
-  $(function () {
+  $(function() {
     $("#datepicker").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
@@ -210,7 +210,7 @@ function customDatePicker() {
 }
 
 function customEditDatePicker() {
-  $(function () {
+  $(function() {
     let initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
 
     $("#editdatepicker").datepicker({
@@ -307,7 +307,7 @@ function formValidation() {
   $("#user_contact_number").on("input", validateContactNumber);
   $("#user_emergency_contact_number").on("input", validateEmergencyContactNumber);
 
-  $("#user-admin-form").on("submit", function (event) {
+  $("#user-admin-form").on("submit", function(event) {
     validateName();
     validateEmail();
     validatePassword();
@@ -431,7 +431,7 @@ function editFormValidation() {
 
 //initialize script
 
-$(document).ready(function () {
+$(document).ready(function() {
   editModelPopup();
   deletePopup();
   studentTableSearch();
@@ -443,7 +443,7 @@ $(document).ready(function () {
   viewStudents();
 
 
-  $(document).on("turbo:render", function () {
+  $(document).on("turbo:render", function() {
     editModelPopup();
     deletePopup();
     studentTableSearch();
@@ -456,10 +456,10 @@ $(document).ready(function () {
 
   });
 
-  $(document).on("turbo:before-render", function () {
+  $(document).on("turbo:before-render", function() {
     $("#overlay").show();
   });
-  $(document).on("turbo:after-render", function () {
+  $(document).on("turbo:after-render", function() {
     $("#overlay").hide();
   });
 });
@@ -467,7 +467,7 @@ $(document).ready(function () {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function (streamElement) {
+  event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
     editModelPopup();

@@ -7,7 +7,7 @@ import "flowbite";
 // Navbar Function
 
 function navDropdown() {
-  $(".main").click(function () {
+  $(".main").click(function() {
     const el = $(this).parent().find(".sub");
     el.slideToggle("slow");
 
@@ -16,9 +16,9 @@ function navDropdown() {
     $(this)
       .find(".change-position")
       .css({
-        transform: el.hasClass("dropdown-open")
-          ? "rotate(180deg)"
-          : "rotate(0deg)",
+        transform: el.hasClass("dropdown-open") ?
+          "rotate(180deg)" :
+          "rotate(0deg)",
       });
 
   });
@@ -26,14 +26,11 @@ function navDropdown() {
 
 function openDropdown(dropdown) {
   const dropdownContent = dropdown.parent().find(".sub");
-  console.log("sdgdfgdgfdg");
   dropdownContent.slideDown("fast");
 }
 
-
-
-function activeClass(){
-  $(".selected").on("click", function(){
+function activeClass() {
+  $(".selected").on("click", function() {
     $(".selected").removeClass("actived");
     $(this).addClass("actived");
   })
@@ -45,7 +42,11 @@ function applyNavbarState() {
   if (navbarState === "titleClicked") {
     $(".title1").addClass("title11");
     $(".open").addClass("open1");
-    $(".openmenu").css({ position: "absolute", right: "18px", top: "15px" });
+    $(".openmenu").css({
+      position: "absolute",
+      right: "18px",
+      top: "15px"
+    });
     $(".main-menu").addClass("main-menu2");
     $(".main-page").addClass("main-page2");
     $(".main-nav").addClass("main-nav2");
@@ -53,13 +54,17 @@ function applyNavbarState() {
 }
 
 var expanded = false;
+
 function initNavbarTitle() {
-  $(".title").click(function () {
+  $(".title").click(function() {
     expanded = true;
-    console.log(expanded);
     $(".title1").addClass("title11");
     $(".open").addClass("open1");
-    $(".openmenu").css({ position: "absolute", right: "18px", top: "15px" });
+    $(".openmenu").css({
+      position: "absolute",
+      right: "18px",
+      top: "15px"
+    });
     $(".main-menu").addClass("main-menu2");
     $(".main-page").addClass("main-page2");
     $(".main-nav").addClass("main-nav2");
@@ -67,41 +72,32 @@ function initNavbarTitle() {
   });
 }
 
-
-
-
-
 function initNavbarHamburger() {
-  $(".hamburger").click(function (event) {
+  $(".hamburger").click(function(event) {
     event.stopPropagation();
     expanded = false;
-    console.log("ladswsssssssss", expanded);
     $(".title1").removeClass("title11");
     $(".open").removeClass("open1");
-    $(".openmenu").css({ position: "", right: "", top: "" });
+    $(".openmenu").css({
+      position: "",
+      right: "",
+      top: ""
+    });
     $(".main-menu").removeClass("main-menu2");
     $(".main-page").removeClass("main-page2");
     $(".main-nav").removeClass("main-nav2");
-    // $(".sub").slideUp();
-    // $(".actived").removeClass("actived");
-
     localStorage.removeItem("dropdownStates");
     localStorage.removeItem("navbarState");
   });
 }
 
-
-
-
 function handleNavbar() {
   initNavbarTitle();
   initNavbarHamburger();
-  console.log("dsfdsfsfsf", expanded);
   let currentUrl = window.location.pathname;
-  console.log("current url", currentUrl);
-  $(".title").mouseenter(function () {
+  $(".title").mouseenter(function() {
     if (expanded === false) {
-      
+
       $(".main-page").css({
         width: "85%",
         "margin-left": "auto",
@@ -112,34 +108,34 @@ function handleNavbar() {
         transition: "all 0.2s linear",
       });
     }
-    if (currentUrl === "/admin/students"){
+    if (currentUrl === "/admin/students") {
       $("#student-management").addClass("actived");
       $("#student-management").parent().find(".sub").slideDown();
 
     }
-    if (currentUrl === "/admin/courses"){
+    if (currentUrl === "/admin/courses") {
       $("#course-management").addClass("actived");
       $("#course-management").parent().find(".sub").slideDown();
 
     }
-    if (currentUrl === "/admin/sections"){
+    if (currentUrl === "/admin/sections") {
       $("#course-management").addClass("actived");
       $("#course-management").parent().find(".sub").slideDown();
 
     }
-    if (currentUrl === "/admin/lessons"){
+    if (currentUrl === "/admin/lessons") {
       $("#course-management").addClass("actived");
       $("#course-management").parent().find(".sub").slideDown();
 
     }
-    if (currentUrl === "/admin/users"){
+    if (currentUrl === "/admin/users") {
       $("#user-management").addClass("actived");
       $("#user-management").parent().find(".sub").slideDown();
 
     }
   });
 
-  $("#sidebar").mouseleave(function () {
+  $("#sidebar").mouseleave(function() {
     if (expanded === false) {
       $(".main-page").css({
         width: "97%",
@@ -153,21 +149,15 @@ function handleNavbar() {
       $(".actived").removeClass("actived");
       $(".sub").slideUp();
     }
-    
+
   });
 }
 
-function loader() {
-  console.log("loader");
-    $("#overlay").fadeIn(300);
-    $("#overlay").delay(300).fadeOut(300);
-}
-
-$(document).ready(function () {
+$(document).ready(function() {
   applyNavbarState();
   activeClass();
   handleNavbar();
-  
+
 
   if ($("#student-management").hasClass("openDropDown")) {
     const studentManagement = $("#student-management");
@@ -179,15 +169,30 @@ $(document).ready(function () {
     openDropdown(courseManagement);
   }
 
+  if ($("#payment-management").hasClass("openDropDown")) {
+    const paymentManagement = $("#payment-management");
+    openDropdown(paymentManagement);
+  }
+
+  if ($("#schedule-management").hasClass("openDropDown")) {
+    const scheduleManagement = $("#schedule-management");
+    openDropdown(scheduleManagement);
+  }
+
+  if ($("#sales-management").hasClass("openDropDown")) {
+    const salesManagement = $("#sales-management");
+    openDropdown(salesManagement);
+  }
 
 
-  $(".dropdownProfile").click(function () {
+
+  $(".dropdownProfile").click(function() {
     $("#menuShow").toggle();
   });
 
   navDropdown();
 
-  $(document).on("turbo:render", function () {
+  $(document).on("turbo:render", function() {
     applyNavbarState();
     activeClass();
     navDropdown();
@@ -201,7 +206,22 @@ $(document).ready(function () {
     if ($("#course-management").hasClass("openDropDown")) {
       const courseManagement = $("#course-management");
       openDropdown(courseManagement);
-    } 
+    }
+
+    if ($("#payment-management").hasClass("openDropDown")) {
+      const paymentManagement = $("#payment-management");
+      openDropdown(paymentManagement);
+    }
+
+    if ($("#schedule-management").hasClass("openDropDown")) {
+      const scheduleManagement = $("#schedule-management");
+      openDropdown(scheduleManagement);
+    }
+
+    if ($("#sales-management").hasClass("openDropDown")) {
+      const salesManagement = $("#sales-management");
+      openDropdown(salesManagement);
+    }
 
   });
 });
