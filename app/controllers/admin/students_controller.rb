@@ -78,7 +78,11 @@ class Admin::StudentsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
 
   private
 
