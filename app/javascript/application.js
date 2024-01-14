@@ -90,17 +90,18 @@ function initNavbarHamburger() {
   });
 }
 
-let currentUrl = window.location.pathname;
-console.log("current url", currentUrl);
+
 
 
 function handleNavbar() {
   initNavbarTitle();
   initNavbarHamburger();
   console.log("dsfdsfsfsf", expanded);
-
+  let currentUrl = window.location.pathname;
+  console.log("current url", currentUrl);
   $(".title").mouseenter(function () {
     if (expanded === false) {
+      
       $(".main-page").css({
         width: "85%",
         "margin-left": "auto",
@@ -113,7 +114,28 @@ function handleNavbar() {
     }
     if (currentUrl === "/admin/students"){
       $("#student-management").addClass("actived");
-      $("#student-management").find(".sub").slideDown();
+      $("#student-management").parent().find(".sub").slideDown();
+
+    }
+    if (currentUrl === "/admin/courses"){
+      $("#course-management").addClass("actived");
+      $("#course-management").parent().find(".sub").slideDown();
+
+    }
+    if (currentUrl === "/admin/sections"){
+      $("#course-management").addClass("actived");
+      $("#course-management").parent().find(".sub").slideDown();
+
+    }
+    if (currentUrl === "/admin/lessons"){
+      $("#course-management").addClass("actived");
+      $("#course-management").parent().find(".sub").slideDown();
+
+    }
+    if (currentUrl === "/admin/users"){
+      $("#user-management").addClass("actived");
+      $("#user-management").parent().find(".sub").slideDown();
+
     }
   });
 
