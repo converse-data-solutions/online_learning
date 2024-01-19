@@ -1,2 +1,4 @@
 <%= turbo_stream.replace 'admin-course-form', partial: 'admin/courses/edit', locals: { course: @course } %>
 <%= turbo_stream.replace 'stepper_section-form', partial: 'admin/sections/form', locals: { section: Section.new } %>
+<%= turbo_stream.append "course-table", partial: "shared/flash", locals: { message: 'Course was successfully created.', type: 'notice' } %>
+<%= turbo_stream.update "course-table", partial: "admin/courses/table", locals: { courses: @courses } %>

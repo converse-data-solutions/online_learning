@@ -4,7 +4,7 @@
 class Admin::CoursesController < ApplicationController # rubocop:disable Style/ClassAndModuleChildren
   # before_action :authenticate_admin!
   require 'will_paginate/array'
-  def index # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
+  def index
     @courses = Course.get_courses(params)
     if params[:section_id].present?
       @section = Section.find_by(id: params[:id])
@@ -26,14 +26,14 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @course = Course.new(course_params)
     respond_to do |format|
       if @course.save
+        @courses = Course.get_courses(params)
         @show_edit_form = false
         format.html
         format.turbo_stream
         format.json { render :show, status: :created, location: @course }
       else
         format.html
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-course-form', partial: 'admin/courses/form', locals: { course: @course }) }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        render_invalid_course(format)
       end
     end
   end
@@ -42,10 +42,11 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @course = Course.find_by(id: params[:id])
   end
 
-  def update # rubocop:disable Metrics/AbcSize
+  def update # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course.update(course_params)
+        @courses = Course.get_courses(params)
         format.turbo_stream { redirect_to admin_courses_path, notice: 'Course updated successfully' }
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else
@@ -69,6 +70,16 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   end
 
   private
+
+  def render_invalid_course(format)
+    format.turbo_stream do
+      render turbo_stream: [
+        turbo_stream.replace('admin-course-form', partial: 'admin/courses/form', locals: { course: @course }),
+        turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Course creation failed.', type: 'notice' })
+      ]
+    end
+    format.json { render json: @course.errors, status: :unprocessable_entity }
+  end
 
   def course_params
     params.require(:course).permit(:id, :course_name, :description)
