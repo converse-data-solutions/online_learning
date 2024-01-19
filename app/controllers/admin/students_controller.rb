@@ -81,6 +81,7 @@ class Admin::StudentsController < ApplicationController
   def show
     respond_to do |format|
       format.turbo_stream
+      format.json { render :show, status: :ok, location: admin_student_url(@student) }
     end
   end
 

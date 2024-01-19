@@ -3,7 +3,7 @@
   <%= javascript_import_module_tag "controllers/notify" %>
 <% end %>
 <div class="flex flex-col w-full" id="student index">
-  <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
+  <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-12 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
     <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px]  font-medium">Student Management - Admin</div>
     <div>
       <!-- Modal toggle -->
@@ -34,7 +34,7 @@
       </div>
     </div>
   </div>
-  <div class="flex items-center justify-between pt-10 md:pt-9 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[30px] flex-col sm:flex-row md:flex-row  ">
+  <div class="flex items-center justify-between pt-10 md:pt-8 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[30px] flex-col sm:flex-row md:flex-row  ">
     <div class="text-[#0BC08B] text-[20px] font-medium sm:ml-[0px] ml-[25px] mb-4 sm:mb-0">Students Details</div>
     <label for="table-search " class="sr-only">Search</label>
     <%= form_tag admin_students_path, method: :get, id: "student_search_form" do %>
@@ -46,7 +46,7 @@
       </div>
     <% end %>
   </div>
-  <div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
+  <div class="relative overflow-x-auto lg:overflow-x-hidden mt-2 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
     <div class="bg-white dark:bg-gray-800 h-[610px] relative mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto">
         <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
