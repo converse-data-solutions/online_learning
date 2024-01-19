@@ -242,10 +242,11 @@ function formValidation() {
   }
 
   function validateEmail() {
-    let email = $("#user_email").val();
-
-    if (!validator.isEmail(email)) {
-      $("#email-error").text("Email can't be blank");
+    let email = $("#user_email").val().trim();
+    let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+  
+    if (!emailRegex.test(email)) {
+      $("#email-error").text("Invalid email format");
     } else {
       $("#email-error").text("");
     }
@@ -355,8 +356,10 @@ function editFormValidation() {
 
   function validateEmail() {
     let email = $("#edit_user_email").val().trim();
-    if (!validator.isEmail(email)) {
-      $("#edit-email-error").text("Email can't be blank");
+    let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+  
+    if (!emailRegex.test(email)) {
+      $("#edit-email-error").text("Invalid email format");
     } else {
       $("#edit-email-error").text("");
     }

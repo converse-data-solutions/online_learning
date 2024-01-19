@@ -381,6 +381,29 @@ nav.main-menu li.active > a,
   font-weight: 500;
 }
 
+.pagination a:hover{
+  background-color: #0bc08b;
+  color: #fff;
+  border-radius: 7px;
+  padding: 5px 15px;
+  margin: 0 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+
+}
+
+.pagination .next_page:hover{
+  background-color: #F0F4F5 !important;
+  color: #0bc08b;
+}
+
+.pagination .previous_page:hover{
+  background-color: #F0F4F5 !important;
+  color: #0bc08b;
+}
+
 .pagination .current {
   background: linear-gradient(to right, #1ab69c, #31b978);
   color: #fff;
