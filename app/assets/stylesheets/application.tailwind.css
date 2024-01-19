@@ -12,6 +12,11 @@
 
 */
 
+.click-btn-color{
+  background: #0082ce !important;
+  transition-duration: 0.5s;
+}
+
 #overlay {
   position: fixed;
   top: 0;

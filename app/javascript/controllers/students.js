@@ -1,5 +1,5 @@
 function editModelPopup() {
-  $(".edit-student-model").click(function() {
+  $(".edit-student-model").click(function () {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -18,12 +18,12 @@ function editModelPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function(res) {
+      success: function (res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
         editFormValidation();
       },
-      error: function() {
+      error: function () {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -32,7 +32,7 @@ function editModelPopup() {
 }
 
 function deletePopup() {
-  $(".send-delete-student").click(function() {
+  $(".send-delete-student").click(function () {
     let id = $(this).data("user-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -50,10 +50,9 @@ function deletePopup() {
     }
 
     if (per_page !== 10) {
-      delUrl += (page === 1 && search === "") ? "?" : "&";
+      delUrl += page === 1 && search === "" ? "?" : "&";
       delUrl += `per_page=${per_page}`;
     }
-
 
     $("#delete-student-model").attr("data-user-id", id);
     $("#delete-student-model").attr("href", delUrl);
@@ -61,8 +60,7 @@ function deletePopup() {
 }
 
 function viewStudents() {
-
-  $(".view-student-model").click(function() {
+  $(".view-student-model").click(function () {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -80,14 +78,14 @@ function viewStudents() {
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function(res) {
+      success: function (res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
       },
-      error: function() {
+      error: function () {
         console.log("Error fetching data");
         $("#overlay").hide();
-      }
+      },
     });
   });
 }
@@ -95,33 +93,42 @@ function viewStudents() {
 function studentTableSearch() {
   let delayTimer;
 
-  $("#student_search").keyup(function(e) {
+  $("#student_search").keyup(function (e) {
     clearTimeout(delayTimer);
-    delayTimer = setTimeout(function() {
+    delayTimer = setTimeout(function () {
       let searchValue = $("#student_search").val();
       $("#overlay").show();
       $.ajax({
         url: "/admin/students",
         type: "GET",
         data: {
-          search: searchValue
+          search: searchValue,
         },
         headers: {
-          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function(res) {
+        success: function (res) {
           Turbo.renderStreamMessage(res);
-          let newURL = window.location.protocol + "//" + window.location.host + window.location.pathname + '?search=' + encodeURIComponent(searchValue);
-          window.history.pushState({
-            path: newURL
-          }, '', newURL);
+          let newURL =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?search=" +
+            encodeURIComponent(searchValue);
+          window.history.pushState(
+            {
+              path: newURL,
+            },
+            "",
+            newURL
+          );
           $("#overlay").hide();
-
         },
-        error: function() {
+        error: function () {
           console.log("Error fetching data");
           $("#overlay").hide();
-
         },
       });
     }, 500);
@@ -133,7 +140,7 @@ function dropdownCheckBoxes() {
   function checkboxDropdown(el) {
     let $el = $(el);
 
-    $el.each(function() {
+    $el.each(function () {
       let $list = $(this).find(".dropdown-list"),
         $label = $(this).find(".dropdown-label"),
         $checkAll = $(this).find(".check-all"),
@@ -151,7 +158,7 @@ function dropdownCheckBoxes() {
         updateStatus();
       }
 
-      $inputs.on("change", function() {
+      $inputs.on("change", function () {
         let checkedText = $(this).next().text();
 
         if ($(this).is(":checked")) {
@@ -163,7 +170,7 @@ function dropdownCheckBoxes() {
         updateLabel();
       });
 
-      $checkAll.on("change", function() {
+      $checkAll.on("change", function () {
         result = [];
 
         if ($(this).is(":checked")) {
@@ -177,7 +184,7 @@ function dropdownCheckBoxes() {
       });
 
       // Initial setup
-      $inputs.each(function() {
+      $inputs.each(function () {
         if ($(this).is(":checked")) {
           result.push($(this).next().text());
         }
@@ -185,11 +192,11 @@ function dropdownCheckBoxes() {
 
       updateLabel();
 
-      $label.on("click", function() {
+      $label.on("click", function () {
         $el.toggleClass("open-dropdown");
       });
 
-      $(document).on("click touchstart", function(e) {
+      $(document).on("click touchstart", function (e) {
         if (!$(e.target).closest($el).length) {
           $el.removeClass("open-dropdown");
         }
@@ -201,7 +208,7 @@ function dropdownCheckBoxes() {
 }
 // datepicker
 function customDatePicker() {
-  $(function() {
+  $(function () {
     $("#datepicker").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
@@ -210,7 +217,7 @@ function customDatePicker() {
 }
 
 function customEditDatePicker() {
-  $(function() {
+  $(function () {
     let initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
 
     $("#editdatepicker").datepicker({
@@ -223,7 +230,6 @@ function customEditDatePicker() {
 
 // Create form validation
 function formValidation() {
-
   function validateName() {
     let name = $("#user_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
@@ -288,7 +294,10 @@ function formValidation() {
     let emergencycontactNumber = $("#user_emergency_contact_number").val();
 
     if (emergencycontactNumber) {
-      if (!validator.isNumeric(emergencycontactNumber) || emergencycontactNumber.length !== 10) {
+      if (
+        !validator.isNumeric(emergencycontactNumber) ||
+        emergencycontactNumber.length !== 10
+      ) {
         $("#emergency-contact-number-error").text(
           "Emergency Contact Number must be a 10-digit number"
         );
@@ -305,9 +314,12 @@ function formValidation() {
   $("#user_password").on("input", validatePassword);
   $("#user_password_confirmation").on("input", validatePasswordConfirmation);
   $("#user_contact_number").on("input", validateContactNumber);
-  $("#user_emergency_contact_number").on("input", validateEmergencyContactNumber);
+  $("#user_emergency_contact_number").on(
+    "input",
+    validateEmergencyContactNumber
+  );
 
-  $("#user-admin-form").on("submit", function(event) {
+  $("#user-admin-form").on("submit", function (event) {
     validateName();
     validateEmail();
     validatePassword();
@@ -363,7 +375,9 @@ function editFormValidation() {
     let password = $("#edit_user_password").val();
     let password_confirmation = $("#edit_user_password_confirmation").val();
     if (!validator.equals(password, password_confirmation)) {
-      $("#edit-password-confirmation-error").text("Password Confirmation dosen't match Password");
+      $("#edit-password-confirmation-error").text(
+        "Password Confirmation dosen't match Password"
+      );
     } else {
       $("#edit-password-confirmation-error").text("");
     }
@@ -389,7 +403,10 @@ function editFormValidation() {
     let emergencycontactNumber = $("#edit_user_emergency_contact_number").val();
 
     if (emergencycontactNumber) {
-      if (!validator.isNumeric(emergencycontactNumber) || emergencycontactNumber.length !== 10) {
+      if (
+        !validator.isNumeric(emergencycontactNumber) ||
+        emergencycontactNumber.length !== 10
+      ) {
         $("#edit-emergency-contact-number-error").text(
           "Emergency Contact Number must be a 10-digit number"
         );
@@ -404,11 +421,25 @@ function editFormValidation() {
   $("#edit-student-popup").on("input", "#edit_user_name", validateName);
   $("#edit-student-popup").on("input", "#edit_user_email", validateEmail);
   $("#edit-student-popup").on("input", "#edit_user_password", validatePassword);
-  $("#edit-student-popup").on("input", "#edit_user_password_confirmation", validatePasswordConfirmation);
-  $("#edit-student-popup").on("input", "#edit_user_contact_number", validateContactNumber);
-  $("#edit-student-popup").on("input", "#edit_user_emergency_contact_number", validateEmergencyContactNumber);
+  $("#edit-student-popup").on(
+    "input",
+    "#edit_user_password_confirmation",
+    validatePasswordConfirmation
+  );
+  $("#edit-student-popup").on(
+    "input",
+    "#edit_user_contact_number",
+    validateContactNumber
+  );
+  $("#edit-student-popup").on(
+    "input",
+    "#edit_user_emergency_contact_number",
+    validateEmergencyContactNumber
+  );
 
-  $("#edit-student-popup").on("submit", "#user-admin-edit-form", function(event) {
+  $("#edit-student-popup").on("submit", "#user-admin-edit-form", function (
+    event
+  ) {
     validateName();
     validateEmail();
     validatePassword();
@@ -429,9 +460,26 @@ function editFormValidation() {
   });
 }
 
+// Onclick hover color change
+function onclickHover() {
+  $(".onclick-hover").on("click", function (event) {
+    event.stopPropagation();
+    $(this).addClass("click-btn-color");
+  });
+
+  $("#student-create-close-btn").on("click", function () {
+    $(".onclick-hover").removeClass("click-btn-color");
+  });
+
+  $(document).on("click", function (event) {
+    if (!$(event.target).closest('.onclick-hover').length) {
+      $(".onclick-hover").removeClass("click-btn-color");
+    }
+  });
+}
 //initialize script
 
-$(document).ready(function() {
+$(document).ready(function () {
   editModelPopup();
   deletePopup();
   studentTableSearch();
@@ -441,9 +489,9 @@ $(document).ready(function() {
   formValidation();
   editFormValidation();
   viewStudents();
+  onclickHover();
 
-
-  $(document).on("turbo:render", function() {
+  $(document).on("turbo:render", function () {
     editModelPopup();
     deletePopup();
     studentTableSearch();
@@ -453,13 +501,13 @@ $(document).ready(function() {
     formValidation();
     editFormValidation();
     viewStudents();
-
+    onclickHover();
   });
 
-  $(document).on("turbo:before-render", function() {
+  $(document).on("turbo:before-render", function () {
     $("#overlay").show();
   });
-  $(document).on("turbo:after-render", function() {
+  $(document).on("turbo:after-render", function () {
     $("#overlay").hide();
   });
 });
@@ -467,7 +515,7 @@ $(document).ready(function() {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function(streamElement) {
+  event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
     editModelPopup();

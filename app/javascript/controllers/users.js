@@ -250,17 +250,39 @@ function editFormValidation() {
   });
 }
 
+
+//click btn hover color
+
+function onclickHover() {
+  $(".onclick-hover").on("click", function (event) {
+    event.stopPropagation();
+    $(this).addClass("click-btn-color");
+  });
+
+  $("#create-close-modal").on("click", function () {
+    $(".onclick-hover").removeClass("click-btn-color");
+  });
+
+  $(document).on("click", function (event) {
+    if (!$(event.target).closest('.onclick-hover').length) {
+      $(".onclick-hover").removeClass("click-btn-color");
+    }
+  });
+}
+
 $(document).ready(function () {
   editPopup();
   deletePopup();
   tableSearch();
   formValidation();
+  onclickHover();
 
   $(document).on("turbo:render", function () {
     editPopup();
     deletePopup();
     tableSearch();
     formValidation();
+    onclickHover();
   });
 
   $(document).on("turbo:before-render", function () {
