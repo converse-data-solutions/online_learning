@@ -61,7 +61,11 @@
                   <path d="M20.0001 4.8457V9.01363M5.3186 6.79568V12.4183C5.3186 12.4183 7.49227 14.5572 10.5002 14.5572C13.5085 14.5572 15.6822 12.4183 15.6822 12.4183V6.79568" stroke="<%= params[:controller] == "admin/courses" && params[:action] == "index" || params[:controller] == "admin/sections" && params[:action] == "index" || params[:controller] == "admin/lessons" && params[:action] == "index" ? '#0bc08b' : '#86898F' %>" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <span class="nav-text main items-center justify-between mt-[7px] title text-lg font-medium" style="display: flex; font-family: 'Poppins', sans-serif;">Courses<img src="<%= asset_path("down.png") %>" class="mr-5 change-position" alt="...">
+              <span class="nav-text main items-center justify-between mt-[7px] title text-lg font-medium" style="display: flex; font-family: 'Poppins', sans-serif; justify-content: flex-start; gap: 130px;">Courses
+              <svg class="change-position" xmlns="http://www.w3.org/2000/svg" width="14" height="7" viewBox="0 0 14 7" fill="none">
+                                          <path d="M12.0261 1.1543L7.00764 5.00045L12.0261 1.1543ZM7.00764 5.00045L1.98915 1.1543L7.00764 5.00045Z" fill="none"/>
+                                          <path d="M12.0261 1.1543L7.00764 5.00045L1.98915 1.1543" stroke="<%= (params[:controller] == "admin/courses" && params[:action] == "index") ? "#0BC08B" : "#86898F" %>" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
                           </span>
                         </a>
                         <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden mx-auto w-2/4">
@@ -104,7 +108,11 @@
                               <path d="M1 4.64746V8.67119" stroke="<%= (params[:controller] == "admin/students" && params[:action] == "index") ? "#0BC08B" : "#86898F" %>" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                           </div>
-                          <span class="nav-text main items-center justify-between mt-[7px] title text-lg font-medium font-['Poppins'] link-clr" style="display: flex;">Student Management<img src="<%= asset_path("down.png") %>" class="mr-2 change-position" alt="...">
+                          <span class="nav-text main items-center justify-between mt-[7px] title text-lg font-medium font-['Poppins'] link-clr" style="display: flex; justify-content: flex-start; gap: 6px;">Student Management
+                                        <svg class="change-position" xmlns="http://www.w3.org/2000/svg" width="14" height="7" viewBox="0 0 14 7" fill="none">
+                                          <path d="M12.0261 1.1543L7.00764 5.00045L12.0261 1.1543ZM7.00764 5.00045L1.98915 1.1543L7.00764 5.00045Z" fill="none"/>
+                                          <path d="M12.0261 1.1543L7.00764 5.00045L1.98915 1.1543" stroke="<%= (params[:controller] == "admin/students" && params[:action] == "index") ? "#0BC08B" : "#86898F" %>" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
                                       </span>
                                     </a>
                                     <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-2/4 mx-auto">

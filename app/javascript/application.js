@@ -19,6 +19,9 @@ function navDropdown() {
         transform: el.hasClass("dropdown-open") ?
           "rotate(180deg)" :
           "rotate(0deg)",
+      })
+      .css({
+        transition: "transform 0.5s ease",
       });
 
   });
