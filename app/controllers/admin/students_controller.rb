@@ -62,7 +62,8 @@ class Admin::StudentsController < ApplicationController
 
   def destroy # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     respond_to do |format|
-      if @student&.update(deleted: true)
+      @student.deleted = true
+      if @student&.save(validate: false)
         @students = User.get_students(params)
         format.turbo_stream do
           render turbo_stream: [

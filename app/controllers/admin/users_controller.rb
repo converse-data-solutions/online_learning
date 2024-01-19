@@ -58,7 +58,8 @@ class Admin::UsersController < ApplicationController
 
   def destroy # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     respond_to do |format|
-      if @user&.update(deleted: true)
+      @user.deleted = true
+      if @user&.save(validate: false)
         @users = User.get_users(params)
         format.turbo_stream { render_destroy_success }
         format.json { render :show }
