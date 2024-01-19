@@ -475,5 +475,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     dropdownCheckBoxes();
     customDatePicker();
     customEditDatePicker();
+    viewStudents();
   };
 });
