@@ -1,20 +1,33 @@
-<% @courses.each do |course| %>
-  <tr data-type="<%= course.id %>"
-            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-    <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
-      <%= course.course_name %>
-    </td>
-    <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
-      <%= course.description %>
-    </td>
-    <td class="px-6 py-4 flex gap-4">
-       <button data-modal-target="course-large-modal" data-modal-toggle="course-large-modal" data-turbo-frame="edit-course-popup-frame" data-action="click->modal#toggle" data-url="<%= edit_admin_course_path(course) %>" data-course-id="<%= course.id %>" class="block w-full md:w-auto edit-course-model" type="button">
-        <img src="<%= asset_path("pencil.png") %>" alt="...">
-      </button>
-      <button data-modal-target="course-popup-modal" data-modal-toggle="course-popup-modal" data-action="click->modal#toggle" data-course-id="<%= course.id %>" class="block send-delete-course" type="button">
-        <img src="<%= asset_path("delete.png") %>" alt="...">
-      </button>
-    </td>
+<% if @courses.present? %>
+  <% @courses.each do |course| %>
+    <tr data-type="<%= course.id %>"
+              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= course.course_name %>
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= course.description %>
+      </td>
+      <td class="px-6 py-4 flex gap-4">
+         <button data-modal-target="course-large-modal" data-modal-toggle="course-large-modal" data-turbo-frame="edit-course-popup-frame" data-action="click->modal#toggle" data-url="<%= edit_admin_course_path(course) %>" data-course-id="<%= course.id %>" class="block w-full md:w-auto edit-course-model" type="button">
+          <img src="<%= asset_path("pencil.png") %>" alt="...">
+        </button>
+        <button data-modal-target="course-popup-modal" data-modal-toggle="course-popup-modal" data-action="click->modal#toggle" data-course-id="<%= course.id %>" class="block send-delete-course" type="button">
+          <img src="<%= asset_path("delete.png") %>" alt="...">
+        </button>
+      </td>
+    </tr>
+  <% end %>
+<% else %>
+  <tr><td class="px-6 py-4"></td></tr>
+  <tr><td class="px-6 py-4"></td></tr>
+  <tr><td class="px-10 py-4"></td></tr>
+  <tr><td class="px-6 py-4"></td></tr>
+  <tr><td class="px-6 py-4"></td></tr>
+  <tr><td class="px-6 py-4"></td></tr>
+  <tr><td class="px-6 py-4"></td></tr>
+  <tr>
+    <td colspan="12" class="px-6 py-4 font-semibold text-[12px] sm:text-[14px] md:text-[15px] lg:text-2xl text-[#818181] text-center">No data found</td>
   </tr>
 <% end %>
 <script>

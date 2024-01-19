@@ -5,11 +5,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   # before_action :authenticate_admin!
   require 'will_paginate/array'
   def index # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
-    @courses = []
-    Course.all.each do |course|
-      @courses.push(course)
-    end
-    @courses = Course.search_by_course_name(params[:search]).paginate(page: params[:page], per_page: 5)
+    @courses = Course.get_courses(params)
     if params[:section_id].present?
       @section = Section.find_by(id: params[:id])
       @lessons = @section.lessons
