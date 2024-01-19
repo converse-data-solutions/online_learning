@@ -47,10 +47,15 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     respond_to do |format|
       if @course.update(course_params)
         @courses = Course.get_courses(params)
-        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course updated successfully' }
+        format.turbo_stream
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-course-popup', partial: 'admin/courses/edit', locals: { course: @course }) }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('edit-course-popup', partial: 'admin/courses/edit', locals: { course: @course }),
+            turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Course update failed.', type: 'notice' })
+          ]
+        end
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
@@ -60,10 +65,15 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course&.destroy
-        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course deleted successfully' }
+        format.turbo_stream { render_destryoyed_course }
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else
-        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course destroy failed' }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Course deletion failed.', type: 'notice' }),
+            turbo_stream.update('course-table', partial: 'admin/courses/table', locals: { courses: @courses })
+          ]
+        end
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
@@ -79,6 +89,13 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
       ]
     end
     format.json { render json: @course.errors, status: :unprocessable_entity }
+  end
+
+  def render_destryoyed_course
+    render turbo_stream: [
+      turbo_stream.append('course-table', partial: 'shared/flash', locals: { message: 'Course was successfully destroyed.', type: 'notice' }),
+      turbo_stream.update('course-table', partial: 'admin/courses/table', locals: { courses: @courses })
+    ]
   end
 
   def course_params
