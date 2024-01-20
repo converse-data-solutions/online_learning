@@ -12,12 +12,17 @@
 
 */
 
-#overlay{	
+.click-btn-color{
+  background: #0082ce !important;
+  transition-duration: 0.5s;
+}
+
+#overlay {
   position: fixed;
   top: 0;
   z-index: 1050;
   width: 100%;
-  height:100%;
+  height: 100%;
   display: none;
   backdrop-filter: contrast(0.5);
 }
@@ -25,7 +30,7 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
 }
 .spinner {
   width: 40px;
@@ -36,19 +41,24 @@
   animation: sp-anime 0.8s infinite linear;
 }
 @keyframes sp-anime {
-  100% { 
-    transform: rotate(360deg); 
+  100% {
+    transform: rotate(360deg);
   }
 }
-.is-hide{
-  display:none;
+.is-hide {
+  display: none;
 }
 
 .gradiant-hover {
   transition: background, color 0.5s;
 }
 .gradiant-hover:hover {
-  background: linear-gradient(to left, #0082ce, #0082ce, #31b978); /* Set the initial gradient */
+  background: linear-gradient(
+    to left,
+    #0082ce,
+    #0082ce,
+    #31b978
+  ); /* Set the initial gradient */
   background-size: 200% 100%; /* Set the size to accommodate the transition */
   transition: background-position 3s;
   color: white;
@@ -62,7 +72,12 @@
   transition: background, color 0.5s;
 }
 .button-gradiant-hover:hover {
-  background: linear-gradient(to right, #31b978, #0082ce, #0082ce); /* Set the initial gradient */
+  background: linear-gradient(
+    to right,
+    #31b978,
+    #0082ce,
+    #0082ce
+  ); /* Set the initial gradient */
   background-size: 200% 100%; /* Set the size to accommodate the transition */
   transition: background-position 3s;
   color: white;
@@ -76,10 +91,18 @@
   transition: background, color 0.5s;
 }
 .button-gradiant-hover-cancel:hover {
-  background: linear-gradient(to right, #EDEDED, #FFFFFF, #FFFFFF); /* Set the initial gradient */
+  background: linear-gradient(
+    to right,
+    #ededed,
+    #ffffff,
+    #ffffff
+  ); /* Set the initial gradient */
   background-size: 200% 100%; /* Set the size to accommodate the transition */
   transition: background-position 3s;
   color: #000;
+}
+.button-gradiant-hover-cancel:hover {
+  background-position: 100% 0; /* Move the gradient to the right on hover */
 }
 .button-gradiant-hover-cancel:hover{
   background-position: 100% 0; /* Move the gradient to the right on hover */
@@ -133,13 +156,13 @@ input:-webkit-autofill {
 
 .main-menu:hover,
 nav.main-menu.expanded {
-  width: 290px;
+  width: 295px;
   overflow: visible;
 }
 
 .main-menu:hover,
 .main-page.expanded {
-  width: 290px;
+  width: 295px;
   overflow: visible;
 }
 
@@ -170,7 +193,7 @@ nav.main-menu.expanded {
 .main-menu li {
   position: relative;
   display: block;
-  width: 290px;
+  width: 295px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -280,7 +303,7 @@ nav.main-menu li.active > a,
 
 .main-menu2 {
   overflow: visible;
-  width: 290px;
+  width: 295px;
 }
 
 .main-nav {
@@ -358,6 +381,29 @@ nav.main-menu li.active > a,
   font-weight: 500;
 }
 
+.pagination a:hover{
+  background-color: #0bc08b;
+  color: #fff;
+  border-radius: 7px;
+  padding: 5px 15px;
+  margin: 0 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+
+}
+
+.pagination .next_page:hover{
+  background-color: #F0F4F5 !important;
+  color: #0bc08b;
+}
+
+.pagination .previous_page:hover{
+  background-color: #F0F4F5 !important;
+  color: #0bc08b;
+}
+
 .pagination .current {
   background: linear-gradient(to right, #1ab69c, #31b978);
   color: #fff;
@@ -398,6 +444,10 @@ nav.main-menu li.active > a,
 .pagination .next_page {
   font-size: 0;
 }
+.pagination .previous_page:hover,
+.pagination .next_page:hover {
+  font-size: 0;
+}
 
 .pagination .previous_page::before {
   content: "\003C";
@@ -416,7 +466,7 @@ nav.main-menu li.active > a,
   stroke: #0bc08b;
 }
 
-.homecontroller .actived {
+.actived {
   margin-left: 6px;
   background: linear-gradient(to right, #1ab69c, #31b978);
   color: #fff !important;
@@ -432,6 +482,10 @@ nav.main-menu li.active > a,
 
 .link-clr {
   color: #999;
+}
+
+.actived-link{
+  color: #0bc08b !important;
 }
 
 .main-menu li:hover .link-clr {
@@ -474,15 +528,15 @@ nav.main-menu li.active > a,
   margin-right: auto !important;
 }
 
-.success .change-step-color{
+.success .change-step-color {
   color: #31b978 !important;
 }
 
-.active .change-step-color{
+.active .change-step-color {
   color: #000 !important;
 }
 
-.stepper-formatter2{
+.stepper-formatter2 {
   width: 100% !important;
   margin-left: 0 !important;
   margin-right: 0 !important;
@@ -671,7 +725,7 @@ nav.main-menu li.active > a,
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
 }
 
-.next-btn{
+.next-btn {
   display: block !important;
 }
 
@@ -962,6 +1016,10 @@ input[type="file"] {
       transform-origin: center center;
     }
   }
+
+  .edit-dropdown {
+    border: none !important;
+  }
   &.open-dropdown {
     .dropdown-list {
       display: block;
@@ -976,8 +1034,9 @@ input[type="file"] {
   }
 }
 
-[type=radio] {
+[type="radio"] {
   color: #0bc08b !important;
+  border: 1px solid #0bc08b !important;
 }
 
 [type="checkbox"]:checked {
@@ -1164,6 +1223,10 @@ input[type="file"] {
   border: 1px solid #cccccc;
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
+}
+
+.edit-datepicker {
+  border: none !important;
 }
 .datepicker-input:focus {
   outline: none !important;

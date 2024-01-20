@@ -1,9 +1,10 @@
-<%= form_for User.new, url: admin_students_path, html: { class: "validate", id: "user-admin-form" }, validate: true, method: :post do |f| %>
+<%= form_for student || User.new, url: admin_students_path, html: { class: "validate", id: "user-admin-form" }, format: :turbo_stream, method: :post do |f| %>
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="w-full sm:w-[55%] flex flex-col">
-        <%= f.text_field :name, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true, value: @student&.name %>
+        <%= f.text_field :name, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+        <div class="text-red-600 text-sm mt-1" id="name-error"></div>
         <% if student&.errors&.any? %>
           <% if student.errors[:name].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -16,7 +17,8 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="email" class=" block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="w-full sm:w-[55%] flex flex-col">
-        <%= f.email_field :email, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true, value: @student&.email %>
+        <%= f.email_field :email, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+        <div class="text-red-600 text-sm mt-1" id="email-error"></div>
         <% if student&.errors&.any? %>
           <% if student.errors[:email].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -31,7 +33,8 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="password" class=" block mb-2 text-lg font-medium text-[#000]">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="w-full sm:w-[55%] flex flex-col">
-        <%= f.password_field :password, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true, value: @student&.password %>
+        <%= f.password_field :password, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password" %>
+        <div class="text-red-600 text-sm mt-1" id="password-error"></div>
         <% if student&.errors&.any? %>
           <% if student.errors[:password].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -44,7 +47,8 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="passwod_confirmation" class="w-full sm:w-[40%] lg:w-[46%]  block mb-2 text-lg font-medium text-[#000]">Password Confirmation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="w-full sm:w-[55%] flex flex-col">
-        <%= f.password_field :password_confirmation, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password", validate: true, value: @student&.password_confirmation %>
+        <%= f.password_field :password_confirmation, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password" %>
+        <div class="text-red-600 text-sm mt-1" id="password-confirmation-error"></div>
         <% if student&.errors&.any? %>
           <% if student.errors[:password_confirmation].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -79,14 +83,16 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="gender" class="block mb-2 text-lg font-medium text-[#000]">Gender</label>
       <div class="flex w-[57%] lg:w-[55%]">
-        <label class="flex items-center">
-          <%= f.radio_button :gender, "Male", checked: true %>
-          <span class="text-sm ml-4">Male</span>
-        </label>
-        <label class="flex items-center ml-2">
-          <%= f.radio_button :gender, "Female" %>
-          <span class="text-sm ml-4">Female</span>
-        </label>
+        <div class="flex w-[70%] justify-between">
+          <label class="flex items-center">
+            <%= f.radio_button :gender, "Male", checked: true %>
+            <span class="text-base font-medium ml-4">Male</span>
+          </label>
+          <label class="flex items-center ml-2">
+            <%= f.radio_button :gender, "Female" %>
+            <span class="text-base font-medium ml-4">Female</span>
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -94,13 +100,14 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="dataofbirth" class=" block mb-2 text-lg font-medium text-[#000]">Date of Birth</label>
       <div class="input-wrapper flex flex-col w-full sm:w-[57%] lg:w-[55%]">
-      <%= f.text_field :dataofbirth, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg', id: 'datepicker', autocomplete: 'off', value: @student&.dataofbirth %>
+        <%= f.text_field :dataofbirth, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg', id: 'datepicker', autocomplete: 'off' %>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-      <label for="contact number" class=" block mb-2 text-lg font-medium text-[#000]">Contact Number</label>
+      <label for="contact number" class=" block mb-2 text-lg font-medium text-[#000]">Phone No</label>
       <div class="w-full sm:w-[55%] flex flex-col">
-        <%= f.text_field :contact_number, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true, value: @student&.contact_number %>
+        <%= f.text_field :contact_number, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+        <div class="text-red-600 text-sm mt-1" id="contact-number-error"></div>
         <% if student&.errors&.any? %>
           <% if student.errors[:contact_number].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -113,15 +120,15 @@
   </div>
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-      <label for="occupation" class=" block mb-2 text-lg font-medium text-[#000]">Occupation</label>
+      <label for="occupation" class=" block mb-2 text-lg font-medium text-[#000]">Occupation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="w-full sm:w-[55%] flex flex-col">
-        <%= f.text_field :occupation, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true, value: @student&.occupation %>
+        <%= f.text_field :occupation, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="education" class=" block mb-2 text-lg font-medium text-[#000]">Education</label>
       <div class="w-full sm:w-[55%] flex flex-col">
-        <%= f.text_field :education, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true, value: @student&.education %>
+        <%= f.text_field :education, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
       </div>
     </div>
   </div>
@@ -129,13 +136,13 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="address" class=" block mb-2 text-lg font-medium text-[#000]">Address</label>
       <div class="w-full sm:w-[55%] flex flex-coll">
-        <%= f.text_field :addresses, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true, value: @student&.addresses %>
+        <%= f.text_field :addresses, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="emergency contact name" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Name</label>
       <div class="w-full sm:w-[55%] flex flex-col">
-        <%= f.text_field :emergency_contact_name, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true, value: @student&.emergency_contact_name %>
+        <%= f.text_field :emergency_contact_name, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
       </div>
     </div>
   </div>
@@ -143,7 +150,8 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="emergency contact number" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Number</label>
       <div class="w-full sm:w-[55%] flex flex-col">
-        <%= f.text_field :emergency_contact_number, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true, value: @student&.emergency_contact_number %>
+        <%= f.text_field :emergency_contact_number, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+        <div class="text-red-600 text-sm mt-1" id="emergency-contact-number-error"></div>
         <% if student&.errors&.any? %>
           <% if student.errors[:emergency_contact_number].any? %>
             <div class="text-red-600 text-sm mt-1">
@@ -157,7 +165,10 @@
       <%= f.hidden_field :role, value: 'student' %>
     </div>
   </div>
-  <div class="w-1/5 mx-auto mt-4 sm:mt-6">
+  <%= hidden_field_tag :page, params[:page]%>
+  <%= hidden_field_tag :per_page, params[:per_page]%>
+  <%= hidden_field_tag :search, params[:search]%>
+  <div class="w-[150px] mx-auto mt-4 sm:mt-6">
     <%= f.submit "CREATE", class: 'button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
   </div>
 <% end %>

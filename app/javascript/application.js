@@ -4,17 +4,10 @@ import "controllers";
 import videojs from "video.js";
 import "flowbite";
 
-function activeClass() {
-  $(".selected").on("click", function (e) {
-    $(".selected").removeClass("actived");
-    $(this).addClass("actived");
-  });
-}
-
 // Navbar Function
 
 function navDropdown() {
-  $(".main").click(function () {
+  $(".main").click(function() {
     const el = $(this).parent().find(".sub");
     el.slideToggle("slow");
 
@@ -23,50 +16,27 @@ function navDropdown() {
     $(this)
       .find(".change-position")
       .css({
-        transform: el.hasClass("dropdown-open")
-          ? "rotate(180deg)"
-          : "rotate(0deg)",
+        transform: el.hasClass("dropdown-open") ?
+          "rotate(180deg)" :
+          "rotate(0deg)",
+      })
+      .css({
+        transition: "transform 0.5s ease",
       });
 
-    updateDropdownStates();
   });
 }
 
-function updateDropdownStates() {
-  var dropdownStates = {};
-
-  $(".main").each(function (index) {
-    var isOpen = $(this).parent().find(".sub").hasClass("dropdown-open");
-    dropdownStates[index] = isOpen ? "open" : "closed";
-  });
-
-  localStorage.setItem("dropdownStates", JSON.stringify(dropdownStates));
+function openDropdown(dropdown) {
+  const dropdownContent = dropdown.parent().find(".sub");
+  dropdownContent.slideDown("fast");
 }
 
-function handleNavbar() {
-  $(".title").mouseenter(function () {
-    $(".main-page").css({
-      width: "85%",
-      "margin-left": "auto",
-      transition: "all 0.2s linear",
-    });
-    $(".main-nav").css({
-      width: "85%",
-      transition: "all 0.2s linear",
-    });
-  });
-
-  $("#sidebar").mouseleave(function () {
-    $(".main-page").css({
-      width: "97%",
-      "margin-left": "auto",
-      transition: "all 0.2s linear",
-    });
-    $(".main-nav").css({
-      width: "97%",
-      transition: "all 0.2s linear",
-    });
-  });
+function activeClass() {
+  $(".selected").on("click", function() {
+    $(".selected").removeClass("actived");
+    $(this).addClass("actived");
+  })
 }
 
 function applyNavbarState() {
@@ -75,105 +45,197 @@ function applyNavbarState() {
   if (navbarState === "titleClicked") {
     $(".title1").addClass("title11");
     $(".open").addClass("open1");
-    $(".openmenu").css({ position: "absolute", right: "18px", top: "15px" });
+    $(".openmenu").css({
+      position: "absolute",
+      right: "18px",
+      top: "15px"
+    });
     $(".main-menu").addClass("main-menu2");
     $(".main-page").addClass("main-page2");
     $(".main-nav").addClass("main-nav2");
   }
 }
 
+var expanded = false;
+var expanded = localStorage.getItem("navbarState") === "titleClicked";
+
 function initNavbarTitle() {
   $(".title").click(function () {
-    $(".title1").addClass("title11");
-    $(".open").addClass("open1");
-    $(".openmenu").css({ position: "absolute", right: "18px", top: "15px" });
-    $(".main-menu").addClass("main-menu2");
-    $(".main-page").addClass("main-page2");
-    $(".main-nav").addClass("main-nav2");
-    localStorage.setItem("navbarState", "titleClicked");
+    expanded = true;
+    updateNavbarState();
+    updateNavbar();
   });
 }
 
 function initNavbarHamburger() {
   $(".hamburger").click(function (event) {
     event.stopPropagation();
+    expanded = !expanded;
+    updateNavbarState();
+    updateNavbar();
+  });
+}
 
+function updateNavbarState() {
+  if (expanded) {
+    localStorage.setItem("navbarState", "titleClicked");
+  } else {
+    localStorage.removeItem("navbarState");
+  }
+}
+
+function updateNavbar() {
+  if (expanded) {
+    $(".title1").addClass("title11");
+    $(".open").addClass("open1");
+    $(".openmenu").css({
+      position: "absolute",
+      right: "18px",
+      top: "15px",
+    });
+    $(".main-menu").addClass("main-menu2");
+    $(".main-page").addClass("main-page2");
+    $(".main-nav").addClass("main-nav2");
+  } else {
     $(".title1").removeClass("title11");
     $(".open").removeClass("open1");
-    $(".openmenu").css({ position: "", right: "", top: "" });
+    $(".openmenu").css({
+      position: "",
+      right: "",
+      top: "",
+    });
     $(".main-menu").removeClass("main-menu2");
     $(".main-page").removeClass("main-page2");
     $(".main-nav").removeClass("main-nav2");
-    $(".actived").removeClass("actived");
-    localStorage.removeItem("dropdownStates");
-    localStorage.removeItem("navbarState");
-    handleNavbar();
-  });
+  }
 }
 
-function loader() {
-  console.log("loader");
-    $("#overlay").fadeIn(300);
-    $("#overlay").delay(300).fadeOut(300);
-}
-
-$(document).ready(function () {
-  applyNavbarState();
+function handleNavbar() {
   initNavbarTitle();
   initNavbarHamburger();
-  activeClass();
-  // loader();
+  let currentUrl = window.location.pathname;
 
-  $(".dropdownProfile").click(function () {
+  $(".title").mouseenter(function () {
+    if (!expanded) {
+      $(".main-page, .main-nav").css({
+        width: "85%",
+        "margin-left": "auto",
+        transition: "all 0.2s linear",
+      });
+    }
+    if (currentUrl === "/admin/students") {
+      $("#student-management").addClass("actived");
+      $("#student-management").parent().find(".sub").slideDown();
+
+    }
+    if (currentUrl === "/admin/courses") {
+      $("#course-management").addClass("actived");
+      $("#course-management").parent().find(".sub").slideDown();
+
+    }
+    if (currentUrl === "/admin/sections") {
+      $("#course-management").addClass("actived");
+      $("#course-management").parent().find(".sub").slideDown();
+
+    }
+    if (currentUrl === "/admin/lessons") {
+      $("#course-management").addClass("actived");
+      $("#course-management").parent().find(".sub").slideDown();
+
+    }
+    if (currentUrl === "/admin/users") {
+      $("#user-management").addClass("actived");
+      $("#user-management").parent().find(".sub").slideDown();
+
+    }
+  });
+
+  $("#sidebar").mouseleave(function () {
+    if (!expanded) {
+      $(".main-page, .main-nav").css({
+        width: "97%",
+        "margin-left": "auto",
+        transition: "all 0.2s linear",
+      });
+      $(".actived").removeClass("actived");
+      $(".sub").slideUp();
+    }
+  });
+
+  updateNavbar();
+}
+
+
+
+$(document).ready(function() {
+  applyNavbarState();
+  activeClass();
+  handleNavbar();
+
+
+  if ($("#student-management").hasClass("openDropDown")) {
+    const studentManagement = $("#student-management");
+    openDropdown(studentManagement);
+  }
+
+  if ($("#course-management").hasClass("openDropDown")) {
+    const courseManagement = $("#course-management");
+    openDropdown(courseManagement);
+  }
+
+  if ($("#payment-management").hasClass("openDropDown")) {
+    const paymentManagement = $("#payment-management");
+    openDropdown(paymentManagement);
+  }
+
+  if ($("#schedule-management").hasClass("openDropDown")) {
+    const scheduleManagement = $("#schedule-management");
+    openDropdown(scheduleManagement);
+  }
+
+  if ($("#sales-management").hasClass("openDropDown")) {
+    const salesManagement = $("#sales-management");
+    openDropdown(salesManagement);
+  }
+
+
+
+  $(".dropdownProfile").click(function() {
     $("#menuShow").toggle();
   });
-  var storedStates = localStorage.getItem("dropdownStates");
-  if (storedStates) {
-    var dropdownStates = JSON.parse(storedStates);
-
-    $(".main").each(function (index) {
-      var isOpen = dropdownStates[index] === "open";
-      var el = $(this).parent().find(".sub");
-
-      if (isOpen) {
-        el.show();
-        $(this).find(".change-position").css({ transform: "rotate(180deg)" });
-        el.addClass("dropdown-open");
-      } else {
-        el.hide();
-        $(this).find(".change-position").css({ transform: "rotate(0deg)" });
-        el.removeClass("dropdown-open");
-      }
-    });
-  }
 
   navDropdown();
 
-  $(document).on("turbo:render", function () {
+  $(document).on("turbo:render", function() {
     applyNavbarState();
-    initNavbarTitle();
-    initNavbarHamburger();
     activeClass();
-    // loader();
-    var storedStates = localStorage.getItem("dropdownStates");
-    if (storedStates) {
-      var dropdownStates = JSON.parse(storedStates);
-
-      $(".main").each(function (index) {
-        var isOpen = dropdownStates[index] === "open";
-        var el = $(this).parent().find(".sub");
-
-        if (isOpen) {
-          el.show();
-          $(this).find(".change-position").css({ transform: "rotate(180deg)" });
-          el.addClass("dropdown-open");
-        } else {
-          el.hide();
-          $(this).find(".change-position").css({ transform: "rotate(0deg)" });
-          el.removeClass("dropdown-open");
-        }
-      });
-    }
     navDropdown();
+    handleNavbar();
+
+    if ($("#student-management").hasClass("openDropDown")) {
+      const dropdownFee = $("#student-management");
+      openDropdown(dropdownFee);
+    }
+
+    if ($("#course-management").hasClass("openDropDown")) {
+      const courseManagement = $("#course-management");
+      openDropdown(courseManagement);
+    }
+
+    if ($("#payment-management").hasClass("openDropDown")) {
+      const paymentManagement = $("#payment-management");
+      openDropdown(paymentManagement);
+    }
+
+    if ($("#schedule-management").hasClass("openDropDown")) {
+      const scheduleManagement = $("#schedule-management");
+      openDropdown(scheduleManagement);
+    }
+
+    if ($("#sales-management").hasClass("openDropDown")) {
+      const salesManagement = $("#sales-management");
+      openDropdown(salesManagement);
+    }
+
   });
 });

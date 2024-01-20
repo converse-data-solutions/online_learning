@@ -43,11 +43,19 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
   def self.get_users(params)
-    page = params[:page].presence&.to_i
-    page = (page && page.positive?) ? page : 1
-    per_page = (params[:per_page].presence&.to_i || 10).to_i
-    per_page = (per_page && per_page.positive?) ? per_page : 10
+    page_number = params[:page].presence&.to_i
+    page = (page_number && page_number.positive?) ? page_number : 1
+    record_per_page = (params[:per_page].presence&.to_i || 10).to_i
+    per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
     User.admin.order(name: :asc).search_by_name_and_email(params[:search]).paginate(page: page, per_page: per_page)
+  end
+
+  def self.get_students(params)
+    page_number = params[:page].presence&.to_i
+    page = (page_number && page_number.positive?) ? page_number : 1
+    record_per_page = (params[:per_page].presence&.to_i || 10).to_i
+    per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
+    User.student.order(name: :asc).search_by_name_and_email(params[:search]).includes(user_courses: [:course]).paginate(page: page, per_page: per_page)
   end
 
   def self.from_omniauth(auth)

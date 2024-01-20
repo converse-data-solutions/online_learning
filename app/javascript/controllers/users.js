@@ -104,6 +104,8 @@ function tableSearch() {
   });
 }
 
+
+
 function formValidation() {
   function validateName() {
     let name = $("#user_name").val();
@@ -117,14 +119,16 @@ function formValidation() {
   }
 
   function validateEmail() {
-    let email = $("#user_email").val();
-
-    if (!validator.isEmail(email)) {
-      $("#email-error").text("Email can't be blank");
+    let email = $("#user_email").val().trim();
+    let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+  
+    if (!emailRegex.test(email)) {
+      $("#email-error").text("Invalid email format");
     } else {
       $("#email-error").text("");
     }
   }
+  
 
   function validatePassword() {
     let password = $("#user_password").val();
@@ -171,6 +175,22 @@ function formValidation() {
   });
 }
 
+// Form reset errors
+
+function resetNewErrorMessages(){
+  $("#name-error").text("");
+  $("#email-error").text("");
+  $("#password-error").text("");
+  $("#password-confirmation-error").text("");
+}
+
+function resetErrorMessages() {
+  $("#edit-name-error").text("");
+  $("#edit-email-error").text("");
+  $("#edit-password-error").text("");
+  $("#edit-password-confirmation-error").text("");
+}
+
 function editFormValidation() {
   function validateName() {
     let name = $("#edit_user_name").val();
@@ -196,12 +216,15 @@ function editFormValidation() {
 
   function validateEmail() {
     let email = $("#edit_user_email").val().trim();
-    if (!validator.isEmail(email)) {
-      $("#edit-email-error").text("Email can't be blank");
+    let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+  
+    if (!emailRegex.test(email)) {
+      $("#edit-email-error").text("Invalid email format");
     } else {
       $("#edit-email-error").text("");
     }
   }
+  
 
   function validatePassword() {
     let password = $("#edit_user_password").val();
@@ -248,6 +271,52 @@ function editFormValidation() {
       event.preventDefault();
     }
   });
+
+}
+
+// Form reset Funtion
+
+function resetNewForm(){
+  $("#create-close-modal").on("click", function () {
+    console.log("values new reseted");
+    resetNewErrorMessages();
+  });
+  $(document).on("click", function () {
+    console.log("document clicked");
+    resetNewErrorMessages();
+  });
+}
+
+function resetEditForm(){
+  $("#modal-close-btn").on("click", function () {
+    console.log("values reseted");
+    resetErrorMessages();
+  });
+  $(document).on("click", function () {
+    console.log("document clicked");
+    resetErrorMessages();
+  });
+}
+
+
+
+//click btn hover color
+
+function onclickHover() {
+  $(".onclick-hover").on("click", function (event) {
+    event.stopPropagation();
+    $(this).addClass("click-btn-color");
+  });
+
+  $("#create-close-modal").on("click", function () {
+    $(".onclick-hover").removeClass("click-btn-color");
+  });
+
+  $(document).on("click", function (event) {
+    if (!$(event.target).closest('.onclick-hover').length) {
+      $(".onclick-hover").removeClass("click-btn-color");
+    }
+  });
 }
 
 $(document).ready(function () {
@@ -255,12 +324,18 @@ $(document).ready(function () {
   deletePopup();
   tableSearch();
   formValidation();
+  onclickHover();
+  resetEditForm();
+  resetNewForm();
 
   $(document).on("turbo:render", function () {
     editPopup();
     deletePopup();
     tableSearch();
     formValidation();
+    onclickHover();
+    resetEditForm();
+    resetNewForm();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -279,5 +354,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     initModals();
     editPopup();
     deletePopup();
+
   };
 });
