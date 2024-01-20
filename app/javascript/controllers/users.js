@@ -354,7 +354,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     initModals();
     editPopup();
     deletePopup();
-    resetEditForm();
-    resetNewForm();
+
   };
 });

@@ -573,7 +573,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     customDatePicker();
     customEditDatePicker();
     viewStudents();
-    resetEditForm();
-    resetNewForm();
+    
   };
 });
