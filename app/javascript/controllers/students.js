@@ -341,6 +341,23 @@ function formValidation() {
   });
 }
 
+// Form reset errors
+
+function resetNewErrorMessages(){
+  $("#name-error").text("");
+  $("#email-error").text("");
+  $("#password-error").text("");
+  $("#password-confirmation-error").text("");
+}
+
+function resetErrorMessages() {
+  $("#edit-name-error").text("");
+  $("#edit-email-error").text("");
+  $("#edit-password-error").text("");
+  $("#edit-password-confirmation-error").text("");
+}
+
+
 // Edit form validation
 function editFormValidation() {
   function validateName() {
@@ -480,6 +497,31 @@ function onclickHover() {
     }
   });
 }
+
+// Form reset Funtion
+
+function resetNewForm(){
+  $("#student-create-close-btn").on("click", function () {
+    console.log("values new reseted");
+    resetNewErrorMessages();
+  });
+  $(document).on("click", function () {
+    console.log("document clicked");
+    resetNewErrorMessages();
+  });
+}
+
+function resetEditForm(){
+  $("#modal-close-btn").on("click", function () {
+    console.log("values reseted");
+    resetErrorMessages();
+  });
+  $(document).on("click", function () {
+    console.log("document clicked");
+    resetErrorMessages();
+  });
+}
+
 //initialize script
 
 $(document).ready(function () {
@@ -493,6 +535,8 @@ $(document).ready(function () {
   editFormValidation();
   viewStudents();
   onclickHover();
+  resetEditForm();
+  resetNewForm();
 
   $(document).on("turbo:render", function () {
     editModelPopup();
@@ -505,6 +549,8 @@ $(document).ready(function () {
     editFormValidation();
     viewStudents();
     onclickHover();
+    resetEditForm();
+    resetNewForm();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -527,5 +573,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     customDatePicker();
     customEditDatePicker();
     viewStudents();
+    resetEditForm();
+    resetNewForm();
   };
 });

@@ -104,6 +104,8 @@ function tableSearch() {
   });
 }
 
+
+
 function formValidation() {
   function validateName() {
     let name = $("#user_name").val();
@@ -171,6 +173,22 @@ function formValidation() {
       event.preventDefault();
     }
   });
+}
+
+// Form reset errors
+
+function resetNewErrorMessages(){
+  $("#name-error").text("");
+  $("#email-error").text("");
+  $("#password-error").text("");
+  $("#password-confirmation-error").text("");
+}
+
+function resetErrorMessages() {
+  $("#edit-name-error").text("");
+  $("#edit-email-error").text("");
+  $("#edit-password-error").text("");
+  $("#edit-password-confirmation-error").text("");
 }
 
 function editFormValidation() {
@@ -253,7 +271,33 @@ function editFormValidation() {
       event.preventDefault();
     }
   });
+
 }
+
+// Form reset Funtion
+
+function resetNewForm(){
+  $("#create-close-modal").on("click", function () {
+    console.log("values new reseted");
+    resetNewErrorMessages();
+  });
+  $(document).on("click", function () {
+    console.log("document clicked");
+    resetNewErrorMessages();
+  });
+}
+
+function resetEditForm(){
+  $("#modal-close-btn").on("click", function () {
+    console.log("values reseted");
+    resetErrorMessages();
+  });
+  $(document).on("click", function () {
+    console.log("document clicked");
+    resetErrorMessages();
+  });
+}
+
 
 
 //click btn hover color
@@ -281,6 +325,8 @@ $(document).ready(function () {
   tableSearch();
   formValidation();
   onclickHover();
+  resetEditForm();
+  resetNewForm();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -288,6 +334,8 @@ $(document).ready(function () {
     tableSearch();
     formValidation();
     onclickHover();
+    resetEditForm();
+    resetNewForm();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -306,5 +354,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     initModals();
     editPopup();
     deletePopup();
+    resetEditForm();
+    resetNewForm();
   };
 });
