@@ -285,6 +285,16 @@ function formValidation() {
     }
   }
 
+  function validateCourseSelection() {
+    let atLeastOneChecked = $("input[name='user[course_ids][]']:checked").length > 0;
+  
+    if (!atLeastOneChecked) {
+      $("#course-error").text("Please select at least one course.");
+    } else {
+      $("#course-error").text("");
+    }
+  }
+
   function validateContactNumber() {
     let contactNumber = $("#user_contact_number").val();
 
@@ -324,6 +334,7 @@ function formValidation() {
   $("#user_email").on("input", validateEmail);
   $("#user_password").on("input", validatePassword);
   $("#user_password_confirmation").on("input", validatePasswordConfirmation);
+  $("#user_course_ids").on("input", validateCourseSelection);
   $("#user_contact_number").on("input", validateContactNumber);
   $("#user_emergency_contact_number").on(
     "input",
@@ -335,6 +346,7 @@ function formValidation() {
     validateEmail();
     validatePassword();
     validatePasswordConfirmation();
+    validateCourseSelection();
     validateContactNumber();
     validateEmergencyContactNumber();
 
@@ -343,6 +355,7 @@ function formValidation() {
       $("#email-error").text() ||
       $("#password-error").text() ||
       $("#password-confirmation-error").text() ||
+      $("#course-error").text() ||
       $("#contact-number-error").text() ||
       $("#emergency-contact-number-error").text()
     ) {
@@ -358,6 +371,7 @@ function resetNewErrorMessages(){
   $("#email-error").text("");
   $("#password-error").text("");
   $("#password-confirmation-error").text("");
+  $("#course-error").text("");
 }
 
 function resetErrorMessages() {

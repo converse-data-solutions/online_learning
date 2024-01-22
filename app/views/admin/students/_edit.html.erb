@@ -68,10 +68,6 @@
           <div class="dropdown">
             <label class="dropdown-label edit-dropdown" style="background-color: #F5F5F5">Select Options</label>
             <div class="dropdown-list">
-              <div class="checkbox">
-                <input type="checkbox" name="dropdown-group-all" class="check-all text-[#818181] checkbox-custom" id="edit-checkbox-main" />
-                <label for="edit-checkbox-main" class="checkbox-custom-label">Selection All</label>
-              </div>
               <% Course.all.each do |course| %>
                 <div class="checkbox ">
                   <%= f.check_box :course_ids, { multiple: true }, course.id, nil %>

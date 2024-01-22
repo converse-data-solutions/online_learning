@@ -66,10 +66,6 @@
         <div class="dropdown">
           <label class="dropdown-label">Select Options</label>
           <div class="dropdown-list">
-            <div class="checkbox">
-              <input type="checkbox" name="dropdown-group-all" class="check-all checkbox-custom" id="checkbox-main" />
-              <label for="checkbox-main" class="checkbox-custom-label">Selection All</label>
-            </div>
             <% Course.all.each do |course| %>
               <div class="checkbox">
                 <%= f.check_box :course_ids, { multiple: true }, course.id, nil %>
@@ -77,8 +73,7 @@
               </div>
             <% end %>
           </div>
-                  <div class="text-red-600 text-sm mt-1" id="contact-number-error"></div>
-
+          <div class="text-red-600 text-sm mt-1" id="course-error"></div>
         </div>
       </div>
     </div>
