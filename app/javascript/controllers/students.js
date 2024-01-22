@@ -295,6 +295,19 @@ function formValidation() {
     }
   }
 
+  function validateOccupation() {
+    let name = $("#user_occupation").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+  
+    if (!name) {
+      $("#occupation-error").text("Occupation can't be blank");
+    } else if (!namecheck) {
+      $("#occupation-error").text("Please enter a valid Occupation (only alphabets allowed)");
+    } else {
+      $("#occupation-error").text("");
+    }
+  }
+
   function validateContactNumber() {
     let contactNumber = $("#user_contact_number").val();
 
@@ -335,6 +348,7 @@ function formValidation() {
   $("#user_password").on("input", validatePassword);
   $("#user_password_confirmation").on("input", validatePasswordConfirmation);
   $("#user_course_ids").on("input", validateCourseSelection);
+  $("#user_occupation").on("input", validateOccupation);
   $("#user_contact_number").on("input", validateContactNumber);
   $("#user_emergency_contact_number").on(
     "input",
@@ -347,6 +361,7 @@ function formValidation() {
     validatePassword();
     validatePasswordConfirmation();
     validateCourseSelection();
+    validateOccupation();
     validateContactNumber();
     validateEmergencyContactNumber();
 
@@ -356,6 +371,7 @@ function formValidation() {
       $("#password-error").text() ||
       $("#password-confirmation-error").text() ||
       $("#course-error").text() ||
+      $("#occupation-error").text() ||
       $("#contact-number-error").text() ||
       $("#emergency-contact-number-error").text()
     ) {
@@ -372,6 +388,7 @@ function resetNewErrorMessages(){
   $("#password-error").text("");
   $("#password-confirmation-error").text("");
   $("#course-error").text("");
+  $("#occupation-error").text("");
 }
 
 function resetErrorMessages() {
@@ -379,6 +396,8 @@ function resetErrorMessages() {
   $("#edit-email-error").text("");
   $("#edit-password-error").text("");
   $("#edit-password-confirmation-error").text("");
+  $("#edit-course-error").text("");
+  $("#edit-occupation-error").text("");
 }
 
 
@@ -449,6 +468,19 @@ function editFormValidation() {
     }
   }
 
+  function validateOccupation() {
+    let name = $("#edit_user_occupation").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+  
+    if (!name) {
+      $("#edit-occupation-error").text("Occupation can't be blank");
+    } else if (!namecheck) {
+      $("#edit-occupation-error").text("Please enter a valid Occupation (only alphabets allowed)");
+    } else {
+      $("#edit-occupation-error").text("");
+    }
+  }
+
   function validateContactNumber() {
     let contactNumber = $("#edit_user_contact_number").val();
 
@@ -493,7 +525,7 @@ function editFormValidation() {
     validatePasswordConfirmation
   );
   $("#edit-student-popup").on("input", "input[name='user[course_ids][]']", validateCourseSelection);
-
+  $("#edit-student-popup").on("input", "#edit_user_occupation", validateOccupation);
   $("#edit-student-popup").on(
     "input",
     "#edit_user_contact_number",
@@ -515,6 +547,7 @@ function editFormValidation() {
     validateContactNumber();
     validateEmergencyContactNumber();
     validateCourseSelection();
+    validateOccupation();
 
     if (
       $("#edit-name-error").text() ||
@@ -522,6 +555,7 @@ function editFormValidation() {
       $("#edit-password-error").text() ||
       $("#edit-password-confirmation-error").text() ||
       $("#edit-course-error").text() ||
+      $("#edit-occupation-error").text() ||
       $("#edit-contact-number-error").text() ||
       $("#edit-emergency-contact-number-error").text()
     ) {
