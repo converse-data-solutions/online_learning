@@ -1,55 +1,56 @@
-<div class="w-full max-w-md mx-auto flex justify-center flex-col mt-9">
-  <h2>Log in</h2>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control" %>
-    </div>
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password", :class => "form-control" %>
-    </div>
-    <% if devise_mapping.rememberable? %>
+<div class="w-full max-w-lg mx-auto flex justify-center flex-col mt-9">
+  <div class="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <h5 class="text-xl mb-7 font-medium text-gray-900 dark:text-white">Sign in to our platform</h5>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+        <%= f.label :email, :class => "" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => " mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
       </div>
-    <% end %>
-    <%= flash[:recaptcha_error] %>
-    <%#= recaptcha_tags %>
-    <%= recaptcha_v3(action: 'login', site_key: "6LfoFZ8oAAAAAOq88cQI4Pp5TTUcYqftFUH17F_w") %>
-    <%# <button class="g-recaptcha" 
+      <div class="">
+        <%= f.label :password, :class => "block text-sm font-medium text-gray-900 dark:text-white" %>
+        <%= f.password_field :password, autocomplete: "current-password", :class => "mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+      </div>
+        <div class="flex mt-8 items-start justify-between">
+          <div class="flex items-center justify-between">
+            <% if devise_mapping.rememberable? %>
+              <div class="field">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end %>
+          </div>
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <%= link_to "Forgot your password?", new_password_path(resource_name) %>
+          <% end %>
+        </div>
+      <%= flash[:recaptcha_error] %>
+      <%#= recaptcha_tags %>
+      <%= recaptcha_v3(action: 'login', site_key: "6LfoFZ8oAAAAAOq88cQI4Pp5TTUcYqftFUH17F_w") %>
+      <%# <button class="g-recaptcha" 
         data-sitekey="reCAPTCHA_site_key" 
         data-callback='onSubmit' 
         data-action='submit'>Submit</button> %>
-    <div class="actions">
-      <%= f.submit "Log in", class: "bg-[#31B978] p-4 w-[20%] rounded text-white" %>
+      <div class="actions mt-8 flex justify-center">
+        <%= f.submit "Log in", class: "block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px]" %>
+      </div>
+    <% end %>
+    <div class="actions mt-8 flex">
+      <p class="text-center text-base">Don't have an account?</p>
+    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <%= link_to "Sign up", new_registration_path(resource_name), class: "text-base text-[#31B978]" %><br />
+    <% end %>
     </div>
-  <% end %>
-  <br>
-  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <%= link_to "Sign up", new_registration_path(resource_name), class: "bg-[#4285F4] p-4 w-[20%] rounded text-white" %><br />
-  <% end %>
-  <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-    <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
-  <% end %>
-
-  <%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= form_for "Log in",
+    <div class="actions mt-8 flex justify-center">
+    <%- if devise_mapping.omniauthable? %>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= form_for "Log in",
      url: omniauth_authorize_path(resource_name, provider),
       method: :post,
        data: { turbo: "false" } do |f| %>
-  
-        <%= f.submit "log in", type: "image", src: asset_path("btn_google_signin_dark_normal_web.png") %>
+          <%= f.submit "log in", type: "image", src: asset_path("btn_google_signin_dark_normal_web.png") %>
         <% end %>
-  <% end %>
-<% end %>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
 </div>
-
- <%# <script>
-   function onSubmit(token) {
-    console.log(token);
-     document.getElementById("demo-form").submit();
-   }
- </script> %>

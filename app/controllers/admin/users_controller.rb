@@ -2,7 +2,7 @@
 
 # This is an Admin User controller
 class Admin::UsersController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_user, only: %i[edit update destroy show]
   def index
     @users = User.get_users(params)

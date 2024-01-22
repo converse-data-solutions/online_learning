@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::StudentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_student, only: %i[edit update destroy show]
   def index
     @students = User.get_students(params)
