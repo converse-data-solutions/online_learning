@@ -233,43 +233,53 @@ function formValidation() {
   function validateName() {
     let name = $("#user_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-
-    if (!namecheck) {
+  
+    if (!name) {
       $("#name-error").text("Name can't be blank");
+    } else if (!namecheck) {
+      $("#name-error").text("Please enter a valid name (only alphabets allowed)");
     } else {
       $("#name-error").text("");
     }
   }
-
+  
   function validateEmail() {
     let email = $("#user_email").val().trim();
     let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
   
-    if (!emailRegex.test(email)) {
-      $("#email-error").text("Invalid email format");
+    if (!email) {
+      $("#email-error").text("Email can't be blank");
+    } else if (!emailRegex.test(email)) {
+      $("#email-error").text("Please enter a valid email address");
     } else {
       $("#email-error").text("");
     }
   }
-
+  
   function validatePassword() {
     let password = $("#user_password").val();
-
+  
+    // Password must contain at least one uppercase letter, one numeric digit, and one special character
+    let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+  
     if (!password) {
       $("#password-error").text("Password can't be blank");
+    } else if (!passwordRegex.test(password)) {
+      $("#password-error").text("Password must contain at least one uppercase letter, one numeric digit, and one special character");
     } else {
       $("#password-error").text("");
     }
   }
-
+  
+  
   function validatePasswordConfirmation() {
     let password = $("#user_password").val();
     let password_confirmation = $("#user_password_confirmation").val();
-
-    if (!validator.equals(password, password_confirmation)) {
-      $("#password-confirmation-error").text(
-        "Password Confirmation dosen't match Password"
-      );
+  
+    if (!password_confirmation) {
+      $("#password-confirmation-error").text("Password Confirmation can't be blank");
+    } else if (!validator.equals(password, password_confirmation)) {
+      $("#password-confirmation-error").text("Password Confirmation doesn't match Password");
     } else {
       $("#password-confirmation-error").text("");
     }
@@ -363,41 +373,53 @@ function editFormValidation() {
   function validateName() {
     let name = $("#edit_user_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-
-    if (!namecheck) {
+  
+    if (!name) {
       $("#edit-name-error").text("Name can't be blank");
+    } else if (!namecheck) {
+      $("#edit-name-error").text("Please enter a valid name (only alphabets allowed)");
     } else {
-      $("#edit-name-error").text("");
+      $("#name-error").text("");
     }
   }
-
+  
   function validateEmail() {
     let email = $("#edit_user_email").val().trim();
     let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
   
-    if (!emailRegex.test(email)) {
-      $("#edit-email-error").text("Invalid email format");
+    if (!email) {
+      $("#edit-email-error").text("Email can't be blank");
+    } else if (!emailRegex.test(email)) {
+      $("#edit-email-error").text("Please enter a valid email address");
     } else {
       $("#edit-email-error").text("");
     }
   }
-
+  
   function validatePassword() {
     let password = $("#edit_user_password").val();
+  
+    // Password must contain at least one uppercase letter, one numeric digit, and one special character
+    let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+  
     if (!password) {
       $("#edit-password-error").text("Password can't be blank");
+    } else if (!passwordRegex.test(password)) {
+      $("#edit-password-error").text("Password must contain at least one uppercase letter, one numeric digit, and one special character");
     } else {
       $("#edit-password-error").text("");
     }
   }
-
+  
+  
   function validatePasswordConfirmation() {
     let password = $("#edit_user_password").val();
     let password_confirmation = $("#edit_user_password_confirmation").val();
-    if (!validator.equals(password, password_confirmation)) {
-      $("#edit-password-confirmation-error").text(
-        "Password Confirmation dosen't match Password"
-      );
+  
+    if (!password_confirmation) {
+      $("#edit-password-confirmation-error").text("Password Confirmation can't be blank");
+    } else if (!validator.equals(password, password_confirmation)) {
+      $("#edit-password-confirmation-error").text("Password Confirmation doesn't match Password");
     } else {
       $("#edit-password-confirmation-error").text("");
     }
@@ -501,23 +523,17 @@ function onclickHover() {
 // Form reset Funtion
 
 function resetNewForm(){
-  $("#student-create-close-btn").on("click", function () {
+  $(".reset-form").on("click", function () {
     console.log("values new reseted");
-    resetNewErrorMessages();
-  });
-  $(document).on("click", function () {
-    console.log("document clicked");
+    $("#user-admin-form")[0].reset()
     resetNewErrorMessages();
   });
 }
 
 function resetEditForm(){
   $("#modal-close-btn").on("click", function () {
+    $("#user-admin-edit-form")[0].reset()
     console.log("values reseted");
-    resetErrorMessages();
-  });
-  $(document).on("click", function () {
-    console.log("document clicked");
     resetErrorMessages();
   });
 }

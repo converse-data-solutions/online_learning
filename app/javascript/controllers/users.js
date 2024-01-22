@@ -288,7 +288,7 @@ function editFormValidation() {
 // Form reset Funtion
 
 function resetNewForm(){
-  $("#create-close-modal").on("click", function () {
+  $(".reset-form").on("click", function () {
     $("#user-admin-form")[0].reset()
     console.log("values new reseted");
     resetNewErrorMessages();
@@ -298,7 +298,7 @@ function resetNewForm(){
 
 function resetEditForm(){
   $("#modal-close-btn").on("click", function () {
-    $("#user-admin-form")[0].reset()
+    $("#user-admin-edit-form")[0].reset()
     console.log("values reseted");
     resetErrorMessages();
   });
