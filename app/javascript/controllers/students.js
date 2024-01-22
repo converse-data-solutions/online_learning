@@ -425,6 +425,16 @@ function editFormValidation() {
     }
   }
 
+  function validateCourseSelection() {
+    let atLeastOneChecked = $("input[name='your_model_name[course_ids][]']:checked").length > 0;
+  
+    if (!atLeastOneChecked) {
+      $("#edit-course-error").text("Please select at least one course.");
+    } else {
+      $("#edit-course-error").text("");
+    }
+  }
+
   function validateContactNumber() {
     let contactNumber = $("#edit_user_contact_number").val();
 
@@ -468,6 +478,8 @@ function editFormValidation() {
     "#edit_user_password_confirmation",
     validatePasswordConfirmation
   );
+  $("#edit-student-popup").on("input", "input[name='user[course_ids][]']", validateCourseSelection);
+
   $("#edit-student-popup").on(
     "input",
     "#edit_user_contact_number",
@@ -488,12 +500,14 @@ function editFormValidation() {
     validatePasswordConfirmation();
     validateContactNumber();
     validateEmergencyContactNumber();
+    validateCourseSelection();
 
     if (
       $("#edit-name-error").text() ||
       $("#edit-email-error").text() ||
       $("#edit-password-error").text() ||
       $("#edit-password-confirmation-error").text() ||
+      $("#edit-course-error").text() ||
       $("#edit-contact-number-error").text() ||
       $("#edit-emergency-contact-number-error").text()
     ) {
@@ -571,9 +585,11 @@ $(document).ready(function () {
 
   $(document).on("turbo:before-render", function () {
     $("#overlay").show();
+    dropdownCheckBoxes();
   });
   $(document).on("turbo:after-render", function () {
     $("#overlay").hide();
+    dropdownCheckBoxes();
   });
 });
 
