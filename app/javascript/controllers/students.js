@@ -364,6 +364,8 @@ function formValidation() {
     validateOccupation();
     validateContactNumber();
     validateEmergencyContactNumber();
+    dropdownCheckBoxes();
+
 
     if (
       $("#name-error").text() ||
@@ -548,6 +550,8 @@ function editFormValidation() {
     validateEmergencyContactNumber();
     validateCourseSelection();
     validateOccupation();
+    dropdownCheckBoxes();
+
 
     if (
       $("#edit-name-error").text() ||
