@@ -290,7 +290,6 @@ function editFormValidation() {
 function resetNewForm(){
   $(".reset-form").on("click", function () {
     $("#user-admin-form")[0].reset()
-    console.log("values new reseted");
     resetNewErrorMessages();
   });
   
@@ -299,7 +298,6 @@ function resetNewForm(){
 function resetEditForm(){
   $("#modal-close-btn").on("click", function () {
     $("#user-admin-edit-form")[0].reset()
-    console.log("values reseted");
     resetErrorMessages();
   });
 }
