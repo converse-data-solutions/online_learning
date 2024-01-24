@@ -31,7 +31,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    render layout: false
+    # render layout: false
+    # respond_to do |format|
+    #   format.turbo_stream
+    #   format.html
+    # end
     return if @user
 
     flash[:alert] = 'User not found.'

@@ -358,7 +358,7 @@ nav.main-menu li.active > a,
 }
 .profile-slider {
   top: 10px !important;
-  /* left: -20px !important; */
+  left: -7px !important;
   transform: translate(1874px, 58px);
   transition: 1s;
 }

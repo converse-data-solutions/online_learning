@@ -11,6 +11,15 @@
         ***********
       </td>
       <td class="px-6 py-4 flex gap-4">
+          <%= link_to edit_admin_user_path(user), 
+            data: { 
+              modal_target: 'large-modal', 
+              modal_toggle: 'large-modal', 
+              turbo_frame: 'edit-user-popup-frame',
+              action: 'click->modal#toggle',
+              turbo_stream: 'replace',
+              format: :turbo_stream 
+            } do %><img src="<%= asset_path("pencil.png") %>" alt="..."><% end %>
         <button data-modal-target="large-modal" data-modal-toggle="large-modal" data-turbo-frame="edit-user-popup-frame" data-action="click->modal#toggle" data-url="<%= edit_admin_user_path(user) %>" data-user-id="<%= user.id %>" class="block w-full md:w-auto edit-user-model loader-btn" type="button">
           <img src="<%= asset_path("pencil.png") %>" alt="...">
         </button>
