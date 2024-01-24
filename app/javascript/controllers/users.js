@@ -326,7 +326,6 @@ function onclickHover() {
 }
 
 $(document).ready(function () {
-  editPopup();
   deletePopup();
   tableSearch();
   formValidation();
@@ -335,7 +334,6 @@ $(document).ready(function () {
   resetNewForm();
 
   $(document).on("turbo:render", function () {
-    editPopup();
     deletePopup();
     tableSearch();
     formValidation();
@@ -358,7 +356,6 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
-    editPopup();
     deletePopup();
 
   };
