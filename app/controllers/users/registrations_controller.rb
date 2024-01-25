@@ -76,4 +76,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render :new
     end
   end
+
+  def sign_up_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :name).merge(role: 'student')
+  end
 end

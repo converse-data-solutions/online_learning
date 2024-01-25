@@ -233,45 +233,78 @@ function formValidation() {
   function validateName() {
     let name = $("#user_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-
-    if (!namecheck) {
+  
+    if (!name) {
       $("#name-error").text("Name can't be blank");
+    } else if (!namecheck) {
+      $("#name-error").text("Please enter a valid name (only alphabets allowed)");
     } else {
       $("#name-error").text("");
     }
   }
-
+  
   function validateEmail() {
     let email = $("#user_email").val().trim();
     let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
   
-    if (!emailRegex.test(email)) {
-      $("#email-error").text("Invalid email format");
+    if (!email) {
+      $("#email-error").text("Email can't be blank");
+    } else if (!emailRegex.test(email)) {
+      $("#email-error").text("Please enter a valid email address");
     } else {
       $("#email-error").text("");
     }
   }
-
+  
   function validatePassword() {
     let password = $("#user_password").val();
-
+  
+    // Password must contain at least one uppercase letter, one numeric digit, and one special character
+    let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+  
     if (!password) {
       $("#password-error").text("Password can't be blank");
+    } else if (!passwordRegex.test(password)) {
+      $("#password-error").text("Password must contain at least one uppercase letter, one numeric digit, and one special character");
     } else {
       $("#password-error").text("");
     }
   }
-
+  
+  
   function validatePasswordConfirmation() {
     let password = $("#user_password").val();
     let password_confirmation = $("#user_password_confirmation").val();
-
-    if (!validator.equals(password, password_confirmation)) {
-      $("#password-confirmation-error").text(
-        "Password Confirmation dosen't match Password"
-      );
+  
+    if (!password_confirmation) {
+      $("#password-confirmation-error").text("Password Confirmation can't be blank");
+    } else if (!validator.equals(password, password_confirmation)) {
+      $("#password-confirmation-error").text("Password Confirmation doesn't match Password");
     } else {
       $("#password-confirmation-error").text("");
+    }
+  }
+
+  function validateCourseSelection() {
+    let atLeastOneChecked = $("input[name='user[course_ids][]']:checked").length > 0;
+  
+    if (!atLeastOneChecked) {
+      $("#course-error").text("Please select at least one course.");
+    } else {
+      $("#course-error").text("");
+    }
+  }
+
+  function validateOccupation() {
+    let name = $("#user_occupation").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+  
+    if (!name) {
+      $("#occupation-error").text("Occupation can't be blank");
+    } else if (!namecheck) {
+      $("#occupation-error").text("Please enter a valid Occupation (only alphabets allowed)");
+    } else {
+      $("#occupation-error").text("");
     }
   }
 
@@ -314,6 +347,8 @@ function formValidation() {
   $("#user_email").on("input", validateEmail);
   $("#user_password").on("input", validatePassword);
   $("#user_password_confirmation").on("input", validatePasswordConfirmation);
+  $("#user_course_ids").on("input", validateCourseSelection);
+  $("#user_occupation").on("input", validateOccupation);
   $("#user_contact_number").on("input", validateContactNumber);
   $("#user_emergency_contact_number").on(
     "input",
@@ -325,14 +360,20 @@ function formValidation() {
     validateEmail();
     validatePassword();
     validatePasswordConfirmation();
+    validateCourseSelection();
+    validateOccupation();
     validateContactNumber();
     validateEmergencyContactNumber();
+    dropdownCheckBoxes();
+
 
     if (
       $("#name-error").text() ||
       $("#email-error").text() ||
       $("#password-error").text() ||
       $("#password-confirmation-error").text() ||
+      $("#course-error").text() ||
+      $("#occupation-error").text() ||
       $("#contact-number-error").text() ||
       $("#emergency-contact-number-error").text()
     ) {
@@ -348,6 +389,8 @@ function resetNewErrorMessages(){
   $("#email-error").text("");
   $("#password-error").text("");
   $("#password-confirmation-error").text("");
+  $("#course-error").text("");
+  $("#occupation-error").text("");
 }
 
 function resetErrorMessages() {
@@ -355,6 +398,8 @@ function resetErrorMessages() {
   $("#edit-email-error").text("");
   $("#edit-password-error").text("");
   $("#edit-password-confirmation-error").text("");
+  $("#edit-course-error").text("");
+  $("#edit-occupation-error").text("");
 }
 
 
@@ -363,43 +408,78 @@ function editFormValidation() {
   function validateName() {
     let name = $("#edit_user_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-
-    if (!namecheck) {
+  
+    if (!name) {
       $("#edit-name-error").text("Name can't be blank");
+    } else if (!namecheck) {
+      $("#edit-name-error").text("Please enter a valid name (only alphabets allowed)");
     } else {
-      $("#edit-name-error").text("");
+      $("#name-error").text("");
     }
   }
-
+  
   function validateEmail() {
     let email = $("#edit_user_email").val().trim();
     let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
   
-    if (!emailRegex.test(email)) {
-      $("#edit-email-error").text("Invalid email format");
+    if (!email) {
+      $("#edit-email-error").text("Email can't be blank");
+    } else if (!emailRegex.test(email)) {
+      $("#edit-email-error").text("Please enter a valid email address");
     } else {
       $("#edit-email-error").text("");
     }
   }
-
+  
   function validatePassword() {
     let password = $("#edit_user_password").val();
+  
+    // Password must contain at least one uppercase letter, one numeric digit, and one special character
+    let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+  
     if (!password) {
       $("#edit-password-error").text("Password can't be blank");
+    } else if (!passwordRegex.test(password)) {
+      $("#edit-password-error").text("Password must contain at least one uppercase letter, one numeric digit, and one special character");
     } else {
       $("#edit-password-error").text("");
     }
   }
-
+  
+  
   function validatePasswordConfirmation() {
     let password = $("#edit_user_password").val();
     let password_confirmation = $("#edit_user_password_confirmation").val();
-    if (!validator.equals(password, password_confirmation)) {
-      $("#edit-password-confirmation-error").text(
-        "Password Confirmation dosen't match Password"
-      );
+  
+    if (!password_confirmation) {
+      $("#edit-password-confirmation-error").text("Password Confirmation can't be blank");
+    } else if (!validator.equals(password, password_confirmation)) {
+      $("#edit-password-confirmation-error").text("Password Confirmation doesn't match Password");
     } else {
       $("#edit-password-confirmation-error").text("");
+    }
+  }
+
+  function validateCourseSelection() {
+    let atLeastOneChecked = $("input[name='your_model_name[course_ids][]']:checked").length > 0;
+  
+    if (!atLeastOneChecked) {
+      $("#edit-course-error").text("Please select at least one course.");
+    } else {
+      $("#edit-course-error").text("");
+    }
+  }
+
+  function validateOccupation() {
+    let name = $("#edit_user_occupation").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+  
+    if (!name) {
+      $("#edit-occupation-error").text("Occupation can't be blank");
+    } else if (!namecheck) {
+      $("#edit-occupation-error").text("Please enter a valid Occupation (only alphabets allowed)");
+    } else {
+      $("#edit-occupation-error").text("");
     }
   }
 
@@ -446,6 +526,8 @@ function editFormValidation() {
     "#edit_user_password_confirmation",
     validatePasswordConfirmation
   );
+  $("#edit-student-popup").on("input", "input[name='user[course_ids][]']", validateCourseSelection);
+  $("#edit-student-popup").on("input", "#edit_user_occupation", validateOccupation);
   $("#edit-student-popup").on(
     "input",
     "#edit_user_contact_number",
@@ -466,12 +548,18 @@ function editFormValidation() {
     validatePasswordConfirmation();
     validateContactNumber();
     validateEmergencyContactNumber();
+    validateCourseSelection();
+    validateOccupation();
+    dropdownCheckBoxes();
+
 
     if (
       $("#edit-name-error").text() ||
       $("#edit-email-error").text() ||
       $("#edit-password-error").text() ||
       $("#edit-password-confirmation-error").text() ||
+      $("#edit-course-error").text() ||
+      $("#edit-occupation-error").text() ||
       $("#edit-contact-number-error").text() ||
       $("#edit-emergency-contact-number-error").text()
     ) {
@@ -501,23 +589,17 @@ function onclickHover() {
 // Form reset Funtion
 
 function resetNewForm(){
-  $("#student-create-close-btn").on("click", function () {
+  $(".reset-form").on("click", function () {
     console.log("values new reseted");
-    resetNewErrorMessages();
-  });
-  $(document).on("click", function () {
-    console.log("document clicked");
+    $("#user-admin-form")[0].reset()
     resetNewErrorMessages();
   });
 }
 
 function resetEditForm(){
   $("#modal-close-btn").on("click", function () {
+    $("#user-admin-edit-form")[0].reset()
     console.log("values reseted");
-    resetErrorMessages();
-  });
-  $(document).on("click", function () {
-    console.log("document clicked");
     resetErrorMessages();
   });
 }
@@ -555,9 +637,11 @@ $(document).ready(function () {
 
   $(document).on("turbo:before-render", function () {
     $("#overlay").show();
+    dropdownCheckBoxes();
   });
   $(document).on("turbo:after-render", function () {
     $("#overlay").hide();
+    dropdownCheckBoxes();
   });
 });
 

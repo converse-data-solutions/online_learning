@@ -61,15 +61,11 @@
   </div>
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-      <label for="course" class="block mb-2 text-lg font-medium text-[#000]">Course</label>
+      <label for="course" class="block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="sm:w-[57%] lg:w-[55%] w-full">
         <div class="dropdown">
           <label class="dropdown-label">Select Options</label>
           <div class="dropdown-list">
-            <div class="checkbox">
-              <input type="checkbox" name="dropdown-group-all" class="check-all checkbox-custom" id="checkbox-main" />
-              <label for="checkbox-main" class="checkbox-custom-label">Selection All</label>
-            </div>
             <% Course.all.each do |course| %>
               <div class="checkbox">
                 <%= f.check_box :course_ids, { multiple: true }, course.id, nil %>
@@ -77,6 +73,7 @@
               </div>
             <% end %>
           </div>
+          <div class="text-red-600 text-sm mt-1" id="course-error"></div>
         </div>
       </div>
     </div>
@@ -123,6 +120,7 @@
       <label for="occupation" class=" block mb-2 text-lg font-medium text-[#000]">Occupation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="w-full sm:w-[55%] flex flex-col">
         <%= f.text_field :occupation, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+        <div class="text-red-600 text-sm mt-1" id="occupation-error"></div>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
@@ -136,7 +134,7 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="address" class=" block mb-2 text-lg font-medium text-[#000]">Address</label>
       <div class="w-full sm:w-[55%] flex flex-coll">
-        <%= f.text_field :addresses, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+        <%= f.text_area :addresses, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
       </div>
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">

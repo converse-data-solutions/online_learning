@@ -17,10 +17,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:google_oauth2]
 
-  validates :name, presence: true
+  validates :name, presence: true, unless: :google_oauth2_provider?
   validates :email, presence: true, uniqueness: true
-  validates :password, :password_confirmation, presence: true, on: :create
-  validates :password, :password_confirmation, presence: true, allow_nil: true, on: :update
+  validates :password, :password_confirmation, presence: true, on: :create, unless: :google_oauth2_provider?
+  validates :password, :password_confirmation, presence: true, allow_nil: true, on: :update , unless: :google_oauth2_provider?
   validates :contact_number, numericality: { only_integer: true, greater_than_or_equal_to: 0 },
                              length: { is: 10 },
                              allow_blank: true
@@ -30,6 +30,10 @@ class User < ApplicationRecord
 
   scope :admin, -> { where(deleted: false).joins(:roles).where(roles: { name: 'admin' }) }
   scope :student, -> { where(deleted: false).joins(:roles).where(roles: { name: 'student' }) }
+
+  def google_oauth2_provider?
+    provider == 'google_oauth2'
+  end
 
   enum current_type: {
     visitor: 0,
