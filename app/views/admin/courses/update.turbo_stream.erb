@@ -1,4 +1,4 @@
-<%= turbo_stream.update "course-table", partial: "admin/courses/table", locals: { courses: @courses } %>
+<%= turbo_stream.replace "course-table", partial: "admin/courses/table", locals: { courses: @courses } %>
 <%= turbo_stream.update 'render-pagination', partial: 'admin/courses/paginate', locals: { courses: @courses } %>
 <%= turbo_stream.update "edit-course-popup", partial: "admin/courses/edit", locals: { course: @course } %>
 <%= turbo_stream.append "course-table", partial: "shared/flash", locals: { message: 'Course was successfully updated.', type: 'notice' } %>

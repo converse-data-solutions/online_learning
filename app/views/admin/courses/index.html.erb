@@ -1,6 +1,8 @@
-<%= content_for :head do %> <%= javascript_import_module_tag "controllers/course" %> <% end %>
-<%= content_for :head do %> <%= javascript_import_module_tag "controllers/stepper" %> <% end %>
-<%= javascript_import_module_tag "controllers/notify" %>
+<%= content_for :head do %>
+  <%= javascript_import_module_tag "controllers/course" %>
+  <%= javascript_import_module_tag "controllers/stepper" %>
+  <%= javascript_import_module_tag "controllers/notify" %>
+<% end %>
 <div class="flex flex-col w-full">
   <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-row sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
     <div class="text-[#0BC08B] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px]  font-medium">Courses Lists</div>

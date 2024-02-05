@@ -58,8 +58,8 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.update("edit-course-popup", partial: 'admin/courses/edit', locals: { course: @course }),
-            turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Course update failed.', type: 'notice' })
+            turbo_stream.replace('admin-course-edit-form', partial: 'admin/courses/edit', locals: { course: @course }),
+            turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Course creation failed.', type: 'notice' })
           ]
         end
         format.json { render json: @course.errors, status: :unprocessable_entity }
@@ -71,10 +71,19 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course&.destroy
-        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course deleted successfully' }
+        @courses = Course.get_courses(params)
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('course-table', partial: 'admin/courses/table', locals: { courses: @courses }),
+            turbo_stream.append('course-table', partial: 'shared/flash', locals: { message: 'Course was successfully destroyed.', type: 'notice' }),
+          ]
+        end
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else
-        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course destroy failed' }
+        format.turbo_stream do
+          turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Course destroy failed.', type: 'notice' })
+          turbo_stream.update('course-table', partial: 'admin/courses/table', locals: { courses: @courses })
+        end
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
