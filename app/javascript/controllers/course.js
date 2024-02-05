@@ -33,68 +33,68 @@ function tableLessonForm() {
 // Collection-Select Style
 function collectionSelect() {
   $(".custom-select").each(function () {
-    var classes = $(this).attr("class"),
-      id = $(this).attr("id"),
-      name = $(this).attr("name");
+      var classes = $(this).attr("class"),
+        id = $(this).attr("id"),
+        name = $(this).attr("name");
 
-    var placeholderText = $(this).find("option:first-of-type").text(); // Get text of the first option
+      var placeholderText = $(this).find("option:first-of-type").text(); // Get text of the first option
 
-    var template = '<div class="' + classes + '">';
-    template +=
-      '<span class="custom-select-trigger">' + placeholderText + "</span>";
-    template += '<div class="custom-options">';
-    $(this)
-      .find("option")
-      .each(function () {
-        template +=
-          '<span class="custom-option ' +
-          $(this).attr("class") +
-          '" data-value="' +
-          $(this).attr("value") +
-          '">' +
-          $(this).html() +
-          "</span>";
-      });
-    template += "</div></div>";
+      var template = '<div class="' + classes + '">';
+      template +=
+        '<span class="custom-select-trigger">' + placeholderText + "</span>";
+      template += '<div class="custom-options">';
+      $(this)
+        .find("option")
+        .each(function () {
+          template +=
+            '<span class="custom-option ' +
+            $(this).attr("class") +
+            '" data-value="' +
+            $(this).attr("value") +
+            '">' +
+            $(this).html() +
+            "</span>";
+        });
+      template += "</div></div>";
 
-    $(this).wrap('<div class="custom-select-wrapper"></div>');
-    $(this).hide();
-    $(this).after(template);
-  });
-
-  $(".custom-option:first-of-type").hover(
-    function () {
-      $(this).parents(".custom-options").addClass("option-hover");
-    },
-    function () {
-      $(this).parents(".custom-options").removeClass("option-hover");
-    }
-  );
-
-  $(".custom-select-trigger").on("click", function (event) {
-    $("html").one("click", function () {
-      $(".custom-select").removeClass("opened");
+      $(this).wrap('<div class="custom-select-wrapper"></div>');
+      $(this).hide();
+      $(this).after(template);
     });
-    $(this).parents(".custom-select").toggleClass("opened");
-    event.stopPropagation();
-  });
 
-  $(".custom-option").on("click", function () {
-    $(this)
-      .parents(".custom-select-wrapper")
-      .find("select")
-      .val($(this).data("value"));
-    $(this)
-      .parents(".custom-options")
-      .find(".custom-option")
-      .removeClass("selection");
-    $(this).addClass("selection");
-    $(this).parents(".custom-select").removeClass("opened");
-    $(this)
-      .parents(".custom-select")
-      .find(".custom-select-trigger")
-      .text($(this).text());
-  });
+    $(".custom-option:first-of-type").hover(
+      function () {
+        $(this).parents(".custom-options").addClass("option-hover");
+      },
+      function () {
+        $(this).parents(".custom-options").removeClass("option-hover");
+      }
+    );
+
+    $(".custom-select-trigger").on("click", function (event) {
+      $("html").one("click", function () {
+        $(".custom-select").removeClass("opened");
+      });
+      $(this).parents(".custom-select").toggleClass("opened");
+      event.stopPropagation();
+    });
+
+    $(".custom-option").on("click", function () {
+      $(this)
+        .parents(".custom-select-wrapper")
+        .find("select")
+        .val($(this).data("value"));
+      $(this)
+        .parents(".custom-options")
+        .find(".custom-option")
+        .removeClass("selection");
+      $(this).addClass("selection");
+      $(this).parents(".custom-select").removeClass("opened");
+      $(this)
+        .parents(".custom-select")
+        .find(".custom-select-trigger")
+        .text($(this).text());
+    });
 }
 
 // Lesson File Upload
@@ -241,7 +241,13 @@ function courseTableSearch() {
         },
         success: function (res) {
           Turbo.renderStreamMessage(res);
-          var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + "?search=" + encodeURIComponent(searchValue);
+          var newUrl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?search=" +
+            encodeURIComponent(searchValue);
           window.history.pushState({ path: newUrl }, "", newUrl);
           $("#overlay").hide();
         },
@@ -398,6 +404,36 @@ function bottomStepper() {
   }
 }
 
+function optionSelect() {
+$(".custom-option").on("click", function () {
+  var selectedCourseId = $(this).data("value");
+  $.ajax({
+    type: 'GET',
+    url: '/admin/courses',
+    data: { course: selectedCourseId },
+    headers: {
+      Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+    },
+    success: function(data) {
+      console.log('AJAX Success:', data);
+      var newUrl =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname +
+      "?course_id=" +
+      encodeURIComponent(selectedCourseId);
+    window.history.pushState({ path: newUrl }, "", newUrl);
+    $("#overlay").hide();
+    },
+    error: function(error) {
+      console.error('AJAX Error:', error);
+    }
+  });
+  });
+}
+
+
 $(document).ready(function () {
   tableSectionForm();
   collectionSelect();
@@ -410,6 +446,7 @@ $(document).ready(function () {
   steeperLessonDeletePopup();
   topStepper();
   bottomStepper();
+  optionSelect();
 
   $(document).on("turbo:render", function () {
     tableSectionForm();
@@ -422,6 +459,7 @@ $(document).ready(function () {
     steeperLessonDeletePopup();
     topStepper();
     bottomStepper();
+    optionSelect();
 
     if ($("#stepper-loader").length > 0) {
       new HSStepper($("#stepper-loader")[0]);
@@ -440,6 +478,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     courseDeletePopup();
     steeperLessonEditPopup();
     steeperLessonDeletePopup();
+    optionSelect();
   };
 });
 
