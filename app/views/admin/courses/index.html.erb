@@ -269,34 +269,36 @@
     <%= collection_select(:course, :course_name, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
   </div>
   <label for="table-search " class="sr-only">Search</label>
-  <%= form_tag admin_courses_path, method: :get, id: "course_search_form" do %>
+  <%= form_tag admin_courses_path, method: :get, id: "course-search-form", data: { turbo_stream: true } do %>
     <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
         <img src="<%= asset_path("search.png") %>">
       </div>
-      <%= text_field_tag :search, params[:search], id: "course_search", class: "block p-2 pl-10 text-sm text-gray-900 border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type", autocomplete: "off" %>
+      <%= text_field_tag :search, params[:search], id: "course_search", class: "block p-2 pl-10 text-sm text-[#818181] border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type" %>
     </div>
   <% end %>
 </div>
-<div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px] h-[50vh]">
-  <table class="w-full text-sm text-left text-gray-500 ml-[47px] sm:ml-[63px] lg:ml-0 md:ml-[26px] dark:text-gray-400 overflow-auto table-auto">
-    <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
-      <tr>
-        <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-          Course Name
-        </th>
-        <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]]">
-          Description
-        </th>
-        <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-          Action 
-        </th>
-      </tr>
-    </thead>
-    <tbody class="overflow-auto filter-table-data" id="course-table">
-      <%= render partial: "admin/courses/table", locals: { courses: @courses } %>
-    </tbody>
-  </table>
+<div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
+  <div class="bg-white dark:bg-gray-800 h-[590px] relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
+    <table class="w-full text-sm text-left text-gray-500 ml-[47px] sm:ml-[63px] lg:ml-0 md:ml-[26px] dark:text-gray-400 overflow-auto table-auto">
+      <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+            Course Name
+          </th>
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]]">
+            Description
+          </th>
+          <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+            Action 
+          </th>
+        </tr>
+      </thead>
+      <tbody class="overflow-auto filter-table-data" id="course-table">
+        <%= render partial: "admin/courses/table", locals: { courses: @courses } %>
+      </tbody>
+    </table>
+  </div>
   <div id="course-large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
     <div class="relative w-full max-w-4xl max-h-full">
       <!-- Modal content -->

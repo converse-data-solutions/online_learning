@@ -5,7 +5,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   # before_action :authenticate_admin!
   require 'will_paginate/array'
   def index # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
-    @courses = Course.search_by_course_name(params[:search]).paginate(page: params[:page], per_page: 5)
+    @courses = Course.get_courses(params)
     if params[:section_id].present?
       @section = Section.find_by(id: params[:id])
       @lessons = @section.lessons
@@ -26,8 +26,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @course = Course.new(course_params)
     respond_to do |format|
       if @course.save
-        @courses = Course.search_by_course_name(params[:search]).paginate(page: params[:page], per_page: 5)
-
+        @courses = Course.get_courses(params)
         @show_edit_form = false
         format.html
         format.turbo_stream
@@ -53,8 +52,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course.update(course_params)
-        @courses = Course.search_by_course_name(params[:search]).paginate(page: params[:page], per_page: 5)
-
+        @courses = Course.get_courses(params)
         format.turbo_stream { redirect_to admin_courses_path, notice: 'Course updated successfully' }
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else

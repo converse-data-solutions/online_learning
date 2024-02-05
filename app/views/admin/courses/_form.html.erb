@@ -1,4 +1,4 @@
-<%= form_for Course.new, url: admin_courses_path, html: { class: "validate", id: "admin-course-form" } , method: :post do |f| %>
+<%= form_for course || Course.new, url: admin_courses_path, html: { class: "validate", id: "admin-course-form" } , method: :post do |f| %>
   <div class="flex justify-between flex-col sm:flex-row">
     <label for="course-name" class="block mb-2 text-lg font-medium text-[#000]">Course</label>
     <div class="w-60% flex flex-col mb-4">
