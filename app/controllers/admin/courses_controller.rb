@@ -53,10 +53,15 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     respond_to do |format|
       if @course.update(course_params)
         @courses = Course.get_courses(params)
-        format.turbo_stream { redirect_to admin_courses_path, notice: 'Course updated successfully' }
+        format.turbo_stream
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.update('edit-course-popup', partial: 'admin/courses/edit', locals: { course: @course }) }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update("edit-course-popup", partial: 'admin/courses/edit', locals: { course: @course }),
+            turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Course update failed.', type: 'notice' })
+          ]
+        end
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
