@@ -5,10 +5,6 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   # before_action :authenticate_admin!
   require 'will_paginate/array'
   def index # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
-    @courses = []
-    Course.all.each do |course|
-      @courses.push(course)
-    end
     @courses = Course.search_by_course_name(params[:search]).paginate(page: params[:page], per_page: 5)
     if params[:section_id].present?
       @section = Section.find_by(id: params[:id])
@@ -30,13 +26,20 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @course = Course.new(course_params)
     respond_to do |format|
       if @course.save
+        @courses = Course.search_by_course_name(params[:search]).paginate(page: params[:page], per_page: 5)
+
         @show_edit_form = false
         format.html
         format.turbo_stream
         format.json { render :show, status: :created, location: @course }
       else
         format.html
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('admin-course-form', partial: 'admin/courses/form', locals: { course: @course }) }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace('admin-course-form', partial: 'admin/courses/form', locals: { course: @course }),
+            turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Course creation failed.', type: 'notice' })
+          ]
+        end
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
@@ -50,6 +53,8 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course.update(course_params)
+        @courses = Course.search_by_course_name(params[:search]).paginate(page: params[:page], per_page: 5)
+
         format.turbo_stream { redirect_to admin_courses_path, notice: 'Course updated successfully' }
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else
