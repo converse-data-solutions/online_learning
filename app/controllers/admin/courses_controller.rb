@@ -53,7 +53,8 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     respond_to do |format|
       if @course.update(course_params)
         @courses = Course.get_courses(params)
-        format.turbo_stream
+        format.turbo_stream { render turbo_stream: turbo_stream.append('course-table', partial: 'shared/flash', locals: { message: 'Course was successfully updated.', type: 'notice' })
+      }
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else
         format.turbo_stream do
