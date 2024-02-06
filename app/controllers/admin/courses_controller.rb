@@ -4,7 +4,7 @@
 class Admin::CoursesController < ApplicationController # rubocop:disable Style/ClassAndModuleChildren
   # before_action :authenticate_admin!
   require 'will_paginate/array'
-  def index # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
+  def index
     @courses = Course.get_courses(params)
     if params[:section_id].present?
       @section = Section.find_by(id: params[:id])
@@ -22,7 +22,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @show_edit_form = true
   end
 
-  def create # rubocop:disable Metrics/MethodLength
+  def create # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     @course = Course.new(course_params)
     respond_to do |format|
       if @course.save
@@ -48,12 +48,12 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     @course = Course.find_by(id: params[:id])
   end
 
-  def update # rubocop:disable Metrics/AbcSize
+  def update # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course.update(course_params)
         @courses = Course.get_courses(params)
-        format.turbo_stream { render turbo_stream: turbo_stream.append('course-table', partial: 'shared/flash', locals: { message: 'Course was successfully updated.', type: 'notice' })
+        format.turbo_stream { render turbo_stream: turbo_stream.append('course-table', partial: 'shared/flash', locals: { message: 'Course was successfully updated.', type: 'notice' }) # rubocop:disable Layout/MultilineBlockLayout
       }
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else
@@ -69,7 +69,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     end
   end
 
-  def destroy # rubocop:disable Metrics/AbcSize
+  def destroy # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course&.destroy

@@ -634,6 +634,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     courseEditFormSubmit();
     editCourseStepValidation();
     resetCourseStepEditForm();
+    steeperSectionDeletePopup();
 
   };
 });
