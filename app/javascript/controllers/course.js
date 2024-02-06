@@ -149,7 +149,7 @@ function courseValidation() {
         $("#course-name-error").text("Course Name can't be blank");
     } 
     else if (name.replace(/ /g, "").length < 3) {
-        $("#course-name-error").text("Course name must contain at least three letters");
+        $("#course-name-error").text("Course name is not valid");
     } 
     else {
         $("#course-name-error").text("");
@@ -179,7 +179,7 @@ function editCourseValidation(){
         $("#edit-course-name-error").text("Course Name can't be blank");
     } 
     else if (name.replace(/ /g, "").length < 3) {
-        $("#edit-course-name-error").text("Course name must contain at least three letters");
+        $("#edit-course-name-error").text("Course name is not valid");
     } 
     else {
         $("#edit-course-name-error").text("");
@@ -221,6 +221,29 @@ function resetCourseEditForm(){
     $("#admin-course-edit-form")[0].reset()
     resetErrorMessages();
   });
+}
+
+// Form submit on onChange Event
+
+function courseFormSubmit(){
+  let delayTimer;
+  delayTimer = setTimeout(function () {
+    $("#admin-course-form").on("change", function (event) {
+      event.preventDefault();
+      $("#submit-course").click();
+    });
+  }, 500); 
+}
+
+function courseEditFormSubmit(){
+  let delayTimer;
+  delayTimer = setTimeout(function () {
+    $("#admin-course-edit-form").on("change", function (event) {
+      event.preventDefault();
+      $("#submit-edit-course").click();
+      resetErrorMessages();
+    });
+  }, 500);
 }
 
 // Course Steeper Section Edit Popup
@@ -427,6 +450,7 @@ function bottomStepper() {
           stepperElement.disableButtons();
         }
       });
+      
       if (stepperElement) {
         try {
           const stepperInstance = HSStepper.getInstance("[data-hs-stepper]");
@@ -522,6 +546,8 @@ $(document).ready(function () {
   editCourseValidation();
   resetCourseNewForm();
   resetCourseEditForm();
+  courseFormSubmit();
+  courseEditFormSubmit();
 
   $(document).on("turbo:render", function () {
     tableSectionForm();
@@ -540,6 +566,8 @@ $(document).ready(function () {
     editCourseValidation();
     resetCourseNewForm();
     resetCourseEditForm();
+    courseFormSubmit();
+    courseEditFormSubmit();
 
 
     if ($("#stepper-loader").length > 0) {
@@ -564,6 +592,8 @@ addEventListener("turbo:before-stream-render", (event) => {
     editCourseValidation();
     resetCourseNewForm();
     resetCourseEditForm();
+    courseFormSubmit();
+    courseEditFormSubmit();
 
   };
 });
