@@ -198,6 +198,33 @@ function editCourseValidation(){
   });
 }
 
+function editCourseStepValidation(){
+  function validateEditCourseName() {
+    let name = $("#edit-course-name").val();
+
+    if (!name) {
+        $("#edit-course-name-error").text("Course Name can't be blank");
+    } 
+    else if (name.replace(/ /g, "").length < 3) {
+        $("#edit-course-name-error").text("Course name is not valid");
+    } 
+    else {
+        $("#edit-course-name-error").text("");
+    }
+  }
+
+  $("#edit-course-name").on("input", editCourseStepValidation);
+  $("#admin-course-step-edit-form").on("submit", function (event) {
+    editCourseStepValidation();
+
+    if (
+      $("#edit-course-name-error").text()
+    ) {
+      event.preventDefault();
+    }
+  });
+}
+
 // Form reset errors
 function resetNewErrorMessages(){
   $("#course-name-error").text("");
@@ -223,6 +250,13 @@ function resetCourseEditForm(){
   });
 }
 
+function resetCourseStepEditForm(){
+  $("#course-modal-close-btn").on("click", function () {
+    $("#admin-course-step-edit-form")[0].reset()
+    resetErrorMessages();
+  });
+}
+
 // Form submit on onChange Event
 
 function courseFormSubmit(){
@@ -238,7 +272,7 @@ function courseFormSubmit(){
 function courseEditFormSubmit(){
   let delayTimer;
   delayTimer = setTimeout(function () {
-    $("#admin-course-edit-form").on("change", function (event) {
+    $("#admin-course-edit-edit-form").on("change", function (event) {
       event.preventDefault();
       $("#submit-edit-course").click();
       resetErrorMessages();
@@ -548,6 +582,8 @@ $(document).ready(function () {
   resetCourseEditForm();
   courseFormSubmit();
   courseEditFormSubmit();
+  editCourseStepValidation();
+  resetCourseStepEditForm();
 
   $(document).on("turbo:render", function () {
     tableSectionForm();
@@ -568,6 +604,8 @@ $(document).ready(function () {
     resetCourseEditForm();
     courseFormSubmit();
     courseEditFormSubmit();
+    editCourseStepValidation();
+    resetCourseStepEditForm();
 
 
     if ($("#stepper-loader").length > 0) {
@@ -594,6 +632,8 @@ addEventListener("turbo:before-stream-render", (event) => {
     resetCourseEditForm();
     courseFormSubmit();
     courseEditFormSubmit();
+    editCourseStepValidation();
+    resetCourseStepEditForm();
 
   };
 });

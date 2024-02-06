@@ -60,6 +60,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace('admin-course-edit-form', partial: 'admin/courses/edit', locals: { course: @course }),
+            turbo_stream.replace('admin-course-step-edit-form', partial: 'admin/courses/stepedit', locals: { course: @course }),
             turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Course creation failed.', type: 'notice' })
           ]
         end
