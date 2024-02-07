@@ -1,4 +1,4 @@
-  <%= form_for Lesson.new, url: admin_lessons_path, method: :post, html: { class: "custom-lesson", id: "lesson-admin-form" } do |f| %>
+  <%= form_for Lesson.new, url: admin_lessons_path, method: :post, html: { class: "custom-lesson", id: "lesson-admin-form" }, format: :turbo_stream do |f| %>
   <td><%= f.hidden_field :section_id, value: ( Course.last.sections.first&.id || section_id ) %></td>
   <%= f.text_field :title, id:"title", class: "w-[110px] sm:w-[110px] md:w-[110px] lg:w-[20%] xl:w-[20%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block p-2.5" %>
   <%= f.text_field :description, class: 'w-[125px] sm:w-[125px] md:w-[125px] lg:w-[25%] xl:w-[25%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block  p-2.5 rounded-[7px]' %>
@@ -28,5 +28,5 @@
     <%= f.file_field :attachments, multiple: true %>
     <p class="attachments text-[#0bc08b]">Attach Files</p>
   </div>
-  <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px] submit_lesson" %>
+  <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px]" %>
 <% end %>

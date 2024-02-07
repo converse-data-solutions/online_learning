@@ -1,1 +1,3 @@
 <%= turbo_stream.replace "lesson-admin-for", partial: "admin/lessons/form", locals: { lessons: @lessons, section_id: @section_id } %>
+<%= turbo_stream.replace 'lessonTable', partial: 'admin/lessons/table', locals: { lessons: @lessons } %>
+<%= turbo_stream.append 'course-table', partial: 'shared/flash', locals: { message: 'Section was successfully destroyed.', type: 'notice' } %>
