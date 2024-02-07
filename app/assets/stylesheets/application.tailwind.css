@@ -866,22 +866,24 @@ nav.main-menu li.active > a,
 .fileUploadIcon {
   position: absolute;
   cursor: pointer;
-  pointer-events: none;
+  pointer-events: visible;
   width: 50px;
-  top: 50%;
+  top: 40%;
   transform: translatey(-50%);
 }
 .clip {
   position: absolute;
-  left: 50px;
+  left: 40px;
   top: 0px;
-  pointer-events: none;
+  pointer-events: visible;
+  cursor: pointer;
 }
 .attachments {
   position: absolute;
-  left: 50px;
+  left: 40px;
   top: 0px;
-  pointer-events: none;
+  pointer-events: visible;
+  cursor: pointer;
 }
 input[type="file"] {
   opacity: 0;

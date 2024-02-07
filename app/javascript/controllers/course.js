@@ -578,12 +578,12 @@ $(document).ready(function () {
   optionSelect();
   courseValidation();
   editCourseValidation();
-  // resetCourseNewForm();
-  // resetCourseEditForm();
+  resetCourseNewForm();
+  resetCourseEditForm();
   courseFormSubmit();
   courseEditFormSubmit();
   editCourseStepValidation();
-  // resetCourseStepEditForm();
+  resetCourseStepEditForm();
 
   $(document).on("turbo:render", function () {
     tableSectionForm();
@@ -600,12 +600,12 @@ $(document).ready(function () {
     collectionSelect();
     courseValidation();
     editCourseValidation();
-    // resetCourseNewForm();
-    // resetCourseEditForm();
+    resetCourseNewForm();
+    resetCourseEditForm();
     courseFormSubmit();
     courseEditFormSubmit();
     editCourseStepValidation();
-    // resetCourseStepEditForm();
+    resetCourseStepEditForm();
 
 
     if ($("#stepper-loader").length > 0) {
@@ -628,12 +628,12 @@ addEventListener("turbo:before-stream-render", (event) => {
     optionSelect();
     courseValidation();
     editCourseValidation();
-      // resetCourseNewForm();
-      // resetCourseEditForm();
+      resetCourseNewForm();
+      resetCourseEditForm();
     courseFormSubmit();
     courseEditFormSubmit();
     editCourseStepValidation();
-    // resetCourseStepEditForm();
+    resetCourseStepEditForm();
     steeperSectionDeletePopup();
 
   };

@@ -53,7 +53,6 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     respond_to do |format|
       if @course.update(course_params)
         @courses = Course.get_courses(params)
-        byebug
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_course_url(@course) }
       else
