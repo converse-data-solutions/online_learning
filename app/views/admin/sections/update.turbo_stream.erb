@@ -1,0 +1,2 @@
+<%= turbo_stream.append "sections-body", partial: "admin/sections/table", locals: { sections: @sections } %>
+<%= turbo_stream.append 'course-table', partial: 'shared/flash', locals: { message: 'Section was successfully updated.', type: 'notice' } %>
