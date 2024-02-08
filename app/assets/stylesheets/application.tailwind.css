@@ -868,20 +868,20 @@ nav.main-menu li.active > a,
   cursor: pointer;
   pointer-events: visible;
   width: 50px;
-  top: 40%;
+  top: 50%;
   transform: translatey(-50%);
 }
 .clip {
   position: absolute;
   left: 40px;
-  top: 0px;
+  top: 7px;
   pointer-events: visible;
   cursor: pointer;
 }
 .attachments {
   position: absolute;
   left: 40px;
-  top: 0px;
+  top: 7px;
   pointer-events: visible;
   cursor: pointer;
 }

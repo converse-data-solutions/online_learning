@@ -2,3 +2,4 @@
 <%= turbo_stream.update "steeper-edit-section-popup", partial: "admin/sections/edit", locals: { section: @section } %>
 <%= turbo_stream.replace 'lesson-admin-form', partial: 'admin/lessons/form', locals: { lesson: @lesson } %>
 <%= turbo_stream.append 'course-table', partial: 'shared/flash', locals: { message: 'Section was successfully created.', type: 'notice' } %>
+<%= turbo_stream.update "lesson-table-title", partial: "admin/lessons/title", locals: { course: Course.last.sections.first&.title } %>

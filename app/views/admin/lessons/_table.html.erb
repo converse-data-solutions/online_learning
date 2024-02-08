@@ -19,7 +19,7 @@
       <td class="px-6 py-4 font-medium text-[15px] text-[#818181]">
         <% if lesson.attachments.attached? %>
           <% lesson.attachments.each do |attachment| %>
-            <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %>
+            <%= link_to "#{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %>
             <br>
           <% end %>
         <% else %>
@@ -33,8 +33,6 @@
     </tr>
   <% end %>
   <script>
-    $("#course-modal-close-btn").click();
-    $("#course-detele-modal-btn").click();
-    $("#section-modal-close-btn").click();
-    $("#section-detele-modal-btn").click();
+    $("#lesson-modal-close-btn").click();
+    $("#lesson-detele-modal-btn").click();
   </script>
