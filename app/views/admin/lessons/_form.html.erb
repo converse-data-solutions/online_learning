@@ -13,7 +13,7 @@
       </defs>
     </svg>
     <%= f.file_field :clip %>
-    <p class="clip text-[#0bc08b]">Attach Clip</p>
+    <p class="clip text-[#0bc08b] w-[170px] truncate">Attach Clip</p>
   </div>
   <div class="fileUploadWrap w-[20%]">
     <svg class="fileUploadIcon" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -26,7 +26,7 @@
       </defs>
     </svg>
     <%= f.file_field :attachments, multiple: true %>
-    <p class="attachments text-[#0bc08b]">Attach Files</p>
+    <p class="attachments text-[#0bc08b] w-[125px] truncate">Attach Files</p>
   </div>
   <%= f.submit "submit", type: "image", src: asset_path("checkmark.png"), class: "mt-[5px] ml-[25px]" %>
 <% end %>

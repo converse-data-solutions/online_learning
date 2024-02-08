@@ -9,8 +9,9 @@
       </td>
       <td class="px-6 py-4 font-medium text-[15px] text-[#818181]">
         <% if lesson.clip.attached? %>
-          <video id="video-<%= lesson.id %>" class="video-js" controls preload="auto" width="40" height="35" data-setup="{}">
-            <source src="<%= url_for(lesson.clip) %>" type="video/mp4" /> </video>
+          <video width="60" height="70" poster="<%= asset_path("video_thumbnail.png") %>" >
+            <source src="<%= url_for(lesson.clip) %>" type="video/mp4">
+          </video>
         <% else %>
           <p>No lesson attached to this record.</p>
         <% end %>
@@ -31,9 +32,9 @@
       </td>
     </tr>
   <% end %>
-<script>
+  <script>
     $("#course-modal-close-btn").click();
     $("#course-detele-modal-btn").click();
     $("#section-modal-close-btn").click();
     $("#section-detele-modal-btn").click();
-</script>
+  </script>
