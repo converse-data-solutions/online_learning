@@ -107,7 +107,7 @@ $(document).on("change", ".fileUploadWrap input[type='file']", function () {
 
 // Course Edit Popup
 function courseEditPopup() {
-  $(".edit-course-model").click(function () {
+  $("#course-table").on('click', '.edit-course-model',function () {
     let id = $(this).data("course-id");
     let url = $(this).data("url");
     $.ajax({
@@ -132,7 +132,7 @@ function courseEditPopup() {
 
 // Course Delete Popup
 function courseDeletePopup() {
-  $(".send-delete-course").click(function () {
+  $("#course-table").on('click', '.send-delete-course', function () {
     let id = $(this).data("course-id");
     $("#delete-course-model").attr("data-course-id", id);
     $("#delete-course-model").attr("href", `courses/${id}`);
@@ -621,15 +621,13 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
-    courseEditPopup();
-    courseDeletePopup();
     steeperLessonEditPopup();
     steeperLessonDeletePopup();
     optionSelect();
     courseValidation();
     editCourseValidation();
-      resetCourseNewForm();
-      resetCourseEditForm();
+    resetCourseNewForm();
+    resetCourseEditForm();
     courseFormSubmit();
     courseEditFormSubmit();
     editCourseStepValidation();
