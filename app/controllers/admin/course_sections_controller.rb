@@ -81,7 +81,7 @@ class Admin::CourseSectionsController < ApplicationController
 
   def render_destroy_success
     render turbo_stream: [
-      turbo_stream.append('section-table', partial: 'shared/flash', locals: { message: 'User was successfully destroyed.', type: 'notice' }),
+      turbo_stream.append('section-table', partial: 'shared/flash', locals: { message: 'Section was successfully destroyed.', type: 'notice' }),
       turbo_stream.update('section-table', partial: 'admin/course_sections/table', locals: { course_sections: @course_sections })
     ]
   end

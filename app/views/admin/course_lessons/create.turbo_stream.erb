@@ -1,0 +1,4 @@
+<%= turbo_stream.update "lesson-table", partial: "admin/course_lessons/table", locals: { course_lessons: @course_lessons } %>
+<%= turbo_stream.replace "lesson-index-form", partial: "admin/course_lessons/form", locals: { course_lesson: Lesson.new } %>
+<%= turbo_stream.append "lesson-table", partial: "shared/flash", locals: { message: 'Lesson was successfully created.', type: 'notice' } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/course_lessons/paginate", locals: { course_lessons: @course_lessons } %>
