@@ -54,7 +54,7 @@
                     </div>
                   </li>
                   <li class="has-subnav">
-                    <a id="course-management" class="main cursor-pointer flex selected title <%= get_active_by_pathname('/admin/courses') %> <%= get_active_by_pathname('/admin/sections') %> <%= get_active_by_pathname('/admin/lessons') %> <%= params[:controller] == "admin/courses" && params[:action] == "index" || params[:controller] == "admin/sections" && params[:action] == "index" || params[:controller] == "admin/lessons" && params[:action] == "index" ? 'openDropDown' : '' %>">
+                    <a id="course-management" class="main cursor-pointer flex selected title <%= get_active_by_pathname('/admin/courses') %> <%= get_active_by_pathname('/admin/course_sections') %> <%= get_active_by_pathname('/admin/lessons') %> <%= params[:controller] == "admin/courses" && params[:action] == "index" || params[:controller] == "admin/course_sections" && params[:action] == "index" || params[:controller] == "admin/lessons" && params[:action] == "index" ? 'openDropDown' : '' %>">
                       <div class="fa">
                         <svg class="ml-5 title test-icon " width="21" height="16" viewBox="0 0 21 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M1 4.79601L10.5 1L19.9999 4.79601L10.5 8.59201L1 4.79601Z" stroke="<%= params[:controller] == "admin/courses" && params[:action] == "index" || params[:controller] == "admin/sections" && params[:action] == "index" || params[:controller] == "admin/lessons" && params[:action] == "index" ? '#0bc08b' : '#86898F' %>" stroke-opacity="0.8" stroke-width="2" stroke-linejoin="round"/>
@@ -70,7 +70,7 @@
                         </a>
                         <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden mx-auto w-2/4">
                           <li class="flex justify-center"><a href="#" class="block font-[Poppins] text-[15px] font-medium "><%= link_to "Course", admin_courses_path, class: "#{(params[:controller] == 'admin/courses' && params[:action] == 'index') ? 'actived-link' : ''}" %></a></li>
-                          <li class="flex justify-center"><a href="#" class="block font-[Poppins] text-[15px] font-medium "><%= link_to "Section", admin_sections_path, class: "#{(params[:controller] == 'admin/sections' && params[:action] == 'index') ? 'actived-link' : ''}" %></a></li>
+                          <li class="flex justify-center"><a href="#" class="block font-[Poppins] text-[15px] font-medium "><%= link_to "Section", admin_course_sections_path, class: "#{(params[:controller] == 'admin/course_sections' && params[:action] == 'index') ? 'actived-link' : ''}" %></a></li>
                           <li class="flex justify-center"><a href="#" class="block font-[Poppins] text-[15px] font-medium "><%= link_to "Session", admin_lessons_path, class: "#{(params[:controller] == 'admin/lessons' && params[:action] == 'index') ? 'actived-link' : ''}" %> </a></li>
                         </ul>
                       </li>

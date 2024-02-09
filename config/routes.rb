@@ -53,6 +53,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :course_sections, only: %i[index edit update create destroy new]
+  end
+
+  namespace :admin do
     resources :users do
     member do
      get :edit
