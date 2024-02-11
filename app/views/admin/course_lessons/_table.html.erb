@@ -10,10 +10,7 @@
       <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
         <%= lesson.title %>
       </td>
-      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
-        <%= lesson.description %>
-      </td>
-      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+      <td class="font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
         <% if lesson.clip.attached? %>
           <video width="60" height="70" poster="<%= asset_path("video_thumbnail.png") %>" >
             <source src="<%= url_for(lesson.clip) %>" type="video/mp4">
@@ -21,6 +18,9 @@
         <% else %>
           <p>No lesson attached to this record.</p>
         <% end %>
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= lesson.description %>
       </td>
       <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
         <% if lesson.attachments.attached? %>

@@ -298,6 +298,36 @@ function collectionSelect() {
   });
 }
 
+function optionSelect() {
+  $(".custom-option").on("click", function () {
+    var selectedLessonId = $(this).data("value");
+    $.ajax({
+      type: 'GET',
+      url: '/admin/course_lessons',
+      data: { section: selectedLessonId },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function(data) {
+        Turbo.renderStreamMessage(data);
+        console.log('AJAX Success:', data);
+        var newUrl =
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        window.location.pathname +
+        "?lesson_id=" +
+        encodeURIComponent(selectedLessonId);
+      window.history.pushState({ path: newUrl }, "", newUrl);
+      $("#overlay").hide();
+      },
+      error: function(error) {
+        console.error('AJAX Error:', error);
+      }
+    });
+    });
+  }
+
 $(document).ready(function () {
   editPopup();
   deletePopup();
@@ -306,6 +336,7 @@ $(document).ready(function () {
   onclickHover();
   resetNewForm();
   collectionSelect();
+  optionSelect();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -314,7 +345,7 @@ $(document).ready(function () {
     formValidation();
     onclickHover();
     resetNewForm();
-    collectionSelect();
+    optionSelect();
   });
 
   $(document).on("turbo:before-render", function () {

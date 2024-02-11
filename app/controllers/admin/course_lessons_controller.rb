@@ -32,14 +32,12 @@ class Admin::CourseLessonsController < ApplicationController
 
   def update # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     @course_lesson = Lesson.find_by(id: params[:id])
-    byebug
     respond_to do |format|
       if @course_lesson.update(lesson_params)
         @course_lessons = Lesson.get_lessons(params)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_course_lesson_url(@course_lesson) }
       else
-        byebug
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update('edit-lesson-popup', partial: 'admin/course_lessons/edit', locals: { course_lesson: @course_lesson }),

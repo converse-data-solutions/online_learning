@@ -533,35 +533,6 @@ function bottomStepper() {
   }
 }
 
-function optionSelect() {
-$(".custom-option").on("click", function () {
-  var selectedCourseId = $(this).data("value");
-  $.ajax({
-    type: 'GET',
-    url: '/admin/courses',
-    data: { course: selectedCourseId },
-    headers: {
-      Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-    },
-    success: function(data) {
-      console.log('AJAX Success:', data);
-      var newUrl =
-      window.location.protocol +
-      "//" +
-      window.location.host +
-      window.location.pathname +
-      "?course_id=" +
-      encodeURIComponent(selectedCourseId);
-    window.history.pushState({ path: newUrl }, "", newUrl);
-    $("#overlay").hide();
-    },
-    error: function(error) {
-      console.error('AJAX Error:', error);
-    }
-  });
-  });
-}
-
 
 $(document).ready(function () {
   tableSectionForm();
@@ -575,7 +546,6 @@ $(document).ready(function () {
   steeperLessonDeletePopup();
   topStepper();
   bottomStepper();
-  optionSelect();
   courseValidation();
   editCourseValidation();
   resetCourseNewForm();
@@ -595,8 +565,6 @@ $(document).ready(function () {
     steeperLessonDeletePopup();
     topStepper();
     bottomStepper();
-    optionSelect();
-    collectionSelect();
     courseValidation();
     editCourseValidation();
     courseFormSubmit();
@@ -618,7 +586,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     initModals();
     steeperLessonEditPopup();
     steeperLessonDeletePopup();
-    optionSelect();
     courseValidation();
     editCourseValidation();
     resetCourseNewForm();

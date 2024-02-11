@@ -1,5 +1,5 @@
 function editPopup() {
-  $("#section-table").on('click', '.edit-section-model',function () {
+  $("#section-table").on("click", ".edit-section-model", function () {
     let id = $(this).data("section-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -22,7 +22,6 @@ function editPopup() {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
         editFormValidation();
-
       },
       done: function () {},
       error: function () {
@@ -34,7 +33,7 @@ function editPopup() {
 }
 
 function deletePopup() {
-  $("#section-table").on('click', '.send-delete-section',function () {
+  $("#section-table").on("click", ".send-delete-section", function () {
     let id = $(this).data("section-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -54,7 +53,7 @@ function deletePopup() {
     }
 
     if (per_page !== 10) {
-      baseUrl += (page === 1 && search === "") ? "?" : "&";
+      baseUrl += page === 1 && search === "" ? "?" : "&";
       baseUrl += `per_page=${per_page}`;
     }
 
@@ -104,21 +103,16 @@ function tableSearch() {
   });
 }
 
-
-
 function formValidation() {
-
   function validateTitle() {
     let name = $("#section_title").val();
 
     if (!name) {
-        $("#title-error").text("Title can't be blank");
-    } 
-    else if (name.replace(/ /g, "").length < 3) {
-        $("#title-error").text("Title is not valid");
-    } 
-    else {
-        $("#title-error").text("");
+      $("#title-error").text("Title can't be blank");
+    } else if (name.replace(/ /g, "").length < 3) {
+      $("#title-error").text("Title is not valid");
+    } else {
+      $("#title-error").text("");
     }
   }
 
@@ -126,23 +120,19 @@ function formValidation() {
     let courseId = $("#section_course_id").val();
 
     if (!courseId) {
-        $("#course-error").text("Please select a course");
-    } 
-    else {
-        $("#course-error").text("");
+      $("#course-error").text("Please select a course");
+    } else {
+      $("#course-error").text("");
     }
   }
 
   $("#section_title").on("input", validateTitle);
-  $("#section_course_id").on("input", validateCourse);  
+  $("#section_course_id").on("input", validateCourse);
 
   $("#section-index-form").on("submit", function (event) {
     validateTitle();
     validateCourse();
-    if (
-      $("#title-error").text() ||
-      $("#course-error").text()
-    ) {
+    if ($("#title-error").text() || $("#course-error").text()) {
       event.preventDefault();
     }
   });
@@ -150,7 +140,7 @@ function formValidation() {
 
 // Form reset errors
 
-function resetNewErrorMessages(){
+function resetNewErrorMessages() {
   $("#name-error").text("");
   $("#email-error").text("");
   $("#password-error").text("");
@@ -165,53 +155,46 @@ function resetErrorMessages() {
 }
 
 function editFormValidation() {
-
   function validateTitle() {
     let name = $("#edit-section-title").val();
 
     if (!name) {
-        $("#edit-title-error").text("Title can't be blank");
-    } 
-    else if (name.replace(/ /g, "").length < 3) {
-        $("#edit-title-error").text("Title is not valid");
-    } 
-    else {
-        $("#edit-title-error").text("");
+      $("#edit-title-error").text("Title can't be blank");
+    } else if (name.replace(/ /g, "").length < 3) {
+      $("#edit-title-error").text("Title is not valid");
+    } else {
+      $("#edit-title-error").text("");
     }
   }
 
   $("#edit-section-popup").on("input", "#edit-section-title", validateTitle);
-  
-  $("#edit-section-popup").on("submit", "#section-admin-edit-form", function (event) {
+
+  $("#edit-section-popup").on("submit", "#section-admin-edit-form", function (
+    event
+  ) {
     validateTitle();
 
-    if (
-      $("#edit-title-error").text()
-    ) {
+    if ($("#edit-title-error").text()) {
       event.preventDefault();
     }
   });
-
 }
 
 // Form reset Funtion
 
-function resetNewForm(){
+function resetNewForm() {
   $(".reset-form").on("click", function () {
-    $("#section-admin-form")[0].reset()
+    $("#section-admin-form")[0].reset();
     resetNewErrorMessages();
   });
-  
 }
 
-function resetEditForm(){
+function resetEditForm() {
   $("#modal-close-btn").on("click", function () {
-    $("#section-admin-edit-form")[0].reset()
+    $("#section-admin-edit-form")[0].reset();
     resetErrorMessages();
   });
 }
-
-
 
 //click btn hover color
 
@@ -226,7 +209,7 @@ function onclickHover() {
   });
 
   $(document).on("click", function (event) {
-    if (!$(event.target).closest('.onclick-hover').length) {
+    if (!$(event.target).closest(".onclick-hover").length) {
       $(".onclick-hover").removeClass("click-btn-color");
     }
   });
@@ -298,6 +281,37 @@ function collectionSelect() {
   });
 }
 
+function optionSelect() {
+  $(".custom-option").on("click", function () {
+    $("#overlay").show();
+    var selectedSectionId = $(this).data("value");
+    $.ajax({
+      type: "GET",
+      url: "/admin/course_sections",
+      data: { section: selectedSectionId },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function (data) {
+        Turbo.renderStreamMessage(data);
+        console.log("AJAX Success:", data);
+        var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?section=" +
+          encodeURIComponent(selectedSectionId);
+        window.history.pushState({ path: newUrl }, "", newUrl);
+        $("#overlay").hide();
+      },
+      error: function (error) {
+        console.error("AJAX Error:", error);
+      },
+    });
+  });
+}
+
 $(document).ready(function () {
   editPopup();
   deletePopup();
@@ -306,6 +320,7 @@ $(document).ready(function () {
   onclickHover();
   resetNewForm();
   collectionSelect();
+  optionSelect();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -315,6 +330,7 @@ $(document).ready(function () {
     onclickHover();
     resetNewForm();
     collectionSelect();
+    optionSelect();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -331,6 +347,5 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
-
   };
 });
