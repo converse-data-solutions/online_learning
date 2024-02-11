@@ -1,4 +1,4 @@
-<%= form_for Section.new, url: admin_sections_path(course_id: Course.last.id), method: :post, html: { class: "custom-section", id: "stepper_section-form" }, format: :turbo_stream do |f| %>
+<%= form_for Section.new, url: admin_course_sections_path(course_id: Course.last.id), method: :post, html: { class: "custom-section", id: "stepper_section-form" }, format: :turbo_stream do |f| %>
   <%= f.hidden_field :course_id, value: Course.last.id, class: "hide_course" %>
   <%= f.text_field :title, id:"section_title", class: "hide_title w-[33%] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 p-2.5 focus:border-gray-200" %>
   <% if section&.errors&.any? %>

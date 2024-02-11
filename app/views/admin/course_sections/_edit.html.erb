@@ -1,6 +1,6 @@
 <!-- Modal body -->
 <div class="p-7 space-y-6 lg:w-[95%] sm:w-[95%] w-[90%] mr-auto lg:ml-auto ml-5">
-  <%= form_for(course_section, url: admin_course_section_path(course_section), html: { class: "validate", id: "section-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
+  <%= form_for(course_section, url: admin_course_chapter_path(course_section), html: { class: "validate", id: "section-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
     <div class="flex justify-between flex-col sm:flex-row">
       <label for="course-name" class="block mb-2 text-lg font-medium text-[#000]">Title</label>
       <div class="flex flex-col mb-4">

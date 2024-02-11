@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-json.array! @users, partial: 'admin/users/user', as: :user
+json.array! @course_sections, partial: 'admin/course_sections/section', as: :course_section

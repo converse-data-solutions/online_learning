@@ -41,7 +41,7 @@
       </div>
     </div>
     <label for="table-search " class="sr-only">Search</label>
-    <%= form_tag admin_course_sections_path, method: :get, id: "section_search_form", data: { turbo_stream: true } do %>
+    <%= form_tag admin_course_chapters_path, method: :get, id: "section_search_form", data: { turbo_stream: true } do %>
       <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <img src="<%= asset_path("search.png") %>">

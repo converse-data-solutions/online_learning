@@ -70,7 +70,7 @@
                         </a>
                         <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden mx-auto w-2/4">
                           <li class="flex justify-center"><a href="#" class="block font-[Poppins] text-[15px] font-medium "><%= link_to "Course", admin_courses_path, class: "#{(params[:controller] == 'admin/courses' && params[:action] == 'index') ? 'actived-link' : ''}" %></a></li>
-                          <li class="flex justify-center"><a href="#" class="block font-[Poppins] text-[15px] font-medium "><%= link_to "Section", admin_course_sections_path, class: "#{(params[:controller] == 'admin/course_sections' && params[:action] == 'index') ? 'actived-link' : ''}" %></a></li>
+                          <li class="flex justify-center"><a href="#" class="block font-[Poppins] text-[15px] font-medium "><%= link_to "Section", admin_course_chapters_path, class: "#{(params[:controller] == 'admin/course_sections' && params[:action] == 'index') ? 'actived-link' : ''}" %></a></li>
                           <li class="flex justify-center"><a href="#" class="block font-[Poppins] text-[15px] font-medium "><%= link_to "Session", admin_course_lessons_path, class: "#{(params[:controller] == 'admin/course_lessons' && params[:action] == 'index') ? 'actived-link' : ''}" %> </a></li>
                         </ul>
                       </li>

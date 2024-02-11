@@ -11,7 +11,7 @@
         <%= section.description %>
       </td>
       <td class="px-6 py-4 flex gap-4">
-        <button data-modal-target="large-modal" data-modal-toggle="large-modal" data-turbo-frame="edit-section-popup-frame" data-action="click->modal#toggle" data-url="<%= edit_admin_course_section_path(section) %>" data-section-id="<%= section.id %>" class="block w-full md:w-auto edit-section-model loader-btn" type="button">
+        <button data-modal-target="large-modal" data-modal-toggle="large-modal" data-turbo-frame="edit-section-popup-frame" data-action="click->modal#toggle" data-url="<%= edit_admin_course_chapter_path(section) %>" data-section-id="<%= section.id %>" class="block w-full md:w-auto edit-section-model loader-btn" type="button">
           <img src="<%= asset_path("pencil.png") %>" alt="...">
         </button>
         <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-action="click->modal#toggle" data-section-id="<%= section.id %>" class="block send-delete-section loader-btn" type="button">

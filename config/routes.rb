@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :course_sections, only: %i[index edit update create destroy new]
+    resources :course_sections, only: %i[index edit update create destroy new], as: :course_chapters
   end
 
   namespace :admin do
