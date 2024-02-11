@@ -19,7 +19,7 @@ class Lesson < ApplicationRecord
     page = (page_number && page_number.positive?) ? page_number : 1
     record_per_page = (params[:per_page].presence&.to_i || 10).to_i
     per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
-    Lesson.includes(:course, :section, clip_attachment: :blob, attachments_attachments: :blob).order(title: :asc).search_by_lesson_title(params[:search]).paginate(page: params[:page], per_page: 10)
+    Lesson.includes(:course, :section, clip_attachment: :blob, attachments_attachments: :blob).order(title: :asc).search_by_lesson_title(params[:search]).search_by_lesson_title(params[:section]).paginate(page: params[:page], per_page: 10)
   end
 
   def self.search_by_lesson_title(query)

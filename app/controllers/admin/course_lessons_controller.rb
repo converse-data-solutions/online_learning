@@ -67,6 +67,10 @@ class Admin::CourseLessonsController < ApplicationController
     end
   end
 
+  def select_section
+    @course = Course.find_by(id: params[:id])
+  end
+
   private
 
   def render_invalid_lesson(format)

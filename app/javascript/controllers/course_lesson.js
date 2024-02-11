@@ -1,5 +1,5 @@
 function editPopup() {
-  $("#lesson-table").on('click', '.edit-lesson-model',function () {
+  $("#lesson-table").on("click", ".edit-lesson-model", function () {
     let id = $(this).data("lesson-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -22,7 +22,6 @@ function editPopup() {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
         editFormValidation();
-
       },
       done: function () {},
       error: function () {
@@ -34,7 +33,7 @@ function editPopup() {
 }
 
 function deletePopup() {
-  $("#lesson-table").on('click', '.send-delete-lesson',function () {
+  $("#lesson-table").on("click", ".send-delete-lesson", function () {
     let id = $(this).data("lesson-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -54,7 +53,7 @@ function deletePopup() {
     }
 
     if (per_page !== 10) {
-      baseUrl += (page === 1 && search === "") ? "?" : "&";
+      baseUrl += page === 1 && search === "" ? "?" : "&";
       baseUrl += `per_page=${per_page}`;
     }
 
@@ -104,21 +103,16 @@ function tableSearch() {
   });
 }
 
-
-
 function formValidation() {
-
   function validateTitle() {
     let name = $("#lesson_title").val();
 
     if (!name) {
-        $("#title-error").text("Title can't be blank");
-    } 
-    else if (name.replace(/ /g, "").length < 3) {
-        $("#title-error").text("Title is not valid");
-    } 
-    else {
-        $("#title-error").text("");
+      $("#title-error").text("Title can't be blank");
+    } else if (name.replace(/ /g, "").length < 3) {
+      $("#title-error").text("Title is not valid");
+    } else {
+      $("#title-error").text("");
     }
   }
 
@@ -126,23 +120,19 @@ function formValidation() {
     let sectionId = $("#lesson_section_id").val();
 
     if (!sectionId) {
-        $("#section-error").text("Please select a course");
-    } 
-    else {
-        $("#section-error").text("");
+      $("#section-error").text("Please select a course");
+    } else {
+      $("#section-error").text("");
     }
   }
 
   $("#lesson_title").on("input", validateTitle);
-  $("#lesson_section_id").on("input", validateCourse);  
+  $("#lesson_section_id").on("input", validateCourse);
 
   $("#lesson-index-form").on("submit", function (event) {
     validateTitle();
     validateCourse();
-    if (
-      $("#title-error").text() ||
-      $("#section-error").text()
-    ) {
+    if ($("#title-error").text() || $("#section-error").text()) {
       event.preventDefault();
     }
   });
@@ -150,7 +140,7 @@ function formValidation() {
 
 // Form reset errors
 
-function resetNewErrorMessages(){
+function resetNewErrorMessages() {
   $("#name-error").text("");
   $("#email-error").text("");
   $("#password-error").text("");
@@ -165,53 +155,46 @@ function resetErrorMessages() {
 }
 
 function editFormValidation() {
-
   function validateTitle() {
     let name = $("#edit-lesson-title").val();
 
     if (!name) {
-        $("#edit-title-error").text("Title can't be blank");
-    } 
-    else if (name.replace(/ /g, "").length < 3) {
-        $("#edit-title-error").text("Title is not valid");
-    } 
-    else {
-        $("#edit-title-error").text("");
+      $("#edit-title-error").text("Title can't be blank");
+    } else if (name.replace(/ /g, "").length < 3) {
+      $("#edit-title-error").text("Title is not valid");
+    } else {
+      $("#edit-title-error").text("");
     }
   }
 
   $("#edit-lesson-popup").on("input", "#edit-lesson-title", validateTitle);
-  
-  $("#edit-lesson-popup").on("submit", "#lesson-admin-edit-form", function (event) {
+
+  $("#edit-lesson-popup").on("submit", "#lesson-admin-edit-form", function (
+    event
+  ) {
     validateTitle();
 
-    if (
-      $("#edit-title-error").text()
-    ) {
+    if ($("#edit-title-error").text()) {
       event.preventDefault();
     }
   });
-
 }
 
 // Form reset Funtion
 
-function resetNewForm(){
+function resetNewForm() {
   $(".reset-form").on("click", function () {
-    $("#section-admin-form")[0].reset()
+    $("#section-admin-form")[0].reset();
     resetNewErrorMessages();
   });
-  
 }
 
-function resetEditForm(){
+function resetEditForm() {
   $("#modal-close-btn").on("click", function () {
-    $("#section-admin-edit-form")[0].reset()
+    $("#section-admin-edit-form")[0].reset();
     resetErrorMessages();
   });
 }
-
-
 
 //click btn hover color
 
@@ -226,7 +209,7 @@ function onclickHover() {
   });
 
   $(document).on("click", function (event) {
-    if (!$(event.target).closest('.onclick-hover').length) {
+    if (!$(event.target).closest(".onclick-hover").length) {
       $(".onclick-hover").removeClass("click-btn-color");
     }
   });
@@ -298,35 +281,66 @@ function collectionSelect() {
   });
 }
 
-function optionSelect() {
+function optionSectionSelect() {
   $(".custom-option").on("click", function () {
     var selectedLessonId = $(this).data("value");
     $.ajax({
-      type: 'GET',
-      url: '/admin/course_lessons',
+      type: "GET",
+      url: "/admin/course_lessons",
       data: { section: selectedLessonId },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function(data) {
+      success: function (data) {
         Turbo.renderStreamMessage(data);
-        console.log('AJAX Success:', data);
+        console.log("AJAX Success:", data);
         var newUrl =
-        window.location.protocol +
-        "//" +
-        window.location.host +
-        window.location.pathname +
-        "?lesson_id=" +
-        encodeURIComponent(selectedLessonId);
-      window.history.pushState({ path: newUrl }, "", newUrl);
-      $("#overlay").hide();
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?lesson_id=" +
+          encodeURIComponent(selectedLessonId);
+        window.history.pushState({ path: newUrl }, "", newUrl);
+        $("#overlay").hide();
       },
-      error: function(error) {
-        console.error('AJAX Error:', error);
-      }
+      error: function (error) {
+        console.error("AJAX Error:", error);
+      },
     });
+  });
+}
+
+function optionSelect() {
+  $(".custom-option").on("click", function () {
+    $("#overlay").show();
+    var selectedLessonId = $(this).data("value");
+    $.ajax({
+      type: "GET",
+      url: "/admin/course_lessons",
+      data: { lesson: selectedLessonId },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function (data) {
+        Turbo.renderStreamMessage(data);
+        console.log("AJAX Success:", data);
+        var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?lesson=" +
+          encodeURIComponent(selectedLessonId);
+        window.history.pushState({ path: newUrl }, "", newUrl);
+        $("#overlay").hide();
+      },
+      error: function (error) {
+        console.error("AJAX Error:", error);
+      },
     });
-  }
+  });
+}
 
 $(document).ready(function () {
   editPopup();
@@ -337,6 +351,7 @@ $(document).ready(function () {
   resetNewForm();
   collectionSelect();
   optionSelect();
+  optionSectionSelect();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -346,6 +361,7 @@ $(document).ready(function () {
     onclickHover();
     resetNewForm();
     optionSelect();
+    optionSectionSelect();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -362,6 +378,5 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
-
   };
 });
