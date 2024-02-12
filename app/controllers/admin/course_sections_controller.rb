@@ -1,7 +1,7 @@
 class Admin::CourseSectionsController < ApplicationController
-
+  before_action :set_course_section, only: %i[edit update destroy]
   def index
-    @course_sections = Section.get_sections(params)
+    @course_sections = Section.get_sections(params, :index)
     respond_to do |format|
       format.json { render json: { data: @sections, total_count: Section.count } }
       format.html { render :index }
@@ -26,9 +26,7 @@ class Admin::CourseSectionsController < ApplicationController
     end
   end
 
-  def edit
-    @course_section = Section.find_by(id: params[:id])
-  end
+  def edit; end
 
   def update
     @course_section = Section.find_by(id: params[:id])
@@ -68,6 +66,10 @@ class Admin::CourseSectionsController < ApplicationController
   end
 
   private
+
+  def set_course_section
+    @course_section = Section.find_by(id: params[:id])
+  end
 
   def render_invalid_section(format)
     format.turbo_stream do

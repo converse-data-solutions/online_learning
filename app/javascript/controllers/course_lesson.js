@@ -293,7 +293,6 @@ function optionSectionSelect() {
       },
       success: function (data) {
         Turbo.renderStreamMessage(data);
-        console.log("AJAX Success:", data);
         var newUrl =
           window.location.protocol +
           "//" +
@@ -324,7 +323,6 @@ function optionSelect() {
       },
       success: function (data) {
         Turbo.renderStreamMessage(data);
-        console.log("AJAX Success:", data);
         var newUrl =
           window.location.protocol +
           "//" +
@@ -342,6 +340,30 @@ function optionSelect() {
   });
 }
 
+function selectSection() {
+  console.log("loaded...........");
+  $('.custom-option').on('click', function () {
+    var courseId = $(this).data('value');
+
+    // Make an AJAX request to fetch sections for the selected course
+    $.ajax({
+      url: '/admin/course_lessons/select_section',
+      method: 'GET',
+      data: { course_id: courseId },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function (data) {
+        // Replace the sections select dropdown with the updated content
+        $('#section_title').empty().append(data);
+      },
+      error: function (error) {
+        console.error('Error:', error);
+      }
+    });
+  });
+}
+
 $(document).ready(function () {
   editPopup();
   deletePopup();
@@ -350,8 +372,9 @@ $(document).ready(function () {
   onclickHover();
   resetNewForm();
   collectionSelect();
-  optionSelect();
-  optionSectionSelect();
+  // optionSelect();
+  // optionSectionSelect();
+  selectSection();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -360,8 +383,9 @@ $(document).ready(function () {
     formValidation();
     onclickHover();
     resetNewForm();
-    optionSelect();
-    optionSectionSelect();
+    // optionSelect();
+    // optionSectionSelect();
+    selectSection();
   });
 
   $(document).on("turbo:before-render", function () {

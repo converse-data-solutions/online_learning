@@ -31,5 +31,13 @@ class Lesson < ApplicationRecord
     end
   end
 
+  def self.search_using_dropdown(query)
+    if query.present?
+      where(section_id: query)
+    else
+      all
+    end
+  end
+
   validates :title, presence: true
 end
