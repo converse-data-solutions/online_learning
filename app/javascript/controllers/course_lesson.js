@@ -347,6 +347,72 @@ function sectionSelect() {
   });
 }
 
+function lessonSelect() {
+  $(".new-lesson-custom-select").each(function () {
+    var classes = $(this).attr("class"),
+      id = $(this).attr("id"),
+      name = $(this).attr("name");
+
+    var placeholderText = $(this).find("option:first-of-type").text();
+
+    var template = '<div class="' + classes + '">';
+    template +=
+      '<span class="new-lesson-custom-select-trigger">' + placeholderText + "</span>";
+    template += '<div class="new-lesson-custom-options">';
+    $(this)
+      .find("option")
+      .each(function () {
+        template +=
+          '<span class="new-lesson-custom-option ' +
+          $(this).attr("class") +
+          '" data-value="' +
+          $(this).attr("value") +
+          '">' +
+          $(this).html() +
+          "</span>";
+      });
+    template += "</div></div>";
+
+    $(this).wrap('<div class="new-lesson-custom-select-wrapper"></div>');
+    $(this).hide();
+    $(this).after(template);
+  });
+
+  $(".new-lesson-custom-option:first-of-type").hover(
+    function () {
+      $(this).parents(".new-lesson-custom-options").addClass("option-hover");
+    },
+    function () {
+      $(this).parents(".new-lesson-custom-options").removeClass("option-hover");
+    }
+  );
+
+  $(".new-lesson-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
+      $(".new-lesson-custom-select").removeClass("opened");
+    });
+    $(this).parents(".new-lesson-custom-select").toggleClass("opened");
+    event.stopPropagation();
+  });
+
+  $(".new-lesson-custom-option").on("click", function () {
+    $(this)
+      .parents(".new-lesson-custom-select-wrapper")
+      .find("select")
+      .val($(this).data("value"));
+    $(this)
+      .parents(".new-lesson-custom-options")
+      .find(".new-lesson-custom-option")
+      .removeClass("selection");
+    $(this).addClass("selection");
+    $(this).parents(".new-lesson-custom-select").removeClass("opened");
+    $(this)
+      .parents(".new-lesson-custom-select")
+      .find(".new-lesson-custom-select-trigger")
+      .text($(this).text());
+  });
+}
+
 function optionSelect() {
   $(".new-custom-option").on("click", function () {
     $("#overlay").show();
@@ -415,6 +481,7 @@ $(document).ready(function () {
   optionSelect();
   selectSection();
   sectionSelect();
+  lessonSelect();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -426,6 +493,7 @@ $(document).ready(function () {
     optionSelect();
     selectSection();
     sectionSelect();
+    lessonSelect();
   });
 
   $(document).on("turbo:before-render", function () {

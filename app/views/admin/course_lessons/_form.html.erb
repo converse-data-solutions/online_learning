@@ -3,7 +3,7 @@
     <div class="flex flex-col md:flex-row items-start mb-4 md:w-[50%] w-full">
       <label for="Section" class="md:w-[30%] w-[30%] block mb-2 text-lg font-medium text-[#000]">Section</label>
       <div class=" flex flex-col mb-4">
-        <%= collection_select(:lesson, :section_id, Section.all, :id, :title, { prompt: "Select Section", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select custom-select-border sources" })  %>
+        <%= collection_select(:lesson, :section_id, Section.all, :id, :title, { prompt: "Select Section", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select new-lesson-custom-select-border sources" })  %>
         <div class="text-red-600 text-sm mt-1" id="section-error"></div>
       </div>
     </div>
