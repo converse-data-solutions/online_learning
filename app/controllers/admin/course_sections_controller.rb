@@ -1,4 +1,5 @@
 class Admin::CourseSectionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_course_section, only: %i[edit update destroy]
   def index
     @course_sections = Section.get_sections(params, :index)
@@ -29,7 +30,6 @@ class Admin::CourseSectionsController < ApplicationController
   def edit; end
 
   def update
-    @course_section = Section.find_by(id: params[:id])
     respond_to do |format|
       if @course_section.update(section_params)
         @course_sections = Section.get_sections(params)
@@ -47,7 +47,6 @@ class Admin::CourseSectionsController < ApplicationController
   end
 
   def destroy # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
-    @course_section = Section.find_by(id: params[:id])
     respond_to do |format|
       if @course_section.destroy
         @course_sections = Section.get_sections(params)

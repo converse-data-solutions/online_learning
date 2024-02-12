@@ -1,5 +1,5 @@
 function editPopup() {
-  $("#section-table").on("click", ".edit-section-model", function () {
+  $("#section-table").on("click", ".edit-section-model", function() {
     let id = $(this).data("section-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -18,13 +18,13 @@ function editPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
         editFormValidation();
       },
-      done: function () {},
-      error: function () {
+      done: function() {},
+      error: function() {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -33,7 +33,7 @@ function editPopup() {
 }
 
 function deletePopup() {
-  $("#section-table").on("click", ".send-delete-section", function () {
+  $("#section-table").on("click", ".send-delete-section", function() {
     let id = $(this).data("section-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -66,9 +66,9 @@ function deletePopup() {
 function tableSearch() {
   let delayTimer;
 
-  $("#section_search").on("input", function (e) {
+  $("#section_search").on("input", function(e) {
     clearTimeout(delayTimer);
-    delayTimer = setTimeout(function () {
+    delayTimer = setTimeout(function() {
       let searchValue = $("#section_search").val();
       $("#overlay").show();
 
@@ -79,10 +79,9 @@ function tableSearch() {
           search: searchValue,
         },
         headers: {
-          Accept:
-            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function (res) {
+        success: function(res) {
           Turbo.renderStreamMessage(res);
           var newURL =
             window.location.protocol +
@@ -91,10 +90,12 @@ function tableSearch() {
             window.location.pathname +
             "?search=" +
             encodeURIComponent(searchValue);
-          window.history.pushState({ path: newURL }, "", newURL);
+          window.history.pushState({
+            path: newURL
+          }, "", newURL);
           $("#overlay").hide();
         },
-        error: function () {
+        error: function() {
           console.log("Error fetching data");
           $("#overlay").hide();
         },
@@ -129,7 +130,7 @@ function formValidation() {
   $("#section_title").on("input", validateTitle);
   $("#section_course_id").on("input", validateCourse);
 
-  $("#section-index-form").on("submit", function (event) {
+  $("#section-index-form").on("submit", function(event) {
     validateTitle();
     validateCourse();
     if ($("#title-error").text() || $("#course-error").text()) {
@@ -169,7 +170,7 @@ function editFormValidation() {
 
   $("#edit-section-popup").on("input", "#edit-section-title", validateTitle);
 
-  $("#edit-section-popup").on("submit", "#section-admin-edit-form", function (
+  $("#edit-section-popup").on("submit", "#section-admin-edit-form", function(
     event
   ) {
     validateTitle();
@@ -183,14 +184,14 @@ function editFormValidation() {
 // Form reset Funtion
 
 function resetNewForm() {
-  $(".reset-form").on("click", function () {
+  $(".reset-form").on("click", function() {
     $("#section-admin-form")[0].reset();
     resetNewErrorMessages();
   });
 }
 
 function resetEditForm() {
-  $("#modal-close-btn").on("click", function () {
+  $("#modal-close-btn").on("click", function() {
     $("#section-admin-edit-form")[0].reset();
     resetErrorMessages();
   });
@@ -199,16 +200,16 @@ function resetEditForm() {
 //click btn hover color
 
 function onclickHover() {
-  $(".onclick-hover").on("click", function (event) {
+  $(".onclick-hover").on("click", function(event) {
     event.stopPropagation();
     $(this).addClass("click-btn-color");
   });
 
-  $("#create-close-modal").on("click", function () {
+  $("#create-close-modal").on("click", function() {
     $(".onclick-hover").removeClass("click-btn-color");
   });
 
-  $(document).on("click", function (event) {
+  $(document).on("click", function(event) {
     if (!$(event.target).closest(".onclick-hover").length) {
       $(".onclick-hover").removeClass("click-btn-color");
     }
@@ -216,7 +217,7 @@ function onclickHover() {
 }
 
 function collectionSelect() {
-  $("#filter-container .custom-select").each(function () {
+  $("#filter-container .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -229,7 +230,7 @@ function collectionSelect() {
     template += '<div class="custom-options">';
     $(this)
       .find("option")
-      .each(function () {
+      .each(function() {
         template +=
           '<span class="custom-option ' +
           $(this).attr("class") +
@@ -247,23 +248,23 @@ function collectionSelect() {
   });
 
   $(".custom-option:first-of-type").hover(
-    function () {
+    function() {
       $(this).parents(".custom-options").addClass("option-hover");
     },
-    function () {
+    function() {
       $(this).parents(".custom-options").removeClass("option-hover");
     }
   );
 
-  $(".custom-select-trigger").on("click", function (event) {
-    $("html").one("click", function () {
+  $(".custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
       $(".custom-select").removeClass("opened");
     });
     $(this).parents(".custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".custom-option").on("click", function () {
+  $(".custom-option").on("click", function() {
     $(this)
       .parents(".custom-select-wrapper")
       .find("select")
@@ -282,7 +283,7 @@ function collectionSelect() {
 }
 
 function sectionSelect() {
-  $("#section-index-form .new-custom-select").each(function () {
+  $("#section-index-form .new-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -295,7 +296,7 @@ function sectionSelect() {
     template += '<div class="new-custom-options">';
     $(this)
       .find("option")
-      .each(function () {
+      .each(function() {
         template +=
           '<span class="new-custom-option ' +
           $(this).attr("class") +
@@ -313,23 +314,23 @@ function sectionSelect() {
   });
 
   $(".new-custom-option:first-of-type").hover(
-    function () {
+    function() {
       $(this).parents(".new-custom-options").addClass("option-hover");
     },
-    function () {
+    function() {
       $(this).parents(".new-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-custom-select-trigger").on("click", function (event) {
-    $("html").one("click", function () {
+  $(".new-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
       $(".new-custom-select").removeClass("opened");
     });
     $(this).parents(".new-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-custom-option").on("click", function () {
+  $(".new-custom-option").on("click", function() {
     $(this)
       .parents(".new-custom-select-wrapper")
       .find("select")
@@ -350,17 +351,19 @@ function sectionSelect() {
 
 
 function optionSelect() {
-  $("#filter-container .custom-select").on("click", ".custom-option", function () {
+  $("#filter-container .custom-select").on("click", ".custom-option", function() {
     $("#overlay").show();
     var selectedSectionId = $(this).data("value");
     $.ajax({
       type: "GET",
       url: "/admin/course_sections",
-      data: { section: selectedSectionId },
+      data: {
+        section: selectedSectionId
+      },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function (data) {
+      success: function(data) {
         Turbo.renderStreamMessage(data);
         var newUrl =
           window.location.protocol +
@@ -369,17 +372,19 @@ function optionSelect() {
           window.location.pathname +
           "?section=" +
           encodeURIComponent(selectedSectionId);
-        window.history.pushState({ path: newUrl }, "", newUrl);
+        window.history.pushState({
+          path: newUrl
+        }, "", newUrl);
         $("#overlay").hide();
       },
-      error: function (error) {
+      error: function(error) {
         console.error("AJAX Error:", error);
       },
     });
   });
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
   editPopup();
   deletePopup();
   tableSearch();
@@ -390,7 +395,7 @@ $(document).ready(function () {
   optionSelect();
   sectionSelect();
 
-  $(document).on("turbo:render", function () {
+  $(document).on("turbo:render", function() {
     editPopup();
     deletePopup();
     tableSearch();
@@ -402,10 +407,10 @@ $(document).ready(function () {
     sectionSelect();
   });
 
-  $(document).on("turbo:before-render", function () {
+  $(document).on("turbo:before-render", function() {
     $("#overlay").show();
   });
-  $(document).on("turbo:after-render", function () {
+  $(document).on("turbo:after-render", function() {
     $("#overlay").hide();
   });
 });
@@ -413,7 +418,7 @@ $(document).ready(function () {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function (streamElement) {
+  event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
   };

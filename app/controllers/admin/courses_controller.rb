@@ -2,7 +2,7 @@
 
 # This is an Admin Course controller
 class Admin::CoursesController < ApplicationController # rubocop:disable Style/ClassAndModuleChildren
-  # before_action :authenticate_admin!
+  before_action :authenticate_user!
   require 'will_paginate/array'
   def index
     @courses = Course.get_courses(params)

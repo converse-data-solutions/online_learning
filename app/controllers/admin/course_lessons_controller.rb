@@ -1,5 +1,6 @@
 class Admin::CourseLessonsController < ApplicationController
-
+  before_action :authenticate_user!
+  before_action :set_course_lesson, only: %i[edit update destroy]
   def index
     @course_lessons = Lesson.get_lessons(params, :index)
     respond_to do |format|
@@ -26,12 +27,9 @@ class Admin::CourseLessonsController < ApplicationController
     end
   end
 
-  def edit
-    @course_lesson = Lesson.find_by(id: params[:id])
-  end
+  def edit; end
 
   def update # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
-    @course_lesson = Lesson.find_by(id: params[:id])
     respond_to do |format|
       if @course_lesson.update(lesson_params)
         @course_lessons = Lesson.get_lessons(params)
@@ -49,7 +47,6 @@ class Admin::CourseLessonsController < ApplicationController
   end
 
   def destroy # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
-    @course_lesson = Lesson.find_by(id: params[:id])
     respond_to do |format|
       if @course_lesson.destroy
         @course_lessons = Lesson.get_lessons(params)
@@ -77,6 +74,10 @@ class Admin::CourseLessonsController < ApplicationController
   end
 
   private
+
+  def set_course_lesson
+    @course_lesson = Lesson.find_by(id: params[:id])
+  end
 
   def render_invalid_lesson(format)
     format.turbo_stream do

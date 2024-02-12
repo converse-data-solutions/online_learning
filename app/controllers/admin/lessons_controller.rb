@@ -29,7 +29,6 @@ class Admin::LessonsController < ApplicationController
 
   def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @lesson = Lesson.new(lesson_params)
-    byebug
     respond_to do |format|
       if @lesson.save
         @lessons = Lesson.where(section_id: @lesson.section_id)
@@ -50,7 +49,6 @@ class Admin::LessonsController < ApplicationController
 
   def update
     respond_to do |format|
-      byebug
       if @lesson.update(lesson_params)
         @lessons = Lesson.where(section_id: @lesson.section_id)
         format.turbo_stream

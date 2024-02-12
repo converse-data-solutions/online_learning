@@ -1,5 +1,5 @@
 function editPopup() {
-  $(".edit-user-model").click(function () {
+  $(".edit-user-model").click(function() {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -18,14 +18,14 @@ function editPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
         editFormValidation();
 
       },
-      done: function () {},
-      error: function () {
+      done: function() {},
+      error: function() {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -34,7 +34,7 @@ function editPopup() {
 }
 
 function deletePopup() {
-  $(".send-delete-user").click(function () {
+  $(".send-delete-user").click(function() {
     let id = $(this).data("user-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -67,9 +67,9 @@ function deletePopup() {
 function tableSearch() {
   let delayTimer;
 
-  $("#user_search").on("input", function (e) {
+  $("#user_search").on("input", function(e) {
     clearTimeout(delayTimer);
-    delayTimer = setTimeout(function () {
+    delayTimer = setTimeout(function() {
       let searchValue = $("#user_search").val();
       $("#overlay").show();
 
@@ -80,10 +80,9 @@ function tableSearch() {
           search: searchValue,
         },
         headers: {
-          Accept:
-            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function (res) {
+        success: function(res) {
           Turbo.renderStreamMessage(res);
           var newURL =
             window.location.protocol +
@@ -92,10 +91,12 @@ function tableSearch() {
             window.location.pathname +
             "?search=" +
             encodeURIComponent(searchValue);
-          window.history.pushState({ path: newURL }, "", newURL);
+          window.history.pushState({
+            path: newURL
+          }, "", newURL);
           $("#overlay").hide();
         },
-        error: function () {
+        error: function() {
           console.log("Error fetching data");
           $("#overlay").hide();
         },
@@ -110,7 +111,7 @@ function formValidation() {
   function validateName() {
     let name = $("#user_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-  
+
     if (!name) {
       $("#name-error").text("Name can't be blank");
     } else if (!namecheck) {
@@ -119,11 +120,11 @@ function formValidation() {
       $("#name-error").text("");
     }
   }
-  
+
   function validateEmail() {
     let email = $("#user_email").val().trim();
     let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-  
+
     if (!email) {
       $("#email-error").text("Email can't be blank");
     } else if (!emailRegex.test(email)) {
@@ -132,13 +133,13 @@ function formValidation() {
       $("#email-error").text("");
     }
   }
-  
+
   function validatePassword() {
     let password = $("#user_password").val();
-  
+
     // Password must contain at least one uppercase letter, one numeric digit, and one special character
     let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-  
+
     if (!password) {
       $("#password-error").text("Password can't be blank");
     } else if (!passwordRegex.test(password)) {
@@ -147,12 +148,12 @@ function formValidation() {
       $("#password-error").text("");
     }
   }
-  
-  
+
+
   function validatePasswordConfirmation() {
     let password = $("#user_password").val();
     let password_confirmation = $("#user_password_confirmation").val();
-  
+
     if (!password_confirmation) {
       $("#password-confirmation-error").text("Password Confirmation can't be blank");
     } else if (!validator.equals(password, password_confirmation)) {
@@ -161,14 +162,14 @@ function formValidation() {
       $("#password-confirmation-error").text("");
     }
   }
-  
+
 
   $("#user_name").on("input", validateName);
   $("#user_email").on("input", validateEmail);
   $("#user_password").on("input", validatePassword);
   $("#user_password_confirmation").on("input", validatePasswordConfirmation);
 
-  $("#user-admin-form").on("submit", function (event) {
+  $("#user-admin-form").on("submit", function(event) {
     validateName();
     validateEmail();
     validatePassword();
@@ -187,7 +188,7 @@ function formValidation() {
 
 // Form reset errors
 
-function resetNewErrorMessages(){
+function resetNewErrorMessages() {
   $("#name-error").text("");
   $("#email-error").text("");
   $("#password-error").text("");
@@ -205,7 +206,7 @@ function editFormValidation() {
   function validateName() {
     let name = $("#edit_user_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-  
+
     if (!name) {
       $("#edit-name-error").text("Name can't be blank");
     } else if (!namecheck) {
@@ -214,11 +215,11 @@ function editFormValidation() {
       $("#name-error").text("");
     }
   }
-  
+
   function validateEmail() {
     let email = $("#edit_user_email").val().trim();
     let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-  
+
     if (!email) {
       $("#edit-email-error").text("Email can't be blank");
     } else if (!emailRegex.test(email)) {
@@ -227,13 +228,13 @@ function editFormValidation() {
       $("#edit-email-error").text("");
     }
   }
-  
+
   function validatePassword() {
     let password = $("#edit_user_password").val();
-  
+
     // Password must contain at least one uppercase letter, one numeric digit, and one special character
     let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-  
+
     if (!password) {
       $("#edit-password-error").text("Password can't be blank");
     } else if (!passwordRegex.test(password)) {
@@ -242,12 +243,12 @@ function editFormValidation() {
       $("#edit-password-error").text("");
     }
   }
-  
-  
+
+
   function validatePasswordConfirmation() {
     let password = $("#edit_user_password").val();
     let password_confirmation = $("#edit_user_password_confirmation").val();
-  
+
     if (!password_confirmation) {
       $("#edit-password-confirmation-error").text("Password Confirmation can't be blank");
     } else if (!validator.equals(password, password_confirmation)) {
@@ -256,7 +257,7 @@ function editFormValidation() {
       $("#edit-password-confirmation-error").text("");
     }
   }
-  
+
 
   $("#edit-user-popup").on("input", "#edit_user_name", validateName);
   $("#edit-user-popup").on("input", "#edit_user_email", validateEmail);
@@ -267,7 +268,7 @@ function editFormValidation() {
     validatePasswordConfirmation
   );
 
-  $("#edit-user-popup").on("submit", "#user-admin-edit-form", function (event) {
+  $("#edit-user-popup").on("submit", "#user-admin-edit-form", function(event) {
     validateName();
     validateEmail();
     validatePassword();
@@ -287,16 +288,16 @@ function editFormValidation() {
 
 // Form reset Funtion
 
-function resetNewForm(){
-  $(".reset-form").on("click", function () {
+function resetNewForm() {
+  $(".reset-form").on("click", function() {
     $("#user-admin-form")[0].reset()
     resetNewErrorMessages();
   });
-  
+
 }
 
-function resetEditForm(){
-  $("#modal-close-btn").on("click", function () {
+function resetEditForm() {
+  $("#modal-close-btn").on("click", function() {
     $("#user-admin-edit-form")[0].reset()
     resetErrorMessages();
   });
@@ -307,23 +308,23 @@ function resetEditForm(){
 //click btn hover color
 
 function onclickHover() {
-  $(".onclick-hover").on("click", function (event) {
+  $(".onclick-hover").on("click", function(event) {
     event.stopPropagation();
     $(this).addClass("click-btn-color");
   });
 
-  $("#create-close-modal").on("click", function () {
+  $("#create-close-modal").on("click", function() {
     $(".onclick-hover").removeClass("click-btn-color");
   });
 
-  $(document).on("click", function (event) {
+  $(document).on("click", function(event) {
     if (!$(event.target).closest('.onclick-hover').length) {
       $(".onclick-hover").removeClass("click-btn-color");
     }
   });
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
   editPopup();
   deletePopup();
   tableSearch();
@@ -332,7 +333,7 @@ $(document).ready(function () {
   resetEditForm();
   resetNewForm();
 
-  $(document).on("turbo:render", function () {
+  $(document).on("turbo:render", function() {
     editPopup();
     deletePopup();
     tableSearch();
@@ -342,10 +343,10 @@ $(document).ready(function () {
     resetNewForm();
   });
 
-  $(document).on("turbo:before-render", function () {
+  $(document).on("turbo:before-render", function() {
     $("#overlay").show();
   });
-  $(document).on("turbo:after-render", function () {
+  $(document).on("turbo:after-render", function() {
     $("#overlay").hide();
   });
 });
@@ -353,7 +354,7 @@ $(document).ready(function () {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function (streamElement) {
+  event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
     editPopup();

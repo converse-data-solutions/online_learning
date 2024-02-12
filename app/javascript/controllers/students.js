@@ -1,5 +1,5 @@
 function editModelPopup() {
-  $(".edit-student-model").click(function () {
+  $(".edit-student-model").click(function() {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -18,12 +18,12 @@ function editModelPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
         editFormValidation();
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -32,7 +32,7 @@ function editModelPopup() {
 }
 
 function deletePopup() {
-  $(".send-delete-student").click(function () {
+  $(".send-delete-student").click(function() {
     let id = $(this).data("user-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -60,7 +60,7 @@ function deletePopup() {
 }
 
 function viewStudents() {
-  $(".view-student-model").click(function () {
+  $(".view-student-model").click(function() {
     let id = $(this).data("user-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -78,11 +78,11 @@ function viewStudents() {
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -93,9 +93,9 @@ function viewStudents() {
 function studentTableSearch() {
   let delayTimer;
 
-  $("#student_search").keyup(function (e) {
+  $("#student_search").keyup(function(e) {
     clearTimeout(delayTimer);
-    delayTimer = setTimeout(function () {
+    delayTimer = setTimeout(function() {
       let searchValue = $("#student_search").val();
       $("#overlay").show();
       $.ajax({
@@ -105,10 +105,9 @@ function studentTableSearch() {
           search: searchValue,
         },
         headers: {
-          Accept:
-            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function (res) {
+        success: function(res) {
           Turbo.renderStreamMessage(res);
           let newURL =
             window.location.protocol +
@@ -117,8 +116,7 @@ function studentTableSearch() {
             window.location.pathname +
             "?search=" +
             encodeURIComponent(searchValue);
-          window.history.pushState(
-            {
+          window.history.pushState({
               path: newURL,
             },
             "",
@@ -126,7 +124,7 @@ function studentTableSearch() {
           );
           $("#overlay").hide();
         },
-        error: function () {
+        error: function() {
           console.log("Error fetching data");
           $("#overlay").hide();
         },
@@ -140,7 +138,7 @@ function dropdownCheckBoxes() {
   function checkboxDropdown(el) {
     let $el = $(el);
 
-    $el.each(function () {
+    $el.each(function() {
       let $list = $(this).find(".dropdown-list"),
         $label = $(this).find(".dropdown-label"),
         $checkAll = $(this).find(".check-all"),
@@ -158,7 +156,7 @@ function dropdownCheckBoxes() {
         updateStatus();
       }
 
-      $inputs.on("change", function () {
+      $inputs.on("change", function() {
         let checkedText = $(this).next().text();
 
         if ($(this).is(":checked")) {
@@ -170,7 +168,7 @@ function dropdownCheckBoxes() {
         updateLabel();
       });
 
-      $checkAll.on("change", function () {
+      $checkAll.on("change", function() {
         result = [];
 
         if ($(this).is(":checked")) {
@@ -184,7 +182,7 @@ function dropdownCheckBoxes() {
       });
 
       // Initial setup
-      $inputs.each(function () {
+      $inputs.each(function() {
         if ($(this).is(":checked")) {
           result.push($(this).next().text());
         }
@@ -192,11 +190,11 @@ function dropdownCheckBoxes() {
 
       updateLabel();
 
-      $label.on("click", function () {
+      $label.on("click", function() {
         $el.toggleClass("open-dropdown");
       });
 
-      $(document).on("click touchstart", function (e) {
+      $(document).on("click touchstart", function(e) {
         if (!$(e.target).closest($el).length) {
           $el.removeClass("open-dropdown");
         }
@@ -208,7 +206,7 @@ function dropdownCheckBoxes() {
 }
 // datepicker
 function customDatePicker() {
-  $(function () {
+  $(function() {
     $("#datepicker").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
@@ -217,7 +215,7 @@ function customDatePicker() {
 }
 
 function customEditDatePicker() {
-  $(function () {
+  $(function() {
     let initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
 
     $("#editdatepicker").datepicker({
@@ -233,7 +231,7 @@ function formValidation() {
   function validateName() {
     let name = $("#user_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-  
+
     if (!name) {
       $("#name-error").text("Name can't be blank");
     } else if (!namecheck) {
@@ -242,11 +240,11 @@ function formValidation() {
       $("#name-error").text("");
     }
   }
-  
+
   function validateEmail() {
     let email = $("#user_email").val().trim();
     let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-  
+
     if (!email) {
       $("#email-error").text("Email can't be blank");
     } else if (!emailRegex.test(email)) {
@@ -255,13 +253,13 @@ function formValidation() {
       $("#email-error").text("");
     }
   }
-  
+
   function validatePassword() {
     let password = $("#user_password").val();
-  
+
     // Password must contain at least one uppercase letter, one numeric digit, and one special character
     let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-  
+
     if (!password) {
       $("#password-error").text("Password can't be blank");
     } else if (!passwordRegex.test(password)) {
@@ -270,12 +268,12 @@ function formValidation() {
       $("#password-error").text("");
     }
   }
-  
-  
+
+
   function validatePasswordConfirmation() {
     let password = $("#user_password").val();
     let password_confirmation = $("#user_password_confirmation").val();
-  
+
     if (!password_confirmation) {
       $("#password-confirmation-error").text("Password Confirmation can't be blank");
     } else if (!validator.equals(password, password_confirmation)) {
@@ -287,7 +285,7 @@ function formValidation() {
 
   function validateCourseSelection() {
     let atLeastOneChecked = $("input[name='user[course_ids][]']:checked").length > 0;
-  
+
     if (!atLeastOneChecked) {
       $("#course-error").text("Please select at least one course.");
     } else {
@@ -298,7 +296,7 @@ function formValidation() {
   function validateOccupation() {
     let name = $("#user_occupation").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-  
+
     if (!name) {
       $("#occupation-error").text("Occupation can't be blank");
     } else if (!namecheck) {
@@ -355,7 +353,7 @@ function formValidation() {
     validateEmergencyContactNumber
   );
 
-  $("#user-admin-form").on("submit", function (event) {
+  $("#user-admin-form").on("submit", function(event) {
     validateName();
     validateEmail();
     validatePassword();
@@ -384,7 +382,7 @@ function formValidation() {
 
 // Form reset errors
 
-function resetNewErrorMessages(){
+function resetNewErrorMessages() {
   $("#name-error").text("");
   $("#email-error").text("");
   $("#password-error").text("");
@@ -408,7 +406,7 @@ function editFormValidation() {
   function validateName() {
     let name = $("#edit_user_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-  
+
     if (!name) {
       $("#edit-name-error").text("Name can't be blank");
     } else if (!namecheck) {
@@ -417,11 +415,11 @@ function editFormValidation() {
       $("#name-error").text("");
     }
   }
-  
+
   function validateEmail() {
     let email = $("#edit_user_email").val().trim();
     let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-  
+
     if (!email) {
       $("#edit-email-error").text("Email can't be blank");
     } else if (!emailRegex.test(email)) {
@@ -430,13 +428,13 @@ function editFormValidation() {
       $("#edit-email-error").text("");
     }
   }
-  
+
   function validatePassword() {
     let password = $("#edit_user_password").val();
-  
+
     // Password must contain at least one uppercase letter, one numeric digit, and one special character
     let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
-  
+
     if (!password) {
       $("#edit-password-error").text("Password can't be blank");
     } else if (!passwordRegex.test(password)) {
@@ -445,12 +443,12 @@ function editFormValidation() {
       $("#edit-password-error").text("");
     }
   }
-  
-  
+
+
   function validatePasswordConfirmation() {
     let password = $("#edit_user_password").val();
     let password_confirmation = $("#edit_user_password_confirmation").val();
-  
+
     if (!password_confirmation) {
       $("#edit-password-confirmation-error").text("Password Confirmation can't be blank");
     } else if (!validator.equals(password, password_confirmation)) {
@@ -462,7 +460,7 @@ function editFormValidation() {
 
   function validateCourseSelection() {
     let atLeastOneChecked = $("input[name='your_model_name[course_ids][]']:checked").length > 0;
-  
+
     if (!atLeastOneChecked) {
       $("#edit-course-error").text("Please select at least one course.");
     } else {
@@ -473,7 +471,7 @@ function editFormValidation() {
   function validateOccupation() {
     let name = $("#edit_user_occupation").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-  
+
     if (!name) {
       $("#edit-occupation-error").text("Occupation can't be blank");
     } else if (!namecheck) {
@@ -539,7 +537,7 @@ function editFormValidation() {
     validateEmergencyContactNumber
   );
 
-  $("#edit-student-popup").on("submit", "#user-admin-edit-form", function (
+  $("#edit-student-popup").on("submit", "#user-admin-edit-form", function(
     event
   ) {
     validateName();
@@ -570,16 +568,16 @@ function editFormValidation() {
 
 // Onclick hover color change
 function onclickHover() {
-  $(".onclick-hover").on("click", function (event) {
+  $(".onclick-hover").on("click", function(event) {
     event.stopPropagation();
     $(this).addClass("click-btn-color");
   });
 
-  $("#student-create-close-btn").on("click", function () {
+  $("#student-create-close-btn").on("click", function() {
     $(".onclick-hover").removeClass("click-btn-color");
   });
 
-  $(document).on("click", function (event) {
+  $(document).on("click", function(event) {
     if (!$(event.target).closest('.onclick-hover').length) {
       $(".onclick-hover").removeClass("click-btn-color");
     }
@@ -588,16 +586,16 @@ function onclickHover() {
 
 // Form reset Funtion
 
-function resetNewForm(){
-  $(".reset-form").on("click", function () {
+function resetNewForm() {
+  $(".reset-form").on("click", function() {
     console.log("values new reseted");
     $("#user-admin-form")[0].reset()
     resetNewErrorMessages();
   });
 }
 
-function resetEditForm(){
-  $("#modal-close-btn").on("click", function () {
+function resetEditForm() {
+  $("#modal-close-btn").on("click", function() {
     $("#user-admin-edit-form")[0].reset()
     console.log("values reseted");
     resetErrorMessages();
@@ -606,7 +604,7 @@ function resetEditForm(){
 
 //initialize script
 
-$(document).ready(function () {
+$(document).ready(function() {
   editModelPopup();
   deletePopup();
   studentTableSearch();
@@ -620,7 +618,7 @@ $(document).ready(function () {
   resetEditForm();
   resetNewForm();
 
-  $(document).on("turbo:render", function () {
+  $(document).on("turbo:render", function() {
     editModelPopup();
     deletePopup();
     studentTableSearch();
@@ -635,11 +633,11 @@ $(document).ready(function () {
     resetNewForm();
   });
 
-  $(document).on("turbo:before-render", function () {
+  $(document).on("turbo:before-render", function() {
     $("#overlay").show();
     dropdownCheckBoxes();
   });
-  $(document).on("turbo:after-render", function () {
+  $(document).on("turbo:after-render", function() {
     $("#overlay").hide();
     dropdownCheckBoxes();
   });
@@ -648,7 +646,7 @@ $(document).ready(function () {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function (streamElement) {
+  event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
     editModelPopup();
@@ -657,6 +655,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     customDatePicker();
     customEditDatePicker();
     viewStudents();
-    
+
   };
 });

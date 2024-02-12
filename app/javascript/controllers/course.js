@@ -1,92 +1,92 @@
 // Stepper Table New Form
 function tableSectionForm() {
-  $(".display-section-button").click(function () {
+  $(".display-section-button").click(function() {
     $(".display-section").toggle();
   });
-  $(".display-lesson-button").click(function () {
+  $(".display-lesson-button").click(function() {
     $(".display-lesson").show();
   });
 }
 
 function tableLessonForm() {
-  $(".display-lesson-button").click(function () {
+  $(".display-lesson-button").click(function() {
     $(".display-lesson").toggle();
   });
-  $(".display-section-button").click(function () {
+  $(".display-section-button").click(function() {
     $(".display-section").hide();
   });
 }
 
 // Collection-Select Style
 function collectionSelect() {
-  $(".custom-select").each(function () {
-      var classes = $(this).attr("class"),
-        id = $(this).attr("id"),
-        name = $(this).attr("name");
+  $(".custom-select").each(function() {
+    var classes = $(this).attr("class"),
+      id = $(this).attr("id"),
+      name = $(this).attr("name");
 
-      var placeholderText = $(this).find("option:first-of-type").text(); // Get text of the first option
+    var placeholderText = $(this).find("option:first-of-type").text(); // Get text of the first option
 
-      var template = '<div class="' + classes + '">';
-      template +=
-        '<span class="custom-select-trigger">' + placeholderText + "</span>";
-      template += '<div class="custom-options">';
-      $(this)
-        .find("option")
-        .each(function () {
-          template +=
-            '<span class="custom-option ' +
-            $(this).attr("class") +
-            '" data-value="' +
-            $(this).attr("value") +
-            '">' +
-            $(this).html() +
-            "</span>";
-        });
-      template += "</div></div>";
-
-      $(this).wrap('<div class="custom-select-wrapper"></div>');
-      $(this).hide();
-      $(this).after(template);
-    });
-
-    $(".custom-option:first-of-type").hover(
-      function () {
-        $(this).parents(".custom-options").addClass("option-hover");
-      },
-      function () {
-        $(this).parents(".custom-options").removeClass("option-hover");
-      }
-    );
-
-    $(".custom-select-trigger").on("click", function (event) {
-      $("html").one("click", function () {
-        $(".custom-select").removeClass("opened");
+    var template = '<div class="' + classes + '">';
+    template +=
+      '<span class="custom-select-trigger">' + placeholderText + "</span>";
+    template += '<div class="custom-options">';
+    $(this)
+      .find("option")
+      .each(function() {
+        template +=
+          '<span class="custom-option ' +
+          $(this).attr("class") +
+          '" data-value="' +
+          $(this).attr("value") +
+          '">' +
+          $(this).html() +
+          "</span>";
       });
-      $(this).parents(".custom-select").toggleClass("opened");
-      event.stopPropagation();
-    });
+    template += "</div></div>";
 
-    $(".custom-option").on("click", function () {
-      $(this)
-        .parents(".custom-select-wrapper")
-        .find("select")
-        .val($(this).data("value"));
-      $(this)
-        .parents(".custom-options")
-        .find(".custom-option")
-        .removeClass("selection");
-      $(this).addClass("selection");
-      $(this).parents(".custom-select").removeClass("opened");
-      $(this)
-        .parents(".custom-select")
-        .find(".custom-select-trigger")
-        .text($(this).text());
+    $(this).wrap('<div class="custom-select-wrapper"></div>');
+    $(this).hide();
+    $(this).after(template);
+  });
+
+  $(".custom-option:first-of-type").hover(
+    function() {
+      $(this).parents(".custom-options").addClass("option-hover");
+    },
+    function() {
+      $(this).parents(".custom-options").removeClass("option-hover");
+    }
+  );
+
+  $(".custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
+      $(".custom-select").removeClass("opened");
     });
+    $(this).parents(".custom-select").toggleClass("opened");
+    event.stopPropagation();
+  });
+
+  $(".custom-option").on("click", function() {
+    $(this)
+      .parents(".custom-select-wrapper")
+      .find("select")
+      .val($(this).data("value"));
+    $(this)
+      .parents(".custom-options")
+      .find(".custom-option")
+      .removeClass("selection");
+    $(this).addClass("selection");
+    $(this).parents(".custom-select").removeClass("opened");
+    $(this)
+      .parents(".custom-select")
+      .find(".custom-select-trigger")
+      .text($(this).text());
+  });
 }
 
 // Lesson File Upload
 
-$(document).on("change", ".clipUpload input[type='file']", function () {
+$(document).on("change", ".clipUpload input[type='file']", function() {
   if ($(this).val()) {
     var filename = $(this).val().split("\\");
 
@@ -95,7 +95,7 @@ $(document).on("change", ".clipUpload input[type='file']", function () {
     $(".clip").text(filename);
   }
 });
-$(document).on("change", ".fileUploadWrap input[type='file']", function () {
+$(document).on("change", ".fileUploadWrap input[type='file']", function() {
   if ($(this).val()) {
     var filename = $(this).val().split("\\");
 
@@ -107,7 +107,7 @@ $(document).on("change", ".fileUploadWrap input[type='file']", function () {
 
 // Course Edit Popup
 function courseEditPopup() {
-  $("#course-table").on('click', '.edit-course-model',function () {
+  $("#course-table").on('click', '.edit-course-model', function() {
     let id = $(this).data("course-id");
     let url = $(this).data("url");
     $.ajax({
@@ -120,10 +120,10 @@ function courseEditPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
       },
     });
@@ -132,7 +132,7 @@ function courseEditPopup() {
 
 // Course Delete Popup
 function courseDeletePopup() {
-  $("#course-table").on('click', '.send-delete-course', function () {
+  $("#course-table").on('click', '.send-delete-course', function() {
     let id = $(this).data("course-id");
     $("#delete-course-model").attr("data-course-id", id);
     $("#delete-course-model").attr("href", `courses/${id}`);
@@ -146,19 +146,17 @@ function courseValidation() {
     let name = $("#course-name").val();
 
     if (!name) {
-        $("#course-name-error").text("Course Name can't be blank");
-    } 
-    else if (name.replace(/ /g, "").length < 3) {
-        $("#course-name-error").text("Course name is not valid");
-    } 
-    else {
-        $("#course-name-error").text("");
+      $("#course-name-error").text("Course Name can't be blank");
+    } else if (name.replace(/ /g, "").length < 3) {
+      $("#course-name-error").text("Course name is not valid");
+    } else {
+      $("#course-name-error").text("");
     }
   }
 
 
   $("#course-name").on("input", validateCourseName);
-  $("#admin-course-form").on("submit", function (event) {
+  $("#admin-course-form").on("submit", function(event) {
     validateCourseName();
 
     if (
@@ -171,23 +169,21 @@ function courseValidation() {
 
 // Edit Course form validation
 
-function editCourseValidation(){
+function editCourseValidation() {
   function validateEditCourseName() {
     let name = $("#edit-course-name").val();
 
     if (!name) {
-        $("#edit-course-name-error").text("Course Name can't be blank");
-    } 
-    else if (name.replace(/ /g, "").length < 3) {
-        $("#edit-course-name-error").text("Course name is not valid");
-    } 
-    else {
-        $("#edit-course-name-error").text("");
+      $("#edit-course-name-error").text("Course Name can't be blank");
+    } else if (name.replace(/ /g, "").length < 3) {
+      $("#edit-course-name-error").text("Course name is not valid");
+    } else {
+      $("#edit-course-name-error").text("");
     }
   }
 
   $("#edit-course-name").on("input", validateEditCourseName);
-  $("#admin-course-edit-form").on("submit", function (event) {
+  $("#admin-course-edit-form").on("submit", function(event) {
     validateEditCourseName();
 
     if (
@@ -198,23 +194,21 @@ function editCourseValidation(){
   });
 }
 
-function editCourseStepValidation(){
+function editCourseStepValidation() {
   function validateEditCourseName() {
     let name = $("#edit-course-name").val();
 
     if (!name) {
-        $("#edit-course-name-error").text("Course Name can't be blank");
-    } 
-    else if (name.replace(/ /g, "").length < 3) {
-        $("#edit-course-name-error").text("Course name is not valid");
-    } 
-    else {
-        $("#edit-course-name-error").text("");
+      $("#edit-course-name-error").text("Course Name can't be blank");
+    } else if (name.replace(/ /g, "").length < 3) {
+      $("#edit-course-name-error").text("Course name is not valid");
+    } else {
+      $("#edit-course-name-error").text("");
     }
   }
 
   $("#edit-course-name").on("input", editCourseStepValidation);
-  $("#admin-course-step-edit-form").on("submit", function (event) {
+  $("#admin-course-step-edit-form").on("submit", function(event) {
     editCourseStepValidation();
 
     if (
@@ -226,7 +220,7 @@ function editCourseStepValidation(){
 }
 
 // Form reset errors
-function resetNewErrorMessages(){
+function resetNewErrorMessages() {
   $("#course-name-error").text("");
 }
 
@@ -235,23 +229,23 @@ function resetErrorMessages() {
 }
 
 // // Form reset Funtion
-function resetCourseNewForm(){
-  $(".reset-form").on("click", function () {
+function resetCourseNewForm() {
+  $(".reset-form").on("click", function() {
     $("#admin-course-form")[0].reset()
     resetNewErrorMessages();
   });
-  
+
 }
 
-function resetCourseEditForm(){
-  $("#course-modal-close-btn").on("click", function () {
+function resetCourseEditForm() {
+  $("#course-modal-close-btn").on("click", function() {
     $("#admin-course-edit-form")[0].reset()
     resetErrorMessages();
   });
 }
 
-function resetCourseStepEditForm(){
-  $("#course-modal-close-btn").on("click", function () {
+function resetCourseStepEditForm() {
+  $("#course-modal-close-btn").on("click", function() {
     $("#admin-course-step-edit-form")[0].reset()
     resetErrorMessages();
   });
@@ -259,20 +253,20 @@ function resetCourseStepEditForm(){
 
 // Form submit on onChange Event
 
-function courseFormSubmit(){
+function courseFormSubmit() {
   let delayTimer;
-  delayTimer = setTimeout(function () {
-    $("#admin-course-form").on("change", function (event) {
+  delayTimer = setTimeout(function() {
+    $("#admin-course-form").on("change", function(event) {
       event.preventDefault();
       $("#submit-course").click();
     });
-  }, 500); 
+  }, 500);
 }
 
-function courseEditFormSubmit(){
+function courseEditFormSubmit() {
   let delayTimer;
-  delayTimer = setTimeout(function () {
-    $("#admin-course-edit-edit-form").on("change", function (event) {
+  delayTimer = setTimeout(function() {
+    $("#admin-course-edit-edit-form").on("change", function(event) {
       event.preventDefault();
       $("#submit-edit-course").click();
       resetErrorMessages();
@@ -282,7 +276,7 @@ function courseEditFormSubmit(){
 
 // Course Steeper Section Edit Popup
 function steeperSectionEditPopup() {
-  $(".edit-stepper-section-modal").click(function () {
+  $(".edit-stepper-section-modal").click(function() {
     let id = $(this).data("section-id");
     let url = $(this).data("url");
     $.ajax({
@@ -295,10 +289,10 @@ function steeperSectionEditPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
       },
     });
@@ -307,7 +301,7 @@ function steeperSectionEditPopup() {
 
 // Course Stepper Section Delete Popup
 function steeperSectionDeletePopup() {
-  $(".send-stepper-delete-section").click(function () {
+  $(".send-stepper-delete-section").click(function() {
     let id = $(this).data("section-id");
     $("#steeper-delete-section-modal").attr("data-section-id", id);
     $("#steeper-delete-section-modal").attr("href", `sections/${id}`);
@@ -316,7 +310,7 @@ function steeperSectionDeletePopup() {
 
 // Course Steeper Lesson Edit Popup
 function steeperLessonEditPopup() {
-  $(".edit-stepper-lesson-modal").click(function () {
+  $(".edit-stepper-lesson-modal").click(function() {
     let id = $(this).data("lesson-id");
     let url = $(this).data("url");
     $.ajax({
@@ -329,10 +323,10 @@ function steeperLessonEditPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
       },
     });
@@ -341,7 +335,7 @@ function steeperLessonEditPopup() {
 
 // Course Stepper Lesson Delete Popup
 function steeperLessonDeletePopup() {
-  $(".send-stepper-delete-lesson").click(function () {
+  $(".send-stepper-delete-lesson").click(function() {
     let id = $(this).data("lesson-id");
     $("#steeper-delete-lesson-modal").attr("data-lesson-id", id);
     $("#steeper-delete-lesson-modal").attr("href", `lessons/${id}`);
@@ -352,9 +346,9 @@ function steeperLessonDeletePopup() {
 function courseTableSearch() {
   let delayTimer;
 
-  $("#course_search").on("input", function () {
+  $("#course_search").on("input", function() {
     clearTimeout(delayTimer);
-    delayTimer = setTimeout(function () {
+    delayTimer = setTimeout(function() {
       let searchValue = $("#course_search").val();
       $("#overlay").show();
       $.ajax({
@@ -364,10 +358,9 @@ function courseTableSearch() {
           search: searchValue,
         },
         headers: {
-          Accept:
-            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function (res) {
+        success: function(res) {
           Turbo.renderStreamMessage(res);
           var newUrl =
             window.location.protocol +
@@ -376,10 +369,12 @@ function courseTableSearch() {
             window.location.pathname +
             "?search=" +
             encodeURIComponent(searchValue);
-          window.history.pushState({ path: newUrl }, "", newUrl);
+          window.history.pushState({
+            path: newUrl
+          }, "", newUrl);
           $("#overlay").hide();
         },
-        error: function () {
+        error: function() {
           console.log("Error fetching data");
           $("#overlay").hide();
         },
@@ -391,7 +386,7 @@ function courseTableSearch() {
 // Course Top stepper functionality
 
 function topStepper() {
-  $(".custom-stepper-btn").on("click", function () {
+  $(".custom-stepper-btn").on("click", function() {
     const stepper = HSStepper.getInstance("[data-hs-stepper]");
     let targetIndex = parseInt($(this).attr("data-index")); // Parse the string to an integer
     let currentIndex = stepper.currentIndex;
@@ -411,8 +406,8 @@ function topStepper() {
         url: "/admin/courses/sections/all",
         type: "GET",
         dataType: "script",
-        success: function (response) {},
-        error: function (xhr, status, error) {},
+        success: function(response) {},
+        error: function(xhr, status, error) {},
       });
       $(".stepper-formatter").addClass("stepper-formatter2");
       $(".reduce-course").addClass("reduce-course2");
@@ -461,8 +456,8 @@ function callAllSections() {
     url: "/admin/courses/sections/all",
     type: "GET",
     dataType: "script",
-    success: function (response) {},
-    error: function (xhr, status, error) {},
+    success: function(response) {},
+    error: function(xhr, status, error) {},
   });
   $(".stepper-formatter").addClass("stepper-formatter2");
   $(".reduce-course").addClass("reduce-course2");
@@ -473,26 +468,25 @@ function callAllSections() {
 
 function bottomStepper() {
   if (typeof HSStepper !== "undefined") {
-    setTimeout(function () {
+    setTimeout(function() {
       const stepperElement = HSStepper.getInstance("[data-hs-stepper]");
       let errorState = 1;
       stepperElement.disableButtons();
-      $("#course-name").on("keyup", function () {
+      $("#course-name").on("keyup", function() {
         if ($(this).val().length > 2) {
           stepperElement.enableButtons();
         } else {
           stepperElement.disableButtons();
         }
       });
-      
+
       if (stepperElement) {
         try {
           const stepperInstance = HSStepper.getInstance("[data-hs-stepper]");
-          $("[data-hs-stepper-next-btn]").on("click", function () {
+          $("[data-hs-stepper-next-btn]").on("click", function() {
             stepperInstance.on("next");
             const currentIndex = stepperInstance.currentIndex;
-            if (currentIndex === 2) {
-            }
+            if (currentIndex === 2) {}
             if (currentIndex === 3) {
               $("button").removeClass("header1");
             }
@@ -501,8 +495,8 @@ function bottomStepper() {
                 url: "/admin/courses/sections/all",
                 type: "GET",
                 dataType: "script",
-                success: function (response) {},
-                error: function (xhr, status, error) {},
+                success: function(response) {},
+                error: function(xhr, status, error) {},
               });
               $(".stepper-formatter").addClass("stepper-formatter2");
               $(".reduce-course").addClass("reduce-course2");
@@ -512,7 +506,7 @@ function bottomStepper() {
               $(".vertical-stepper").css("display", "none");
             }
           });
-          $("[data-hs-stepper-back-btn]").on("click", function () {
+          $("[data-hs-stepper-back-btn]").on("click", function() {
             stepperInstance.on("back");
             const backButtonIndex = stepperInstance.currentIndex;
             if (backButtonIndex < 3) {
@@ -534,7 +528,7 @@ function bottomStepper() {
 }
 
 
-$(document).ready(function () {
+$(document).ready(function() {
   tableSectionForm();
   collectionSelect();
   courseEditPopup();
@@ -554,7 +548,7 @@ $(document).ready(function () {
   courseEditFormSubmit();
   editCourseStepValidation();
 
-  $(document).on("turbo:render", function () {
+  $(document).on("turbo:render", function() {
     tableSectionForm();
     courseEditPopup();
     courseDeletePopup();
@@ -580,7 +574,7 @@ $(document).ready(function () {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function (streamElement) {
+  event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
     steeperLessonEditPopup();
@@ -597,14 +591,14 @@ addEventListener("turbo:before-stream-render", (event) => {
   };
 });
 
-$(document).on("turbo:submit-end", function (event) {
+$(document).on("turbo:submit-end", function(event) {
   if (event.detail.success) {
     $("#lesson-admin-form")[0].reset();
     $("#lesson-admin-form file").val("");
   }
 });
 
-$(document).on("turbo:submit-end", function (event) {
+$(document).on("turbo:submit-end", function(event) {
   if (event.detail.success) {
     $("#stepper_section-form")[0].reset();
   }
