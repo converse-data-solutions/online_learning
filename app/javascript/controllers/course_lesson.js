@@ -216,7 +216,7 @@ function onclickHover() {
 }
 
 function collectionSelect() {
-  $(".custom-select").each(function () {
+  $("#filter-container .custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -282,7 +282,8 @@ function collectionSelect() {
 }
 
 function sectionSelect() {
-  $(".new-custom-select").each(function () {
+  console.log("function called.............");
+  $("#section-dropdown .new-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -348,7 +349,7 @@ function sectionSelect() {
 }
 
 function lessonSelect() {
-  $(".new-lesson-custom-select").each(function () {
+  $("#lesson-index-form .new-lesson-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -414,7 +415,7 @@ function lessonSelect() {
 }
 
 function optionSelect() {
-  $(".new-custom-option").on("click", function () {
+  $("#filter-container").on("click", ".new-custom-option", function () {
     $("#overlay").show();
     var selectedLessonId = $(this).data("value");
     $.ajax({
@@ -426,7 +427,6 @@ function optionSelect() {
       },
       success: function (data) {
         Turbo.renderStreamMessage(data);
-        console.log("AJAX Success:", data);
         var newUrl =
           window.location.protocol +
           "//" +
@@ -447,7 +447,7 @@ function optionSelect() {
 
 function selectSection() {
   console.log("loaded...........");
-  $('.custom-option').on('click', function () {
+  $("#filter-container .custom-select").on("click", ".custom-option", function () {
     var courseId = $(this).data('value');
     console.log("course ifffff: ", courseId);
 
@@ -460,8 +460,8 @@ function selectSection() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
       success: function (data) {
-        // Replace the sections select dropdown with the updated content
-        $('#section_title').empty().append(data);
+        Turbo.renderStreamMessage(data);
+        // sectionSelect();
       },
       error: function (error) {
         console.error('Error:', error);
@@ -484,6 +484,7 @@ $(document).ready(function () {
   lessonSelect();
 
   $(document).on("turbo:render", function () {
+    console.log("rgreiute");
     editPopup();
     deletePopup();
     tableSearch();
@@ -492,15 +493,16 @@ $(document).ready(function () {
     resetNewForm();
     optionSelect();
     selectSection();
-    sectionSelect();
     lessonSelect();
   });
 
   $(document).on("turbo:before-render", function () {
     $("#overlay").show();
+    
   });
   $(document).on("turbo:after-render", function () {
     $("#overlay").hide();
+    
   });
 });
 
@@ -510,9 +512,8 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
-    sectionSelect();
-    optionSelect();
-
-
+    if (streamElement.target == 'section-dropdown') {
+      sectionSelect();
+    }
   };
 });

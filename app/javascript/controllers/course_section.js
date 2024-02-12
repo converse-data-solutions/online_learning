@@ -216,7 +216,7 @@ function onclickHover() {
 }
 
 function collectionSelect() {
-  $(".custom-select").each(function () {
+  $("#filter-container .custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -282,7 +282,7 @@ function collectionSelect() {
 }
 
 function sectionSelect() {
-  $(".new-custom-select").each(function () {
+  $("#section-index-form .new-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -350,7 +350,7 @@ function sectionSelect() {
 
 
 function optionSelect() {
-  $(".custom-option").on("click", function () {
+  $("#filter-container .custom-select").on("click", ".custom-option", function () {
     $("#overlay").show();
     var selectedSectionId = $(this).data("value");
     $.ajax({
