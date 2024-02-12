@@ -281,37 +281,74 @@ function collectionSelect() {
   });
 }
 
-function optionSectionSelect() {
-  $(".custom-option").on("click", function () {
-    var selectedLessonId = $(this).data("value");
-    $.ajax({
-      type: "GET",
-      url: "/admin/course_lessons",
-      data: { section: selectedLessonId },
-      headers: {
-        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-      },
-      success: function (data) {
-        Turbo.renderStreamMessage(data);
-        var newUrl =
-          window.location.protocol +
-          "//" +
-          window.location.host +
-          window.location.pathname +
-          "?lesson_id=" +
-          encodeURIComponent(selectedLessonId);
-        window.history.pushState({ path: newUrl }, "", newUrl);
-        $("#overlay").hide();
-      },
-      error: function (error) {
-        console.error("AJAX Error:", error);
-      },
+function sectionSelect() {
+  $(".new-custom-select").each(function () {
+    var classes = $(this).attr("class"),
+      id = $(this).attr("id"),
+      name = $(this).attr("name");
+
+    var placeholderText = $(this).find("option:first-of-type").text();
+
+    var template = '<div class="' + classes + '">';
+    template +=
+      '<span class="new-custom-select-trigger">' + placeholderText + "</span>";
+    template += '<div class="new-custom-options">';
+    $(this)
+      .find("option")
+      .each(function () {
+        template +=
+          '<span class="new-custom-option ' +
+          $(this).attr("class") +
+          '" data-value="' +
+          $(this).attr("value") +
+          '">' +
+          $(this).html() +
+          "</span>";
+      });
+    template += "</div></div>";
+
+    $(this).wrap('<div class="new-custom-select-wrapper"></div>');
+    $(this).hide();
+    $(this).after(template);
+  });
+
+  $(".new-custom-option:first-of-type").hover(
+    function () {
+      $(this).parents(".new-custom-options").addClass("option-hover");
+    },
+    function () {
+      $(this).parents(".new-custom-options").removeClass("option-hover");
+    }
+  );
+
+  $(".new-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
+      $(".new-custom-select").removeClass("opened");
     });
+    $(this).parents(".new-custom-select").toggleClass("opened");
+    event.stopPropagation();
+  });
+
+  $(".new-custom-option").on("click", function () {
+    $(this)
+      .parents(".new-custom-select-wrapper")
+      .find("select")
+      .val($(this).data("value"));
+    $(this)
+      .parents(".new-custom-options")
+      .find(".new-custom-option")
+      .removeClass("selection");
+    $(this).addClass("selection");
+    $(this).parents(".new-custom-select").removeClass("opened");
+    $(this)
+      .parents(".new-custom-select")
+      .find(".new-custom-select-trigger")
+      .text($(this).text());
   });
 }
 
 function optionSelect() {
-  $(".custom-option").on("click", function () {
+  $(".new-custom-option").on("click", function () {
     $("#overlay").show();
     var selectedLessonId = $(this).data("value");
     $.ajax({
@@ -323,6 +360,7 @@ function optionSelect() {
       },
       success: function (data) {
         Turbo.renderStreamMessage(data);
+        console.log("AJAX Success:", data);
         var newUrl =
           window.location.protocol +
           "//" +
@@ -339,6 +377,7 @@ function optionSelect() {
     });
   });
 }
+
 
 function selectSection() {
   console.log("loaded...........");
@@ -373,9 +412,9 @@ $(document).ready(function () {
   onclickHover();
   resetNewForm();
   collectionSelect();
-  // optionSelect();
-  // optionSectionSelect();
+  optionSelect();
   selectSection();
+  sectionSelect();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -384,9 +423,9 @@ $(document).ready(function () {
     formValidation();
     onclickHover();
     resetNewForm();
-    // optionSelect();
-    // optionSectionSelect();
+    optionSelect();
     selectSection();
+    sectionSelect();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -403,5 +442,9 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
+    sectionSelect();
+    optionSelect();
+
+
   };
 });

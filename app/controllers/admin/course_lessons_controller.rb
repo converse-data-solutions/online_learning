@@ -1,7 +1,7 @@
 class Admin::CourseLessonsController < ApplicationController
 
   def index
-    @course_lessons = Lesson.get_lessons(params)
+    @course_lessons = Lesson.get_lessons(params, :index)
     respond_to do |format|
       format.json { render json: { data: @lessons, total_count: Section.count } }
       format.html { render :index }
@@ -73,9 +73,7 @@ class Admin::CourseLessonsController < ApplicationController
     puts "Course Id: #{@course.id}"
     puts "Params: #{params}"
     puts "Sections: #{@sections}"
-    respond_to do |format|
-      format.turbo_stream
-    end
+    respond_to(&:turbo_stream)
   end
 
   private

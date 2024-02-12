@@ -1,9 +1,1 @@
-<div class="w-full">
-  <label for="section" class='text-[15px] text-[#555555] font-semibold'>Section</label>
-  <select id="section_id" name="[section_id]" class= "border border-[#dddddd] text-[#555555] text-sm rounded-[5px] focus:border-[#66afe9] focus:ring-blue-200 block w-full p-2.0 ">
-    <option value="">Select Section</option>
-    <% sections.each do |section| %>
-      <option value="<%= section.id %>"><%= section.title %></option>
-    <% end %>
-  </select>
-</div>
+<%= collection_select(:section, :title, sections, :id, :title, { prompt: "Select Section", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select sources" }) %>

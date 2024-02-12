@@ -21,7 +21,7 @@ class Section < ApplicationRecord
     sections = sections.search_by_section_title(params[:search]) if params[:search].present?
     sections.paginate(page: page, per_page: per_page)
   end
-  
+
   def self.search_by_section_title(query)
     if query.present?
       where('title LIKE ?', "%#{query}%")
