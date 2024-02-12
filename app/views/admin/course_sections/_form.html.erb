@@ -2,7 +2,7 @@
   <div class="flex flex-col md:flex-row mb-4">
     <label for="Corse Name" class="w-full md:w-[50%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Course Name</label>
     <div class=" flex flex-col mb-4">
-      <%= collection_select(:section, :course_id, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select custom-select-border sources" })  %>
+      <%= collection_select(:section, :course_id, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select new-custom-select-border sources" })  %>
       <div class="text-red-600 text-sm mt-1" id="course-error"></div>
     </div>
   </div>

@@ -281,6 +281,74 @@ function collectionSelect() {
   });
 }
 
+function sectionSelect() {
+  $(".new-custom-select").each(function () {
+    var classes = $(this).attr("class"),
+      id = $(this).attr("id"),
+      name = $(this).attr("name");
+
+    var placeholderText = $(this).find("option:first-of-type").text();
+
+    var template = '<div class="' + classes + '">';
+    template +=
+      '<span class="new-custom-select-trigger">' + placeholderText + "</span>";
+    template += '<div class="new-custom-options">';
+    $(this)
+      .find("option")
+      .each(function () {
+        template +=
+          '<span class="new-custom-option ' +
+          $(this).attr("class") +
+          '" data-value="' +
+          $(this).attr("value") +
+          '">' +
+          $(this).html() +
+          "</span>";
+      });
+    template += "</div></div>";
+
+    $(this).wrap('<div class="new-custom-select-wrapper"></div>');
+    $(this).hide();
+    $(this).after(template);
+  });
+
+  $(".new-custom-option:first-of-type").hover(
+    function () {
+      $(this).parents(".new-custom-options").addClass("option-hover");
+    },
+    function () {
+      $(this).parents(".new-custom-options").removeClass("option-hover");
+    }
+  );
+
+  $(".new-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
+      $(".new-custom-select").removeClass("opened");
+    });
+    $(this).parents(".new-custom-select").toggleClass("opened");
+    event.stopPropagation();
+  });
+
+  $(".new-custom-option").on("click", function () {
+    $(this)
+      .parents(".new-custom-select-wrapper")
+      .find("select")
+      .val($(this).data("value"));
+    $(this)
+      .parents(".new-custom-options")
+      .find(".new-custom-option")
+      .removeClass("selection");
+    $(this).addClass("selection");
+    $(this).parents(".new-custom-select").removeClass("opened");
+    $(this)
+      .parents(".new-custom-select")
+      .find(".new-custom-select-trigger")
+      .text($(this).text());
+  });
+}
+
+
+
 function optionSelect() {
   $(".custom-option").on("click", function () {
     $("#overlay").show();
@@ -321,6 +389,7 @@ $(document).ready(function () {
   resetNewForm();
   collectionSelect();
   optionSelect();
+  sectionSelect();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -331,6 +400,7 @@ $(document).ready(function () {
     resetNewForm();
     collectionSelect();
     optionSelect();
+    sectionSelect();
   });
 
   $(document).on("turbo:before-render", function () {
