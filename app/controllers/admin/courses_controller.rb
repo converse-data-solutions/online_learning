@@ -3,6 +3,8 @@
 # This is an Admin Course controller
 class Admin::CoursesController < ApplicationController # rubocop:disable Style/ClassAndModuleChildren
   before_action :authenticate_user!
+  before_action :set_course, only: %i[edit update destroy]
+
   require 'will_paginate/array'
   def index
     @courses = Course.get_courses(params)
@@ -44,12 +46,9 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     end
   end
 
-  def edit
-    @course = Course.find_by(id: params[:id])
-  end
+  def edit; end
 
   def update # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-    @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course.update(course_params)
         @courses = Course.get_courses(params)
@@ -69,7 +68,6 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   end
 
   def destroy # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-    @course = Course.find_by(id: params[:id])
     respond_to do |format|
       if @course&.destroy
         @courses = Course.get_courses(params)
@@ -91,6 +89,10 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   end
 
   private
+
+  def set_course
+    @course = Course.find_by(id: params[:id])
+  end
 
   def course_params
     params.require(:course).permit(:id, :course_name, :description)
