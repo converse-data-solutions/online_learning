@@ -59,7 +59,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :course_lessons, only: %i[index edit update create destroy new] do
       collection do
-        get 'sections_for_course', to: 'course_lessons#sections_for_course'
+        # get 'sections_for_course', to: 'course_lessons#sections_for_course'
+        get :sections_for_course
       end
     end
   end

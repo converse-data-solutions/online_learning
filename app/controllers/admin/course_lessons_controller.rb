@@ -68,11 +68,13 @@ class Admin::CourseLessonsController < ApplicationController
   end
 
   def sections_for_course
-    @course = Course.find(params[:course_id])
-    @course_lessons = @course.sections
-
+    @course = Course.find_by(id: params[:course_id])
+    @sections = @course.sections
+    puts "Course Id: #{@course.id}"
+    puts "Params: #{params}"
+    puts "Sections: #{@sections}"
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace('select_section', partial: 'sections_select', locals: { sections: @sections }) }
+      format.turbo_stream
     end
   end
 

@@ -344,11 +344,12 @@ function selectSection() {
   console.log("loaded...........");
   $('.custom-option').on('click', function () {
     var courseId = $(this).data('value');
+    console.log("course ifffff: ", courseId);
 
     // Make an AJAX request to fetch sections for the selected course
     $.ajax({
-      url: '/admin/course_lessons/select_section',
-      method: 'GET',
+      url: '/admin/course_lessons/sections_for_course',
+      type: 'GET',
       data: { course_id: courseId },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
