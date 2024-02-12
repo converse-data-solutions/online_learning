@@ -282,7 +282,6 @@ function collectionSelect() {
 }
 
 function sectionSelect() {
-  console.log("function called.............");
   $("#section-dropdown .new-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -446,10 +445,8 @@ function optionSelect() {
 
 
 function selectSection() {
-  console.log("loaded...........");
   $("#filter-container .custom-select").on("click", ".custom-option", function () {
     var courseId = $(this).data('value');
-    console.log("course ifffff: ", courseId);
 
     // Make an AJAX request to fetch sections for the selected course
     $.ajax({
@@ -484,7 +481,6 @@ $(document).ready(function () {
   lessonSelect();
 
   $(document).on("turbo:render", function () {
-    console.log("rgreiute");
     editPopup();
     deletePopup();
     tableSearch();

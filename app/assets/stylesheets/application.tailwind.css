@@ -780,13 +780,6 @@ nav.main-menu li.active > a,
   position: absolute;
   display: block;
   content: "";
-  /* width: 10px;
-  height: 10px;
-  top: 50%;
-  right: 0px;
-  margin-top: -3px;
-  border-bottom: 1px solid #818181;
-  border-right: 1px solid #818181; */
   top: 35%;
   right: 0;
   width: 0;

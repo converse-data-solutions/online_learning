@@ -579,7 +579,6 @@ $(document).ready(function () {
 
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
-  console.log("fallbackToDefaultActions");
 
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);

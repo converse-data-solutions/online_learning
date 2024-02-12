@@ -362,7 +362,6 @@ function optionSelect() {
       },
       success: function (data) {
         Turbo.renderStreamMessage(data);
-        console.log("AJAX Success:", data);
         var newUrl =
           window.location.protocol +
           "//" +
