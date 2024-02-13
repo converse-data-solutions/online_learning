@@ -1,49 +1,33 @@
-<div class="container">
-<h1>Create Payment</h1>
-<%= form_for [:admin, @user, @entrollment, @payment], url: admin_payments_path, method: :post, multipart: true do |f| %>
-  <div class="form-group">
-    <%= f.label :user_id %>
-    <br>
-    <%= f.select :user_id, @users.map { |user| [user.email, user.id] }, {}, required: true %>
-    <% if @payment.errors.has_key?(:user_id) %>
-      <span style="color: red">
-        <%= @payment.errors[:user_id].first %>
-      </span>
-    <% end %>
-  </div>
-  <div class="form-group">
-    <%= f.label :entrollment_id %>
-    <br>
-    <%= f.select :entrollment_id, @entrollments.includes(:user).map { |entrollment| [entrollment.course.course_name + " - " + entrollment.user.email, entrollment.id] }, {}, required: true %>
-    <% if @payment.errors.has_key?(:entrollment_id) %>
-      <span style="color: red">
-        <%= @payment.errors[:entrollment_id].first %>
-      </span>
-    <% end %>
-  </div>
-  <div class="form-group">
-    <%= f.label :paid_at %>
-    <br>
-    <%= f.date_field :paid_at %>
-    <% if @payment.errors.has_key?(:paid_at) %>
-      <span style="color: red">
-        <%= @payment.errors[:paid_at].first %>
-      </span>
-    <% end %>
-  </div>
-  <div class="form-group">
-    <%= f.label :amount %>
-    <br>
-    <%= f.number_field :amount %>
-    <% if @payment.errors.has_key?(:amount) %>
-      <span style="color: red">
-        <%= @payment.errors[:amount].first %>
-      </span>
-    <% end %>
-  </div>
-  <br>
-  <%= f.submit "Create Payment", class: "btn btn-primary" %>
+<%= content_for :head do %>
+  <%= javascript_import_module_tag "controllers/payment" %>
+  <%= javascript_import_module_tag "controllers/notify" %>
 <% end %>
-<br>
-<%= link_to "Back to Payment List", admin_payments_path, class: "btn btn-secondary" %>
+<div class="flex flex-col w-full" id="start">
+  <div class="flex w-[75%] sm:w-[80%] md:w-[88%] lg:w-[90%] mt-8 mb-5 sm:mx-auto md:mr-auto lg:ml-[98px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
+    <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px] mb-4 sm:mb-0 font-medium">Invoice Creation - Admin</div>
+    <div>
+    </div>
+  </div>
+  <div class="w-[75%] ml-[100px] mr-auto h-[75vh] bg-white rounded-[5px]" id="filter-container">
+    <div class= "flex flex-col">
+      <div class="flex flex-col gap-12 w-[50%] mx-auto mt-10">
+        <div class="flex justify-between">
+          <div class="text-[#000000] text-[18px] font-medium">
+            Student Name
+          </div>
+          <div class="text-[#31B978] text-[18px] font-bold  pb-4 sm:pb-0">
+            <%= collection_select(:user, :name, User.joins(:roles).where(roles: { name: 'student' }), :id, :name, { prompt: "Select Student", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <div class="text-[#000000] text-[18px] font-medium">
+            Course
+          </div>
+          <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0 b" id="section-dropdown">
+            <%= collection_select(:course, :course_name, [], :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

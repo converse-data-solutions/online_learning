@@ -4,8 +4,7 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def new
-    @users = User.all
-    @entrollments = Entrollment.all
+    @course = Course.find_by(id: params[:course_id])
     @payment = Payment.new
   end
 
@@ -18,27 +17,10 @@ class Admin::PaymentsController < ApplicationController
     end
   end
 
-  def edit
-    @payment = Payment.find_by(id: params[:id])
-  end
-
-  def update
-    @payment = Payment.find_by(id: params[:id])
-    if @payment.update(payment_params)
-      redirect_to admin_payments_path
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @payment = Payment.find_by(id: params[:id])
-    @payment.destroy
-    redirect_to admin_payments_path
-  end
-
-  def show
-    @payment = Payment.find_by(id: params[:id])
+  def user_course
+    @user = User.find(params[:user_id])
+    @courses = @user.courses
+    respond_to(&:turbo_stream)
   end
 
   private

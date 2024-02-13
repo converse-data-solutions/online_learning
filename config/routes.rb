@@ -105,7 +105,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :payments
+    resources :payments, only: %i[index new create] do
+      collection do
+        get :user_course
+      end
+    end
   end
 
   namespace :admin do

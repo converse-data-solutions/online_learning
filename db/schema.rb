@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_12_172543) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_13_091845) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_12_172543) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "amount"
+    t.decimal "fees", precision: 10
   end
 
   create_table "entrollment_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -89,14 +89,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_12_172543) do
   end
 
   create_table "payments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "amount"
     t.datetime "paid_at"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "course_id"
-    t.index ["course_id"], name: "index_payments_on_course_id"
-    t.index ["user_id"], name: "index_payments_on_user_id"
+    t.decimal "paid_amount", precision: 10
+    t.bigint "user_course_id"
   end
 
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -173,6 +170,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_12_172543) do
     t.bigint "course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "enrolled_at"
+    t.decimal "course_amount", precision: 10
+    t.datetime "next_payment_date"
     t.index ["course_id"], name: "index_user_courses_on_course_id"
     t.index ["user_id"], name: "index_user_courses_on_user_id"
   end
@@ -223,7 +223,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_12_172543) do
   add_foreign_key "entrollments", "courses"
   add_foreign_key "entrollments", "users"
   add_foreign_key "lessons", "sections"
-  add_foreign_key "payments", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "ratings", "users"
   add_foreign_key "sections", "courses"
