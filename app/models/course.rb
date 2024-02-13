@@ -28,12 +28,4 @@ class Course < ApplicationRecord
       all
     end
   end
-
-  # def self.search_using_dropdown(query)
-  #   if query.present?
-  #     where(id: query)
-  #   else
-  #     all
-  #   end
-  # end
 end
