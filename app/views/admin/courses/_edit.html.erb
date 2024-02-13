@@ -3,7 +3,8 @@
   <div class="flex justify-between flex-col sm:flex-row">
     <label for="course-name" class="block mb-2 text-lg font-medium text-[#000]">Course</label>
     <div class="flex flex-col mb-4">
-      <%= f.text_field :course_name, class: "border-0  text-[#818181] bg-[#F5F5F5] text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-name" %>
+      <%= f.text_field :course_name, class: "border-0  text-[#818181] bg-[#F5F5F5] text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit-course-name" %>
+      <div class="text-red-600 text-sm mt-1" id="edit-course-name-error"></div>
       <% if course&.errors&.any? %>
         <% if course.errors[:course_name].any? %>
           <div class="text-red-600 text-sm mt-1">

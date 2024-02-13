@@ -1,0 +1,31 @@
+<!-- Modal body -->
+<div class="p-7 space-y-6 lg:w-[95%] sm:w-[95%] w-[90%] mr-auto lg:ml-auto ml-5">
+  <%= form_for(course_section, url: admin_course_chapter_path(course_section), html: { class: "validate", id: "section-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
+    <div class="flex justify-between flex-col sm:flex-row">
+      <label for="course-name" class="block mb-2 text-lg font-medium text-[#000]">Title</label>
+      <div class="flex flex-col mb-4">
+        <%= f.text_field :title, class: "border-0  text-[#818181] bg-[#F5F5F5] text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit-section-title" %>
+          <div class="text-red-600 text-sm mt-1" id="edit-title-error"></div>
+        <% if course_section&.errors&.any? %>
+          <% if course_section.errors[:title].any? %>
+            <div class="text-red-600 text-sm mt-1">
+              <%= course_section.errors.full_messages_for(:title).join(', ') %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="mb-4 flex justify-between flex-col sm:flex-row">
+      <label for="description" class="block mb-2 text-lg font-medium text-[#000]">Description
+        <span class="text-[#C6C6C6] text-[15px] font-medium">(optional)</span>
+      </label>
+      <%= f.text_area :description, class: 'resize-none border-0 text-[#818181] bg-[#F5F5F5] text-[14px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 w-[292px]  block h-[110px] p-2.5 rounded-[7px]' %>
+    </div>
+    <%= hidden_field_tag :page, params[:page]%>
+    <%= hidden_field_tag :per_page, params[:per_page]%>
+    <%= hidden_field_tag :search, params[:search]%>
+    <div class="w-1/2 md:w-1/5 mx-auto mt-7">
+      <%= f.submit "UPDATE", class: 'w-full md:ml-[50px] ml-[20px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 button-gradiant-hover' %>
+    </div>
+  <% end %>
+</div>

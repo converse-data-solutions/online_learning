@@ -1,0 +1,2 @@
+<%= turbo_stream.replace 'lessonTable', partial: 'admin/lessons/table', locals: { lessons: @lessons } %>
+<%= turbo_stream.append 'course-table', partial: 'shared/flash', locals: { message: 'Lesson was successfully updated.', type: 'notice' } %>

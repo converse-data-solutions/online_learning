@@ -9,8 +9,9 @@
       </td>
       <td class="px-6 py-4 font-medium text-[15px] text-[#818181]">
         <% if lesson.clip.attached? %>
-          <video id="video-<%= lesson.id %>" class="video-js" controls preload="auto" width="40" height="35" data-setup="{}">
-            <source src="<%= url_for(lesson.clip) %>" type="video/mp4" /> </video>
+          <video width="60" height="70" poster="<%= asset_path("video_thumbnail.png") %>" >
+            <source src="<%= url_for(lesson.clip) %>" type="video/mp4">
+          </video>
         <% else %>
           <p>No lesson attached to this record.</p>
         <% end %>
@@ -18,7 +19,7 @@
       <td class="px-6 py-4 font-medium text-[15px] text-[#818181]">
         <% if lesson.attachments.attached? %>
           <% lesson.attachments.each do |attachment| %>
-            <%= link_to "Download #{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %>
+            <%= link_to "#{attachment.filename}", rails_blob_path(attachment, disposition: "attachment") %>
             <br>
           <% end %>
         <% else %>
@@ -31,7 +32,7 @@
       </td>
     </tr>
   <% end %>
-<script>
-   $("#section-modal-close-btn").click();
-    $("#section-detele-modal-btn").click();
-</script>
+  <script>
+    $("#lesson-modal-close-btn").click();
+    $("#lesson-detele-modal-btn").click();
+  </script>

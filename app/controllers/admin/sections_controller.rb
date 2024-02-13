@@ -46,7 +46,8 @@ class Admin::SectionsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace('section-admin-form', partial: 'admin/sections/form', locals: { section: @section }),
-            turbo_stream.replace('section-index-form', partial: 'admin/sections/sectionform', locals: { section: @section })
+            turbo_stream.replace('section-index-form', partial: 'admin/sections/sectionform', locals: { section: @section }),
+            turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Section creation failed.', type: 'notice' })
           ]
         end
         format.json { render json: @section.errors, status: :unprocessable_entity }
@@ -59,6 +60,7 @@ class Admin::SectionsController < ApplicationController
   def update
     respond_to do |format|
       if @section.update(section_params)
+        @sections = @section.course.sections
         format.turbo_stream
       else
         format.turbo_stream { render turbo_stream: turbo_stream.update('steeper-edit-section-popup', partial: 'admin/sections/edit', locals: { section: @section }) }
@@ -67,14 +69,20 @@ class Admin::SectionsController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @section = Section.find_by(id: params[:id])
     respond_to do |format|
       if @section&.destroy
-        format.turbo_stream
+        @sections = @section.course.sections
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('sections-body', partial: 'admin/sections/table', locals: { sections: @sections }),
+            turbo_stream.append('course-table', partial: 'shared/flash', locals: { message: 'Section was successfully destroyed.', type: 'notice' })
+          ]
+        end
         format.json { render :show, status: :ok, location: admin_section_url(@section) }
       else
-        format.turbo_stream
+        format.turbo_stream { render turbo_stream: turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Section destroy failed.', type: 'notice' }) }
         format.json { render json: @section.errors, status: :unprocessable_entity }
       end
     end

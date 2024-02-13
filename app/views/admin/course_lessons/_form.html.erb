@@ -1,0 +1,64 @@
+<%= form_for course_lesson || Lesson.new, url: admin_course_lessons_path(), method: :post, html: { class: "space-y-6 w-[90%] mx-auto", id: "lesson-index-form" }, data: { turbo: true }, multiple: true do |f| %>
+  <div class="flex flex-col md:flex-row w-full gap-x-10 gap-y-4">
+    <div class="flex flex-col md:flex-row items-start mb-4 md:w-[50%] w-full">
+      <label for="Section" class="md:w-[30%] w-[30%] block mb-2 text-lg font-medium text-[#000]">Section</label>
+      <div class=" flex flex-col mb-4">
+        <%= collection_select(:lesson, :section_id, Section.all, :id, :title, { prompt: "Select Section", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select new-lesson-custom-select-border sources" })  %>
+        <div class="text-red-600 text-sm mt-1" id="section-error"></div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row items-start md:w-[50%] w-full">
+      <label for="title" class="w-[60%] md:w-[30%] block mb-2 text-lg text-[#000] font-medium">Title</label>
+      <div class=" flex flex-col mb-4">
+        <%= f.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full md:w-[100%] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
+        <div class="text-red-600 text-sm mt-1" id="title-error"></div>
+        <% if course_lesson&.errors&.any? %>
+          <% if course_lesson.errors[:title].any? %>
+            <div class="text-red-600 text-sm mt-1">
+              <%= course_lesson.errors.full_messages_for(:title).join(', ') %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col md:flex-row w-full gap-x-10 gap-y-4">
+    <div class="flex flex-col md:w-1/2 w-full gap-5">
+      <div class="flex flex-col md:flex-row items-normal md:items-center mb-4">
+        <label for="Clip" class="w-[60%] md:w-[30%] block mb-2 text-lg font-medium text-[#000]">Clip</label>
+        <div class="bg-[#F5F5F5] h-[50px] flex items-center md:w-[70%] w-full rounded-lg">
+          <div class="clipUpload">
+            <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <%= f.file_field :clip %>
+            <p class="clip text-[#818181] text-[15px] font-medium">Upload your files here</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row items-normal md:items-center mb-4">
+        <label for="Clip" class="w-[60%] md:w-[30%] block mb-2 text-lg font-medium text-[#000]">Clip</label>
+        <div class="bg-[#F5F5F5] h-[50px] flex items-center w-full md:w-[70%] rounded-lg">
+          <div class="fileUploadWrap">
+            <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <%= f.file_field :attachments, multiple: true %>
+            <p class="attachments text-[#818181] text-[15px] font-medium">Upload your files here</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row items-start mb-4 md:w-1/2 w-full">
+      <label for="description" class="w-[60%] md:w-[30%] block mb-2 text-lg font-medium text-[#000]">Description<br>
+        <span class="text-[15px] font-medium text-[#C6C6C6]">(optional)</span></label>
+      <%= f.text_area :description, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block w-full md:w-[70%] h-[16vh] p-2.5 rounded-[7px]' %>
+    </div>
+  </div>
+  <%= hidden_field_tag :page, params[:page]%>
+  <%= hidden_field_tag :per_page, params[:per_page]%>
+  <%= hidden_field_tag :search, params[:search]%>
+  <div class="md:w-1/5 w-1/2 mx-auto mt-11">
+    <%= f.submit "Create", class: 'w-full text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800', id: 'submit-button' %>
+  </div>
+<% end %>

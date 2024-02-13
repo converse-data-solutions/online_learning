@@ -21,20 +21,25 @@ class Admin::LessonsController < ApplicationController
 
   def new
     @lesson = Lesson.new
+    respond_to do |format|
+      format.html # This will render the new.html.erb view
+      format.turbo_stream # This will render the new.turbo_stream.erb view
+    end
   end
 
   def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     @lesson = Lesson.new(lesson_params)
-
     respond_to do |format|
       if @lesson.save
         @lessons = Lesson.where(section_id: @lesson.section_id)
-
-        format.html { redirect_to your_redirect_path, notice: 'Lesson was successfully created.' }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('lessonTable', partial: 'admin/lessons/table', locals: { lessons: @lessons }) }
+        format.html
+        format.turbo_stream
       else
-        format.html { render partial: 'admin/lessons/form', locals: { lesson: @lesson }, status: :unprocessable_entity }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('lesson-admin-form', partial: 'admin/lessons/form', locals: { section_id: @lesson.section_id, lesson: @lesson }) }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Lesson creation failed.', type: 'notice' })
+          ]
+        end
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
@@ -45,10 +50,16 @@ class Admin::LessonsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
+        @lessons = Lesson.where(section_id: @lesson.section_id)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_lesson_url(@lesson) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.update('steeper-edit-lesson-popup', partial: 'admin/lessons/edit', locals: { lesson: @lesson, section: @section }) }
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.update('steeper-edit-lesson-popup', partial: 'admin/lessons/edit', locals: { lesson: @lesson, section: @section }),
+            turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Lesson update failed.', type: 'notice' })
+          ]
+        end
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
@@ -57,10 +68,21 @@ class Admin::LessonsController < ApplicationController
   def destroy
     respond_to do |format|
       if @lesson&.destroy
-        format.turbo_stream
+        @lessons = Lesson.where(section_id: @lesson.section_id)
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace('lessonTable', partial: 'admin/lessons/table', locals: { lessons: @lessons }),
+            turbo_stream.append('course-table', partial: 'shared/flash', locals: { message: 'Lesson was successfully destroyed.', type: 'notice' })
+          ]
+        end
         format.json { render :show, status: :ok, location: admin_lesson_url(@lesson) }
       else
-        format.turbo_stream
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Lesson destroy failed.', type: 'notice' }),
+            turbo_stream.replace('lessonTable', partial: 'admin/lessons/table', locals: { lessons: @lessons })
+          ]
+        end
         format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end

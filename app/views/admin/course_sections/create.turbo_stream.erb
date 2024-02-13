@@ -1,0 +1,4 @@
+<%= turbo_stream.update "section-table", partial: "admin/course_sections/table", locals: { course_sections: @course_sections } %>
+<%= turbo_stream.replace "section-index-form", partial: "admin/course_sections/form", locals: { course_section: Section.new } %>
+<%= turbo_stream.append "section-table", partial: "shared/flash", locals: { message: 'Section was successfully created.', type: 'notice' } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/course_sections/paginate", locals: { course_sections: @course_sections } %>
