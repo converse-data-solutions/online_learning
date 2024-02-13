@@ -157,14 +157,15 @@ function userCourseSelect() {
 }
 
 function userIdSelect() {
-  $("#filter-container").on("click", ".new-custom-option", function() {
+  $("#course-select").on("click", ".new-custom-option", function() {
     $("#overlay").show();
     var selectedCourseId = $(this).data("value");
+    console.log("selectedCourseId", selectedCourseId);
     var user_id = $("#get-user-id").val();
     console.log("user_id", user_id);
     $.ajax({
       type: "GET",
-      url: "/admin/payments/new",
+      url: "/admin/payments/balance_amount",
       data: {
         course_id: selectedCourseId,
         user_id: user_id
@@ -191,6 +192,7 @@ function userIdSelect() {
       },
       error: function(error) {
         console.error("AJAX Error:", error);
+        $("#overlay").hide();
       },
     });
   });

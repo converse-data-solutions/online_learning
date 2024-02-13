@@ -4,7 +4,6 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def new
-    @course = Course.find_by(id: params[:course_id])
     @payment = Payment.new
   end
 
@@ -20,6 +19,12 @@ class Admin::PaymentsController < ApplicationController
   def user_course
     @user = User.find(params[:user_id])
     @courses = @user.courses
+    respond_to(&:turbo_stream)
+  end
+
+  def balance_amount
+    @user = User.find_by(id: params[:user_id])
+    @balance = @user.user_courses.find_by(course_id: params[:course_id])
     respond_to(&:turbo_stream)
   end
 
