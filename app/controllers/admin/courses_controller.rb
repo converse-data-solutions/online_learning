@@ -95,6 +95,6 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   end
 
   def course_params
-    params.require(:course).permit(:id, :course_name, :description)
+    params.require(:course).permit(:id, :course_name, :description, :fees)
   end
 end

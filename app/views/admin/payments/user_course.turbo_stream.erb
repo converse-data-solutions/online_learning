@@ -1,1 +1,1 @@
-<%= turbo_stream.replace "section-dropdown", partial: "admin/payments/user_course", locals: { courses: @courses } %>
+<%= turbo_stream.update "course-select", partial: "admin/payments/user_course", locals: { courses: @courses } %>

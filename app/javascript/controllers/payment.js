@@ -65,7 +65,7 @@ function selectUser() {
 }
 
 function selectCourse() {
-  $("#section-dropdown .new-custom-select").each(function() {
+  $("#course-select .new-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -133,6 +133,7 @@ function selectCourse() {
 function userCourseSelect() {
   $("#filter-container .custom-select").on("click", ".custom-option", function() {
     var userId = $(this).data('value');
+    let getUser = $("#get-user-id").attr("data-user-id", userId).val(userId);
 
     // Make an AJAX request to fetch sections for the selected course
     $.ajax({
@@ -146,6 +147,7 @@ function userCourseSelect() {
       },
       success: function(data) {
         Turbo.renderStreamMessage(data);
+        $("#course-select .new-custom-option").attr('data-user-id', userId);
       },
       error: function(error) {
         console.error('Error:', error);
@@ -158,11 +160,14 @@ function userIdSelect() {
   $("#filter-container").on("click", ".new-custom-option", function() {
     $("#overlay").show();
     var selectedCourseId = $(this).data("value");
+    var user_id = $("#get-user-id").val();
+    console.log("user_id", user_id);
     $.ajax({
       type: "GET",
       url: "/admin/payments/new",
       data: {
-        course_id: selectedCourseId
+        course_id: selectedCourseId,
+        user_id: user_id
       },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
@@ -175,7 +180,10 @@ function userIdSelect() {
           window.location.host +
           window.location.pathname +
           "?course_id=" +
-          encodeURIComponent(selectedCourseId);
+          encodeURIComponent(selectedCourseId) +
+          "&user_id=" +
+          encodeURIComponent(user_id);
+
         window.history.pushState({
           path: newUrl
         }, "", newUrl);
@@ -216,7 +224,7 @@ addEventListener("turbo:before-stream-render", (event) => {
 
   event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
-    if (streamElement.target == 'section-dropdown') {
+    if (streamElement.target == 'course-select') {
       selectCourse();
     }
   };
