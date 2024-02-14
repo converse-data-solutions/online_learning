@@ -31,6 +31,6 @@ class Admin::PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(:user_id, :entrollment_id, :amount, :paid_at)
+    params.require(:payment).permit(:user_id, :user_course_id, :paid_at, :paid_amount)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_13_091845) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_14_032309) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_13_091845) do
     t.datetime "updated_at", null: false
     t.decimal "paid_amount", precision: 10
     t.bigint "user_course_id"
+    t.index ["user_course_id"], name: "fk_rails_daaae70391"
   end
 
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -223,6 +224,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_13_091845) do
   add_foreign_key "entrollments", "courses"
   add_foreign_key "entrollments", "users"
   add_foreign_key "lessons", "sections"
+  add_foreign_key "payments", "user_courses"
   add_foreign_key "profiles", "users"
   add_foreign_key "ratings", "users"
   add_foreign_key "sections", "courses"
