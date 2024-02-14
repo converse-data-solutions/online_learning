@@ -10,6 +10,8 @@ class Admin::PaymentsController < ApplicationController
   def create
     @payment = Payment.new(payment_params)
     if @payment.save
+      user_course = UserCourse.find_by(id: params[:payment][:user_course_id])
+      user_course.update(next_payment_date: params[:next_payment_date]) if user_course.present?
       redirect_to admin_payments_path
     else
       render :new, status: :unprocessable_entity
@@ -36,6 +38,10 @@ class Admin::PaymentsController < ApplicationController
         render pdf: 'Invoice', template: 'admin/payments/invoice', formats: [:html], layout: 'pdf'
       end
     end
+  end
+
+  def collections
+    @user_courses = UserCourse.includes(:user, :course).all
   end
 
   private

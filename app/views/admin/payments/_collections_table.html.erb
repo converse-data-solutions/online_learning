@@ -1,22 +1,20 @@
-<% if @payments.present? %>
-  <% @payments.each do |payment| %>
+<% if @user_courses.present? %>
+  <% @user_courses.each do |user_course| %>
     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600">
       <th scope="row" class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181] whitespace-nowrap dark:text-white">
-        <%= payment.user_course.user.name %>
+        <%= user_course.user.name %>
       </th>
       <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
-        <%= payment.user_course.course.course_name %>
+        <%= user_course.course.course_name %>
       </td>
       <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
-        <%= payment.paid_at&.strftime("%d/%m/%Y") %>
+        <%= user_course.next_payment_date&.strftime("%d/%m/%Y") %>
       </td>
       <td class="px-6 py-4 flex gap-4">
-        <%= link_to invoice_admin_payment_path(payment, format: :pdf) do %>
           <div class="flex items-center">
             <img src="<%= asset_path("download.png") %>" alt="..."><span class="ml-2 text-[#0BC08B] text-[18px] font-medium">Download Invoice</span>
           </div>
-        <% end %>
-        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-action="click->modal#toggle" data-lesson-id="<%= payment.id %>" class="block loader-btn" type="button">
+        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-action="click->modal#toggle" data-lesson-id="" class="block loader-btn" type="button">
           <div class="flex items-center">
             <img src="<%= asset_path("send.png") %>" alt="..."><span class="ml-2 text-[#0BC08B] text-[18px] font-medium">Send Invoice</span>
           </div>

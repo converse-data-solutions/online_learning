@@ -1,18 +1,24 @@
 <%= form_for Payment.new, url: admin_payments_path, html: { class: "validate", id: "admin-payment-form" } , method: :post do |f| %>
   <%= f.hidden_field :user_course_id, value: UserCourse.find_by(user_id: params[:user_id], course_id: params[:course_id])&.id %>
-  <div class="flex gap-7 flex-col sm:flex-row">
-    <label for="course-name" class="block mb-2 text-lg font-medium text-[#000]">Amount to be Paid</label>
+  <div class="flex gap-7 flex-col justify-between sm:flex-row">
+    <label for="course-name" class="w-[45%] text-end block mb-2 text-lg font-medium text-[#000]">Amount to be Paid</label>
     <div class="w-[47%] flex flex-col mb-4">
       <%= f.text_field :paid_amount, class: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-name" %>
     </div>
   </div>
-  <div class="flex gap-7 flex-col sm:flex-row">
-    <label for="course-name" class="block mb-2 text-lg font-medium text-[#000]">Next Payment Date</label>
+  <div class="flex gap-7 flex-col justify-between sm:flex-row">
+    <label for="course-name" class="w-[45%] text-end block mb-2 text-lg font-medium text-[#000]">Payment Date</label>
     <div class="w-[47%] flex flex-col mb-4">
       <%= f.date_field :paid_at, class: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-name" %>
     </div>
   </div>
-  <div class="w-3/12 mx-auto mt-7 flex-col md:flex-row">
+  <div class="flex gap-7 flex-col justify-between sm:flex-row">
+    <label for="course-name" class="w-[45%] text-end block mb-2 text-lg font-medium text-[#000]">Next Payment Date</label>
+    <div class="w-[47%] flex flex-col mb-4">
+      <%= date_field_tag :next_payment_date, nil, class: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "next-payment-date" %>
+    </div>
+  </div>
+  <div class="w-[20%] ml-auto mr-[100px] mt-7 flex-col md:flex-row">
     <%= f.submit "SUBMIT", class: "button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800", id:"submit-course" %>
   </div>
 <% end %>

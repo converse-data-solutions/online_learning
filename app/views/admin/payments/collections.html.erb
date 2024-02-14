@@ -4,7 +4,7 @@
 <% end %>
 <div class="flex flex-col w-full" id="start">
   <div class="flex w-[75%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
-    <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px] mb-4 sm:mb-0 font-medium">Download Invoices - Admin</div>
+    <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px] mb-4 sm:mb-0 font-medium">Payment Collections - Admin</div>
     <div>
       <!-- Modal toggle -->
       <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px] gradiant-hover loader-btn onclick-hover" type="button">
@@ -43,7 +43,7 @@
               Course
             </th>
             <th scope="col" class="min-w-[250px] max-w-[250px] truncate px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text:[16px] lg:text-[18px]">
-              Payment Date
+              Due Date
             </th>
             <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
               Action
@@ -51,7 +51,7 @@
           </tr>
         </thead>
         <tbody class="overflow-auto" id="payment-table">
-          <%= render partial: "admin/payments/table", locals: { payments: @payments } %>
+          <%= render partial: "admin/payments/collections_table", locals: { user_courses: @user_courses } %>
         </tbody>
       </table>
     </div>
