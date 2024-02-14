@@ -110,6 +110,9 @@ Rails.application.routes.draw do
         get :user_course
         get :balance_amount
       end
+      member do
+        get :invoice
+      end
     end
   end
 

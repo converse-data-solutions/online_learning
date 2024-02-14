@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .test{
+        display: flex;
+        flex-direction: row;
+      }
+    </style>
+  </head>
+  <body id= "invoice">
+    <div class="container">
+      <div class="wrapper">
+        <div class="row margin-0 direction test" style="width: 100%; display: flex; flex-direction: row;">
+          <div class="col-sm-5" style="width: 70%; display: flex; justify-content: space-between; flex-direction: column;">
+            <img src="https://techvillageacademy.com/assets/images/logo/logo.png" alt="logo" style="width: 230px; height: 70px;">
+            <p>440, Sri Aishwaryam Nagar,<br />
+              Karatadiplayam, 
+              Gobichettipalayam, Erode<br />
+              Tamil nadu-638 453. </p>
+          </div>
+          <div class="col-sm-7 padding-0" style="width: 30%; display: flex; justify-content: end;">
+            <table class="table" cellspacing="0" cellpadding="10" border="1">
+              <tbody>
+                <tr>
+                  <td style="width: 55%;" >
+                    <b>Date</b>
+                  </td>
+                  <td >
+                    <b><%= @payment.paid_at&.strftime("%B %d, %Y") %></b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Payment ID</b>
+                  </td>
+                  <td>
+                    <b><%= @payment.id %></b>
+                  </td>
+                </tr>
+                <tr style="">
+                  <td >
+                    <b>Contact No</b>
+                  </td>
+                  <td class="last">
+                    <b><%= @payment.user_course.user.contact_number %></b>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row margin-0">
+          <div class="col-sm-12 padding-0">
+            <table border="1" style="border-collapse: collapse; width: 100%;">
+              <thead style="border-bottom: 0px solid #000;">
+                <tr>
+                  <th class="serial-no">
+                    <b>SL. No.</b>
+                  </th>
+                  <th class="particulars">
+                    <b>Particulars</b>
+                  </th>
+                  <th class="particulars">
+                    <b>Todatl Course Fee</b>
+                  </th>
+                  <th class="amount">
+                    <b>Amount Paid</b>
+                  </th>
+                </tr>
+              </thead>
+              <tr style="height: 250px;">
+                <td>
+                  1
+                </td>
+                <td>
+                  <p>
+                    <%= @payment.user_course.course.course_name %>
+                  </p>
+                  <div class="particular-items">
+                    <p>
+                    </p>
+                    <p>
+                    </p>
+                    <p>
+                    </p>
+                    <p>
+                    </p>
+                    <p>
+                    </p>
+                    <p>
+                    </p>
+                  </div>
+                </td>
+                <td></td>
+                <td>
+                  <p><%= @payment.paid_amount %></p>
+                  <div class="particular-items amount-items">
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" style="text-align: end;"><b>Balance</b></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="3" style="text-align: end;">
+                  <b>Total</b>
+                </td>
+                <td><%= @payment.paid_amount %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div style="width: 100%; height: 120px; border-bottom: 1px solid #000; padding-top: 10px;">
+          <span class="">Total Amount (In Words):</span>
+        </div>
+        <div  style="width: 100%; height: 220px; border-bottom: 0px solid #000;" class="signature">
+          <div style="text-align: end; padding-bottom:125px;">
+            <span>Authorized Signatory </span>
+          </div>
+          <div style="text-align: end;">
+            <p>Gayathri Tamilselvan</p>
+            <p>Operational Head of Tech Village Academy </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
