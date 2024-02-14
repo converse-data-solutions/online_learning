@@ -1,6 +1,6 @@
 class Admin::PaymentsController < ApplicationController
   def index
-    @payments = Payment.all
+    @payments = Payment.includes(:user_course).all
   end
 
   def new
