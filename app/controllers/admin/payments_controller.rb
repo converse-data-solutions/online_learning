@@ -56,6 +56,12 @@ class Admin::PaymentsController < ApplicationController
     respond_to(&:turbo_stream)
   end
 
+  def user_collection
+    @user = User.find(params[:user_id])
+    @courses = @user.courses
+    respond_to(&:turbo_stream)
+  end
+
   private
 
   def payment_params

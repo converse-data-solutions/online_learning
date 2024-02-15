@@ -111,6 +111,7 @@ Rails.application.routes.draw do
         get :balance_amount
         get :collections
         get :user_invoice
+        get :user_collection
       end
       member do
         get :invoice
