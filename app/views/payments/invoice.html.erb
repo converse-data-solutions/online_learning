@@ -35,6 +35,14 @@
                 </tr>
                 <tr>
                   <td>
+                    <b>Name</b>
+                  </td>
+                  <td>
+                    <b><%= @payment.user_course.user.name %></b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
                     <b>Payment ID</b>
                   </td>
                   <td>
@@ -78,7 +86,7 @@
                 </td>
                 <td>
                   <p>
-                  <%= @payment.entrollment.course.course_name %>
+                  <%= @payment.user_course.course.course_name %>
                   </p>
                   <div class="particular-items">
                     <p>

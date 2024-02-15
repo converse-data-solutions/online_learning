@@ -40,6 +40,21 @@ class Admin::PaymentsController < ApplicationController
     end
   end
 
+  def generate_invoice_pdf
+    @payment = Payment.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf_data = render_to_string(pdf: 'Invoice', template: 'admin/payments/invoice', formats: [:html], layout: 'pdf')
+
+        PaymentMailer.send_invoice_with_pdf(@payment, pdf_data).deliver_now
+
+        render pdf: 'Invoice', template: 'admin/payments/invoice', formats: [:html], layout: 'pdf'
+      end
+    end
+  end
+
   def collections
     @user_courses = UserCourse.includes(:user, :course).paginate(page: params[:page], per_page: 10)
   end

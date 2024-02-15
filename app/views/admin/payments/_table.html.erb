@@ -16,14 +16,15 @@
             <img src="<%= asset_path("download.png") %>" alt="..."><span class="ml-2 text-[#0BC08B] text-[18px] font-medium">Download Invoice</span>
           </div>
         <% end %>
-        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-action="click->modal#toggle" data-lesson-id="<%= payment.id %>" class="block loader-btn" type="button">
+        <%= link_to generate_invoice_pdf_admin_payment_path(payment, format: :pdf) do %>
           <div class="flex items-center">
             <img src="<%= asset_path("send.png") %>" alt="..."><span class="ml-2 text-[#0BC08B] text-[18px] font-medium">Send Invoice</span>
           </div>
-        </button>
-      </td>
-    </tr>
-  <% end %>
+        <% end %>
+      </button>
+    </td>
+  </tr>
+<% end %>
 <% else %>
   <tr>
     <td class="px-6 py-4"></td>

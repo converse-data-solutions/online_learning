@@ -116,6 +116,7 @@ Rails.application.routes.draw do
       member do
         get :invoice
         get :send_due_email
+        get :generate_invoice_pdf
       end
     end
   end
