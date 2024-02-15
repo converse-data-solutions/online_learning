@@ -1,0 +1,2 @@
+<%= turbo_stream.update "payment-table", partial: "admin/payments/table", locals: { payments: @payments } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/payments/paginate", locals: { payments: @payments } %>

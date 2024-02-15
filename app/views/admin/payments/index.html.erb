@@ -22,12 +22,12 @@
       </div>
     </div>
     <label for="table-search " class="sr-only">Search</label>
-    <%= form_tag admin_payments_path, method: :get, id: "lesson_search_form", data: { turbo_stream: true } do %>
+    <%= form_tag admin_payments_path, method: :get, id: "invoice_search_form", data: { turbo_stream: true } do %>
       <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <img src="<%= asset_path("search.png") %>">
         </div>
-        <%= text_field_tag :search, params[:search], id: "lesson_search", class: "block p-2 pl-10 text-sm text-[#818181] border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type" %>
+        <%= text_field_tag :search, params[:search], id: "invoice_search", class: "block p-2 pl-10 text-sm text-[#818181] border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type" %>
       </div>
     <% end %>
   </div>
@@ -56,7 +56,7 @@
       </table>
     </div>
     <div class="mt-4 ml-[30px] lg:ml-0" id="render-pagination">
-      <%#= render partial: 'admin/course_lessons/paginate', locals: { course_lessons: @course_lessons } %>
+      <%= render partial: 'admin/payments/paginate', locals: { payments: @payments } %>
     </div>
   </div>
 </div>

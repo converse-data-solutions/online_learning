@@ -198,6 +198,47 @@ function userIdSelect() {
   });
 }
 
+function tableSearch() {
+  let delayTimer;
+
+  $("#collection_search").on("input", function(e) {
+    clearTimeout(delayTimer);
+    delayTimer = setTimeout(function() {
+      let searchValue = $("#collection_search").val();
+      $("#overlay").show();
+
+      $.ajax({
+        url: "/admin/payments/collections",
+        type: "GET",
+        data: {
+          search: searchValue,
+        },
+        headers: {
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function(res) {
+          Turbo.renderStreamMessage(res);
+          var newURL =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?search=" +
+            encodeURIComponent(searchValue);
+          window.history.pushState({
+            path: newURL
+          }, "", newURL);
+          $("#overlay").hide();
+        },
+        error: function() {
+          console.log("Error fetching data");
+          $("#overlay").hide();
+        },
+      });
+    }, 500);
+  });
+}
+
 function fromDate() {
   $(function() {
     $("#datepicker").datepicker({
@@ -223,6 +264,7 @@ $(document).ready(function() {
   userIdSelect();
   fromDate();
   toDate();
+  tableSearch();
 
   $(document).on("turbo:render", function() {
     selectUser();
@@ -231,6 +273,7 @@ $(document).ready(function() {
     userIdSelect();
     fromDate();
     toDate();
+    tableSearch();
   });
 
   $(document).on("turbo:before-render", function() {

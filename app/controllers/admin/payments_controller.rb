@@ -1,6 +1,6 @@
 class Admin::PaymentsController < ApplicationController
   def index
-    @payments = Payment.includes(:user_course).all
+    @payments = Payment.get_payments(params)
   end
 
   def new
@@ -56,7 +56,7 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def collections
-    @user_courses = UserCourse.includes(:user, :course).paginate(page: params[:page], per_page: 10)
+    @user_courses = UserCourse.get_collections(params)
   end
 
   def send_due_email

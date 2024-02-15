@@ -198,17 +198,60 @@ function userIdSelect() {
   });
 }
 
+function tableSearch() {
+  let delayTimer;
+
+  $("#invoice_search").on("input", function(e) {
+    clearTimeout(delayTimer);
+    delayTimer = setTimeout(function() {
+      let searchValue = $("#invoice_search").val();
+      $("#overlay").show();
+
+      $.ajax({
+        url: "/admin/payments",
+        type: "GET",
+        data: {
+          search: searchValue,
+        },
+        headers: {
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function(res) {
+          Turbo.renderStreamMessage(res);
+          var newURL =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?search=" +
+            encodeURIComponent(searchValue);
+          window.history.pushState({
+            path: newURL
+          }, "", newURL);
+          $("#overlay").hide();
+        },
+        error: function() {
+          console.log("Error fetching data");
+          $("#overlay").hide();
+        },
+      });
+    }, 500);
+  });
+}
+
 $(document).ready(function() {
   selectUser();
   selectCourse();
   userCourseSelect();
   userIdSelect();
+  tableSearch();
 
   $(document).on("turbo:render", function() {
     selectUser();
     selectCourse();
     userCourseSelect();
     userIdSelect();
+    tableSearch();
   });
 
   $(document).on("turbo:before-render", function() {
