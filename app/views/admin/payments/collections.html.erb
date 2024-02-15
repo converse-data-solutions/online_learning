@@ -13,12 +13,43 @@
     </div>
   </div>
   <div class="flex items-center justify-between pt-10 md:pt-9 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row" id="filter-container">
-    <div class="flex flex-col md:flex-col lg:flex-row gap-12">
+    <div class="flex flex-col md:flex-col lg:flex-row gap-4">
       <div class="text-[#31B978] text-[18px] font-bold  pb-4 sm:pb-0">
-        <%= collection_select(:user, :name, User.joins(:roles).where(roles: { name: 'student' }), :id, :name, { prompt: "Select Student", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+        <%= collection_select(:user, :name, User.joins(:roles).where(roles: { name: 'student' }), :id, :name, { prompt: "Select Student", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources width-reducer" }) %>
       </div>
       <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="course-dropdown">
         <%= collection_select(:course, :course_name, [], :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+      </div>
+      <div>
+        <div class="checkbox-dropdown">
+          Choose city
+          <ul class="checkbox-dropdown-list">
+            <li>
+              <label class="ml-2">
+                <input type="checkbox" value="Vejle" name="city" class="show-dates" /><span class="ml-2">Today</span></label>
+            </li>
+            <li>
+              <label class="ml-2" >
+                <input type="checkbox" value="Horsens" name="city" id="hide-dates" /><span class="ml-2">Dates Between</span></label>
+            </li>
+            <li>
+              <label class="ml-2">
+                <input type="checkbox" value="Kolding" name="city" class="show-dates" /><span class="ml-2">This Week</span></label>
+            </li>
+            <li>
+              <label class="ml-2">
+                <input type="checkbox" value="Kolding" name="city" class="show-dates" /><span class="ml-2">Date Passed</span></label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex gap-2 toggle-dates" id="display-dates">
+        <div class="input-wrapper flex flex-col w-full sm:w-[57%] lg:w-full">
+          <%= date_field_tag :from_date, nil, class: 'datepicker-input border border-[#cccccc] text-[#818181] remove-margin text-base font-medium rounded-lg', id: 'datepicker', autocomplete: 'off' %>
+        </div>
+        <div class="input-wrapper flex flex-col w-full sm:w-[57%] lg:w-full">
+          <%= date_field_tag :to_date, nil, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base remove-margin font-medium rounded-lg', id: 'todatepicker', autocomplete: 'off' %>
+        </div>
       </div>
     </div>
     <label for="table-search " class="sr-only">Search</label>
@@ -60,3 +91,19 @@
     </div>
   </div>
 </div>
+<script>
+  $(".checkbox-dropdown").click(function () {
+    $(this).toggleClass("is-active");
+  });
+
+  $(".checkbox-dropdown ul").click(function(e) {
+    e.stopPropagation();
+  });
+
+  $("#hide-dates").on('click', function(){
+    $("#display-dates").removeClass('toggle-dates');
+  })
+  $(".show-dates").on('click', function(){
+    $("#display-dates").addClass('toggle-dates');
+  })
+</script>

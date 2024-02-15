@@ -198,17 +198,39 @@ function userIdSelect() {
   });
 }
 
+function fromDate() {
+  $(function() {
+    $("#datepicker").datepicker({
+      dateFormat: "dd-mm-yy",
+      duration: "fast",
+    });
+  });
+}
+
+function toDate() {
+  $(function() {
+    $("#todatepicker").datepicker({
+      dateFormat: "dd-mm-yy",
+      duration: "fast",
+    });
+  });
+}
+
 $(document).ready(function() {
   selectUser();
   selectCourse();
   userCourseSelect();
   userIdSelect();
+  fromDate();
+  toDate();
 
   $(document).on("turbo:render", function() {
     selectUser();
     selectCourse();
     userCourseSelect();
     userIdSelect();
+    fromDate();
+    toDate();
   });
 
   $(document).on("turbo:before-render", function() {
