@@ -41,7 +41,13 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def collections
-    @user_courses = UserCourse.includes(:user, :course).all
+    @user_courses = UserCourse.includes(:user, :course).paginate(page: params[:page], per_page: 10)
+  end
+
+  def send_due_email
+    @user_course = UserCourse.find_by(id: params[:id])
+    PaymentMailer.payment_due_notification(@user_course).deliver_now
+    redirect_to collections_admin_payments_path
   end
 
   private

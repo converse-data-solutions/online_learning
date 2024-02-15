@@ -56,7 +56,7 @@
       </table>
     </div>
     <div class="mt-4 ml-[30px] lg:ml-0" id="render-pagination">
-      <%#= render partial: 'admin/course_lessons/paginate', locals: { course_lessons: @course_lessons } %>
+      <%= will_paginate(@user_courses) %>
     </div>
   </div>
 </div>

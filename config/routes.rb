@@ -113,6 +113,7 @@ Rails.application.routes.draw do
       end
       member do
         get :invoice
+        get :send_due_email
       end
     end
   end

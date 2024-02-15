@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Payment Due Notification</title>
+  </head>
+  <body>
+    <h2>Payment Due Notification</h2>
+    <p>Hello, <%= @user_course.user.name %></p>
+    <% if @user_course.next_payment_date == Date.today %>
+      <p>This is a friendly reminder that your payment for the course is due today. Please make sure to complete your payment at your earliest convenience.</p>
+    <% elsif @user_course.next_payment_date == Date.tomorrow %>
+      <p>This is a friendly reminder that your payment for the course is due tomorrow. Please make sure to complete your payment by tomorrow.</p>
+    <% elsif @user_course.next_payment_date == Date.today + 1.week %>
+      <p>This is a friendly reminder that your payment for the course is due one week from today. Please make sure to complete your payment within the next week <%= @user_course.next_payment_date&.strftime("%d/%m/%Y") %>.</p>
+    <% else %>
+      <p>This is a friendly reminder that your next payment for the course is due on <%= @user_course.next_payment_date&.strftime("%d/%m/%Y") %>. Please make sure to complete your payment by that date.</p>
+    <% end %>
+    <p>If you have any questions or concerns regarding your payment, feel free to reach out to me.</p>
+    <p>Thank you for your attention to this matter.</p>
+    <p>Sincerely,<br>
+      Gayathri Tamilselvan</p>
+  </body>
+</html>
