@@ -50,6 +50,12 @@ class Admin::PaymentsController < ApplicationController
     redirect_to collections_admin_payments_path
   end
 
+  def user_invoice
+    @user = User.find(params[:user_id])
+    @courses = @user.courses
+    respond_to(&:turbo_stream)
+  end
+
   private
 
   def payment_params
