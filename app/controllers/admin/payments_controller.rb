@@ -57,6 +57,10 @@ class Admin::PaymentsController < ApplicationController
 
   def collections
     @user_courses = UserCourse.get_collections(params)
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def send_due_email

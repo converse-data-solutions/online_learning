@@ -252,6 +252,47 @@ function toDate() {
   });
 }
 
+function dateFilter(){
+  $('.show-dates').change(function() {
+    // Collect selected checkbox values
+    var selectedOptions = [];
+    $('.show-dates:checked').each(function() {
+      selectedOptions.push($(this).val());
+    });
+
+    // Send AJAX request with selected options
+    $.ajax({
+      type: "GET",
+      url: "/admin/payments/collections",
+      data: {
+        dates: selectedOptions
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function(data) {
+        Turbo.renderStreamMessage(data);
+        console.log("Data:", data);
+        var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?next_payment_date=" +
+          encodeURIComponent(selectedOptions);
+        window.history.pushState({
+          path: newUrl
+        }, "", newUrl);
+        $("#overlay").hide();
+      },
+      error: function(error) {
+        console.error("AJAX Error:", error);
+        $("#overlay").hide();
+      },
+    });
+  });
+}
+
 $(document).ready(function() {
   selectUser();
   selectCourse();
@@ -260,6 +301,7 @@ $(document).ready(function() {
   toDate();
   tableSearch();
   optionSelect();
+  dateFilter();
 
   $(document).on("turbo:render", function() {
     selectUser();
@@ -269,6 +311,7 @@ $(document).ready(function() {
     toDate();
     tableSearch();
     optionSelect();
+    dateFilter();
   });
 
   $(document).on("turbo:before-render", function() {
