@@ -237,8 +237,10 @@ function optionSelect() {
 function fromDate() {
   $(function() {
     $("#datepicker").datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "yy-mm-dd",
       duration: "fast",
+      changeYear: true, // Enable changing the year
+
     });
   });
 }
@@ -246,40 +248,65 @@ function fromDate() {
 function toDate() {
   $(function() {
     $("#todatepicker").datepicker({
-      dateFormat: "dd-mm-yy",
+      dateFormat: "yy-mm-dd",
       duration: "fast",
+      changeYear: true, // Enable changing the year
     });
   });
 }
 
-function dateFilter(){
+function dateFilter() {
   $('.show-dates').change(function() {
-    // Collect selected checkbox values
     var selectedOptions = [];
     $('.show-dates:checked').each(function() {
       selectedOptions.push($(this).val());
     });
 
-    // Send AJAX request with selected options
+    // Send AJAX request with selected options and date range
+    sendAjaxRequest(selectedOptions);
+  });
+
+  // Event handler for Dates Between checkbox
+  $('#datepicker, #todatepicker').change(function() {
+    // Only trigger the AJAX request if Dates Between option is selected
+    if ($('#hide-dates').is(':checked')) {
+      var fromDate = $('#datepicker').val();
+      var toDate = $('#todatepicker').val();
+      console.log("From Date:", fromDate);
+      console.log("To Date:", toDate);
+
+      // Send AJAX request with selected options and date range
+      sendAjaxRequest(['dates_between'], fromDate, toDate);
+    }
+  });
+
+  // Function to send AJAX request
+  function sendAjaxRequest(selectedOptions, fromDate, toDate) {
     $.ajax({
       type: "GET",
       url: "/admin/payments/collections",
       data: {
-        dates: selectedOptions
+        dates: selectedOptions,
+        from_date: fromDate,
+        to_date: toDate
       },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
       success: function(data) {
         Turbo.renderStreamMessage(data);
-        console.log("Data:", data);
+        
         var newUrl =
           window.location.protocol +
           "//" +
           window.location.host +
           window.location.pathname +
           "?next_payment_date=" +
-          encodeURIComponent(selectedOptions);
+          encodeURIComponent(selectedOptions) +
+          "&from_date=" +
+          encodeURIComponent(fromDate) +
+          "&to_date=" +
+          encodeURIComponent(toDate);
         window.history.pushState({
           path: newUrl
         }, "", newUrl);
@@ -290,8 +317,11 @@ function dateFilter(){
         $("#overlay").hide();
       },
     });
-  });
+  }
 }
+
+
+
 
 $(document).ready(function() {
   selectUser();
