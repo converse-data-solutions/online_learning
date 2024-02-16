@@ -156,48 +156,6 @@ function userCourseSelect() {
   });
 }
 
-function userIdSelect() {
-  $("#course-select").on("click", ".new-custom-option", function() {
-    $("#overlay").show();
-    var selectedCourseId = $(this).data("value");
-    console.log("selectedCourseId", selectedCourseId);
-    var user_id = $("#get-user-id").val();
-    console.log("user_id", user_id);
-    $.ajax({
-      type: "GET",
-      url: "/admin/payments/balance_amount",
-      data: {
-        course_id: selectedCourseId,
-        user_id: user_id
-      },
-      headers: {
-        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-      },
-      success: function(data) {
-        Turbo.renderStreamMessage(data);
-        var newUrl =
-          window.location.protocol +
-          "//" +
-          window.location.host +
-          window.location.pathname +
-          "?course_id=" +
-          encodeURIComponent(selectedCourseId) +
-          "&user_id=" +
-          encodeURIComponent(user_id);
-
-        window.history.pushState({
-          path: newUrl
-        }, "", newUrl);
-        $("#overlay").hide();
-      },
-      error: function(error) {
-        console.error("AJAX Error:", error);
-        $("#overlay").hide();
-      },
-    });
-  });
-}
-
 function tableSearch() {
   let delayTimer;
 
@@ -239,6 +197,43 @@ function tableSearch() {
   });
 }
 
+function optionSelect() {
+  console.log("function Loaded......");
+  $("#course-dropdown").on("click", ".new-custom-option", function() {
+    console.log("option selected");
+    $("#overlay").show();
+    var selectedCourseId = $(this).data("value");
+    $.ajax({
+      type: "GET",
+      url: "/admin/payments/collections",
+      data: {
+        course: selectedCourseId
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function(data) {
+        Turbo.renderStreamMessage(data);
+        var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?course_id=" +
+          encodeURIComponent(selectedCourseId);
+        window.history.pushState({
+          path: newUrl
+        }, "", newUrl);
+        $("#overlay").hide();
+      },
+      error: function(error) {
+        console.error("AJAX Error:", error);
+        $("#overlay").hide();
+      },
+    });
+  });
+}
+
 function fromDate() {
   $(function() {
     $("#datepicker").datepicker({
@@ -261,19 +256,19 @@ $(document).ready(function() {
   selectUser();
   selectCourse();
   userCourseSelect();
-  userIdSelect();
   fromDate();
   toDate();
   tableSearch();
+  optionSelect();
 
   $(document).on("turbo:render", function() {
     selectUser();
     selectCourse();
     userCourseSelect();
-    userIdSelect();
     fromDate();
     toDate();
     tableSearch();
+    optionSelect();
   });
 
   $(document).on("turbo:before-render", function() {
@@ -294,5 +289,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     if (streamElement.target == 'course-dropdown') {
       selectCourse();
     }
+    optionSelect();
   };
 });

@@ -15,13 +15,21 @@ class UserCourse < ApplicationRecord # rubocop:disable Style/Documentation
     page = (page_number && page_number.positive?) ? page_number : 1
     record_per_page = (params[:per_page].presence&.to_i || 10).to_i
     per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
-    UserCourse.custom_search_method(params[:search]).paginate(page: page, per_page: per_page)
+    UserCourse.includes(:user, :course).search_using_dropdown(params[:course]).custom_search_method(params[:search]).paginate(page: page, per_page: per_page)
   end
 
   def self.custom_search_method(query)
     if query.present?
       search_query = "%#{query}%"
       joins(:user, :course).where('users.name LIKE ? OR courses.course_name LIKE ?', search_query, search_query)
+    else
+      all
+    end
+  end
+
+  def self.search_using_dropdown(query)
+    if query.present?
+      joins(:user, :course).where(courses: { id: query })
     else
       all
     end
