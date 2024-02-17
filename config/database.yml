@@ -56,4 +56,4 @@ production:
   <<: *default
   database: online_learning_production
   username: root
-  password: <%= ENV["ONLINE_LEARNING_DATABASE_PASSWORD"] %>
+  password: root

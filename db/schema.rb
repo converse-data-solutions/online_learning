@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_18_071655) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_14_032309) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_071655) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "amount"
+    t.decimal "fees", precision: 10
   end
 
   create_table "entrollment_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -89,14 +89,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_071655) do
   end
 
   create_table "payments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "amount"
     t.datetime "paid_at"
-    t.bigint "user_id", null: false
-    t.bigint "entrollment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["entrollment_id"], name: "index_payments_on_entrollment_id"
-    t.index ["user_id"], name: "index_payments_on_user_id"
+    t.decimal "paid_amount", precision: 10
+    t.bigint "user_course_id"
+    t.index ["user_course_id"], name: "fk_rails_daaae70391"
   end
 
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -142,37 +140,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_071655) do
     t.index ["course_id"], name: "index_sections_on_course_id"
   end
 
-  create_table "subscription_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "subscription_id", null: false
-    t.string "stripe_subscription_id"
-    t.integer "amount"
-    t.datetime "paid_at"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["subscription_id"], name: "index_subscription_details_on_subscription_id"
-    t.index ["user_id"], name: "index_subscription_details_on_user_id"
-  end
-
-  create_table "subscriptions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.datetime "paid_until"
-    t.string "stripe_customer_ref"
-    t.string "stripe_subscription_ref"
-    t.datetime "next_invoice_on"
-    t.bigint "user_id", null: false
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_subscriptions_on_user_id"
-  end
-
   create_table "user_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "enrolled_at"
+    t.decimal "course_amount", precision: 10
+    t.datetime "next_payment_date"
     t.index ["course_id"], name: "index_user_courses_on_course_id"
     t.index ["user_id"], name: "index_user_courses_on_user_id"
   end
@@ -223,14 +198,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_18_071655) do
   add_foreign_key "entrollments", "courses"
   add_foreign_key "entrollments", "users"
   add_foreign_key "lessons", "sections"
-  add_foreign_key "payments", "entrollments"
-  add_foreign_key "payments", "users"
+  add_foreign_key "payments", "user_courses"
   add_foreign_key "profiles", "users"
   add_foreign_key "ratings", "users"
   add_foreign_key "sections", "courses"
-  add_foreign_key "subscription_details", "subscriptions"
-  add_foreign_key "subscription_details", "users"
-  add_foreign_key "subscriptions", "users"
   add_foreign_key "user_courses", "courses"
   add_foreign_key "user_courses", "users"
 end

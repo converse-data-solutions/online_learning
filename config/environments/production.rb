@@ -64,18 +64,28 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "auth_app_production"
 
-  # config.action_mailer.default_url_options = { host: 'techvillageacademy-1baf62cde5a3.herokuapp.com' }
-  # config_action_mailer_delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   address: 'smtp.gmail.com',
-  #   port: 587,
-  #   user_name: 'smartaravindhan001@gmail.com',
-  #   password: 'xuge xhvb rovm znyv',
-  #   authentication: 'plain',
-  #   enable_starttls_auto: true
-  # }
-  # config.action_mailer.raise_delivery_errors = false
-  # config.action_mailer.default charset: 'utf-8'
+  config.action_mailer.default_url_options = { host: 'techvillageacademy-1baf62cde5a3.herokuapp.com' }
+  config_action_mailer_delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    user_name: 'smartaravindhan001@gmail.com',
+    password: 'xuge xhvb rovm znyv',
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
+  config.action_mailer.default_url_options = { host: 'techvillage-stag-7e9b45b67d93.herokuapp.com' }
+  config_action_mailer_delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    user_name: 'smartaravindhan001@gmail.com',
+    password: 'xuge xhvb rovm znyv',
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default charset: 'utf-8'
 
   # config.action_mailer.perform_caching = false
 

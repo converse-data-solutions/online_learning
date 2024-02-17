@@ -1,0 +1,125 @@
+<%= content_for :head do %>
+  <%= javascript_import_module_tag "controllers/collection" %>
+  <%= javascript_import_module_tag "controllers/notify" %>
+<% end %>
+<div class="flex flex-col w-full" id="start">
+  <div class="flex w-[75%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
+    <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px] mb-4 sm:mb-0 font-medium">Payment Collections - Admin</div>
+    <div>
+      <!-- Modal toggle -->
+      <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px] gradiant-hover loader-btn onclick-hover" type="button">
+        <span class="font-semibold text-base">+ </span><%= link_to "ADD NEW", new_admin_payment_path %>
+      </button>
+    </div>
+  </div>
+  <div class="flex items-center justify-between pt-10 md:pt-9 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row" id="filter-container">
+    <div class="flex flex-col md:flex-col lg:flex-row gap-4">
+      <div class="text-[#31B978] text-[18px] font-bold  pb-4 sm:pb-0">
+        <%= collection_select(:user, :name, User.joins(:roles).where(roles: { name: 'student' }), :id, :name, { prompt: "Select Student", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources width-reducer" }) %>
+      </div>
+      <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="course-dropdown">
+        <%= collection_select(:course, :course_name, [], :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+      </div>
+      <div>
+        <div class="checkbox-dropdown">
+          Due
+          <ul class="checkbox-dropdown-list">
+            <li>
+              <label class="ml-2">
+                <input type="checkbox" value="today" name="due_today" class="show-dates" /><span class="ml-2">Today</span></label>
+            </li>
+            <li>
+              <label class="ml-2" >
+                <input type="checkbox" value="dates_between" name="due_between" id="hide-dates" /><span class="ml-2">Dates Between</span></label>
+            </li>
+            <li>
+              <label class="ml-2">
+                <input type="checkbox" value="this_week" name="due_this_week" class="show-dates" /><span class="ml-2">This Week</span></label>
+            </li>
+            <li>
+              <label class="ml-2">
+                <input type="checkbox" value="date_passed" name="due_passed" class="show-dates" /><span class="ml-2">Date Passed</span></label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex gap-2 toggle-dates" id="display-dates">
+        <div class="input-wrapper flex flex-col w-full sm:w-[57%] lg:w-full">
+          <%= date_field_tag :from_date, nil, class: 'datepicker-input border border-[#cccccc] text-[#818181] remove-margin text-base font-medium rounded-lg', id: 'datepicker', autocomplete: 'off' %>
+        </div>
+        <div class="input-wrapper flex flex-col w-full sm:w-[57%] lg:w-full">
+          <%= date_field_tag :to_date, nil, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base remove-margin font-medium rounded-lg', id: 'todatepicker', autocomplete: 'off' %>
+        </div>
+      </div>
+    </div>
+    <label for="table-search " class="sr-only">Search</label>
+    <%= form_tag admin_payments_path, method: :get, id: "lesson_search_form", data: { turbo_stream: true } do %>
+      <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <img src="<%= asset_path("search.png") %>">
+        </div>
+        <%= text_field_tag :search, params[:search], id: "collection_search", class: "block p-2 pl-10 text-sm text-[#818181] border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
+    <div class="bg-white dark:bg-gray-800 h-[590px] relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto">
+        <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
+          <tr>
+            <th scope="col" class="min-w-[300px] max-w-[300px] truncate px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text:[16px] lg:text-[18px]">
+              Student Name
+            </th>
+            <th scope="col" class="min-w-[250px] max-w-[250px] truncate px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text:[16px] lg:text-[18px]">
+              Course
+            </th>
+            <th scope="col" class="min-w-[250px] max-w-[250px] truncate px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text:[16px] lg:text-[18px]">
+              Due Date
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody class="overflow-auto" id="collection-table">
+          <%= render partial: "admin/payments/collections_table", locals: { user_courses: @user_courses } %>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4 ml-[30px] lg:ml-0" id="render-pagination">
+      <%= render partial: 'admin/payments/pagination', locals: { user_courses: @user_courses } %>
+    </div>
+  </div>
+</div>
+<script>
+  // Toggle dropdown active state
+  $(".checkbox-dropdown").click(function () {
+      $(this).toggleClass("is-active");
+  })
+  // Prevent dropdown from closing when clicking inside it
+  $(".checkbox-dropdown ul").click(function(e) {
+      e.stopPropagation();
+  })
+  // Close dropdown when clicking outside it
+  $(document).click(function(e) {
+      if (!$(e.target).closest('.checkbox-dropdown').length) {
+          $(".checkbox-dropdown").removeClass("is-active");
+      }
+  })
+  // Ensure only one checkbox is checked at a time
+  $(".checkbox-dropdown input[type='checkbox']").change(function() {
+      var checkboxes = $(".checkbox-dropdown input[type='checkbox']");
+      checkboxes.each(function() {
+          if (this !== event.target) {
+              $(this).prop('checked', false);
+          }
+      });
+  })
+  // hide date between field
+  $("#hide-dates").on('click', function(){
+    $("#display-dates").removeClass('toggle-dates');
+  })
+  $(".show-dates").on('click', function(){
+    $("#display-dates").addClass('toggle-dates');
+  })
+</script>
