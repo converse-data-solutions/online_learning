@@ -198,17 +198,42 @@ function userIdSelect() {
   });
 }
 
+function fromDate() {
+  $(function() {
+    $("#datepicker").datepicker({
+      dateFormat: "yy-mm-dd",
+      duration: "fast",
+      changeYear: true, // Enable changing the year
+
+    });
+  });
+}
+
+function toDate() {
+  $(function() {
+    $("#todatepicker").datepicker({
+      dateFormat: "yy-mm-dd",
+      duration: "fast",
+      changeYear: true, // Enable changing the year
+    });
+  });
+}
+
 $(document).ready(function() {
   selectUser();
   selectCourse();
   userCourseSelect();
   userIdSelect();
+  fromDate();
+  toDate();
 
   $(document).on("turbo:render", function() {
     selectUser();
     selectCourse();
     userCourseSelect();
     userIdSelect();
+    fromDate();
+    toDate();
   });
 
   $(document).on("turbo:before-render", function() {
@@ -229,5 +254,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     if (streamElement.target == 'course-select') {
       selectCourse();
     }
+    fromDate();
+    toDate();
   };
 });

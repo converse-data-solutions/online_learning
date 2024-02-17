@@ -9,13 +9,13 @@
   <div class="flex gap-7 flex-col justify-between sm:flex-row">
     <label for="course-name" class="w-[45%] text-end block mb-2 text-lg font-medium text-[#000]">Payment Date</label>
     <div class="w-[47%] flex flex-col mb-4">
-      <%= f.date_field :paid_at, class: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-name" %>
+      <%= f.date_field :paid_at, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg', id: 'datepicker', autocomplete: 'off' %>
     </div>
   </div>
   <div class="flex gap-7 flex-col justify-between sm:flex-row">
     <label for="course-name" class="w-[45%] text-end block mb-2 text-lg font-medium text-[#000]">Next Payment Date</label>
     <div class="w-[47%] flex flex-col mb-4">
-      <%= date_field_tag :next_payment_date, nil, class: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "next-payment-date" %>
+      <%= f.date_field :paid_amount, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg', id: 'todatepicker', autocomplete: 'off' %>
     </div>
   </div>
   <div class="w-[20%] ml-auto mr-[100px] mt-7 flex-col md:flex-row">
