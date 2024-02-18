@@ -29,6 +29,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     respond_to do |format|
       if @course.save
         @courses = Course.get_courses(params)
+        @last_created_course_id = @course.id
         @show_edit_form = false
         format.html
         format.turbo_stream

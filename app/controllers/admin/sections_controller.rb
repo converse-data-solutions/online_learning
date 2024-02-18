@@ -45,7 +45,7 @@ class Admin::SectionsController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('section-admin-form', partial: 'admin/sections/form', locals: { section: @section }),
+            turbo_stream.replace('section-admin-form', partial: 'admin/sections/form', locals: { section: @section, course_id: @section.course_id }),
             turbo_stream.replace('section-index-form', partial: 'admin/sections/sectionform', locals: { section: @section }),
             turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Section creation failed.', type: 'notice' })
           ]
