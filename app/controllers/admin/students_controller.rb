@@ -26,9 +26,7 @@ class Admin::StudentsController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('user-admin-form', partial: 'admin/students/form', locals: { student: @student }),
-            turbo_stream.append('user-table', partial: 'shared/failed', locals: { message: 'Student creation failed.', type: 'notice' })
-          ]
+            turbo_stream.replace('user-admin-form', partial: 'admin/students/form', locals: { student: @student })          ]
         end
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
@@ -52,9 +50,7 @@ class Admin::StudentsController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.update('edit-student-popup', partial: 'admin/students/edit', locals: { student: @student }),
-            turbo_stream.append('user-table', partial: 'shared/failed', locals: { message: 'Student update failed.', type: 'notice' })
-          ]
+            turbo_stream.update('edit-student-popup', partial: 'admin/students/edit', locals: { student: @student })          ]
         end
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
@@ -68,13 +64,13 @@ class Admin::StudentsController < ApplicationController
         @students = User.get_students(params)
         format.turbo_stream do
           render turbo_stream: [
-           turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'Student was successfully destroyed.', type: 'notice' }),  # rubocop:disable Layout/FirstArrayElementIndentation
+           turbo_stream.append('user-table', partial: 'shared/flash', locals: { message: 'Student deleted successfully.', type: 'notice' }),  # rubocop:disable Layout/FirstArrayElementIndentation
            turbo_stream.update('user-table', partial: 'admin/students/table', locals: { students: @students })
           ]
         end
         format.json { render :show, status: :ok, location: admin_student_url(@student) }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.append('user-table', partial: 'shared/failed', locals: { message: 'Student destroy failed.', type: 'notice' }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.append('user-table', partial: 'shared/failed', locals: { message: 'Student deletion failed.', type: 'notice' }) }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
