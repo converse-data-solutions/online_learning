@@ -596,9 +596,13 @@ function resetNewForm() {
 
 function resetEditForm() {
   $("#modal-close-btn").on("click", function() {
-    $("#user-admin-edit-form")[0].reset()
-    console.log("values reseted");
-    resetErrorMessages();
+      var formElement = $("#user-admin-edit-form");
+      if (formElement.length > 0) {
+          formElement[0].reset();
+          resetErrorMessages();
+      } else {
+          console.error("Form element not found.");
+      }
   });
 }
 
