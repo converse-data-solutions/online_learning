@@ -198,9 +198,7 @@ function invoiceTableSearch() {
 }
 
 function invoiceOptionSelect() {
-  console.log("function Loaded......");
   $("#course-dropdown").on("click", ".new-custom-option", function() {
-    console.log("option selected");
     $("#overlay").show();
     var selectedCourseId = $(this).data("value");
     $.ajax({
@@ -239,14 +237,14 @@ $(document).ready(function() {
   invoiceSelectCourse();
   invoiceUserCourseSelect();
   invoiceTableSearch();
-  invoicePptionSelect();
+  invoiceOptionSelect();
 
   $(document).on("turbo:render", function() {
     invoiceSelectUser();
     invoiceSelectCourse();
     invoiceUserCourseSelect();
     invoiceTableSearch();
-    invoicePptionSelect();
+    invoiceOptionSelect();
   });
 
   $(document).on("turbo:before-render", function() {

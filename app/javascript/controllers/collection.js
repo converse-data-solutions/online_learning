@@ -198,9 +198,7 @@ function collectionTableSearch() {
 }
 
 function collectionOptionSelect() {
-  console.log("function Loaded......");
   $("#course-dropdown").on("click", ".new-custom-option", function() {
-    console.log("option selected");
     $("#overlay").show();
     var selectedCourseId = $(this).data("value");
     $.ajax({
@@ -272,8 +270,6 @@ function dateFilter() {
     if ($('#hide-dates').is(':checked')) {
       var fromDate = $('#datepicker').val();
       var toDate = $('#todatepicker').val();
-      console.log("From Date:", fromDate);
-      console.log("To Date:", toDate);
 
       // Send AJAX request with selected options and date range
       sendAjaxRequest(['dates_between'], fromDate, toDate);
