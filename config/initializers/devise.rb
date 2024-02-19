@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  # config.mailer_sender = 'smartaravindhan001@gmail.com'
+  config.mailer_sender = 'smartaravindhan001@gmail.com'
   config.omniauth :google_oauth2,
   Rails.application.credentials.dig(:development, :google_oauth2, :google_client_id),
   Rails.application.credentials.dig(:development, :google_oauth2, :google_client_secret)
@@ -174,11 +174,11 @@ Devise.setup do |config|
   config.expire_all_remember_me_on_sign_out = true
 
   # If true, extends the user's remember period when remembered via cookie.
-  # config.extend_remember_period = false
+  config.extend_remember_period = true
 
   # Options to be passed to the created cookie. For instance, you can set
   # secure: true in order to force SSL only cookies.
-  # config.rememberable_options = {}
+  config.rememberable_options = {}
 
   # ==> Configuration for :validatable
   # Range for password length.

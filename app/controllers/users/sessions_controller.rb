@@ -15,6 +15,17 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def create
+    self.resource = resource_class.new(sign_in_params)
+    if resource.valid?
+      super
+    else
+      # Handle the case when resource is not valid, perhaps by rendering the login form again with error messages
+      flash[:alert] = resource.errors.full_messages.join(", ")
+      render :new
+    end
+  end
+
   # DELETE /resource/sign_out
   # def destroy
   #   super

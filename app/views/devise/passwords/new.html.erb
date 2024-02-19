@@ -2,18 +2,23 @@
   <div class="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
     <h5 class="text-xl mb-7 font-medium text-gray-900 dark:text-white">Forgot your password?</h5>
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
       <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+        <% if resource.errors.has_key?(:email) %>
+          <p class="text-red-500 text-sm"><%= resource.errors.full_messages_for(:email).join(", ") %></p>
+        <% end %>
       </div>
       <br>
       <div class="actions">
         <%= f.submit "Send me reset password instructions", class: "cursor-pointer block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE]" %>
       </div>
     <% end %>
-    <%- if controller_name != 'sessions' %>
-      <%= link_to "Log in", new_session_path(resource_name), class: "mt-4 text-center block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px]" %><br />
-    <% end %>
+    <div class="flex mt-8">
+      <%- if controller_name != 'sessions' %>
+        <p class="text-center text-base">Remembered your password?</p>
+        <%= link_to "Log in", new_session_path(resource_name), class: "ml-2 font-semibold text-[#31B978]" %><br />
+      <% end %>
+    </div>
   </div>
 </div>

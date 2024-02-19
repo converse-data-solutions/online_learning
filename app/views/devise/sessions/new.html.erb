@@ -5,10 +5,16 @@
       <div class="field">
         <%= f.label :email, :class => "" %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => " mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+        <% if resource.errors.has_key?(:email) %>
+          <p class="text-red-500 text-sm"><%= resource.errors.full_messages_for(:email).join(", ") %></p>
+        <% end %>
       </div>
       <div class="">
         <%= f.label :password, :class => "block text-sm font-medium text-gray-900 dark:text-white" %>
         <%= f.password_field :password, autocomplete: "current-password", :class => "mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+        <% if resource.errors.has_key?(:password) %>
+          <p class="text-red-500 text-sm"><%= resource.errors.full_messages_for(:password).join(", ") %></p>
+        <% end %>
       </div>
       <div class="flex mt-8 items-start justify-between">
         <div class="flex items-center justify-between">
