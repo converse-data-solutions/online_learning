@@ -92,6 +92,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'bullet', '~> 7.1', '>= 7.1.1'
 end
 
 # gem 'newrelic-infinite_tracing'

@@ -105,7 +105,20 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :payments
+    resources :payments, only: %i[index new create] do
+      collection do
+        get :user_course
+        get :balance_amount
+        get :collections
+        get :user_invoice
+        get :user_collection
+      end
+      member do
+        get :invoice
+        get :send_due_email
+        get :generate_invoice_pdf
+      end
+    end
   end
 
   namespace :admin do

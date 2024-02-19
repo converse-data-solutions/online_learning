@@ -123,7 +123,7 @@
                               </tbody>
                             </table>
                             <div class="display-section hidden bg-[#EDEDED]" id="section_create_form">
-                              <%= render partial: "admin/sections/form", locals: {section: @section} %>
+                              <%= render partial: "admin/sections/form", locals: { section: @section, course_id: @last_created_course_id } %>
                             </div>
                             <div id="steeper-section-large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
                               <div class="relative w-full max-w-4xl max-h-full">
@@ -269,7 +269,6 @@
 </div>
 <div class="flex items-center justify-between pt-10 md:pt:20 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[30px] flex-col sm:flex-row md:flex-row">
   <div class="text-[#31B978] text-[18px] font-bold  w-[70%] md:w-[35%] pb-4 sm:pb-0">
-    
   </div>
   <label for="table-search " class="sr-only">Search</label>
   <%= form_tag admin_courses_path, method: :get, id: "course-search-form", data: { turbo_stream: true } do %>

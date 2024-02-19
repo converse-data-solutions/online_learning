@@ -1,0 +1,52 @@
+<% if @user_courses.present? %>
+  <% @user_courses.each do |user_course| %>
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600">
+      <th scope="row" class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181] whitespace-nowrap dark:text-white">
+        <%= user_course.user.name %>
+      </th>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= user_course.course.course_name %>
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= user_course.next_payment_date&.strftime("%d/%m/%Y") %>
+      </td>
+      <td class="px-6 pt-3 flex gap-4">
+        <%= link_to send_due_email_admin_payment_path(user_course) do %>
+          <div class="flex items-center">
+            <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#0BC08B"></path> </g></svg><span class="ml-2 text-[#0BC08B] text-[18px] font-medium">Send Email</span>
+          </div>
+        <% end %>
+        <button data-payment-id="<%= user_course.id %>" class="block loader-btn" type="button">
+          <div class="flex items-center">
+            <img src="<%= asset_path("send.png") %>" alt="..."><span class="ml-2 text-[#0BC08B] text-[18px] font-medium">Send Message</span>
+          </div>
+        </button>
+      </td>
+    </tr>
+  <% end %>
+<% else %>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-10 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td colspan="12" class="px-6 py-4 font-semibold text-[12px] sm:text-[14px] md:text-[15px] lg:text-2xl text-[#818181] text-center">No data found</td>
+  </tr>
+<% end %>

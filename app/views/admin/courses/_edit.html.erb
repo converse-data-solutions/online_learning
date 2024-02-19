@@ -20,6 +20,12 @@
     </label>
     <%= f.text_area :description, class: 'resize-none border-0 text-[#818181] bg-[#F5F5F5] text-[14px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 w-[292px]  block h-[110px] p-2.5 rounded-[7px]' %>
   </div>
+  <div class="flex justify-between flex-col sm:flex-row">
+    <label for="fees" class="block mb-2 text-lg font-medium text-[#000]">Course Fee</label>
+    <div class="flex flex-col mb-4">
+      <%= f.text_field :fees, class: "border-0  text-[#818181] bg-[#F5F5F5] text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit-course-fee" %>
+    </div>
+  </div>
   <div class="w-1/5 mx-auto mt-7 flex-col md:flex-row">
     <%= f.submit "UPDATE", class: 'button-gradiant-hover w-[150px] h-[42px] md:ml-[50px] ml-[20px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
   </div>

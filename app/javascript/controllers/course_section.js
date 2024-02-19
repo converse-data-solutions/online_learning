@@ -216,7 +216,7 @@ function onclickHover() {
   });
 }
 
-function collectionSelect() {
+function sectionCollectionSelect() {
   $("#filter-container .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -282,7 +282,7 @@ function collectionSelect() {
   });
 }
 
-function sectionSelect() {
+function sectionSectionSelect() {
   $("#section-index-form .new-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -350,7 +350,7 @@ function sectionSelect() {
 
 
 
-function optionSelect() {
+function sectionOptionSelect() {
   $("#filter-container .custom-select").on("click", ".custom-option", function() {
     $("#overlay").show();
     var selectedSectionId = $(this).data("value");
@@ -391,9 +391,9 @@ $(document).ready(function() {
   formValidation();
   onclickHover();
   resetNewForm();
-  collectionSelect();
-  optionSelect();
-  sectionSelect();
+  sectionCollectionSelect();
+  sectionOptionSelect();
+  sectionSectionSelect();
 
   $(document).on("turbo:render", function() {
     editPopup();
@@ -402,9 +402,9 @@ $(document).ready(function() {
     formValidation();
     onclickHover();
     resetNewForm();
-    collectionSelect();
-    optionSelect();
-    sectionSelect();
+    sectionCollectionSelect();
+    sectionOptionSelect();
+    sectionSectionSelect();
   });
 
   $(document).on("turbo:before-render", function() {

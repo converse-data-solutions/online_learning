@@ -2,13 +2,13 @@
 
 # this is an User model
 class User < ApplicationRecord
-  has_many :payments, dependent: :destroy
   has_one :profile, dependent: :destroy
   has_many :entrollments, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :ratings, as: :rateable, dependent: :destroy
-  has_many :user_courses
+  has_many :user_courses, dependent: :destroy
   has_many :courses, through: :user_courses
+  has_many :payments, through: :user_courses, dependent: :destroy
   rolify before_add: :remove_previouse_role
   accepts_nested_attributes_for :profile # Make sure to add this line if you want to create profiles alongside users
 

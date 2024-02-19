@@ -1,0 +1,2 @@
+<%= turbo_stream.update "payment-form", partial: "admin/payments/form", locals: { payment: @payment } %>
+<%= turbo_stream.append "payment-form", partial: "shared/flash", locals: { message: 'Payment was successfully created.', type: 'notice' } %>
