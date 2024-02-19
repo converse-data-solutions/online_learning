@@ -4,14 +4,17 @@
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <%= f.label :email, :class => "" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => " mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "mb-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "user_email" %>
+        <p id="email-error" class="text-red-500 text-sm"></p>
         <% if resource.errors.has_key?(:email) %>
           <p class="text-red-500 text-sm"><%= resource.errors.full_messages_for(:email).join(", ") %></p>
         <% end %>
       </div>
       <div class="">
         <%= f.label :password, :class => "block text-sm font-medium text-gray-900 dark:text-white" %>
-        <%= f.password_field :password, autocomplete: "current-password", :class => "mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+        <%= f.password_field :password, autocomplete: "current-password", :class => "mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "user_password" %>
+        <p id="password-error" class="text-red-500 text-sm"></p>
+        <!-- Password error message placeholder -->
         <% if resource.errors.has_key?(:password) %>
           <p class="text-red-500 text-sm"><%= resource.errors.full_messages_for(:password).join(", ") %></p>
         <% end %>
@@ -37,7 +40,7 @@
         data-callback='onSubmit' 
         data-action='submit'>Submit</button> %>
       <div class="actions mt-8 flex justify-center">
-        <%= f.submit "Log in", class: "cursor-pointer block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px]" %>
+        <%= f.submit "Log in", class: "cursor-pointer block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px]", id: "login_button" %>
       </div>
     <% end %>
     <div class="actions mt-8 flex">
