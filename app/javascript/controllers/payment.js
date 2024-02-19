@@ -1,4 +1,4 @@
-function selectUser() {
+function paymentSelectUser() {
   $("#filter-container .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -64,7 +64,7 @@ function selectUser() {
   });
 }
 
-function selectCourse() {
+function paymentSelectCourse() {
   $("#course-select .new-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -130,7 +130,7 @@ function selectCourse() {
   });
 }
 
-function userCourseSelect() {
+function paymentUserCourseSelect() {
   $("#filter-container .custom-select").on("click", ".custom-option", function() {
     var userId = $(this).data('value');
     let getUser = $("#get-user-id").attr("data-user-id", userId).val(userId);
@@ -156,7 +156,7 @@ function userCourseSelect() {
   });
 }
 
-function userIdSelect() {
+function paymentUserIdSelect() {
   $("#course-select").on("click", ".new-custom-option", function() {
     $("#overlay").show();
     var selectedCourseId = $(this).data("value");
@@ -220,18 +220,18 @@ function toDate() {
 }
 
 $(document).ready(function() {
-  selectUser();
-  selectCourse();
-  userCourseSelect();
-  userIdSelect();
+  paymentSelectUser();
+  paymentSelectCourse();
+  paymentUserCourseSelect();
+  paymentUserIdSelect();
   fromDate();
   toDate();
 
   $(document).on("turbo:render", function() {
-    selectUser();
-    selectCourse();
-    userCourseSelect();
-    userIdSelect();
+    paymentSelectUser();
+    paymentSelectCourse();
+    paymentUserCourseSelect();
+    paymentUserIdSelect();
     fromDate();
     toDate();
   });
@@ -252,7 +252,7 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     if (streamElement.target == 'course-select') {
-      selectCourse();
+      paymentSelectCourse();
     }
     fromDate();
     toDate();

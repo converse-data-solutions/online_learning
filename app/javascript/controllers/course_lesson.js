@@ -216,7 +216,7 @@ function onclickHover() {
   });
 }
 
-function collectionSelect() {
+function lessonCollectionSelect() {
   $("#filter-container .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -282,7 +282,7 @@ function collectionSelect() {
   });
 }
 
-function sectionSelect() {
+function lessonSectionSelect() {
   $("#section-dropdown .new-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -348,7 +348,7 @@ function sectionSelect() {
   });
 }
 
-function lessonSelect() {
+function lessonLessonSelect() {
   $("#lesson-index-form .new-lesson-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -414,7 +414,7 @@ function lessonSelect() {
   });
 }
 
-function optionSelect() {
+function lessonOptionSelect() {
   $("#filter-container").on("click", ".new-custom-option", function() {
     $("#overlay").show();
     var selectedLessonId = $(this).data("value");
@@ -449,7 +449,7 @@ function optionSelect() {
 }
 
 
-function selectSection() {
+function lessonSelectSection() {
   $("#filter-container .custom-select").on("click", ".custom-option", function() {
     var courseId = $(this).data('value');
 
@@ -481,11 +481,11 @@ $(document).ready(function() {
   formValidation();
   onclickHover();
   resetNewForm();
-  collectionSelect();
-  optionSelect();
-  selectSection();
-  sectionSelect();
-  lessonSelect();
+  lessonCollectionSelect();
+  lessonOptionSelect();
+  lessonSelectSection();
+  lessonSectionSelect();
+  lessonLessonSelect();
 
   $(document).on("turbo:render", function() {
     editPopup();
@@ -494,9 +494,9 @@ $(document).ready(function() {
     formValidation();
     onclickHover();
     resetNewForm();
-    optionSelect();
-    selectSection();
-    lessonSelect();
+    lessonOptionSelect();
+    lessonSelectSection();
+    lessonLessonSelect();
   });
 
   $(document).on("turbo:before-render", function() {
@@ -516,7 +516,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     fallbackToDefaultActions(streamElement);
     initModals();
     if (streamElement.target == 'section-dropdown') {
-      sectionSelect();
+      lessonSectionSelect();
     }
   };
 });

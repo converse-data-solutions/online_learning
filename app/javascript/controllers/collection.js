@@ -1,4 +1,4 @@
-function selectUser() {
+function collectionSelectUser() {
   $("#filter-container .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -64,7 +64,7 @@ function selectUser() {
   });
 }
 
-function selectCourse() {
+function collectionSelectCourse() {
   $("#course-dropdown .new-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -130,7 +130,7 @@ function selectCourse() {
   });
 }
 
-function userCourseSelect() {
+function collectionUserCourseSelect() {
   $("#filter-container .custom-select").on("click", ".custom-option", function() {
     var userId = $(this).data('value');
     let getUser = $("#get-user-id").attr("data-user-id", userId).val(userId);
@@ -156,7 +156,7 @@ function userCourseSelect() {
   });
 }
 
-function tableSearch() {
+function collectionTableSearch() {
   let delayTimer;
 
   $("#collection_search").on("input", function(e) {
@@ -197,7 +197,7 @@ function tableSearch() {
   });
 }
 
-function optionSelect() {
+function collectionOptionSelect() {
   console.log("function Loaded......");
   $("#course-dropdown").on("click", ".new-custom-option", function() {
     console.log("option selected");
@@ -324,23 +324,23 @@ function dateFilter() {
 
 
 $(document).ready(function() {
-  selectUser();
-  selectCourse();
-  userCourseSelect();
+  collectionSelectUser();
+  collectionSelectCourse();
+  collectionUserCourseSelect();
+  collectionTableSearch();
+  paymentOptionSelect();
   fromDate();
   toDate();
-  tableSearch();
-  optionSelect();
   dateFilter();
 
   $(document).on("turbo:render", function() {
-    selectUser();
-    selectCourse();
-    userCourseSelect();
+    collectionSelectUser();
+    collectionSelectCourse();
+    collectionUserCourseSelect();
+    collectionTableSearch();
+    paymentOptionSelect();
     fromDate();
     toDate();
-    tableSearch();
-    optionSelect();
     dateFilter();
   });
 
@@ -360,7 +360,7 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     if (streamElement.target == 'course-dropdown') {
-      selectCourse();
+      paymentSelectCourse();
     }
     optionSelect();
   };
