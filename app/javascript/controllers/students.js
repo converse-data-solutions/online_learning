@@ -147,7 +147,7 @@ function dropdownCheckBoxes() {
 
       function updateStatus() {
         if (!result.length) {
-          $label.html("Select Options");
+          $label.html("Select Courses");
         }
       }
 
@@ -168,12 +168,30 @@ function dropdownCheckBoxes() {
         updateLabel();
       });
 
+      // Add event listener to labels
+      $(this).find(".checkbox label").on("click", function() {
+        let checkedText = $(this).text();
+        let checkbox = $(this).prev();
+        
+        checkbox.prop("checked", !checkbox.prop("checked"));
+        
+        if (checkbox.is(":checked")) {
+          result.push(checkedText);
+        } else {
+          result = result.filter((item) => item !== checkedText);
+        }
+
+        updateLabel();
+      });
+
       $checkAll.on("change", function() {
         result = [];
 
         if ($(this).is(":checked")) {
           $inputs.prop("checked", true);
-          result.push($(this).next().text());
+          $inputs.each(function() {
+            result.push($(this).next().text());
+          });
         } else {
           $inputs.prop("checked", false);
         }
