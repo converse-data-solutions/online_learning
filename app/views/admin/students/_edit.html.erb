@@ -34,8 +34,11 @@
     <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
       <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
         <label for="password" class=" block mb-2 text-lg font-medium text-[#000]">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-        <div class="w-full sm:w-[55%] flex flex-col">
+        <div class="w-full sm:w-[55%] flex flex-col relative">
           <%= f.password_field :password, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_password", autocomplete: "new-password", validate: true %>
+          <div class="absolute top-0 bottom-4 right-0 flex items-center pr-3">
+            <img id="toggle-edit-password-visibility" src="<%= asset_path("eye.png") %>" alt="Show Password" class="cursor-pointer" onclick="toggleEditPasswordVisibility()">
+          </div>
           <div class="text-red-600 text-sm mt-1" id="edit-password-error"></div>
           <% if student&.errors&.any? %>
             <% if student.errors[:password].any? %>
@@ -48,8 +51,11 @@
       </div>
       <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
         <label for="passwod_confirmation" class="w-full sm:w-[40%] lg:w-[46%]  block mb-2 text-lg font-medium text-[#000]">Password Confirmation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-        <div class="w-full sm:w-[55%] flex flex-col">
+        <div class="w-full sm:w-[55%] flex flex-col relative">
           <%= f.password_field :password_confirmation, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_password_confirmation", autocomplete: "new-password", validate: true %>
+          <div class="absolute top-0 bottom-4 right-0 flex items-center pr-3">
+            <img id="toggle-edit-password-confirmation-visibility" src="<%= asset_path("eye.png") %>" alt="Show Password" class="cursor-pointer" onclick="toggleEditPasswordConfirmationVisibility()">
+          </div>
           <div class="text-red-600 text-sm mt-1" id="edit-password-confirmation-error"></div>
           <% if student&.errors&.any? %>
             <% if student.errors[:password_confirmation].any? %>
@@ -203,3 +209,30 @@
     </div>
   <% end %>
 </div>
+<script>
+  function toggleEditPasswordVisibility() {
+        var passwordField = document.getElementById('edit_user_password');
+        var toggleIcon = document.getElementById('toggle-edit-password-visibility');
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.src = "<%= asset_path("eyeclosed.png") %>";
+        } else {
+            passwordField.type = "password";
+            toggleIcon.src = "<%= asset_path("eye.png") %>";
+        }
+    }
+
+    function toggleEditPasswordConfirmationVisibility() {
+        var passwordField = document.getElementById('edit_user_password_confirmation');
+        var toggleIcon = document.getElementById('toggle-edit-password-confirmation-visibility');
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.src = "<%= asset_path("eyeclosed.png") %>";
+        } else {
+            passwordField.type = "password";
+            toggleIcon.src = "<%= asset_path("eye.png") %>";
+        }
+    }
+</script>
