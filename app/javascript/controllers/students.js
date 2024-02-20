@@ -210,9 +210,22 @@ function customDatePicker() {
     $("#datepicker").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
+      changeYear: true, // Enable changing the year
+    });
+
+    // Adding click functionality to the datepicker icon
+    $("#datepicker-icon").on('click', function(event) {
+      event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
+      var $datepicker = $("#datepicker");
+      if ($datepicker.datepicker("widget").is(":hidden")) {
+        $datepicker.datepicker("show"); // Show the datepicker if it's hidden
+      } else {
+        $datepicker.datepicker("hide"); // Hide the datepicker if it's visible
+      }
     });
   });
 }
+
 
 function customEditDatePicker() {
   $(function() {
@@ -222,6 +235,17 @@ function customEditDatePicker() {
       dateFormat: "dd-mm-yy", // Update this if needed
       duration: "fast",
       defaultDate: initialDate,
+      changeYear: true, // Enable changing the year
+    });
+
+    $("#editdatepicker-icon").on('click', function(event) {
+      event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
+      var $datepicker = $("#editdatepicker");
+      if ($datepicker.datepicker("widget").is(":hidden")) {
+        $datepicker.datepicker("show"); // Show the datepicker if it's hidden
+      } else {
+        $datepicker.datepicker("hide"); // Hide the datepicker if it's visible
+      }
     });
   });
 }
@@ -409,10 +433,13 @@ function editFormValidation() {
 
     if (!name) {
       $("#edit-name-error").text("Name can't be blank");
+      return false;
     } else if (!namecheck) {
       $("#edit-name-error").text("Please enter a valid name (only alphabets allowed)");
+      return false;
     } else {
-      $("#name-error").text("");
+      $("#edit-name-error").text("");
+      return true;
     }
   }
 
@@ -422,39 +449,53 @@ function editFormValidation() {
 
     if (!email) {
       $("#edit-email-error").text("Email can't be blank");
+      return false;
     } else if (!emailRegex.test(email)) {
       $("#edit-email-error").text("Please enter a valid email address");
+      return false;
     } else {
       $("#edit-email-error").text("");
+      return true;
     }
   }
 
   function validatePassword() {
     let password = $("#edit_user_password").val();
-
-    // Password must contain at least one uppercase letter, one numeric digit, and one special character
-    let passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+    let hasUppercase = /[A-Z]/.test(password);
+    let hasNumber = /\d/.test(password);
+    let hasSpecialChar = /[!@#$%^&*()_+]/.test(password);
 
     if (!password) {
       $("#edit-password-error").text("Password can't be blank");
-    } else if (!passwordRegex.test(password)) {
-      $("#edit-password-error").text("Password must contain at least one uppercase letter, one numeric digit, and one special character");
+      return false;
+    } else if (password.length < 8) {
+      $("#edit-password-error").text("Password must be at least 8 characters long");
+      return false;
+    } else if (!hasUppercase) {
+      $("#edit-password-error").text("Password must contain at least one uppercase letter");
+      return false;
+    } else if (!hasNumber) {
+      $("#edit-password-error").text("Password must contain at least one numeric digit");
+      return false;
+    } else if (!hasSpecialChar) {
+      $("#edit-password-error").text("Password must contain at least one special character");
+      return false;
     } else {
       $("#edit-password-error").text("");
+      return true;
     }
   }
 
-
   function validatePasswordConfirmation() {
     let password = $("#edit_user_password").val();
-    let password_confirmation = $("#edit_user_password_confirmation").val();
+    let passwordConfirmation = $("#edit_user_password_confirmation").val();
 
-    if (!password_confirmation) {
-      $("#edit-password-confirmation-error").text("Password Confirmation can't be blank");
-    } else if (!validator.equals(password, password_confirmation)) {
-      $("#edit-password-confirmation-error").text("Password Confirmation doesn't match Password");
+    if (password !== passwordConfirmation) {
+      $("#edit-password-confirmation-error").text("Password confirmation doesn't match");
+      return false;
     } else {
       $("#edit-password-confirmation-error").text("");
+      return true;
     }
   }
 
@@ -463,8 +504,10 @@ function editFormValidation() {
 
     if (!atLeastOneChecked) {
       $("#edit-course-error").text("Please select at least one course.");
+      return false;
     } else {
       $("#edit-course-error").text("");
+      return true;
     }
   }
 
@@ -474,10 +517,13 @@ function editFormValidation() {
 
     if (!name) {
       $("#edit-occupation-error").text("Occupation can't be blank");
+      return false;
     } else if (!namecheck) {
       $("#edit-occupation-error").text("Please enter a valid Occupation (only alphabets allowed)");
+      return false;
     } else {
       $("#edit-occupation-error").text("");
+      return true;
     }
   }
 
@@ -487,10 +533,11 @@ function editFormValidation() {
     if (contactNumber) {
       if (!validator.isNumeric(contactNumber) || contactNumber.length !== 10) {
         $("#edit-contact-number-error").text(
-          "Contact Number must be a 10-digit number"
-        );
+          "Contact Number must be a 10-digit number");
+          return false;
       } else {
         $("#edit-contact-number-error").text("");
+        return true;
       }
     } else {
       $("#edit-contact-number-error").text("");
@@ -508,63 +555,43 @@ function editFormValidation() {
         $("#edit-emergency-contact-number-error").text(
           "Emergency Contact Number must be a 10-digit number"
         );
+        return false;
       } else {
         $("#edit-emergency-contact-number-error").text("");
+        return true;
       }
     } else {
       $("#edit-emergency-contact-number-error").text("");
     }
   }
 
-  $("#edit-student-popup").on("input", "#edit_user_name", validateName);
-  $("#edit-student-popup").on("input", "#edit_user_email", validateEmail);
-  $("#edit-student-popup").on("input", "#edit_user_password", validatePassword);
-  $("#edit-student-popup").on(
-    "input",
-    "#edit_user_password_confirmation",
-    validatePasswordConfirmation
-  );
-  $("#edit-student-popup").on("input", "input[name='user[course_ids][]']", validateCourseSelection);
-  $("#edit-student-popup").on("input", "#edit_user_occupation", validateOccupation);
-  $("#edit-student-popup").on(
-    "input",
-    "#edit_user_contact_number",
-    validateContactNumber
-  );
-  $("#edit-student-popup").on(
-    "input",
-    "#edit_user_emergency_contact_number",
-    validateEmergencyContactNumber
-  );
+  
 
-  $("#edit-student-popup").on("submit", "#user-admin-edit-form", function(
-    event
-  ) {
-    validateName();
-    validateEmail();
-    validatePassword();
-    validatePasswordConfirmation();
-    validateContactNumber();
-    validateEmergencyContactNumber();
-    validateCourseSelection();
-    validateOccupation();
-    dropdownCheckBoxes();
+  $("#edit-student-popup").on("focusout", "#edit_user_name", validateName);
+  $("#edit-student-popup").on("focusout", "#edit_user_email", validateEmail);
+  $("#edit-student-popup").on("focusout", "#edit_user_password", validatePassword);
+  $("#edit-student-popup").on("focusout", "#edit_user_password_confirmation", validatePasswordConfirmation);
+  $("#edit-student-popup").on("focusout", "#edit_user_occupation", validateOccupation);
+  $("#edit-student-popup").on("focusout", "#edit_user_contact_number", validateContactNumber);
+  $("#edit-student-popup").on("focusout", "#edit_user_emergency_contact_number", validateEmergencyContactNumber);
 
 
-    if (
-      $("#edit-name-error").text() ||
-      $("#edit-email-error").text() ||
-      $("#edit-password-error").text() ||
-      $("#edit-password-confirmation-error").text() ||
-      $("#edit-course-error").text() ||
-      $("#edit-occupation-error").text() ||
-      $("#edit-contact-number-error").text() ||
-      $("#edit-emergency-contact-number-error").text()
-    ) {
+  $("#edit-student-popup").on("submit", "#user-admin-edit-form", function(event) {
+    let isNameValid = validateName();
+    let isEmailValid = validateEmail();
+    let isPasswordValid = validatePassword();
+    let isPasswordConfirmationValid = validatePasswordConfirmation();
+    let isCourseSelectionValid = validateCourseSelection();
+    let isOccupationValid = validateOccupation();
+    let isContactNumberValid = validateContactNumber();
+    let isEmergencyContactNumberValid = validateEmergencyContactNumber();
+
+    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isCourseSelectionValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid) {
       event.preventDefault();
     }
   });
 }
+
 
 // Onclick hover color change
 function onclickHover() {
@@ -588,7 +615,6 @@ function onclickHover() {
 
 function resetNewForm() {
   $(".reset-form").on("click", function() {
-    console.log("values new reseted");
     $("#user-admin-form")[0].reset()
     resetNewErrorMessages();
   });
