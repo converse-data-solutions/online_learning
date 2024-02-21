@@ -1,5 +1,5 @@
 function collectionSelectUser() {
-  $("#filter-container .custom-select").each(function() {
+  $("#collection-filter-container .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -131,7 +131,7 @@ function collectionSelectCourse() {
 }
 
 function collectionUserCourseSelect() {
-  $("#filter-container .custom-select").on("click", ".custom-option", function() {
+  $("#collection-filter-container .custom-select").on("click", ".custom-option", function() {
     var userId = $(this).data('value');
     let getUser = $("#get-user-id").attr("data-user-id", userId).val(userId);
 

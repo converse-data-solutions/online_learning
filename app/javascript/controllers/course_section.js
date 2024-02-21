@@ -217,7 +217,7 @@ function onclickHover() {
 }
 
 function sectionCollectionSelect() {
-  $("#filter-container .custom-select").each(function() {
+  $("#section-filter-container .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -351,7 +351,7 @@ function sectionSectionSelect() {
 
 
 function sectionOptionSelect() {
-  $("#filter-container .custom-select").on("click", ".custom-option", function() {
+  $("#section-filter-container .custom-select").on("click", ".custom-option", function() {
     $("#overlay").show();
     var selectedSectionId = $(this).data("value");
     $.ajax({

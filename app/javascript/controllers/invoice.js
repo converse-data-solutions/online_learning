@@ -1,5 +1,5 @@
 function invoiceSelectUser() {
-  $("#filter-container .custom-select").each(function() {
+  $("#invoice-filter-container .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -131,7 +131,7 @@ function invoiceSelectCourse() {
 }
 
 function invoiceUserCourseSelect() {
-  $("#filter-container .custom-select").on("click", ".custom-option", function() {
+  $("#invoice-filter-container .custom-select").on("click", ".custom-option", function() {
     var userId = $(this).data('value');
     let getUser = $("#get-user-id").attr("data-user-id", userId).val(userId);
 
