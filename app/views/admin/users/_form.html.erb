@@ -56,6 +56,20 @@
       <% end %>
     </div>
   </div>
+  <div class="mb-4 flex flex-col sm:flex-row">
+    <label for="role" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Role<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <%= collection_select(:role, :name, Role.all, :name, :name, { prompt: "Select Role", selected: '' }, { class: "bg-[#fff] border-[1px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select select-widht" }) %>
+      <div class="text-red-600 text-sm mt-1" id="role-error"></div>
+      <% if user&.errors&.any? %>
+        <% if user&.errors[:role].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= user&.errors.full_messages_for(:role).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
   <%= hidden_field_tag :page, params[:page]%>
   <%= hidden_field_tag :per_page, params[:per_page]%>
   <%= hidden_field_tag :search, params[:search]%>

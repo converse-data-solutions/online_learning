@@ -1063,6 +1063,23 @@ nav.main-menu li.active > a,
   width: 211px !important;
 }
 
+.select-widht{
+  width: -webkit-fill-available !important;
+  border: #cccccc !important;
+  border: 1px solid #CCCCCC !important;
+}
+
+.select-edit-width{
+  width: -webkit-fill-available !important;
+  gap: 67px;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.select-edit-color{
+  background-color: #F5F5F5 !important;
+}
+
+
 /* Collections Screen Dropdown */
 
 .checkbox-dropdown {
