@@ -28,7 +28,7 @@ class User < ApplicationRecord
                                        length: { is: 10 },
                                        allow_blank: true
 
-  scope :admin, -> { where(deleted: false).joins(:roles).where(roles: { name: 'admin' }) }
+  scope :admin, -> { where(deleted: false) }
   scope :student, -> { where(deleted: false).joins(:roles).where(roles: { name: 'student' }) }
 
   def google_oauth2_provider?
@@ -51,7 +51,7 @@ class User < ApplicationRecord
     page = (page_number && page_number.positive?) ? page_number : 1
     record_per_page = (params[:per_page].presence&.to_i || 12).to_i
     per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 12
-    User.admin.order(name: :asc).search_by_name_and_email(params[:search]).paginate(page: page, per_page: per_page)
+    User.admin.order(name: :asc).role_filter(params[:user]).search_by_name_and_email(params[:search]).paginate(page: page, per_page: per_page)
   end
 
   def self.get_students(params)
@@ -91,6 +91,14 @@ class User < ApplicationRecord
     if query.present?
       search_query = "%#{query}%"
       where('users.name LIKE ? OR email LIKE ?', search_query, search_query)
+    else
+      all
+    end
+  end
+
+  def self.role_filter(role)
+    if role.present?
+      where(deleted: false).joins(:roles).where(roles: { id: role })
     else
       all
     end

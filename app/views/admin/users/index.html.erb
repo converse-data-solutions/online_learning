@@ -5,7 +5,7 @@
 <div class="flex flex-col w-full" id="start">
   <div class="flex w-[75%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
     <div class="text-[#0BC08B] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px] mb-4 sm:mb-0 font-medium">Users</div>
-    <div class="flex gap-8">
+    <div class="flex gap-8" id="user-filter-container">
       <label for="table-search " class="sr-only">Search</label>
       <%= form_tag admin_users_path, method: :get, id: "user_search_form", data: { turbo_stream: true } do %>
         <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
@@ -15,6 +15,9 @@
           <%= text_field_tag :search, params[:search], id: "user_search", class: "block p-2 pl-10 text-sm text-[#818181] border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type" %>
         </div>
       <% end %>
+      <div class="text-[#31B978] text-[18px] font-bold  pb-4 sm:pb-0">
+        <%= collection_select(:role, :name, Role.all, :id, :name, { prompt: "Select Role", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select" }) %>
+      </div>
       <div>
         <!-- Modal toggle -->
         <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px] gradiant-hover loader-btn onclick-hover" type="button">
