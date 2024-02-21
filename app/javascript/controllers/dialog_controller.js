@@ -26,6 +26,7 @@ export default class extends Controller {
     // this.modalTarget.show()
     this.modalTarget.showModal()
     document.body.classList.add('overflow-hidden')
+    console.log("stimulus loaded...................");
   }
 
   close() {

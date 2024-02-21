@@ -22,7 +22,7 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def user_course
-    @user = User.find_by(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
     @courses = @user.courses
     respond_to(&:turbo_stream)
   end
@@ -44,7 +44,7 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def generate_invoice_pdf
-    @payment = Payment.find_by(params[:id])
+    @payment = Payment.find_by(id: params[:id])
 
     respond_to do |format|
       format.html

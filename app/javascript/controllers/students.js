@@ -383,9 +383,7 @@ function formValidation() {
         $("#contact-number-error").text("");
         return true;
       }
-    } else {
-      $("#contact-number-error").text("");
-    }
+    } 
   }
 
   function validateEmergencyContactNumber() {
@@ -404,8 +402,6 @@ function formValidation() {
         $("#emergency-contact-number-error").text("");
         return true;
       }
-    } else {
-      $("#emergency-contact-number-error").text("");
     }
   }
   // Event bindings for registration form fields
@@ -420,7 +416,7 @@ function formValidation() {
 
 
   // Event binding for form submission
-  $("form").on("submit", function(event) {
+  $("#user-admin-form").on("submit", function(event) {
     // Validate all fields on form submission
     let isNameValid = validateName();
     let isEmailValid = validateEmail();

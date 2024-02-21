@@ -187,7 +187,7 @@ function formValidation() {
   $("#user_password_confirmation").on("blur", validatePasswordConfirmation); // Validate password confirmation on blur
 
   // Event binding for form submission
-  $("form").on("submit", function(event) {
+  $("#user-admin-form").on("submit", function(event) {
     // Validate all fields on form submission
     let isNameValid = validateName();
     let isEmailValid = validateEmail();

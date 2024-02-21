@@ -118,7 +118,7 @@ function handleNavbar() {
   $(".title").mouseenter(function () {
     if (!expanded) {
       $(".main-page, .main-nav").css({
-        width: "85%",
+        width: "87%",
         "margin-left": "auto",
         transition: "all 0.2s linear",
       });

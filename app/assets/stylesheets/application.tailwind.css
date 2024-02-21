@@ -156,13 +156,13 @@ input:-webkit-autofill {
 
 .main-menu:hover,
 nav.main-menu.expanded {
-  width: 295px;
+  width: 250px;
   overflow: visible;
 }
 
 .main-menu:hover,
 .main-page.expanded {
-  width: 295px;
+  width: 250px;
   overflow: visible;
 }
 
@@ -193,7 +193,7 @@ nav.main-menu.expanded {
 .main-menu li {
   position: relative;
   display: block;
-  width: 295px;
+  width: 250px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -227,7 +227,7 @@ nav.main-menu.expanded {
   position: relative;
   display: table-cell;
   vertical-align: middle;
-  width: 230px;
+  width: 190px;
   font-size: 18px;
   font-weight: 500;
 }
@@ -303,7 +303,7 @@ nav.main-menu li.active > a,
 
 .main-menu2 {
   overflow: visible;
-  width: 295px;
+  width: 250px;
 }
 
 .main-nav {
@@ -311,14 +311,14 @@ nav.main-menu li.active > a,
 }
 
 .main-nav2 {
-  width: 85%;
+  width: 87%;
 }
 .main-page {
   width: 97%;
   margin-left: auto;
 }
 .main-page2 {
-  width: 85%;
+  width: 87%;
   margin-left: auto;
   transition: all 0.2s linear;
 }
