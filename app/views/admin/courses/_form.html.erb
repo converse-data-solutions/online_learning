@@ -29,6 +29,12 @@
     </div>
   </div>
   <div class="flex justify-between flex-col sm:flex-row">
+    <label for="fees" class="block mb-2 text-lg font-medium text-[#000]">Course Type</label>
+    <div class="w-[47%] flex flex-col mb-4">
+<%= f.select(:course_type, Course.course_types.keys.map { |type| [type.humanize, Course.course_types[type]] }, { prompt: "Select Course Type" }, { class: "bg-[#fff] border-[1px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select select-widht" }) %>
+    </div>
+  </div>
+  <div class="flex justify-between flex-col sm:flex-row">
     <label for="fees" class="block mb-2 text-lg font-medium text-[#000]">Course Fee</label>
     <div class="w-[47%] flex flex-col mb-4">
       <%= f.text_field :fees, class: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-fee" %>

@@ -361,22 +361,22 @@ function onclickHover() {
 }
 
 function collectionSelect() {
-  $("#user-filter-container .custom-select").each(function() {
+  $("#user-filter-container .new-lesson-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
 
-    var placeholderText = $(this).find("option:first-of-type").text(); // Get text of the first option
+    var placeholderText = $(this).find("option:first-of-type").text();
 
     var template = '<div class="' + classes + '">';
     template +=
-      '<span class="custom-select-trigger">' + placeholderText + "</span>";
-    template += '<div class="custom-options">';
+      '<span class="new-lesson-custom-select-trigger">' + placeholderText + "</span>";
+    template += '<div class="new-lesson-custom-options">';
     $(this)
       .find("option")
       .each(function() {
         template +=
-          '<span class="custom-option ' +
+          '<span class="new-lesson-custom-option ' +
           $(this).attr("class") +
           '" data-value="' +
           $(this).attr("value") +
@@ -386,48 +386,48 @@ function collectionSelect() {
       });
     template += "</div></div>";
 
-    $(this).wrap('<div class="custom-select-wrapper"></div>');
+    $(this).wrap('<div class="new-lesson-custom-select-wrapper"></div>');
     $(this).hide();
     $(this).after(template);
   });
 
-  $(".custom-option:first-of-type").hover(
+  $(".new-lesson-custom-option:first-of-type").hover(
     function() {
-      $(this).parents(".custom-options").addClass("option-hover");
+      $(this).parents(".new-lesson-custom-options").addClass("option-hover");
     },
     function() {
-      $(this).parents(".custom-options").removeClass("option-hover");
+      $(this).parents(".new-lesson-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".custom-select-trigger").on("click", function(event) {
+  $(".new-lesson-custom-select-trigger").on("click", function(event) {
     $("html").one("click", function() {
-      $(".custom-select").removeClass("opened");
+      $(".new-lesson-custom-select").removeClass("opened");
     });
-    $(this).parents(".custom-select").toggleClass("opened");
+    $(this).parents(".new-lesson-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".custom-option").on("click", function() {
+  $(".new-lesson-custom-option").on("click", function() {
     $(this)
-      .parents(".custom-select-wrapper")
+      .parents(".new-lesson-custom-select-wrapper")
       .find("select")
       .val($(this).data("value"));
     $(this)
-      .parents(".custom-options")
-      .find(".custom-option")
+      .parents(".new-lesson-custom-options")
+      .find(".new-lesson-custom-option")
       .removeClass("selection");
     $(this).addClass("selection");
-    $(this).parents(".custom-select").removeClass("opened");
+    $(this).parents(".new-lesson-custom-select").removeClass("opened");
     $(this)
-      .parents(".custom-select")
-      .find(".custom-select-trigger")
+      .parents(".new-lesson-custom-select")
+      .find(".new-lesson-custom-select-trigger")
       .text($(this).text());
   });
 }
 
 function selectRole() {
-  $("#user-filter-container").on("click", ".custom-option", function() {
+  $("#user-filter-container").on("click", ".new-lesson-custom-option", function() {
     $("#overlay").show();
     var selectedUserId = $(this).data("value");
     console.log(selectedUserId);
@@ -462,8 +462,8 @@ function selectRole() {
   });
 }
 
-function lessonCollectionSelect() {
-  $("#user-admin-form .custom-select").each(function() {
+function createRole() {
+  $("#user-filter-container .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
