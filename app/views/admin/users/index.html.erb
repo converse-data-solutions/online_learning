@@ -94,7 +94,6 @@
         </div>
       </div>
     </div>
-    <% turbo_frame_tag :moodal do %>
       <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
         <div class="relative w-full max-w-[40rem] max-h-full shadow-md">
           <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
@@ -115,7 +114,6 @@
           </div>
         </div>
       </div>
-    <% end %>
     <div class="mt-4 ml-[30px] lg:ml-0" id="render-pagination">
       <%= render partial: 'admin/users/paginate', locals: { users: @users } %>
     </div>

@@ -363,12 +363,12 @@ nav.main-menu li.active > a,
   top: -7px;
   right: 25px;
 }
-.profile-slider {
+/* .profile-slider {
   top: 10px !important;
   left: -7px !important;
   transform: translate(1874px, 58px);
   transition: 1s;
-}
+} */
 
 .pagination {
   display: flex;
