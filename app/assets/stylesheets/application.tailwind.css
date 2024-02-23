@@ -118,6 +118,13 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #818181 !important;
 }
 
+#todatepicker::-webkit-calendar-picker-indicator {
+  display: none;
+}
+#datepicker::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
 .table-container {
   overflow: auto;
 }
@@ -1552,6 +1559,13 @@ select:focus, textarea:focus {
   font-weight: 500 !important;
   font-family: "Poppins", sans-serif;
   font-size: 14px !important;
+}
+.ui-state-highlight{
+  background-color: #0bc08b !important;
+  font-weight: 500 !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px !important;
+  color: #ffffff !important;
 }
 .datepicker-input {
   font-family: "Poppins", sans-serif;

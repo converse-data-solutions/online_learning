@@ -5,7 +5,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: %i[edit update destroy show]
   def index
-    @users = User.get_users(params)
+    @users = User.get_users(params, :index)
     respond_to do |format|
       format.json { render json: { data: @users, total_count: User.admin.count } }
       format.html { render :index }

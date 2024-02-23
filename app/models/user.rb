@@ -46,12 +46,15 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
-  def self.get_users(params)
+  def self.get_users(params, context = nil)
     page_number = params[:page].presence&.to_i
     page = (page_number && page_number.positive?) ? page_number : 1
     record_per_page = (params[:per_page].presence&.to_i || 12).to_i
-    per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 12
-    User.admin.order(name: :asc).role_filter(params[:user]).search_by_name_and_email(params[:search]).paginate(page: page, per_page: per_page)
+    per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
+    user_courses = User.admin.order(name: :asc)
+    user_courses = user_courses.role_filter(params[:user]) if context == :index
+    user_courses = user_courses.search_by_name_and_email(params[:search]) if params[:search].present?
+    user_courses.paginate(page: page, per_page: per_page)
   end
 
   def self.get_students(params)

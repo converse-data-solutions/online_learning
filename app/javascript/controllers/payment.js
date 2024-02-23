@@ -204,7 +204,7 @@ function fromDate() {
       dateFormat: "yy-mm-dd",
       duration: "fast",
       changeYear: true, // Enable changing the year
-
+      defaultDate: new Date() // Set default date to current date
     });
   });
 }
@@ -215,6 +215,7 @@ function toDate() {
       dateFormat: "yy-mm-dd",
       duration: "fast",
       changeYear: true, // Enable changing the year
+      defaultDate: new Date() // Set default date to current date
     });
   });
 }
