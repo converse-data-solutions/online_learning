@@ -1,0 +1,3 @@
+<%= turbo_stream.update "user-course-table", partial: "admin/user_courses/table", locals: { user_courses: @user_courses } %>
+<%= turbo_stream.update "edit-user-popup", partial: "admin/user_courses/edit", locals: { user_course: @user_course } %>
+<%= turbo_stream.append "user-course-table", partial: "shared/flash", locals: { message: 'User updated successfully.', type: 'notice' } %>

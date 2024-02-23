@@ -166,7 +166,6 @@ function handleNavbar() {
 }
 
 function loginValidation(){
-  console.log("dsfsdfsdff................");
   function validateEmail() {
    let email = $("#user_email").val().trim();
    let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;

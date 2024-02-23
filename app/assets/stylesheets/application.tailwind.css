@@ -958,6 +958,11 @@ nav.main-menu li.active > a,
   width: 16.25rem !important;
 }
 
+.new-select-border {
+  border: 1px solid #CCCCCC !important;
+  width: 100% !important;
+}
+
 .new-lesson-custom-select-wrapper {
   position: relative;
   display: inline-block;

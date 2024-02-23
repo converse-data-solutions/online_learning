@@ -1,0 +1,52 @@
+<%= form_for user_course || UserCourse.new, url: admin_user_courses_path, html: { class: "validate", id: "user-course-admin-form" }, validate: true, method: :post do |f| %>
+  <div class="mb-4 flex flex-col sm:flex-row">
+    <label for="name" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Student Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <%= collection_select(:user_course, :user_id, User.all, :id, :name, { prompt: "Select User", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources" })  %>
+      <div class="text-red-600 text-sm mt-1" id="name-error"></div>
+      <% if user_course&.errors&.any? %>
+        <% if user_course&.errors[:user_id].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= user_course&.errors.full_messages_for(:user_id).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="mb-4 flex flex-col sm:flex-row">
+    <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Course Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <%= collection_select(:user_course, :course_id, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select new-select-border  sources" })  %>
+      <div class="text-red-600 text-sm mt-1" id="email-error"></div>
+      <% if user_course&.errors&.any? %>
+        <% if user_course&.errors[:course_id].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= user_course&.errors.full_messages_for(:course_id).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="mb-4 flex flex-col sm:flex-row">
+    <label for="password" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Course Amount<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <%= f.text_field :course_amount, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"%>
+      <div class="text-red-600 text-sm mt-1" id="password-error"></div>
+      <% if user_course&.errors&.any? %>
+        <% if user_course&.errors[:course_amount].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= user_course&.errors.full_messages_for(:course_amount).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <%= text_field_tag :course_id, params[:course_id], class: "", id:"get-course-id" %>
+  <%= f.hidden_field :enrolled_at, value: Time.now %>
+  <%= hidden_field_tag :page, params[:page]%>
+  <%= hidden_field_tag :per_page, params[:per_page]%>
+  <%= hidden_field_tag :search, params[:search]%>
+  <div class="w-1/5 mx-auto mt-4 sm:mt-6">
+    <%= f.submit "CREATE", class: 'button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 loader-btn' %>
+  </div>
+<% end %>
