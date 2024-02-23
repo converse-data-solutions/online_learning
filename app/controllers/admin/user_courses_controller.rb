@@ -43,7 +43,6 @@ class Admin::UserCoursesController < ApplicationController
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_user_course_url(@user_course) }
       else
-        byebug
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update('edit-user-course-popup', partial: 'admin/user_courses/edit', locals: { user_course: @user_course })

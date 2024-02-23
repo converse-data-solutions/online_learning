@@ -38,7 +38,7 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end
 
-  def update # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+  def update # rubocop:disable,Metrics/MethodLength
     respond_to do |format|
       if @user.update(admin_params)
         @users = User.get_users(params)

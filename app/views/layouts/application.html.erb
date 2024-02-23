@@ -116,7 +116,7 @@
                                         </svg>
                                       </span>
                                     </a>
-                                    <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-2/4 mx-auto">
+                                    <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-[75%] ml-auto">
                                       <li class="flex justify-center"><a href="#" class="block font-medium font-[Poppins] text-[15px]">Attendance Details </a></li>
                                       <li class="flex justify-center"><a href="#" class="block font-medium font-[Poppins] text-[15px] <%= (params[:controller] == "admin/students" && params[:action] == "index") ? "#0BC08B" : "#999" %>"> <%= link_to admin_students_path, class: "block font-medium font-[Poppins] text-[15px] #{(params[:controller] == 'admin/students' && params[:action] == 'index') ? 'current-screen-color' : ''}" do %>
                                             Student Details
@@ -136,7 +136,7 @@
                                       <span class="nav-text main items-center justify-between mt-[5px] title text-lg font-medium font-['Poppins'] link-clr" style="display: flex;">Payment<img src="<%= asset_path("down.png") %>" class="mr-5 change-position" alt="...">
                                       </span>
                                     </a>
-                                    <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-2/4 mx-auto">
+                                    <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-[75%] ml-auto">
                                       <li><a href="#" class="block font-medium text=[15px] font-['[15px]"><%= link_to "Invoice Creation", new_admin_payment_path, class: "#{(params[:controller] == 'admin/payments' && params[:action] == 'new') ? 'actived-link' : ''}" %></a></li>
                                       <li><a href="#" class="block font-medium text=[15px] font-['[15px]"><%= link_to "Download Invoices", admin_payments_path, class: "#{(params[:controller] == 'admin/payments' && params[:action] == 'index') ? 'actived-link' : ''}" %></a></li>
                                       <li><a href="#" class="block font-medium text=[15px] font-['[15px]"><%= link_to "Collections", collections_admin_payments_path, class: "#{(params[:controller] == 'admin/payments' && params[:action] == 'collections') ? 'actived-link' : ''}" %></a></li>
@@ -152,7 +152,7 @@
                                       <span class="nav-text main items-center justify-between mt-[5px] title text-lg font-medium font-['Poppins'] link-clr" style="display: flex;">Scheduling<img src="<%= asset_path("down.png") %>" class="mr-5 change-position" alt="...">
                                       </span>
                                     </a>
-                                    <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-2/4 mx-auto">
+                                    <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-[75%] ml-auto">
                                       <li><a href="#" class="block font-medium text=[15px] font-['[15px]">Schedule Plan</a></li>
                                     </ul>
                                   </li>
@@ -167,7 +167,7 @@
                                       <span class="nav-text main items-center justify-between mt-[5px] title text-lg font-medium font-['Poppins'] link-clr" style="display: flex;">Sales<img src="<%= asset_path("down.png") %>" class="mr-5 change-position" alt="...">
                                       </span>
                                     </a>
-                                    <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-2/4 mx-auto">
+                                    <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-[75%] ml-auto">
                                       <li><a href="#" class="block font-medium text=[15px] font-['[15px]">Enquires</a></li>
                                     </ul>
                                   </li>
