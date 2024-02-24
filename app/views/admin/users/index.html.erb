@@ -73,7 +73,7 @@
       </table>
     </div>
     <div id="large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
-      <%= turbo_frame_tag "edit-user-popup", class: "w-[51rem]" do %>
+      <%= turbo_frame_tag "edit-user-popup", class: "w-full lg:max-w-[51rem] sm:max-w-[32rem] max-h-full max-w-[20rem]" do %>
       <% end %>
     </div>
     <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
