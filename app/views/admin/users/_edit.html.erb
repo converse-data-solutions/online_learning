@@ -1,82 +1,99 @@
-<!-- Modal body -->
-<div class="p-7 space-y-6 lg:w-[95%] sm:w-[95%] w-[90%] mr-auto lg:ml-auto ml-5">
-  <%= form_for(user, url: admin_user_path(user), html: { class: "validate", id: "user-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
-    <div class="mb-4 flex flex-col sm:flex-row">
-      <label for="name" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-      <div class="w-full sm:w-[50%] flex flex-col">
-        <%= f.text_field :name, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_user_name", autocomplete: "off" %>
-        <div class="text-red-600 text-sm mt-1" id="edit-name-error"></div>
-        <% if user&.errors&.any? %>
-          <% if user.errors[:name].any? %>
-            <div class="text-red-600 text-sm mt-1">
-              <%= user.errors.full_messages_for(:name).join(', ') %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
+<div class="relative w-full lg:max-w-[52rem] sm:max-w-[32rem] max-h-full max-w-[20rem] ml-[42px] sm:ml-[25px] md:ml-[0px]">
+  <!-- Modal content -->
+  <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
+    <!-- Modal header -->
+    <div class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
+      <h3 class="text-[26px] font-semibold text-[#0BC08B] text-center flex justify-center w-full">
+        EDIT USER MANAGEMENT
+      </h3>
+      <button type="button" id="modal-close-btn" class="text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white loader-btn" data-modal-hide="large-modal">
+        <svg class="w-8 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
     </div>
-    <div class="mb-4 flex flex-col sm:flex-row">
-      <label for="email" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-      <div class="w-full sm:w-[50%] flex flex-col">
-        <%= f.email_field :email, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_user_email", autocomplete: "off" %>
-        <div class="text-red-600 text-sm mt-1" id="edit-email-error"></div>
-        <% if user&.errors&.any? %>
-          <% if user.errors[:email].any? %>
-            <div class="text-red-600 text-sm mt-1">
-              <%= user.errors.full_messages_for(:email).join(', ') %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
+    <!-- Modal body -->
+    <div class="p-7 space-y-6 lg:w-[95%] sm:w-[95%] w-[90%] mr-auto lg:ml-auto ml-5">
+      <%= form_for(user, url: admin_user_path(user), html: { class: "validate", id: "user-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
+        <div class="mb-4 flex flex-col sm:flex-row">
+          <label for="name" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+          <div class="w-full sm:w-[50%] flex flex-col">
+            <%= f.text_field :name, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_user_name", autocomplete: "off" %>
+            <div class="text-red-600 text-sm mt-1" id="edit-name-error"></div>
+            <% if user&.errors&.any? %>
+              <% if user.errors[:name].any? %>
+                <div class="text-red-600 text-sm mt-1">
+                  <%= user.errors.full_messages_for(:name).join(', ') %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="mb-4 flex flex-col sm:flex-row">
+          <label for="email" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+          <div class="w-full sm:w-[50%] flex flex-col">
+            <%= f.email_field :email, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_user_email", autocomplete: "off" %>
+            <div class="text-red-600 text-sm mt-1" id="edit-email-error"></div>
+            <% if user&.errors&.any? %>
+              <% if user.errors[:email].any? %>
+                <div class="text-red-600 text-sm mt-1">
+                  <%= user.errors.full_messages_for(:email).join(', ') %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <%= f.hidden_field :role, value: 'admin' %>
+        <div class="mb-4 flex flex-col sm:flex-row">
+          <label for="password" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+          <div class="w-full sm:w-[50%] flex flex-col">
+            <%= f.password_field :password, class: "validate bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_user_password" %>
+            <div class="text-red-600 text-sm mt-1" id="edit-password-error"></div>
+            <% if user&.errors&.any? %>
+              <% if user.errors[:password].any? %>
+                <div class="text-red-600 text-sm mt-1">
+                  <%= user.errors.full_messages_for(:password).join(', ') %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="mb-4 flex flex-col sm:flex-row">
+          <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[50%]">Confirmation Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+          <div class="w-full sm:w-[50%] flex flex-col">
+            <%= f.password_field :password_confirmation, class: "validate bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_user_password_confirmation" %>
+            <div class="text-red-600 text-sm mt-1" id="edit-password-confirmation-error"></div>
+            <% if user&.errors&.any? %>
+              <% if user.errors[:password_confirmation].any? %>
+                <div class="text-red-600 text-sm mt-1">
+                  <%= user.errors.full_messages_for(:password_confirmation).join(', ') %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="mb-4 flex flex-col sm:flex-row select-edit-width">
+          <label for="role" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Role<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+          <div class="w-full sm:w-[55%] flex flex-col">
+            <%= collection_select(:role, :name, Role.all, :name, :name, { prompt: "Select Role", selected: '' }, { class: "bg-[#fff] border-0 bg-[#F5F5F5] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select select-edit-color" }) %>
+            <div class="text-red-600 text-sm mt-1" id="role-error"></div>
+            <% if user&.errors&.any? %>
+              <% if user&.errors[:role].any? %>
+                <div class="text-red-600 text-sm mt-1">
+                  <%= user&.errors.full_messages_for(:role).join(', ') %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <%= hidden_field_tag :page, params[:page]%>
+        <%= hidden_field_tag :per_page, params[:per_page]%>
+        <%= hidden_field_tag :search, params[:search]%>
+        <div class="w-1/2 md:w-2/5 mx-auto mt-4 sm:mt-6">
+          <%= f.submit "UPDATE", class: 'button-gradiant-hover w-[150px] h-[42px] md:ml-[50px] ml-[20px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-[7px] text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 button-gradiant-hover loader-btn' %>
+        </div>
+      <% end %>
     </div>
-    <%= f.hidden_field :role, value: 'admin' %>
-    <div class="mb-4 flex flex-col sm:flex-row">
-      <label for="password" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-      <div class="w-full sm:w-[50%] flex flex-col">
-        <%= f.password_field :password, class: "validate bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_user_password" %>
-        <div class="text-red-600 text-sm mt-1" id="edit-password-error"></div>
-        <% if user&.errors&.any? %>
-          <% if user.errors[:password].any? %>
-            <div class="text-red-600 text-sm mt-1">
-              <%= user.errors.full_messages_for(:password).join(', ') %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="mb-4 flex flex-col sm:flex-row">
-      <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[50%]">Confirmation Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-      <div class="w-full sm:w-[50%] flex flex-col">
-        <%= f.password_field :password_confirmation, class: "validate bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_user_password_confirmation" %>
-        <div class="text-red-600 text-sm mt-1" id="edit-password-confirmation-error"></div>
-        <% if user&.errors&.any? %>
-          <% if user.errors[:password_confirmation].any? %>
-            <div class="text-red-600 text-sm mt-1">
-              <%= user.errors.full_messages_for(:password_confirmation).join(', ') %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="mb-4 flex flex-col sm:flex-row select-edit-width">
-      <label for="role" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Role<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-      <div class="w-full sm:w-[55%] flex flex-col">
-        <%= collection_select(:role, :name, Role.all, :name, :name, { prompt: "Select Role", selected: '' }, { class: "bg-[#fff] border-0 bg-[#F5F5F5] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select select-edit-color" }) %>
-        <div class="text-red-600 text-sm mt-1" id="role-error"></div>
-        <% if user&.errors&.any? %>
-          <% if user&.errors[:role].any? %>
-            <div class="text-red-600 text-sm mt-1">
-              <%= user&.errors.full_messages_for(:role).join(', ') %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <%= hidden_field_tag :page, params[:page]%>
-    <%= hidden_field_tag :per_page, params[:per_page]%>
-    <%= hidden_field_tag :search, params[:search]%>
-    <div class="w-1/2 md:w-2/5 mx-auto mt-4 sm:mt-6">
-      <%= f.submit "UPDATE", class: 'button-gradiant-hover w-[150px] h-[42px] md:ml-[50px] ml-[20px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-[7px] text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 button-gradiant-hover loader-btn' %>
-    </div>
-  <% end %>
+  </div>
 </div>
