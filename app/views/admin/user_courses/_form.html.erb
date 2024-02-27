@@ -41,7 +41,7 @@
       <% end %>
     </div>
   </div>
-  <%= text_field_tag :course_id, params[:course_id], class: "", id:"get-course-id" %>
+  <%= hidden_field_tag :course_id, params[:course_id], class: "", id:"get-course-id" %>
   <%= f.hidden_field :enrolled_at, value: Time.now %>
   <%= hidden_field_tag :page, params[:page]%>
   <%= hidden_field_tag :per_page, params[:per_page]%>
