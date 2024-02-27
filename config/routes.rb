@@ -83,6 +83,14 @@ Rails.application.routes.draw do
   #   get '', to: 'sections#course_section_index'
   # end
 
+  namespace :admin do
+    resources :user_courses do
+      collection do
+        get :receive_course_amount
+      end
+    end
+  end
+
   resources :courses, only: [] do
     resources :sections, only: %i[index show]
   end

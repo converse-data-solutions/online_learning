@@ -217,7 +217,7 @@ function onclickHover() {
 }
 
 function lessonCollectionSelect() {
-  $("#filter-container .custom-select").each(function() {
+  $("#lesson-filter-container .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -415,7 +415,7 @@ function lessonLessonSelect() {
 }
 
 function lessonOptionSelect() {
-  $("#filter-container").on("click", ".new-custom-option", function() {
+  $("#lesson-filter-container").on("click", ".new-custom-option", function() {
     $("#overlay").show();
     var selectedLessonId = $(this).data("value");
     $.ajax({
@@ -450,7 +450,7 @@ function lessonOptionSelect() {
 
 
 function lessonSelectSection() {
-  $("#filter-container .custom-select").on("click", ".custom-option", function() {
+  $("#lesson-filter-container .custom-select").on("click", ".custom-option", function() {
     var courseId = $(this).data('value');
 
     // Make an AJAX request to fetch sections for the selected course

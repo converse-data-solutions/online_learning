@@ -31,9 +31,12 @@
   </div>
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-      <label for="password" class=" block mb-2 text-lg font-medium text-[#000]">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-      <div class="w-full sm:w-[55%] flex flex-col">
+      <label for="password" class="block mb-2 text-lg font-medium text-[#000]">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+      <div class="w-full sm:w-[55%] flex flex-col relative">
         <%= f.password_field :password, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password" %>
+        <div class="absolute top-0 bottom-4 right-0 flex items-center pr-3">
+          <img id="toggle-password-visibility" src="<%= asset_path("eye.png") %>" alt="Show Password" class="cursor-pointer" onclick="togglePasswordVisibility()">
+        </div>
         <div class="text-red-600 text-sm mt-1" id="password-error"></div>
         <% if student&.errors&.any? %>
           <% if student.errors[:password].any? %>
@@ -46,8 +49,11 @@
     </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="passwod_confirmation" class="w-full sm:w-[40%] lg:w-[46%]  block mb-2 text-lg font-medium text-[#000]">Password Confirmation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-      <div class="w-full sm:w-[55%] flex flex-col">
+      <div class="w-full sm:w-[55%] flex flex-col relative">
         <%= f.password_field :password_confirmation, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-password" %>
+        <div class="absolute top-0 bottom-4 right-0 flex items-center pr-3">
+          <img id="toggle-password-confirmation-visibility" src="<%= asset_path("eye.png") %>" alt="Show Password" class="cursor-pointer" onclick="togglePasswordConfirmationVisibility()">
+        </div>
         <div class="text-red-600 text-sm mt-1" id="password-confirmation-error"></div>
         <% if student&.errors&.any? %>
           <% if student.errors[:password_confirmation].any? %>
@@ -60,23 +66,6 @@
     </div>
   </div>
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
-    <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-      <label for="course" class="block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-      <div class="sm:w-[57%] lg:w-[55%] w-full">
-        <div class="dropdown">
-          <label class="dropdown-label">Select Options</label>
-          <div class="dropdown-list">
-            <% Course.all.each do |course| %>
-              <div class="checkbox">
-                <%= f.check_box :course_ids, { multiple: true }, course.id, nil %>
-                <label for="checkbox-custom_<%= course.id %>" class="checkbox-custom-label"><%= course.course_name %></label>
-              </div>
-            <% end %>
-          </div>
-          <div class="text-red-600 text-sm mt-1" id="course-error"></div>
-        </div>
-      </div>
-    </div>
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="gender" class="block mb-2 text-lg font-medium text-[#000]">Gender</label>
       <div class="flex w-[57%] lg:w-[55%]">
@@ -92,14 +81,46 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-      <label for="dataofbirth" class=" block mb-2 text-lg font-medium text-[#000]">Date of Birth</label>
-      <div class="input-wrapper flex flex-col w-full sm:w-[57%] lg:w-[55%]">
-        <%= f.text_field :dataofbirth, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg', id: 'datepicker', autocomplete: 'off' %>
+      <label for="dataofbirth" class="block mb-2 text-lg font-medium text-[#000]">Date of Birth</label>
+      <div class="input-wrapper flex flex-col w-full sm:w-[57%] lg:w-[55%] relative">
+        <%= f.text_field :dataofbirth, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg pl-10 pr-4', id: 'datepicker', autocomplete: 'off' %>
+        <svg id="datepicker-icon" class="absolute top-4 left-[19.75rem] w-6 h-6 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="31" height="31" viewBox="0 0 31 31" fill="none">
+          <g filter="url(#filter0_d_598_6971)">
+            <path d="M25.3958 4.16699H23.1388V5.55588H25.2222V20.8337H5.77774V5.55588H7.86107V4.16699H5.60413C5.44179 4.16971 5.28158 4.20437 5.13265 4.26901C4.98371 4.33365 4.84897 4.427 4.73612 4.54372C4.62326 4.66044 4.53451 4.79826 4.47492 4.94928C4.41534 5.10031 4.38609 5.2616 4.38885 5.42394V20.9656C4.38609 21.1279 4.41534 21.2892 4.47492 21.4403C4.53451 21.5913 4.62326 21.7291 4.73612 21.8458C4.84897 21.9625 4.98371 22.0559 5.13265 22.1205C5.28158 22.1852 5.44179 22.2198 5.60413 22.2225H25.3958C25.5581 22.2198 25.7183 22.1852 25.8673 22.1205C26.0162 22.0559 26.151 21.9625 26.2638 21.8458C26.3767 21.7291 26.4654 21.5913 26.525 21.4403C26.5846 21.2892 26.6138 21.1279 26.6111 20.9656V5.42394C26.6138 5.2616 26.5846 5.10031 26.525 4.94928C26.4654 4.79826 26.3767 4.66044 26.2638 4.54372C26.151 4.427 26.0162 4.33365 25.8673 4.26901C25.7183 4.20437 25.5581 4.16971 25.3958 4.16699Z" fill="#0BC08B"/>
+            <path d="M8.55566 9.72168H9.94455V11.1106H8.55566V9.72168Z" fill="#0BC08B"/>
+            <path d="M12.7222 9.72168H14.1111V11.1106H12.7222V9.72168Z" fill="#0BC08B"/>
+            <path d="M16.8889 9.72168H18.2778V11.1106H16.8889V9.72168Z" fill="#0BC08B"/>
+            <path d="M21.0557 9.72168H22.4446V11.1106H21.0557V9.72168Z" fill="#0BC08B"/>
+            <path d="M8.55566 13.1943H9.94455V14.5832H8.55566V13.1943Z" fill="#0BC08B"/>
+            <path d="M12.7222 13.1943H14.1111V14.5832H12.7222V13.1943Z" fill="#0BC08B"/>
+            <path d="M16.8889 13.1943H18.2778V14.5832H16.8889V13.1943Z" fill="#0BC08B"/>
+            <path d="M21.0557 13.1943H22.4446V14.5832H21.0557V13.1943Z" fill="#0BC08B"/>
+            <path d="M8.55566 16.667H9.94455V18.0559H8.55566V16.667Z" fill="#0BC08B"/>
+            <path d="M12.7222 16.667H14.1111V18.0559H12.7222V16.667Z" fill="#0BC08B"/>
+            <path d="M16.8889 16.667H18.2778V18.0559H16.8889V16.667Z" fill="#0BC08B"/>
+            <path d="M21.0557 16.667H22.4446V18.0559H21.0557V16.667Z" fill="#0BC08B"/>
+            <path d="M9.94444 6.94423C10.1286 6.94423 10.3053 6.87106 10.4355 6.74083C10.5657 6.6106 10.6389 6.43396 10.6389 6.24978V2.08312C10.6389 1.89894 10.5657 1.7223 10.4355 1.59207C10.3053 1.46184 10.1286 1.38867 9.94444 1.38867C9.76027 1.38867 9.58363 1.46184 9.4534 1.59207C9.32316 1.7223 9.25 1.89894 9.25 2.08312V6.24978C9.25 6.43396 9.32316 6.6106 9.4534 6.74083C9.58363 6.87106 9.76027 6.94423 9.94444 6.94423Z" fill="#0BC08B"/>
+            <path d="M21.0555 6.94423C21.2397 6.94423 21.4163 6.87106 21.5466 6.74083C21.6768 6.6106 21.75 6.43396 21.75 6.24978V2.08312C21.75 1.89894 21.6768 1.7223 21.5466 1.59207C21.4163 1.46184 21.2397 1.38867 21.0555 1.38867C20.8714 1.38867 20.6947 1.46184 20.5645 1.59207C20.4342 1.7223 20.3611 1.89894 20.3611 2.08312V6.24978C20.3611 6.43396 20.4342 6.6106 20.5645 6.74083C20.6947 6.87106 20.8714 6.94423 21.0555 6.94423Z" fill="#0BC08B"/>
+            <path d="M12.0278 4.16699H18.9723V5.55588H12.0278V4.16699Z" fill="#0BC08B"/>
+          </g>
+          <defs>
+            <filter id="filter0_d_598_6971" x="0.388672" y="1.38867" width="30.2227" height="28.834" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+              <feOffset dy="4"/>
+              <feGaussianBlur stdDeviation="2"/>
+              <feComposite in2="hardAlpha" operator="out"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_598_6971"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_598_6971" result="shape"/>
+            </filter>
+          </defs>
+        </svg>
       </div>
     </div>
+  </div>
+  <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="contact number" class=" block mb-2 text-lg font-medium text-[#000]">Phone No</label>
       <div class="w-full sm:w-[55%] flex flex-col">
@@ -114,8 +135,6 @@
         <% end %>
       </div>
     </div>
-  </div>
-  <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="occupation" class=" block mb-2 text-lg font-medium text-[#000]">Occupation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="w-full sm:w-[55%] flex flex-col">
@@ -123,28 +142,28 @@
         <div class="text-red-600 text-sm mt-1" id="occupation-error"></div>
       </div>
     </div>
+  </div>
+  <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="education" class=" block mb-2 text-lg font-medium text-[#000]">Education</label>
       <div class="w-full sm:w-[55%] flex flex-col">
         <%= f.text_field :education, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
       </div>
     </div>
-  </div>
-  <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="address" class=" block mb-2 text-lg font-medium text-[#000]">Address</label>
       <div class="w-full sm:w-[55%] flex flex-coll">
         <%= f.text_area :addresses, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
       </div>
     </div>
+  </div>
+  <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="emergency contact name" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Name</label>
       <div class="w-full sm:w-[55%] flex flex-col">
         <%= f.text_field :emergency_contact_name, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
       </div>
     </div>
-  </div>
-  <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="emergency contact number" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Number</label>
       <div class="w-full sm:w-[55%] flex flex-col">
@@ -159,6 +178,8 @@
         <% end %>
       </div>
     </div>
+  </div>
+  <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <%= f.hidden_field :role, value: 'student' %>
     </div>
@@ -170,3 +191,30 @@
     <%= f.submit "CREATE", class: 'button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
   </div>
 <% end %>
+<script>
+  function togglePasswordVisibility() {
+        var passwordField = document.getElementById('user_password');
+        var toggleIcon = document.getElementById('toggle-password-visibility');
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.src = "<%= asset_path("eyeclosed.png") %>";
+        } else {
+            passwordField.type = "password";
+            toggleIcon.src = "<%= asset_path("eye.png") %>";
+        }
+    }
+
+    function togglePasswordConfirmationVisibility() {
+        var passwordField = document.getElementById('user_password_confirmation');
+        var toggleIcon = document.getElementById('toggle-password-confirmation-visibility');
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.src = "<%= asset_path("eyeclosed.png") %>";
+        } else {
+            passwordField.type = "password";
+            toggleIcon.src = "<%= asset_path("eye.png") %>";
+        }
+    }
+</script>

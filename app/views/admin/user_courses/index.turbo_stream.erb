@@ -1,0 +1,2 @@
+<%= turbo_stream.update "user-course-table", partial: "admin/user_courses/table", locals: { user_courses: @user_courses } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/user_courses/paginate", locals: { user_courses: @user_courses } %>

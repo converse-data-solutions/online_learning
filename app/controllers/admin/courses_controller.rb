@@ -25,6 +25,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   end
 
   def create # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
+    params[:course][:course_type] = params[:course][:course_type].to_i
     @course = Course.new(course_params)
     respond_to do |format|
       if @course.save
@@ -50,6 +51,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   def edit; end
 
   def update # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    params[:course][:course_type] = params[:course][:course_type].to_i
     respond_to do |format|
       if @course.update(course_params)
         @courses = Course.get_courses(params)
@@ -96,6 +98,6 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
   end
 
   def course_params
-    params.require(:course).permit(:id, :course_name, :description, :fees)
+    params.require(:course).permit(:id, :course_name, :description, :fees, :course_type)
   end
 end

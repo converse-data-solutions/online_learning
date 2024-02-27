@@ -118,7 +118,7 @@ function handleNavbar() {
   $(".title").mouseenter(function () {
     if (!expanded) {
       $(".main-page, .main-nav").css({
-        width: "85%",
+        width: "87%",
         "margin-left": "auto",
         transition: "all 0.2s linear",
       });
@@ -165,12 +165,82 @@ function handleNavbar() {
   updateNavbar();
 }
 
+function loginValidation(){
+  function validateEmail() {
+   let email = $("#user_email").val().trim();
+   let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+   if (!email) {
+     $("#email-error").text("Email can't be blank");
+     return false; // Return false to indicate validation failure
+   } else if (!emailRegex.test(email)) {
+     $("#email-error").text("Please enter a valid email address");
+     return false; // Return false to indicate validation failure
+   } else {
+     $("#email-error").text("");
+     return true; // Return true to indicate validation success
+   }
+ }
+
+ function validatePassword() {
+ let password = $("#user_password").val();
+ let hasUppercase = /[A-Z]/.test(password);
+ let hasNumber = /\d/.test(password);
+ let hasSpecialChar = /[!@#$%^&*()_+]/.test(password);
+
+ if (!password) {
+   $("#password-error").text("Password can't be blank");
+   return false;
+ } else if (password.length < 8) {
+   $("#password-error").text("Password must be at least 8 characters long");
+   return false;
+ } else if (!hasUppercase) {
+   $("#password-error").text("Password must contain at least one uppercase letter");
+   return false;
+ } else if (!hasNumber) {
+   $("#password-error").text("Password must contain at least one numeric digit");
+   return false;
+ } else if (!hasSpecialChar) {
+   $("#password-error").text("Password must contain at least one special character");
+   return false;
+ } else {
+   $("#password-error").text("");
+   return true;
+ }
+}
+
+
+ $("#user_email").on("blur", validateEmail); // Validate email on blur (when focus moves out)
+ $("#user_password").on("blur", validatePassword); // Validate password on blur
+
+ $("#login_button").on("click", function(event) {
+   // Validate both email and password on button click
+   let isEmailValid = validateEmail();
+   let isPasswordValid = validatePassword();
+
+   // Prevent form submission if either email or password is invalid
+   if (!isEmailValid || !isPasswordValid) {
+     event.preventDefault();
+   }
+ });
+
+ // Blur event for showing error messages when clicking outside of input fields
+ $("#user_email, #user_password").on("blur", function() {
+   if ($(this).attr("id") === "user_email") {
+     validateEmail();
+   } else if ($(this).attr("id") === "user_password") {
+     validatePassword();
+   }
+ });
+}
+
 
 
 $(document).ready(function() {
   applyNavbarState();
   activeClass();
   handleNavbar();
+  loginValidation();
 
 
   if ($("#student-management").hasClass("openDropDown")) {
@@ -211,6 +281,7 @@ $(document).ready(function() {
     activeClass();
     navDropdown();
     handleNavbar();
+    loginValidation();
 
     if ($("#student-management").hasClass("openDropDown")) {
       const dropdownFee = $("#student-management");

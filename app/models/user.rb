@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+ # frozen_string_literal: true
 
 # this is an User model
 class User < ApplicationRecord
@@ -28,7 +28,7 @@ class User < ApplicationRecord
                                        length: { is: 10 },
                                        allow_blank: true
 
-  scope :admin, -> { where(deleted: false).joins(:roles).where(roles: { name: 'admin' }) }
+  scope :admin, -> { where(deleted: false) }
   scope :student, -> { where(deleted: false).joins(:roles).where(roles: { name: 'student' }) }
 
   def google_oauth2_provider?
@@ -46,19 +46,22 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
-  def self.get_users(params)
+  def self.get_users(params, context = nil)
     page_number = params[:page].presence&.to_i
     page = (page_number && page_number.positive?) ? page_number : 1
-    record_per_page = (params[:per_page].presence&.to_i || 10).to_i
+    record_per_page = (params[:per_page].presence&.to_i || 12).to_i
     per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
-    User.admin.order(name: :asc).search_by_name_and_email(params[:search]).paginate(page: page, per_page: per_page)
+    user_courses = User.admin.order(name: :asc)
+    user_courses = user_courses.role_filter(params[:user]) if context == :index
+    user_courses = user_courses.search_by_name_and_email(params[:search]) if params[:search].present?
+    user_courses.paginate(page: page, per_page: per_page)
   end
 
   def self.get_students(params)
     page_number = params[:page].presence&.to_i
     page = (page_number && page_number.positive?) ? page_number : 1
-    record_per_page = (params[:per_page].presence&.to_i || 10).to_i
-    per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
+    record_per_page = (params[:per_page].presence&.to_i || 12).to_i
+    per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 12
     User.student.order(name: :asc).search_by_name_and_email(params[:search]).includes(user_courses: [:course]).paginate(page: page, per_page: per_page)
   end
 
@@ -91,6 +94,14 @@ class User < ApplicationRecord
     if query.present?
       search_query = "%#{query}%"
       where('users.name LIKE ? OR email LIKE ?', search_query, search_query)
+    else
+      all
+    end
+  end
+
+  def self.role_filter(role)
+    if role.present?
+      where(deleted: false).joins(:roles).where(roles: { id: role })
     else
       all
     end

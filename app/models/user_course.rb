@@ -4,10 +4,19 @@ class UserCourse < ApplicationRecord # rubocop:disable Style/Documentation
   belongs_to :user, optional: true
   belongs_to :course, optional: true
   has_many :payments, dependent: :destroy
-  after_create :create_course_amount
 
-  def create_course_amount
-    self.update(course_amount: course.fees) if course
+
+  validates :user_id, presence: true
+  validates :course_id, presence: true
+  validates :course_amount, presence: true
+
+
+  def self.get_user_courses(params)
+    page_number = params[:page].presence&.to_i
+    page = (page_number && page_number.positive?) ? page_number : 1
+    record_per_page = (params[:per_page].presence&.to_i || 10).to_i
+    per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
+    UserCourse.includes(:user, :course).search_by_name_and_course(params[:search]).paginate(page: page, per_page: per_page)
   end
 
   def self.get_collections(params) # rubocop:disable Metrics/AbcSize
@@ -23,6 +32,15 @@ class UserCourse < ApplicationRecord # rubocop:disable Style/Documentation
           .custom_search_method(params[:search])
           .paginate(page: page_number, per_page: record_per_page)
 
+  end
+
+  def self.search_by_name_and_course(query)
+    if query.present?
+      search_query = "%#{query}%"
+      joins(:user, :course).where('users.name LIKE ? OR courses.course_name LIKE ?', search_query, search_query)
+    else
+      all
+    end
   end
 
   def self.custom_search_method(query)

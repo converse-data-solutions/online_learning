@@ -12,17 +12,14 @@ class Admin::PaymentsController < ApplicationController
     if @payment.save
       user_course = UserCourse.find_by(id: params[:payment][:user_course_id])
       user_course.update(next_payment_date: params[:next_payment_date]) if user_course.present?
-      respond_to do |format|
-        format.html { redirect_to admin_payments_path }
-        format.turbo_stream
-      end
+      redirect_to admin_payments_path
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def user_course
-    @user = User.find_by(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
     @courses = @user.courses
     respond_to(&:turbo_stream)
   end
@@ -44,7 +41,7 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def generate_invoice_pdf
-    @payment = Payment.find_by(params[:id])
+    @payment = Payment.find_by(id: params[:id])
 
     respond_to do |format|
       format.html
@@ -87,6 +84,6 @@ class Admin::PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(:user_id, :user_course_id, :paid_at, :paid_amount)
+    params.require(:payment).permit(:user_id, :user_course_id, :paid_at, :paid_amount, :next_payment_date)
   end
 end

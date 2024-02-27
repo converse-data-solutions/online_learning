@@ -4,28 +4,39 @@
 <% end %>
 <div class="flex flex-col w-full" id="student index">
   <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-12 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
-    <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px]  font-medium">Student Management - Admin</div>
-    <div>
-      <!-- Modal toggle -->
-      <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px] gradiant-hover onclick-hover" type="button">
-        <span class="font-semibold text-base">+ </span> ADD NEW
-      </button>
-      <!-- Main modal -->
-      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
-        <div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
-          <!-- Modal content -->
-          <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
-            <button type="button" id="student-create-close-btn" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
-              <svg class="w-8 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span class="sr-only">Close modal</span>
-            </button>
-            <div class="px-6 py-6 lg:px-8">
-              <h3 class="mb-4 sm:mb-7 md:mb-10 text-[26px] font-semibold text-[#0BC08B] dark:text-white text-center">NEW STUDENT</h3>
-              <div class="lg:w-[95%] sm:w-[95%] w-[90%] mx-auto">
-                <div class="" id="admin-form">
-                  <%= render partial: 'admin/students/form', locals: { student: @student } %>
+    <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px]  font-medium">Students</div>
+    <div class="flex gap-8">
+      <label for="table-search " class="sr-only">Search</label>
+      <%= form_tag admin_students_path, method: :get, id: "student_search_form" do %>
+        <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <img src="<%= asset_path("search.png") %>">
+          </div>
+          <%= text_field_tag :search, params[:search], id: "student_search", class: "block p-2 pl-10 text-sm text-gray-900 border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type", autocomplete: "off" %>
+        </div>
+      <% end %>
+      <div>
+        <!-- Modal toggle -->
+        <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px] gradiant-hover onclick-hover" type="button">
+          <span class="font-semibold text-base">+ </span> ADD NEW
+        </button>
+        <!-- Main modal -->
+        <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
+          <div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
+              <button type="button" id="student-create-close-btn" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+                <svg class="w-8 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                  <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+              <div class="px-6 py-6 lg:px-8">
+                <h3 class="mb-4 sm:mb-7 md:mb-10 text-[26px] font-semibold text-[#0BC08B] dark:text-white text-center">NEW STUDENT</h3>
+                <div class="lg:w-[95%] sm:w-[95%] w-[90%] mx-auto">
+                  <div class="" id="admin-form">
+                    <%= render partial: 'admin/students/form', locals: { student: @student } %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -34,20 +45,8 @@
       </div>
     </div>
   </div>
-  <div class="flex items-center justify-between pt-10 md:pt-8 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[30px] flex-col sm:flex-row md:flex-row  ">
-    <div class="text-[#0BC08B] text-[20px] font-medium sm:ml-[0px] ml-[25px] mb-4 sm:mb-0">Students Details</div>
-    <label for="table-search " class="sr-only">Search</label>
-    <%= form_tag admin_students_path, method: :get, id: "student_search_form" do %>
-      <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <img src="<%= asset_path("search.png") %>">
-        </div>
-        <%= text_field_tag :search, params[:search], id: "student_search", class: "block p-2 pl-10 text-sm text-gray-900 border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type", autocomplete: "off" %>
-      </div>
-    <% end %>
-  </div>
   <div class="relative overflow-x-auto lg:overflow-x-hidden mt-2 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
-    <div class="bg-white dark:bg-gray-800 h-[610px] relative mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
+    <div class="bg-white dark:bg-gray-800 h-[716px] relative mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto">
         <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
           <tr>
@@ -71,26 +70,8 @@
       </table>
     </div>
     <div id="large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
-      <div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
-          <!-- Modal header -->
-          <div class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
-            <h3 class="text-[26px] font-semibold text-[#0BC08B] text-center flex justify-center w-full">
-              EDIT STUDENT
-            </h3>
-            <button type="button" id="modal-close-btn" class="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="large-modal">
-              <svg class="w-8 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span class="sr-only">Close modal</span>
-            </button>
-          </div>
-          <!-- Modal body -->
-          <%= turbo_frame_tag "edit-student-popup" do %>
-          <% end %>
-        </div>
-      </div>
+      <%= turbo_frame_tag "edit-student-popup", class: "w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem]" do %>
+      <% end %>
     </div>
     <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
       <div class="relative w-full max-w-[40rem] max-h-full shadow-md">
@@ -137,7 +118,7 @@
           <!-- Modal footer -->
           <div class="flex justify-end items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-gray-200 rounded-b dark:border-gray-600">
             <button type="button" class="w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-[7px] text-[20px] block items-center text-center mr-2 button-gradiant-hover" data-modal-hide="extralarge-modal">
-            CLOSE
+              CLOSE
             </button>
           </div>
         </div>

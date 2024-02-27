@@ -118,6 +118,13 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: #818181 !important;
 }
 
+#todatepicker::-webkit-calendar-picker-indicator {
+  display: none;
+}
+#datepicker::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
 .table-container {
   overflow: auto;
 }
@@ -156,13 +163,13 @@ input:-webkit-autofill {
 
 .main-menu:hover,
 nav.main-menu.expanded {
-  width: 295px;
+  width: 250px;
   overflow: visible;
 }
 
 .main-menu:hover,
 .main-page.expanded {
-  width: 295px;
+  width: 250px;
   overflow: visible;
 }
 
@@ -193,7 +200,7 @@ nav.main-menu.expanded {
 .main-menu li {
   position: relative;
   display: block;
-  width: 295px;
+  width: 250px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
@@ -227,7 +234,7 @@ nav.main-menu.expanded {
   position: relative;
   display: table-cell;
   vertical-align: middle;
-  width: 230px;
+  width: 190px;
   font-size: 18px;
   font-weight: 500;
 }
@@ -303,7 +310,7 @@ nav.main-menu li.active > a,
 
 .main-menu2 {
   overflow: visible;
-  width: 295px;
+  width: 250px;
 }
 
 .main-nav {
@@ -311,14 +318,14 @@ nav.main-menu li.active > a,
 }
 
 .main-nav2 {
-  width: 85%;
+  width: 87%;
 }
 .main-page {
   width: 97%;
   margin-left: auto;
 }
 .main-page2 {
-  width: 85%;
+  width: 87%;
   margin-left: auto;
   transition: all 0.2s linear;
 }
@@ -358,9 +365,7 @@ nav.main-menu li.active > a,
 }
 .profile-slider {
   top: 10px !important;
-  left: -7px !important;
-  transform: translate(1874px, 58px);
-  transition: 1s;
+  left: -21px !important;
 }
 
 .pagination {
@@ -958,6 +963,11 @@ nav.main-menu li.active > a,
   width: 16.25rem !important;
 }
 
+.new-select-border {
+  border: 1px solid #CCCCCC !important;
+  width: 100% !important;
+}
+
 .new-lesson-custom-select-wrapper {
   position: relative;
   display: inline-block;
@@ -1061,6 +1071,28 @@ nav.main-menu li.active > a,
 
 .width-reducer{
   width: 211px !important;
+}
+
+.select-widht{
+  width: -webkit-fill-available !important;
+  border: #cccccc !important;
+  border: 1px solid #CCCCCC !important;
+}
+
+.select-edit-width{
+  width: -webkit-fill-available !important;
+  gap: 67px;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.select-edit-color{
+  background-color: #F5F5F5 !important;
+}
+
+.course-type{
+  width: 296px !important;
+  background-color: #f5f5f5 !important;
+  border: none !important;
 }
 
 /* Collections Screen Dropdown */
@@ -1525,6 +1557,13 @@ select:focus, textarea:focus {
   font-weight: 500 !important;
   font-family: "Poppins", sans-serif;
   font-size: 14px !important;
+}
+.ui-state-highlight{
+  background-color: #0bc08b !important;
+  font-weight: 500 !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px !important;
+  color: #ffffff !important;
 }
 .datepicker-input {
   font-family: "Poppins", sans-serif;
