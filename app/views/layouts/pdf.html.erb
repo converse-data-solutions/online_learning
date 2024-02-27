@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= wicked_pdf_stylesheet_link_tag "pdf" %>
-    <%= javascript_include_tag 'application' %>
-    <%= pdf_stylesheet_link_tag  'pdf' %>
+    <%= wicked_pdf_stylesheet_link_tag "pdf", media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= pdf_stylesheet_link_tag  'pdf', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
     <%= yield %>
