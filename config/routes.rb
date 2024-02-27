@@ -94,6 +94,7 @@ Rails.application.routes.draw do
   resources :courses, only: [] do
     resources :sections, only: %i[index show]
   end
+
   resources :courses, only: [] do
     resources :sections, only: [] do
       resources :lessons, only: %i[index show]
@@ -127,6 +128,10 @@ Rails.application.routes.draw do
         get :generate_invoice_pdf
       end
     end
+  end
+
+  namespace :admin do
+    resources :attendance_details
   end
 
   namespace :admin do
