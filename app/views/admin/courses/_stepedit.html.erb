@@ -18,12 +18,14 @@
     <label for="description" class="block mb-2 text-lg font-medium text-[#000]">Description
       <span class="text-[#C6C6C6] text-[15px] font-medium">(optional)</span>
     </label>
-    <%= f.text_area :description, class: 'resize-none border-0 text-[#818181] bg-[#F5F5F5] text-[14px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 w-[292px]  block h-[110px] p-2.5 rounded-[7px]' %>
+    <div class="flex flex-col mb-4">
+      <%= f.text_area :description, class: 'resize-none border-0 text-[#818181] bg-[#F5F5F5] text-[14px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 w-[292px]  block h-[110px] p-2.5 rounded-[7px]' %>
+    </div>
   </div>
   <div class="flex justify-between flex-col sm:flex-row">
     <label for="fees" class="block mb-2 text-lg font-medium text-[#000]">Course Type</label>
-    <div class="flex flex-col mb-4">
-      <%= f.select(:course_type, Course.course_types.keys.map { |type| [type.humanize, Course.course_types[type]] }, { prompt: "Select Course Type" }, { class: "bg-[#fff] border-[1px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select select-widht" }) %>
+    <div class="w-[47%] flex flex-col mb-4">
+      <%= f.select(:course_type, Course.course_types.keys.map { |type| [type.humanize, Course.course_types[type]] }, { prompt: "Select Course Type" }, { class: "bg-[#f5f5f5] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#f5f5f5] text-[#818181] filter-handle new-lesson-custom-select select-widht" }) %>
     </div>
   </div>
   <div class="flex justify-between flex-col sm:flex-row">
