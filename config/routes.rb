@@ -91,6 +91,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :attendance_details
+  end
+
   resources :courses, only: [] do
     resources :sections, only: %i[index show]
   end
