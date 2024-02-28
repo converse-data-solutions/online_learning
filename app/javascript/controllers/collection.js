@@ -324,7 +324,6 @@ $(document).ready(function() {
   collectionSelectCourse();
   collectionUserCourseSelect();
   collectionTableSearch();
-  paymentOptionSelect();
   fromDate();
   toDate();
   dateFilter();
@@ -334,7 +333,6 @@ $(document).ready(function() {
     collectionSelectCourse();
     collectionUserCourseSelect();
     collectionTableSearch();
-    paymentOptionSelect();
     fromDate();
     toDate();
     dateFilter();
@@ -356,8 +354,6 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     if (streamElement.target == 'course-dropdown') {
-      paymentSelectCourse();
     }
-    optionSelect();
   };
 });

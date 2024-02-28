@@ -221,7 +221,7 @@ function selectCreateUser() {
 }
 
 function selectCreateCourse() {
-  $("#user-course-filter-container .new-custom-select").each(function () {
+  $("#user-course-filter-container .new-course-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -230,13 +230,13 @@ function selectCreateCourse() {
 
     var template = '<div class="' + classes + '">';
     template +=
-      '<span class="new-custom-select-trigger">' + placeholderText + "</span>";
-    template += '<div class="new-custom-options">';
+      '<span class="new-course-custom-select-trigger">' + placeholderText + "</span>";
+    template += '<div class="new-course-custom-options">';
     $(this)
       .find("option")
-      .each(function () {
+      .each(function() {
         template +=
-          '<span class="new-custom-option ' +
+          '<span class="new-course-custom-option ' +
           $(this).attr("class") +
           '" data-value="' +
           $(this).attr("value") +
@@ -246,42 +246,42 @@ function selectCreateCourse() {
       });
     template += "</div></div>";
 
-    $(this).wrap('<div class="new-custom-select-wrapper"></div>');
+    $(this).wrap('<div class="new-course-custom-select-wrapper"></div>');
     $(this).hide();
     $(this).after(template);
   });
 
-  $(".new-custom-option:first-of-type").hover(
-    function () {
-      $(this).parents(".new-custom-options").addClass("option-hover");
+  $(".new-course-custom-option:first-of-type").hover(
+    function() {
+      $(this).parents(".new-course-custom-options").addClass("option-hover");
     },
-    function () {
-      $(this).parents(".new-custom-options").removeClass("option-hover");
+    function() {
+      $(this).parents(".new-course-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-custom-select-trigger").on("click", function (event) {
-    $("html").one("click", function () {
-      $(".new-custom-select").removeClass("opened");
+  $(".new-course-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
+      $(".new-course-custom-select").removeClass("opened");
     });
-    $(this).parents(".new-custom-select").toggleClass("opened");
+    $(this).parents(".new-course-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-custom-option").on("click", function () {
+  $(".new-course-custom-option").on("click", function() {
     $(this)
-      .parents(".new-custom-select-wrapper")
+      .parents(".new-course-custom-select-wrapper")
       .find("select")
       .val($(this).data("value"));
     $(this)
-      .parents(".new-custom-options")
-      .find(".new-custom-option")
+      .parents(".new-course-custom-options")
+      .find(".new-course-custom-option")
       .removeClass("selection");
     $(this).addClass("selection");
-    $(this).parents(".new-custom-select").removeClass("opened");
+    $(this).parents(".new-course-custom-select").removeClass("opened");
     $(this)
-      .parents(".new-custom-select")
-      .find(".new-custom-select-trigger")
+      .parents(".new-course-custom-select")
+      .find(".new-course-custom-select-trigger")
       .text($(this).text());
   });
 }

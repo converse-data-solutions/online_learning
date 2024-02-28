@@ -12,7 +12,6 @@ class Admin::PaymentsController < ApplicationController
     if @payment.save
       user_course = UserCourse.find_by(id: params[:payment][:user_course_id])
       user_course.update(next_payment_date: params[:next_payment_date]) if user_course.present?
-      redirect_to admin_payments_path
     else
       render :new, status: :unprocessable_entity
     end
