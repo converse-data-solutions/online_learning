@@ -18,6 +18,7 @@ gem 'terser', '~> 1.1', '>= 1.1.19'
 gem 'wicked_pdf', '~> 2.7'
 gem 'will_paginate', '~> 4.0'
 gem 'wkhtmltopdf-binary'
+gem 'numbers_and_words', '~> 0.11.12'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
