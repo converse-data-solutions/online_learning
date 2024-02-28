@@ -342,18 +342,6 @@ function formValidation() {
     }
   }
 
-  function validateCourseSelection() {
-    let atLeastOneChecked = $("input[name='user[course_ids][]']:checked").length > 0;
-
-    if (!atLeastOneChecked) {
-      $("#course-error").text("Please select at least one course.");
-      return false;
-    } else {
-      $("#course-error").text("");
-      return true;
-    }
-  }
-
   function validateOccupation() {
     let name = $("#user_occupation").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
@@ -409,7 +397,6 @@ function formValidation() {
   $("#user_email").on("blur", validateEmail); // Validate email on blur
   $("#user_password").on("blur", validatePassword); // Validate password on blur
   $("#user_password_confirmation").on("blur", validatePasswordConfirmation); // Validate password confirmation on blur
-  $("input[name='user[course_ids][]']").on("change", validateCourseSelection); // Validate course selection on change
   $("#user_occupation").on("blur", validateOccupation); // Validate occupation on blur
   $("#user_contact_number").on("blur", validateContactNumber); // Validate contact number on blur
   $("#user_emergency_contact_number").on("blur", validateEmergencyContactNumber);
@@ -422,13 +409,12 @@ function formValidation() {
     let isEmailValid = validateEmail();
     let isPasswordValid = validatePassword();
     let isPasswordConfirmationValid = validatePasswordConfirmation();
-    let isCourseSelectionValid = validateCourseSelection();
     let isOccupationValid = validateOccupation();
     let isContactNumberValid = validateContactNumber();
     let isEmergencyContactNumberValid = validateEmergencyContactNumber();
 
     // Check if any field is invalid
-    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isCourseSelectionValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid) {
+    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid) {
       // Prevent form submission
       event.preventDefault();
 
@@ -437,7 +423,6 @@ function formValidation() {
       validateEmail();
       validatePassword();
       validatePasswordConfirmation();
-      validateCourseSelection();
       validateOccupation();
       validateContactNumber();
       validateEmergencyContactNumber();
@@ -452,7 +437,6 @@ function resetNewErrorMessages() {
   $("#email-error").text("");
   $("#password-error").text("");
   $("#password-confirmation-error").text("");
-  $("#course-error").text("");
   $("#occupation-error").text("");
 }
 
@@ -461,7 +445,6 @@ function resetErrorMessages() {
   $("#edit-email-error").text("");
   $("#edit-password-error").text("");
   $("#edit-password-confirmation-error").text("");
-  $("#edit-course-error").text("");
   $("#edit-occupation-error").text("");
 }
 
@@ -540,18 +523,6 @@ function editFormValidation() {
     }
   }
 
-  function validateCourseSelection() {
-    let atLeastOneChecked = $("input[name='your_model_name[course_ids][]']:checked").length > 0;
-
-    if (!atLeastOneChecked) {
-      $("#edit-course-error").text("Please select at least one course.");
-      return false;
-    } else {
-      $("#edit-course-error").text("");
-      return true;
-    }
-  }
-
   function validateOccupation() {
     let name = $("#edit_user_occupation").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
@@ -622,12 +593,11 @@ function editFormValidation() {
     let isEmailValid = validateEmail();
     let isPasswordValid = validatePassword();
     let isPasswordConfirmationValid = validatePasswordConfirmation();
-    let isCourseSelectionValid = validateCourseSelection();
     let isOccupationValid = validateOccupation();
     let isContactNumberValid = validateContactNumber();
     let isEmergencyContactNumberValid = validateEmergencyContactNumber();
 
-    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isCourseSelectionValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid) {
+    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid) {
       event.preventDefault();
     }
   });
