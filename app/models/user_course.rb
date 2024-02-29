@@ -4,6 +4,7 @@ class UserCourse < ApplicationRecord # rubocop:disable Style/Documentation
   belongs_to :user, optional: true
   belongs_to :course, optional: true
   has_many :payments, dependent: :destroy
+  has_many :attendances, dependent: :destroy
 
 
   validates :user_id, presence: true
