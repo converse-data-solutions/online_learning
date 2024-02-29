@@ -16,7 +16,7 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.email_field :course_id, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true%>
+      <%= f.text_field :course_id, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true%>
       <div class="text-red-600 text-sm mt-1" id="email-error"></div>
       <% if attendance_detail&.errors&.any? %>
         <% if attendance_detail&.errors[:course_id].any? %>
@@ -30,7 +30,7 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="class_date" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Class Date<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.password_field :class_date, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"%>
+      <%= f.text_field :class_date, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"%>
       <div class="text-red-600 text-sm mt-1" id="password-error"></div>
       <% if attendance_detail&.errors&.any? %>
         <% if attendance_detail&.errors[:class_date].any? %>
@@ -44,26 +44,12 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="status" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[45%]">Attendance<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.password_field :status, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+      <%= f.text_field :status, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
       <div class="text-red-600 text-sm mt-1" id="password-confirmation-error"></div>
       <% if attendance_detail&.errors&.any? %>
         <% if attendance_detail&.errors[:status].any? %>
           <div class="text-red-600 text-sm mt-1">
             <%= attendance_detail&.errors.full_messages_for(:status).join(', ') %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-  <div class="mb-4 flex flex-col sm:flex-row">
-    <label for="role" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Role<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-    <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.collection_select(:role, Role.all, :name, :name, { prompt: "Select Role", selected: '' }, class: "bg-[#fff] border-[1px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select select-widht") %>
-      <div class="text-red-600 text-sm mt-1" id="role-error"></div>
-      <% if user&.errors&.any? %>
-        <% if user&.errors[:role].any? %>
-          <div class="text-red-600 text-sm mt-1">
-            <%= user&.errors.full_messages_for(:role).join(', ') %>
           </div>
         <% end %>
       <% end %>
