@@ -3,7 +3,7 @@ class Admin::AttendanceDetailsController < ApplicationController
   before_action :set_attendance, only: %i[edit update destroy]
 
   def index
-    @attendance_details = Attendance.paginate(page: params[:page], per_page: 10)
+    @attendance_details = Attendance.get_attendances(params)
     respond_to do |format|
       format.json { render json: @attendance_details }
       format.html { render :index }
@@ -19,7 +19,7 @@ class Admin::AttendanceDetailsController < ApplicationController
     @attendance_detail = Attendance.new(attendance_params)
     respond_to do |format|
       if @attendance_detail.save
-        @attendance_details = Attendance.paginate(page: params[:page], per_page: 10)
+        @attendance_details = Attendance.get_attendances(params)
         format.turbo_stream
         format.json { render :create }
       else
@@ -39,7 +39,7 @@ class Admin::AttendanceDetailsController < ApplicationController
   def update # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if @attendance_detail.update(attendance_params)
-        @attendance_details = Attendance.paginate(page: params[:page], per_page: 10)
+        @attendance_details = Attendance.get_attendances(params)
         format.turbo_stream
         format.json { render :update }
       else
@@ -55,7 +55,7 @@ class Admin::AttendanceDetailsController < ApplicationController
   def destroy # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     respond_to do |format|
       if @attendance_detail.destroy
-        @attendance_details = Attendance.paginate(page: params[:page], per_page: 10)
+        @attendance_details = Attendance.get_attendances(params)
         format.turbo_stream { render_destroy_success }
         format.json { render :show }
       else

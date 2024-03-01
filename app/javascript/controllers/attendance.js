@@ -1,5 +1,5 @@
 function yearPicker() {
-  $("#datepicker").yearpicker({
+  $("#yearpicker").yearpicker({
     onChange: function (value) {},
   });
 }
@@ -71,7 +71,7 @@ function selectCreateUser() {
 }
 
 function selectCreateCourse() {
-  $("#admin-form .new-custom-select").each(function () {
+  $("#filtered_course .new-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -158,7 +158,7 @@ function passUserId() {
           window.location.host +
           window.location.pathname +
           "?user_id=" +
-          encodeURIComponent(selectedLessonId);
+          encodeURIComponent(userId);
         window.history.pushState({
           path: newUrl
         }, "", newUrl);
@@ -172,7 +172,32 @@ function passUserId() {
 }
 
 function findUserCourse(){
-  
+  $(".new-custom-option").click(function() {
+    let id = $(this).data('value');
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
+    let per_page = parseInt(searchParams.get("per_page")) || 10;
+
+
+    // Add params only if they are not empty
+    if (page !== 1) {
+      baseUrl += `?page=${page}`;
+    }
+
+    if (search !== "") {
+      baseUrl += (page === 1 ? "?" : "&") + `search=${search}`;
+    }
+
+    if (per_page !== 10) {
+      baseUrl += (page === 1 && search === "") ? "?" : "&";
+      baseUrl += `per_page=${per_page}`;
+    }
+
+    // Update the href attribute
+    $("#attendance_user_course_id").attr("value", id);
+  });
+
 }
 
 function attendanceEditPopup() {
@@ -240,6 +265,95 @@ function attendanceDeletePopup() {
   });
 }
 
+function classDate() {
+  $(function() {
+    $("#datepicker").datepicker({
+      dateFormat: "dd-mm-yy",
+      duration: "fast",
+      changeYear: true, // Enable changing the year
+    });
+
+    // Adding click functionality to the datepicker icon
+    $("#datepicker-icon").on('click', function(event) {
+      event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
+      var $datepicker = $("#datepicker");
+      if ($datepicker.datepicker("widget").is(":hidden")) {
+        $datepicker.datepicker("show"); // Show the datepicker if it's hidden
+      } else {
+        $datepicker.datepicker("hide"); // Hide the datepicker if it's visible
+      }
+    });
+  });
+}
+
+function editClassDate() {
+  $(function() {
+    let initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
+
+    $("#editdatepicker").datepicker({
+      dateFormat: "dd-mm-yy", // Update this if needed
+      duration: "fast",
+      defaultDate: initialDate,
+      changeYear: true, // Enable changing the year
+    });
+
+    $("#editdatepicker-icon").on('click', function(event) {
+      event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
+      var $datepicker = $("#editdatepicker");
+      if ($datepicker.datepicker("widget").is(":hidden")) {
+        $datepicker.datepicker("show"); // Show the datepicker if it's hidden
+      } else {
+        $datepicker.datepicker("hide"); // Hide the datepicker if it's visible
+      }
+    });
+  });
+}
+
+function searchAttendance() {
+  let delayTimer;
+
+  $("#attendance_search").on("input", function (e) {
+    clearTimeout(delayTimer);
+    delayTimer = setTimeout(function () {
+      let searchValue = $("#attendance_search").val();
+      $("#overlay").show();
+
+      $.ajax({
+        url: "/admin/attendance_details",
+        type: "GET",
+        data: {
+          search: searchValue,
+        },
+        headers: {
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function (res) {
+          Turbo.renderStreamMessage(res);
+          var newURL =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?search=" +
+            encodeURIComponent(searchValue);
+          window.history.pushState(
+            {
+              path: newURL,
+            },
+            "",
+            newURL
+          );
+          $("#overlay").hide();
+        },
+        error: function () {
+          console.log("Error fetching data");
+          $("#overlay").hide();
+        },
+      });
+    }, 500);
+  });
+}
 
 $(document).ready(function () {
   yearPicker();
@@ -248,6 +362,10 @@ $(document).ready(function () {
   passUserId();
   attendanceEditPopup();
   attendanceDeletePopup();
+  findUserCourse();
+  classDate();
+  editClassDate();
+  searchAttendance();
 
   $(document).on("turbo:render", function () {
     yearPicker();
@@ -256,6 +374,10 @@ $(document).ready(function () {
     passUserId();
     attendanceEditPopup();
     attendanceDeletePopup();
+    findUserCourse();
+    classDate();
+    editClassDate();
+    searchAttendance();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -271,7 +393,12 @@ addEventListener("turbo:before-stream-render", (event) => {
 
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
+    initModals();
     if (streamElement.target == "course-select") {
     }
+    selectCreateCourse();
+    findUserCourse();
+    editClassDate();
+    yearPicker();
   };
 });
