@@ -1,4 +1,6 @@
 class Admin::AttendanceDetailsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_attendance, only: %i[edit update destroy]
 
   def index
     @attendance_details = Attendance.paginate(page: params[:page], per_page: 10)
@@ -50,7 +52,7 @@ class Admin::AttendanceDetailsController < ApplicationController
     end
   end
 
-  def destroy # rubocop:disable Metrics/MethodLength
+  def destroy # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     respond_to do |format|
       if @attendance_detail.destroy
         @attendance_details = Attendance.paginate(page: params[:page], per_page: 10)
@@ -66,6 +68,13 @@ class Admin::AttendanceDetailsController < ApplicationController
         format.json { render json: @attendance_detail.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def find_users_course
+    @user_courses = UserCourse.where(user_id: params[:user_id])
+    puts "User: #{@user}"
+    puts "Course: #{@course}"
+    respond_to(&:turbo_stream)
   end
 
   private

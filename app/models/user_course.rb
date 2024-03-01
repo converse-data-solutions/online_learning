@@ -11,6 +11,10 @@ class UserCourse < ApplicationRecord # rubocop:disable Style/Documentation
   validates :course_id, presence: true
   validates :course_amount, presence: true
 
+  def course_name_from_course_model
+    course.course_name if course.present?
+  end
+
 
   def self.get_user_courses(params)
     page_number = params[:page].presence&.to_i

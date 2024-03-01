@@ -2,7 +2,7 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="user_id" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.text_field :user_id, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+      <%= collection_select(:user_course, :user_id, User.joins(:roles).where(roles: { name: 'student' }), :id, :name, { prompt: "Select User", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources" })  %>
       <div class="text-red-600 text-sm mt-1" id="name-error"></div>
       <% if attendance_detail&.errors&.any? %>
         <% if attendance_detail&.errors[:user_id].any? %>
@@ -15,18 +15,13 @@
   </div>
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-    <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.text_field :course_id, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true%>
+    <div class="w-full sm:w-[55%] flex flex-col" id="filtered_course">
+      <%= collection_select(:user_course, :id, [], :id, :course_name_from_course_model, { prompt: "Select Section", selected: '' }, { class: "bg-gray-50 border-0 focus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select new-select-border sources" }) %>
       <div class="text-red-600 text-sm mt-1" id="email-error"></div>
-      <% if attendance_detail&.errors&.any? %>
-        <% if attendance_detail&.errors[:course_id].any? %>
-          <div class="text-red-600 text-sm mt-1">
-            <%= attendance_detail&.errors.full_messages_for(:course_id).join(', ') %>
-          </div>
-        <% end %>
-      <% end %>
     </div>
   </div>
+  <%= turbo_frame_tag "course_input_render" do %>
+  <% end %>
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="class_date" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Class Date<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">

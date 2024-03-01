@@ -131,7 +131,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :attendance_details
+    resources :attendance_details do
+      collection do
+        get :find_users_course
+      end
+    end
   end
 
   namespace :admin do
