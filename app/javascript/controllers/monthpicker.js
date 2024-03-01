@@ -1,7 +1,5 @@
-console.log("monthpicker.js loaded");
 $(function () {
 
-  console.log("monthpicker.js loaded..................");
   // $("#myMonthPicker").Monthpicker();
   let   input = document.getElementById("myMonthPicker");
   var m = new Monthpicker(input);

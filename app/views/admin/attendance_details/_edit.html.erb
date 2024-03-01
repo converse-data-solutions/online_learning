@@ -19,26 +19,12 @@
         <div class="mb-4 flex flex-col sm:flex-row">
           <label for="user_id" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
-            <%= f.text_field :user_id, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+            <%= f.text_field :user_course_id, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
             <div class="text-red-600 text-sm mt-1" id="name-error"></div>
             <% if attendance_detail&.errors&.any? %>
               <% if attendance_detail&.errors[:user_id].any? %>
                 <div class="text-red-600 text-sm mt-1">
                   <%= attendance_detail&.errors.full_messages_for(:user_id).join(', ') %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <div class="mb-4 flex flex-col sm:flex-row">
-          <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-          <div class="w-full sm:w-[55%] flex flex-col">
-            <%= f.text_field :course_id, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true%>
-            <div class="text-red-600 text-sm mt-1" id="email-error"></div>
-            <% if attendance_detail&.errors&.any? %>
-              <% if attendance_detail&.errors[:course_id].any? %>
-                <div class="text-red-600 text-sm mt-1">
-                  <%= attendance_detail&.errors.full_messages_for(:course_id).join(', ') %>
                 </div>
               <% end %>
             <% end %>
