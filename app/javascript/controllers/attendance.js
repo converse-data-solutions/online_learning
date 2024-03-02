@@ -400,5 +400,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     findUserCourse();
     editClassDate();
     yearPicker();
+
   };
 });

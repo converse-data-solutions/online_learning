@@ -124,6 +124,11 @@ input:-webkit-autofill:active {
 #datepicker::-webkit-calendar-picker-indicator {
   display: none;
 }
+/* Hide default icon of date picker */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
 
 .table-container {
   overflow: auto;

@@ -27,5 +27,4 @@ class Attendance < ApplicationRecord
       all
     end
   end
-  
 end
