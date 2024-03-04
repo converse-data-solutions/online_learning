@@ -16,13 +16,21 @@ class Attendance < ApplicationRecord
     page = (page_number && page_number.positive?) ? page_number : 1
     record_per_page = (params[:per_page].presence&.to_i || 12).to_i
     per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 12
-    Attendance.includes(:user_course).search_by_name_and_email(params[:search]).paginate(page: page, per_page: per_page)
+    Attendance.includes(:user_course).dates_between_filter(params[:from_date], params[:to_date]).search_by_name_and_email(params[:search]).paginate(page: page, per_page: per_page)
   end
 
   def self.search_by_name_and_email(query)
     if query.present?
       search_query = "%#{query}%"
       Attendance.joins(user_course: { user: :courses }).where('courses.course_name LIKE ? OR users.name LIKE ?', search_query, search_query)    
+    else
+      all
+    end
+  end
+
+  def self.dates_between_filter(from_date, to_date)
+    if from_date.present? && to_date.present?
+      where(created_at: from_date..to_date)
     else
       all
     end

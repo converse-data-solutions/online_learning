@@ -137,20 +137,20 @@ function selectCreateCourse() {
 }
 
 function passUserId() {
-  $("#admin-form .custom-select").on("click", ".custom-option", function() {
-    var userId = $(this).data('value');
+  $("#admin-form .custom-select").on("click", ".custom-option", function () {
+    var userId = $(this).data("value");
 
     // Make an AJAX request to fetch sections for the selected course
     $.ajax({
-      url: '/admin/attendance_details/find_users_course',
-      type: 'GET',
+      url: "/admin/attendance_details/find_users_course",
+      type: "GET",
       data: {
-        user_id: userId
+        user_id: userId,
       },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function(data) {
+      success: function (data) {
         Turbo.renderStreamMessage(data);
         var newUrl =
           window.location.protocol +
@@ -159,26 +159,29 @@ function passUserId() {
           window.location.pathname +
           "?user_id=" +
           encodeURIComponent(userId);
-        window.history.pushState({
-          path: newUrl
-        }, "", newUrl);
+        window.history.pushState(
+          {
+            path: newUrl,
+          },
+          "",
+          newUrl
+        );
         $("#overlay").hide();
       },
-      error: function(error) {
-        console.error('Error:', error);
-      }
+      error: function (error) {
+        console.error("Error:", error);
+      },
     });
   });
 }
 
-function findUserCourse(){
-  $(".new-custom-option").click(function() {
-    let id = $(this).data('value');
+function findUserCourse() {
+  $(".new-custom-option").click(function () {
+    let id = $(this).data("value");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
     let search = searchParams.get("search") || "";
     let per_page = parseInt(searchParams.get("per_page")) || 10;
-
 
     // Add params only if they are not empty
     if (page !== 1) {
@@ -190,18 +193,17 @@ function findUserCourse(){
     }
 
     if (per_page !== 10) {
-      baseUrl += (page === 1 && search === "") ? "?" : "&";
+      baseUrl += page === 1 && search === "" ? "?" : "&";
       baseUrl += `per_page=${per_page}`;
     }
 
     // Update the href attribute
     $("#attendance_user_course_id").attr("value", id);
   });
-
 }
 
 function attendanceEditPopup() {
-  $("#attendance-table").on('click', '.edit-attendance-model', function() {
+  $("#attendance-table").on("click", ".edit-attendance-model", function () {
     let id = $(this).data("attendance-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -220,13 +222,12 @@ function attendanceEditPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function(res) {
+      success: function (res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
-
       },
-      done: function() {},
-      error: function() {
+      done: function () {},
+      error: function () {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -235,7 +236,7 @@ function attendanceEditPopup() {
 }
 
 function attendanceDeletePopup() {
-  $(".send-delete-attendance").click(function() {
+  $(".send-delete-attendance").click(function () {
     let id = $(this).data("attendance-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -255,7 +256,7 @@ function attendanceDeletePopup() {
     }
 
     if (per_page !== 10) {
-      baseUrl += (page === 1 && search === "") ? "?" : "&";
+      baseUrl += page === 1 && search === "" ? "?" : "&";
       baseUrl += `per_page=${per_page}`;
     }
 
@@ -266,7 +267,7 @@ function attendanceDeletePopup() {
 }
 
 function classDate() {
-  $(function() {
+  $(function () {
     $("#datepicker").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
@@ -274,7 +275,7 @@ function classDate() {
     });
 
     // Adding click functionality to the datepicker icon
-    $("#datepicker-icon").on('click', function(event) {
+    $("#datepicker-icon").on("click", function (event) {
       event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
       var $datepicker = $("#datepicker");
       if ($datepicker.datepicker("widget").is(":hidden")) {
@@ -287,7 +288,7 @@ function classDate() {
 }
 
 function editClassDate() {
-  $(function() {
+  $(function () {
     let initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
 
     $("#editdatepicker").datepicker({
@@ -297,7 +298,7 @@ function editClassDate() {
       changeYear: true, // Enable changing the year
     });
 
-    $("#editdatepicker-icon").on('click', function(event) {
+    $("#editdatepicker-icon").on("click", function (event) {
       event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
       var $datepicker = $("#editdatepicker");
       if ($datepicker.datepicker("widget").is(":hidden")) {
@@ -355,22 +356,22 @@ function searchAttendance() {
   });
 }
 
-function updateStatus(){
-  $('.attendance-status').click(function() {
-    var attendanceDetailId = $(this).data('attendanceDetailId');
-    var currentStatus = $(this).hasClass('true') ? 'false' : 'true';
+function updateStatus() {
+  $(".attendance-status").click(function () {
+    var attendanceDetailId = $(this).data("attendanceDetailId");
+    var currentStatus = $(this).hasClass("true") ? "false" : "true";
 
     // Send AJAX request to toggle status
     $.ajax({
-      url: '/admin/attendance_details/toggle_status/' + attendanceDetailId + '',
-      method: 'PATCH',
+      url: "/admin/attendance_details/toggle_status/" + attendanceDetailId + "",
+      method: "PATCH",
       headers: {
-         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
       },
       data: { status: currentStatus },
-      success: function(data) {
-       Turbo.renderStreamMessage(data);
+      success: function (data) {
+        Turbo.renderStreamMessage(data);
         var newUrl =
           window.location.protocol +
           "//" +
@@ -378,18 +379,22 @@ function updateStatus(){
           window.location.pathname +
           "?status=" +
           encodeURIComponent(currentStatus);
-        window.history.pushState({
-          path: newUrl
-        }, "", newUrl);
+        window.history.pushState(
+          {
+            path: newUrl,
+          },
+          "",
+          newUrl
+        );
       },
-      error: function(error) {
-        console.error('Error:', error);
-      }
+      error: function (error) {
+        console.error("Error:", error);
+      },
     });
   });
 }
 
-function rangeCalendar(){
+function rangeCalendar() {
   $("#rangestart").calendar({
     type: "date",
     endCalendar: $("#rangeend"),
@@ -398,6 +403,88 @@ function rangeCalendar(){
     type: "date",
     startCalendar: $("#rangestart"),
   });
+}
+
+function rangeDateFilter() {
+  var fromDate;
+  var toDate;
+
+  var initializeDatepickers = function () {
+    $("#rangestart").calendar({
+      type: "date",
+      endCalendar: $("#rangeend"),
+      formatter: {
+        date: function (date, settings) {
+          if (!date) return '';
+          var day = date.getDate();
+          var month = date.getMonth() + 1;
+          var year = date.getFullYear();
+          return year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+        }
+      },
+      onChange: function (date, text, mode) {
+        fromDate = text;
+        makeAjaxCall(); // Call the function to make AJAX call
+
+      },
+    });
+
+    $("#rangeend").calendar({
+      type: "date",
+      startCalendar: $("#rangestart"),
+      formatter: {
+        date: function (date, settings) {
+          if (!date) return '';
+          var day = date.getDate();
+          var month = date.getMonth() + 1;
+          var year = date.getFullYear();
+          return year + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
+        }
+      },
+      onChange: function (date, text, mode) {
+        toDate = text;
+        makeAjaxCall(); // Call the function to make AJAX call
+
+      },
+    });
+  };
+
+  function makeAjaxCall() {
+    if (fromDate && toDate) {
+      var requestData = {
+        from_date: fromDate,
+        to_date: toDate,
+      };
+
+      $.ajax({
+        url: "/admin/attendance_details",
+        type: "GET",
+        data: requestData,
+        headers: {
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function (response) {
+          Turbo.renderStreamMessage(response);
+          var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?dates=" +
+          encodeURIComponent(requestData);
+        window.history.pushState({
+          path: newUrl
+        }, "", newUrl);
+        },
+        error: function (xhr, status, error) {
+          console.error("AJAX call error:", error);
+        },
+      });
+    }
+  }
+
+  initializeDatepickers();
+
 }
 
 $(document).ready(function () {
@@ -412,6 +499,7 @@ $(document).ready(function () {
   searchAttendance();
   updateStatus();
   rangeCalendar();
+  rangeDateFilter();
 
   $(document).on("turbo:render", function () {
     selectCreateCourse();
@@ -425,6 +513,7 @@ $(document).ready(function () {
     searchAttendance();
     updateStatus();
     rangeCalendar();
+    rangeDateFilter();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -447,6 +536,5 @@ addEventListener("turbo:before-stream-render", (event) => {
     findUserCourse();
     editClassDate();
     classDate();
-    
   };
 });

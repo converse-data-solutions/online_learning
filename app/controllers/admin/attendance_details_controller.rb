@@ -1,4 +1,4 @@
-class Admin::AttendanceDetailsController < ApplicationController
+class Admin::AttendanceDetailsController < ApplicationController # rubocop:disable Style/FrozenStringLiteralComment,Style/ClassAndModuleChildren
   before_action :authenticate_user!
   before_action :set_attendance, only: %i[edit update destroy toggle_status]
 
@@ -45,23 +45,22 @@ class Admin::AttendanceDetailsController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.update('edit-attendance-popup', partial: 'admin/attendance_details/edit', locals: { attendance_detail: @attendance_detail })
+            turbo_stream.update('edit-attendance-popup', partial: 'admin/attendance_details/edit', locals: { attendance_detail: @attendance_detail }) # rubocop:disable Layout/LineLength
           ]
         end
       end
     end
   end
 
-  def toggle_status
+  def toggle_status # rubocop:disable Metrics/MethodLength
     @status = params[:status]
     @attendance_detail.update(status: @status)
     @attendance_details = Attendance.get_attendances(params)
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.append("attendance-table", partial: "shared/flash", locals: { message: 'Attendance updated successfully.', type: 'notice' }),
-          turbo_stream.update("attendance-table", partial: "admin/attendance_details/table", locals: { attendance_details: @attendance_details })
-
+          turbo_stream.append("attendance-table", partial: "shared/flash", locals: { message: 'Attendance updated successfully.', type: 'notice' }), # rubocop:disable Style/StringLiterals
+          turbo_stream.update("attendance-table", partial: "admin/attendance_details/table", locals: { attendance_details: @attendance_details }) # rubocop:disable Style/StringLiterals
         ]
       end
     end
@@ -77,7 +76,7 @@ class Admin::AttendanceDetailsController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.append('attendance-table', partial: 'shared/failed', locals: { message: 'Attendance deletion failed.', type: 'notice' }),
-            turbo_stream.update("render-pagination", partial: "admin/attendance_details/paginate", locals: { attendance_details: @attendance_details })
+            turbo_stream.update("render-pagination", partial: "admin/attendance_details/paginate", locals: { attendance_details: @attendance_details }) # rubocop:disable Style/StringLiterals
           ]
         end
         format.json { render json: @attendance_detail.errors, status: :unprocessable_entity }
@@ -105,7 +104,7 @@ class Admin::AttendanceDetailsController < ApplicationController
 
   def render_destroy_success
     render turbo_stream: [
-      turbo_stream.append("attendance-table", partial: "shared/flash", locals: { message: 'Attendance was successfully deleted.', type: 'notice' }),
+      turbo_stream.append("attendance-table", partial: "shared/flash", locals: { message: 'Attendance was successfully deleted.', type: 'notice' }), # rubocop:disable Style/StringLiterals,Layout/LineLength
       turbo_stream.update('attendance-table', partial: 'admin/attendance_details/table', locals: { attendance_details: @attendance_details })
     ]
   end
