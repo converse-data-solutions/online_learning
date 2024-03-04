@@ -134,6 +134,7 @@ Rails.application.routes.draw do
     resources :attendance_details do
       collection do
         get :find_users_course
+        patch 'toggle_status/:id', to: 'attendance_details#toggle_status', as: :toggle_status
       end
     end
   end

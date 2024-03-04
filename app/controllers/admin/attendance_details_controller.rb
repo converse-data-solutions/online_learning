@@ -1,6 +1,6 @@
 class Admin::AttendanceDetailsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_attendance, only: %i[edit update destroy]
+  before_action :set_attendance, only: %i[edit update destroy toggle_status]
 
   def index
     @attendance_details = Attendance.get_attendances(params)
@@ -48,6 +48,21 @@ class Admin::AttendanceDetailsController < ApplicationController
             turbo_stream.update('edit-attendance-popup', partial: 'admin/attendance_details/edit', locals: { attendance_detail: @attendance_detail })
           ]
         end
+      end
+    end
+  end
+
+  def toggle_status
+    @status = params[:status]
+    @attendance_detail.update(status: @status)
+    @attendance_details = Attendance.get_attendances(params)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.append("attendance-table", partial: "shared/flash", locals: { message: 'Attendance updated successfully.', type: 'notice' }),
+          turbo_stream.update("attendance-table", partial: "admin/attendance_details/table", locals: { attendance_details: @attendance_details })
+
+        ]
       end
     end
   end

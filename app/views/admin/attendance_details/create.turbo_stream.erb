@@ -1,4 +1,4 @@
 <%= turbo_stream.update "attendance-table", partial: "admin/attendance_details/table", locals: { attendance_details: @attendance_details } %>
 <%= turbo_stream.replace "user-attendance-form", partial: "admin/attendance_details/form", locals: { attendance_detail: Attendance.new } %>
-<%= turbo_stream.append "attendance-table", partial: "shared/flash", locals: { message: 'Lesson was successfully created.', type: 'notice' } %>
+<%= turbo_stream.append "attendance-table", partial: "shared/flash", locals: { message: 'Attendance created successfully.', type: 'notice' } %>
 <%= turbo_stream.update "render-pagination", partial: "admin/attendance_details/paginate", locals: { attendance_details: @attendace_details } %>

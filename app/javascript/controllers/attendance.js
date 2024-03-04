@@ -355,8 +355,52 @@ function searchAttendance() {
   });
 }
 
+function updateStatus(){
+  $('.attendance-status').click(function() {
+    var attendanceDetailId = $(this).data('attendanceDetailId');
+    var currentStatus = $(this).hasClass('true') ? 'false' : 'true';
+
+    // Send AJAX request to toggle status
+    $.ajax({
+      url: '/admin/attendance_details/toggle_status/' + attendanceDetailId + '',
+      method: 'PATCH',
+      headers: {
+         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: { status: currentStatus },
+      success: function(data) {
+       Turbo.renderStreamMessage(data);
+        var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?status=" +
+          encodeURIComponent(currentStatus);
+        window.history.pushState({
+          path: newUrl
+        }, "", newUrl);
+      },
+      error: function(error) {
+        console.error('Error:', error);
+      }
+    });
+  });
+}
+
+function rangeCalendar(){
+  $("#rangestart").calendar({
+    type: "date",
+    endCalendar: $("#rangeend"),
+  });
+  $("#rangeend").calendar({
+    type: "date",
+    startCalendar: $("#rangestart"),
+  });
+}
+
 $(document).ready(function () {
-  yearPicker();
   selectCreateCourse();
   selectCreateUser();
   passUserId();
@@ -366,9 +410,10 @@ $(document).ready(function () {
   classDate();
   editClassDate();
   searchAttendance();
+  updateStatus();
+  rangeCalendar();
 
   $(document).on("turbo:render", function () {
-    yearPicker();
     selectCreateCourse();
     selectCreateUser();
     passUserId();
@@ -378,6 +423,8 @@ $(document).ready(function () {
     classDate();
     editClassDate();
     searchAttendance();
+    updateStatus();
+    rangeCalendar();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -399,7 +446,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     selectCreateCourse();
     findUserCourse();
     editClassDate();
-    yearPicker();
-
+    classDate();
+    
   };
 });

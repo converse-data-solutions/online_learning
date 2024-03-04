@@ -1927,3 +1927,16 @@ select:focus, textarea:focus {
 .monthpicker_selector>table tr:last-child td {
     border-bottom: none;
 }
+
+/* From date To date */
+.ui.calendar .ui.table.day {
+  min-width: 26.5rem;
+}
+
+.ui.table {
+  border: none !important;
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #818181 !important;
+}
