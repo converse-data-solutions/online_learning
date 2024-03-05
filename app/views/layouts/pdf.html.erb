@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Page title</title>
+    <title>Tech Village Academy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= wicked_pdf_stylesheet_link_tag "pdf", media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload'%>
-    <%= pdf_stylesheet_link_tag  'pdf', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body style="font-family: 'Poppins', sans-serif;">
     <%= yield %>
   </body>
 </html>

@@ -12,49 +12,49 @@
     </style>
   </head>
   <body id= "invoice">
-    <div class="container">
+    <div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%;">
       <div class="wrapper">
         <div class="row margin-0 direction test" style="width: 100%; display: flex; flex-direction: row;">
-          <div class="col-sm-5" style="width: 70%; display: flex; justify-content: space-between; flex-direction: column;">
+          <div class="col-sm-5" style="width: 60%; display: flex; justify-content: space-between; flex-direction: column;">
             <img src="https://techvillageacademy.com/assets/images/logo/logo.png" alt="logo" style="width: 230px; height: 70px;">
-            <p>440, Sri Aishwaryam Nagar,<br />
+            <p class="address">440, Sri Aishwaryam Nagar,<br />
               Karatadiplayam, 
               Gobichettipalayam, Erode<br />
               Tamil nadu-638 453. </p>
           </div>
-          <div class="col-sm-7 padding-0" style="width: 30%; display: flex; justify-content: end;">
-            <table class="table" cellspacing="0" cellpadding="10" border="1">
+          <div class="col-sm-7 padding-0" style="width: 40%; display: flex; justify-content: end;">
+            <table class="table" cellspacing="0" cellpadding="10" >
               <tbody>
                 <tr>
-                  <td style="width: 55%;" >
-                    <b>Date</b>
+                  <td style= "text-align: end; font-weight: 600; font-size: 18px !important;" >
+                    Date:
                   </td>
-                  <td >
-                    <b><%= @payment.paid_at&.strftime("%B %d, %Y") %></b>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <b>Student Name</b>
-                  </td>
-                  <td>
-                    <b><%= @payment.user_course.user.name %></b>
+                  <td style= "font-size: 18px !important;">
+                    <%= @payment.paid_at&.strftime("%B %d, %Y") %>
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    <b>Payment ID</b>
+                  <td style= "text-align: end; font-weight: 600; font-size: 18px !important;">
+                    Student Name:
                   </td>
-                  <td>
-                    <b><%= @payment.id %></b>
+                  <td style= "font-size: 18px !important;">
+                    <%= @payment.user_course.user.name %>
+                  </td>
+                </tr>
+                <tr>
+                  <td style= "text-align: end; font-weight: 600; font-size: 18px !important;">
+                    Payment ID:
+                  </td>
+                  <td style= "font-size: 18px !important;">
+                    <%= @payment.id %>
                   </td>
                 </tr>
                 <tr style="">
-                  <td >
-                    <b>Contact No</b>
+                  <td style= "text-align: end; font-weight: 600; font-size: 18px !important;">
+                    Contact No:
                   </td>
-                  <td class="last">
-                    <b><%= @payment.user_course.user.contact_number %></b>
+                  <td class="last" style= "font-size: 18px !important;">
+                    <%= @payment.user_course.user.contact_number %>
                   </td>
                 </tr>
               </tbody>
@@ -63,32 +63,32 @@
         </div>
         <div class="row margin-0">
           <div class="col-sm-12 padding-0">
-            <table border="1" style="border-collapse: collapse; width: 100%;">
-              <thead style="border-bottom: 0px solid #000;">
+            <table border="1" style="border-collapse: collapse; width: 100% !important; margin-left: auto !important; margin-right: auto !important;">
+              <thead style="">
                 <tr>
                   <th class="serial-no">
-                    <b>SL. No.</b>
+                    SNo
+                  </th>
+                  <th class="ourses">
+                    Course
                   </th>
                   <th class="particulars">
-                    <b>Particulars</b>
-                  </th>
-                  <th class="particulars">
-                    <b>Todatl Course Fee</b>
+                    Total Course Fee
                   </th>
                   <th class="amount">
-                    <b>Amount Paid</b>
+                    Amount Paid 
                   </th>
                 </tr>
               </thead>
               <tr style="height: 250px;">
-                <td>
+                <td style="text-align: center !important;">
                   1
                 </td>
                 <td>
-                  <p>
+                  <p style="text-align: center !important;">
                     <%= @payment.user_course.course.course_name %>
                   </p>
-                  <div class="particular-items">
+                  <div class="">
                     <p>
                     </p>
                     <p>
@@ -105,7 +105,7 @@
                 </td>
                 <td></td>
                 <td>
-                  <p><%= @payment.paid_amount %></p>
+                  <p style="text-align: center !important; "><%= @payment.paid_amount %></p>
                   <div class="particular-items amount-items">
                     <p></p>
                     <p></p>
@@ -116,30 +116,31 @@
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td colspan="2" style="text-align: end;"><b>Balance</b></td>
+              <tr >
+                <td colspan="2" style="text-align: end; margin-right: 15px !important; padding: 20px;">Balance</td>
                 <td></td>
                 <td></td>
               </tr>
-              <tr>
-                <td colspan="3" style="text-align: end;">
-                  <b>Total</b>
+              <tr style="border-top: 0px !important;">
+                <td colspan="3" style="text-align: end; margin-right: 15px !important; border-top: 0px !important; padding: 20px;">
+                  Total
                 </td>
-                <td><%= @payment.paid_amount %></td>
+                <td style="text-align: center; border-top: 0px !important;"><%= @payment.paid_amount %></td>
               </tr>
             </table>
           </div>
         </div>
-        <div style="width: 100%; height: 120px; border-bottom: 1px solid #000; padding-top: 10px;">
-          <span class="">Total Amount (In Words):</span>
+        <div style="width: 100%; height: 80px; border-bottom: 1px solid #000; padding-top: 10px;">
+          <span style="font-size: 18px !important; margin-left: 15px !important;">Total Amount (In Words):</span>
+          <p style="font-size: 18px !important; margin-left: 15px !important;"><%= @payment.paid_amount.to_words.capitalize %> rupees only /-</p>
         </div>
-        <div  style="width: 100%; height: 220px; border-bottom: 0px solid #000;" class="signature">
-          <div style="text-align: end; padding-bottom:125px;">
-            <span>Authorized Signatory </span>
+        <div  style="width: 100%; height: 240px; border-bottom: 0px solid #000;" class="signature">
+          <div style="text-align: end; padding-bottom:125px; margin-right: 15px !important; margin-top: 10px !important;">
+            <span style="font-size: 18px !important;">Authorized Signatory </span>
           </div>
-          <div style="text-align: end;">
-            <p>Gayathri Tamilselvan</p>
-            <p>Operational Head of Tech Village Academy </p>
+          <div style="text-align: end; margin-right: 15px !important;">
+            <p style="font-size: 18px !important;">Gayathri Tamilselvan</p>
+            <p style="font-size: 18px !important;">Operational Head of Tech Village Academy </p>
           </div>
         </div>
       </div>

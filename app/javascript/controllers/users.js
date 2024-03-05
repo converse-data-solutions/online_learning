@@ -637,6 +637,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     fallbackToDefaultActions(streamElement);
     initModals();
     deletePopup();
+    editRole();
 
   };
 });

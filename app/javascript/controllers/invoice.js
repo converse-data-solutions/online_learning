@@ -265,6 +265,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     if (streamElement.target == 'course-dropdown') {
       invoiceSelectCourse();
     }
-    optionSelect();
+    invoiceOptionSelect();
   };
 });
