@@ -1,9 +1,3 @@
-function yearPicker() {
-  $("#yearpicker").yearpicker({
-    onChange: function (value) {},
-  });
-}
-
 function selectCreateUser() {
   $("#admin-form .custom-select").each(function () {
     var classes = $(this).attr("class"),
@@ -139,8 +133,7 @@ function selectCreateCourse() {
 function passUserId() {
   $("#admin-form .custom-select").on("click", ".custom-option", function () {
     var userId = $(this).data("value");
-
-    // Make an AJAX request to fetch sections for the selected course
+    $("#overlay").show();
     $.ajax({
       url: "/admin/attendance_details/find_users_course",
       type: "GET",
@@ -170,6 +163,7 @@ function passUserId() {
       },
       error: function (error) {
         console.error("Error:", error);
+        $("#overlay").hide();
       },
     });
   });
@@ -360,8 +354,8 @@ function updateStatus() {
   $(".attendance-status").click(function () {
     var attendanceDetailId = $(this).data("attendanceDetailId");
     var currentStatus = $(this).hasClass("true") ? "false" : "true";
+    $("#overlay").show();
 
-    // Send AJAX request to toggle status
     $.ajax({
       url: "/admin/attendance_details/toggle_status/" + attendanceDetailId + "",
       method: "PATCH",
@@ -386,9 +380,11 @@ function updateStatus() {
           "",
           newUrl
         );
+        $("#overlay").hide();
       },
       error: function (error) {
         console.error("Error:", error);
+        $("#overlay").hide();
       },
     });
   });
@@ -424,7 +420,7 @@ function rangeDateFilter() {
       },
       onChange: function (date, text, mode) {
         fromDate = text;
-        makeAjaxCall(); // Call the function to make AJAX call
+        makeAjaxCall();
 
       },
     });
@@ -443,7 +439,7 @@ function rangeDateFilter() {
       },
       onChange: function (date, text, mode) {
         toDate = text;
-        makeAjaxCall(); // Call the function to make AJAX call
+        makeAjaxCall();
 
       },
     });
@@ -455,6 +451,7 @@ function rangeDateFilter() {
         from_date: fromDate,
         to_date: toDate,
       };
+      $("#overlay").show();
 
       $.ajax({
         url: "/admin/attendance_details",
@@ -475,17 +472,96 @@ function rangeDateFilter() {
         window.history.pushState({
           path: newUrl
         }, "", newUrl);
+        $("#overlay").hide();
         },
         error: function (xhr, status, error) {
           console.error("AJAX call error:", error);
+          $("#overlay").hide();
         },
       });
     }
   }
-
   initializeDatepickers();
-
 }
+
+function formValidation() {
+  function validateName() {
+    let name = $("#user_id").val().trim();
+
+    if (!name) {
+      $("#name-error").text("Name can't be blank");
+      return false;
+    } else {
+      $("#name-error").text("");
+      return true;
+    }
+  }
+
+  function validateCourse() {
+    let course = $("#user_course").val();
+
+    if (!course || course === "") {
+      $("#course-error").text("Course must be selected");
+      return false;
+    } else {
+      $("#course-error").text("");
+      return true;
+    }
+  }
+
+  function validateClassDate() {
+    let classDate = $("#user_class_date").val().trim();
+
+    if (!classDate) {
+        $("#date-error").text("Class Date can't be blank");
+        return false;
+    } else {
+        $("#date-error").text("");
+        return true;
+    }
+}
+
+
+  function validateStatus() {
+    let status = $("#user_status").val().trim();
+
+    if (!status) {
+      $("#status-error").text("Status can't be blank");
+      return false;
+    } else {
+      $("#status-error").text("");
+      return true;
+    }
+  }
+
+  // Event bindings for form fields
+  $("#user_id").on("blur", validateName);
+  $("#user_course").on("change", validateCourse);
+  $("#datepicker").on("blur", validateClassDate); // Change to blur event
+  $("#user_status").on("blur", validateStatus);
+
+  // Event binding for form submission
+  $("#user-attendance-form").on("submit", function(event) {
+    // Validate all fields on form submission
+    let isNameValid = validateName();
+    let isCourseValid = validateCourse();
+    let isClassDateValid = validateClassDate();
+    let isStatusValid = validateStatus();
+
+    // Check if any field is invalid
+    if (!isNameValid || !isCourseValid || !isClassDateValid || !isStatusValid) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      validateName();
+      validateCourse();
+      validateClassDate();
+      validateStatus();
+    }
+  });
+}
+
 
 $(document).ready(function () {
   selectCreateCourse();
@@ -500,6 +576,7 @@ $(document).ready(function () {
   updateStatus();
   rangeCalendar();
   rangeDateFilter();
+  formValidation();
 
   $(document).on("turbo:render", function () {
     selectCreateCourse();
@@ -514,6 +591,7 @@ $(document).ready(function () {
     updateStatus();
     rangeCalendar();
     rangeDateFilter();
+    formValidation();
   });
 
   $(document).on("turbo:before-render", function () {

@@ -2,7 +2,7 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="user_id" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= collection_select(:user_course, :user_id, User.joins(:roles).where(roles: { name: 'student' }), :id, :name, { prompt: "Select User", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources" })  %>
+      <%= collection_select(:user_course, :user_id, User.joins(:roles).where(roles: { name: 'student' }), :id, :name, { prompt: "Select User", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources", id: "user_id" })  %>
       <div class="text-red-600 text-sm mt-1" id="name-error"></div>
       <% if attendance_detail&.errors&.any? %>
         <% if attendance_detail&.errors[:user_id].any? %>
@@ -14,13 +14,20 @@
     </div>
   </div>
   <div class="mb-4 flex flex-col sm:flex-row">
-    <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <label for="course" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col" id="filtered_course">
-      <%= collection_select(:user_course, :id, [], :id, :course_name_from_course_model, { prompt: "Select Section", selected: '' }, { class: "bg-gray-50 border-0 focus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources" }) %>
-      <div class="text-red-600 text-sm mt-1" id="email-error"></div>
+      <%= collection_select(:user_course, :id, [], :id, :course_name_from_course_model, { prompt: "Select Section", selected: '' }, { class: "bg-gray-50 border-0 focus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources", id:"user_course" }) %>
+      <div class="text-red-600 text-sm mt-1" id="course-error"></div>
     </div>
   </div>
   <%= f.hidden_field :user_course_id, value: @user_course_id, id: "attendance_user_course_id" %>
+  <% if attendance_detail&.errors&.any? %>
+    <% if attendance_detail&.errors[:user_course_id].any? %>
+      <div class="text-red-600 text-sm mt-1">
+        <%= attendance_detail&.errors.full_messages_for(:user_course_id).join(', ') %>
+      </div>
+    <% end %>
+  <% end %>
   <%= turbo_frame_tag "course_input_render" do %>
   <% end %>
   <div class="mb-4 flex flex-col sm:flex-row">
@@ -59,7 +66,7 @@
           </filter>
         </defs>
       </svg>
-      <div class="text-red-600 text-sm mt-1" id="password-error"></div>
+      <div class="text-red-600 text-sm mt-1" id="date-error"></div>
       <% if attendance_detail&.errors&.any? %>
         <% if attendance_detail&.errors[:class_date].any? %>
           <div class="text-red-600 text-sm mt-1">
@@ -72,8 +79,8 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="status" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[45%]">Attendance<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.text_field :status, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
-      <div class="text-red-600 text-sm mt-1" id="password-confirmation-error"></div>
+      <%= f.text_field :status, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "user_status" %>
+      <div class="text-red-600 text-sm mt-1" id="status-error"></div>
       <% if attendance_detail&.errors&.any? %>
         <% if attendance_detail&.errors[:status].any? %>
           <div class="text-red-600 text-sm mt-1">
