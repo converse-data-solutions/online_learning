@@ -3,7 +3,6 @@ class Attendance < ApplicationRecord
 
   validates :user_course_id, presence: true
   validates :class_date, presence: true
-  validates :status, presence: true
 
   def self.get_attendances(params)
     page_number = params[:page].presence&.to_i

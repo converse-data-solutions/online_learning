@@ -54,13 +54,20 @@ class Admin::AttendanceDetailsController < ApplicationController # rubocop:disab
 
   def toggle_status # rubocop:disable Metrics/MethodLength
     @status = params[:status]
-    @attendance_detail.update(status: @status)
-    @attendance_details = Attendance.get_attendances(params)
-    respond_to do |format|
+    if @attendance_detail.update(status: @status)
+      @attendance_details = Attendance.get_attendances(params)
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append("attendance-table", partial: "shared/flash", locals: { message: 'Attendance updated successfully.', type: 'notice' }), # rubocop:disable Style/StringLiterals
+            turbo_stream.update("attendance-table", partial: "admin/attendance_details/table", locals: { attendance_details: @attendance_details }) # rubocop:disable Style/StringLiterals
+          ]
+        end
+      end
+    else
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.append("attendance-table", partial: "shared/flash", locals: { message: 'Attendance updated successfully.', type: 'notice' }), # rubocop:disable Style/StringLiterals
-          turbo_stream.update("attendance-table", partial: "admin/attendance_details/table", locals: { attendance_details: @attendance_details }) # rubocop:disable Style/StringLiterals
+          turbo_stream.append("attendance-table", partial: "shared/failed", locals: { message: 'Attendance update failed.', type: 'notice' }), # rubocop:disable Style/StringLiterals
         ]
       end
     end
