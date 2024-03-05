@@ -1,0 +1,132 @@
+<%= content_for :head do %>
+  <%= javascript_import_module_tag "controllers/attendance" %>
+  <%= javascript_import_module_tag "controllers/notify" %>
+<% end %>
+<div class="flex flex-col w-full" id="start">
+  <div class="flex w-[75%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-10 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
+    <div class="text-[#0BC08B] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px] mb-4 sm:mb-0 font-medium">Attendance Details</div>
+    <div>
+      <!-- Modal toggle -->
+      <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px] gradiant-hover loader-btn onclick-hover" type="button">
+        <span class="font-semibold text-base">+ </span>ADD NEW
+      </button>
+      <!-- Main modal -->
+      <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
+        <div class="relative w-full lg:max-w-[48rem] sm:max-w-[32rem] max-h-full max-w-[20rem] ml-[42px] sm:ml-[25px] md:ml-[0px]">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
+            <button type="button" id="create-close-modal" class="absolute top-3 right-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white loader-btn" data-modal-hide="authentication-modal">
+              <svg class="w-8 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+            <div class="px-6 py-6 lg:px-8">
+              <h3 class="mb-4 sm:mb-7 md:mb-10 text-[26px] font-semibold text-[#0BC08B] dark:text-white text-center">NEW ATTENDACE</h3>
+              <div class="lg:w-[90%] sm:w-[90%] w-[90%] mr-auto lg:ml-auto ml-5">
+                <div class="" id="admin-form">
+                  <%= render partial: 'admin/attendance_details/form', locals: { attendance_detail: @attendance_detail } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex items-center justify-between pt-10 md:pt-9 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row" id="lesson-filter-container">
+    <div class="flex flex-col md:flex-col lg:flex-row gap-16 w-[50%]">
+      <div class="ui container">
+        <div class="ui form">
+          <div class="two fields">
+            <div class="field">
+              <div class="ui calendar" id="rangestart">
+                <div class="ui input left icon">
+                  <i class="calendar icon"></i>
+                  <input type="text text-[#818181] border-[0] text-base" placeholder="From-Date" id="from_date" />
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui calendar" id="rangeend">
+                <div class="ui input left icon">
+                  <i class="calendar icon"></i>
+                  <input type="text text-[#818181] border-[0] text-base" placeholder="To-Date" id="to_date" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+    <label for="table-search " class="sr-only">Search</label>
+    <%= form_tag admin_attendance_details_path, method: :get, id: "attendance_search_form", data: { turbo_stream: true } do %>
+      <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <img src="<%= asset_path("search.png") %>">
+        </div>
+        <%= text_field_tag :search, params[:search], id: "attendance_search", class: "block p-2 pl-10 text-sm text-[#818181] border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
+    <div class="bg-white dark:bg-gray-800 h-[590px] relative overflow-x-auto lg:overflow-x-hidden mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto">
+        <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text:[16px] lg:text-[18px]">
+              Student Name
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text:[16px] lg:text-[18px]">
+              Course
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text:[16px] lg:text-[18px]">
+              Class Date
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text:[16px] lg:text-[18px]">
+              Attendance
+            </th>
+            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+              Action
+            </th>
+          </tr>
+        </thead>
+        <tbody class="overflow-auto" id="attendance-table">
+          <%= render partial: "admin/attendance_details/table", locals: { attendance_details: @attendance_details } %>
+        </tbody>
+      </table>
+    </div>
+    <div id="large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
+      <%= turbo_frame_tag "edit-attendance-popup", class: "w-full lg:max-w-[60rem] sm:max-w-[32rem] max-h-full max-w-[20rem]" do %>
+      <% end %>
+    </div>
+    <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
+      <div class="relative w-full max-w-[40rem] max-h-full shadow-md">
+        <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
+          <h4 class="text-[20px] font-medium pt-6 pl-6 pb-4 border-b-2 border-[#EDEDED] text-[#0BC08B] text-center mb-3">Confirm Deletion</h4>
+          <button type="button" id="detele-modal-btn" class="absolute top-3 right-2.5 text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white loader-btn" data-modal-hide="popup-modal">
+            <svg class="w-10 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+          <div class="px-6 pb-6 pt-2">
+            <h3 class="mb-5 text-base font-medium text-center text-[#818181] dark:text-gray-400 ">Are you sure you want to delete this item? This action cannot be undone.</h3>
+            <div class="flex justify-center gap-[10px]">
+              <%= link_to 'DELETE', "", data: { turbo_method: :delete }, class: "w-[150px] h-[42px] mr-2 text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-[7px] text-[16px] block items-center px-9 py-2.5 text-center mr-2 button-gradiant-hover loader-btn", id:"delete-attendance-model" %>
+              <button data-modal-hide="popup-modal" type="button" class="w-[150px] h-[42px] text-[#000] rounded-[7px] border bg-[#EDEDED] text-base font-medium px-9 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 button-gradiant-hover-cancel loader-btn">CANCEL</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4 ml-[30px] lg:ml-0" id="render-pagination">
+      <%= render partial: 'admin/attendance_details/paginate', locals: { attendance_details: @attendance_details } %>
+    </div>
+  </div>
+</div>
+<script>
+  $("#modal-close-btn").click();
+  $("#detele-modal-btn").click();
+</script>

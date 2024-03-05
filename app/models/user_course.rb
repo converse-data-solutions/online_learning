@@ -4,11 +4,16 @@ class UserCourse < ApplicationRecord # rubocop:disable Style/Documentation
   belongs_to :user, optional: true
   belongs_to :course, optional: true
   has_many :payments, dependent: :destroy
+  has_many :attendances, dependent: :destroy
 
 
   validates :user_id, presence: true
   validates :course_id, presence: true
   validates :course_amount, presence: true
+
+  def course_name_from_course_model
+    course.course_name if course.present?
+  end
 
 
   def self.get_user_courses(params)

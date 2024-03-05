@@ -94,6 +94,7 @@ Rails.application.routes.draw do
   resources :courses, only: [] do
     resources :sections, only: %i[index show]
   end
+
   resources :courses, only: [] do
     resources :sections, only: [] do
       resources :lessons, only: %i[index show]
@@ -125,6 +126,15 @@ Rails.application.routes.draw do
         get :invoice
         get :send_due_email
         get :generate_invoice_pdf
+      end
+    end
+  end
+
+  namespace :admin do
+    resources :attendance_details do
+      collection do
+        get :find_users_course
+        patch 'toggle_status/:id', to: 'attendance_details#toggle_status', as: :toggle_status
       end
     end
   end
