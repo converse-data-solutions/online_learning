@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  course: MyString
+  contact: 1
+  location: MyString
+  timeslot: 2024-03-05 20:02:40
+  no_of_people: 1
+  status: 1
+  follow_up: 2024-03-05
+  remarks: MyText
+  sales_person: MyString
+  references: MyString
+  lead_source: MyString
+
+two:
+  name: MyString
+  course: MyString
+  contact: 1
+  location: MyString
+  timeslot: 2024-03-05 20:02:40
+  no_of_people: 1
+  status: 1
+  follow_up: 2024-03-05
+  remarks: MyText
+  sales_person: MyString
+  references: MyString
+  lead_source: MyString

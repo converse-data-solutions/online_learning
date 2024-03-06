@@ -140,6 +140,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :enquires
+  end
+
+  namespace :admin do
     resources :courses do
       resources :sections, only: %i[index new create edit update destroy show]
       collection do
