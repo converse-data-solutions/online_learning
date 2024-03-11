@@ -1,4 +1,12 @@
 <%= form_for enquire || Enquire.new, url: admin_enquires_path, html: { class: "validate", id: "enquire-admin-form" }, format: :turbo_stream, method: :post do |f| %>
+  <% if enquire&.errors&.any? %>
+    <div class="form-errors">
+      <h2><%= pluralize(enquire.errors.count, "error") %> stopped you from updating this user:</h2>
+      <% enquire.errors.full_messages.each do |msg| %>
+        <h4><%= msg %></h4>
+      <% end %>
+    </div>
+  <% end %>
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>

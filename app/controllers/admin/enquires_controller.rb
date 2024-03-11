@@ -17,16 +17,20 @@ class Admin::EnquiresController < ApplicationController
 
   def create
     @enquire = Enquire.new(enquire_params)
+    respond_to do |format|
     if @enquire.save
       @enquires = Enquire.get_enquires(params)
-      respond_to do |format|
         format.turbo_stream
         format.json { render :show, status: :created, location: admin_enquire_url(@enquire) }
-      end
     else
-      format.turbo_stream { render turbo_stream: turbo_stream.replace('user-admin-form', partial: 'admin/students/form', locals: { student: @student }) }
-      format.json { render json: @student.errors, status: :unprocessable_entity }
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace('admin-enquire-form', partial: 'admin/enquires/form', locals: { enquire: @enquire })
+        ]
+      end
+      format.json { render json: @enquire.errors, status: :unprocessable_entity }
     end
+  end
   end
 
   def edit

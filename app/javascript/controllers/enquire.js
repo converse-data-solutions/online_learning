@@ -398,6 +398,126 @@ function enquireTimeslot() {
   });
 }
 
+function nameFilter(){
+  $("#enquire-filter-container .custom-select").on("click", ".custom-option", function () {
+    var studentName = $(this).data("value");
+    console.log("Name: " + studentName);
+    $("#overlay").show();
+    $.ajax({
+      url: "/admin/enquires",
+      type: "GET",
+      data: {
+        name: studentName,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function (data) {
+        Turbo.renderStreamMessage(data);
+        var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?name=" +
+          encodeURIComponent(studentName);
+        window.history.pushState(
+          {
+            path: newUrl,
+          },
+          "",
+          newUrl
+        );
+        $("#overlay").hide();
+      },
+      error: function (error) {
+        console.error("Error:", error);
+        $("#overlay").hide();
+      },
+    });
+  });
+}
+
+function courseFilter(){
+  $("#enquire-filter-container .new-course-custom-select").on("click", ".new-course-custom-option", function () {
+    var studentCourse = $(this).data("value");
+    console.log("Course: " + studentCourse);
+    $("#overlay").show();
+    $.ajax({
+      url: "/admin/enquires",
+      type: "GET",
+      data: {
+        course: studentCourse,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function (data) {
+        Turbo.renderStreamMessage(data);
+        var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?course=" +
+          encodeURIComponent(studentCourse);
+        window.history.pushState(
+          {
+            path: newUrl,
+          },
+          "",
+          newUrl
+        );
+        $("#overlay").hide();
+      },
+      error: function (error) {
+        console.error("Error:", error);
+        $("#overlay").hide();
+      },
+    });
+  });
+}
+
+function statusFilter(){
+  $("#enquire-filter-container .new-custom-select").on("click", ".new-custom-option", function () {
+    var studentStatus = $(this).data("value");
+    console.log("Status: " + studentStatus);
+    $("#overlay").show();
+    $.ajax({
+      url: "/admin/enquires",
+      type: "GET",
+      data: {
+        status: studentStatus,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function (data) {
+        Turbo.renderStreamMessage(data);
+        var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?status=" +
+          encodeURIComponent(studentStatus);
+        window.history.pushState(
+          {
+            path: newUrl,
+          },
+          "",
+          newUrl
+        );
+        $("#overlay").hide();
+      },
+      error: function (error) {
+        console.error("Error:", error);
+        $("#overlay").hide();
+      },
+    });
+  });
+}
+
 $(document).ready(function() {
   editEnquirePopup();
   viewEnquirePopup();
@@ -407,6 +527,9 @@ $(document).ready(function() {
   enquireCourse();
   enquireStatus();
   enquireTimeslot();
+  nameFilter();
+  courseFilter();
+  statusFilter();
 
   $(document).on("turbo:render", function() {
     editEnquirePopup();
@@ -417,6 +540,9 @@ $(document).ready(function() {
     enquireCourse();
     enquireStatus();
     enquireTimeslot();
+    nameFilter();
+    courseFilter();
+    statusFilter(); 
     
   });
 
