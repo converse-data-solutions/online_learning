@@ -3,7 +3,7 @@ class Admin::EnquiresController < ApplicationController
   before_action :set_enquire, only: %i[edit update destroy show]
 
   def index
-    @enquires = Enquire.all
+    @enquires = Enquire.get_enquires(params)
     respond_to do |format|
       format.json { render json: @enquires }
       format.html { render :index }
@@ -18,6 +18,7 @@ class Admin::EnquiresController < ApplicationController
   def create
     @enquire = Enquire.new(enquire_params)
     if @enquire.save
+      @enquires = Enquire.get_enquires(params)
       respond_to do |format|
         format.turbo_stream
         format.json { render :show, status: :created, location: admin_enquire_url(@enquire) }
@@ -35,7 +36,7 @@ class Admin::EnquiresController < ApplicationController
   def update
     respond_to do |format|
       if @enquire.update(enquire_params)
-        @enquires = Enquire.all
+        @enquires = Enquire.get_enquires(params)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_enquire_url(@enquire) }
       else
@@ -48,8 +49,8 @@ class Admin::EnquiresController < ApplicationController
   def destroy
     respond_to do |format|
       if @enquire.destroy
-      @enquires = Enquire.all
-      format.turbo_stream do
+        @enquires = Enquire.get_enquires(params)
+        format.turbo_stream do
         render turbo_stream: [
           turbo_stream.update("enquire-table", partial: 'admin/enquires/table', locals: { enquires: @enquires }),
           turbo_stream.append("enquire-table", partial: 'shared/flash', locals: { message: 'Enquire deleted successfully.', type: 'notice' })
@@ -75,6 +76,6 @@ class Admin::EnquiresController < ApplicationController
   end
 
   def enquire_params
-    params.require(:enquire).permit(:name, :course, :contact, :location, :timeslot, :no_of_people, :status, :follow_up, :remarks, :sales_person, :references, :lead_source)
+    params.require(:enquire).permit(:name, :course, :contact, :location, :timeslot, :no_of_people, :status, :follow_up, :remarks, :sales_person, :references, :lead_source, attachments: [])
   end
 end

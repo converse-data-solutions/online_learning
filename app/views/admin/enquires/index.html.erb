@@ -45,8 +45,22 @@
       </div>
     </div>
   </div>
+  <div class="flex items-center justify-between pt-10 md:pt-9 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row" id="enquire-filter-container">
+    <div class="text-[#31B978] text-[18px] font-bold  pb-4 sm:pb-0">
+      <%= collection_select(:name, :name, Enquire.all, :id, :name, { prompt: "Select Student", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
+    </div>
+    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
+      <%= collection_select(:course, :course, Enquire.distinct.pluck(:course), :to_s, :to_s, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 focus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-course-custom-select sources" }) %>
+    </div>
+    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
+      <%= collection_select(:status, :status, Enquire.distinct.pluck(:status), :to_s, :to_s, { prompt: "Select Status", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select sources" }) %>
+    </div>
+    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
+      <%= collection_select(:timeslot, :timeslot, Enquire.distinct.pluck(:timeslot), :to_s, :to_s, { prompt: "Select Time", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select sources" }) %>
+    </div>
+  </div>
   <div class="relative overflow-x-auto lg:overflow-x-hidden mt-2 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
-    <div class="bg-white dark:bg-gray-800 h-[716px] relative mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
+    <div class="bg-white dark:bg-gray-800 h-[650px] relative mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 overflow-auto table-auto">
         <thead class="text-[#000] bg-[#EDEDED] dark:text-gray-400">
           <tr>
@@ -108,7 +122,7 @@
       <% end %>
     </div>
     <div class="mt-4 ml-[30px] lg:ml-0" id="render-pagination" >
-      <%#= render partial: 'admin/enquires/paginate', locals: { enquires: @enquires } %>
+      <%= render partial: "admin/enquires/paginate", locals: { enquires: @enquires } %>
     </div>
   </div>
 </div>
