@@ -3,12 +3,12 @@ class CreateEnquires < ActiveRecord::Migration[7.0]
     create_table :enquires do |t|
       t.string :name
       t.string :course
-      t.integer :contact
+      t.bigint :contact
       t.string :location
-      t.datetime :timeslot
-      t.integer :no_of_people
+      t.string :timeslot
+      t.bigint :no_of_people
       t.integer :status
-      t.date :follow_up
+      t.datetime :follow_up
       t.text :remarks
       t.string :sales_person
       t.string :references

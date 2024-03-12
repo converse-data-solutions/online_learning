@@ -17,6 +17,7 @@ class Admin::EnquiresController < ApplicationController
 
   def create
     @enquire = Enquire.new(enquire_params)
+    byebug
     respond_to do |format|
     if @enquire.save
       @enquires = Enquire.get_enquires(params)
@@ -80,6 +81,6 @@ class Admin::EnquiresController < ApplicationController
   end
 
   def enquire_params
-    params.require(:enquire).permit(:name, :course, :contact, :location, :timeslot, :no_of_people, :status, :follow_up, :remarks, :sales_person, :references, :lead_source, attachments: [])
+    params.require(:enquire).permit(:name, :course, :contact, :location, :timeslot, :status, :no_of_people, :follow_up, :remarks, :sales_person, :references, :lead_source, :attachment)
   end
 end

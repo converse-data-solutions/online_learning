@@ -1,5 +1,5 @@
 class Enquire < ApplicationRecord
-  has_many_attached :attachments
+  has_one_attached :attachment
 
   enum status: {
     initial: 0,
@@ -15,7 +15,6 @@ class Enquire < ApplicationRecord
   validates :location, presence: true
   validates :timeslot, presence: true
   validates :status, presence: true
-  validates :follow_up, presence: true
   validates :sales_person, presence: true
 
   def self.get_enquires(params)
