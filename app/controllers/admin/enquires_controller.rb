@@ -76,7 +76,7 @@ class Admin::EnquiresController < ApplicationController
   private
 
   def set_enquire
-    @enquire = Enquire.find(params[:id])
+    @enquire = Enquire.find_by(params[:id])
   end
 
   def enquire_params

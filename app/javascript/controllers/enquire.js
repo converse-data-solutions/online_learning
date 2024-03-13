@@ -1,5 +1,5 @@
 function editEnquirePopup() {
-  $("#enquire-table").on("click", ".edit-enquire-model", function () {
+  $("#enquire-table").on("click", ".edit-enquire-model", function() {
     let id = $(this).data("enquire-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -18,11 +18,11 @@ function editEnquirePopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -31,7 +31,7 @@ function editEnquirePopup() {
 }
 
 function viewEnquirePopup() {
-  $("#enquire-table").on("click", ".view-enquire-model", function () {
+  $("#enquire-table").on("click", ".view-enquire-model", function() {
     let id = $(this).data("enquire-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -49,11 +49,11 @@ function viewEnquirePopup() {
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function (res) {
+      success: function(res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
       },
-      error: function () {
+      error: function() {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -62,7 +62,7 @@ function viewEnquirePopup() {
 }
 
 function deleteEnquirePopup() {
-  $("#enquire-table").on("click", ".send-delete-enquire", function () {
+  $("#enquire-table").on("click", ".send-delete-enquire", function() {
     let id = $(this).data("enquire-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -92,9 +92,9 @@ function deleteEnquirePopup() {
 function searchEnquire() {
   let delayTimer;
 
-  $("#enquire_search").keyup(function (e) {
+  $("#enquire_search").keyup(function(e) {
     clearTimeout(delayTimer);
-    delayTimer = setTimeout(function () {
+    delayTimer = setTimeout(function() {
       let searchValue = $("#enquire_search").val();
       $("#overlay").show();
       $.ajax({
@@ -104,10 +104,9 @@ function searchEnquire() {
           search: searchValue,
         },
         headers: {
-          Accept:
-            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function (res) {
+        success: function(res) {
           Turbo.renderStreamMessage(res);
           let newURL =
             window.location.protocol +
@@ -116,8 +115,7 @@ function searchEnquire() {
             window.location.pathname +
             "?search=" +
             encodeURIComponent(searchValue);
-          window.history.pushState(
-            {
+          window.history.pushState({
               path: newURL,
             },
             "",
@@ -125,7 +123,7 @@ function searchEnquire() {
           );
           $("#overlay").hide();
         },
-        error: function () {
+        error: function() {
           console.log("Error fetching data");
           $("#overlay").hide();
         },
@@ -135,7 +133,7 @@ function searchEnquire() {
 }
 
 function enquireName() {
-  $("#enquire-filter-container .new-name-custom-select").each(function () {
+  $("#enquire-filter-container .new-name-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -150,7 +148,7 @@ function enquireName() {
     template += '<div class="new-name-custom-options">';
     $(this)
       .find("option")
-      .each(function () {
+      .each(function() {
         template +=
           '<span class="new-name-custom-option ' +
           $(this).attr("class") +
@@ -168,23 +166,23 @@ function enquireName() {
   });
 
   $(".new-name-custom-option:first-of-type").hover(
-    function () {
+    function() {
       $(this).parents(".new-name-custom-options").addClass("option-hover");
     },
-    function () {
+    function() {
       $(this).parents(".new-name-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-name-custom-select-trigger").on("click", function (event) {
-    $("html").one("click", function () {
+  $(".new-name-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
       $(".new-name-custom-select").removeClass("opened");
     });
     $(this).parents(".new-name-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-name-custom-option").on("click", function () {
+  $(".new-name-custom-option").on("click", function() {
     $(this)
       .parents(".new-name-custom-select-wrapper")
       .find("select")
@@ -203,7 +201,7 @@ function enquireName() {
 }
 
 function enquireCourse() {
-  $("#enquire-filter-container .new-course-custom-select").each(function () {
+  $("#enquire-filter-container .new-course-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -218,7 +216,7 @@ function enquireCourse() {
     template += '<div class="new-course-custom-options">';
     $(this)
       .find("option")
-      .each(function () {
+      .each(function() {
         template +=
           '<span class="new-course-custom-option ' +
           $(this).attr("class") +
@@ -236,23 +234,23 @@ function enquireCourse() {
   });
 
   $(".new-course-custom-option:first-of-type").hover(
-    function () {
+    function() {
       $(this).parents(".new-course-custom-options").addClass("option-hover");
     },
-    function () {
+    function() {
       $(this).parents(".new-course-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-course-custom-select-trigger").on("click", function (event) {
-    $("html").one("click", function () {
+  $(".new-course-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
       $(".new-course-custom-select").removeClass("opened");
     });
     $(this).parents(".new-course-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-course-custom-option").on("click", function () {
+  $(".new-course-custom-option").on("click", function() {
     $(this)
       .parents(".new-course-custom-select-wrapper")
       .find("select")
@@ -271,7 +269,7 @@ function enquireCourse() {
 }
 
 function enquireStatus() {
-  $("#enquire-filter-container .new-status-custom-select").each(function () {
+  $("#enquire-filter-container .new-status-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       status = $(this).attr("status");
@@ -286,7 +284,7 @@ function enquireStatus() {
     template += '<div class="new-status-custom-options">';
     $(this)
       .find("option")
-      .each(function () {
+      .each(function() {
         template +=
           '<span class="new-status-custom-option ' +
           $(this).attr("class") +
@@ -304,23 +302,23 @@ function enquireStatus() {
   });
 
   $(".new-status-custom-option:first-of-type").hover(
-    function () {
+    function() {
       $(this).parents(".new-status-custom-options").addClass("option-hover");
     },
-    function () {
+    function() {
       $(this).parents(".new-status-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-status-custom-select-trigger").on("click", function (event) {
-    $("html").one("click", function () {
+  $(".new-status-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
       $(".new-status-custom-select").removeClass("opened");
     });
     $(this).parents(".new-status-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-status-custom-option").on("click", function () {
+  $(".new-status-custom-option").on("click", function() {
     $(this)
       .parents(".new-status-custom-select-wrapper")
       .find("select")
@@ -339,7 +337,7 @@ function enquireStatus() {
 }
 
 function enquireTimeslot() {
-  $("#enquire-filter-container .new-lesson-custom-select").each(function () {
+  $("#enquire-filter-container .new-lesson-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -354,7 +352,7 @@ function enquireTimeslot() {
     template += '<div class="new-lesson-custom-options">';
     $(this)
       .find("option")
-      .each(function () {
+      .each(function() {
         template +=
           '<span class="new-lesson-custom-option ' +
           $(this).attr("class") +
@@ -372,23 +370,23 @@ function enquireTimeslot() {
   });
 
   $(".new-lesson-custom-option:first-of-type").hover(
-    function () {
+    function() {
       $(this).parents(".new-lesson-custom-options").addClass("option-hover");
     },
-    function () {
+    function() {
       $(this).parents(".new-lesson-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-lesson-custom-select-trigger").on("click", function (event) {
-    $("html").one("click", function () {
+  $(".new-lesson-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
       $(".new-lesson-custom-select").removeClass("opened");
     });
     $(this).parents(".new-lesson-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-lesson-custom-option").on("click", function () {
+  $(".new-lesson-custom-option").on("click", function() {
     $(this)
       .parents(".new-lesson-custom-select-wrapper")
       .find("select")
@@ -410,7 +408,7 @@ function nameFilter() {
   $("#enquire-filter-container .new-name-custom-select").on(
     "click",
     ".new-name-custom-option",
-    function () {
+    function() {
       var studentName = $(this).data("value");
       console.log("Name: " + studentName);
       $("#overlay").show();
@@ -421,10 +419,9 @@ function nameFilter() {
           name: studentName,
         },
         headers: {
-          Accept:
-            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function (data) {
+        success: function(data) {
           Turbo.renderStreamMessage(data);
           var newUrl =
             window.location.protocol +
@@ -433,8 +430,7 @@ function nameFilter() {
             window.location.pathname +
             "?name=" +
             encodeURIComponent(studentName);
-          window.history.pushState(
-            {
+          window.history.pushState({
               path: newUrl,
             },
             "",
@@ -442,7 +438,7 @@ function nameFilter() {
           );
           $("#overlay").hide();
         },
-        error: function (error) {
+        error: function(error) {
           console.error("Error:", error);
           $("#overlay").hide();
         },
@@ -455,7 +451,7 @@ function courseFilter() {
   $("#enquire-filter-container .new-course-custom-select").on(
     "click",
     ".new-course-custom-option",
-    function () {
+    function() {
       var studentCourse = $(this).data("value");
       console.log("Course: " + studentCourse);
       $("#overlay").show();
@@ -466,10 +462,9 @@ function courseFilter() {
           course: studentCourse,
         },
         headers: {
-          Accept:
-            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function (data) {
+        success: function(data) {
           Turbo.renderStreamMessage(data);
           var newUrl =
             window.location.protocol +
@@ -478,8 +473,7 @@ function courseFilter() {
             window.location.pathname +
             "?course=" +
             encodeURIComponent(studentCourse);
-          window.history.pushState(
-            {
+          window.history.pushState({
               path: newUrl,
             },
             "",
@@ -487,7 +481,7 @@ function courseFilter() {
           );
           $("#overlay").hide();
         },
-        error: function (error) {
+        error: function(error) {
           console.error("Error:", error);
           $("#overlay").hide();
         },
@@ -500,7 +494,7 @@ function statusFilter() {
   $("#enquire-filter-container .new-status-custom-select").on(
     "click",
     ".new-status-custom-option",
-    function () {
+    function() {
       var studentStatus = $(this).data("value");
       console.log("Status: " + studentStatus);
       $("#overlay").show();
@@ -511,10 +505,9 @@ function statusFilter() {
           status: studentStatus,
         },
         headers: {
-          Accept:
-            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function (data) {
+        success: function(data) {
           Turbo.renderStreamMessage(data);
           var newUrl =
             window.location.protocol +
@@ -523,8 +516,7 @@ function statusFilter() {
             window.location.pathname +
             "?status=" +
             encodeURIComponent(studentStatus);
-          window.history.pushState(
-            {
+          window.history.pushState({
               path: newUrl,
             },
             "",
@@ -532,7 +524,7 @@ function statusFilter() {
           );
           $("#overlay").hide();
         },
-        error: function (error) {
+        error: function(error) {
           console.error("Error:", error);
           $("#overlay").hide();
         },
@@ -542,49 +534,46 @@ function statusFilter() {
 }
 
 function timeSlotFilter() {
-  $("#enquire-filter-container .new-lesson-custom-select").on("click", ".new-lesson-custom-option", function () {
-      var timeStatus = $(this).data("value");
-      console.log("Status: " + timeStatus);
-      $("#overlay").show();
-      $.ajax({
-        url: "/admin/enquires",
-        type: "GET",
-        data: {
-          timeslot: timeStatus,
-        },
-        headers: {
-          Accept:
-            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-        },
-        success: function (data) {
-          Turbo.renderStreamMessage(data);
-          var newUrl =
-            window.location.protocol +
-            "//" +
-            window.location.host +
-            window.location.pathname +
-            "?timeslot=" +
-            encodeURIComponent(timeStatus);
-          window.history.pushState(
-            {
-              path: newUrl,
-            },
-            "",
-            newUrl
-          );
-          $("#overlay").hide();
-        },
-        error: function (error) {
-          console.error("Error:", error);
-          $("#overlay").hide();
-        },
-      });
-    }
-  );
+  $("#enquire-filter-container .new-lesson-custom-select").on("click", ".new-lesson-custom-option", function() {
+    var timeStatus = $(this).data("value");
+    console.log("Status: " + timeStatus);
+    $("#overlay").show();
+    $.ajax({
+      url: "/admin/enquires",
+      type: "GET",
+      data: {
+        timeslot: timeStatus,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function(data) {
+        Turbo.renderStreamMessage(data);
+        var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?timeslot=" +
+          encodeURIComponent(timeStatus);
+        window.history.pushState({
+            path: newUrl,
+          },
+          "",
+          newUrl
+        );
+        $("#overlay").hide();
+      },
+      error: function(error) {
+        console.error("Error:", error);
+        $("#overlay").hide();
+      },
+    });
+  });
 }
 
 function timeSlot() {
-  $(function () {
+  $(function() {
     $("#datepicker").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
@@ -592,7 +581,7 @@ function timeSlot() {
     });
 
     // Adding click functionality to the datepicker icon
-    $("#datepicker-icon").on("click", function (event) {
+    $("#datepicker-icon").on("click", function(event) {
       event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
       var $datepicker = $("#datepicker");
       if ($datepicker.datepicker("widget").is(":hidden")) {
@@ -605,7 +594,7 @@ function timeSlot() {
 }
 
 function editTimeSlot() {
-  $(function () {
+  $(function() {
     let initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
 
     $("#editdatepicker").datepicker({
@@ -615,7 +604,7 @@ function editTimeSlot() {
       changeYear: true, // Enable changing the year
     });
 
-    $("#editdatepicker-icon").on("click", function (event) {
+    $("#editdatepicker-icon").on("click", function(event) {
       event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
       var $datepicker = $("#editdatepicker");
       if ($datepicker.datepicker("widget").is(":hidden")) {
@@ -628,7 +617,7 @@ function editTimeSlot() {
 }
 
 function enquireAdmin() {
-  $("#enquire-admin-form .custom-select").each(function () {
+  $("#enquire-admin-form .custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -641,7 +630,7 @@ function enquireAdmin() {
     template += '<div class="custom-options">';
     $(this)
       .find("option")
-      .each(function () {
+      .each(function() {
         template +=
           '<span class="custom-option ' +
           $(this).attr("class") +
@@ -659,23 +648,23 @@ function enquireAdmin() {
   });
 
   $(".custom-option:first-of-type").hover(
-    function () {
+    function() {
       $(this).parents(".custom-options").addClass("option-hover");
     },
-    function () {
+    function() {
       $(this).parents(".custom-options").removeClass("option-hover");
     }
   );
 
-  $(".custom-select-trigger").on("click", function (event) {
-    $("html").one("click", function () {
+  $(".custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
       $(".custom-select").removeClass("opened");
     });
     $(this).parents(".custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".custom-option").on("click", function () {
+  $(".custom-option").on("click", function() {
     $(this)
       .parents(".custom-select-wrapper")
       .find("select")
@@ -694,7 +683,7 @@ function enquireAdmin() {
 }
 
 function initializeTimeDropdowns() {
-  $(document).ready(function () {
+  $(document).ready(function() {
     const $startDropdown = $("#start-time").closest(".dropdown");
     const $startDropdownMenu = $startDropdown.find(".dropdown-menu");
     const $endDropdown = $("#end-time").closest(".dropdown");
@@ -708,7 +697,9 @@ function initializeTimeDropdowns() {
 
     // Function to generate time options
     function generateTimeOptions($dropdownMenu) {
-      const hours = Array.from({ length: 12 }, (_, i) => (i === 0 ? 12 : i));
+      const hours = Array.from({
+        length: 12
+      }, (_, i) => (i === 0 ? 12 : i));
       const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
       const amPm = ["AM", "PM"];
       amPm.forEach((period) => {
@@ -741,17 +732,17 @@ function initializeTimeDropdowns() {
     }
 
     // Add event listener to toggle dropdown menu for start time
-    $startDropdown.on("click", function (event) {
+    $startDropdown.on("click", function(event) {
       toggleDropdown($startDropdownMenu);
     });
 
     // Add event listener to toggle dropdown menu for end time
-    $endDropdown.on("click", function (event) {
+    $endDropdown.on("click", function(event) {
       toggleDropdown($endDropdownMenu);
     });
 
     // Add event listener to close the dropdown menu when clicking outside for start time
-    $(document).on("click", function (event) {
+    $(document).on("click", function(event) {
       if (
         !$startDropdown.is(event.target) &&
         $startDropdown.has(event.target).length === 0
@@ -761,7 +752,7 @@ function initializeTimeDropdowns() {
     });
 
     // Add event listener to close the dropdown menu when clicking outside for end time
-    $(document).on("click", function (event) {
+    $(document).on("click", function(event) {
       if (
         !$endDropdown.is(event.target) &&
         $endDropdown.has(event.target).length === 0
@@ -771,7 +762,7 @@ function initializeTimeDropdowns() {
     });
 
     // Add event listener to select start time from dropdown
-    $startDropdownMenu.on("click", ".dropdown-menu-item", function (event) {
+    $startDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
       const selectedTime = $(this).text();
       $("#start-time").val(selectedTime);
       $startDropdownMenu.removeClass("show");
@@ -779,7 +770,7 @@ function initializeTimeDropdowns() {
     });
 
     // Add event listener to select end time from dropdown
-    $endDropdownMenu.on("click", ".dropdown-menu-item", function (event) {
+    $endDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
       const selectedTime = $(this).text();
       $("#end-time").val(selectedTime);
       $endDropdownMenu.removeClass("show");
@@ -789,7 +780,7 @@ function initializeTimeDropdowns() {
 }
 
 function editTimeDropdowns() {
-  $(document).ready(function () {
+  $(document).ready(function() {
     const $startDropdown = $("#edit-start-time").closest(".dropdown");
     const $startDropdownMenu = $startDropdown.find(".dropdown-menu");
     const $endDropdown = $("#edit-end-time").closest(".dropdown");
@@ -803,7 +794,9 @@ function editTimeDropdowns() {
 
     // Function to generate time options
     function generateTimeOptions($dropdownMenu) {
-      const hours = Array.from({ length: 12 }, (_, i) => (i === 0 ? 12 : i));
+      const hours = Array.from({
+        length: 12
+      }, (_, i) => (i === 0 ? 12 : i));
       const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
       const amPm = ["AM", "PM"];
       amPm.forEach((period) => {
@@ -836,17 +829,17 @@ function editTimeDropdowns() {
     }
 
     // Add event listener to toggle dropdown menu for start time
-    $startDropdown.on("click", function (event) {
+    $startDropdown.on("click", function(event) {
       toggleDropdown($startDropdownMenu);
     });
 
     // Add event listener to toggle dropdown menu for end time
-    $endDropdown.on("click", function (event) {
+    $endDropdown.on("click", function(event) {
       toggleDropdown($endDropdownMenu);
     });
 
     // Add event listener to close the dropdown menu when clicking outside for start time
-    $(document).on("click", function (event) {
+    $(document).on("click", function(event) {
       if (
         !$startDropdown.is(event.target) &&
         $startDropdown.has(event.target).length === 0
@@ -856,7 +849,7 @@ function editTimeDropdowns() {
     });
 
     // Add event listener to close the dropdown menu when clicking outside for end time
-    $(document).on("click", function (event) {
+    $(document).on("click", function(event) {
       if (
         !$endDropdown.is(event.target) &&
         $endDropdown.has(event.target).length === 0
@@ -866,7 +859,7 @@ function editTimeDropdowns() {
     });
 
     // Add event listener to select start time from dropdown
-    $startDropdownMenu.on("click", ".dropdown-menu-item", function (event) {
+    $startDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
       const selectedTime = $(this).text();
       $("#edit-start-time").val(selectedTime);
       $startDropdownMenu.removeClass("show");
@@ -874,7 +867,7 @@ function editTimeDropdowns() {
     });
 
     // Add event listener to select end time from dropdown
-    $endDropdownMenu.on("click", ".dropdown-menu-item", function (event) {
+    $endDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
       const selectedTime = $(this).text();
       $("#edit-end-time").val(selectedTime);
       $endDropdownMenu.removeClass("show");
@@ -884,7 +877,7 @@ function editTimeDropdowns() {
 }
 
 function editEnquireAdmin() {
-  $("#edit-enquire-popup .new-custom-select").each(function () {
+  $("#edit-enquire-popup .new-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -897,7 +890,7 @@ function editEnquireAdmin() {
     template += '<div class="new-custom-options">';
     $(this)
       .find("option")
-      .each(function () {
+      .each(function() {
         template +=
           '<span class="new-custom-option ' +
           $(this).attr("class") +
@@ -915,23 +908,23 @@ function editEnquireAdmin() {
   });
 
   $(".new-custom-option:first-of-type").hover(
-    function () {
+    function() {
       $(this).parents(".new-custom-options").addClass("option-hover");
     },
-    function () {
+    function() {
       $(this).parents(".new-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-custom-select-trigger").on("click", function (event) {
-    $("html").one("click", function () {
+  $(".new-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
       $(".new-custom-select").removeClass("opened");
     });
     $(this).parents(".new-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-custom-option").on("click", function () {
+  $(".new-custom-option").on("click", function() {
     $(this)
       .parents(".new-custom-select-wrapper")
       .find("select")
@@ -1034,6 +1027,7 @@ function enquireFormValidation() {
       return true;
     }
   }
+
   function enquireSalesPerson() {
     let name = $("#enquire_sales_person").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
@@ -1060,7 +1054,7 @@ function enquireFormValidation() {
   $("#enquire_location").on("blur", enquireLocation);
 
   // Event binding for form submission
-  $("#enquire-admin-form").on("submit", function (event) {
+  $("#enquire-admin-form").on("submit", function(event) {
     // Validate all fields on form submission
     let isNameValid = enquireName();
     let isStatusValid = enquireStatus();
@@ -1177,6 +1171,7 @@ function enquireEditFormValidation() {
       return true;
     }
   }
+
   function enquireSalesPerson() {
     let name = $("#edit_enquire_sales_person").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
@@ -1218,7 +1213,7 @@ function enquireEditFormValidation() {
   });
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
   editEnquirePopup();
   viewEnquirePopup();
   deleteEnquirePopup();
@@ -1240,7 +1235,7 @@ $(document).ready(function () {
   enquireFormValidation();
   enquireEditFormValidation();
 
-  $(document).on("turbo:render", function () {
+  $(document).on("turbo:render", function() {
     editEnquirePopup();
     viewEnquirePopup();
     deleteEnquirePopup();
@@ -1263,10 +1258,10 @@ $(document).ready(function () {
     enquireEditFormValidation();
   });
 
-  $(document).on("turbo:before-render", function () {
+  $(document).on("turbo:before-render", function() {
     $("#overlay").show();
   });
-  $(document).on("turbo:after-render", function () {
+  $(document).on("turbo:after-render", function() {
     $("#overlay").hide();
   });
 });
@@ -1274,7 +1269,7 @@ $(document).ready(function () {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function (streamElement) {
+  event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     initializeTimeDropdowns();
     editTimeDropdowns();
