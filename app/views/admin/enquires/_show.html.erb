@@ -123,6 +123,22 @@
           </div>
         </div>
       </div>
+      <div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
+        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+          <label for="references" class=" block mb-2 text-lg font-medium text-[#000]">References</label>
+          <div class="w-full sm:w-[55%] lg:w-[55%] flex flex-col">
+            <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
+              <% if enquire.attachment.attached? %>
+                <%= link_to " #{enquire.attachment.filename}", rails_blob_path(enquire.attachment, disposition: "attachment") %><br>
+              <% else %>
+                <p>No attachments for this enquire.</p>
+              <% end %>
+            </p>
+          </div>
+        </div>
+        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+        </div>
+      </div>
     </div>
     <!-- Modal footer -->
     <div class="flex justify-end items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-gray-200 rounded-b dark:border-gray-600">
