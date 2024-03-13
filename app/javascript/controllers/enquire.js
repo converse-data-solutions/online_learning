@@ -410,7 +410,6 @@ function nameFilter() {
     ".new-name-custom-option",
     function() {
       var studentName = $(this).data("value");
-      console.log("Name: " + studentName);
       $("#overlay").show();
       $.ajax({
         url: "/admin/enquires",
@@ -453,7 +452,6 @@ function courseFilter() {
     ".new-course-custom-option",
     function() {
       var studentCourse = $(this).data("value");
-      console.log("Course: " + studentCourse);
       $("#overlay").show();
       $.ajax({
         url: "/admin/enquires",
@@ -496,7 +494,6 @@ function statusFilter() {
     ".new-status-custom-option",
     function() {
       var studentStatus = $(this).data("value");
-      console.log("Status: " + studentStatus);
       $("#overlay").show();
       $.ajax({
         url: "/admin/enquires",
@@ -536,7 +533,6 @@ function statusFilter() {
 function timeSlotFilter() {
   $("#enquire-filter-container .new-lesson-custom-select").on("click", ".new-lesson-custom-option", function() {
     var timeStatus = $(this).data("value");
-    console.log("Status: " + timeStatus);
     $("#overlay").show();
     $.ajax({
       url: "/admin/enquires",
