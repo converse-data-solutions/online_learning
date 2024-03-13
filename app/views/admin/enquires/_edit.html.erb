@@ -228,9 +228,9 @@
                 <%= f.file_field :attachment %>
                 <% if enquire.attachment.attached? %>
                   <p class="attachments text-[#818181] text-[15px] font-medium">
-                    <%= link_to " #{enquire.attachment.filename}", rails_blob_path(enquire.attachment, disposition: "attachment") %><br>
+                    <%= link_to " #{enquire.attachment.filename}", rails_blob_path(enquire.attachment, disposition: "attachment") %>
                   <% else %>
-                    <p>No attachments for this enquire.</p>
+                    No attachments for this enquire
                   <% end %>
                 </p>
               </div>

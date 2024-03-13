@@ -117,7 +117,7 @@
         <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
           <label for="lead_source" class=" block mb-2 text-lg font-medium text-[#000]">Lead Source</label>
           <div class="w-full sm:w-[55%] lg:w-[55%] flex flex-col">
-            <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
+            < class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
               <%= enquire.lead_source %>
             </p>
           </div>
@@ -129,9 +129,9 @@
           <div class="w-full sm:w-[55%] lg:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
               <% if enquire.attachment.attached? %>
-                <%= link_to " #{enquire.attachment.filename}", rails_blob_path(enquire.attachment, disposition: "attachment") %><br>
+                <%= link_to " #{enquire.attachment.filename}", rails_blob_path(enquire.attachment, disposition: "attachment") %>
               <% else %>
-                <p>No attachments for this enquire.</p>
+                No attachments for this enquire
               <% end %>
             </p>
           </div>
