@@ -21,8 +21,8 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col">
-              <%= f.text_field :name, class: "validate w-full bg-[#f5f5f5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
-              <div class="text-red-600 text-sm mt-1" id="name-error"></div>
+              <%= f.text_field :name, class: "validate w-full bg-[#f5f5f5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_enquire_name", autocomplete: "off" %>
+              <div class="text-red-600 text-sm mt-1" id="edit_enquire_name_error"></div>
               <% if enquire&.errors&.any? %>
                 <% if enquire.errors[:name].any? %>
                   <div class="text-red-600 text-sm mt-1">
@@ -35,8 +35,8 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col">
-              <%= f.text_field :course, class: "validate w-full bg-[#f5f5f5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
-              <div class="text-red-600 text-sm mt-1" id="course-error"></div>
+              <%= f.text_field :course, class: "validate w-full bg-[#f5f5f5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_enquire_course", autocomplete: "off" %>
+              <div class="text-red-600 text-sm mt-1" id="edit_enquire_course_error"></div>
               <% if enquire&.errors&.any? %>
                 <% if enquire.errors[:course].any? %>
                   <div class="text-red-600 text-sm mt-1">
@@ -51,11 +51,11 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="contact" class="block mb-2 text-lg font-medium text-[#000]">Contact<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col relative">
-              <%= f.text_field :contact, class: "validate w-full bg-[#f5f5f5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-contact" %>
+              <%= f.text_field :contact, class: "validate w-full bg-[#f5f5f5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_enquire_contact", autocomplete: "new-contact" %>
               <svg class="absolute top-3 right-3" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 1H7L9 6L6.5 7.5C7.57096 9.67153 9.32847 11.429 11.5 12.5L13 10L18 12V16C18 16.5304 17.7893 17.0391 17.4142 17.4142C17.0391 17.7893 16.5304 18 16 18C12.0993 17.763 8.42015 16.1065 5.65683 13.3432C2.8935 10.5798 1.23705 6.90074 1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1Z" stroke="#818181" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <div class="text-red-600 text-sm mt-1" id="contact-error"></div>
+              <div class="text-red-600 text-sm mt-1" id="edit_enquire_contact_error"></div>
               <% if enquire&.errors&.any? %>
                 <% if enquire.errors[:contact].any? %>
                   <div class="text-red-600 text-sm mt-1">
@@ -68,12 +68,12 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="location" class="w-full sm:w-[40%] lg:w-[46%]  block mb-2 text-lg font-medium text-[#000]">Location<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col relative">
-              <%= f.text_field :location, class: "validate w-full bg-[#f5f5f5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "new-contact" %>
+              <%= f.text_field :location, class: "validate w-full bg-[#f5f5f5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_enquire_location", autocomplete: "new-contact" %>
               <svg class="absolute top-3 right-3" width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M3.81689 8.89109C3.81689 7.61099 4.32541 6.38331 5.23059 5.47814C6.13576 4.57297 7.36343 4.06445 8.64354 4.06445C9.92364 4.06445 11.1513 4.57297 12.0565 5.47814C12.9617 6.38331 13.4702 7.61099 13.4702 8.89109C13.4702 10.1712 12.9617 11.3989 12.0565 12.304C11.1513 13.2092 9.92364 13.7177 8.64354 13.7177C7.36343 13.7177 6.13576 13.2092 5.23059 12.304C4.32541 11.3989 3.81689 10.1712 3.81689 8.89109ZM8.64354 5.58866C7.76767 5.58866 6.92769 5.93659 6.30836 6.55592C5.68903 7.17525 5.3411 8.01523 5.3411 8.89109C5.3411 9.76696 5.68903 10.6069 6.30836 11.2263C6.92769 11.8456 7.76767 12.1935 8.64354 12.1935C9.5194 12.1935 10.3594 11.8456 10.9787 11.2263C11.598 10.6069 11.946 9.76696 11.946 8.89109C11.946 8.01523 11.598 7.17525 10.9787 6.55592C10.3594 5.93659 9.5194 5.58866 8.64354 5.58866Z" fill="#818181"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0.0307236 7.72974C0.204408 5.62309 1.16394 3.65879 2.71882 2.22683C4.2737 0.794878 6.3102 -6.4378e-06 8.424 0H8.86297C10.9768 -6.4378e-06 13.0133 0.794878 14.5681 2.22683C16.123 3.65879 17.0826 5.62309 17.2562 7.72974C17.4495 10.0763 16.7246 12.4063 15.2341 14.2289L10.3638 20.1845C10.1554 20.4394 9.89291 20.6448 9.59539 20.7858C9.29788 20.9268 8.97274 21 8.64348 21C8.31423 21 7.98909 20.9268 7.69158 20.7858C7.39406 20.6448 7.1316 20.4394 6.92317 20.1845L2.05283 14.2289C0.56228 12.4063 -0.162662 10.0763 0.0307236 7.72974ZM8.424 1.5242C6.693 1.52446 5.02537 2.17557 3.75214 3.34829C2.4789 4.521 1.69316 6.12958 1.55086 7.85472C1.38991 9.80759 1.99317 11.7467 3.23358 13.2636L8.10392 19.2202C8.16939 19.3003 8.25185 19.3649 8.34535 19.4092C8.43884 19.4536 8.54102 19.4766 8.6445 19.4766C8.74798 19.4766 8.85016 19.4536 8.94365 19.4092C9.03715 19.3649 9.11961 19.3003 9.18508 19.2202L14.0554 13.2636C15.2951 11.7464 15.8976 9.80732 15.7361 7.85472C15.5938 6.1294 14.8079 4.52068 13.5345 3.34794C12.261 2.1752 10.5931 1.52421 8.86195 1.5242H8.42298H8.424Z" fill="#818181"/>
               </svg>
-              <div class="text-red-600 text-sm mt-1" id="contact-confirmation-error"></div>
+              <div class="text-red-600 text-sm mt-1" id="edit_enquire_location_error"></div>
               <% if enquire&.errors&.any? %>
                 <% if enquire.errors[:location].any? %>
                   <div class="text-red-600 text-sm mt-1">
@@ -128,8 +128,8 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="status" class="block mb-2 text-lg font-medium text-[#000]">Status</label>
             <div class="w-full sm:w-[55%] flex flex-col relative">
-              <%= f.select(:status, Enquire.statuses.keys.map { |type| [type.humanize, type] }, { prompt: "Select Status" }, { class: "bg-[#fff] border-[1px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select select-widht edit-enquire-status" }) %>
-              <div class="text-red-600 text-sm mt-1" id="contact-confirmation-error"></div>
+              <%= f.select(:status, Enquire.statuses.keys.map { |type| [type.humanize, type] }, { prompt: "Select Status" }, { class: "bg-[#fff] border-[1px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select select-widht edit-enquire-status edit_status_validation" }) %>
+              <div class="text-red-600 text-sm mt-1" id="edit_enquire_status_error"></div>
               <% if enquire&.errors&.any? %>
                 <% if enquire.errors[:status].any? %>
                   <div class="text-red-600 text-sm mt-1">
@@ -183,7 +183,15 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="sales person" class=" block mb-2 text-lg font-medium text-[#000]">Sales Person</label>
             <div class="w-full sm:w-[55%] flex flex-coll">
-              <%= f.text_field :sales_person, class: "validate w-full bg-[#f5f5f5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+              <%= f.text_field :sales_person, class: "validate w-full bg-[#f5f5f5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_enquire_sales_person", autocomplete: "off" %>
+              <div class="text-red-600 text-sm mt-1" id="edit_enquire_sales_person_error"></div>
+              <% if enquire&.errors&.any? %>
+                <% if enquire.errors[:sales_person].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= enquire.errors.full_messages_for(:sales_person).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>

@@ -17,7 +17,6 @@ class Admin::EnquiresController < ApplicationController
 
   def create
     @enquire = Enquire.new(enquire_params)
-    byebug
     respond_to do |format|
     if @enquire.save
       @enquires = Enquire.get_enquires(params)
@@ -26,7 +25,7 @@ class Admin::EnquiresController < ApplicationController
     else
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.replace('admin-enquire-form', partial: 'admin/enquires/form', locals: { enquire: @enquire })
+          turbo_stream.replace('enquire-admin-form', partial: 'admin/enquires/form', locals: { enquire: @enquire })
         ]
       end
       format.json { render json: @enquire.errors, status: :unprocessable_entity }

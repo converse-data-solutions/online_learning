@@ -18,11 +18,11 @@ function editEnquirePopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function(res) {
+      success: function (res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
       },
-      error: function() {
+      error: function () {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -49,11 +49,11 @@ function viewEnquirePopup() {
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function(res) {
+      success: function (res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
       },
-      error: function() {
+      error: function () {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -89,12 +89,12 @@ function deleteEnquirePopup() {
   });
 }
 
-function searchEnquire(){
+function searchEnquire() {
   let delayTimer;
 
-  $("#enquire_search").keyup(function(e) {
+  $("#enquire_search").keyup(function (e) {
     clearTimeout(delayTimer);
-    delayTimer = setTimeout(function() {
+    delayTimer = setTimeout(function () {
       let searchValue = $("#enquire_search").val();
       $("#overlay").show();
       $.ajax({
@@ -104,9 +104,10 @@ function searchEnquire(){
           search: searchValue,
         },
         headers: {
-          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function(res) {
+        success: function (res) {
           Turbo.renderStreamMessage(res);
           let newURL =
             window.location.protocol +
@@ -115,7 +116,8 @@ function searchEnquire(){
             window.location.pathname +
             "?search=" +
             encodeURIComponent(searchValue);
-          window.history.pushState({
+          window.history.pushState(
+            {
               path: newURL,
             },
             "",
@@ -123,7 +125,7 @@ function searchEnquire(){
           );
           $("#overlay").hide();
         },
-        error: function() {
+        error: function () {
           console.log("Error fetching data");
           $("#overlay").hide();
         },
@@ -133,7 +135,7 @@ function searchEnquire(){
 }
 
 function enquireName() {
-  $("#enquire-filter-container .custom-select").each(function() {
+  $("#enquire-filter-container .custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -146,7 +148,7 @@ function enquireName() {
     template += '<div class="custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="custom-option ' +
           $(this).attr("class") +
@@ -164,23 +166,23 @@ function enquireName() {
   });
 
   $(".custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".custom-options").removeClass("option-hover");
     }
   );
 
-  $(".custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".custom-select").removeClass("opened");
     });
     $(this).parents(".custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".custom-option").on("click", function() {
+  $(".custom-option").on("click", function () {
     $(this)
       .parents(".custom-select-wrapper")
       .find("select")
@@ -199,7 +201,7 @@ function enquireName() {
 }
 
 function enquireCourse() {
-  $("#enquire-filter-container .new-course-custom-select").each(function() {
+  $("#enquire-filter-container .new-course-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -208,11 +210,13 @@ function enquireCourse() {
 
     var template = '<div class="' + classes + '">';
     template +=
-      '<span class="new-course-custom-select-trigger">' + placeholderText + "</span>";
+      '<span class="new-course-custom-select-trigger">' +
+      placeholderText +
+      "</span>";
     template += '<div class="new-course-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-course-custom-option ' +
           $(this).attr("class") +
@@ -230,23 +234,23 @@ function enquireCourse() {
   });
 
   $(".new-course-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-course-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-course-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-course-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-course-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-course-custom-select").removeClass("opened");
     });
     $(this).parents(".new-course-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-course-custom-option").on("click", function() {
+  $(".new-course-custom-option").on("click", function () {
     $(this)
       .parents(".new-course-custom-select-wrapper")
       .find("select")
@@ -263,7 +267,6 @@ function enquireCourse() {
       .text($(this).text());
   });
 }
-
 
 function enquireStatus() {
   $("#enquire-filter-container .new-custom-select").each(function () {
@@ -331,9 +334,8 @@ function enquireStatus() {
   });
 }
 
-
 function enquireTimeslot() {
-  $("#enquire-filter-container .new-lesson-custom-select").each(function() {
+  $("#enquire-filter-container .new-lesson-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -342,11 +344,13 @@ function enquireTimeslot() {
 
     var template = '<div class="' + classes + '">';
     template +=
-      '<span class="new-lesson-custom-select-trigger">' + placeholderText + "</span>";
+      '<span class="new-lesson-custom-select-trigger">' +
+      placeholderText +
+      "</span>";
     template += '<div class="new-lesson-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-lesson-custom-option ' +
           $(this).attr("class") +
@@ -364,23 +368,23 @@ function enquireTimeslot() {
   });
 
   $(".new-lesson-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-lesson-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-lesson-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-lesson-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-lesson-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-lesson-custom-select").removeClass("opened");
     });
     $(this).parents(".new-lesson-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-lesson-custom-option").on("click", function() {
+  $(".new-lesson-custom-option").on("click", function () {
     $(this)
       .parents(".new-lesson-custom-select-wrapper")
       .find("select")
@@ -398,124 +402,139 @@ function enquireTimeslot() {
   });
 }
 
-function nameFilter(){
-  $("#enquire-filter-container .custom-select").on("click", ".custom-option", function () {
-    var studentName = $(this).data("value");
-    console.log("Name: " + studentName);
-    $("#overlay").show();
-    $.ajax({
-      url: "/admin/enquires",
-      type: "GET",
-      data: {
-        name: studentName,
-      },
-      headers: {
-        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-      },
-      success: function (data) {
-        Turbo.renderStreamMessage(data);
-        var newUrl =
-          window.location.protocol +
-          "//" +
-          window.location.host +
-          window.location.pathname +
-          "?name=" +
-          encodeURIComponent(studentName);
-        window.history.pushState(
-          {
-            path: newUrl,
-          },
-          "",
-          newUrl
-        );
-        $("#overlay").hide();
-      },
-      error: function (error) {
-        console.error("Error:", error);
-        $("#overlay").hide();
-      },
-    });
-  });
+function nameFilter() {
+  $("#enquire-filter-container .custom-select").on(
+    "click",
+    ".custom-option",
+    function () {
+      var studentName = $(this).data("value");
+      console.log("Name: " + studentName);
+      $("#overlay").show();
+      $.ajax({
+        url: "/admin/enquires",
+        type: "GET",
+        data: {
+          name: studentName,
+        },
+        headers: {
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function (data) {
+          Turbo.renderStreamMessage(data);
+          var newUrl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?name=" +
+            encodeURIComponent(studentName);
+          window.history.pushState(
+            {
+              path: newUrl,
+            },
+            "",
+            newUrl
+          );
+          $("#overlay").hide();
+        },
+        error: function (error) {
+          console.error("Error:", error);
+          $("#overlay").hide();
+        },
+      });
+    }
+  );
 }
 
-function courseFilter(){
-  $("#enquire-filter-container .new-course-custom-select").on("click", ".new-course-custom-option", function () {
-    var studentCourse = $(this).data("value");
-    console.log("Course: " + studentCourse);
-    $("#overlay").show();
-    $.ajax({
-      url: "/admin/enquires",
-      type: "GET",
-      data: {
-        course: studentCourse,
-      },
-      headers: {
-        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-      },
-      success: function (data) {
-        Turbo.renderStreamMessage(data);
-        var newUrl =
-          window.location.protocol +
-          "//" +
-          window.location.host +
-          window.location.pathname +
-          "?course=" +
-          encodeURIComponent(studentCourse);
-        window.history.pushState(
-          {
-            path: newUrl,
-          },
-          "",
-          newUrl
-        );
-        $("#overlay").hide();
-      },
-      error: function (error) {
-        console.error("Error:", error);
-        $("#overlay").hide();
-      },
-    });
-  });
+function courseFilter() {
+  $("#enquire-filter-container .new-course-custom-select").on(
+    "click",
+    ".new-course-custom-option",
+    function () {
+      var studentCourse = $(this).data("value");
+      console.log("Course: " + studentCourse);
+      $("#overlay").show();
+      $.ajax({
+        url: "/admin/enquires",
+        type: "GET",
+        data: {
+          course: studentCourse,
+        },
+        headers: {
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function (data) {
+          Turbo.renderStreamMessage(data);
+          var newUrl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?course=" +
+            encodeURIComponent(studentCourse);
+          window.history.pushState(
+            {
+              path: newUrl,
+            },
+            "",
+            newUrl
+          );
+          $("#overlay").hide();
+        },
+        error: function (error) {
+          console.error("Error:", error);
+          $("#overlay").hide();
+        },
+      });
+    }
+  );
 }
 
-function statusFilter(){
-  $("#enquire-filter-container .new-custom-select").on("click", ".new-custom-option", function () {
-    var studentStatus = $(this).data("value");
-    console.log("Status: " + studentStatus);
-    $("#overlay").show();
-    $.ajax({
-      url: "/admin/enquires",
-      type: "GET",
-      data: {
-        status: studentStatus,
-      },
-      headers: {
-        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
-      },
-      success: function (data) {
-        Turbo.renderStreamMessage(data);
-        var newUrl =
-          window.location.protocol +
-          "//" +
-          window.location.host +
-          window.location.pathname +
-          "?status=" +
-          encodeURIComponent(studentStatus);
-        window.history.pushState(
-          {
-            path: newUrl,
-          },
-          "",
-          newUrl
-        );
-        $("#overlay").hide();
-      },
-      error: function (error) {
-        console.error("Error:", error);
-        $("#overlay").hide();
-      },
-    });
-  });
+function statusFilter() {
+  $("#enquire-filter-container .new-custom-select").on(
+    "click",
+    ".new-custom-option",
+    function () {
+      var studentStatus = $(this).data("value");
+      console.log("Status: " + studentStatus);
+      $("#overlay").show();
+      $.ajax({
+        url: "/admin/enquires",
+        type: "GET",
+        data: {
+          status: studentStatus,
+        },
+        headers: {
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function (data) {
+          Turbo.renderStreamMessage(data);
+          var newUrl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?status=" +
+            encodeURIComponent(studentStatus);
+          window.history.pushState(
+            {
+              path: newUrl,
+            },
+            "",
+            newUrl
+          );
+          $("#overlay").hide();
+        },
+        error: function (error) {
+          console.error("Error:", error);
+          $("#overlay").hide();
+        },
+      });
+    }
+  );
 }
 
 function timeSlot() {
@@ -563,7 +582,7 @@ function editTimeSlot() {
 }
 
 function enquireAdmin() {
-  $("#enquire-admin-form .custom-select").each(function() {
+  $("#enquire-admin-form .custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -576,7 +595,7 @@ function enquireAdmin() {
     template += '<div class="custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="custom-option ' +
           $(this).attr("class") +
@@ -594,23 +613,23 @@ function enquireAdmin() {
   });
 
   $(".custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".custom-options").removeClass("option-hover");
     }
   );
 
-  $(".custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".custom-select").removeClass("opened");
     });
     $(this).parents(".custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".custom-option").on("click", function() {
+  $(".custom-option").on("click", function () {
     $(this)
       .parents(".custom-select-wrapper")
       .find("select")
@@ -652,7 +671,9 @@ function initializeTimeDropdowns() {
           minutes.forEach((minute) => {
             const minuteStr = minute < 10 ? "0" + minute : "" + minute;
             const time = hourStr + ":" + minuteStr + " " + period;
-            const $optionElement = $("<div>").addClass("dropdown-menu-item").text(time);
+            const $optionElement = $("<div>")
+              .addClass("dropdown-menu-item")
+              .text(time);
             $dropdownMenu.append($optionElement);
           });
         });
@@ -685,14 +706,20 @@ function initializeTimeDropdowns() {
 
     // Add event listener to close the dropdown menu when clicking outside for start time
     $(document).on("click", function (event) {
-      if (!$startDropdown.is(event.target) && $startDropdown.has(event.target).length === 0) {
+      if (
+        !$startDropdown.is(event.target) &&
+        $startDropdown.has(event.target).length === 0
+      ) {
         $startDropdownMenu.removeClass("show");
       }
     });
 
     // Add event listener to close the dropdown menu when clicking outside for end time
     $(document).on("click", function (event) {
-      if (!$endDropdown.is(event.target) && $endDropdown.has(event.target).length === 0) {
+      if (
+        !$endDropdown.is(event.target) &&
+        $endDropdown.has(event.target).length === 0
+      ) {
         $endDropdownMenu.removeClass("show");
       }
     });
@@ -739,7 +766,9 @@ function editTimeDropdowns() {
           minutes.forEach((minute) => {
             const minuteStr = minute < 10 ? "0" + minute : "" + minute;
             const time = hourStr + ":" + minuteStr + " " + period;
-            const $optionElement = $("<div>").addClass("dropdown-menu-item").text(time);
+            const $optionElement = $("<div>")
+              .addClass("dropdown-menu-item")
+              .text(time);
             $dropdownMenu.append($optionElement);
           });
         });
@@ -772,14 +801,20 @@ function editTimeDropdowns() {
 
     // Add event listener to close the dropdown menu when clicking outside for start time
     $(document).on("click", function (event) {
-      if (!$startDropdown.is(event.target) && $startDropdown.has(event.target).length === 0) {
+      if (
+        !$startDropdown.is(event.target) &&
+        $startDropdown.has(event.target).length === 0
+      ) {
         $startDropdownMenu.removeClass("show");
       }
     });
 
     // Add event listener to close the dropdown menu when clicking outside for end time
     $(document).on("click", function (event) {
-      if (!$endDropdown.is(event.target) && $endDropdown.has(event.target).length === 0) {
+      if (
+        !$endDropdown.is(event.target) &&
+        $endDropdown.has(event.target).length === 0
+      ) {
         $endDropdownMenu.removeClass("show");
       }
     });
@@ -868,7 +903,276 @@ function editEnquireAdmin() {
   });
 }
 
-$(document).ready(function() {
+function enquireFormValidation() {
+  function enquireName() {
+    let name = $("#enquire_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#enquire_name_error").text("Name can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#enquire_name_error").text(
+        "Please enter a valid name (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#enquire_name_error").text("");
+      return true;
+    }
+  }
+
+  function enquireStatus() {
+    let name = $(".status_validation").val();
+
+    if (!name) {
+      $("#enquire_status_error").text("Status can't be blank");
+      return false;
+    } else {
+      $("#enquire_status_error").text("");
+      return true;
+    }
+  }
+
+  function enquireCourse() {
+    let name = $("#enquire_course").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#enquire_course_error").text("Course can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#enquire_course_error").text(
+        "Please enter a valid Course (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#enquire_course_error").text("");
+      return true;
+    }
+  }
+
+  function enquireContact() {
+    let contactNumber = $("#enquire_contact").val();
+
+    if (!contactNumber) {
+      $("#enquire_contact_error").text("Contact Number cannot be empty");
+      return false;
+    }
+
+    if (!validator.isNumeric(contactNumber) || contactNumber.length !== 10) {
+      $("#enquire_contact_error").text(
+        "Contact Number must be a 10-digit number"
+      );
+      return false;
+    } else {
+      $("#enquire_contact_error").text("");
+      return true;
+    }
+  }
+
+  function enquireLocation() {
+    let name = $("#enquire_course").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#enquire_location_error").text("Occupation can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#enquire_location_error").text(
+        "Please enter a valid Occupation (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#enquire_location_error").text("");
+      return true;
+    }
+  }
+  function enquireSalesPerson() {
+    let name = $("#enquire_sales_person").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#enquire_sales_person_error").text("Occupation can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#enquire_sales_person_error").text(
+        "Please enter a valid Occupation (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#enquire_sales_person_error").text("");
+      return true;
+    }
+  }
+  // Event bindings for registration form fields
+  $("#enquire_name").on("blur", enquireName);
+  $(".status_validation").on("blur", enquireStatus);
+  $("#enquire_sales_person").on("blur", enquireSalesPerson);
+  $("#enquire_course").on("blur", enquireCourse);
+  $("#enquire_contact").on("blur", enquireContact);
+  $("#enquire_location").on("blur", enquireLocation);
+
+  // Event binding for form submission
+  $("#enquire-admin-form").on("submit", function (event) {
+    // Validate all fields on form submission
+    let isNameValid = enquireName();
+    let isStatusValid = enquireStatus();
+    let isCourseValid = enquireCourse();
+    let isContactValid = enquireContact();
+    let isLocationValid = enquireLocation();
+    let isSalesPersonValid = enquireSalesPerson();
+
+    // Check if any field is invalid
+    if (
+      !isNameValid ||
+      !isCourseValid ||
+      !isStatusValid ||
+      !isContactValid ||
+      !isLocationValid ||
+      !isSalesPersonValid
+    ) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      enquireName();
+      enquireStatus();
+      enquireCourse();
+      enquireContact();
+      enquireLocation();
+      enquireSalesPerson();
+    }
+  });
+}
+
+function enquireEditFormValidation() {
+  function enquireName() {
+    let name = $("#edit_enquire_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#edit_enquire_name_error").text("Name can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#edit_enquire_name_error").text(
+        "Please enter a valid name (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#edit_enquire_name_error").text("");
+      return true;
+    }
+  }
+
+  function enquireStatus() {
+    let name = $(".edit_status_validation").val();
+
+    if (!name) {
+      $("#edit_enquire_status_error").text("Status can't be blank");
+      return false;
+    } else {
+      $("#edit_enquire_status_error").text("");
+      return true;
+    }
+  }
+
+  function enquireCourse() {
+    let name = $("#edit_enquire_course").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#edit_enquire_course_error").text("Course can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#edit_enquire_course_error").text(
+        "Please enter a valid Course (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#edit_enquire_course_error").text("");
+      return true;
+    }
+  }
+
+  function enquireContact() {
+    let contactNumber = $("#edit_enquire_contact").val();
+
+    if (!contactNumber) {
+      $("#edit_enquire_contact_error").text("Contact Number cannot be empty");
+      return false;
+    }
+
+    if (!validator.isNumeric(contactNumber) || contactNumber.length !== 10) {
+      $("#edit_enquire_contact_error").text(
+        "Contact Number must be a 10-digit number"
+      );
+      return false;
+    } else {
+      $("#edit_enquire_contact_error").text("");
+      return true;
+    }
+  }
+
+  function enquireLocation() {
+    let name = $("#edit_enquire_course").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#edit_enquire_location_error").text("Occupation can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#edit_enquire_location_error").text(
+        "Please enter a valid Occupation (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#edit_enquire_location_error").text("");
+      return true;
+    }
+  }
+  function enquireSalesPerson() {
+    let name = $("#edit_enquire_sales_person").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#edit_enquire_sales_person_error").text("Occupation can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#edit_enquire_sales_person_error").text(
+        "Please enter a valid Occupation (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#edit_enquire_sales_person_error").text("");
+      return true;
+    }
+  }
+  // Event bindings for registration form fields
+  $("#edit-enquire-popup").on("focusout", "#edit_enquire_name", enquireName);
+  $("#edit-enquire-popup").on("focusout", "#enquireStatus", enquireStatus);
+  $("#edit-enquire-popup").on("focusout", "#edit_enquire_course", enquireCourse);
+  $("#edit-enquire-popup").on("focusout", "#edit_enquire_contact", enquireContact);
+  $("#edit-enquire-popup").on("focusout", "#edit_enquire_location", enquireLocation);
+  $("#edit-enquire-popup").on("focusout", "#edit_enquire_sales_person", enquireSalesPerson);
+
+
+  $("#edit-enquire-popup").on("submit", "#enquire-admin-edit-form", function(event) {
+
+    let isNameValid = enquireName();
+    let isStatusValid = enquireStatus();
+    let isCourseValid = enquireCourse();
+    let isContactValid = enquireContact();
+    let isLocationValid = enquireLocation();
+    let isSalesPersonValid = enquireSalesPerson();
+
+    if (!isNameValid || !isStatusValid || !isCourseValid || !isContactValid || !isLocationValid || !isSalesPersonValid) {
+      event.preventDefault();
+    }
+  });
+}
+
+$(document).ready(function () {
   editEnquirePopup();
   viewEnquirePopup();
   deleteEnquirePopup();
@@ -886,8 +1190,10 @@ $(document).ready(function() {
   editTimeDropdowns();
   editTimeSlot();
   editEnquireAdmin();
+  enquireFormValidation();
+  enquireEditFormValidation();
 
-  $(document).on("turbo:render", function() {
+  $(document).on("turbo:render", function () {
     editEnquirePopup();
     viewEnquirePopup();
     deleteEnquirePopup();
@@ -905,14 +1211,14 @@ $(document).ready(function() {
     editTimeDropdowns();
     editTimeSlot();
     editEnquireAdmin();
-    
+    enquireFormValidation();
+    enquireEditFormValidation();
   });
 
-  $(document).on("turbo:before-render", function() {
+  $(document).on("turbo:before-render", function () {
     $("#overlay").show();
-    
   });
-  $(document).on("turbo:after-render", function() {
+  $(document).on("turbo:after-render", function () {
     $("#overlay").hide();
   });
 });
@@ -920,12 +1226,11 @@ $(document).ready(function() {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function(streamElement) {
+  event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initializeTimeDropdowns();
     editTimeDropdowns();
     editTimeSlot();
     editEnquireAdmin();
-
   };
 });
