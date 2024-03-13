@@ -22,7 +22,7 @@ class Enquire < ApplicationRecord
     page = (page_number && page_number.positive?) ? page_number : 1
     record_per_page = (params[:per_page].presence&.to_i || 10).to_i
     per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
-    Enquire.order(created_at: :desc).name_dropdown_filter(params[:name]).course_dropdown_filter(params[:course]).status_dropdown_filter(params[:status]).search_by_name_and_course(params[:search]).paginate(page: page, per_page: per_page)
+    Enquire.order(created_at: :desc).name_dropdown_filter(params[:name]).course_dropdown_filter(params[:course]).status_dropdown_filter(params[:status]).timeslot_dropdown_filter(params[:timeslot]).search_by_name_and_course(params[:search]).paginate(page: page, per_page: per_page)
   end
 
   def self.search_by_name_and_course(query)
@@ -58,5 +58,12 @@ class Enquire < ApplicationRecord
       all
     end
   end
-  
+
+  def self.timeslot_dropdown_filter(timeslot)
+    if timeslot.present?
+      where('timeslot LIKE ?', "%#{timeslot}%")
+    else
+      all
+    end
+  end
 end

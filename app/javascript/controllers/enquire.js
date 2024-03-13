@@ -135,7 +135,7 @@ function searchEnquire() {
 }
 
 function enquireName() {
-  $("#enquire-filter-container .custom-select").each(function () {
+  $("#enquire-filter-container .new-name-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -144,13 +144,15 @@ function enquireName() {
 
     var template = '<div class="' + classes + '">';
     template +=
-      '<span class="custom-select-trigger">' + placeholderText + "</span>";
-    template += '<div class="custom-options">';
+      '<span class="new-name-custom-select-trigger">' +
+      placeholderText +
+      "</span>";
+    template += '<div class="new-name-custom-options">';
     $(this)
       .find("option")
       .each(function () {
         template +=
-          '<span class="custom-option ' +
+          '<span class="new-name-custom-option ' +
           $(this).attr("class") +
           '" data-value="' +
           $(this).attr("value") +
@@ -160,42 +162,42 @@ function enquireName() {
       });
     template += "</div></div>";
 
-    $(this).wrap('<div class="custom-select-wrapper"></div>');
+    $(this).wrap('<div class="new-name-custom-select-wrapper"></div>');
     $(this).hide();
     $(this).after(template);
   });
 
-  $(".custom-option:first-of-type").hover(
+  $(".new-name-custom-option:first-of-type").hover(
     function () {
-      $(this).parents(".custom-options").addClass("option-hover");
+      $(this).parents(".new-name-custom-options").addClass("option-hover");
     },
     function () {
-      $(this).parents(".custom-options").removeClass("option-hover");
+      $(this).parents(".new-name-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".custom-select-trigger").on("click", function (event) {
+  $(".new-name-custom-select-trigger").on("click", function (event) {
     $("html").one("click", function () {
-      $(".custom-select").removeClass("opened");
+      $(".new-name-custom-select").removeClass("opened");
     });
-    $(this).parents(".custom-select").toggleClass("opened");
+    $(this).parents(".new-name-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".custom-option").on("click", function () {
+  $(".new-name-custom-option").on("click", function () {
     $(this)
-      .parents(".custom-select-wrapper")
+      .parents(".new-name-custom-select-wrapper")
       .find("select")
       .val($(this).data("value"));
     $(this)
-      .parents(".custom-options")
-      .find(".custom-option")
+      .parents(".new-name-custom-options")
+      .find(".new-name-custom-option")
       .removeClass("selection");
     $(this).addClass("selection");
-    $(this).parents(".custom-select").removeClass("opened");
+    $(this).parents(".new-name-custom-select").removeClass("opened");
     $(this)
-      .parents(".custom-select")
-      .find(".custom-select-trigger")
+      .parents(".new-name-custom-select")
+      .find(".new-name-custom-select-trigger")
       .text($(this).text());
   });
 }
@@ -269,22 +271,24 @@ function enquireCourse() {
 }
 
 function enquireStatus() {
-  $("#enquire-filter-container .new-custom-select").each(function () {
+  $("#enquire-filter-container .new-status-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
-      name = $(this).attr("name");
+      status = $(this).attr("status");
 
     var placeholderText = $(this).find("option:first-of-type").text();
 
     var template = '<div class="' + classes + '">';
     template +=
-      '<span class="new-custom-select-trigger">' + placeholderText + "</span>";
-    template += '<div class="new-custom-options">';
+      '<span class="new-status-custom-select-trigger">' +
+      placeholderText +
+      "</span>";
+    template += '<div class="new-status-custom-options">';
     $(this)
       .find("option")
       .each(function () {
         template +=
-          '<span class="new-custom-option ' +
+          '<span class="new-status-custom-option ' +
           $(this).attr("class") +
           '" data-value="' +
           $(this).attr("value") +
@@ -294,42 +298,42 @@ function enquireStatus() {
       });
     template += "</div></div>";
 
-    $(this).wrap('<div class="new-custom-select-wrapper"></div>');
+    $(this).wrap('<div class="new-status-custom-select-wrapper"></div>');
     $(this).hide();
     $(this).after(template);
   });
 
-  $(".new-custom-option:first-of-type").hover(
+  $(".new-status-custom-option:first-of-type").hover(
     function () {
-      $(this).parents(".new-custom-options").addClass("option-hover");
+      $(this).parents(".new-status-custom-options").addClass("option-hover");
     },
     function () {
-      $(this).parents(".new-custom-options").removeClass("option-hover");
+      $(this).parents(".new-status-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-custom-select-trigger").on("click", function (event) {
+  $(".new-status-custom-select-trigger").on("click", function (event) {
     $("html").one("click", function () {
-      $(".new-custom-select").removeClass("opened");
+      $(".new-status-custom-select").removeClass("opened");
     });
-    $(this).parents(".new-custom-select").toggleClass("opened");
+    $(this).parents(".new-status-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-custom-option").on("click", function () {
+  $(".new-status-custom-option").on("click", function () {
     $(this)
-      .parents(".new-custom-select-wrapper")
+      .parents(".new-status-custom-select-wrapper")
       .find("select")
       .val($(this).data("value"));
     $(this)
-      .parents(".new-custom-options")
-      .find(".new-custom-option")
+      .parents(".new-status-custom-options")
+      .find(".new-status-custom-option")
       .removeClass("selection");
     $(this).addClass("selection");
-    $(this).parents(".new-custom-select").removeClass("opened");
+    $(this).parents(".new-status-custom-select").removeClass("opened");
     $(this)
-      .parents(".new-custom-select")
-      .find(".new-custom-select-trigger")
+      .parents(".new-status-custom-select")
+      .find(".new-status-custom-select-trigger")
       .text($(this).text());
   });
 }
@@ -403,9 +407,9 @@ function enquireTimeslot() {
 }
 
 function nameFilter() {
-  $("#enquire-filter-container .custom-select").on(
+  $("#enquire-filter-container .new-name-custom-select").on(
     "click",
-    ".custom-option",
+    ".new-name-custom-option",
     function () {
       var studentName = $(this).data("value");
       console.log("Name: " + studentName);
@@ -493,9 +497,9 @@ function courseFilter() {
 }
 
 function statusFilter() {
-  $("#enquire-filter-container .new-custom-select").on(
+  $("#enquire-filter-container .new-status-custom-select").on(
     "click",
-    ".new-custom-option",
+    ".new-status-custom-option",
     function () {
       var studentStatus = $(this).data("value");
       console.log("Status: " + studentStatus);
@@ -519,6 +523,48 @@ function statusFilter() {
             window.location.pathname +
             "?status=" +
             encodeURIComponent(studentStatus);
+          window.history.pushState(
+            {
+              path: newUrl,
+            },
+            "",
+            newUrl
+          );
+          $("#overlay").hide();
+        },
+        error: function (error) {
+          console.error("Error:", error);
+          $("#overlay").hide();
+        },
+      });
+    }
+  );
+}
+
+function timeSlotFilter() {
+  $("#enquire-filter-container .new-lesson-custom-select").on("click", ".new-lesson-custom-option", function () {
+      var timeStatus = $(this).data("value");
+      console.log("Status: " + timeStatus);
+      $("#overlay").show();
+      $.ajax({
+        url: "/admin/enquires",
+        type: "GET",
+        data: {
+          timeslot: timeStatus,
+        },
+        headers: {
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function (data) {
+          Turbo.renderStreamMessage(data);
+          var newUrl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?timeslot=" +
+            encodeURIComponent(timeStatus);
           window.history.pushState(
             {
               path: newUrl,
@@ -1184,6 +1230,7 @@ $(document).ready(function () {
   nameFilter();
   courseFilter();
   statusFilter();
+  timeSlotFilter();
   timeSlot();
   enquireAdmin();
   initializeTimeDropdowns();
@@ -1205,6 +1252,7 @@ $(document).ready(function () {
     nameFilter();
     courseFilter();
     statusFilter();
+    timeSlotFilter();
     timeSlot();
     enquireAdmin();
     initializeTimeDropdowns();
