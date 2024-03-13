@@ -457,7 +457,7 @@ function courseFilter() {
         url: "/admin/enquires",
         type: "GET",
         data: {
-          course: studentCourse,
+          course_name: studentCourse,
         },
         headers: {
           Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
@@ -469,7 +469,7 @@ function courseFilter() {
             "//" +
             window.location.host +
             window.location.pathname +
-            "?course=" +
+            "?course_name=" +
             encodeURIComponent(studentCourse);
           window.history.pushState({
               path: newUrl,
@@ -970,7 +970,7 @@ function enquireFormValidation() {
   }
 
   function enquireCourse() {
-    let name = $("#enquire_course").val();
+    let name = $("#enquire_course_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
 
     if (!name) {
@@ -1007,15 +1007,15 @@ function enquireFormValidation() {
   }
 
   function enquireLocation() {
-    let name = $("#enquire_course").val();
+    let name = $("#enquire_location").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
 
     if (!name) {
-      $("#enquire_location_error").text("Occupation can't be blank");
+      $("#enquire_location_error").text("Location can't be blank");
       return false;
     } else if (!namecheck) {
       $("#enquire_location_error").text(
-        "Please enter a valid Occupation (only alphabets allowed)"
+        "Please enter a valid Location (only alphabets allowed)"
       );
       return false;
     } else {
@@ -1029,11 +1029,11 @@ function enquireFormValidation() {
     let namecheck = /^[a-zA-Z ]+$/.test(name);
 
     if (!name) {
-      $("#enquire_sales_person_error").text("Occupation can't be blank");
+      $("#enquire_sales_person_error").text("Sales Person name can't be blank");
       return false;
     } else if (!namecheck) {
       $("#enquire_sales_person_error").text(
-        "Please enter a valid Occupation (only alphabets allowed)"
+        "Please enter a valid name (only alphabets allowed)"
       );
       return false;
     } else {
@@ -1045,7 +1045,7 @@ function enquireFormValidation() {
   $("#enquire_name").on("blur", enquireName);
   $(".status_validation").on("blur", enquireStatus);
   $("#enquire_sales_person").on("blur", enquireSalesPerson);
-  $("#enquire_course").on("blur", enquireCourse);
+  $("#enquire_course_name").on("blur", enquireCourse);
   $("#enquire_contact").on("blur", enquireContact);
   $("#enquire_location").on("blur", enquireLocation);
 
@@ -1114,7 +1114,7 @@ function enquireEditFormValidation() {
   }
 
   function enquireCourse() {
-    let name = $("#edit_enquire_course").val();
+    let name = $("#edit_enquire_course_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
 
     if (!name) {
@@ -1151,15 +1151,15 @@ function enquireEditFormValidation() {
   }
 
   function enquireLocation() {
-    let name = $("#edit_enquire_course").val();
+    let name = $("#edit_enquire_location").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
 
     if (!name) {
-      $("#edit_enquire_location_error").text("Occupation can't be blank");
+      $("#edit_enquire_location_error").text("Location can't be blank");
       return false;
     } else if (!namecheck) {
       $("#edit_enquire_location_error").text(
-        "Please enter a valid Occupation (only alphabets allowed)"
+        "Please enter a valid Location (only alphabets allowed)"
       );
       return false;
     } else {
@@ -1173,11 +1173,11 @@ function enquireEditFormValidation() {
     let namecheck = /^[a-zA-Z ]+$/.test(name);
 
     if (!name) {
-      $("#edit_enquire_sales_person_error").text("Occupation can't be blank");
+      $("#edit_enquire_sales_person_error").text("Sales Person name can't be blank");
       return false;
     } else if (!namecheck) {
       $("#edit_enquire_sales_person_error").text(
-        "Please enter a valid Occupation (only alphabets allowed)"
+        "Please enter a valid name (only alphabets allowed)"
       );
       return false;
     } else {
@@ -1188,7 +1188,7 @@ function enquireEditFormValidation() {
   // Event bindings for registration form fields
   $("#edit-enquire-popup").on("focusout", "#edit_enquire_name", enquireName);
   $("#edit-enquire-popup").on("focusout", "#enquireStatus", enquireStatus);
-  $("#edit-enquire-popup").on("focusout", "#edit_enquire_course", enquireCourse);
+  $("#edit-enquire-popup").on("focusout", "#edit_enquire_course_name", enquireCourse);
   $("#edit-enquire-popup").on("focusout", "#edit_enquire_contact", enquireContact);
   $("#edit-enquire-popup").on("focusout", "#edit_enquire_location", enquireLocation);
   $("#edit-enquire-popup").on("focusout", "#edit_enquire_sales_person", enquireSalesPerson);

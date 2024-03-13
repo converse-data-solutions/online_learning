@@ -18,19 +18,19 @@ class Admin::EnquiresController < ApplicationController
   def create
     @enquire = Enquire.new(enquire_params)
     respond_to do |format|
-    if @enquire.save
-      @enquires = Enquire.get_enquires(params)
+      if @enquire.save
+        @enquires = Enquire.get_enquires(params)
         format.turbo_stream
         format.json { render :show, status: :created, location: admin_enquire_url(@enquire) }
-    else
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.replace('enquire-admin-form', partial: 'admin/enquires/form', locals: { enquire: @enquire })
-        ]
+      else
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace('enquire-admin-form', partial: 'admin/enquires/form', locals: { enquire: @enquire })
+          ]
+        end
+        format.json { render json: @enquire.errors, status: :unprocessable_entity }
       end
-      format.json { render json: @enquire.errors, status: :unprocessable_entity }
     end
-  end
   end
 
   def edit
@@ -62,7 +62,7 @@ class Admin::EnquiresController < ApplicationController
       end
       else
         format.turbo_stream { render turbo_stream: turbo_stream.append('enquire-table', partial: 'shared/failed', locals: { message: 'Enquire deletion failed.', type: 'notice' }) }
-      end 
+      end
     end
   end
 
@@ -80,6 +80,6 @@ class Admin::EnquiresController < ApplicationController
   end
 
   def enquire_params
-    params.require(:enquire).permit(:name, :course, :contact, :location, :timeslot, :status, :no_of_people, :follow_up, :remarks, :sales_person, :references, :lead_source, :attachment)
+    params.require(:enquire).permit(:name, :course_name, :contact, :location, :timeslot, :status, :no_of_people, :follow_up, :remarks, :sales_person, :references, :lead_source, :attachment)
   end
 end

@@ -10,7 +10,7 @@ class Enquire < ApplicationRecord
   }
 
   validates :name, presence: true
-  validates :course, presence: true
+  validates :course_name, presence: true
   validates :contact, presence: true
   validates :location, presence: true
   validates :timeslot, presence: true
@@ -22,48 +22,33 @@ class Enquire < ApplicationRecord
     page = (page_number && page_number.positive?) ? page_number : 1
     record_per_page = (params[:per_page].presence&.to_i || 10).to_i
     per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
-    Enquire.order(created_at: :desc).name_dropdown_filter(params[:name]).course_dropdown_filter(params[:course]).status_dropdown_filter(params[:status]).timeslot_dropdown_filter(params[:timeslot]).search_by_name_and_course(params[:search]).paginate(page: page, per_page: per_page)
+    Enquire.filter_enquires(params).paginate(page: page, per_page: per_page)
   end
 
-  def self.search_by_name_and_course(query)
-    if query.present?
-      where('name LIKE ? OR course LIKE ?', "%#{query}%", "%#{query}%")
-    else
-      all
-    end
-  end
+  def self.filter_enquires(params)
+    query = Enquire.order(created_at: :desc)
 
-  def self.name_dropdown_filter(name)
-    if name.present?
-      where('name LIKE ?', "%#{name}%")
-    else
-      all
+    if params[:search].present?
+      query = query.where('name LIKE ? OR course_name LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
     end
-  end
 
-  def self.course_dropdown_filter(course)
-    if course.present?
-      where('course LIKE ?', "%#{course}%")
-    else
-      all
+    if params[:name].present?
+      query = query.where('name LIKE ?', "%#{params[:name]}%")
     end
-  end
-
-  def self.status_dropdown_filter(status)
-    if status.present?
-      # Convert status string to symbol and then to integer using enum
-      status_enum = Enquire.statuses[status.to_sym]
-      where(status: status_enum)
-    else
-      all
+ 
+    if params[:course_name].present?
+      query = query.where('course_name LIKE ?', "%#{params[:course_name]}%")
     end
-  end
-
-  def self.timeslot_dropdown_filter(timeslot)
-    if timeslot.present?
-      where('timeslot LIKE ?', "%#{timeslot}%")
-    else
-      all
+ 
+    if params[:status].present?
+      status_enum = Enquire.statuses[params[:status].to_sym]
+      query = query.where(status: status_enum)
     end
+ 
+    if params[:timeslot].present?
+      query = query.where('timeslot LIKE ?', "%#{params[:timeslot]}%")
+    end
+ 
+    query
   end
 end

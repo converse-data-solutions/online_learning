@@ -50,7 +50,7 @@
       <%= collection_select(:name, :name, Enquire.all, :name, :name, { prompt: "Select Student", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-name-custom-select sources" }) %>
     </div>
     <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
-      <%= collection_select(:course, :course, Enquire.distinct.pluck(:course), :to_s, :to_s, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 focus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-course-custom-select sources" }) %>
+      <%= collection_select(:course_name, :course_name, Enquire.distinct.pluck(:course_name), :to_s, :to_s, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 focus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-course-custom-select sources" }) %>
     </div>
     <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
       <%= collection_select(:status, :status, Enquire.distinct.pluck(:status), :to_s, :to_s, { prompt: "Select Status", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-status-custom-select sources" }) %>
