@@ -19,17 +19,6 @@
 </div>
 <div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
   <div class="mb-7 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-    <label for="course" class="block mb-2 text-lg font-medium text-[#000]">Course</label>
-    <div class="sm:w-[55%] lg:w-[55%] w-full">
-      <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-        <% student.user_courses.each do |student_course| %>
-          <%= student_course.course.course_name %>
-          <%= ', ' unless student.user_courses.last == student_course %>
-        <% end %>
-      </p>
-    </div>
-  </div>
-  <div class="mb-7 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
     <label for="gender" class="block mb-2 text-lg font-medium text-[#000]">Gender</label>
     <div class="flex w-[55%] lg:w-[55%]">
       <p class="bg-[#F5F5F5] w-[100%] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
@@ -37,8 +26,6 @@
       </p>
     </div>
   </div>
-</div>
-<div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
   <div class="mb-7 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
     <label for="dataofbirth" class=" block mb-2 text-lg font-medium text-[#000]">Date of Birth</label>
     <div class="input-wrapper flex flex-col w-full sm:w-[55%] lg:w-[55%]">
@@ -47,6 +34,8 @@
       </p>
     </div>
   </div>
+</div>
+<div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
   <div class="mb-7 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
     <label for="contact number" class=" block mb-2 text-lg font-medium text-[#000]">Phone No</label>
     <div class="w-full sm:w-[55%] flex flex-col">
@@ -55,8 +44,6 @@
       </p>
     </div>
   </div>
-</div>
-<div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
   <div class="mb-7 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
     <label for="occupation" class=" block mb-2 text-lg font-medium text-[#000]">Occupation</label>
     <div class="w-full sm:w-[55%] flex flex-col">
@@ -65,6 +52,8 @@
       </p>
     </div>
   </div>
+</div>
+<div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
   <div class="mb-7 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
     <label for="education" class=" block mb-2 text-lg font-medium text-[#000]">Education</label>
     <div class="w-full sm:w-[55%] flex flex-col">
@@ -73,8 +62,6 @@
       </p>
     </div>
   </div>
-</div>
-<div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
   <div class="mb-7 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
     <label for="address" class=" block mb-2 text-lg font-medium text-[#000]">Address</label>
     <div class="w-full sm:w-[55%] flex flex-col">
@@ -83,6 +70,8 @@
       </textarea>
     </div>
   </div>
+</div>
+<div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
   <div class="mb-7 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
     <label for="emergency contact name" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Name</label>
     <div class="w-full sm:w-[55%] lg:w-[55%] flex flex-col">
@@ -91,8 +80,6 @@
       </p>
     </div>
   </div>
-</div>
-<div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
   <div class="mb-7 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
     <label for="emergency contact number" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Number</label>
     <div class="w-full sm:w-[55%] lg:w-[55%] flex flex-col">
@@ -100,7 +87,5 @@
         <%= student.emergency_contact_number %>
       </p>
     </div>
-  </div>
-  <div class="mb-7 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
   </div>
 </div>
