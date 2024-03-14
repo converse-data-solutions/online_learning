@@ -585,26 +585,30 @@ function createAttendance(){
   });
 }
 
-function editAttendance(){
+function editAttendance() {
+  let status = $("#edit_attendance_status").val();
+  
+  if (status == 'true') {
+    $("#edit_present").show();
+    $("#edit_absent").hide();
+  } else {
+    $("#edit_present").hide();
+    $("#edit_absent").show();
+  }
+
   $("#edit_present").click(function(){
     $(this).hide();
     $("#edit_absent").show();
+    $("#edit_attendance_status").val("true");
   });
 
   $("#edit_absent").click(function(){
     $(this).hide();
     $("#edit_present").show();
-  });
-
-   $("#edit_present").click(function(){
-    let status = $("#edit_absent_status").val()
-    $("#edit_attendance_status").attr("value", status);
-  });
-  $("#edit_absent").click(function(){
-    let status = $("#edit_present_status").val()
-    $("#edit_attendance_status").attr("value", status);
+    $("#edit_attendance_status").val("false");
   });
 }
+
 $(document).ready(function () {
   selectCreateCourse();
   selectCreateUser();
