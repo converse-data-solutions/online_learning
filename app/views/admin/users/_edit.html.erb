@@ -1,4 +1,4 @@
-<div class="relative w-full lg:max-w-[51rem] sm:max-w-[32rem] max-h-full max-w-[20rem] ml-[42px] sm:ml-[25px] md:ml-[0px]">
+<div class="relative w-full lg:max-w-[58rem] sm:max-w-[32rem] max-h-full max-w-[20rem] ml-[42px] sm:ml-[25px] md:ml-[0px]">
   <!-- Modal content -->
   <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
     <!-- Modal header -->
@@ -76,7 +76,7 @@
         <div class="mb-4 flex flex-col sm:flex-row select-edit-width">
           <label for="role" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Role<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
-            <%= collection_select(:role, :name, Role.all, :name, :name, { prompt: "Select Role", selected: '' }, { class: "bg-[#fff] border-0 bg-[#F5F5F5] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select select-edit-color" }) %>
+            <%= collection_select(:role, :name, Role.all, :name, :name, { selected: user.role&.name }, { class: "bg-[#fff] border-0 bg-[#F5F5F5] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select select-edit-color" }) %>
             <div class="text-red-600 text-sm mt-1" id="role-error"></div>
             <% if user&.errors&.any? %>
               <% if user&.errors[:role].any? %>
