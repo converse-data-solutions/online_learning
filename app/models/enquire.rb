@@ -18,10 +18,8 @@ class Enquire < ApplicationRecord
   validates :sales_person, presence: true
 
   def self.get_enquires(params)
-    page_number = params[:page].presence&.to_i
-    page = (page_number && page_number.positive?) ? page_number : 1
-    record_per_page = (params[:per_page].presence&.to_i || 10).to_i
-    per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
+    page = (params[:page].presence&.to_i&.positive? ? params[:page].to_i : 1)
+    per_page = [(params[:per_page].presence&.to_i || 10).to_i, 1].max
     Enquire.filter_enquires(params).paginate(page: page, per_page: per_page)
   end
 
