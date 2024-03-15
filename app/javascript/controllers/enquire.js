@@ -1270,6 +1270,8 @@ addEventListener("turbo:before-stream-render", (event) => {
     initializeTimeDropdowns();
     editTimeDropdowns();
     editTimeSlot();
-    editEnquireAdmin();
+    if (streamElement.target == 'edit-enquire-popup') {
+      editEnquireAdmin();
+    }
   };
 });
