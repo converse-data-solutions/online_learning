@@ -972,6 +972,13 @@ nav.main-menu li.active > a,
   border: 1px solid #CCCCCC !important;
   width: 100% !important;
 }
+.width_course{
+  width: 335px !important;
+}
+.edit_width_course{
+  width: 353px !important;
+  background-color: #F5F5F5 !important;
+}
 
 .new-lesson-custom-select-wrapper {
   position: relative;

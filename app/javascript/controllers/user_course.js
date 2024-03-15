@@ -221,54 +221,58 @@ function selectCreateUser() {
 }
 
 function selectCreateCourse() {
-  $("#user-course-filter-container .new-course-custom-select").each(function() {
-    var classes = $(this).attr("class"),
-      id = $(this).attr("id"),
-      name = $(this).attr("name");
+  $("#user-course-filter-container .new-course-custom-select").each(
+    function () {
+      var classes = $(this).attr("class"),
+        id = $(this).attr("id"),
+        name = $(this).attr("name");
 
-    var placeholderText = $(this).find("option:first-of-type").text();
+      var placeholderText = $(this).find("option:first-of-type").text();
 
-    var template = '<div class="' + classes + '">';
-    template +=
-      '<span class="new-course-custom-select-trigger">' + placeholderText + "</span>";
-    template += '<div class="new-course-custom-options">';
-    $(this)
-      .find("option")
-      .each(function() {
-        template +=
-          '<span class="new-course-custom-option ' +
-          $(this).attr("class") +
-          '" data-value="' +
-          $(this).attr("value") +
-          '">' +
-          $(this).html() +
-          "</span>";
-      });
-    template += "</div></div>";
+      var template = '<div class="' + classes + '">';
+      template +=
+        '<span class="new-course-custom-select-trigger">' +
+        placeholderText +
+        "</span>";
+      template += '<div class="new-course-custom-options">';
+      $(this)
+        .find("option")
+        .each(function () {
+          template +=
+            '<span class="new-course-custom-option ' +
+            $(this).attr("class") +
+            '" data-value="' +
+            $(this).attr("value") +
+            '">' +
+            $(this).html() +
+            "</span>";
+        });
+      template += "</div></div>";
 
-    $(this).wrap('<div class="new-course-custom-select-wrapper"></div>');
-    $(this).hide();
-    $(this).after(template);
-  });
+      $(this).wrap('<div class="new-course-custom-select-wrapper"></div>');
+      $(this).hide();
+      $(this).after(template);
+    }
+  );
 
   $(".new-course-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-course-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-course-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-course-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-course-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-course-custom-select").removeClass("opened");
     });
     $(this).parents(".new-course-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-course-custom-option").on("click", function() {
+  $(".new-course-custom-option").on("click", function () {
     $(this)
       .parents(".new-course-custom-select-wrapper")
       .find("select")
@@ -286,8 +290,8 @@ function selectCreateCourse() {
   });
 }
 
-function selectEditUser(){
-  $("#edit-user_course-popup .new-lesson-custom-select").each(function() {
+function selectEditUser() {
+  $("#edit-user_course-popup .new-lesson-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -296,11 +300,13 @@ function selectEditUser(){
 
     var template = '<div class="' + classes + '">';
     template +=
-      '<span class="new-lesson-custom-select-trigger">' + placeholderText + "</span>";
+      '<span class="new-lesson-custom-select-trigger">' +
+      placeholderText +
+      "</span>";
     template += '<div class="new-lesson-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-lesson-custom-option ' +
           $(this).attr("class") +
@@ -318,23 +324,23 @@ function selectEditUser(){
   });
 
   $(".new-lesson-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-lesson-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-lesson-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-lesson-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-lesson-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-lesson-custom-select").removeClass("opened");
     });
     $(this).parents(".new-lesson-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-lesson-custom-option").on("click", function() {
+  $(".new-lesson-custom-option").on("click", function () {
     $(this)
       .parents(".new-lesson-custom-select-wrapper")
       .find("select")
@@ -418,15 +424,12 @@ function selectEditCourse() {
   });
 }
 
-
 $(document).ready(function () {
   editPopup();
   deletePopup();
   tableSearch();
   selectCreateCourse();
   selectCreateUser();
-  selectEditUser();
-  selectEditCourse();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -434,8 +437,6 @@ $(document).ready(function () {
     tableSearch();
     selectCreateCourse();
     selectCreateUser();
-    selectEditUser();
-    selectEditCourse();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -453,7 +454,13 @@ addEventListener("turbo:before-stream-render", (event) => {
     fallbackToDefaultActions(streamElement);
     initModals();
     deletePopup();
-    selectEditUser();
-    selectEditCourse();
+    if (streamElement.target == "user-course-admin-form") {
+      selectCreateCourse();
+      selectCreateUser();
+    }
+    if (streamElement.target == "edit-user_course-popup") {
+      selectEditUser();
+      selectEditCourse();
+    }
   };
 });
