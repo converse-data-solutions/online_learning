@@ -2,6 +2,9 @@ class Payment < ApplicationRecord
   belongs_to :user_course
   belongs_to :entrollment, optional: true
 
+  validates :paid_amount, presence: true
+  validates :paid_at, presence: true
+
   def self.get_payments(params)
     page_number = params[:page].presence&.to_i
     page = (page_number && page_number.positive?) ? page_number : 1
