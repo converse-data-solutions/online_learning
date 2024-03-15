@@ -198,7 +198,7 @@ function collectionTableSearch() {
 }
 
 function collectionOptionSelect() {
-  $("#course-dropdown").on("click", ".new-custom-option", function() {
+  $("#course-dropdown .new-custom-select").on("click", ".new-custom-option", function() {
     $("#overlay").show();
     var selectedCourseId = $(this).data("value");
     $.ajax({
@@ -327,6 +327,7 @@ $(document).ready(function() {
   fromDate();
   toDate();
   dateFilter();
+  collectionOptionSelect();
 
   $(document).on("turbo:render", function() {
     collectionSelectUser();
@@ -336,6 +337,7 @@ $(document).ready(function() {
     fromDate();
     toDate();
     dateFilter();
+    collectionOptionSelect();
   });
 
   $(document).on("turbo:before-render", function() {
@@ -354,6 +356,8 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     if (streamElement.target == 'course-dropdown') {
+      collectionSelectCourse();
+      collectionOptionSelect();
     }
   };
 });

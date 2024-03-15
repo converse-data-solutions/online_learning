@@ -69,13 +69,13 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def user_invoice
-    @user = User.find_by(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
     @courses = @user.courses
     respond_to(&:turbo_stream)
   end
 
   def user_collection
-    @user = User.find_by(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
     @courses = @user.courses
     respond_to(&:turbo_stream)
   end

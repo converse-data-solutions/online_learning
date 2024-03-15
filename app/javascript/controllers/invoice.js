@@ -132,8 +132,9 @@ function invoiceSelectCourse() {
 
 function invoiceUserCourseSelect() {
   $("#invoice-filter-container .custom-select").on("click", ".custom-option", function() {
+    console.log("function triggered");
     var userId = $(this).data('value');
-    let getUser = $("#get-user-id").attr("data-user-id", userId).val(userId);
+    console.log("user id: " + userId);
 
     // Make an AJAX request to fetch sections for the selected course
     $.ajax({
@@ -147,7 +148,7 @@ function invoiceUserCourseSelect() {
       },
       success: function(data) {
         Turbo.renderStreamMessage(data);
-        $("#course-select .new-custom-option").attr('data-user-id', userId);
+        console.log("success: " + data);
       },
       error: function(error) {
         console.error('Error:', error);
@@ -266,5 +267,7 @@ addEventListener("turbo:before-stream-render", (event) => {
       invoiceSelectCourse();
     }
     invoiceOptionSelect();
+    invoiceUserCourseSelect();
+
   };
 });
