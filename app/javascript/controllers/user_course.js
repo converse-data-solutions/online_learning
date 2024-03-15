@@ -424,12 +424,156 @@ function selectEditCourse() {
   });
 }
 
+function resetNewErrorMessages() {
+  $("#student_name_error").text("");
+  $("#course_name_error").text("");
+  $("#course_amount_error").text("");
+  
+}
+
+function resetNewForm() {
+  $(".reset-form").on("click", function() {
+    $("#user-course-admin-form")[0].reset()
+    resetNewErrorMessages();
+  });
+
+}
+
+function createValidation() {
+
+  function enquireStudentName() {
+    let name = $(".student_name").val();
+
+    if (!name) {
+      $("#student_name_error").text("Student name can't be blank");
+      return false;
+    } else {
+      $("#student_name_error").text("");
+      return true;
+    }
+  }
+
+  function enquireCourseName(){
+    let name = $(".student_course").val();
+
+    if (!name) {
+      $("#course_name_error").text("Course name can't be blank");
+      return false;
+    } else {
+      $("#course_name_error").text("");
+      return true;
+    }
+  }
+
+  function enquireCourseAmount() {
+    let name = $("#user_course_course_amount").val();
+
+    if (!name) {
+      $("#course_amount_error").text("Status can't be blank");
+      return false;
+    } else {
+      $("#course_amount_error").text("");
+      return true;
+    }
+  }
+
+  
+  // Event bindings for registration form fields
+  
+  $(".student_name").on("blur", enquireStudentName);
+  $(".student_course").on("blur", enquireCourseName);
+  $("#user_course_course_amount").on("blur", enquireCourseAmount);
+
+  // Event binding for form submission
+  $("#user-course-admin-form").on("submit", function(event) {
+    // Validate all fields on form submission
+    let isNameValid = enquireStudentName();
+    let isCourseValid = enquireCourseName();
+    let isAmountValid = enquireCourseAmount();
+
+   
+    // Check if any field is invalid
+    if (
+      !isNameValid ||
+      !isCourseValid ||
+      !isAmountValid
+     
+    ) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      enquireStudentName();
+      enquireCourseName();
+      enquireCourseAmount();
+    }
+  });
+}
+
+function editValidation() {
+  function enquireStudentName() {
+    let name = $(".edit_student_name").val();
+
+    if (!name) {
+      $("#edit_student_name_error").text("Student name can't be blank");
+      return false;
+    } else {
+      $("#edit_student_name_error").text("");
+      return true;
+    }
+  }
+
+  function enquireCourseName(){
+    let name = $(".edit_student_course").val();
+
+    if (!name) {
+      $("#edit_course_name_error").text("Course name can't be blank");
+      return false;
+    } else {
+      $("#edit_course_name_error").text("");
+      return true;
+    }
+  }
+
+  function enquireCourseAmount() {
+    let name = $("#edit_user_course_course_amount").val();
+
+    if (!name) {
+      $("#edit_course_amount_error").text("Status can't be blank");
+      return false;
+    } else {
+      $("#edit_course_amount_error").text("");
+      return true;
+    }
+  }
+
+  // Event bindings for registration form fields
+  $("#edit-user_course-popup").on("focusout", ".edit_student_name", enquireStudentName);
+  $("#edit-user_course-popup").on("focusout", ".edit_student_course", enquireCourseName);
+  $("#edit-user_course-popup").on("focusout", "#edit_user_course_course_amount", enquireCourseAmount);
+
+
+  $("#edit-user_course-popup").on("submit", "#user-admin-edit-form", function(event) {
+
+    let isNameValid = enquireStudentName();
+    let isCourseValid = enquireCourseName();
+    let isAmountValid = enquireCourseAmount();
+
+    if (!isNameValid || !isAmountValid || !isCourseValid) {
+      event.preventDefault();
+    }
+  });
+}
+
 $(document).ready(function () {
   editPopup();
   deletePopup();
   tableSearch();
   selectCreateCourse();
   selectCreateUser();
+  resetNewForm();
+  createValidation();
+  editValidation();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -437,6 +581,9 @@ $(document).ready(function () {
     tableSearch();
     selectCreateCourse();
     selectCreateUser();
+    resetNewForm();
+    createValidation();
+    editValidation();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -454,6 +601,9 @@ addEventListener("turbo:before-stream-render", (event) => {
     fallbackToDefaultActions(streamElement);
     initModals();
     deletePopup();
+    resetNewForm();
+    createValidation();
+    editValidation();
     if (streamElement.target == "user-course-admin-form") {
       selectCreateCourse();
       selectCreateUser();
