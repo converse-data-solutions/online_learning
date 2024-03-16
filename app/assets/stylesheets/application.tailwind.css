@@ -559,7 +559,7 @@ nav.main-menu li.active > a,
   padding: 8px;
 }
 .active .hs-stepper-active\:rounded {
-  border-radius: 23px;
+  border-radius: 26px;
 }
 .active .hs-stepper-active\:bg-blue-600 {
   --tw-bg-opacity: 1;
