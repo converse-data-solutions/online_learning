@@ -24,27 +24,27 @@ class Enquire < ApplicationRecord
   end
 
   def self.filter_enquires(params) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
-    query = Enquire.order(created_at: :desc)
+    enquires = Enquire.order(created_at: :desc)
 
     conditions = params.slice(:name, :course_name, :timeslot)
 
     conditions.each do |param_key, param_value|
       if param_value.present?
         column_name = param_key.to_s
-        query = query.where("#{column_name} LIKE ?", "%#{param_value}%")
+        enquires = enquires.where("#{column_name} LIKE ?", "%#{param_value}%")
       end
     end
 
     if params[:search].present?
-      query = query.where('name LIKE ? OR course_name LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
+      enquires = enquires.where('name LIKE ? OR course_name LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
     end
 
     if params[:status].present?
       status_enum = Enquire.statuses[params[:status].to_sym]
-      query = query.where(status: status_enum)
+      enquires = enquires.where(status: status_enum)
     end
 
-    query
+    enquires
   end
   
 end
