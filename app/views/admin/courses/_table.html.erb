@@ -8,6 +8,9 @@
     <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
       <%= course.description %>
     </td>
+    <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+      <%= course.course_type %>
+    </td>
     <td class="px-6 py-4 flex gap-4">
        <button data-modal-target="course-large-modal" data-modal-toggle="course-large-modal" data-turbo-frame="edit-course-popup-frame" data-action="click->modal#toggle" data-url="<%= edit_admin_course_path(course) %>" data-course-id="<%= course.id %>" class="block w-full md:w-auto edit-course-model" type="button">
         <img src="<%= asset_path("pencil.png") %>" alt="...">
