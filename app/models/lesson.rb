@@ -22,14 +22,14 @@ class Lesson < ApplicationRecord
   
     lessons = Lesson.order(title: :asc).includes(:course, :section, clip_attachment: :blob, attachments_attachments: :blob)
     lessons = lessons.search_using_dropdown(params[:lesson]) if context == :index
-    lessons = lessons.search_by_section_title(params[:search]) if params[:search].present?
+    lessons = lessons.search_by_lesson_title(params[:search]) if params[:search].present?
     lessons.paginate(page: page, per_page: per_page)
   end
 
   def self.search_by_lesson_title(query)
     if query.present?
       search_query = "%#{query}%"
-      where('title LIKE ?', search_query)
+      where('title LIKE ? OR lesson.section.title LIKE ?', search_query, search_query)
     else
       all
     end

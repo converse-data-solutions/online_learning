@@ -406,14 +406,16 @@ function bottomStepper() {
     setTimeout(function() {
       const stepperElement = HSStepper.getInstance("[data-hs-stepper]");
       let errorState = 1;
-      stepperElement.disableButtons();
-      $("#course-name").on("keyup", function() {
-        if ($(this).val().length > 2) {
-          stepperElement.enableButtons();
-        } else {
-          stepperElement.disableButtons();
-        }
-      });
+      if (stepperElement) {
+        stepperElement.disableButtons();
+        $("#course-name").on("keyup", function() {
+          if ($(this).val().length > 2) {
+            stepperElement.enableButtons();
+          } else {
+            stepperElement.disableButtons();
+          }
+        });
+      }
 
       if (stepperElement) {
         try {
@@ -682,6 +684,9 @@ $(document).ready(function() {
   editCourseStepValidation();
   createType();
   editType();
+  if ($("#stepper-loader").length > 0) {
+    new HSStepper($("#stepper-loader")[0]);
+  }
 
 
   $(document).on("turbo:render", function() {
