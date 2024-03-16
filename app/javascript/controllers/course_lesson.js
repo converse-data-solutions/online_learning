@@ -348,7 +348,7 @@ function lessonSectionSelect() {
   });
 }
 
-function lessonLessonSelect() {
+function formCreateSection() {
   $("#lesson-index-form .new-lesson-custom-select").each(function() {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
@@ -485,7 +485,7 @@ $(document).ready(function() {
   lessonOptionSelect();
   lessonSelectSection();
   lessonSectionSelect();
-  lessonLessonSelect();
+  formCreateSection();
 
   $(document).on("turbo:render", function() {
     editPopup();
@@ -496,7 +496,7 @@ $(document).ready(function() {
     resetNewForm();
     lessonOptionSelect();
     lessonSelectSection();
-    lessonLessonSelect();
+    formCreateSection();
   });
 
   $(document).on("turbo:before-render", function() {
@@ -517,6 +517,8 @@ addEventListener("turbo:before-stream-render", (event) => {
     initModals();
     if (streamElement.target == 'section-dropdown') {
       lessonSectionSelect();
+      lessonOptionSelect();
+      
     }
   };
 });

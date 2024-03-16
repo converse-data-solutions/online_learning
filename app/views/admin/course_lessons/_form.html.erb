@@ -10,7 +10,7 @@
     <div class="flex flex-col md:flex-row items-start md:w-[50%] w-full">
       <label for="title" class="w-[60%] md:w-[30%] block mb-2 text-lg text-[#000] font-medium">Title</label>
       <div class=" flex flex-col mb-4">
-        <%= f.text_field :title, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full md:w-[100%] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
+        <%= f.text_field :title, class: "bg-[#FFFFFF] border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full md:w-[100%] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white mb-4" %>
         <div class="text-red-600 text-sm mt-1" id="title-error"></div>
         <% if course_lesson&.errors&.any? %>
           <% if course_lesson.errors[:title].any? %>
@@ -52,7 +52,7 @@
     <div class="flex flex-col md:flex-row items-start mb-4 md:w-1/2 w-full">
       <label for="description" class="w-[60%] md:w-[30%] block mb-2 text-lg font-medium text-[#000]">Description<br>
         <span class="text-[15px] font-medium text-[#C6C6C6]">(optional)</span></label>
-      <%= f.text_area :description, class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block w-full md:w-[70%] h-[16vh] p-2.5 rounded-[7px]' %>
+      <%= f.text_area :description, class: 'bg-[#FFFFFF] border border-gray-300 text-gray-900 text-sm rounded-lg outline-none focus:ring-blue-500 focus:border-blue-500 block w-full md:w-[70%] h-[16vh] p-2.5 rounded-[7px]' %>
     </div>
   </div>
   <%= hidden_field_tag :page, params[:page]%>

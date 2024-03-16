@@ -1,7 +1,7 @@
 <%= form_for course || Course.new, url: admin_courses_path, html: { class: "validate", id: "admin-course-form" } , method: :post do |f| %>
-  <div class="flex justify-between flex-col sm:flex-row">
+  <div class="flex justify-between flex-col sm:flex-row mb-4">
     <label for="course-name" class="block w-full sm:w-[45%] mb-2 text-lg font-medium text-[#000]">Course</label>
-    <div class="w-full sm:w-[55%] flex flex-col mb-4">
+    <div class="w-full sm:w-[55%] flex flex-col">
       <%= f.text_field :course_name, class: "border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-name" %>
       <div class="text-red-600 text-sm mt-1" id="course-name-error"></div>
       <% if course&.errors&.any? %>
