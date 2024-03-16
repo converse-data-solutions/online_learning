@@ -757,6 +757,11 @@ nav.main-menu li.active > a,
 
 /* Select */
 
+.section_section_course{
+  width: 25.25rem !important;
+  border: 1px solid #CCCCCC !important;
+}
+
 .custom-select-border{
   border: 1px solid #CCCCCC !important;
   width: 16.25rem !important;
