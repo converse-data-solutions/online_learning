@@ -29,7 +29,7 @@ class Lesson < ApplicationRecord
   def self.search_by_lesson_title(query)
     if query.present?
       search_query = "%#{query}%"
-      where('title LIKE ? OR lesson.section.title LIKE ?', search_query, search_query)
+      joins(:section).where('lessons.title LIKE ? OR sections.title LIKE ?', search_query, search_query)
     else
       all
     end

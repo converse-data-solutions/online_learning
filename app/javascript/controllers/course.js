@@ -663,6 +663,78 @@ function stepperEditType() {
   });
 }
 
+function stepperSectionCreate() {
+  function sectionTitle() {
+    let name = $("#section_title").val();
+    // let namecheck = /^[a-zA-Z ]+$/.test(name);
+    
+    if (!name) {
+      $("#section_title_error").text("Title can't be blank");
+      return false;
+    } else if (name.replace(/ /g, "").length < 3) {
+      $("#section_title_error").text(
+        "Please enter a valid title"
+      );
+      return false;
+    } else {
+      $("#enquire_name_error").text("");
+      return true;
+    }
+  }
+
+  // Event bindings for registration form fields
+  $("#section_title").on("blur", sectionTitle);
+
+  // Event binding for form submission
+  $("#stepper_section-form").on("submit", function(event) {
+    // Validate all fields on form submission
+    let isNameValid = sectionTitle();
+
+    // Check if any field is invalid
+    if (
+      !isNameValid
+    ) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      sectionTitle();
+    }
+  });
+}
+
+function stepperSectionEdit() {
+  function sectionTitle() {
+    let name = $("#edit_title").val();
+    // let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#edit_title_error").text("Title can't be blank");
+      return false;
+    } else if (name.replace(/ /g, "").length < 3) {
+      $("#edit_title_error").text(
+        "Please enter a valid title"
+      );
+      return false;
+    } else {
+      $("#edit_title_error").text("");
+      return true;
+    }
+  }
+
+  // Event bindings for registration form fields
+  $("#steeper-edit-section-popup").on("focusout", "#edit_enquire_name", sectionTitle);
+
+
+  $("#steeper-edit-section-popup").on("submit", "#edit_stepper_section_form", function(event) {
+
+    let isTitleValid = sectionTitle();
+
+    if (!isTitleValid) {
+      event.sectionTitle();
+    }
+  });
+}
 
 $(document).ready(function() {
   tableSectionForm();
@@ -684,6 +756,8 @@ $(document).ready(function() {
   editCourseStepValidation();
   createType();
   editType();
+  stepperSectionCreate();
+  stepperSectionEdit();
   if ($("#stepper-loader").length > 0) {
     new HSStepper($("#stepper-loader")[0]);
   }
@@ -707,7 +781,8 @@ $(document).ready(function() {
     createType();
     editType();
     stepperEditType();
-
+    stepperSectionCreate();
+    stepperSectionEdit();
 
     if ($("#stepper-loader").length > 0) {
       new HSStepper($("#stepper-loader")[0]);
@@ -732,7 +807,8 @@ addEventListener("turbo:before-stream-render", (event) => {
     editCourseStepValidation();
     steeperSectionDeletePopup();
     editType();
-
+    stepperSectionCreate();
+    stepperSectionEdit();
   };
 });
 
