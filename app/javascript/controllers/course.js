@@ -132,26 +132,49 @@ function courseValidation() {
 // Edit Course form validation
 
 function editCourseValidation() {
-  function validateEditCourseName() {
+  function validateCourseName() {
     let name = $("#edit-course-name").val();
-
+  
     if (!name) {
-      $("#edit-course-name-error").text("Course Name can't be blank");
+      $("#edit-course-name-error").text("Title can't be blank");
+      return false;
     } else if (name.replace(/ /g, "").length < 3) {
-      $("#edit-course-name-error").text("Course name is not valid");
+      $("#edit-course-name-error").text("Please enter a valid title");
+      return false;
     } else {
       $("#edit-course-name-error").text("");
+      return true;
     }
   }
-
-  $("#edit-course-name").on("input", validateEditCourseName);
-  $("#admin-course-edit-form").on("submit", function (event) {
-    validateEditCourseName();
-
-    if ($("#edit-course-name-error").text()) {
-      event.preventDefault();
+  
+  function validateCourseAmount() {
+    let fee = $("#edit-course-fee").val();
+  
+    if (!fee) {
+        $("#edit-course-fee-error").text("Course Fee can't be blank");
+        return false;
+    } else if (isNaN(fee) || parseFloat(fee) < 0) {
+        $("#edit-course-fee-error").text("Please enter a valid non-negative Course Fee");
+        return false;
+    } else {
+        $("#edit-course-fee-error").text("");
+        return true;
     }
-  });
+  }
+  
+  $("#edit-course-popup").on("focusout", "#edit-course-name", validateCourseName);
+  $("#edit-course-popup").on("focusout", "#edit-course-fee", validateCourseAmount);
+  
+  $("#edit-course-popup").on("submit", "#admin-course-edit-form",  function (event) {
+      let isFeeValid = validateCourseAmount();
+      let isNameValid = validateCourseName();
+  
+      if (!isFeeValid || !isNameValid) {
+        event.validateCourseName();
+        event.validateCourseAmount();
+      }
+    }
+  );
 }
 
 function editCourseStepValidation() {
