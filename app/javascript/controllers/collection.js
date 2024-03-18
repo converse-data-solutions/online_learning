@@ -339,15 +339,6 @@ $(document).ready(function() {
     dateFilter();
     collectionOptionSelect();
   });
-
-  $(document).on("turbo:before-render", function() {
-    $("#overlay").show();
-
-  });
-  $(document).on("turbo:after-render", function() {
-    $("#overlay").hide();
-
-  });
 });
 
 addEventListener("turbo:before-stream-render", (event) => {
