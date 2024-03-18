@@ -38,6 +38,7 @@
     <label for="fees" class="block w-full sm:w-[45%] mb-2 text-lg font-medium text-[#000]">Course Fee</label>
     <div class="w-full sm:w-[55%] flex flex-col mb-4">
       <%= f.text_field :fees, class: "border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-fee" %>
+      <div class="text-red-600 text-sm mt-1" id="course_fee_error"></div>
     </div>
   </div>
   <div class="w-1/5 mx-auto mt-7 flex-col md:flex-row">
