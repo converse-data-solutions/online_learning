@@ -127,12 +127,44 @@ function formValidation() {
     }
   }
 
+  function validateClip() {
+    // Get the file input element
+    let fileInput = $(".clipUpload input[type='file']")[0];
+
+    // Check if a file is selected
+    if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+        $("#clip_error").text("Please attach a clip");
+        return false;
+    }
+
+    // Get the file object
+    let file = fileInput.files[0];
+
+    // Get the file name
+    let fileName = file.name;
+
+    // Get the file extension
+    let fileExtension = fileName.split('.').pop().toLowerCase();
+
+    // Check if the file extension is valid
+    if (fileExtension !== 'mp4' && fileExtension !== 'mov' && fileExtension !== 'avi' && fileExtension !== 'wmv') {
+        $("#clip_error").text("Please attach a valid video clip (MP4, MOV, AVI, WMV)");
+        return false;
+    } else {
+        $("#clip_error").text("");
+        return true;
+    }
+}
+
+
   $("#lesson_title").on("input", validateTitle);
   $("#lesson_section_id").on("input", validateCourse);
+  $("#lesson_clip").on("input", validateClip);
 
   $("#lesson-index-form").on("submit", function(event) {
     validateTitle();
     validateCourse();
+    validateClip();
     if ($("#title-error").text() || $("#section-error").text()) {
       event.preventDefault();
     }

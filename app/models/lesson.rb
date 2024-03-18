@@ -10,6 +10,9 @@ class Lesson < ApplicationRecord
   has_many :entrollment_details, dependent: :destroy
   has_one :course, through: :section
 
+  validates :title, presence: true
+  validates :clip, presence: true
+
   def all_sections
     Section.includes(:lessons).where(course_id: section.course_id)
   end

@@ -827,21 +827,56 @@ function stepperLessonCreate() {
     }
   }
 
+  function validateClip() {
+    // Get the file input element
+    let fileInput = $(".clipUpload input[type='file']")[0];
+
+    // Check if a file is selected
+    if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+        $("#clip_error").text("Please attach a clip");
+        return false;
+    }
+
+    // Get the file object
+    let file = fileInput.files[0];
+
+    // Get the file name
+    let fileName = file.name;
+
+    // Get the file extension
+    let fileExtension = fileName.split('.').pop().toLowerCase();
+
+    // Check if the file extension is valid
+    if (fileExtension !== 'mp4' && fileExtension !== 'mov' && fileExtension !== 'avi' && fileExtension !== 'wmv') {
+        $("#clip_error").text("Please attach a valid video clip (MP4, MOV, AVI, WMV)");
+        return false;
+    } else {
+        $("#clip_error").text("");
+        return true;
+    }
+}
+
+
+
+
   // Event bindings for registration form fields
   $("#lesson_title").on("blur", lessonTitle);
+  // $("input[type='file'][name='clip']").on("blur", validateClip);
 
   // Event binding for form submission
   $("#lesson-admin-form").on("submit", function (event) {
     // Validate all fields on form submission
     let isNameValid = lessonTitle();
+    let isClipValid = validateClip();
 
     // Check if any field is invalid
-    if (!isNameValid) {
+    if (!isNameValid || !isClipValid) {
       // Prevent form submission
       event.preventDefault();
 
       // Show all error messages
       lessonTitle();
+      validateClip();
     }
   });
 }

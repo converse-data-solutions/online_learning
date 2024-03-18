@@ -26,14 +26,17 @@
     <div class="flex flex-col md:w-1/2 w-full gap-5">
       <div class="flex flex-col md:flex-row items-normal md:items-center mb-4">
         <label for="Clip" class="w-[60%] md:w-[30%] block mb-2 text-lg font-medium text-[#000]">Clip</label>
-        <div class="bg-[#F5F5F5] h-[50px] flex items-center md:w-[70%] w-full rounded-lg">
-          <div class="clipUpload">
-            <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <%= f.file_field :clip %>
-            <p class="clip text-[#818181] text-[15px] font-medium">Upload your files here</p>
+        <div class="flex flex-col md:w-[70%] w-full">
+          <div class="bg-[#F5F5F5] h-[50px] flex items-center w-full rounded-lg">
+            <div class="clipUpload">
+              <svg class="fileUploadIcon" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.98477 14.8044C-1.04648 15.5856 -0.26523 6.99187 5.98477 7.77312C3.64102 -0.82063 16.9223 -0.820629 16.141 5.42937C23.9535 3.08562 23.9535 15.5856 16.9223 14.8044M7.54727 11.6794L11.4535 8.55437M11.4535 8.55437L15.3598 11.6794M11.4535 8.55437V20.2731" stroke="#818181" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <%= f.file_field :clip %>
+              <p class="clip text-[#818181] text-[15px] font-medium">Upload your files here</p>
+            </div>
           </div>
+          <div class="text-red-600 text-sm mt-1" id="clip-error"></div>
         </div>
       </div>
       <div class="flex flex-col md:flex-row items-normal md:items-center mb-4">
