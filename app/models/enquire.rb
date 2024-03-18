@@ -18,37 +18,33 @@ class Enquire < ApplicationRecord
   validates :sales_person, presence: true
 
   def self.get_enquires(params)
-    page_number = params[:page].presence&.to_i
-    page = (page_number && page_number.positive?) ? page_number : 1
-    record_per_page = (params[:per_page].presence&.to_i || 10).to_i
-    per_page = (record_per_page && record_per_page.positive?) ? record_per_page : 10
+    page = (params[:page].presence&.to_i&.positive? ? params[:page].to_i : 1)
+    per_page = [(params[:per_page].presence&.to_i || 10).to_i, 1].max
     Enquire.filter_enquires(params).paginate(page: page, per_page: per_page)
   end
 
-  def self.filter_enquires(params)
-    query = Enquire.order(created_at: :desc)
+  def self.filter_enquires(params) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+    enquires = Enquire.order(created_at: :desc)
+
+    conditions = params.slice(:name, :course_name, :timeslot)
+
+    conditions.each do |param_key, param_value|
+      if param_value.present?
+        column_name = param_key.to_s
+        enquires = enquires.where("#{column_name} LIKE ?", "%#{param_value}%")
+      end
+    end
 
     if params[:search].present?
-      query = query.where('name LIKE ? OR course_name LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
+      enquires = enquires.where('name LIKE ? OR course_name LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
     end
 
-    if params[:name].present?
-      query = query.where('name LIKE ?', "%#{params[:name]}%")
-    end
- 
-    if params[:course_name].present?
-      query = query.where('course_name LIKE ?', "%#{params[:course_name]}%")
-    end
- 
     if params[:status].present?
       status_enum = Enquire.statuses[params[:status].to_sym]
-      query = query.where(status: status_enum)
+      enquires = enquires.where(status: status_enum)
     end
- 
-    if params[:timeslot].present?
-      query = query.where('timeslot LIKE ?', "%#{params[:timeslot]}%")
-    end
- 
-    query
+
+    enquires
   end
+  
 end
