@@ -677,7 +677,7 @@ function stepperSectionCreate() {
       );
       return false;
     } else {
-      $("#enquire_name_error").text("");
+      $("#section_title_error").text("");
       return true;
     }
   }
@@ -736,6 +736,47 @@ function stepperSectionEdit() {
   });
 }
 
+function stepperLessonCreate() {
+  function lessonTitle() {
+    let name = $("#lesson_title").val();
+    // let namecheck = /^[a-zA-Z ]+$/.test(name);
+    
+    if (!name) {
+      $("#lesson_title_error").text("Title can't be blank");
+      return false;
+    } else if (name.replace(/ /g, "").length < 3) {
+      $("#lesson_title_error").text(
+        "Please enter a valid title"
+      );
+      return false;
+    } else {
+      $("#lesson_title_error").text("");
+      return true;
+    }
+  }
+
+  // Event bindings for registration form fields
+  $("#lesson_title").on("blur", lessonTitle);
+
+  // Event binding for form submission
+  $("#lesson-admin-form").on("submit", function(event) {
+    // Validate all fields on form submission
+    let isNameValid = lessonTitle();
+
+    // Check if any field is invalid
+    if (
+      !isNameValid
+    ) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      lessonTitle();
+    }
+  });
+}
+
+
 $(document).ready(function() {
   tableSectionForm();
   courseEditPopup();
@@ -758,6 +799,7 @@ $(document).ready(function() {
   editType();
   stepperSectionCreate();
   stepperSectionEdit();
+  stepperLessonCreate();
   if ($("#stepper-loader").length > 0) {
     new HSStepper($("#stepper-loader")[0]);
   }
@@ -783,7 +825,7 @@ $(document).ready(function() {
     stepperEditType();
     stepperSectionCreate();
     stepperSectionEdit();
-
+    stepperLessonCreate();
     if ($("#stepper-loader").length > 0) {
       new HSStepper($("#stepper-loader")[0]);
     }
@@ -809,6 +851,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     editType();
     stepperSectionCreate();
     stepperSectionEdit();
+    stepperLessonCreate();
   };
 });
 
