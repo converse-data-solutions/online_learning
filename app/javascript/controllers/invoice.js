@@ -132,9 +132,7 @@ function invoiceSelectCourse() {
 
 function invoiceUserCourseSelect() {
   $("#invoice-filter-container .custom-select").on("click", ".custom-option", function() {
-    console.log("function triggered");
-    var userId = $(this).data('value');
-    console.log("user id: " + userId);
+    let userId = $(this).data('value');
 
     // Make an AJAX request to fetch sections for the selected course
     $.ajax({
