@@ -562,6 +562,52 @@ function formValidation() {
   });
 }
 
+function createAttendance(){
+  $("#present").click(function(){
+    $(this).hide();
+    $("#absent").show();
+  });
+
+  $("#absent").click(function(){
+    $(this).hide();
+    $("#present").show();
+  });
+
+   $("#present").click(function(){
+    let status = $("#absent_status").val()
+    console.log("status", status);
+    $("#attendance_status").attr("value", status);
+  });
+  $("#absent").click(function(){
+    let status = $("#present_status").val()
+    console.log("status", status);
+    $("#attendance_status").attr("value", status);
+  });
+}
+
+function editAttendance() {
+  let status = $("#edit_attendance_status").val();
+  
+  if (status == 'true') {
+    $("#edit_present").show();
+    $("#edit_absent").hide();
+  } else {
+    $("#edit_present").hide();
+    $("#edit_absent").show();
+  }
+
+  $("#edit_present").click(function(){
+    $(this).hide();
+    $("#edit_absent").show();
+    $("#edit_attendance_status").val("true");
+  });
+
+  $("#edit_absent").click(function(){
+    $(this).hide();
+    $("#edit_present").show();
+    $("#edit_attendance_status").val("false");
+  });
+}
 
 $(document).ready(function () {
   selectCreateCourse();
@@ -577,6 +623,8 @@ $(document).ready(function () {
   rangeCalendar();
   rangeDateFilter();
   formValidation();
+  createAttendance();
+  editAttendance();
 
   $(document).on("turbo:render", function () {
     selectCreateCourse();
@@ -592,6 +640,8 @@ $(document).ready(function () {
     rangeCalendar();
     rangeDateFilter();
     formValidation();
+    createAttendance();
+    editAttendance();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -614,5 +664,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     findUserCourse();
     editClassDate();
     classDate();
+    createAttendance();
+    editAttendance();
   };
 });

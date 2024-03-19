@@ -220,6 +220,77 @@ function toDate() {
   });
 }
 
+function createPayment() {
+
+  function paidDate() {
+    let name = $("#datepicker").val();
+
+    if (!name) {
+      $("#datepicker_error").text("Payment date can't be blank");
+      return false;
+    } else {
+      $("#datepicker_error").text("");
+      return true;
+    }
+  }
+
+  function nextPayment(){
+    let name = $("#todatepicker").val();
+
+    if (!name) {
+      $("#todatepicker_error").text("Next payment can't be blank");
+      return false;
+    } else {
+      $("#todatepicker_error").text("");
+      return true;
+    }
+  }
+
+  function couseAmount() {
+    let name = $("#paid_amount").val();
+
+    if (!name) {
+      $("#payment_error").text("Paid amount can't be blank");
+      return false;
+    } else {
+      $("#payment_error").text("");
+      return true;
+    }
+  }
+
+  
+  // Event bindings for registration form fields
+  
+  $("#datepicker").on("blur", paidDate);
+  $("#todatepicker").on("blur", nextPayment);
+  $("#paid_amount").on("blur", couseAmount);
+
+  // Event binding for form submission
+  $("#admin-payment-form").on("submit", function(event) {
+    // Validate all fields on form submission
+    let isNameValid = paidDate();
+    let isCourseValid = nextPayment();
+    let isAmountValid = couseAmount();
+
+   
+    // Check if any field is invalid
+    if (
+      !isNameValid ||
+      !isCourseValid ||
+      !isAmountValid
+     
+    ) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      paidDate();
+      nextPayment();
+      couseAmount();
+    }
+  });
+}
+
 $(document).ready(function() {
   paymentSelectUser();
   paymentSelectCourse();
@@ -227,6 +298,7 @@ $(document).ready(function() {
   paymentUserIdSelect();
   fromDate();
   toDate();
+  createPayment();
 
   $(document).on("turbo:render", function() {
     paymentSelectUser();
@@ -235,6 +307,7 @@ $(document).ready(function() {
     paymentUserIdSelect();
     fromDate();
     toDate();
+    createPayment();
   });
 
   $(document).on("turbo:before-render", function() {
@@ -257,5 +330,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     }
     fromDate();
     toDate();
+    createPayment();
   };
 });

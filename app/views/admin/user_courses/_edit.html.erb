@@ -19,8 +19,8 @@
         <div class="mb-4 flex flex-col sm:flex-row">
           <label for="name" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Student Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
-            <%= collection_select(:user_course, :user_id, User.student, :id, :name, { prompt: "Select User", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select new-select-border sources" })  %>
-            <div class="text-red-600 text-sm mt-1" id="name-error"></div>
+            <%= collection_select(:user_course, :user_id, User.student, :id, :name, { prompt: user_course&.user&.name, selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select border-0 bg-[#F5F5F5] edit_student_name edit_width_course w-full sm:w-[53%] sources" })  %>
+            <div class="text-red-600 text-sm mt-1" id="edit_student_name_error"></div>
             <% if user_course&.errors&.any? %>
               <% if user_course&.errors[:user_id].any? %>
                 <div class="text-red-600 text-sm mt-1">
@@ -33,8 +33,8 @@
         <div class="mb-4 flex flex-col sm:flex-row">
           <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Course Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
-            <%= collection_select(:user_course, :course_id, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select new-select-border  sources" })  %>
-            <div class="text-red-600 text-sm mt-1" id="email-error"></div>
+            <%= collection_select(:user_course, :course_id, Course.all, :id, :course_name, { prompt: user_course&.course&.course_name, selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select border-0 bg-[#F5F5F5] edit_student_course edit_width_course w-full sm:w-[53%] sources" })  %>
+            <div class="text-red-600 text-sm mt-1" id="edit_course_name_error"></div>
             <% if user_course&.errors&.any? %>
               <% if user_course&.errors[:course_id].any? %>
                 <div class="text-red-600 text-sm mt-1">
@@ -47,8 +47,8 @@
         <div class="mb-4 flex flex-col sm:flex-row">
           <label for="password" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Course Amount<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
-            <%= f.text_field :course_amount, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"%>
-            <div class="text-red-600 text-sm mt-1" id="password-error"></div>
+            <%= f.text_field :course_amount, class: "validate bg-[#F5F5F5] border-0 text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_user_course_course_amount"%>
+            <div class="text-red-600 text-sm mt-1" id="edit_course_amount_error"></div>
             <% if user_course&.errors&.any? %>
               <% if user_course&.errors[:course_amount].any? %>
                 <div class="text-red-600 text-sm mt-1">

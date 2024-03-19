@@ -1,8 +1,8 @@
 <%= form_for course || Course.new, url: admin_courses_path, html: { class: "validate", id: "admin-course-form" } , method: :post do |f| %>
-  <div class="flex justify-between flex-col sm:flex-row">
-    <label for="course-name" class="block mb-2 text-lg font-medium text-[#000]">Course</label>
-    <div class="w-[47%] flex flex-col mb-4">
-      <%= f.text_field :course_name, class: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-name" %>
+  <div class="flex justify-between flex-col sm:flex-row mb-4">
+    <label for="course-name" class="block w-full sm:w-[45%] mb-2 text-lg font-medium text-[#000]">Course</label>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <%= f.text_field :course_name, class: "border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-name" %>
       <div class="text-red-600 text-sm mt-1" id="course-name-error"></div>
       <% if course&.errors&.any? %>
         <% if course.errors[:course_name].any? %>
@@ -14,11 +14,11 @@
     </div>
   </div>
   <div class="mb-4 flex justify-between flex-col sm:flex-row">
-    <label for="description" class="block mb-2 text-lg font-medium text-[#000]">Description
+    <label for="description" class="block w-full sm:w-[45%] mb-2 text-lg font-medium text-[#000]">Description
       <span class="text-[#C6C6C6] text-[15px] font-medium">(optional)</span>
     </label>
-    <div class="flex flex-col">
-      <%= f.text_area :description, class: 'resize-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200  block w-[292px] h-[110px] p-2.5 rounded-[7px]' %>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <%= f.text_area :description, class: 'resize-none w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block h-[110px] p-2.5 rounded-[7px]' %>
       <% if course&.errors&.any? %>
         <% if course.errors[:description].any? %>
           <div class="text-red-600 text-sm mt-1">
@@ -29,15 +29,16 @@
     </div>
   </div>
   <div class="flex justify-between flex-col sm:flex-row">
-    <label for="fees" class="block mb-2 text-lg font-medium text-[#000]">Course Type</label>
-    <div class="w-[47%] flex flex-col mb-4">
-<%= f.select(:course_type, Course.course_types.keys.map { |type| [type.humanize, Course.course_types[type]] }, { prompt: "Select Course Type" }, { class: "bg-[#fff] border-[1px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select select-widht" }) %>
+    <label for="fees" class="block w-full sm:w-[45%] mb-2 text-lg font-medium text-[#000]">Course Type</label>
+    <div class="w-full sm:w-[55%] flex flex-col mb-4">
+      <%= f.select(:course_type, Course.course_types.keys.map { |type| [type.humanize, Course.course_types[type]] }, { prompt: "Select Course Type" }, { class: "bg-[#fff] border-[1px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select select-widht" }) %>
     </div>
   </div>
   <div class="flex justify-between flex-col sm:flex-row">
-    <label for="fees" class="block mb-2 text-lg font-medium text-[#000]">Course Fee</label>
-    <div class="w-[47%] flex flex-col mb-4">
-      <%= f.text_field :fees, class: "border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-fee" %>
+    <label for="fees" class="block w-full sm:w-[45%] mb-2 text-lg font-medium text-[#000]">Course Fee</label>
+    <div class="w-full sm:w-[55%] flex flex-col mb-4">
+      <%= f.text_field :fees, class: "border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "course-fee" %>
+      <div class="text-red-600 text-sm mt-1" id="course_fee_error"></div>
     </div>
   </div>
   <div class="w-1/5 mx-auto mt-7 flex-col md:flex-row">

@@ -48,7 +48,9 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
     end
   end
 
-  def edit; end
+  def edit
+    render layout: false
+  end
 
   def update # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     params[:course][:course_type] = params[:course][:course_type].to_i
@@ -60,7 +62,7 @@ class Admin::CoursesController < ApplicationController # rubocop:disable Style/C
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('admin-course-edit-form', partial: 'admin/courses/edit', locals: { course: @course }),
+            turbo_stream.replace('edit-course-popup', partial: 'admin/courses/edit', locals: { course: @course }),
             turbo_stream.replace('admin-course-step-edit-form', partial: 'admin/courses/stepedit', locals: { course: @course }),
             turbo_stream.append('course-table', partial: 'shared/failed', locals: { message: 'Course creation failed.', type: 'notice' })
           ]

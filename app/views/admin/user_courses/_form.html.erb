@@ -2,8 +2,8 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="name" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Student Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= collection_select(:user_course, :user_id, User.all, :id, :name, { prompt: "Select User", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources" })  %>
-      <div class="text-red-600 text-sm mt-1" id="name-error"></div>
+      <%= collection_select(:user_course, :user_id, User.student, :id, :name, { prompt: "Select User", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select border-[#cccccc] border-[1px] student_name width_course sources w-full sm:w-[53%]" })  %>
+      <div class="text-red-600 text-sm mt-1" id="student_name_error"></div>
       <% if user_course&.errors&.any? %>
         <% if user_course&.errors[:user_id].any? %>
           <div class="text-red-600 text-sm mt-1">
@@ -16,8 +16,8 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Course Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= collection_select(:user_course, :course_id, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-course-custom-select new-select-border  sources" })  %>
-      <div class="text-red-600 text-sm mt-1" id="email-error"></div>
+      <%= collection_select(:user_course, :course_id, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-course-custom-select border-[#cccccc] border-[1px] student_course width_course w-full sm:w-[53%] sources" })  %>
+      <div class="text-red-600 text-sm mt-1" id="course_name_error"></div>
       <% if user_course&.errors&.any? %>
         <% if user_course&.errors[:course_id].any? %>
           <div class="text-red-600 text-sm mt-1">
@@ -31,7 +31,7 @@
     <label for="password" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Course Amount<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
       <%= f.text_field :course_amount, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"%>
-      <div class="text-red-600 text-sm mt-1" id="password-error"></div>
+      <div class="text-red-600 text-sm mt-1" id="course_amount_error"></div>
       <% if user_course&.errors&.any? %>
         <% if user_course&.errors[:course_amount].any? %>
           <div class="text-red-600 text-sm mt-1">
@@ -41,8 +41,8 @@
       <% end %>
     </div>
   </div>
-  <%= hidden_field_tag :course_id, params[:course_id], class: "", id:"get-course-id" %>
   <%= f.hidden_field :enrolled_at, value: Time.now %>
+  <%= hidden_field_tag :course_id, params[:course_id], class: "", id:"get-course-id" %>
   <%= hidden_field_tag :page, params[:page]%>
   <%= hidden_field_tag :per_page, params[:per_page]%>
   <%= hidden_field_tag :search, params[:search]%>

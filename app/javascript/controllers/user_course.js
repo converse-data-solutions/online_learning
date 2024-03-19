@@ -221,54 +221,58 @@ function selectCreateUser() {
 }
 
 function selectCreateCourse() {
-  $("#user-course-filter-container .new-course-custom-select").each(function() {
-    var classes = $(this).attr("class"),
-      id = $(this).attr("id"),
-      name = $(this).attr("name");
+  $("#user-course-filter-container .new-course-custom-select").each(
+    function () {
+      var classes = $(this).attr("class"),
+        id = $(this).attr("id"),
+        name = $(this).attr("name");
 
-    var placeholderText = $(this).find("option:first-of-type").text();
+      var placeholderText = $(this).find("option:first-of-type").text();
 
-    var template = '<div class="' + classes + '">';
-    template +=
-      '<span class="new-course-custom-select-trigger">' + placeholderText + "</span>";
-    template += '<div class="new-course-custom-options">';
-    $(this)
-      .find("option")
-      .each(function() {
-        template +=
-          '<span class="new-course-custom-option ' +
-          $(this).attr("class") +
-          '" data-value="' +
-          $(this).attr("value") +
-          '">' +
-          $(this).html() +
-          "</span>";
-      });
-    template += "</div></div>";
+      var template = '<div class="' + classes + '">';
+      template +=
+        '<span class="new-course-custom-select-trigger">' +
+        placeholderText +
+        "</span>";
+      template += '<div class="new-course-custom-options">';
+      $(this)
+        .find("option")
+        .each(function () {
+          template +=
+            '<span class="new-course-custom-option ' +
+            $(this).attr("class") +
+            '" data-value="' +
+            $(this).attr("value") +
+            '">' +
+            $(this).html() +
+            "</span>";
+        });
+      template += "</div></div>";
 
-    $(this).wrap('<div class="new-course-custom-select-wrapper"></div>');
-    $(this).hide();
-    $(this).after(template);
-  });
+      $(this).wrap('<div class="new-course-custom-select-wrapper"></div>');
+      $(this).hide();
+      $(this).after(template);
+    }
+  );
 
   $(".new-course-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-course-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-course-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-course-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-course-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-course-custom-select").removeClass("opened");
     });
     $(this).parents(".new-course-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-course-custom-option").on("click", function() {
+  $(".new-course-custom-option").on("click", function () {
     $(this)
       .parents(".new-course-custom-select-wrapper")
       .find("select")
@@ -286,8 +290,8 @@ function selectCreateCourse() {
   });
 }
 
-function selectEditUser(){
-  $("#edit-user_course-popup .new-lesson-custom-select").each(function() {
+function selectEditUser() {
+  $("#edit-user_course-popup .new-lesson-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -296,11 +300,13 @@ function selectEditUser(){
 
     var template = '<div class="' + classes + '">';
     template +=
-      '<span class="new-lesson-custom-select-trigger">' + placeholderText + "</span>";
+      '<span class="new-lesson-custom-select-trigger">' +
+      placeholderText +
+      "</span>";
     template += '<div class="new-lesson-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-lesson-custom-option ' +
           $(this).attr("class") +
@@ -318,23 +324,23 @@ function selectEditUser(){
   });
 
   $(".new-lesson-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-lesson-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-lesson-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-lesson-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-lesson-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-lesson-custom-select").removeClass("opened");
     });
     $(this).parents(".new-lesson-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-lesson-custom-option").on("click", function() {
+  $(".new-lesson-custom-option").on("click", function () {
     $(this)
       .parents(".new-lesson-custom-select-wrapper")
       .find("select")
@@ -418,6 +424,146 @@ function selectEditCourse() {
   });
 }
 
+function resetNewErrorMessages() {
+  $("#student_name_error").text("");
+  $("#course_name_error").text("");
+  $("#course_amount_error").text("");
+  
+}
+
+function resetNewForm() {
+  $(".reset-form").on("click", function() {
+    $("#user-course-admin-form")[0].reset()
+    resetNewErrorMessages();
+  });
+
+}
+
+function createValidation() {
+
+  function enquireStudentName() {
+    let name = $(".student_name").val();
+
+    if (!name) {
+      $("#student_name_error").text("Student name can't be blank");
+      return false;
+    } else {
+      $("#student_name_error").text("");
+      return true;
+    }
+  }
+
+  function enquireCourseName(){
+    let name = $(".student_course").val();
+
+    if (!name) {
+      $("#course_name_error").text("Course name can't be blank");
+      return false;
+    } else {
+      $("#course_name_error").text("");
+      return true;
+    }
+  }
+
+  function enquireCourseAmount() {
+    let name = $("#user_course_course_amount").val();
+
+    if (!name) {
+      $("#course_amount_error").text("Status can't be blank");
+      return false;
+    } else {
+      $("#course_amount_error").text("");
+      return true;
+    }
+  }
+
+  
+  // Event bindings for registration form fields
+  
+  $(".student_name").on("blur", enquireStudentName);
+  $(".student_course").on("blur", enquireCourseName);
+  $("#user_course_course_amount").on("blur", enquireCourseAmount);
+
+  // Event binding for form submission
+  $("#user-course-admin-form").on("submit", function(event) {
+    // Validate all fields on form submission
+    let isNameValid = enquireStudentName();
+    let isCourseValid = enquireCourseName();
+    let isAmountValid = enquireCourseAmount();
+
+   
+    // Check if any field is invalid
+    if (
+      !isNameValid ||
+      !isCourseValid ||
+      !isAmountValid
+     
+    ) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      enquireStudentName();
+      enquireCourseName();
+      enquireCourseAmount();
+    }
+  });
+}
+
+function editValidation() {
+  function enquireStudentName() {
+    let name = $(".edit_student_name").val();
+
+    if (!name) {
+      $("#edit_student_name_error").text("Student name can't be blank");
+      return false;
+    } else {
+      $("#edit_student_name_error").text("");
+      return true;
+    }
+  }
+
+  function enquireCourseName(){
+    let name = $(".edit_student_course").val();
+
+    if (!name) {
+      $("#edit_course_name_error").text("Course name can't be blank");
+      return false;
+    } else {
+      $("#edit_course_name_error").text("");
+      return true;
+    }
+  }
+
+  function enquireCourseAmount() {
+    let name = $("#edit_user_course_course_amount").val();
+
+    if (!name) {
+      $("#edit_course_amount_error").text("Status can't be blank");
+      return false;
+    } else {
+      $("#edit_course_amount_error").text("");
+      return true;
+    }
+  }
+
+  // Event bindings for registration form fields
+  $("#edit-user_course-popup").on("focusout", ".edit_student_name", enquireStudentName);
+  $("#edit-user_course-popup").on("focusout", ".edit_student_course", enquireCourseName);
+  $("#edit-user_course-popup").on("focusout", "#edit_user_course_course_amount", enquireCourseAmount);
+
+
+  $("#edit-user_course-popup").on("submit", "#user-admin-edit-form", function(event) {
+
+    let isNameValid = enquireStudentName();
+    let isCourseValid = enquireCourseName();
+    let isAmountValid = enquireCourseAmount();
+
+    if (!isNameValid || !isAmountValid || !isCourseValid) {
+      event.preventDefault();
+    }
+  });
+}
 
 $(document).ready(function () {
   editPopup();
@@ -425,8 +571,9 @@ $(document).ready(function () {
   tableSearch();
   selectCreateCourse();
   selectCreateUser();
-  selectEditUser();
-  selectEditCourse();
+  resetNewForm();
+  createValidation();
+  editValidation();
 
   $(document).on("turbo:render", function () {
     editPopup();
@@ -434,8 +581,9 @@ $(document).ready(function () {
     tableSearch();
     selectCreateCourse();
     selectCreateUser();
-    selectEditUser();
-    selectEditCourse();
+    resetNewForm();
+    createValidation();
+    editValidation();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -453,7 +601,16 @@ addEventListener("turbo:before-stream-render", (event) => {
     fallbackToDefaultActions(streamElement);
     initModals();
     deletePopup();
-    selectEditUser();
-    selectEditCourse();
+    resetNewForm();
+    createValidation();
+    editValidation();
+    if (streamElement.target == "user-course-admin-form") {
+      selectCreateCourse();
+      selectCreateUser();
+    }
+    if (streamElement.target == "edit-user_course-popup") {
+      selectEditUser();
+      selectEditCourse();
+    }
   };
 });

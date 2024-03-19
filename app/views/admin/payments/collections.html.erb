@@ -7,7 +7,7 @@
     <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px] mb-4 sm:mb-0 font-medium">Payment Collections - Admin</div>
     <div>
       <!-- Modal toggle -->
-      <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold hover:bg-[#0082CE] w-[150px] h-[42px] gradiant-hover loader-btn onclick-hover" type="button">
+      <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block reset-form text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] px-1 py-1 md:px-4 md:py-2 rounded-[7px] text-base font-semibold w-[150px] h-[42px] gradiant-hover loader-btn onclick-hover" type="button">
         <span class="font-semibold text-base">+ </span><%= link_to "ADD NEW", new_admin_payment_path %>
       </button>
     </div>
@@ -22,7 +22,7 @@
       </div>
       <div>
         <div class="checkbox-dropdown">
-          Due
+          <span class="text-[#818181] font-medium text-[16px]">Due</span>
           <ul class="checkbox-dropdown-list">
             <li>
               <label class="ml-2">
@@ -58,7 +58,7 @@
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <img src="<%= asset_path("search.png") %>">
         </div>
-        <%= text_field_tag :search, params[:search], id: "collection_search", class: "block p-2 pl-10 text-sm text-[#818181] border-[0] focus:ring-0 rounded-lg md:w-72 h-11 bg-gray-50 dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type" %>
+        <%= text_field_tag :search, params[:search], id: "collection_search", class: "block p-2 pl-12 text-[16px] font-medium text-[#818181] border-[0] focus:ring-0 rounded-lg md:w-72 h-[45px] bg-[#FFFFFF] dark:placeholder-gray-400 dark:text-white lg:w-full sm:w-[93%] w-[90%]", placeholder: "Search or type" %>
       </div>
     <% end %>
   </div>
