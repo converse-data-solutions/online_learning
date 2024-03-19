@@ -25,7 +25,7 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def user_course
-    handle_user_presence { load_user_courses }
+    handle_user_presence
   end
 
   def balance_amount
@@ -91,11 +91,11 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def user_invoice
-    handle_user_presence { load_user_courses }
+    handle_user_presence
   end
 
   def user_collection
-    handle_user_presence { load_user_courses }
+    handle_user_presence
   end
 
   private
@@ -111,15 +111,11 @@ class Admin::PaymentsController < ApplicationController
 
   def handle_user_presence
     if @user
-      yield
+      @courses = @user.courses
+      respond_to { |format| format.turbo_stream }
     else
       render_user_not_found
     end
-  end
-
-  def load_user_courses
-    @courses = @user.courses
-    respond_to { |format| format.turbo_stream }
   end
 
   def render_user_not_found
@@ -146,6 +142,7 @@ class Admin::PaymentsController < ApplicationController
       'default-container'
     end
   end
+
   def payment_params
     params.require(:payment).permit(:user_id, :user_course_id, :paid_at, :paid_amount, :next_payment_date)
   end
