@@ -226,7 +226,7 @@ function createPayment() {
     let name = $("#datepicker").val();
 
     if (!name) {
-      $("#datepicker_error").text("Payment can't be blank");
+      $("#datepicker_error").text("Payment date can't be blank");
       return false;
     } else {
       $("#datepicker_error").text("");

@@ -106,9 +106,17 @@ class Admin::PaymentsController < ApplicationController
 
   def update_user_course_next_payment_date
     user_course = UserCourse.find_by(id: @payment.user_course_id)
-    user_course.update(next_payment_date: params[:next_payment_date]) if user_course.present?
+    if user_course.present?
+      if user_course.update(next_payment_date: params[:next_payment_date])
+        flash[:notice] = "Next payment date updated successfully."
+      else
+        flash[:alert] = "Failed to update next payment date."
+      end
+    else
+      flash[:alert] = "User course not found."
+    end
   end
-
+  
   def handle_user_presence
     if @user
       @courses = @user.courses
