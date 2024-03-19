@@ -16,12 +16,15 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :sections
   end
+
   namespace :admin do
     resources :lessons
   end
+
   resources :users, only: [] do
     resources :profiles
   end
+
   resources :payments do
     member do
       get 'invoice'
@@ -50,6 +53,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :students, only: %i[index edit update create destroy new show]
+  end
+
+  namespace :admin do
+    resources :trainers
   end
 
   namespace :admin do

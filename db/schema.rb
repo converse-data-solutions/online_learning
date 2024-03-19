@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_13_145027) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_19_150710) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -125,14 +125,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_13_145027) do
   end
 
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.string "gender"
-    t.integer "age"
-    t.string "phno"
-    t.string "qualification"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "alternate_phone"
+    t.string "office_email"
+    t.string "higher_education"
+    t.integer "idcard_type"
+    t.string "idcard_no"
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -230,6 +230,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_13_145027) do
     t.string "addresses"
     t.string "education"
     t.string "occupation"
+    t.string "type"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
