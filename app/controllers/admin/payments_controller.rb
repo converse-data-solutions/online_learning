@@ -1,4 +1,6 @@
+# frozen_string_literal: true
 class Admin::PaymentsController < ApplicationController
+  before_action :set_user, only: %i[user_course balance_amount user_invoice user_collection]
 
   def index
     @payments = Payment.get_payments(params)
@@ -8,12 +10,11 @@ class Admin::PaymentsController < ApplicationController
     @payment = Payment.new
   end
 
-  def create # rubocop:disable Metrics/AbcSize
+  def create
     @payment = Payment.new(payment_params)
     respond_to do |format|
       if @payment.save
-        user_course = UserCourse.find_by(id: params[:payment][:user_course_id])
-        user_course.update(next_payment_date: params[:next_payment_date]) if user_course.present?
+        update_user_course_next_payment_date
         format.html { render :new }
         format.turbo_stream
       else
@@ -24,19 +25,10 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def user_course
-    @user = User.find_by(id: params[:user_id])
-    respond_to do |format|
-      if @user
-        @courses = @user.courses
-        format.turbo_stream
-      else
-        format.turbo_stream { render turbo_stream: turbo_stream.append('payment-filter-container', partial: 'shared/failed', locals: { message: 'User not found .', type: 'notice' }) }
-      end
-    end
+    handle_user_presence { load_user_courses }
   end
 
   def balance_amount
-    @user = User.find_by(id: params[:user_id])
     respond_to do |format|
       if @user
         @balance = @user.user_courses.find_by(course_id: params[:course_id])
@@ -99,31 +91,61 @@ class Admin::PaymentsController < ApplicationController
   end
 
   def user_invoice
-    @user = User.find_by(id: params[:user_id])
-    respond_to do |format|
-      if @user
-        @courses = @user.courses
-        format.turbo_stream
-      else
-        format.turbo_stream { render turbo_stream: turbo_stream.append('payment-table', partial: 'shared/failed', locals: { message: 'User not found .', type: 'notice' }) }
-      end
-    end
+    handle_user_presence { load_user_courses }
   end
 
   def user_collection
-    @user = User.find_by(id: params[:user_id])
-    respond_to do |format|
-      if @user
-        @courses = @user.courses
-        format.turbo_stream
-      else
-        format.turbo_stream { render turbo_stream: turbo_stream.append('collection-table', partial: 'shared/failed', locals: { message: 'User not found .', type: 'notice' }) }
-      end
-    end
+    handle_user_presence { load_user_courses }
   end
 
   private
 
+  def set_user
+    @user = User.find_by(id: params[:user_id])
+  end
+
+  def update_user_course_next_payment_date
+    user_course = UserCourse.find_by(id: @payment.user_course_id)
+    user_course.update(next_payment_date: params[:next_payment_date]) if user_course.present?
+  end
+
+  def handle_user_presence
+    if @user
+      yield
+    else
+      render_user_not_found
+    end
+  end
+
+  def load_user_courses
+    @courses = @user.courses
+    respond_to { |format| format.turbo_stream }
+  end
+
+  def render_user_not_found
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.append(
+          container_selector,
+          partial: 'shared/failed',
+          locals: { message: 'User not found.', type: 'notice' }
+        )
+      end
+    end
+  end
+
+  def container_selector
+    case action_name
+    when 'user_course'
+      'payment-filter-container'
+    when 'user_invoice'
+      'payment-table'
+    when 'user_collection'
+      'collection-table'
+    else
+      'default-container'
+    end
+  end
   def payment_params
     params.require(:payment).permit(:user_id, :user_course_id, :paid_at, :paid_amount, :next_payment_date)
   end

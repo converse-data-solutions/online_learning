@@ -226,7 +226,7 @@ function createPayment() {
     let name = $("#datepicker").val();
 
     if (!name) {
-      $("#datepicker_error").text("Payment date can't be blank");
+      $("#datepicker_error").text("Payment can't be blank");
       return false;
     } else {
       $("#datepicker_error").text("");
@@ -238,7 +238,7 @@ function createPayment() {
     let name = $("#todatepicker").val();
 
     if (!name) {
-      $("#todatepicker_error").text("Course name can't be blank");
+      $("#todatepicker_error").text("Next payment can't be blank");
       return false;
     } else {
       $("#todatepicker_error").text("");
@@ -250,7 +250,7 @@ function createPayment() {
     let name = $("#paid_amount").val();
 
     if (!name) {
-      $("#payment_error").text("Payment can't be blank");
+      $("#payment_error").text("Paid amount can't be blank");
       return false;
     } else {
       $("#payment_error").text("");
