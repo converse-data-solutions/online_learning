@@ -35,7 +35,7 @@
                 <h3 class="mb-4 sm:mb-7 md:mb-10 text-[26px] font-semibold text-[#0BC08B] dark:text-white text-center">NEW TRAINER</h3>
                 <div class="lg:w-[95%] sm:w-[95%] w-[90%] mx-auto">
                   <div class="" id="admin-form">
-                    <%= render partial: 'admin/trainers/form', locals: { trainer: @trainer } %>
+                    <%= render partial: 'admin/trainers/form', locals: { trainer: Trainer.new } %>
                   </div>
                 </div>
               </div>
@@ -128,7 +128,7 @@
       </div>
     </div>
     <div class="mt-4 ml-[30px] lg:ml-0" id="render-pagination" >
-      <%#= render partial: 'admin/trainers/paginate', locals: { trainers: @trainers } %>
+      <%= render partial: 'admin/trainers/paginate', locals: { trainers: @trainers } %>
     </div>
   </div>
 </div>

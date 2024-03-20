@@ -3,7 +3,7 @@ class Admin::TrainersController < ApplicationController
   before_action :set_trainer, only: %i[edit update destroy show]
 
   def index
-    @trainers = Trainer.all
+    @trainers = Trainer.paginate(page: params[:page], per_page: 13)
     respond_to do |format|
       format.json { render json: { data: @trainers, total_count: Trainer.trainer.count } }
       format.html { render :index }
@@ -13,19 +13,22 @@ class Admin::TrainersController < ApplicationController
 
   def new
     @trainer = Trainer.new
+    @trainer.build_profile # Build associated profile for the trainer
   end
 
   def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Lint/RedundantCopDisableDirective
-    @trainer = Trainer.add_role_and_save(trainer_params[:role])
+    @trainer = Trainer.new(trainer_params)
+    binding.pry
     respond_to do |format|
-      if @trainer.save
-        @trainers = Trainer.all
+      if @trainer.add_role_and_save(trainer_params[:role])
+        @trainers = Trainer.paginate(page: (params[:page].presence || 1), per_page: (params[:per_page].presence || 13))
         format.turbo_stream
         format.json { render :show, status: :created, location: admin_trainer_url(@trainer) }
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('trainer-admin-form', partial: 'admin/trainers/form', locals: { trainer: @trainer })          ]
+            turbo_stream.replace('trainer-admin-form', partial: 'admin/trainers/form', locals: { trainer: @trainer })
+          ]
         end
         format.json { render json: @trainer.errors, status: :unprocessable_entity }
       end
@@ -40,10 +43,10 @@ class Admin::TrainersController < ApplicationController
     redirect_to admin_trainers_path
   end
 
-  def update # rubocop:disable Metrics/MethodLength
+  def update # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     respond_to do |format|
       if @trainer.update(trainer_params)
-        @trainers = Trainer.all
+        @trainers = Trainer.paginate(page: params[:page], per_page: 13)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_trainer_url(@trainer) }
       else
@@ -61,7 +64,7 @@ class Admin::TrainersController < ApplicationController
     respond_to do |format|
       @trainer.deleted = true
       if @trainer&.save(validate: false)
-        @trainers = Trainer.all
+        @trainers = Trainer.paginate(page: params[:page], per_page: 13)
         format.turbo_stream do
           render turbo_stream: [
            turbo_stream.append('trainer-table', partial: 'shared/flash', locals: { message: 'Trainer deleted successfully.', type: 'notice' }),  # rubocop:disable Layout/FirstArrayElementIndentation
@@ -89,14 +92,21 @@ class Admin::TrainersController < ApplicationController
     @trainer = Trainer.find_by(id: params[:id])
   end
 
+  # def trainer_params
+  #   params.require(:trainer).permit(
+  #     :name, :email, :password, :password_confirmation, :gender,
+  #     :dataofbirth, :contact_number, :occupation, :education, :addresses,
+  #     :emergency_contact_name, :emergency_contact_number, :role,
+  #     profile_attributes: [:alternate_phone, :office_email, :idcard_type, :higher_education, :idcard_no]
+  #   )
+  # end
+
   def trainer_params
     params.require(:trainer).permit(
-      :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, 
-      :remember_created_at, :confirmed_at, :confirmation_sent_at, :unconfirmed_email,
-      :deleted, :uid, :provider, :current_type, :name, :dataofbirth, 
-      :emergency_contact_name, :emergency_contact_number, :gender, :contact_number,
-      :addresses, :education, :type,
-      profile_attributes: %i[alternate_phone office_email higher_education idcard_type idcard_no]
+      :name, :email, :password, :password_confirmation, :gender, :dataofbirth,
+      :contact_number, :occupation, :education, :addresses, :emergency_contact_name,
+      :emergency_contact_number, :role,
+      profile_attributes: [:id, :alternate_phone, :office_email, :higher_education, :idcard_type, :idcard_no]
     )
   end
 end
