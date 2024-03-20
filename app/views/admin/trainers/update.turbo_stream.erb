@@ -1,0 +1,3 @@
+<%= turbo_stream.update "trainer-table", partial: "admin/trainers/table", locals: { trainers: @trainers } %>
+<%= turbo_stream.update "edit-trainer-popup", partial: "admin/trainers/edit", locals: { trainer: @trainer } %>
+<%= turbo_stream.append "trainer-table", partial: "shared/flash", locals: { message: 'Trainer updated successfully.', type: 'notice' } %>
