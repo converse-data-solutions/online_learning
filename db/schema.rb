@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_21_110818) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_21_130555) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -48,13 +48,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_110818) do
     t.index ["user_course_id"], name: "index_attendances_on_user_course_id"
   end
 
-  create_table "batch_students", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "batch_students", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "batch_id", null: false
-    t.bigint "student_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["batch_id", "user_id"], name: "index_batch_students_on_batch_id_and_user_id", unique: true
     t.index ["batch_id"], name: "index_batch_students_on_batch_id"
-    t.index ["student_id"], name: "index_batch_students_on_student_id"
+    t.index ["user_id"], name: "index_batch_students_on_user_id"
   end
 
   create_table "batch_timings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -256,7 +255,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_110818) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "user_courses"
   add_foreign_key "batch_students", "batches"
-  add_foreign_key "batch_students", "users", column: "student_id"
+  add_foreign_key "batch_students", "users"
   add_foreign_key "batch_timings", "batches"
   add_foreign_key "batches", "courses"
   add_foreign_key "batches", "users", column: "primary_trainer_id"

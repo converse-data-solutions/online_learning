@@ -10,7 +10,7 @@
     has_many :courses, through: :user_courses
     has_many :payments, through: :user_courses, dependent: :destroy
     has_many :batches, dependent: :destroy
-    has_and_belongs_to_many :batches
+    has_and_belongs_to_many :batches, join_table: :batch_students
     rolify before_add: :remove_previouse_role
     accepts_nested_attributes_for :profile # Make sure to add this line if you want to create profiles alongside users
 
