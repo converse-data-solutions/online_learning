@@ -100,5 +100,4 @@ class Admin::TrainerCoursesController < ApplicationController
   def admin_params
     params.require(:trainer_course).permit(:user_id, :course_id, :next_payment_date, :enrolled_at, :course_amount)
   end
-
 end

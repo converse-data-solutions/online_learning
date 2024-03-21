@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_21_105123) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_21_110522) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -66,15 +66,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_105123) do
     t.datetime "updated_at", null: false
     t.decimal "fees", precision: 10
     t.integer "course_type", default: 0
-  end
-
-  create_table "create_trainer_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "course_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_create_trainer_courses_on_course_id"
-    t.index ["user_id"], name: "index_create_trainer_courses_on_user_id"
   end
 
   create_table "enquires", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -203,6 +194,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_105123) do
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
+  create_table "trainer_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_trainer_courses_on_course_id"
+    t.index ["user_id"], name: "index_trainer_courses_on_user_id"
+  end
+
   create_table "user_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
@@ -258,8 +258,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_105123) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "user_courses"
   add_foreign_key "comments", "users"
-  add_foreign_key "create_trainer_courses", "courses"
-  add_foreign_key "create_trainer_courses", "users"
   add_foreign_key "entrollment_details", "entrollments"
   add_foreign_key "entrollment_details", "lessons"
   add_foreign_key "entrollments", "courses"
@@ -272,6 +270,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_105123) do
   add_foreign_key "subscription_details", "subscriptions"
   add_foreign_key "subscription_details", "users"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "trainer_courses", "courses"
+  add_foreign_key "trainer_courses", "users"
   add_foreign_key "user_courses", "courses"
   add_foreign_key "user_courses", "users"
 end
