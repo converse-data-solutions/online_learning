@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  day: MyString
+  from_time: 2024-03-21 16:31:07
+  to_time: 2024-03-21 16:31:07
+  batch: one
+
+two:
+  day: MyString
+  from_time: 2024-03-21 16:31:07
+  to_time: 2024-03-21 16:31:07
+  batch: two

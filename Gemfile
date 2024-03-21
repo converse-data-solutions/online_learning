@@ -7,6 +7,7 @@ gem 'client_side_validations', '~> 22.1', '>= 22.1.1'
 gem 'devise'
 gem 'foreman', '~> 0.87.2'
 gem 'jquery-rails', '~> 4.6'
+gem 'numbers_and_words', '~> 0.11.12'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
@@ -18,7 +19,6 @@ gem 'terser', '~> 1.1', '>= 1.1.19'
 gem 'wicked_pdf', '~> 2.7'
 gem 'will_paginate', '~> 4.0'
 gem 'wkhtmltopdf-binary'
-gem 'numbers_and_words', '~> 0.11.12'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
@@ -66,6 +66,7 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'bullet', '~> 7.1', '>= 7.1.1'
   gem 'byebug', '~> 11.1', '>= 11.1.3'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'htmlbeautifier'
@@ -75,7 +76,6 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'brakeman', '~> 6.0', '>= 6.0.1'
-  gem 'bullet', '~> 7.1', '>= 7.1.1'
   gem 'rack-mini-profiler', '~> 3.1', '>= 3.1.1', require: false
   gem 'rubocop', '~> 1.56', '>= 1.56.4'
   gem 'rubycritic', '~> 4.8', '>= 4.8.1'
@@ -93,7 +93,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'bullet', '~> 7.1', '>= 7.1.1'
 end
 
 # gem 'newrelic-infinite_tracing'

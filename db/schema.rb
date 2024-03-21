@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_19_155910) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_21_110818) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,6 +46,39 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_155910) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_course_id"], name: "index_attendances_on_user_course_id"
+  end
+
+  create_table "batch_students", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "batch_id", null: false
+    t.bigint "student_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_batch_students_on_batch_id"
+    t.index ["student_id"], name: "index_batch_students_on_student_id"
+  end
+
+  create_table "batch_timings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "day"
+    t.time "from_time"
+    t.time "to_time"
+    t.bigint "batch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_batch_timings_on_batch_id"
+  end
+
+  create_table "batches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "batch_name"
+    t.date "effective_from"
+    t.date "effective_to"
+    t.bigint "course_id", null: false
+    t.bigint "primary_trainer_id", null: false
+    t.bigint "secondary_trainer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_batches_on_course_id"
+    t.index ["primary_trainer_id"], name: "index_batches_on_primary_trainer_id"
+    t.index ["secondary_trainer_id"], name: "index_batches_on_secondary_trainer_id"
   end
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -168,32 +201,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_155910) do
     t.index ["course_id"], name: "index_sections_on_course_id"
   end
 
-  create_table "subscription_details", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "subscription_id", null: false
-    t.string "stripe_subscription_id"
-    t.integer "amount"
-    t.datetime "paid_at"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["subscription_id"], name: "index_subscription_details_on_subscription_id"
-    t.index ["user_id"], name: "index_subscription_details_on_user_id"
-  end
-
-  create_table "subscriptions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.datetime "paid_until"
-    t.string "stripe_customer_ref"
-    t.string "stripe_subscription_ref"
-    t.datetime "next_invoice_on"
-    t.bigint "user_id", null: false
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_subscriptions_on_user_id"
-  end
-
   create_table "user_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
@@ -248,6 +255,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_155910) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "attendances", "user_courses"
+  add_foreign_key "batch_students", "batches"
+  add_foreign_key "batch_students", "users", column: "student_id"
+  add_foreign_key "batch_timings", "batches"
+  add_foreign_key "batches", "courses"
+  add_foreign_key "batches", "users", column: "primary_trainer_id"
+  add_foreign_key "batches", "users", column: "secondary_trainer_id"
   add_foreign_key "comments", "users"
   add_foreign_key "entrollment_details", "entrollments"
   add_foreign_key "entrollment_details", "lessons"
@@ -258,9 +271,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_155910) do
   add_foreign_key "profiles", "users"
   add_foreign_key "ratings", "users"
   add_foreign_key "sections", "courses"
-  add_foreign_key "subscription_details", "subscriptions"
-  add_foreign_key "subscription_details", "users"
-  add_foreign_key "subscriptions", "users"
   add_foreign_key "user_courses", "courses"
   add_foreign_key "user_courses", "users"
 end
