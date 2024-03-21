@@ -3,7 +3,7 @@ class Admin::TrainersController < ApplicationController
   before_action :set_trainer, only: %i[edit update destroy show]
 
   def index
-    @trainers = Trainer.paginate(page: params[:page], per_page: 13)
+    @trainers = Trainer.get_trainers(params)
     respond_to do |format|
       format.json { render json: { data: @trainers, total_count: Trainer.trainer.count } }
       format.html { render :index }
@@ -18,10 +18,9 @@ class Admin::TrainersController < ApplicationController
 
   def create # rubocop:disable Metrics/AbcSize,Metrics/MethodLength,Lint/RedundantCopDisableDirective
     @trainer = Trainer.new(trainer_params)
-    binding.pry
-    respond_to do |format|
+      respond_to do |format|
       if @trainer.add_role_and_save(trainer_params[:role])
-        @trainers = Trainer.paginate(page: (params[:page].presence || 1), per_page: (params[:per_page].presence || 13))
+        @trainers = Trainer.get_trainers(params)
         format.turbo_stream
         format.json { render :show, status: :created, location: admin_trainer_url(@trainer) }
       else
@@ -46,7 +45,7 @@ class Admin::TrainersController < ApplicationController
   def update # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
     respond_to do |format|
       if @trainer.update(trainer_params)
-        @trainers = Trainer.paginate(page: params[:page], per_page: 13)
+        @trainers = Trainer.get_trainers(params)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_trainer_url(@trainer) }
       else
@@ -64,7 +63,7 @@ class Admin::TrainersController < ApplicationController
     respond_to do |format|
       @trainer.deleted = true
       if @trainer&.save(validate: false)
-        @trainers = Trainer.paginate(page: params[:page], per_page: 13)
+        @trainers = Trainer.get_trainers(params)
         format.turbo_stream do
           render turbo_stream: [
            turbo_stream.append('trainer-table', partial: 'shared/flash', locals: { message: 'Trainer deleted successfully.', type: 'notice' }),  # rubocop:disable Layout/FirstArrayElementIndentation
@@ -91,15 +90,6 @@ class Admin::TrainersController < ApplicationController
   def set_trainer
     @trainer = Trainer.find_by(id: params[:id])
   end
-
-  # def trainer_params
-  #   params.require(:trainer).permit(
-  #     :name, :email, :password, :password_confirmation, :gender,
-  #     :dataofbirth, :contact_number, :occupation, :education, :addresses,
-  #     :emergency_contact_name, :emergency_contact_number, :role,
-  #     profile_attributes: [:alternate_phone, :office_email, :idcard_type, :higher_education, :idcard_no]
-  #   )
-  # end
 
   def trainer_params
     params.require(:trainer).permit(

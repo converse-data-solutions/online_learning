@@ -90,24 +90,67 @@ function viewStudents() {
   });
 }
 
+function trainerSearch() {
+  let delayTimer;
+
+  $("#trainer_search").keyup(function(e) {
+    clearTimeout(delayTimer);
+    delayTimer = setTimeout(function() {
+      let searchValue = $("#trainer_search").val();
+      $("#overlay").show();
+      $.ajax({
+        url: "/admin/trainers",
+        type: "GET",
+        data: {
+          search: searchValue,
+        },
+        headers: {
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function(res) {
+          Turbo.renderStreamMessage(res);
+          let newURL =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?search=" +
+            encodeURIComponent(searchValue);
+          window.history.pushState({
+              path: newURL,
+            },
+            "",
+            newURL
+          );
+          $("#overlay").hide();
+        },
+        error: function() {
+          console.log("Error fetching data");
+          $("#overlay").hide();
+        },
+      });
+    }, 500);
+  });
+}
+
 $(document).ready(function() {
   editModelPopup();
   deletePopup();
   viewStudents();
+  trainerSearch();
 
   $(document).on("turbo:render", function() {
     editModelPopup();
     deletePopup();
+    trainerSearch();
     
   });
 
   $(document).on("turbo:before-render", function() {
     $("#overlay").show();
-    dropdownCheckBoxes();
   });
   $(document).on("turbo:after-render", function() {
     $("#overlay").hide();
-    dropdownCheckBoxes();
   });
 });
 
@@ -120,6 +163,5 @@ addEventListener("turbo:before-stream-render", (event) => {
     editModelPopup();
     deletePopup();
     viewStudents();
-
   };
 });
