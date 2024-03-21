@@ -156,7 +156,7 @@ function getCourseAmount() {
 }
 
 function selectCreateUser() {
-  $("#user-course-filter-container .custom-select").each(function () {
+  $("#trainer-course-filter-container .custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -222,7 +222,7 @@ function selectCreateUser() {
 }
 
 function selectCreateCourse() {
-  $("#user-course-filter-container .new-course-custom-select").each(
+  $("#trainer-course-filter-container .new-course-custom-select").each(
     function () {
       var classes = $(this).attr("class"),
         id = $(this).attr("id"),
@@ -292,7 +292,7 @@ function selectCreateCourse() {
 }
 
 function selectEditUser() {
-  $("#edit-user_course-popup .new-lesson-custom-select").each(function () {
+  $("#edit-trainer_course-popup .new-lesson-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -360,7 +360,7 @@ function selectEditUser() {
 }
 
 function selectEditCourse() {
-  $("#edit-user_course-popup .new-custom-select").each(function () {
+  $("#edit-trainer_course-popup .new-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -465,39 +465,23 @@ function createValidation() {
       return true;
     }
   }
-
-  function enquireCourseAmount() {
-    let name = $("#user_course_course_amount").val();
-
-    if (!name) {
-      $("#course_amount_error").text("Status can't be blank");
-      return false;
-    } else {
-      $("#course_amount_error").text("");
-      return true;
-    }
-  }
-
   
   // Event bindings for registration form fields
   
   $(".student_name").on("blur", enquireStudentName);
   $(".student_course").on("blur", enquireCourseName);
-  $("#user_course_course_amount").on("blur", enquireCourseAmount);
 
   // Event binding for form submission
-  $("#user-course-admin-form").on("submit", function(event) {
+  $("#trainer-course-admin-form").on("submit", function(event) {
     // Validate all fields on form submission
     let isNameValid = enquireStudentName();
     let isCourseValid = enquireCourseName();
-    let isAmountValid = enquireCourseAmount();
 
    
     // Check if any field is invalid
     if (
       !isNameValid ||
-      !isCourseValid ||
-      !isAmountValid
+      !isCourseValid
      
     ) {
       // Prevent form submission
@@ -506,7 +490,6 @@ function createValidation() {
       // Show all error messages
       enquireStudentName();
       enquireCourseName();
-      enquireCourseAmount();
     }
   });
 }
@@ -536,31 +519,16 @@ function editValidation() {
     }
   }
 
-  function enquireCourseAmount() {
-    let name = $("#edit_user_course_course_amount").val();
-
-    if (!name) {
-      $("#edit_course_amount_error").text("Status can't be blank");
-      return false;
-    } else {
-      $("#edit_course_amount_error").text("");
-      return true;
-    }
-  }
-
   // Event bindings for registration form fields
-  $("#edit-user_course-popup").on("focusout", ".edit_student_name", enquireStudentName);
-  $("#edit-user_course-popup").on("focusout", ".edit_student_course", enquireCourseName);
-  $("#edit-user_course-popup").on("focusout", "#edit_user_course_course_amount", enquireCourseAmount);
+  $("#edit-trainer_course-popup").on("focusout", ".edit_student_name", enquireStudentName);
+  $("#edit-trainer_course-popup").on("focusout", ".edit_student_course", enquireCourseName);
 
-
-  $("#edit-user_course-popup").on("submit", "#user-admin-edit-form", function(event) {
+  $("#edit-trainer_course-popup").on("submit", "#trainer-admin-edit-form", function(event) {
 
     let isNameValid = enquireStudentName();
     let isCourseValid = enquireCourseName();
-    let isAmountValid = enquireCourseAmount();
 
-    if (!isNameValid || !isAmountValid || !isCourseValid) {
+    if (!isNameValid || !isCourseValid) {
       event.preventDefault();
     }
   });
@@ -605,11 +573,11 @@ addEventListener("turbo:before-stream-render", (event) => {
     resetNewForm();
     createValidation();
     editValidation();
-    if (streamElement.target == "user-course-admin-form") {
+    if (streamElement.target == "trainer-course-admin-form") {
       selectCreateCourse();
       selectCreateUser();
     }
-    if (streamElement.target == "edit-user_course-popup") {
+    if (streamElement.target == "edit-trainer_course-popup") {
       selectEditUser();
       selectEditCourse();
     }

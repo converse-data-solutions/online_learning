@@ -5,9 +5,9 @@
       <%= collection_select(:trainer_course, :user_id, User.student, :id, :name, { prompt: "Select trainer", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select border-[#cccccc] border-[1px] student_name width_course sources w-full sm:w-[53%]" })  %>
       <div class="text-red-600 text-sm mt-1" id="student_name_error"></div>
       <% if trainer_course&.errors&.any? %>
-        <% if trainer_course&.errors[:trainer_id].any? %>
+        <% if trainer_course&.errors[:user_id].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= trainer_course&.errors.full_messages_for(:trainer_id).join(', ') %>
+            <%= trainer_course&.errors.full_messages_for(:user_id).join(', ') %>
           </div>
         <% end %>
       <% end %>
