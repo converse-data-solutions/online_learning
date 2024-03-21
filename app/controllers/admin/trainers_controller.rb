@@ -42,7 +42,7 @@ class Admin::TrainersController < ApplicationController
     redirect_to admin_trainers_path
   end
 
-  def update # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
+  def update # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if @trainer.update(trainer_params)
         @trainers = Trainer.get_trainers(params)

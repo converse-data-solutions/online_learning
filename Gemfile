@@ -7,6 +7,7 @@ gem 'client_side_validations', '~> 22.1', '>= 22.1.1'
 gem 'devise'
 gem 'foreman', '~> 0.87.2'
 gem 'jquery-rails', '~> 4.6'
+gem 'numbers_and_words', '~> 0.11.12'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
@@ -18,7 +19,6 @@ gem 'terser', '~> 1.1', '>= 1.1.19'
 gem 'wicked_pdf', '~> 2.7'
 gem 'will_paginate', '~> 4.0'
 gem 'wkhtmltopdf-binary'
-gem 'numbers_and_words', '~> 0.11.12'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
@@ -93,7 +93,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'bullet', '~> 7.1', '>= 7.1.1'
 end
 
 # gem 'newrelic-infinite_tracing'
