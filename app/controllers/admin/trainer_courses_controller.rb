@@ -3,7 +3,7 @@ class Admin::TrainerCoursesController < ApplicationController
   before_action :set_trainer_course, only: %i[edit update destroy show]
 
   def index
-    @trainer_courses = TrainerCourse.paginate(page: params[:page], per_page: 10).includes(:user, :course)
+    @trainer_courses = TrainerCourse.get_trainer_courses(params)
     respond_to do |format|
       format.html { render :index }
       format.turbo_stream
@@ -19,7 +19,7 @@ class Admin::TrainerCoursesController < ApplicationController
     @trainer_course = TrainerCourse.new(admin_params)
     respond_to do |format|
       if @trainer_course.save
-        @trainer_courses = TrainerCourse.paginate(page: params[:page], per_page: 10).includes(:user, :course)
+        @trainer_courses = TrainerCourse.get_trainer_courses(params)
         format.turbo_stream
         format.json { render :create }
       else
@@ -39,7 +39,7 @@ class Admin::TrainerCoursesController < ApplicationController
   def update # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if @trainer_course.update(admin_params)
-        @trainer_courses = TrainerCourse.paginate(page: params[:page], per_page: 10).includes(:user, :course)
+        @trainer_courses = TrainerCourse.get_trainer_courses(params)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_trainer_course_url(@trainer_course) }
       else
@@ -56,7 +56,7 @@ class Admin::TrainerCoursesController < ApplicationController
   def destroy # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if @trainer_course.destroy
-        @trainer_courses = TrainerCourse.paginate(page: params[:page], per_page: 10).includes(:user, :course)
+        @trainer_courses = TrainerCourse.get_trainer_courses(params)
         format.turbo_stream { render_destroy_success }
         format.json { render :show }
       else
