@@ -1,0 +1,3 @@
+<%= turbo_stream.update "enquire-table", partial: "admin/enquires/table", locals: { enquires: @enquires } %>
+<%= turbo_stream.update "edit-enquire-popup", partial: "admin/enquires/edit", locals: { enquire: @enquire } %>
+<%= turbo_stream.append "enquire-table", partial: "shared/flash", locals: { message: 'Enquiry updated successfully.', type: 'notice' } %>

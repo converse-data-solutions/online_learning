@@ -3,7 +3,7 @@ class Admin::BatchesController < ApplicationController
   before_action :set_batch, only: %i[edit update destroy show]
 
   def index
-    @batches = Batch.all
+    @batches = Batch.paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html { render :index }
       format.turbo_stream
@@ -19,7 +19,7 @@ class Admin::BatchesController < ApplicationController
     @batch = Batch.new(batch_params)
     respond_to do |format|
       if @batch.save
-        @batches = Batch.all
+        @batches = Batch.paginate(page: params[:page], per_page: 10)
         format.turbo_stream
         # format.json { render :show, status: :created, location: admin_batch_url(@batch) }
       else
@@ -47,7 +47,7 @@ class Admin::BatchesController < ApplicationController
   def update
     respond_to do |format|
       if @batch.update(batch_params)
-        @batches = Batch.all
+        @batches = Batch.paginate(page: params[:page], per_page: 10)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_batch_url(@batch) }
       else
@@ -63,7 +63,7 @@ class Admin::BatchesController < ApplicationController
   def destroy
     respond_to do |format|
       if @batch.destroy
-        @batches = Batch.all
+        @batches = Batch.paginate(page: params[:page], per_page: 10)
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update('batch-table', partial: 'admin/batches/table', locals: { batches: @batches }),
@@ -87,6 +87,7 @@ class Admin::BatchesController < ApplicationController
   end
 
   def batch_params
-    params.require(:batch).permit(:name, :description, :start_date, :end_date)
+    params.require(:batch).permit(:batch_name, :course_id, :effective_from, :effective_to, :primary_trainer_id,
+                                  :secondary_trainer_id)
   end
 end

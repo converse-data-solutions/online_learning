@@ -1,0 +1,2 @@
+<%= turbo_stream.update "enquire-table", partial: "admin/enquires/table", locals: { enquires: @enquires } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/enquires/paginate", locals: { enquires: @enquires } %>

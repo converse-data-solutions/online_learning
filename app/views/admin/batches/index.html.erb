@@ -1,10 +1,10 @@
 <%= content_for :head do %>
-  <%= javascript_import_module_tag "controllers/enquire" %>
+  <%= javascript_import_module_tag "controllers/batch" %>
   <%= javascript_import_module_tag "controllers/notify" %>
 <% end %>
-<div class="flex flex-col w-full" id="enquire index">
+<div class="flex flex-col w-full" id="batch index">
   <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-12 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
-    <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px]  font-medium">Batches  </div>
+    <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px]  font-medium">Batches</div>
     <div class="flex gap-8">
       <label for="table-search " class="sr-only">Search</label>
       <%= form_tag admin_enquires_path, method: :get, id: "enquire_search_form" do %>
@@ -25,7 +25,7 @@
           <div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
             <!-- Modal content -->
             <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
-              <button type="button" id="enquire-create-close-btn" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
+              <button type="button" id="batch-create-close-btn" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="authentication-modal">
                 <svg class="w-8 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                   <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                 </svg>
@@ -34,7 +34,7 @@
               <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 sm:mb-7 md:mb-10 text-[26px] font-semibold text-[#0BC08B] dark:text-white text-center">NEW ENQUIRE</h3>
                 <div class="lg:w-[95%] sm:w-[95%] w-[90%] mx-auto">
-                  <div class="" id="enquire-form">
+                  <div class="" id="batch-form">
                     <%= render partial: 'admin/batches/form', locals: { batch: @batch } %>
                   </div>
                 </div>
@@ -45,7 +45,7 @@
       </div>
     </div>
   </div>
-  <div class="flex items-center justify-between pt-10 md:pt-9 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row" id="enquire-filter-container">
+  <div class="flex items-center justify-between pt-10 md:pt-9 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row" id="batch-filter-container">
     <div class="text-[#31B978] text-[18px] font-bold  pb-4 sm:pb-0">
       <%= collection_select(:name, :name, Enquire.all, :name, :name, { prompt: "Select Student", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-name-custom-select sources" }) %>
     </div>
@@ -87,20 +87,20 @@
             </th>
           </tr>
         </thead>
-        <tbody class="overflow-auto" id="enquire-table">
-          <%= render partial: "admin/enquires/table", locals: { enquires: @enquires } %>
+        <tbody class="overflow-auto" id="batch-table">
+          <%= render partial: "admin/batches/table", locals: { batches: @batches } %>
         </tbody>
       </table>
     </div>
     <div id="large-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
-      <%= turbo_frame_tag "edit-enquire-popup", class: "w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem]" do %>
+      <%= turbo_frame_tag "edit-batch-popup", class: "w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem]" do %>
       <% end %>
     </div>
     <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full shadow-lg" style="backdrop-filter: contrast(0.5);">
       <div class="relative w-full max-w-[40rem] max-h-full shadow-md">
         <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
           <h4 class="text-[20px] font-medium text-center pt-6 pl-6 pb-4 border-b-2 border-[#EDEDED] text-[#0BC08B]">Confirm Deletion</h4>
-          <button type="button" id="enquire-detele-modal-btn" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+          <button type="button" id="batch-detele-modal-btn" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
             <svg class="w-10 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
               <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
             </svg>
@@ -109,7 +109,7 @@
           <div class="px-6 pb-6 pt-2">
             <h3 class="mb-5 text-base text-center font-medium text-[#818181] dark:text-gray-400 mt-4 ">Are you sure you want to delete this item? This action cannot be undone.</h3>
             <div class="flex justify-center gap-[10px]">
-              <%= link_to 'DELETE', "", data: { turbo_method: :delete }, class: "w-[150px] h-[42px] mr-2 text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-[7px] text-[16px] block items-center px-9 py-2.5 text-center mr-2 button-gradiant-hover", id:"delete-enquire-model" %>
+              <%= link_to 'DELETE', "", data: { turbo_method: :delete }, class: "w-[150px] h-[42px] mr-2 text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-medium rounded-[7px] text-[16px] block items-center px-9 py-2.5 text-center mr-2 button-gradiant-hover", id:"delete-batch-model" %>
               <button data-modal-hide="popup-modal" type="button" class="w-[150px] h-[42px] text-[#000] rounded-[7px] border bg-[#EDEDED] text-base font-medium px-9 py-2.5 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 button-gradiant-hover-cancel">CANCEL</button>
             </div>
           </div>
@@ -118,15 +118,15 @@
     </div>
     <!-- Extra Large Modal -->
     <div id="extralarge-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-[1000] hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full" style="backdrop-filter: contrast(0.5);">
-      <%= turbo_frame_tag "view-enquire-popup", class: "w-full max-w-[86rem] max-h-full" do %>
+      <%= turbo_frame_tag "view-batch-popup", class: "w-full max-w-[86rem] max-h-full" do %>
       <% end %>
     </div>
     <div class="mt-4 ml-[30px] lg:ml-0" id="render-pagination" >
-      <%# <%= render partial: "admin/enquires/paginate", locals: {  } %> %>
+      <%= render partial: "admin/batches/paginate", locals: { batches: @batches } %>
     </div>
   </div>
 </div>
 <script>
-  $("#enquire-modal-close-btn").click();
-  $("#enquire-detele-modal-btn").click();
+  $("#batch-modal-close-btn").click();
+  $("#batch-detele-modal-btn").click();
 </script>
