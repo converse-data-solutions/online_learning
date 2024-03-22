@@ -11,6 +11,7 @@ class Course < ApplicationRecord
   has_many :trainers_courses, dependent: :destroy
   has_many :trainers, through: :trainers_courses
   has_many :payments, through: :user_courses, dependent: :destroy
+  has_many :batches, dependent: :destroy
   # validations
   validates :course_name, presence: true, uniqueness: true
   validates :course_type, presence: true

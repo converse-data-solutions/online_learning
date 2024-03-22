@@ -190,5 +190,8 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :batches
+  end
   get 'entollment_details/update_progress', to: 'entrollment_details#update_progress', as: :update_progress
 end

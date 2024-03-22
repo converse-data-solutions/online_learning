@@ -66,6 +66,7 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'bullet', '~> 7.1', '>= 7.1.1'
   gem 'byebug', '~> 11.1', '>= 11.1.3'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'htmlbeautifier'
@@ -75,7 +76,6 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'brakeman', '~> 6.0', '>= 6.0.1'
-  gem 'bullet', '~> 7.1', '>= 7.1.1'
   gem 'rack-mini-profiler', '~> 3.1', '>= 3.1.1', require: false
   gem 'rubocop', '~> 1.56', '>= 1.56.4'
   gem 'rubycritic', '~> 4.8', '>= 4.8.1'
