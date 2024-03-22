@@ -85,13 +85,30 @@
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Secondary Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class="w-full sm:w-[55%] flex flex-col">
-        <%= f.collection_select(:secondary_trainer_id, User.joins(:roles).where(roles: { name: 'student' }), :id, :name, { prompt: "Select User", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle         new-name-custom-select
- new-select-border sources", id: "user_id" })  %>
+        <%= f.collection_select(:secondary_trainer_id, Trainer.all, :id, :name, { prompt: "Select User", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle         new-name-custom-select new-select-border sources", id: "user_id" })  %>
         <div class="text-red-600 text-sm mt-1" id="batch_course_error"></div>
         <% if batch&.errors&.any? %>
           <% if batch.errors[:course_name].any? %>
             <div class="text-red-600 text-sm mt-1">
               <%= batch.errors.full_messages_for(:course_name).join(', ') %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!--- nested form for batch timing -->
+  <%= f.fields_for :batch_timing, batch.batch_timing || batch.build_batch_timing, class: "w-full" do |batchTimingForm| %>
+  <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
+     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+      <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Batch Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+      <div class="w-full sm:w-[55%] flex flex-col">
+        <%= f.text_field :batch_name, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+        <div class="text-red-600 text-sm mt-1" id="batch_name_error"></div>
+        <% if batch&.errors&.any? %>
+          <% if batch.errors[:name].any? %>
+            <div class="text-red-600 text-sm mt-1">
+              <%= batch.errors.full_messages_for(:name).join(', ') %>
             </div>
           <% end %>
         <% end %>
