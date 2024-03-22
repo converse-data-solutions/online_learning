@@ -1,9 +1,14 @@
 class TrainerCourse < ApplicationRecord
   belongs_to :user
   belongs_to :course
+  has_many :trainer_attendances
 
   validates :user_id, presence: true
   validates :course_id, presence: true
+
+  def course_name_from_course_model
+    course.course_name if course.present?
+  end
 
   def self.get_trainer_courses(params)
     page = (params[:page].presence&.to_i&.positive? ? params[:page].to_i : 1)

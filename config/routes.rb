@@ -64,6 +64,15 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :trainer_attendances do
+      collection do
+        get :find_users_course
+        patch 'toggle_status/:id', to: 'trainer_attendances#toggle_status', as: :toggle_status
+      end
+    end
+  end
+
+  namespace :admin do
     resources :course_sections, only: %i[index edit update create destroy new], as: :course_chapters
   end
 

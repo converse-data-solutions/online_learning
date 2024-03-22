@@ -1,0 +1,4 @@
+<div class="w-full sm:w-[55%] flex flex-col" id="filtered_course">
+      <%= collection_select(:trainer_course, :id, trainer_courses.includes(:course), :id, :course_name_from_course_model, { prompt: "Select Section", selected: '' }, { class: "bg-gray-50 border-0 focus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select new-select-border sources" }) %>
+  <div class="text-red-600 text-sm mt-1" id="email-error"></div>
+</div>

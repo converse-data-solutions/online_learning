@@ -153,7 +153,7 @@
                                         <li class="flex justify-center"><a href="#" class="block font-medium font-[Poppins] text-[15px] <%= (params[:controller] == "admin/trainer_courses" && params[:action] == "index") ? "#0BC08B" : "#999" %>"> <%= link_to admin_trainer_courses_path, class: "block font-medium font-[Poppins] text-[15px] #{(params[:controller] == 'admin/trainer_courses' && params[:action] == 'index') ? 'current-screen-color' : ''}" do %>
                                               Trainer Courses
                                             <% end %></a></li>
-                                        <li class="flex justify-center"><a href="#" class="block font-medium font-[Poppins] text-[15px] <%= (params[:controller] == "admin/trainer_attendances" && params[:action] == "index") ? "#0BC08B" : "#999" %>"> <%= link_to admin_attendance_details_path, class: "block font-medium font-[Poppins] text-[15px] #{(params[:controller] == 'admin/trainer_attendances' && params[:action] == 'index') ? 'current-screen-color' : ''}" do %>
+                                        <li class="flex justify-center"><a href="#" class="block font-medium font-[Poppins] text-[15px] <%= (params[:controller] == "admin/trainer_attendances" && params[:action] == "index") ? "#0BC08B" : "#999" %>"> <%= link_to admin_trainer_attendances_path, class: "block font-medium font-[Poppins] text-[15px] #{(params[:controller] == 'admin/trainer_attendances' && params[:action] == 'index') ? 'current-screen-color' : ''}" do %>
                                               Trainer Attendances
                                             <% end %></a></li>
                                       </ul>

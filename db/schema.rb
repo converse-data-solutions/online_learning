@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_21_130555) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_22_062340) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -226,6 +226,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_130555) do
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
+  create_table "trainer_attendances", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "trainer_course_id", null: false
+    t.date "attendance_date"
+    t.string "class_timing"
+    t.boolean "status", default: true
+    t.bigint "batch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_trainer_attendances_on_batch_id"
+    t.index ["trainer_course_id"], name: "index_trainer_attendances_on_trainer_course_id"
+  end
+
   create_table "trainer_courses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "course_id", null: false
@@ -308,6 +320,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_21_130555) do
   add_foreign_key "subscription_details", "subscriptions"
   add_foreign_key "subscription_details", "users"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "trainer_attendances", "batches"
+  add_foreign_key "trainer_attendances", "trainer_courses"
   add_foreign_key "trainer_courses", "courses"
   add_foreign_key "trainer_courses", "users"
   add_foreign_key "user_courses", "courses"
