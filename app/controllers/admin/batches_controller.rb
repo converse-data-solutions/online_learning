@@ -3,6 +3,8 @@ class Admin::BatchesController < ApplicationController
   before_action :set_batch, only: %i[edit update destroy show]
 
   def index
+    @batch = Batch.new
+    @batch_timing = @batch.batch_timings.build
     @batches = Batch.paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html { render :index }
@@ -11,12 +13,13 @@ class Admin::BatchesController < ApplicationController
     end
   end
 
-  def new
-    @batch = Batch.new
-  end
+  # def new
+  #   @batch = Batch.new
+  #   @batch_timing = @batch.batch_timings.build
+  # end
 
   def create
-    @batch = Batch.new(batch_params)
+    @batch = Batch.new(batch_params)    
     respond_to do |format|
       if @batch.save
         @batches = Batch.paginate(page: params[:page], per_page: 10)
@@ -88,6 +91,6 @@ class Admin::BatchesController < ApplicationController
 
   def batch_params
     params.require(:batch).permit(:batch_name, :course_id, :effective_from, :effective_to, :primary_trainer_id,
-                                  :secondary_trainer_id)
+                                  :secondary_trainer_id, batch_timings_attributes: [:id, :day, :from_time, :to_time, :_destroy])
   end
 end
