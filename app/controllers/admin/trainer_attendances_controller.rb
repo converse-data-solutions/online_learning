@@ -3,7 +3,7 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
   before_action :set_attendance, only: %i[edit update destroy toggle_status]
 
   def index
-    @trainer_attendances = TrainerAttendance.all
+    @trainer_attendances = TrainerAttendance.get_trainers_attendances(params)
     respond_to do |format|
       format.json { render json: @trainer_attendances }
       format.html { render :index }
@@ -19,7 +19,7 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
     @trainer_attendance = TrainerAttendance.new(trainer_attendance_params)
     respond_to do |format|
       if @trainer_attendance.save
-        @trainer_attendances = TrainerAttendance.all
+        @trainer_attendances = TrainerAttendance.get_trainers_attendances(params)
         format.turbo_stream
         format.json { render :create }
       else
@@ -39,7 +39,7 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
   def update # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if @trainer_attendance.update(trainer_attendance_params)
-        @trainer_attendances = TrainerAttendance.all
+        @trainer_attendances = TrainerAttendance.get_trainers_attendances(params)
         format.turbo_stream
         format.json { render :update }
       else
@@ -55,7 +55,7 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
   def toggle_status # rubocop:disable Metrics/MethodLength
     @status = params[:status]
     if @trainer_attendance.update(status: @status)
-      @trainer_attendances = TrainerAttendance.all
+      @trainer_attendances = TrainerAttendance.get_trainers_attendances(params)
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
@@ -76,7 +76,7 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
   def destroy # rubocop:disable Metrics/MethodLength
     respond_to do |format|
       if @trainer_attendance.destroy
-        @trainer_attendances = TrainerAttendance.all
+        @trainer_attendances = TrainerAttendance.get_trainers_attendances(params)
         format.turbo_stream { render_destroy_success }
         format.json { render :show }
       else

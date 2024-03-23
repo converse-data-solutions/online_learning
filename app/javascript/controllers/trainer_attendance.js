@@ -263,7 +263,7 @@ function findUserCourse() {
 }
 
 function attendanceEditPopup() {
-  $("#attendance-table").on("click", ".edit-attendance-model", function () {
+  $("#trainer_attendance-table").on("click", ".edit-attendance-model", function () {
     let id = $(this).data("attendance-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -321,8 +321,8 @@ function attendanceDeletePopup() {
     }
 
     // Update the href attribute
-    $("#delete-attendance-model").attr("data-attendance-id", id);
-    $("#delete-attendance-model").attr("href", baseUrl);
+    $("#delete-trainer_attendance-model").attr("data-attendance-id", id);
+    $("#delete-trainer_attendance-model").attr("href", baseUrl);
   });
 }
 
@@ -373,14 +373,14 @@ function editClassDate() {
 function searchAttendance() {
   let delayTimer;
 
-  $("#attendance_search").on("input", function (e) {
+  $("#trainer_attendance_search").on("input", function (e) {
     clearTimeout(delayTimer);
     delayTimer = setTimeout(function () {
-      let searchValue = $("#attendance_search").val();
+      let searchValue = $("#trainer_attendance_search").val();
       $("#overlay").show();
 
       $.ajax({
-        url: "/admin/attendance_details",
+        url: "/admin/trainer_attendances",
         type: "GET",
         data: {
           search: searchValue,
@@ -653,7 +653,7 @@ function createAttendance(){
 }
 
 function editAttendance() {
-  let status = $("#edit_attendance_status").val();
+  let status = $("#edit_trainer_attendance_status").val();
   
   if (status == 'true') {
     $("#edit_present").show();
@@ -666,13 +666,13 @@ function editAttendance() {
   $("#edit_present").click(function(){
     $(this).hide();
     $("#edit_absent").show();
-    $("#edit_attendance_status").val("true");
+    $("#edit_trainer_attendance_status").val("true");
   });
 
   $("#edit_absent").click(function(){
     $(this).hide();
     $("#edit_present").show();
-    $("#edit_attendance_status").val("false");
+    $("#edit_trainer_attendance_status").val("false");
   });
 }
 
