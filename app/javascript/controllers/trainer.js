@@ -133,17 +133,336 @@ function trainerSearch() {
   });
 }
 
+
+// Create form validation
+function formValidation() {
+  function validateName() {
+    let name = $("#trainer_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#name-error").text("Name can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#name-error").text("Please enter a valid name (only alphabets allowed)");
+      return false;
+    } else {
+      $("#name-error").text("");
+      return true;
+    }
+  }
+
+  // Function to validate email field
+  function validateEmail() {
+    let email = $("#trainer_email").val().trim();
+    let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    if (!email) {
+      $("#email-error").text("Email can't be blank");
+      return false; // Return false to indicate validation failure
+    } else if (!emailRegex.test(email)) {
+      $("#email-error").text("Please enter a valid email address");
+      return false; // Return false to indicate validation failure
+    } else {
+      $("#email-error").text("");
+      return true; // Return true to indicate validation success
+    }
+  }
+
+  // Function to validate password field
+  function validatePassword() {
+    let password = $("#trainer_password").val();
+    let hasUppercase = /[A-Z]/.test(password);
+    let hasNumber = /\d/.test(password);
+    let hasSpecialChar = /[!@#$%^&*()_+]/.test(password);
+    if (!password) {
+      $("#password-error").text("Password can't be blank");
+      return false;
+    } else if (password.length < 8) {
+      $("#password-error").text("Password must be at least 8 characters long");
+      return false;
+    } else if (!hasUppercase) {
+      $("#password-error").text("Password must contain at least one uppercase letter");
+      return false;
+    } else if (!hasNumber) {
+      $("#password-error").text("Password must contain at least one numeric digit");
+      return false;
+    } else if (!hasSpecialChar) {
+      $("#password-error").text("Password must contain at least one special character");
+      return false;
+    } else {
+      $("#password-error").text("");
+      return true;
+    }
+  }
+
+  // Function to validate password confirmation field
+  function validatePasswordConfirmation() {
+    let password = $("#trainer_password").val();
+    let passwordConfirmation = $("#trainer_password_confirmation").val();
+    if (password !== passwordConfirmation) {
+      $("#password-confirmation-error").text("Password confirmation doesn't match");
+      return false; // Return false to indicate validation failure
+    } else {
+      $("#password-confirmation-error").text("");
+      return true; // Return true to indicate validation success
+    }
+  }
+
+  function validateOccupation() {
+    let name = $("#trainer_occupation").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#occupation-error").text("Occupation can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#occupation-error").text("Please enter a valid Occupation (only alphabets allowed)");
+      return false;
+    } else {
+      $("#occupation-error").text("");
+      return true;
+    }
+  }
+
+  function validateContactNumber() {
+    let contactNumber = $("#trainer_contact_number").val();
+
+    if (contactNumber) {
+      if (!validator.isNumeric(contactNumber) || contactNumber.length !== 10) {
+        $("#contact-number-error").text(
+          "Contact Number must be a 10-digit number"
+        );
+        return false;
+      } else {
+        $("#contact-number-error").text("");
+        return true;
+      }
+    } 
+  }
+
+  function validateEmergencyContactNumber() {
+    let emergencycontactNumber = $("#trainer_emergency_contact_number").val();
+
+    if (emergencycontactNumber) {
+      if (
+        !validator.isNumeric(emergencycontactNumber) ||
+        emergencycontactNumber.length !== 10
+      ) {
+        $("#emergency-contact-number-error").text(
+          "Emergency Contact Number must be a 10-digit number"
+        );
+        return false;
+      } else {
+        $("#emergency-contact-number-error").text("");
+        return true;
+      }
+    }
+  }
+  // Event bindings for registration form fields
+  $("#trainer_name").on("blur", validateName); // Validate name on blur
+  $("#trainer_email").on("blur", validateEmail); // Validate email on blur
+  $("#trainer_password").on("blur", validatePassword); // Validate password on blur
+  $("#trainer_password_confirmation").on("blur", validatePasswordConfirmation); // Validate password confirmation on blur
+  $("#trainer_occupation").on("blur", validateOccupation); // Validate occupation on blur
+  $("#trainer_contact_number").on("blur", validateContactNumber); // Validate contact number on blur
+  $("#trainer_emergency_contact_number").on("blur", validateEmergencyContactNumber);
+
+
+  // Event binding for form submission
+  $("#trainer-admin-form").on("submit", function(event) {
+    // Validate all fields on form submission
+    let isNameValid = validateName();
+    let isEmailValid = validateEmail();
+    let isPasswordValid = validatePassword();
+    let isPasswordConfirmationValid = validatePasswordConfirmation();
+    let isOccupationValid = validateOccupation();
+    let isContactNumberValid = validateContactNumber();
+    let isEmergencyContactNumberValid = validateEmergencyContactNumber();
+
+    // Check if any field is invalid
+    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      validateName();
+      validateEmail();
+      validatePassword();
+      validatePasswordConfirmation();
+      validateOccupation();
+      validateContactNumber();
+      validateEmergencyContactNumber();
+    }
+  });
+}
+
+function editFormValidation() {
+  function validateName() {
+    let name = $("#edit_trainer_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#edit-name-error").text("Name can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#edit-name-error").text("Please enter a valid name (only alphabets allowed)");
+      return false;
+    } else {
+      $("#edit-name-error").text("");
+      return true;
+    }
+  }
+
+  function validateEmail() {
+    let email = $("#edit_trainer_email").val().trim();
+    let emailRegex = /^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+    if (!email) {
+      $("#edit-email-error").text("Email can't be blank");
+      return false;
+    } else if (!emailRegex.test(email)) {
+      $("#edit-email-error").text("Please enter a valid email address");
+      return false;
+    } else {
+      $("#edit-email-error").text("");
+      return true;
+    }
+  }
+
+  function validatePassword() {
+    let password = $("#edit_trainer_password").val();
+    let hasUppercase = /[A-Z]/.test(password);
+    let hasNumber = /\d/.test(password);
+    let hasSpecialChar = /[!@#$%^&*()_+]/.test(password);
+
+    if (!password) {
+      $("#edit-password-error").text("Password can't be blank");
+      return false;
+    } else if (password.length < 8) {
+      $("#edit-password-error").text("Password must be at least 8 characters long");
+      return false;
+    } else if (!hasUppercase) {
+      $("#edit-password-error").text("Password must contain at least one uppercase letter");
+      return false;
+    } else if (!hasNumber) {
+      $("#edit-password-error").text("Password must contain at least one numeric digit");
+      return false;
+    } else if (!hasSpecialChar) {
+      $("#edit-password-error").text("Password must contain at least one special character");
+      return false;
+    } else {
+      $("#edit-password-error").text("");
+      return true;
+    }
+  }
+
+  function validatePasswordConfirmation() {
+    let password = $("#edit_trainer_password").val();
+    let passwordConfirmation = $("#edit_trainer_password_confirmation").val();
+
+    if (password !== passwordConfirmation) {
+      $("#edit-password-confirmation-error").text("Password confirmation doesn't match");
+      return false;
+    } else {
+      $("#edit-password-confirmation-error").text("");
+      return true;
+    }
+  }
+
+  function validateOccupation() {
+    let name = $("#edit_trainer_occupation").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#edit-occupation-error").text("Occupation can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#edit-occupation-error").text("Please enter a valid Occupation (only alphabets allowed)");
+      return false;
+    } else {
+      $("#edit-occupation-error").text("");
+      return true;
+    }
+  }
+
+  function validateContactNumber() {
+    let contactNumber = $("#edit_trainer_contact_number").val();
+
+    if (contactNumber) {
+      if (!validator.isNumeric(contactNumber) || contactNumber.length !== 10) {
+        $("#edit-contact-number-error").text(
+          "Contact Number must be a 10-digit number");
+          return false;
+      } else {
+        $("#edit-contact-number-error").text("");
+        return true;
+      }
+    } else {
+      $("#edit-contact-number-error").text("");
+    }
+  }
+
+  function validateEmergencyContactNumber() {
+    let emergencycontactNumber = $("#edit_trainer_emergency_contact_number").val();
+
+    if (emergencycontactNumber) {
+      if (
+        !validator.isNumeric(emergencycontactNumber) ||
+        emergencycontactNumber.length !== 10
+      ) {
+        $("#edit-emergency-contact-number-error").text(
+          "Emergency Contact Number must be a 10-digit number"
+        );
+        return false;
+      } else {
+        $("#edit-emergency-contact-number-error").text("");
+        return true;
+      }
+    } else {
+      $("#edit-emergency-contact-number-error").text("");
+    }
+  }
+
+  
+
+  $("#edit-trainer-popup").on("focusout", "#edit_trainer_name", validateName);
+  $("#edit-trainer-popup").on("focusout", "#edit_trainer_email", validateEmail);
+  $("#edit-trainer-popup").on("focusout", "#edit_trainer_password", validatePassword);
+  $("#edit-trainer-popup").on("focusout", "#edit_trainer_password_confirmation", validatePasswordConfirmation);
+  $("#edit-trainer-popup").on("focusout", "#edit_trainer_occupation", validateOccupation);
+  $("#edit-trainer-popup").on("focusout", "#edit_trainer_contact_number", validateContactNumber);
+  $("#edit-trainer-popup").on("focusout", "#edit_trainer_emergency_contact_number", validateEmergencyContactNumber);
+
+
+  $("#edit-trainer-popup").on("submit", "#trainer-admin-edit-form", function(event) {
+    let isNameValid = validateName();
+    let isEmailValid = validateEmail();
+    let isPasswordValid = validatePassword();
+    let isPasswordConfirmationValid = validatePasswordConfirmation();
+    let isOccupationValid = validateOccupation();
+    let isContactNumberValid = validateContactNumber();
+    let isEmergencyContactNumberValid = validateEmergencyContactNumber();
+
+    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid) {
+      event.preventDefault();
+    }
+  });
+}
+
 $(document).ready(function() {
   editModelPopup();
   deletePopup();
   viewStudents();
   trainerSearch();
+  formValidation();
+  editFormValidation();
 
   $(document).on("turbo:render", function() {
     editModelPopup();
     deletePopup();
     trainerSearch();
-    
+    formValidation();
+    editFormValidation();
   });
 
   $(document).on("turbo:before-render", function() {
@@ -163,5 +482,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     editModelPopup();
     deletePopup();
     viewStudents();
+    formValidation();
+    editFormValidation();
   };
 });

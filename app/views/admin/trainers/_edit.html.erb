@@ -16,12 +16,12 @@
     </div>
     <!-- Modal body -->
     <div class="p-7 space-y-6 lg:w-[94%] sm:w-[95%] w-[90%] mr-auto ml-auto">
-      <%= form_for(trainer, url: admin_trainer_path(trainer), html: { class: "validate", id: "user-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
+      <%= form_for(trainer, url: admin_trainer_path(trainer), html: { class: "validate", id: "trainer-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
         <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col">
-              <%= f.text_field :name, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_name", validate: true %>
+              <%= f.text_field :name, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_trainer_name", validate: true %>
               <div class="text-red-600 text-sm mt-1" id="edit-name-error"></div>
               <% if trainer&.errors&.any? %>
                 <% if trainer.errors[:name].any? %>
@@ -35,7 +35,7 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="email" class=" block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col">
-              <%= f.email_field :email, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_email", validate: true %>
+              <%= f.email_field :email, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_trainer_email", validate: true %>
               <div class="text-red-600 text-sm mt-1" id="edit-email-error"></div>
               <% if trainer&.errors&.any? %>
                 <% if trainer.errors[:email].any? %>
@@ -51,7 +51,7 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="password" class=" block mb-2 text-lg font-medium text-[#000]">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col relative">
-              <%= f.password_field :password, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_password", autocomplete: "new-password", validate: true %>
+              <%= f.password_field :password, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_trainer_password", autocomplete: "new-password", validate: true %>
               <div class="absolute top-0 bottom-4 right-0 flex items-center pr-3">
                 <img id="toggle-edit-password-visibility" src="<%= asset_path("eye.png") %>" alt="Show Password" class="cursor-pointer" onclick="toggleEditPasswordVisibility()">
               </div>
@@ -68,7 +68,7 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="passwod_confirmation" class="w-full sm:w-[40%] lg:w-[46%]  block mb-2 text-lg font-medium text-[#000]">Password Confirmation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col relative">
-              <%= f.password_field :password_confirmation, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_password_confirmation", autocomplete: "new-password", validate: true %>
+              <%= f.password_field :password_confirmation, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_trainer_password_confirmation", autocomplete: "new-password", validate: true %>
               <div class="absolute top-0 bottom-4 right-0 flex items-center pr-3">
                 <img id="toggle-edit-password-confirmation-visibility" src="<%= asset_path("eye.png") %>" alt="Show Password" class="cursor-pointer" onclick="toggleEditPasswordConfirmationVisibility()">
               </div>
@@ -111,7 +111,7 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="contact number" class=" block mb-2 text-lg font-medium text-[#000]">Phone No</label>
             <div class="w-full sm:w-[55%] flex flex-col">
-              <%= f.text_field :contact_number, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_contact_number", validate: true %>
+              <%= f.text_field :contact_number, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_trainer_contact_number", validate: true %>
               <div class="text-red-600 text-sm mt-1" id="edit-contact-number-error"></div>
               <% if trainer&.errors&.any? %>
                 <% if trainer.errors[:contact_number].any? %>
@@ -125,7 +125,7 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="occupation" class=" block mb-2 text-lg font-medium text-[#000]">Occupation<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col">
-              <%= f.text_field :occupation, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_occupation", validate: true %>
+              <%= f.text_field :occupation, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_trainer_occupation", validate: true %>
               <div class="text-red-600 text-sm mt-1" id="edit-occupation-error"></div>
             </div>
           </div>
@@ -154,7 +154,7 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="emergency contact number" class=" block mb-2 text-lg font-medium text-[#000]">Emergency Contact Number</label>
             <div class="w-full sm:w-[55%] flex flex-col">
-              <%= f.text_field :emergency_contact_number, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_user_emergency_contact_number", validate: true %>
+              <%= f.text_field :emergency_contact_number, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id:"edit_trainer_emergency_contact_number", validate: true %>
               <div class="text-red-600 text-sm mt-1" id="edit-emergency-contact-number-error"></div>
               <% if trainer&.errors&.any? %>
                 <% if trainer.errors[:emergency_contact_number].any? %>
@@ -229,7 +229,7 @@
 </div>
 <script>
   function toggleEditPasswordVisibility() {
-        var passwordField = document.getElementById('edit_user_password');
+        var passwordField = document.getElementById('edit_trainer_password');
         var toggleIcon = document.getElementById('toggle-edit-password-visibility');
 
         if (passwordField.type === "password") {
@@ -242,7 +242,7 @@
     }
 
     function toggleEditPasswordConfirmationVisibility() {
-        var passwordField = document.getElementById('edit_user_password_confirmation');
+        var passwordField = document.getElementById('edit_trainer_password_confirmation');
         var toggleIcon = document.getElementById('toggle-edit-password-confirmation-visibility');
 
         if (passwordField.type === "password") {

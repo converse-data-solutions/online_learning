@@ -1,4 +1,4 @@
-<%= form_for trainer || Trainer.new, url: admin_trainers_path, html: { class: "validate", id: "-admin-form" }, format: :turbo_stream, method: :post do |f| %>
+<%= form_for trainer || Trainer.new, url: admin_trainers_path, html: { class: "validate", id: "trainer-admin-form" }, format: :turbo_stream, method: :post do |f| %>
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
       <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
@@ -210,7 +210,7 @@
 <% end %>
 <script>
   function togglePasswordVisibility() {
-        var passwordField = document.getElementById('user_password');
+        var passwordField = document.getElementById('trainer_password');
         var toggleIcon = document.getElementById('toggle-password-visibility');
 
         if (passwordField.type === "password") {
@@ -223,7 +223,7 @@
     }
 
     function togglePasswordConfirmationVisibility() {
-        var passwordField = document.getElementById('user_password_confirmation');
+        var passwordField = document.getElementById('trainer_password_confirmation');
         var toggleIcon = document.getElementById('toggle-password-confirmation-visibility');
 
         if (passwordField.type === "password") {
