@@ -20,7 +20,7 @@
       <div class="text-red-600 text-sm mt-1" id="course-error"></div>
     </div>
   </div>
-  <%= f.text_field :trainer_course_id, value: @trainer_course_id, id: "attendance_trainer_course_id" %>
+  <%= f.hidden_field :trainer_course_id, value: @trainer_course_id, id: "attendance_trainer_course_id" %>
   <% if trainer_attendance&.errors&.any? %>
     <% if trainer_attendance&.errors[:trainer_course_id].any? %>
       <div class="text-red-600 text-sm mt-1">
@@ -31,7 +31,7 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="batch_id" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Batch Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.collection_select(:batch_id, Batch.all, :id, :batch_name, { prompt: "Select Batch", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select new-lesson-custom-select-border sources" })  %>
+      <%= f.collection_select(:batch_id, Batch.all, :id, :batch_name, { prompt: "Select Batch", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select trainer_attendance_batch_select sources" })  %>
       <div class="text-red-600 text-sm mt-1" id="name-error"></div>
       <% if trainer_attendance&.errors&.any? %>
         <% if trainer_attendance&.errors[:user_id].any? %>
@@ -44,6 +44,46 @@
   </div>
   <%= turbo_frame_tag "course_input_render" do %>
   <% end %>
+  <div class="mb-4 flex flex-col sm:flex-row">
+    <label for="timeslot" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Timeslot</label>
+    <div class="w-full sm:w-[55%] flex flex-col relative">
+      <div class="flex items-center space-x-2 gap-2">
+        <div class="dropdown">
+          <input type="text" id="start-time" class="w-full px-4 py-2 bg-white border border-[#cccccc] text-[#818181] rounded-lg focus:outline-none" readonly placeholder="Start time" />
+          <div class="dropdown-menu" id="start-time-dropdown">
+            <!-- JavaScript will populate this with all the options -->
+          </div>
+        </div>
+        <span class="text-[#818181] text-center text-base mb-5">-</span>
+        <div class="dropdown">
+          <input type="text" id="end-time" class="w-full px-4 py-2 bg-white border border-[#cccccc] text-[#818181] rounded-lg focus:outline-none" readonly placeholder="End time"/>
+          <div class="dropdown-menu" id="end-time-dropdown">
+            <!-- JavaScript will populate this with all the options -->
+          </div>
+        </div>
+      </div>
+      <!-- New input field to display the concatenated result -->
+      <div class="mt-4">
+        <%= f.text_field :class_timing, id: "time-range", class: "w-full px-4 py-2 bg-white border border-[#cccccc] text-[#818181] rounded-lg focus:outline-none" %>
+      </div>
+      <svg class="absolute top-3" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="left: 7.5rem">
+        <path d="M9.5 19C7.62108 19 5.78435 18.4428 4.22209 17.399C2.65982 16.3551 1.44218 14.8714 0.723149 13.1355C0.00411619 11.3996 -0.184015 9.48946 0.182544 7.64665C0.549104 5.80383 1.45389 4.11109 2.78249 2.78249C4.11109 1.45389 5.80383 0.549104 7.64665 0.182544C9.48946 -0.184015 11.3996 0.00411619 13.1355 0.723149C14.8714 1.44218 16.3551 2.65982 17.399 4.22209C18.4428 5.78435 19 7.62108 19 9.5C19 12.0196 17.9991 14.4359 16.2175 16.2175C14.4359 17.9991 12.0196 19 9.5 19ZM9.5 1.35715C7.8895 1.35715 6.31516 1.83472 4.97607 2.72947C3.63699 3.62421 2.5933 4.89595 1.97698 6.38387C1.36067 7.87178 1.19942 9.50903 1.51361 11.0886C1.8278 12.6682 2.60334 14.1191 3.74213 15.2579C4.88093 16.3967 6.33185 17.1722 7.91141 17.4864C9.49097 17.8006 11.1282 17.6393 12.6161 17.023C14.104 16.4067 15.3758 15.363 16.2705 14.0239C17.1653 12.6848 17.6429 11.1105 17.6429 9.5C17.6429 7.34038 16.785 5.26922 15.2579 3.74213C13.7308 2.21505 11.6596 1.35715 9.5 1.35715Z" fill="#818181"/>
+        <path d="M12.6145 13.5721L8.82129 9.77891V3.39355H10.1784V9.2157L13.5713 12.6153L12.6145 13.5721Z" fill="#818181"/>
+      </svg>
+      <svg class="absolute right-3 top-3" width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.5 19C7.62108 19 5.78435 18.4428 4.22209 17.399C2.65982 16.3551 1.44218 14.8714 0.723149 13.1355C0.00411619 11.3996 -0.184015 9.48946 0.182544 7.64665C0.549104 5.80383 1.45389 4.11109 2.78249 2.78249C4.11109 1.45389 5.80383 0.549104 7.64665 0.182544C9.48946 -0.184015 11.3996 0.00411619 13.1355 0.723149C14.8714 1.44218 16.3551 2.65982 17.399 4.22209C18.4428 5.78435 19 7.62108 19 9.5C19 12.0196 17.9991 14.4359 16.2175 16.2175C14.4359 17.9991 12.0196 19 9.5 19ZM9.5 1.35715C7.8895 1.35715 6.31516 1.83472 4.97607 2.72947C3.63699 3.62421 2.5933 4.89595 1.97698 6.38387C1.36067 7.87178 1.19942 9.50903 1.51361 11.0886C1.8278 12.6682 2.60334 14.1191 3.74213 15.2579C4.88093 16.3967 6.33185 17.1722 7.91141 17.4864C9.49097 17.8006 11.1282 17.6393 12.6161 17.023C14.104 16.4067 15.3758 15.363 16.2705 14.0239C17.1653 12.6848 17.6429 11.1105 17.6429 9.5C17.6429 7.34038 16.785 5.26922 15.2579 3.74213C13.7308 2.21505 11.6596 1.35715 9.5 1.35715Z" fill="#818181"/>
+        <path d="M12.6145 13.5721L8.82129 9.77891V3.39355H10.1784V9.2157L13.5713 12.6153L12.6145 13.5721Z" fill="#818181"/>
+      </svg>
+      <div class="text-red-600 text-sm mt-1" id="enquire_timeslot_error"></div>
+      <% if trainer_attendance&.errors&.any? %>
+        <% if trainer_attendance.errors[:class_timing].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= trainer_attendance.errors.full_messages_for(:class_timing).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="class_date" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Class Date<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col relative">
@@ -96,7 +136,7 @@
       </div>
     </div>
   </div>
-  <%= f.text_field :status, id: "attendance_status"%>
+  <%= f.hidden_field :status, id: "attendance_status"%>
   <%= hidden_field_tag :page, params[:page]%>
   <%= hidden_field_tag :per_page, params[:per_page]%>
   <%= hidden_field_tag :search, params[:search]%>

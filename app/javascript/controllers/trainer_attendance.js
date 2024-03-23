@@ -521,7 +521,7 @@ function rangeDateFilter() {
       $("#overlay").show();
 
       $.ajax({
-        url: "/admin/attendance_details",
+        url: "/admin/trainer_attendances",
         type: "GET",
         data: requestData,
         headers: {
@@ -676,6 +676,200 @@ function editAttendance() {
   });
 }
 
+function initializeTimeDropdowns() {
+  $(document).ready(function() {
+    const $startDropdown = $("#start-time").closest(".dropdown");
+    const $startDropdownMenu = $startDropdown.find(".dropdown-menu");
+    const $endDropdown = $("#end-time").closest(".dropdown");
+    const $endDropdownMenu = $endDropdown.find(".dropdown-menu");
+    const $timeRangeInput = $("#time-range");
+
+    // Function to toggle dropdown menu
+    function toggleDropdown($dropdownMenu) {
+      $dropdownMenu.toggleClass("show");
+    }
+
+    // Function to generate time options
+    function generateTimeOptions($dropdownMenu) {
+      const hours = Array.from({
+        length: 12
+      }, (_, i) => (i === 0 ? 12 : i));
+      const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+      const amPm = ["AM", "PM"];
+      amPm.forEach((period) => {
+        hours.forEach((hour) => {
+          const hourStr = hour < 10 ? "0" + hour : "" + hour;
+          minutes.forEach((minute) => {
+            const minuteStr = minute < 10 ? "0" + minute : "" + minute;
+            const time = hourStr + ":" + minuteStr + " " + period;
+            const $optionElement = $("<div>")
+              .addClass("dropdown-menu-item")
+              .text(time);
+            $dropdownMenu.append($optionElement);
+          });
+        });
+      });
+    }
+
+    // Generate time options for start time dropdown
+    generateTimeOptions($startDropdownMenu);
+
+    // Generate time options for end time dropdown
+    generateTimeOptions($endDropdownMenu);
+
+    // Function to update the time range input
+    function updateSelectedTimeRange() {
+      const startTime = $("#start-time").val();
+      const endTime = $("#end-time").val();
+      const timeRange = startTime + " - " + endTime;
+      $timeRangeInput.val(timeRange);
+    }
+
+    // Add event listener to toggle dropdown menu for start time
+    $startDropdown.on("click", function(event) {
+      toggleDropdown($startDropdownMenu);
+    });
+
+    // Add event listener to toggle dropdown menu for end time
+    $endDropdown.on("click", function(event) {
+      toggleDropdown($endDropdownMenu);
+    });
+
+    // Add event listener to close the dropdown menu when clicking outside for start time
+    $(document).on("click", function(event) {
+      if (
+        !$startDropdown.is(event.target) &&
+        $startDropdown.has(event.target).length === 0
+      ) {
+        $startDropdownMenu.removeClass("show");
+      }
+    });
+
+    // Add event listener to close the dropdown menu when clicking outside for end time
+    $(document).on("click", function(event) {
+      if (
+        !$endDropdown.is(event.target) &&
+        $endDropdown.has(event.target).length === 0
+      ) {
+        $endDropdownMenu.removeClass("show");
+      }
+    });
+
+    // Add event listener to select start time from dropdown
+    $startDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+      const selectedTime = $(this).text();
+      $("#start-time").val(selectedTime);
+      $startDropdownMenu.removeClass("show");
+      updateSelectedTimeRange();
+    });
+
+    // Add event listener to select end time from dropdown
+    $endDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+      const selectedTime = $(this).text();
+      $("#end-time").val(selectedTime);
+      $endDropdownMenu.removeClass("show");
+      updateSelectedTimeRange();
+    });
+  });
+}
+
+function editTimeDropdowns() {
+  $(document).ready(function() {
+    const $startDropdown = $("#edit-start-time").closest(".dropdown");
+    const $startDropdownMenu = $startDropdown.find(".dropdown-menu");
+    const $endDropdown = $("#edit-end-time").closest(".dropdown");
+    const $endDropdownMenu = $endDropdown.find(".dropdown-menu");
+    const $timeRangeInput = $("#edit-time-range");
+
+    // Function to toggle dropdown menu
+    function toggleDropdown($dropdownMenu) {
+      $dropdownMenu.toggleClass("show");
+    }
+
+    // Function to generate time options
+    function generateTimeOptions($dropdownMenu) {
+      const hours = Array.from({
+        length: 12
+      }, (_, i) => (i === 0 ? 12 : i));
+      const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+      const amPm = ["AM", "PM"];
+      amPm.forEach((period) => {
+        hours.forEach((hour) => {
+          const hourStr = hour < 10 ? "0" + hour : "" + hour;
+          minutes.forEach((minute) => {
+            const minuteStr = minute < 10 ? "0" + minute : "" + minute;
+            const time = hourStr + ":" + minuteStr + " " + period;
+            const $optionElement = $("<div>")
+              .addClass("dropdown-menu-item")
+              .text(time);
+            $dropdownMenu.append($optionElement);
+          });
+        });
+      });
+    }
+
+    // Generate time options for start time dropdown
+    generateTimeOptions($startDropdownMenu);
+
+    // Generate time options for end time dropdown
+    generateTimeOptions($endDropdownMenu);
+
+    // Function to update the time range input
+    function updateSelectedTimeRange() {
+      const startTime = $("#edit-start-time").val();
+      const endTime = $("#edit-end-time").val();
+      const timeRange = startTime + " - " + endTime;
+      $timeRangeInput.val(timeRange);
+    }
+
+    // Add event listener to toggle dropdown menu for start time
+    $startDropdown.on("click", function(event) {
+      toggleDropdown($startDropdownMenu);
+    });
+
+    // Add event listener to toggle dropdown menu for end time
+    $endDropdown.on("click", function(event) {
+      toggleDropdown($endDropdownMenu);
+    });
+
+    // Add event listener to close the dropdown menu when clicking outside for start time
+    $(document).on("click", function(event) {
+      if (
+        !$startDropdown.is(event.target) &&
+        $startDropdown.has(event.target).length === 0
+      ) {
+        $startDropdownMenu.removeClass("show");
+      }
+    });
+
+    // Add event listener to close the dropdown menu when clicking outside for end time
+    $(document).on("click", function(event) {
+      if (
+        !$endDropdown.is(event.target) &&
+        $endDropdown.has(event.target).length === 0
+      ) {
+        $endDropdownMenu.removeClass("show");
+      }
+    });
+
+    // Add event listener to select start time from dropdown
+    $startDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+      const selectedTime = $(this).text();
+      $("#edit-start-time").val(selectedTime);
+      $startDropdownMenu.removeClass("show");
+      updateSelectedTimeRange();
+    });
+
+    // Add event listener to select end time from dropdown
+    $endDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+      const selectedTime = $(this).text();
+      $("#edit-end-time").val(selectedTime);
+      $endDropdownMenu.removeClass("show");
+      updateSelectedTimeRange();
+    });
+  });
+}
+
 $(document).ready(function () {
   selectCreateCourse();
   selectCreateUser();
@@ -693,6 +887,8 @@ $(document).ready(function () {
   formValidation();
   createAttendance();
   editAttendance();
+  initializeTimeDropdowns();
+  editTimeDropdowns();
 
   $(document).on("turbo:render", function () {
     selectCreateCourse();
@@ -711,6 +907,8 @@ $(document).ready(function () {
     formValidation();
     createAttendance();
     editAttendance();
+    initializeTimeDropdowns();
+    editTimeDropdowns();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -735,5 +933,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     classDate();
     createAttendance();
     editAttendance();
+    editTimeDropdowns();
   };
 });
