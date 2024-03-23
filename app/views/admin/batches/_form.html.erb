@@ -100,7 +100,7 @@
   </div>
   <!--- nested form for batch timing -->
   <div id="batch_timings_container">
-    <%= f.fields_for :batch_timings, batch_timing || batch.batch_timings do |batchTimingForm| %>
+    <%= f.fields_for :batch_timings, batch_timings || batch.batch_timings do |batchTimingForm| %>
       <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Batch Timings<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
       <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row batch_timing_container">
         <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">

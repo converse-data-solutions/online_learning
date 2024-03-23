@@ -4,7 +4,8 @@ class Admin::BatchesController < ApplicationController
 
   def index
     @batch = Batch.new
-    @batch_timing = @batch.batch_timings.build
+    @batch_timings = @batch.batch_timings.build
+    @batch_students = @batch.students
     @batches = Batch.paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html { render :index }
@@ -28,7 +29,7 @@ class Admin::BatchesController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('batch-admin-form', partial: 'admin/batches/form', locals: { batch: Batch.new, batch_timing: BatchTiming.new })
+            turbo_stream.replace('batch-admin-form', partial: 'admin/batches/form', locals: { batch: @batch, batch_timings: @batch.batch_timings })
           ]
         end
         format.json { render json: @batch.errors, status: :unprocessable_entity }
