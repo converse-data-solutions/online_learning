@@ -5,7 +5,6 @@ class Admin::BatchesController < ApplicationController
   def index
     @batch = Batch.new
     @batch_timings = @batch.batch_timings.build
-    @batch_students = @batch.students
     @batches = Batch.paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html { render :index }
@@ -14,18 +13,15 @@ class Admin::BatchesController < ApplicationController
     end
   end
 
-  # def new
-  #   @batch = Batch.new
-  #   @batch_timing = @batch.batch_timings.build
-  # end
-
   def create
     @batch = Batch.new(batch_params)    
     respond_to do |format|
       if @batch.save
+        student_ids = Array(params[:batch][:student_ids]).reject(&:empty?).map(&:to_i)
+        students = User.where(id: student_ids).where.not(id: @batch.student_ids) # Exclude already associated students
+        @batch.students << students
         @batches = Batch.paginate(page: params[:page], per_page: 10)
         format.turbo_stream
-        # format.json { render :show, status: :created, location: admin_batch_url(@batch) }
       else
         format.turbo_stream do
           render turbo_stream: [
@@ -92,6 +88,6 @@ class Admin::BatchesController < ApplicationController
 
   def batch_params
     params.require(:batch).permit(:batch_name, :course_id, :effective_from, :effective_to, :primary_trainer_id,
-                                  :secondary_trainer_id, batch_timings_attributes: [:id, :day, :from_time, :to_time, :_destroy])
+                                  :secondary_trainer_id, batch_timings_attributes: [:id, :day, :from_time, :to_time, :_destroy], student_ids: [])
   end
 end

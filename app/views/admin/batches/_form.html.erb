@@ -120,6 +120,13 @@
   <div class="w-full sm:w-[55%] flex flex-col">
     <button type="button" id="add_timing" class="w-[100px] h-[42px] bg-[#ffffff] button-gradiant-hover border border-[#cccccc] bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200">add day</button>
   </div>
+  <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+    <label for="student_ids" class="block mb-2 text-lg font-medium text-[#000]">Select Students</label>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <!-- Replace User.all with your appropriate method to fetch users -->
+      <%= f.collection_select(:student_ids, User.all, :id, :name, { prompt: "Select Students" }, { multiple: true, class: "bg-[#FFFFFF] focus:ring-0 text-[#818181] text-base font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources" }) %>
+    </div>
+  </div>
   <%= hidden_field_tag :page, params[:page]%>
   <%= hidden_field_tag :per_page, params[:per_page]%>
   <%= hidden_field_tag :search, params[:search]%>
