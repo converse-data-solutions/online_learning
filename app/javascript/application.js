@@ -248,6 +248,11 @@ $(document).ready(function() {
     openDropdown(studentManagement);
   }
 
+  if ($("#trainer-management").hasClass("openDropDown")) {
+    const trainerManagement = $("#trainer-management");
+    openDropdown(trainerManagement);
+  }
+
   if ($("#course-management").hasClass("openDropDown")) {
     const courseManagement = $("#course-management");
     openDropdown(courseManagement);
@@ -286,6 +291,11 @@ $(document).ready(function() {
     if ($("#student-management").hasClass("openDropDown")) {
       const dropdownFee = $("#student-management");
       openDropdown(dropdownFee);
+    }
+
+    if ($("#trainer-management").hasClass("openDropDown")) {
+      const trainerManagement = $("#trainer-management");
+      openDropdown(trainerManagement);
     }
 
     if ($("#course-management").hasClass("openDropDown")) {
