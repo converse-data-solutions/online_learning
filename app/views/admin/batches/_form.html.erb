@@ -98,26 +98,16 @@
     </div>
   </div>
   <!--- nested form for batch timing -->
-<%= f.fields_for :batch_timings, batch_timing do |batchTimingForm| %>
+  <%= f.fields_for :batch_timings, batch_timing do |batchTimingForm| %>
+    <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Batch Timings<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
       <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-        <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Day<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= batchTimingForm.text_field :day, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
         </div>
-      </div>
-    </div>
-    <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
-      <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-        <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">From Time<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= batchTimingForm.time_field :from_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
         </div>
-      </div>
-    </div>
-    <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
-      <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-        <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">To time<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= batchTimingForm.time_field :to_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
         </div>
