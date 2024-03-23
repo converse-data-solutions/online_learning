@@ -653,9 +653,9 @@ function createAttendance(){
 }
 
 function editAttendance() {
-  let status = $("#edit_trainer_attendance_status").val();
+  let initialStatus = $("#edit_trainer_attendance_status").val();
   
-  if (status == 'true') {
+  if (initialStatus === 'true') {
     $("#edit_present").show();
     $("#edit_absent").hide();
   } else {
@@ -663,18 +663,21 @@ function editAttendance() {
     $("#edit_absent").show();
   }
 
+  // Click event handler for "Present" button
   $("#edit_present").click(function(){
-    $(this).hide();
-    $("#edit_absent").show();
-    $("#edit_trainer_attendance_status").val("true");
+    $(this).hide(); // Hide "Present" button
+    $("#edit_absent").show(); // Show "Absent" button
+    $("#edit_trainer_attendance_status").val("false"); // Update hidden field value to "false"
   });
 
+  // Click event handler for "Absent" button
   $("#edit_absent").click(function(){
-    $(this).hide();
-    $("#edit_present").show();
-    $("#edit_trainer_attendance_status").val("false");
+    $(this).hide(); // Hide "Absent" button
+    $("#edit_present").show(); // Show "Present" button
+    $("#edit_trainer_attendance_status").val("true"); // Update hidden field value to "true"
   });
 }
+
 
 function initializeTimeDropdowns() {
   $(document).ready(function() {

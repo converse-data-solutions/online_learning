@@ -90,42 +90,39 @@
         <div class="mb-4 flex flex-col sm:flex-row">
           <label for="status" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[45%]">Attendance<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
-            <% if trainer_attendance.status == true %>
-              <div>
-                <div id="edit_present" class="attendace_present relative rounded-[18px] h-[35px] w-[110px] items-center bg-[#0BC08B] bg-opacity-20 flex flex-row-reverse" value="true">
-                  <input type="hidden" id="edit_present_status" name="status" value="true">
-                  <div id="slider" class="mx-[2px] h-[30px] w-[30px] bg-white rounded-[50%] relative flex justify-center items-center right-0 slider-duration">
-                    <div id="sliderContent">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none"><path d="M15.25 4.6875L7.34375 12.5938L3.75 9" stroke="#0BC08B" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                  </div>
-                  <div class="self-center mx-auto flex justify-center">
-                    <span id="attendanceText" class="text-[#0BC08B] text-base font-medium">
-                      Present
-                    </span>
+            <div>
+              <div id="edit_present" class="attendace_present relative rounded-[18px] h-[35px] w-[110px] items-center bg-[#0BC08B] bg-opacity-20 flex flex-row-reverse" value="true">
+                <input type="hidden" id="edit_present_status" name="status" value="true">
+                <div id="slider" class="mx-[2px] h-[30px] w-[30px] bg-white rounded-[50%] relative flex justify-center items-center right-0 slider-duration">
+                  <div id="sliderContent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none"><path d="M15.25 4.6875L7.34375 12.5938L3.75 9" stroke="#0BC08B" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </div>
                 </div>
-              </div>
-            <% elsif trainer_attendance.status == false %>
-              <div>
-                <div id="edit_absent" class="attendance_absent relative rounded-[18px] h-[35px] w-[110px] items-center bg-[#F9DCDC] flex" value="false" style="display:none;">
-                  <input type="hidden" id="edit_absent_status" name="status" value="false">
-                  <div id="slider" class="mx-[2px] h-[30px] w-[30px] bg-white rounded-[50%] relative flex justify-center items-center left-0 slider-duration">
-                    <div id="sliderContent">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none"><path d="M13.8125 4.6875L5.1875 13.3125M5.1875 4.6875L13.8125 13.3125" stroke="#DF4F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                  </div>
-                  <div class="self-center mx-auto flex justify-center">
-                    <span id="attendanceText" class="text-[#DF4F4F] text-base font-medium">
-                      Absent
-                    </span>
-                  </div>
+                <div class="self-center mx-auto flex justify-center">
+                  <span id="attendanceText" class="text-[#0BC08B] text-base font-medium">
+                    Present
+                  </span>
                 </div>
               </div>
-            <% end %>
+            </div>
+            <div>
+              <div id="edit_absent" class="attendance_absent relative rounded-[18px] h-[35px] w-[110px] items-center bg-[#F9DCDC] flex" value="false" style="display:none;">
+                <input type="hidden" id="edit_absent_status" name="status" value="false">
+                <div id="slider" class="mx-[2px] h-[30px] w-[30px] bg-white rounded-[50%] relative flex justify-center items-center left-0 slider-duration">
+                  <div id="sliderContent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none"><path d="M13.8125 4.6875L5.1875 13.3125M5.1875 4.6875L13.8125 13.3125" stroke="#DF4F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                </div>
+                <div class="self-center mx-auto flex justify-center">
+                  <span id="attendanceText" class="text-[#DF4F4F] text-base font-medium">
+                    Absent
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <%= f.hidden_field :status, id: "edit_trainer_attendance_status"%>
+        <%= f.text_field :status, id: "edit_trainer_attendance_status"%>
         <%= hidden_field_tag :page, params[:page]%>
         <%= hidden_field_tag :per_page, params[:per_page]%>
         <%= hidden_field_tag :search, params[:search]%>
