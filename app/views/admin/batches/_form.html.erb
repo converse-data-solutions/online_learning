@@ -1,3 +1,4 @@
+<div id="timeIndex" data-time-index="<%= @batch.batch_timings.size %>"></div>
 <%= form_for batch || Batch.new, url: admin_batches_path, html: { class: "validate", id: "batch-admin-form" }, format: :turbo_stream, method: :post do |f| %>
   <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
     <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
@@ -98,22 +99,27 @@
     </div>
   </div>
   <!--- nested form for batch timing -->
-  <%= f.fields_for :batch_timings, batch_timing do |batchTimingForm| %>
-    <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Batch Timings<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-    <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
-      <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-        <div class="w-full sm:w-[55%] flex flex-col">
-          <%= batchTimingForm.text_field :day, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
-        </div>
-        <div class="w-full sm:w-[55%] flex flex-col">
-          <%= batchTimingForm.time_field :from_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
-        </div>
-        <div class="w-full sm:w-[55%] flex flex-col">
-          <%= batchTimingForm.time_field :to_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+  <div id="batch_timings_container">
+    <%= f.fields_for :batch_timings, batch_timing || batch.batch_timings do |batchTimingForm| %>
+      <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Batch Timings<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+      <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row batch_timing_container">
+        <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+          <div class="w-full sm:w-[55%] flex flex-col">
+            <%= batchTimingForm.select(:day, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] ,  { prompt: 'Select Year' }, { class: 'validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200'} ) %>
+          </div>
+          <div class="w-full sm:w-[55%] flex flex-col">
+            <%= batchTimingForm.time_field :from_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+          </div>
+          <div class="w-full sm:w-[55%] flex flex-col">
+            <%= batchTimingForm.time_field :to_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+  <div class="w-full sm:w-[55%] flex flex-col">
+    <button type="button" id="add_timing" class="w-[100px] h-[42px] bg-[#ffffff] button-gradiant-hover border border-[#cccccc] bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200">add day</button>
+  </div>
   <%= hidden_field_tag :page, params[:page]%>
   <%= hidden_field_tag :per_page, params[:per_page]%>
   <%= hidden_field_tag :search, params[:search]%>

@@ -1,3 +1,29 @@
+function addBatchTime() {
+  $("#batch-form #add_timing").on("click", function() {
+    cloneBatchTimeForm();
+    let timeIndex = $("#timeIndex").data("timeIndex");
+
+  })
+}
+
+function cloneBatchTimeForm() {
+  let timeIndex = $("#timeIndex").data("timeIndex");
+  console.log("timeIndex =", timeIndex);
+  let newtiming = $("#batch-form #batch_timings_container .batch_timing_container:first").clone();
+  console.log("newtiming =", newtiming);
+  newtiming.find("input").val("");
+  newtiming.find("input").each(function() {
+    let oldName = $(this).attr("name");
+    let newName = oldName.replace(/\[\d\]/, "[" + timeIndex + "]");
+    $(this).attr("name", newName);
+  })
+  
+  $("#batch-form #batch_timings_container").append(newtiming);
+  timeIndex++;
+  $("#batch-form #timeIndex").data("timeIndex", timeIndex);
+}
+
+
 function courseSelect() {
   $("#batch-form .new-custom-select").each(function() {
     var classes = $(this).attr("class"),
@@ -242,12 +268,15 @@ $(document).ready(function() {
   timeSlot();
   selectCreateUser();
   enquireName();
+  addBatchTime();
 
   $(document).on("turbo:render", function() {
     courseSelect();
     timeSlot(); 
     selectCreateUser();
     enquireName();
+    cloneBatchTimeForm();
+    addBatchTime();
     
   });
 
@@ -268,3 +297,4 @@ addEventListener("turbo:before-stream-render", (event) => {
     
   };
 });
+

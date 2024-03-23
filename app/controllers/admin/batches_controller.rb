@@ -28,7 +28,7 @@ class Admin::BatchesController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('batch-admin-form', partial: 'admin/batches/form', locals: { batch: @batch })
+            turbo_stream.replace('batch-admin-form', partial: 'admin/batches/form', locals: { batch: Batch.new, batch_timing: BatchTiming.new })
           ]
         end
         format.json { render json: @batch.errors, status: :unprocessable_entity }
