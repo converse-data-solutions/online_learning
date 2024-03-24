@@ -185,7 +185,7 @@
                                         </span>
                                       </a>
                                       <ul class="opacity-[0.8] sm:opacity-[100%] sm:bg-white text-sm sub hidden w-[75%] ml-auto">
-                                        <li><a href="#" class="block font-medium text=[15px] font-['[15px]">Schedule Plan</a></li>
+                                        <li><a href="#" class="block font-medium text=[15px] font-['[15px]"><%= link_to "Schedules", admin_schedules_path, class: "#{(params[:controller] == 'admin/schedules' && params[:action] == 'index') ? 'actived-link' : ''}" %></a></li>
                                       </ul>
                                     </li>
                                     <li class="has-subnav">

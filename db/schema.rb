@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_22_062340) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_24_120930) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -191,6 +191,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_22_062340) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
+  create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "batch_id", null: false
+    t.datetime "schedule_date"
+    t.string "schedule_timings"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["batch_id"], name: "index_schedules_on_batch_id"
+  end
+
   create_table "sections", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.bigint "course_id", null: false
@@ -316,6 +325,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_22_062340) do
   add_foreign_key "payments", "user_courses"
   add_foreign_key "profiles", "users"
   add_foreign_key "ratings", "users"
+  add_foreign_key "schedules", "batches"
   add_foreign_key "sections", "courses"
   add_foreign_key "subscription_details", "subscriptions"
   add_foreign_key "subscription_details", "users"
