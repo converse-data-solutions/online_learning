@@ -12,6 +12,12 @@ function cloneBatchTimeForm() {
     "#batch-form #batch_timings_container .batch_timing_container:first"
   ).clone();
   console.log("newtiming =", newtiming);
+  newtiming.find("select").val("");
+  newtiming.find("select").each(function () {
+    let oldName = $(this).attr("name");
+    let newName = oldName.replace(/\[\d\]/, "[" + timeIndex + "]");
+    $(this).attr("name", newName);
+  })
   newtiming.find("input").val("");
   newtiming.find("input").each(function () {
     let oldName = $(this).attr("name");

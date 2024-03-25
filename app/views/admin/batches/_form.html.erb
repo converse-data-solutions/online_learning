@@ -123,7 +123,7 @@
   <div id="batch_timings_container">
     <%= f.fields_for :batch_timings, batch_timings || batch.batch_timings do |batchTimingForm| %>
       <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Batch Timings<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-      <div class= "flex w-[96%] gap-[50px] flex-col lg:flex-row batch_timing_container">
+      <div class= "flex w-[95.5%] gap-[50px] flex-col lg:flex-row batch_timing_container">
         <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
           <div class="w-full sm:w-[55%] flex flex-col">
             <%= batchTimingForm.select(:day, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] ,  { prompt: 'Select Year' }, { class: 'validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200'} ) %>
