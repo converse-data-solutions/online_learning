@@ -142,14 +142,35 @@
           <div class="w-full sm:w-[55%] flex flex-col">
             <%= batchTimingForm.select(:day, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] ,  { prompt: 'Select Day' }, { class: 'validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200'} ) %>
             <div class="text-red-600 text-sm" id="batch_day_error">  </div>
+            <% @batch.batch_timings.each do |batch_timing| %>
+              <% if batch_timing.errors[:day].any? %>
+                <div class="text-red-600 text-sm mt-1">
+                  <%= batch_timing.errors.full_messages_for(:day).join(', ') %>
+                </div>
+              <% end %>
+            <% end %>
           </div>
           <div class="w-full sm:w-[55%] flex flex-col">
             <%= batchTimingForm.time_field :from_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off", placeholder: "From Time" %>
             <div class="text-red-600 text-sm" id="batch_from_time_error"></div>
+            <% @batch.batch_timings.each do |batch_timing| %>
+              <% if batch_timing.errors[:from_time].any? %>
+                <div class="text-red-600 text-sm mt-1">
+                  <%= batch_timing.errors.full_messages_for(:from_time).join(', ') %>
+                </div>
+              <% end %>
+            <% end %>
           </div>
           <div class="w-full sm:w-[55%] flex flex-col">
             <%= batchTimingForm.time_field :to_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off", placeholder: "To Time" %>
             <div class="text-red-600 text-sm" id="batch_to_time_error"></div>
+            <% @batch.batch_timings.each do |batch_timing| %>
+              <% if batch_timing.errors[:to_time].any? %>
+                <div class="text-red-600 text-sm mt-1">
+                  <%= batch_timing.errors.full_messages_for(:to_time).join(', ') %>
+                </div>
+              <% end %>
+            <% end %>
           </div>
         </div>
       </div>
