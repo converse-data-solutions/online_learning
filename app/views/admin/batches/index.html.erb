@@ -32,7 +32,7 @@
                 <span class="sr-only">Close modal</span>
               </button>
               <div class="px-6 py-6 lg:px-8">
-                <h3 class="mb-4 sm:mb-7 md:mb-10 text-[26px] font-semibold text-[#0BC08B] dark:text-white text-center">NEW ENQUIRE</h3>
+                <h3 class="mb-4 sm:mb-7 md:mb-10 text-[26px] font-semibold text-[#0BC08B] dark:text-white text-center">NEW BATCH  </h3>
                 <div class="lg:w-[95%] sm:w-[95%] w-[90%] mx-auto">
                   <div class="" id="batch-form">
                     <%= render partial: 'admin/batches/form', locals: { batch: @batch ,batch_timings: @batch_timings} %>
@@ -46,17 +46,8 @@
     </div>
   </div>
   <div class="flex items-center justify-between pt-10 md:pt-9 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row" id="batch-filter-container">
-    <div class="text-[#31B978] text-[18px] font-bold  pb-4 sm:pb-0">
-      <%= collection_select(:name, :name, Enquire.all, :name, :name, { prompt: "Select Student", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-name-custom-select sources" }) %>
-    </div>
     <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
       <%= collection_select(:course_name, :course_name, Enquire.distinct.pluck(:course_name), :to_s, :to_s, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 focus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-course-custom-select sources" }) %>
-    </div>
-    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
-      <%= collection_select(:status, :status, Enquire.distinct.pluck(:status), :to_s, :to_s, { prompt: "Select Status", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-status-custom-select sources" }) %>
-    </div>
-    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
-      <%= collection_select(:timeslot, :timeslot, Enquire.distinct.pluck(:timeslot), :to_s, :to_s, { prompt: "Select Time", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select sources" }) %>
     </div>
   </div>
   <div class="relative overflow-x-auto lg:overflow-x-hidden mt-2 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">

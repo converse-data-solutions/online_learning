@@ -1,186 +1,33 @@
-function batchFormValidation() {
-  function batchName() {
-    let name = $("#batch_batch_name").val();
-    let namecheck = /^[a-zA-Z ]+$/.test(name);
-    console.log(namecheck);
-    if (!name) {
-      $("#batch_name_error").text("Name can't be blank");
-      return false;
-    } else if (!namecheck) {
-      $("#batch_name_error").text(
-        "Please enter a valid name (only alphabets allowed)"
-      );
-      return false;
-    } else {
-      $("#batch_name_error").text("");
-      return true;
-    }
-  }
-
-  function batchCourse() {
-    let name = $("#batch_course_name").val();
-    let namecheck = /^[a-zA-Z ]+$/.test(name);
-
-    if (!name) {
-      $("#batch_course_error").text("Course can't be blank");
-      return false;
-    } else if (!namecheck) {
-      $("#batch_course_error").text(
-        "Please enter a valid Course (only alphabets allowed)"
-      );
-      return false;
-    } else {
-      $("#batch_course_error").text("");
-      return true;
-    }
-  }
-
-  function batchFromDate() {
-    let from_date = $("#datepicker").val();
-
-    if (!from_date) {
-      $("#batch_effective_from_error").text("From Date can't be empty");
-      return false;
-    } else {
-      $("#batch_effective_from_error").text("");
-      return true;
-    }
-  }
-
-  function batchToDate() {
-    let to_date = $("#datepicker_to").val();
-
-    if (!to_date) {
-      $("#batch_effective_to_error").text("To Date can't be blank");
-      return false;
-    } else {
-      $("#batch_effective_to_error").text("");
-      return true;
-    }
-  }
-
-  function batchPrimaryTrainer() {
-    let user_id = $("#user_id").val();
-
-    if (!user_id) {
-      $("#batch__primary_trainer_error").text("Primary Trainer can't be blank");
-      return false;
-    } else {
-      $("#batch__primary_trainer_error").text("");
-      return true;
-    }
-  }
-
-  function batchSecondaryTrainer() {
-    let second_user__id = $("secondary_trainer_id").val();
-
-    if (!second_user__id) {
-      $("#batch__secondary_trainer_error").text(
-        "Secondary Trainer can't be blank"
-      );
-      return false;
-    } else {
-      $("#batch__secondary_trainer_error").text("");
-      return true;
-    }
-  }
-
-  function studentCheckboxValidation() {
-    console.log("studentCheckboxValidation");
-    if ($('input[type="checkbox"]:checked').length === 0) {
-      console.log("no checkbox is checked");
-      $("#batch_student_error").text("Please select atleast one student");
-      return false;
-    } else {
-      $("#batch_student_error").text("");
-      return true;
-    }
-  }
-
-  function daySelectValidation() {
-    let day = $("#batch_batch_timings_attributes_0_day").val();
-    if (!day) {
-      $("#batch_day_error").text("Day can't be empty");
-      return false;
-    } else {
-      $("#batch_day_error").text("");
-      return true;
-    }
-  }
-  function fromTimeValidation() {
-    let from_time = $("#batch_batch_timings_attributes_0_from_time").val();
-    if (!from_time) {
-      $("#batch_from_time_error").text("From time can't be empty");
-      return false;
-    } else {
-      $("#batch_from_time_error").text("");
-      return true;
-    }
-  }
-  function toTimeValidation() {
-    let to_time = $("#batch_batch_timings_attributes_0_to_time").val();
-    if (!to_time) {
-      $("#batch_to_time_error").text("To time can't be empty");
-      return false;
-    } else {
-      $("#batch_to_time_error").text("");
-      return true;
-    }
-  }
-
-  // Event bindings for registration form fields
-  $("#batch_batch_name").on("blur", batchName);
-  $("#datepicker").on("blur", batchFromDate);
-  $("#datepicker_to").on("blur", batchToDate);
-  $("user_id").on("blur", batchPrimaryTrainer);
-  $("secondary_trainer_id").on("blur", batchSecondaryTrainer);
-  $(".checkbox-custom").on("click", studentCheckboxValidation);
-  $("#batch_batch_timings_attributes_0_day").on("blur", daySelectValidation);
-  $("#batch_batch_timings_attributes_0_from_time").on("blir", fromTimeValidation)
-  $("#batch_batch_timings_attributes_0_to_time").on("blir", toTimeValidation)
-  // Event binding for form submission
-  $("#batch-admin-form").on("submit", function (event) {
-    // Validate all fields on form submission
-    let isNameValid = batchName();
-    let isCourseValid = batchCourse();
-    let isFromDateValid = batchFromDate();
-    let isToDateValid = batchToDate();
-    let parimaryTrainerValid = batchPrimaryTrainer();
-    let secondaryTrainerValid = batchSecondaryTrainer();
-    let isCheckboxValid = studentCheckboxValidation();
-    let isDayValid = daySelectValidation();
-    let isFromTimeValid = fromTimeValidation();
-    let isToTimeValid = toTimeValidation();
-
-    // Check if any field is invalid
-    if (
-      !isNameValid ||
-      !isCourseValid ||
-      !isFromDateValid ||
-      !isToDateValid ||
-      !parimaryTrainerValid ||
-      !secondaryTrainerValid ||
-      !isCheckboxValid ||
-      !isDayValid ||
-      !isFromTimeValid ||
-      !isToTimeValid
-    ) {
-      // Prevent form submission
-      event.preventDefault();
-
-      // Show all error messages
-      batchName();
-      batchCourse();
-      batchFromDate();
-      batchToDate();
-      batchPrimaryTrainer();
-      batchSecondaryTrainer();
-      studentCheckboxValidation();
-      daySelectValidation();
-      fromTimeValidation();
-      toTimeValidation();
-    }
-  });
+function editBatchPopup() {
+  $("#batch-table").on("click", ".edit-batch-model", function () {
+    let id = $(this).data("batch-id");
+    let url = $(this).data("url");
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
+    $("#overlay").show();
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        batch_id: id,
+        page: page,
+        search: search,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function (res) {
+        Turbo.renderStreamMessage(res);
+        $("#overlay").hide();
+      },
+      // done: function () {},
+      error: function () {
+        console.log("Error fetching data");
+        $("#overlay").hide();
+      },
+    })
+  })
 }
 
 function addBatchTime() {
@@ -525,6 +372,190 @@ function timeSlot() {
     });
   });
 }
+function batchFormValidation() {
+  function batchName() {
+    let name = $("#batch_batch_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+    console.log(namecheck);
+    if (!name) {
+      $("#batch_name_error").text("Name can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#batch_name_error").text(
+        "Please enter a valid name (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#batch_name_error").text("");
+      return true;
+    }
+  }
+
+  function batchCourse() {
+    let name = $("#batch_course_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#batch_course_error").text("Course can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#batch_course_error").text(
+        "Please enter a valid Course (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#batch_course_error").text("");
+      return true;
+    }
+  }
+
+  function batchFromDate() {
+    let from_date = $("#datepicker").val();
+
+    if (!from_date) {
+      $("#batch_effective_from_error").text("From Date can't be empty");
+      return false;
+    } else {
+      $("#batch_effective_from_error").text("");
+      return true;
+    }
+  }
+
+  function batchToDate() {
+    let to_date = $("#datepicker_to").val();
+
+    if (!to_date) {
+      $("#batch_effective_to_error").text("To Date can't be blank");
+      return false;
+    } else {
+      $("#batch_effective_to_error").text("");
+      return true;
+    }
+  }
+
+  function batchPrimaryTrainer() {
+    let user_id = $("#user_id").val();
+
+    if (!user_id) {
+      $("#batch__primary_trainer_error").text("Primary Trainer can't be blank");
+      return false;
+    } else {
+      $("#batch__primary_trainer_error").text("");
+      return true;
+    }
+  }
+
+  function batchSecondaryTrainer() {
+    let second_user__id = $("secondary_trainer_id").val();
+
+    if (!second_user__id) {
+      $("#batch__secondary_trainer_error").text(
+        "Secondary Trainer can't be blank"
+      );
+      return false;
+    } else {
+      $("#batch__secondary_trainer_error").text("");
+      return true;
+    }
+  }
+
+  function studentCheckboxValidation() {
+    console.log("studentCheckboxValidation");
+    if ($('input[type="checkbox"]:checked').length === 0) {
+      console.log("no checkbox is checked");
+      $("#batch_student_error").text("Please select atleast one student");
+      return false;
+    } else {
+      $("#batch_student_error").text("");
+      return true;
+    }
+  }
+
+  function daySelectValidation() {
+    let day = $("#batch_batch_timings_attributes_0_day").val();
+    if (!day) {
+      $("#batch_day_error").text("Day can't be empty");
+      return false;
+    } else {
+      $("#batch_day_error").text("");
+      return true;
+    }
+  }
+  function fromTimeValidation() {
+    let from_time = $("#batch_batch_timings_attributes_0_from_time").val();
+    if (!from_time) {
+      $("#batch_from_time_error").text("From time can't be empty");
+      return false;
+    } else {
+      $("#batch_from_time_error").text("");
+      return true;
+    }
+  }
+  function toTimeValidation() {
+    let to_time = $("#batch_batch_timings_attributes_0_to_time").val();
+    if (!to_time) {
+      $("#batch_to_time_error").text("To time can't be empty");
+      return false;
+    } else {
+      $("#batch_to_time_error").text("");
+      return true;
+    }
+  }
+
+  // Event bindings for registration form fields
+  $("#batch_batch_name").on("blur", batchName);
+  $("#datepicker").on("blur", batchFromDate);
+  $("#datepicker_to").on("blur", batchToDate);
+  $("user_id").on("blur", batchPrimaryTrainer);
+  $("secondary_trainer_id").on("blur", batchSecondaryTrainer);
+  $(".checkbox-custom").on("click", studentCheckboxValidation);
+  $("#batch_batch_timings_attributes_0_day").on("blur", daySelectValidation);
+  $("#batch_batch_timings_attributes_0_from_time").on("blir", fromTimeValidation)
+  $("#batch_batch_timings_attributes_0_to_time").on("blir", toTimeValidation)
+  // Event binding for form submission
+  $("#batch-admin-form").on("submit", function (event) {
+    // Validate all fields on form submission
+    let isNameValid = batchName();
+    let isCourseValid = batchCourse();
+    let isFromDateValid = batchFromDate();
+    let isToDateValid = batchToDate();
+    let parimaryTrainerValid = batchPrimaryTrainer();
+    let secondaryTrainerValid = batchSecondaryTrainer();
+    let isCheckboxValid = studentCheckboxValidation();
+    let isDayValid = daySelectValidation();
+    let isFromTimeValid = fromTimeValidation();
+    let isToTimeValid = toTimeValidation();
+
+    // Check if any field is invalid
+    if (
+      !isNameValid ||
+      !isCourseValid ||
+      !isFromDateValid ||
+      !isToDateValid ||
+      !parimaryTrainerValid ||
+      !secondaryTrainerValid ||
+      !isCheckboxValid ||
+      !isDayValid ||
+      !isFromTimeValid ||
+      !isToTimeValid
+    ) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      batchName();
+      batchCourse();
+      batchFromDate();
+      batchToDate();
+      batchPrimaryTrainer();
+      batchSecondaryTrainer();
+      studentCheckboxValidation();
+      daySelectValidation();
+      fromTimeValidation();
+      toTimeValidation();
+    }
+  });
+}
 
 $(document).ready(function () {
   courseSelect();
@@ -534,6 +565,7 @@ $(document).ready(function () {
   addBatchTime();
   dropdownCheckBoxes();
   batchFormValidation();
+  editBatchPopup();
 
   $(document).on("turbo:render", function () {
     courseSelect();
@@ -543,6 +575,7 @@ $(document).ready(function () {
     addBatchTime();
     dropdownCheckBoxes();
     batchFormValidation();
+    editBatchPopup();
   });
 
   $(document).on("turbo:before-render", function () {

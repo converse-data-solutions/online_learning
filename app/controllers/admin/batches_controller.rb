@@ -43,6 +43,10 @@ class Admin::BatchesController < ApplicationController
 
   def edit
     render layout: false
+    return if @batch
+
+    flash[:alert] = 'Batch not found.'
+    redirect_to admin_batches_path
   end
 
   def update
@@ -53,7 +57,7 @@ class Admin::BatchesController < ApplicationController
         format.json { render :show, status: :ok, location: admin_batch_url(@batch) }
       else
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('edit-batch-popup', partial: 'admin/batches/edit',
+          render turbo_stream: turbo_stream.update('edit-batch-popup', partial: 'admin/batches/edit',
                                                                         locals: { batch: @batch })
         end
         format.json { render json: @batch.errors, status: :unprocessable_entity }
