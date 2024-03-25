@@ -392,18 +392,12 @@ function batchFormValidation() {
   }
 
   function batchCourse() {
-    let name = $("#batch_course_name").val();
-    let namecheck = /^[a-zA-Z ]+$/.test(name);
+    let name = $("#batch_course_id").val();
 
     if (!name) {
       $("#batch_course_error").text("Course can't be blank");
       return false;
-    } else if (!namecheck) {
-      $("#batch_course_error").text(
-        "Please enter a valid Course (only alphabets allowed)"
-      );
-      return false;
-    } else {
+    }  else {
       $("#batch_course_error").text("");
       return true;
     }
@@ -422,7 +416,7 @@ function batchFormValidation() {
   }
 
   function batchToDate() {
-    let to_date = $("#datepicker_to").val();
+    let to_date = $("#datepicker-to").val();
 
     if (!to_date) {
       $("#batch_effective_to_error").text("To Date can't be blank");
@@ -446,9 +440,9 @@ function batchFormValidation() {
   }
 
   function batchSecondaryTrainer() {
-    let second_user__id = $("secondary_trainer_id").val();
+    let second_user_id = $("#secondary_trainer_id").val();
 
-    if (!second_user__id) {
+    if (!second_user_id) {
       $("#batch__secondary_trainer_error").text(
         "Secondary Trainer can't be blank"
       );
