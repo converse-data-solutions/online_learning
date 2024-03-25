@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_24_120930) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_25_124932) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -197,7 +197,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_24_120930) do
     t.string "schedule_timings"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
     t.index ["batch_id"], name: "index_schedules_on_batch_id"
+    t.index ["course_id"], name: "index_schedules_on_course_id"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "sections", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -300,6 +304,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_24_120930) do
   add_foreign_key "profiles", "users"
   add_foreign_key "ratings", "users"
   add_foreign_key "schedules", "batches"
+  add_foreign_key "schedules", "courses"
+  add_foreign_key "schedules", "users"
   add_foreign_key "sections", "courses"
   add_foreign_key "trainer_attendances", "batches"
   add_foreign_key "trainer_attendances", "trainer_courses"

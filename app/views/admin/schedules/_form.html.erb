@@ -1,13 +1,13 @@
-<%= form_for user || User.new, url: admin_users_path, html: { class: "validate", id: "user-admin-form" }, validate: true, method: :post do |f| %>
+<%= form_for schedule || Schedule.new, url: admin_schedules_path, html: { class: "validate", id: "schedule-admin-form" }, validate: true, method: :post do |f| %>
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="name" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.text_field :name, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true %>
+      <%= collection_select(:schedule, :batch_name, Batch.all, :id, :batch_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
       <div class="text-red-600 text-sm mt-1" id="name-error"></div>
-      <% if user&.errors&.any? %>
-        <% if user&.errors[:name].any? %>
+      <% if schedule&.errors&.any? %>
+        <% if schedule&.errors[:batch_name].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= user&.errors.full_messages_for(:name).join(', ') %>
+            <%= schedule&.errors.full_messages_for(:batch_name).join(', ') %>
           </div>
         <% end %>
       <% end %>
@@ -16,12 +16,12 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.email_field :email, class: "validate w-full bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", validate: true%>
+      <%= collection_select(:schedule, :user_id, [], :id, :name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
       <div class="text-red-600 text-sm mt-1" id="email-error"></div>
-      <% if user&.errors&.any? %>
-        <% if user&.errors[:email].any? %>
+      <% if schedule&.errors&.any? %>
+        <% if schedule&.errors[:user_id].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= user&.errors.full_messages_for(:email).join(', ') %>
+            <%= schedule&.errors.full_messages_for(:user_id).join(', ') %>
           </div>
         <% end %>
       <% end %>
@@ -31,12 +31,12 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="password" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.password_field :password, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"%>
+      <%= collection_select(:schedule, :course_id, [], :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
       <div class="text-red-600 text-sm mt-1" id="password-error"></div>
-      <% if user&.errors&.any? %>
-        <% if user&.errors[:password].any? %>
+      <% if schedule&.errors&.any? %>
+        <% if schedule&.errors[:course_id].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= user&.errors.full_messages_for(:password).join(', ') %>
+            <%= schedule&.errors.full_messages_for(:course_id).join(', ') %>
           </div>
         <% end %>
       <% end %>
@@ -45,12 +45,12 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[45%]">Confirmation Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.password_field :password_confirmation, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+      <%= f.date_field :schedule_date, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
       <div class="text-red-600 text-sm mt-1" id="password-confirmation-error"></div>
-      <% if user&.errors&.any? %>
-        <% if user&.errors[:password_confirmation].any? %>
+      <% if schedule&.errors&.any? %>
+        <% if schedule&.errors[:schedule_date].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= user&.errors.full_messages_for(:password_confirmation).join(', ') %>
+            <%= schedule&.errors.full_messages_for(:schedule_date).join(', ') %>
           </div>
         <% end %>
       <% end %>
@@ -58,13 +58,13 @@
   </div>
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="role" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Role<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <%= f.text_field :schedule_timings, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.collection_select(:role, Role.all, :name, :name, { prompt: "Select Role", selected: '' }, class: "bg-[#fff] border-[1px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select select-widht") %>
       <div class="text-red-600 text-sm mt-1" id="role-error"></div>
-      <% if user&.errors&.any? %>
-        <% if user&.errors[:role].any? %>
+      <% if schedule&.errors&.any? %>
+        <% if schedule&.errors[:schedule_timings].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= user&.errors.full_messages_for(:role).join(', ') %>
+            <%= schedule&.errors.full_messages_for(:schedule_timings).join(', ') %>
           </div>
         <% end %>
       <% end %>
