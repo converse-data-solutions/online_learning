@@ -1852,7 +1852,6 @@ input[type="file"] {
 }
 .dropdown {
   position: relative;
-  margin-bottom: 20px;
 
   .dropdown-list {
     padding: 25px 20px;
@@ -1889,7 +1888,7 @@ input[type="file"] {
     background: #fff;
     border: 1px solid #cccccc;
     border-radius: 8px;
-    padding: 0 40px 0 20px;
+    padding: 0 40px 0 10px;
     cursor: pointer;
     position: relative;
     overflow: auto;

@@ -5,4 +5,12 @@ class Batch < ApplicationRecord
   has_many :batch_timings, dependent: :destroy
   has_and_belongs_to_many :students, class_name: 'User', join_table: :batch_students
   accepts_nested_attributes_for :batch_timings
+
+  validates :batch_name, presence: true
+  validates :course_id, presence: true
+  validates :effective_from, presence: true
+  validates :effective_to, presence: true
+  validates :primary_trainer_id, presence: true
+  validates :secondary_trainer_id, presence: true
+
 end
