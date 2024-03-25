@@ -98,6 +98,27 @@
       </div>
     </div>
   </div>
+  <!-- select student--->
+  <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+    <label for="student_ids" class="block mb-2 text-lg font-medium text-[#000]">Select Students</label>
+    <div class="sm:w-[57%] w-full">
+      <div class="dropdown">
+        <label class="dropdown-label">Select Options</label>
+        <div class="dropdown-list">
+          <div class="checkbox">
+            <input type="checkbox" name="dropdown-group-all" class="check-all checkbox-custom" id="checkbox-main" />
+            <label for="checkbox-main" class="checkbox-custom-label">Selection All</label>
+          </div>
+          <% User.all.each do |course| %>
+            <div class="checkbox">
+              <%= f.check_box :student_ids, { multiple: true }, course.id, nil %>
+              <label for="checkbox-custom_<%= course.id %>" class="checkbox-custom-label"><%= course.name %></label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
   <!--- nested form for batch timing -->
   <div id="batch_timings_container">
     <%= f.fields_for :batch_timings, batch_timings || batch.batch_timings do |batchTimingForm| %>
@@ -119,13 +140,6 @@
   </div>
   <div class="w-full sm:w-[55%] flex flex-col">
     <button type="button" id="add_timing" class="w-[100px] h-[42px] bg-[#ffffff] button-gradiant-hover border border-[#cccccc] bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200">add day</button>
-  </div>
-  <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-    <label for="student_ids" class="block mb-2 text-lg font-medium text-[#000]">Select Students</label>
-    <div class="w-full sm:w-[55%] flex flex-col">
-      <!-- Replace User.all with your appropriate method to fetch users -->
-      <%= f.collection_select(:student_ids, User.all, :id, :name, { prompt: "Select Students" }, { multiple: true, class: "bg-[#FFFFFF] focus:ring-0 text-[#818181] text-base font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources" }) %>
-    </div>
   </div>
   <%= hidden_field_tag :page, params[:page]%>
   <%= hidden_field_tag :per_page, params[:per_page]%>

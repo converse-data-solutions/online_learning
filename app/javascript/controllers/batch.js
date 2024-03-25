@@ -23,6 +23,118 @@ function cloneBatchTimeForm() {
   $("#batch-form #timeIndex").data("timeIndex", timeIndex);
 }
 
+function dropdownCheckBoxes() {
+
+  function checkboxDropdown(el) {
+
+    let $el = $(el);
+ 
+    $el.each(function () {
+
+      let $list = $(this).find(".dropdown-list"),
+
+        $label = $(this).find(".dropdown-label"),
+
+        $checkAll = $(this).find(".check-all"),
+
+        $inputs = $(this).find(".checkbox input[type='checkbox']"),
+
+        result = [];
+ 
+      function updateStatus() {
+
+        if (!result.length) {
+
+          $label.html("Select Options");
+
+        }
+
+      }
+ 
+      function updateLabel() {
+
+        $label.html(result.join(", "));
+
+        updateStatus();
+
+      }
+ 
+      $inputs.on("change", function () {
+
+        let checkedText = $(this).next().text();
+ 
+        if ($(this).is(":checked")) {
+
+          result.push(checkedText);
+
+        } else {
+
+          result = result.filter((item) => item !== checkedText);
+
+        }
+ 
+        updateLabel();
+
+      });
+ 
+      $checkAll.on("change", function () {
+
+        result = [];
+ 
+        if ($(this).is(":checked")) {
+
+          $inputs.prop("checked", true);
+
+          result.push($(this).next().text());
+
+        } else {
+
+          $inputs.prop("checked", false);
+
+        }
+ 
+        updateLabel();
+
+      });
+ 
+      // Initial setup
+
+      $inputs.each(function () {
+
+        if ($(this).is(":checked")) {
+
+          result.push($(this).next().text());
+
+        }
+
+      });
+ 
+      updateLabel();
+ 
+      $label.on("click", function () {
+
+        $el.toggleClass("open-dropdown");
+
+      });
+ 
+      $(document).on("click touchstart", function (e) {
+
+        if (!$(e.target).closest($el).length) {
+
+          $el.removeClass("open-dropdown");
+
+        }
+
+      });
+
+    });
+
+  }
+ 
+  checkboxDropdown(".dropdown");
+
+}
+
 
 function courseSelect() {
   $("#batch-form .new-custom-select").each(function() {
@@ -269,6 +381,7 @@ $(document).ready(function() {
   selectCreateUser();
   enquireName();
   addBatchTime();
+  dropdownCheckBoxes();
 
   $(document).on("turbo:render", function() {
     courseSelect();
@@ -277,6 +390,7 @@ $(document).ready(function() {
     enquireName();
     cloneBatchTimeForm();
     addBatchTime();
+    dropdownCheckBoxes();
     
   });
 
