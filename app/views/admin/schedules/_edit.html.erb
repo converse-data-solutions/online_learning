@@ -17,10 +17,10 @@
     <div class="p-7 space-y-6 lg:w-[95%] sm:w-[95%] w-[90%] mr-auto lg:ml-auto ml-5">
       <%= form_for(schedule, url: admin_schedule_path(schedule), html: { class: "validate", id: "schedule-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
         <div class="mb-4 flex flex-col sm:flex-row">
-          <label for="name" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+          <label for="name" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Batch Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[50%] flex flex-col">
-            <%= f.text_field :batch_id, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_schedule_name", autocomplete: "off" %>
-            <div class="text-red-600 text-sm mt-1" id="edit-name-error"></div>
+            <%= f.text_field :batch_id, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_batch_name", autocomplete: "off" %>
+            <div class="text-red-600 text-sm mt-1" id="edit_batch_error"></div>
             <% if schedule&.errors&.any? %>
               <% if schedule.errors[:batch_id].any? %>
                 <div class="text-red-600 text-sm mt-1">
@@ -31,10 +31,10 @@
           </div>
         </div>
         <div class="mb-4 flex flex-col sm:flex-row">
-          <label for="email" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+          <label for="email" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000]">Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[50%] flex flex-col">
-            <%= f.text_field :user_id, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_schedule_email", autocomplete: "off" %>
-            <div class="text-red-600 text-sm mt-1" id="edit-email-error"></div>
+            <%= f.text_field :user_id, class: "validate w-full bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_user", autocomplete: "off" %>
+            <div class="text-red-600 text-sm mt-1" id="edit_user_error"></div>
             <% if schedule&.errors&.any? %>
               <% if schedule.errors[:user_id].any? %>
                 <div class="text-red-600 text-sm mt-1">
@@ -45,10 +45,10 @@
           </div>
         </div>
         <div class="mb-4 flex flex-col sm:flex-row">
-          <label for="password" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+          <label for="password" class="w-full sm:w-[50%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[50%] flex flex-col">
-            <%= f.text_field :course_id, class: "validate bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_schedule_password" %>
-            <div class="text-red-600 text-sm mt-1" id="edit-password-error"></div>
+            <%= f.text_field :course_id, class: "validate bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_course" %>
+            <div class="text-red-600 text-sm mt-1" id="edit_course_error"></div>
             <% if schedule&.errors&.any? %>
               <% if schedule.errors[:course_id].any? %>
                 <div class="text-red-600 text-sm mt-1">
@@ -59,10 +59,10 @@
           </div>
         </div>
         <div class="mb-4 flex flex-col sm:flex-row">
-          <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[50%]">Confirmation Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+          <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[50%]">Schedule Date<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[50%] flex flex-col">
-            <%= f.date_field :schedule_date, class: "validate bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_schedule_password_confirmation" %>
-            <div class="text-red-600 text-sm mt-1" id="edit-password-confirmation-error"></div>
+            <%= f.date_field :schedule_date, class: "validate bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_schedule_dates" %>
+            <div class="text-red-600 text-sm mt-1" id="edit_schedule_date_error"></div>
             <% if schedule&.errors&.any? %>
               <% if schedule.errors[:schedule_date].any? %>
                 <div class="text-red-600 text-sm mt-1">
@@ -73,10 +73,10 @@
           </div>
         </div>
         <div class="mb-4 flex flex-col sm:flex-row select-edit-width">
-          <label for="role" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Role<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-            <%= f.text_field :schedule_timings, class: "validate bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_schedule_password_confirmation" %>
+          <label for="role" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Schedule Timings<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
-            <div class="text-red-600 text-sm mt-1" id="role-error"></div>
+            <%= f.text_field :schedule_timings, class: "validate bg-[#F5F5F5] border-0 text-[#818181] font-medium text-[16px] rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white", id: "edit_schedule_timings" %>
+            <div class="text-red-600 text-sm mt-1" id="edit_schedule_timings_error"></div>
             <% if schedule&.errors&.any? %>
               <% if schedule&.errors[:schedule_timings].any? %>
                 <div class="text-red-600 text-sm mt-1">

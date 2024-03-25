@@ -1,4 +1,4 @@
-<%= turbo_stream.update "user-table", partial: "admin/users/table", locals: { users: @users } %>
-<%= turbo_stream.replace "user-admin-form", partial: "admin/users/form", locals: { user: User.new } %>
-<%= turbo_stream.append "user-table", partial: "shared/flash", locals: { message: 'User created successfully.', type: 'notice' } %>
-<%= turbo_stream.update "render-pagination", partial: "admin/users/paginate", locals: { users: @users } %>
+<%= turbo_stream.update "schedule-table", partial: "admin/schedules/table", locals: { schedules: @schedules } %>
+<%= turbo_stream.replace "schedule-admin-form", partial: "admin/schedules/form", locals: { schedule: schedule.new } %>
+<%= turbo_stream.append "schedule-table", partial: "shared/flash", locals: { message: 'schedule created successfully.', type: 'notice' } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/schedules/paginate", locals: { schedules: @schedules } %>

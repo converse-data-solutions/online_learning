@@ -1,9 +1,9 @@
 <%= form_for schedule || Schedule.new, url: admin_schedules_path, html: { class: "validate", id: "schedule-admin-form" }, validate: true, method: :post do |f| %>
   <div class="mb-4 flex flex-col sm:flex-row">
-    <label for="name" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <label for="name" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Batch Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= collection_select(:schedule, :batch_name, Batch.all, :id, :batch_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
-      <div class="text-red-600 text-sm mt-1" id="name-error"></div>
+      <%= collection_select(:schedule, :batch_name, Batch.all, :id, :batch_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources select-widht" }) %>
+      <div class="text-red-600 text-sm mt-1" id="batch_error"></div>
       <% if schedule&.errors&.any? %>
         <% if schedule&.errors[:batch_name].any? %>
           <div class="text-red-600 text-sm mt-1">
@@ -14,10 +14,10 @@
     </div>
   </div>
   <div class="mb-4 flex flex-col sm:flex-row">
-    <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Email<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= collection_select(:schedule, :user_id, [], :id, :name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
-      <div class="text-red-600 text-sm mt-1" id="email-error"></div>
+      <%= collection_select(:schedule, :user_id, [], :id, :name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources select-widht" }) %>
+      <div class="text-red-600 text-sm mt-1" id="user_error"></div>
       <% if schedule&.errors&.any? %>
         <% if schedule&.errors[:user_id].any? %>
           <div class="text-red-600 text-sm mt-1">
@@ -28,10 +28,10 @@
     </div>
   </div>
   <div class="mb-4 flex flex-col sm:flex-row">
-    <label for="password" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <label for="password" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= collection_select(:schedule, :course_id, [], :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources" }) %>
-      <div class="text-red-600 text-sm mt-1" id="password-error"></div>
+      <%= collection_select(:schedule, :course_id, [], :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources select-widht" }) %>
+      <div class="text-red-600 text-sm mt-1" id="course_error"></div>
       <% if schedule&.errors&.any? %>
         <% if schedule&.errors[:course_id].any? %>
           <div class="text-red-600 text-sm mt-1">
@@ -42,10 +42,10 @@
     </div>
   </div>
   <div class="mb-4 flex flex-col sm:flex-row">
-    <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[45%]">Confirmation Password<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <label for="Confirm Password" class="block mb-2 text-lg font-medium text-[#000] dark:text-white w-full sm:w-[45%]">Schedule Date<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= f.date_field :schedule_date, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
-      <div class="text-red-600 text-sm mt-1" id="password-confirmation-error"></div>
+      <%= f.date_field :schedule_date, class: "w-full validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+      <div class="text-red-600 text-sm mt-1" id="schedule_date_error"></div>
       <% if schedule&.errors&.any? %>
         <% if schedule&.errors[:schedule_date].any? %>
           <div class="text-red-600 text-sm mt-1">
@@ -56,10 +56,10 @@
     </div>
   </div>
   <div class="mb-4 flex flex-col sm:flex-row">
-    <label for="role" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Role<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-    <%= f.text_field :schedule_timings, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+    <label for="role" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Schedule Timings<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <div class="text-red-600 text-sm mt-1" id="role-error"></div>
+      <%= f.text_field :schedule_timings, class: "w-full validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+      <div class="text-red-600 text-sm mt-1" id="schedule_timings_error"></div>
       <% if schedule&.errors&.any? %>
         <% if schedule&.errors[:schedule_timings].any? %>
           <div class="text-red-600 text-sm mt-1">
