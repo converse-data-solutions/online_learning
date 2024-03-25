@@ -16,11 +16,7 @@ class Admin::BatchesController < ApplicationController
   def create
     @batch = Batch.new(batch_params)    
     respond_to do |format|
-      if @batch.save
-        if params[:batch][:student_ids].present?
-          students = params[:batch][:student_ids].reject(&:empty?).map(&:to_i)
-          @batch.student_ids = students
-        end      
+      if @batch.save   
         @batches = Batch.paginate(page: params[:page], per_page: 10)
         format.turbo_stream
       else

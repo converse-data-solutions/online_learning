@@ -36,7 +36,7 @@
             <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col">
               <div class="text-[#31B978] text-[18px] font-bold  pb-4 sm:pb-0">
-                <%= f.collection_select(:course_id, Course.all, :id, :course_name, { prompt: batch.course&.course_name, selected: '' }, { class: "bg-[#FFFFFF] w-[50px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block  p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select section_section_batch sources" })  %>
+                <%= f.collection_select(:course_id, Course.all, :id, :course_name, { prompt: "Select Course", selected: @batch.course_id }, { class: "bg-[#FFFFFF] w-[50px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block  p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select section_section_batch sources" })  %>
               </div>
               <div class="text-red-600 text-sm mt-1" id="batch_course_error"></div>
               <% if batch&.errors&.any? %>
@@ -89,7 +89,7 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Primary Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col">
-              <%= f.collection_select(:primary_trainer_id, Trainer.all, :id, :name, { prompt: batch&.primary_trainer&.name, selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources", id: "user_id" })  %>
+              <%= f.collection_select(:primary_trainer_id, Trainer.all, :id, :name, { prompt: "Select Trainer", selected: @batch.primary_trainer }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select new-select-border sources", id: "user_id" })  %>
               <div class="text-red-600 text-sm mt-1" id="batch__primary_trainer_error"></div>
               <% if batch&.errors&.any? %>
                 <% if batch.errors[:primary_trainer_id].any? %>
@@ -103,7 +103,7 @@
           <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
             <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Secondary Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
             <div class="w-full sm:w-[55%] flex flex-col">
-              <%= f.collection_select(:secondary_trainer_id, Trainer.all, :id, :name, { prompt: batch&.secondary_trainer&.name, selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle         new-name-custom-select new-select-border sources", id: "secondary_trainer_id" })  %>
+              <%= f.collection_select(:secondary_trainer_id, Trainer.all, :id, :name, { prompt: "Select Trainer", selected: @batch.secondary_trainer }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle         new-name-custom-select new-select-border sources", id: "secondary_trainer_id" })  %>
               <div class="text-red-600 text-sm mt-1" id="batch__secondary_trainer_error"></div>
               <% if batch&.errors&.any? %>
                 <% if batch.errors[:secondary_trainer_id].any? %>
