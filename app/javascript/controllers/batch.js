@@ -17,7 +17,7 @@ function cloneBatchTimeForm() {
     let oldName = $(this).attr("name");
     let newName = oldName.replace(/\[\d\]/, "[" + timeIndex + "]");
     $(this).attr("name", newName);
-  })
+  });
   newtiming.find("input").val("");
   newtiming.find("input").each(function () {
     let oldName = $(this).attr("name");
@@ -354,7 +354,6 @@ $(document).ready(function () {
     timeSlot();
     selectCreateUser();
     enquireName();
-    cloneBatchTimeForm();
     addBatchTime();
     dropdownCheckBoxes();
   });
@@ -373,5 +372,10 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
+    courseSelect();
+    selectCreateUser();
+    enquireName();
+    addBatchTime();
+    dropdownCheckBoxes();
   };
 });

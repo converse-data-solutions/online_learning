@@ -17,9 +17,10 @@ class Admin::BatchesController < ApplicationController
     @batch = Batch.new(batch_params)    
     respond_to do |format|
       if @batch.save
-        student_ids = Array(params[:batch][:student_ids]).reject(&:empty?).map(&:to_i)
-        students = User.where(id: student_ids).where.not(id: @batch.student_ids) # Exclude already associated students
-        @batch.students << students
+        if params[:batch][:student_ids].present?
+          students = params[:batch][:student_ids].reject(&:empty?).map(&:to_i)
+          @batch.student_ids = students
+        end      
         @batches = Batch.paginate(page: params[:page], per_page: 10)
         format.turbo_stream
       else
