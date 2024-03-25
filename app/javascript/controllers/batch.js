@@ -1,143 +1,105 @@
 function addBatchTime() {
-  $("#batch-form #add_timing").on("click", function() {
+  $("#batch-form #add_timing").on("click", function () {
     cloneBatchTimeForm();
     let timeIndex = $("#timeIndex").data("timeIndex");
-
-  })
+  });
 }
 
 function cloneBatchTimeForm() {
   let timeIndex = $("#timeIndex").data("timeIndex");
   console.log("timeIndex =", timeIndex);
-  let newtiming = $("#batch-form #batch_timings_container .batch_timing_container:first").clone();
+  let newtiming = $(
+    "#batch-form #batch_timings_container .batch_timing_container:first"
+  ).clone();
   console.log("newtiming =", newtiming);
   newtiming.find("input").val("");
-  newtiming.find("input").each(function() {
+  newtiming.find("input").each(function () {
     let oldName = $(this).attr("name");
     let newName = oldName.replace(/\[\d\]/, "[" + timeIndex + "]");
     $(this).attr("name", newName);
-  })
-  
+  });
+
   $("#batch-form #batch_timings_container").append(newtiming);
   timeIndex++;
   $("#batch-form #timeIndex").data("timeIndex", timeIndex);
 }
 
 function dropdownCheckBoxes() {
-
   function checkboxDropdown(el) {
-
     let $el = $(el);
- 
+
     $el.each(function () {
-
       let $list = $(this).find(".dropdown-list"),
-
         $label = $(this).find(".dropdown-label"),
-
         $checkAll = $(this).find(".check-all"),
-
         $inputs = $(this).find(".checkbox input[type='checkbox']"),
-
         result = [];
- 
+
       function updateStatus() {
-
         if (!result.length) {
-
           $label.html("Select Options");
-
         }
-
       }
- 
-      function updateLabel() {
 
+      function updateLabel() {
         $label.html(result.join(", "));
 
         updateStatus();
-
       }
- 
+
       $inputs.on("change", function () {
-
         let checkedText = $(this).next().text();
- 
-        if ($(this).is(":checked")) {
 
+        if ($(this).is(":checked")) {
           result.push(checkedText);
-
         } else {
-
           result = result.filter((item) => item !== checkedText);
-
         }
- 
+
         updateLabel();
-
       });
- 
+
       $checkAll.on("change", function () {
-
         result = [];
- 
-        if ($(this).is(":checked")) {
 
+        if ($(this).is(":checked")) {
           $inputs.prop("checked", true);
 
           result.push($(this).next().text());
-
         } else {
-
           $inputs.prop("checked", false);
-
         }
- 
-        updateLabel();
 
+        updateLabel();
       });
- 
+
       // Initial setup
 
       $inputs.each(function () {
-
         if ($(this).is(":checked")) {
-
           result.push($(this).next().text());
-
         }
-
       });
- 
+
       updateLabel();
- 
+
       $label.on("click", function () {
-
         $el.toggleClass("open-dropdown");
-
       });
- 
+
       $(document).on("click touchstart", function (e) {
-
         if (!$(e.target).closest($el).length) {
-
           $el.removeClass("open-dropdown");
-
         }
-
       });
-
     });
-
   }
- 
-  checkboxDropdown(".dropdown");
 
+  checkboxDropdown(".dropdown");
 }
 
-
 function courseSelect() {
-  $("#batch-form .new-custom-select").each(function() {
+  $("#batch-form .new-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -150,7 +112,7 @@ function courseSelect() {
     template += '<div class="new-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-custom-option ' +
           $(this).attr("class") +
@@ -168,23 +130,23 @@ function courseSelect() {
   });
 
   $(".new-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-custom-select").removeClass("opened");
     });
     $(this).parents(".new-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-custom-option").on("click", function() {
+  $(".new-custom-option").on("click", function () {
     $(this)
       .parents(".new-custom-select-wrapper")
       .find("select")
@@ -267,7 +229,7 @@ function selectCreateUser() {
   });
 }
 function enquireName() {
-  $("#batch-form .new-name-custom-select").each(function() {
+  $("#batch-form .new-name-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -282,7 +244,7 @@ function enquireName() {
     template += '<div class="new-name-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-name-custom-option ' +
           $(this).attr("class") +
@@ -300,23 +262,23 @@ function enquireName() {
   });
 
   $(".new-name-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-name-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-name-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-name-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-name-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-name-custom-select").removeClass("opened");
     });
     $(this).parents(".new-name-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-name-custom-option").on("click", function() {
+  $(".new-name-custom-option").on("click", function () {
     $(this)
       .parents(".new-name-custom-select-wrapper")
       .find("select")
@@ -334,7 +296,7 @@ function enquireName() {
   });
 }
 function timeSlot() {
-  $(function() {
+  $(function () {
     $("#datepicker").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
@@ -342,7 +304,7 @@ function timeSlot() {
     });
 
     // Adding click functionality to the effective-from datepicker icon
-    $("#datepicker-icon").on("click", function(event) {
+    $("#datepicker-icon").on("click", function (event) {
       event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
       var $datepicker = $("#datepicker");
       if ($datepicker.datepicker("widget").is(":hidden")) {
@@ -353,7 +315,7 @@ function timeSlot() {
     });
   });
 
-  $(function() {
+  $(function () {
     $("#datepicker-to").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
@@ -361,7 +323,7 @@ function timeSlot() {
     });
 
     // Adding click functionality to the effective-from datepicker icon
-    $("#datepicker-icon-to").on("click", function(event) {
+    $("#datepicker-icon-to").on("click", function (event) {
       event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
       var $datepicker = $("#datepicker-to");
       if ($datepicker.datepicker("widget").is(":hidden")) {
@@ -371,11 +333,9 @@ function timeSlot() {
       }
     });
   });
-
-  
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   courseSelect();
   timeSlot();
   selectCreateUser();
@@ -383,21 +343,20 @@ $(document).ready(function() {
   addBatchTime();
   dropdownCheckBoxes();
 
-  $(document).on("turbo:render", function() {
+  $(document).on("turbo:render", function () {
     courseSelect();
-    timeSlot(); 
+    timeSlot();
     selectCreateUser();
     enquireName();
     cloneBatchTimeForm();
     addBatchTime();
     dropdownCheckBoxes();
-    
   });
 
-  $(document).on("turbo:before-render", function() {
+  $(document).on("turbo:before-render", function () {
     $("#overlay").show();
   });
-  $(document).on("turbo:after-render", function() {
+  $(document).on("turbo:after-render", function () {
     $("#overlay").hide();
   });
 });
@@ -405,10 +364,8 @@ $(document).ready(function() {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function(streamElement) {
+  event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
-    
   };
 });
-
