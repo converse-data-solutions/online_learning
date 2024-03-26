@@ -30,7 +30,7 @@ function editBatchPopup() {
   });
 }
 
-function   showBatchPopup(){
+function showBatchPopup() {
   $("#batch-table").on("click", ".view-batch-model", function () {
     let id = $(this).data("batch-id");
     let url = $(this).data("url");
@@ -57,13 +57,13 @@ function   showBatchPopup(){
       error: function () {
         console.log("Error fetching data");
         $("#overlay").hide();
-      }
+      },
     });
   });
 }
 
-function deleteBatchPopup() {``
-  $("#batch-table").on("click", ".send-delete-batch", function() {
+function deleteBatchPopup() {
+  $("#batch-table").on("click", ".send-delete-batch", function () {
     let id = $(this).data("batch-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -89,7 +89,6 @@ function deleteBatchPopup() {``
     $("#delete-batch-model").attr("href", delUrl);
   });
 }
-
 
 function addBatchTime() {
   $("#batch-form #add_timing").on("click", function () {
@@ -726,7 +725,7 @@ function batchFormValidation() {
     }
   }
 
-  function editBatchCourse() {
+  function batchCourse() {
     let name = $("#batch_course_id").val();
 
     if (!name) {
@@ -831,14 +830,17 @@ function batchFormValidation() {
 
   // Event bindings for registration form fields
   $("#batch_batch_name").on("blur", batchName);
-  $("#batch_course_id").on("blur", editBatchCourse);
+  $("#batch_course_id").on("blur", batchCourse);
   $("#datepicker").on("blur", batchFromDate);
   $("#datepicker_to").on("blur", batchToDate);
   $("user_id").on("blur", batchPrimaryTrainer);
   $("secondary_trainer_id").on("blur", batchSecondaryTrainer);
   $(".checkbox-custom").on("click", studentCheckboxValidation);
   $("#batch_batch_timings_attributes_0_day").on("blur", daySelectValidation);
-  $("#batch_batch_timings_attributes_0_from_time").on("blur", fromTimeValidation);
+  $("#batch_batch_timings_attributes_0_from_time").on(
+    "blur",
+    fromTimeValidation
+  );
   $("#batch_batch_timings_attributes_0_to_time").on("blur", toTimeValidation);
   // Event binding for form submission
   $("#batch-admin-form").on("submit", function (event) {
@@ -1052,9 +1054,9 @@ function batchEditFormValidation() {
 function searchBatch() {
   let delayTimer;
 
-  $("#batch_search_form").keyup(function(e) {
+  $("#batch_search_form").keyup(function (e) {
     clearTimeout(delayTimer);
-    delayTimer = setTimeout(function() {
+    delayTimer = setTimeout(function () {
       let searchValue = $("#enquire_search").val();
       $("#overlay").show();
       $.ajax({
@@ -1064,9 +1066,10 @@ function searchBatch() {
           search: searchValue,
         },
         headers: {
-          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function(res) {
+        success: function (res) {
           Turbo.renderStreamMessage(res);
           let newURL =
             window.location.protocol +
@@ -1075,7 +1078,8 @@ function searchBatch() {
             window.location.pathname +
             "?search=" +
             encodeURIComponent(searchValue);
-          window.history.pushState({
+          window.history.pushState(
+            {
               path: newURL,
             },
             "",
@@ -1083,7 +1087,7 @@ function searchBatch() {
           );
           $("#overlay").hide();
         },
-        error: function() {
+        error: function () {
           console.log("Error fetching data");
           $("#overlay").hide();
         },
@@ -1092,12 +1096,11 @@ function searchBatch() {
   });
 }
 
-function searchByCourse()
-{
+function searchByCourse() {
   $("#batch-filter .new-filter-custom-select").on(
     "click",
     ".new-filter-custom-option",
-    function() {
+    function () {
       var courseName = $(this).data("value");
       $("#overlay").show();
       $.ajax({
@@ -1107,9 +1110,10 @@ function searchByCourse()
           course: courseName,
         },
         headers: {
-          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
         },
-        success: function(data) {
+        success: function (data) {
           Turbo.renderStreamMessage(data);
           var newUrl =
             window.location.protocol +
@@ -1118,7 +1122,8 @@ function searchByCourse()
             window.location.pathname +
             "?course=" +
             encodeURIComponent(courseName);
-          window.history.pushState({
+          window.history.pushState(
+            {
               path: newUrl,
             },
             "",
@@ -1126,7 +1131,7 @@ function searchByCourse()
           );
           $("#overlay").hide();
         },
-        error: function(error) {
+        error: function (error) {
           console.error("Error:", error);
           $("#overlay").hide();
         },
@@ -1223,7 +1228,6 @@ $(document).ready(function () {
   selectBatchFilter();
   searchByCourse();
 
-
   $(document).on("turbo:render", function () {
     courseSelect();
     timeSlot();
@@ -1259,7 +1263,6 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
-    addBatchTime();
     dropdownCheckBoxes();
     editTimeSlot();
     batchEditCourse();
