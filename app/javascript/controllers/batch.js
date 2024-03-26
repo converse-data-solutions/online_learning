@@ -26,8 +26,8 @@ function editBatchPopup() {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
-    })
-  })
+    });
+  });
 }
 
 function addBatchTime() {
@@ -201,6 +201,7 @@ function courseSelect() {
       .text($(this).text());
   });
 }
+
 function selectCreateUser() {
   $("#batch-form .custom-select").each(function () {
     var classes = $(this).attr("class"),
@@ -372,10 +373,53 @@ function timeSlot() {
     });
   });
 }
+
+function editTimeSlot() {
+  $(function () {
+    $("#edit-datepicker").datepicker({
+      dateFormat: "dd-mm-yy",
+      duration: "fast",
+      changeYear: true, // Enable changing the year
+    });
+
+    // Adding click functionality to the effective-from datepicker icon
+    $("#edit-datepicker-icon").on("click", function (event) {
+      event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
+      var $datepicker = $("#edit-datepicker");
+      if ($datepicker.datepicker("widget").is(":hidden")) {
+        $datepicker.datepicker("show"); // Show the datepicker if it's hidden
+      } else {
+        $datepicker.datepicker("hide"); // Hide the datepicker if it's visible
+      }
+    });
+  });
+
+  $(function () {
+    $("#edit-datepicker-to").datepicker({
+      dateFormat: "dd-mm-yy",
+      duration: "fast",
+      changeYear: true, // Enable changing the year
+    });
+
+    // Adding click functionality to the effective-from datepicker icon
+    $("#edit-datepicker-icon-to").on("click", function (event) {
+      event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
+      var $datepicker = $("#edit-datepicker-to");
+      if ($datepicker.datepicker("widget").is(":hidden")) {
+        $datepicker.datepicker("show"); // Show the datepicker if it's hidden
+      } else {
+        $datepicker.datepicker("hide"); // Hide the datepicker if it's visible
+      }
+    });
+  });
+}
+
+
 function batchFormValidation() {
   function batchName() {
     let name = $("#batch_batch_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
+    console.log(name);
     console.log(namecheck);
     if (!name) {
       $("#batch_name_error").text("Name can't be blank");
@@ -397,7 +441,7 @@ function batchFormValidation() {
     if (!name) {
       $("#batch_course_error").text("Course can't be blank");
       return false;
-    }  else {
+    } else {
       $("#batch_course_error").text("");
       return true;
     }
@@ -504,8 +548,11 @@ function batchFormValidation() {
   $("secondary_trainer_id").on("blur", batchSecondaryTrainer);
   $(".checkbox-custom").on("click", studentCheckboxValidation);
   $("#batch_batch_timings_attributes_0_day").on("blur", daySelectValidation);
-  $("#batch_batch_timings_attributes_0_from_time").on("blir", fromTimeValidation)
-  $("#batch_batch_timings_attributes_0_to_time").on("blir", toTimeValidation)
+  $("#batch_batch_timings_attributes_0_from_time").on(
+    "blir",
+    fromTimeValidation
+  );
+  $("#batch_batch_timings_attributes_0_to_time").on("blir", toTimeValidation);
   // Event binding for form submission
   $("#batch-admin-form").on("submit", function (event) {
     // Validate all fields on form submission
@@ -560,6 +607,8 @@ $(document).ready(function () {
   dropdownCheckBoxes();
   batchFormValidation();
   editBatchPopup();
+  editTimeSlot();
+  // editCourseSelect();
 
   $(document).on("turbo:render", function () {
     courseSelect();
@@ -570,6 +619,8 @@ $(document).ready(function () {
     dropdownCheckBoxes();
     batchFormValidation();
     editBatchPopup();
+    editTimeSlot();
+    // editCourseSelect();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -591,5 +642,9 @@ addEventListener("turbo:before-stream-render", (event) => {
     selectBatchName();
     addBatchTime();
     dropdownCheckBoxes();
+      // editCourseSelect();
+      editTimeSlot();
+
+
   };
 });
