@@ -45,7 +45,7 @@
       </div>
     </div>
   </div>
-  <div class="flex items-center justify-between pt-10 md:pt-9 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row" id="batch-filter-container">
+  <div class="flex items-center justify-between pt-1 md:pt-1 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row" id="batch-filter-container">
     <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
       <%= collection_select(:course_name, :course_name, Enquire.distinct.pluck(:course_name), :to_s, :to_s, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 focus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-course-custom-select sources" }) %>
     </div>
@@ -60,18 +60,6 @@
             </th>
             <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
               Course
-            </th>
-            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-              Contact
-            </th>
-            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-              Location
-            </th>
-            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-              Time Slot
-            </th>
-            <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
-              Status
             </th>
             <th scope="col" class="px-6 py-5 font-medium text-[14px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
               Action

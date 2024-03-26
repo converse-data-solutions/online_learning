@@ -5,7 +5,7 @@ class Admin::BatchesController < ApplicationController
   def index
     @batch = Batch.new
     @batch_timings = @batch.batch_timings.build
-    @batches = Batch.paginate(page: params[:page], per_page: 10)
+    @batches = Batch.includes(:course).paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html { render :index }
       format.turbo_stream
