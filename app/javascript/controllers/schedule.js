@@ -264,7 +264,9 @@ function scheduleCreateCourse() {
 }
 function scheduleEditUser() {
   $("#edit-schedule-popup .new-name-custom-select").each(function() {
-    var classes = $(this).attr("class");
+    var classes = $(this).attr("class"),
+      id = $(this).attr("id"),
+      name = $(this).attr("name");
 
     var placeholderText = $(this).find("option:selected").text();
 
@@ -277,10 +279,11 @@ function scheduleEditUser() {
     $(this)
       .find("option")
       .each(function() {
-        var selected = $(this).is(":selected") ? "selection" : "";
         template +=
-          '<span class="new-name-custom-option ' + selected + '" data-value="' +
-          $(this).val() +
+          '<span class="new-name-custom-option ' +
+          $(this).attr("class") +
+          '" data-value="' +
+          $(this).attr("value") +
           '">' +
           $(this).html() +
           "</span>";
@@ -292,14 +295,28 @@ function scheduleEditUser() {
     $(this).after(template);
   });
 
+  $(".new-name-custom-option:first-of-type").hover(
+    function() {
+      $(this).parents(".new-name-custom-options").addClass("option-hover");
+    },
+    function() {
+      $(this).parents(".new-name-custom-options").removeClass("option-hover");
+    }
+  );
+
+  $(".new-name-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
+      $(".new-name-custom-select").removeClass("opened");
+    });
+    $(this).parents(".new-name-custom-select").toggleClass("opened");
+    event.stopPropagation();
+  });
+
   $(".new-name-custom-option").on("click", function() {
-    var value = $(this).data("value");
-    var text = $(this).text();
     $(this)
       .parents(".new-name-custom-select-wrapper")
       .find("select")
-      .val(value)
-      .trigger("change");
+      .val($(this).data("value"));
     $(this)
       .parents(".new-name-custom-options")
       .find(".new-name-custom-option")
@@ -309,13 +326,15 @@ function scheduleEditUser() {
     $(this)
       .parents(".new-name-custom-select")
       .find(".new-name-custom-select-trigger")
-      .text(text);
+      .text($(this).text());
   });
 }
 
 function scheduleEditBatch() {
   $("#edit-schedule-popup .new-status-custom-select").each(function() {
-    var classes = $(this).attr("class");
+    var classes = $(this).attr("class"),
+      id = $(this).attr("id"),
+      status = $(this).attr("status");
 
     var placeholderText = $(this).find("option:selected").text();
 
@@ -328,10 +347,11 @@ function scheduleEditBatch() {
     $(this)
       .find("option")
       .each(function() {
-        var selected = $(this).is(":selected") ? "selection" : "";
         template +=
-          '<span class="new-status-custom-option ' + selected + '" data-value="' +
-          $(this).val() +
+          '<span class="new-status-custom-option ' +
+          $(this).attr("class") +
+          '" data-value="' +
+          $(this).attr("value") +
           '">' +
           $(this).html() +
           "</span>";
@@ -343,14 +363,28 @@ function scheduleEditBatch() {
     $(this).after(template);
   });
 
+  $(".new-status-custom-option:first-of-type").hover(
+    function() {
+      $(this).parents(".new-status-custom-options").addClass("option-hover");
+    },
+    function() {
+      $(this).parents(".new-status-custom-options").removeClass("option-hover");
+    }
+  );
+
+  $(".new-status-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
+      $(".new-status-custom-select").removeClass("opened");
+    });
+    $(this).parents(".new-status-custom-select").toggleClass("opened");
+    event.stopPropagation();
+  });
+
   $(".new-status-custom-option").on("click", function() {
-    var value = $(this).data("value");
-    var text = $(this).text();
     $(this)
       .parents(".new-status-custom-select-wrapper")
       .find("select")
-      .val(value)
-      .trigger("change");
+      .val($(this).data("value"));
     $(this)
       .parents(".new-status-custom-options")
       .find(".new-status-custom-option")
@@ -360,75 +394,6 @@ function scheduleEditBatch() {
     $(this)
       .parents(".new-status-custom-select")
       .find(".new-status-custom-select-trigger")
-      .text(text);
-  });
-}
-
-
-function scheduleEditCourse() {
-  $("#edit-schedule-popup .new-course-custom-select").each(function() {
-    var classes = $(this).attr("class"),
-      id = $(this).attr("id"),
-      name = $(this).attr("name");
-
-    var placeholderText = $(this).find("option:first-of-type").text();
-
-    var template = '<div class="' + classes + '">';
-    template +=
-      '<span class="new-course-custom-select-trigger">' +
-      placeholderText +
-      "</span>";
-    template += '<div class="new-course-custom-options">';
-    $(this)
-      .find("option")
-      .each(function() {
-        template +=
-          '<span class="new-course-custom-option ' +
-          $(this).attr("class") +
-          '" data-value="' +
-          $(this).attr("value") +
-          '">' +
-          $(this).html() +
-          "</span>";
-      });
-    template += "</div></div>";
-
-    $(this).wrap('<div class="new-course-custom-select-wrapper"></div>');
-    $(this).hide();
-    $(this).after(template);
-  });
-
-  $(".new-course-custom-option:first-of-type").hover(
-    function() {
-      $(this).parents(".new-course-custom-options").addClass("option-hover");
-    },
-    function() {
-      $(this).parents(".new-course-custom-options").removeClass("option-hover");
-    }
-  );
-
-  $(".new-course-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
-      $(".new-course-custom-select").removeClass("opened");
-    });
-    $(this).parents(".new-course-custom-select").toggleClass("opened");
-    event.stopPropagation();
-  });
-
-  $(".new-course-custom-option").on("click", function() {
-    $(this)
-      .parents(".new-course-custom-select-wrapper")
-      .find("select")
-      .val($(this).data("value"));
-    $(this)
-      .parents(".new-course-custom-options")
-      .find(".new-course-custom-option")
-      .removeClass("selection");
-    $(this).addClass("selection");
-    $(this).parents(".new-course-custom-select").removeClass("opened");
-    $(this)
-      .parents(".new-course-custom-select")
-      .find(".new-course-custom-select-trigger")
       .text($(this).text());
   });
 }
@@ -463,7 +428,6 @@ $(document).ready(function() {
   scheduleCreateBatch();
   scheduleCreateUser();
   scheduleCreateCourse();
-  scheduleEditCourse();
   scheduleEditBatch();
   scheduleEditUser();
   scheduleBatchData();
@@ -474,7 +438,6 @@ $(document).ready(function() {
     scheduleCreateBatch();
     scheduleCreateUser();
     scheduleCreateCourse();
-    scheduleEditCourse();
     scheduleEditBatch();
     scheduleEditUser();
     scheduleBatchData();
@@ -501,7 +464,6 @@ addEventListener("turbo:before-stream-render", (event) => {
       scheduleBatchData();
     }
     if (streamElement.target == 'edit-schedule-popup') {
-      scheduleEditCourse();
       scheduleEditBatch();
       scheduleEditUser();
       editPopup();

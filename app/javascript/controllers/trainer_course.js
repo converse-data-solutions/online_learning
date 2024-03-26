@@ -297,7 +297,7 @@ function selectEditUser() {
       id = $(this).attr("id"),
       name = $(this).attr("name");
 
-    var placeholderText = $(this).find("option:first-of-type").text();
+    var placeholderText = $(this).find("option:selected").text();
 
     var template = '<div class="' + classes + '">';
     template +=
@@ -365,7 +365,7 @@ function selectEditCourse() {
       id = $(this).attr("id"),
       name = $(this).attr("name");
 
-    var placeholderText = $(this).find("option:first-of-type").text();
+    var placeholderText = $(this).find("option:selected").text();
 
     var template = '<div class="' + classes + '">';
     template +=
