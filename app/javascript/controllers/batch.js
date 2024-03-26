@@ -1049,6 +1049,159 @@ function batchEditFormValidation() {
     }
   });
 }
+function searchBatch() {
+  let delayTimer;
+
+  $("#batch_search_form").keyup(function(e) {
+    clearTimeout(delayTimer);
+    delayTimer = setTimeout(function() {
+      let searchValue = $("#enquire_search").val();
+      $("#overlay").show();
+      $.ajax({
+        url: "/admin/batches",
+        type: "GET",
+        data: {
+          search: searchValue,
+        },
+        headers: {
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function(res) {
+          Turbo.renderStreamMessage(res);
+          let newURL =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?search=" +
+            encodeURIComponent(searchValue);
+          window.history.pushState({
+              path: newURL,
+            },
+            "",
+            newURL
+          );
+          $("#overlay").hide();
+        },
+        error: function() {
+          console.log("Error fetching data");
+          $("#overlay").hide();
+        },
+      });
+    }, 500);
+  });
+}
+
+function searchByCourse()
+{
+  $("#batch-filter .new-filter-custom-select").on(
+    "click",
+    ".new-filter-custom-option",
+    function() {
+      var courseName = $(this).data("value");
+      $("#overlay").show();
+      $.ajax({
+        url: "/admin/batches",
+        type: "GET",
+        data: {
+          course: courseName,
+        },
+        headers: {
+          Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function(data) {
+          Turbo.renderStreamMessage(data);
+          var newUrl =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?course=" +
+            encodeURIComponent(courseName);
+          window.history.pushState({
+              path: newUrl,
+            },
+            "",
+            newUrl
+          );
+          $("#overlay").hide();
+        },
+        error: function(error) {
+          console.error("Error:", error);
+          $("#overlay").hide();
+        },
+      });
+    }
+  );
+}
+
+function selectBatchFilter() {
+  $("#batch-filter .new-filter-custom-select").each(function () {
+    var classes = $(this).attr("class"),
+      id = $(this).attr("id"),
+      filter = $(this).attr("filter");
+
+    var placeholderText = $(this).find("option:first-of-type").text();
+
+    var template = '<div class="' + classes + '">';
+    template +=
+      '<span class="new-filter-custom-select-trigger">' +
+      placeholderText +
+      "</span>";
+    template += '<div class="new-filter-custom-options">';
+    $(this)
+      .find("option")
+      .each(function () {
+        template +=
+          '<span class="new-filter-custom-option ' +
+          $(this).attr("class") +
+          '" data-value="' +
+          $(this).attr("value") +
+          '">' +
+          $(this).html() +
+          "</span>";
+      });
+    template += "</div></div>";
+
+    $(this).wrap('<div class="new-filter-custom-select-wrapper"></div>');
+    $(this).hide();
+    $(this).after(template);
+  });
+
+  $(".new-filter-custom-option:first-of-type").hover(
+    function () {
+      $(this).parents(".new-filter-custom-options").addClass("option-hover");
+    },
+    function () {
+      $(this).parents(".new-filter-custom-options").removeClass("option-hover");
+    }
+  );
+
+  $(".new-filter-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
+      $(".new-filter-custom-select").removeClass("opened");
+    });
+    $(this).parents(".new-filter-custom-select").toggleClass("opened");
+    event.stopPropagation();
+  });
+
+  $(".new-filter-custom-option").on("click", function () {
+    $(this)
+      .parents(".new-filter-custom-select-wrapper")
+      .find("select")
+      .val($(this).data("value"));
+    $(this)
+      .parents(".new-filter-custom-options")
+      .find(".new-filter-custom-option")
+      .removeClass("selection");
+    $(this).addClass("selection");
+    $(this).parents(".new-filter-custom-select").removeClass("opened");
+    $(this)
+      .parents(".new-filter-custom-select")
+      .find(".new-filter-custom-select-trigger")
+      .text($(this).text());
+  });
+}
 
 $(document).ready(function () {
   courseSelect();
@@ -1066,6 +1219,10 @@ $(document).ready(function () {
   batchEditSecondaryTrainer();
   batchEditFormValidation();
   deleteBatchPopup();
+  searchBatch();
+  selectBatchFilter();
+  searchByCourse();
+
 
   $(document).on("turbo:render", function () {
     courseSelect();
@@ -1083,6 +1240,9 @@ $(document).ready(function () {
     batchEditSecondaryTrainer();
     batchEditFormValidation();
     deleteBatchPopup();
+    searchBatch();
+    selectBatchFilter();
+    searchByCourse();
   });
 
   $(document).on("turbo:before-render", function () {

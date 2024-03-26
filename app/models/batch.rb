@@ -13,4 +13,26 @@ class Batch < ApplicationRecord
   validates :primary_trainer_id, presence: true
   validates :secondary_trainer_id, presence: true
 
+  def self.get_batches(params)
+    page = (params[:page].presence&.to_i&.positive? ? params[:page].to_i : 1)
+    per_page = [(params[:per_page].presence&.to_i || 10).to_i, 1].max
+    Batch.includes(:course).search_by_name(params[:search]).search_by_course(params[:course]).paginate(page: page, per_page: per_page)
+
+  end
+
+  def self.search_by_name(search)
+    if search.present?
+      where('batch_name LIKE ?', "%#{search}%")
+    else
+      all
+    end
+  end
+
+  def self.search_by_course(search)
+    if search.present?
+      where('course_id = ?', search)
+    else
+      all
+    end
+  end
 end

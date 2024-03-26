@@ -5,7 +5,7 @@ class Admin::BatchesController < ApplicationController
   def index
     @batch = Batch.new
     @batch_timings = @batch.batch_timings.build
-    @batches = Batch.includes(:course).paginate(page: params[:page], per_page: 10)
+    @batches = Batch.get_batches(params)
     respond_to do |format|
       format.html { render :index }
       format.turbo_stream
@@ -17,7 +17,7 @@ class Admin::BatchesController < ApplicationController
     @batch = Batch.new(batch_params)    
     respond_to do |format|
       if @batch.save   
-        @batches = Batch.paginate(page: params[:page], per_page: 10)
+        @batches = Batch.get_batches(params)
         format.turbo_stream
       else
         format.turbo_stream do
@@ -48,7 +48,7 @@ class Admin::BatchesController < ApplicationController
   def update
     respond_to do |format|
       if @batch.update(batch_params)
-        @batches = Batch.paginate(page: params[:page], per_page: 10)
+        @batches = Batch.get_batches(params)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_batch_url(@batch) }
       else
@@ -64,7 +64,7 @@ class Admin::BatchesController < ApplicationController
   def destroy
     respond_to do |format|
       if @batch.destroy
-        @batches = Batch.includes(:course).paginate(page: params[:page], per_page: 10)
+        @batches = Batch.get_batches(params)
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update('batch-table', partial: 'admin/batches/table', locals: { batches: @batches }),

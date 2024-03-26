@@ -5,9 +5,12 @@
 <div class="flex flex-col w-full" id="batch index">
   <div class="flex w-[71%] sm:w-[80%] md:w-[88%] lg:w-[95%] mt-12 sm:mx-auto md:mr-auto lg:ml-[30px] sm:ml-[30px] md:ml-[56px] justify-between flex-col sm:flex-row md:flex-row sm:mr-[43px] ml-auto mr-[23px]">
     <div class="text-[#818181] text-[16px] sm:text[16px] md:text-[18px] lg:text-[20px]  font-medium">Batches</div>
-    <div class="flex gap-8">
+    <div class="flex gap-8" id="batch-filter">
+      <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
+        <%= collection_select(:course_name, :course_name, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-filter-custom-select" , id: "search_course_name"}) %>
+      </div>
       <label for="table-search " class="sr-only">Search</label>
-      <%= form_tag admin_enquires_path, method: :get, id: "enquire_search_form" do %>
+      <%= form_tag admin_enquires_path, method: :get, id: "batch_search_form" do %>
         <div class="relative ml-[45px] sm:ml-[50px] md:ml-[55px] lg:ml-[60px]">
           <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <img src="<%= asset_path("search.png") %>">
@@ -46,9 +49,6 @@
     </div>
   </div>
   <div class="flex items-center justify-between pt-1 md:pt-1 pb-4 md:w-[88%] lg:w-[95%] w-[95%] mr-auto lg:ml-[30px] md:ml-[55px] ml-[0px] flex-col sm:flex-row md:flex-row" id="batch-filter-container">
-    <div class="text-[#31B978] text-[18px] font-bold sm:ml-[10px] ml-[25px] pb-4 sm:pb-0" id="section-dropdown">
-      <%= collection_select(:course_name, :course_name, Enquire.distinct.pluck(:course_name), :to_s, :to_s, { prompt: "Select Course", selected: '' }, { class: "bg-gray-50 border-0 focus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-course-custom-select sources" }) %>
-    </div>
   </div>
   <div class="relative overflow-x-auto lg:overflow-x-hidden mt-2 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[95%] mr-auto ml-[30px]">
     <div class="bg-white dark:bg-gray-800 h-[650px] relative mt-4 w-[87%] sm:w-[90%] md:w-[95%] lg:w-[100%] mr-auto ml-[30px] lg:ml-[0px]">
