@@ -175,17 +175,17 @@
     </div>
     <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
       <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-        <label for="higher_education" class="block mb-2 text-lg font-medium text-[#000]">Highest Eduction (Master/Bachelour)</label>
+        <label for="higher_education" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Highest Eduction<span class="text-[#818181] text-[14px] font-medium">(Master/Bachelour)</span></label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= profile_fields.text_field :higher_education, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
-          <div class="text-red-600 text-sm mt-1" id="alternate-phone-error"></div>
+          <div class="text-red-600 text-sm mt-1" id="higher_education_error"></div>
         </div>
       </div>
       <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
         <label for="idcard_type" class="block mb-2 text-lg font-medium text-[#000]">IdCard Type</label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= profile_fields.select(:idcard_type, Profile.idcard_types.keys.map { |type| [type.humanize, type] }, { prompt: "Select Status" }, { class: "bg-[#fff] border-[1px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select select-widht status_validation" }) %>
-          <div class="text-red-600 text-sm mt-1" id="alternate-phone-error"></div>
+          <div class="text-red-600 text-sm mt-1" id="idcard_type_error"></div>
         </div>
       </div>
     </div>
@@ -194,7 +194,7 @@
         <label for="idcard_no" class="block mb-2 text-lg font-medium text-[#000]">IdCard Number</label>
         <div class="w-full sm:w-[55%] flex flex-col">
           <%= profile_fields.text_field :idcard_no, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", autocomplete: "off" %>
-          <div class="text-red-600 text-sm mt-1" id="alternate-phone-error"></div>
+          <div class="text-red-600 text-sm mt-1" id="idcard_no_error"></div>
         </div>
       </div>
       <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">

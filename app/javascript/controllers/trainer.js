@@ -258,6 +258,50 @@ function formValidation() {
       }
     }
   }
+
+  function validateCardNo() {
+    let name = $("#trainer_profile_attributes_idcard_no").val();
+
+    if (!name) {
+      $("#idcard_no_error").text("Card Number can't be blank");
+      return false;
+    } else if (name.replace(/ /g, "").length < 10) {
+      $("#idcard_no_error").text("Please enter a valid Card Number");
+      return false;
+    } else {
+      $("#idcard_no_error").text("");
+      return true;
+    }
+  }
+
+  function validateCardType() {
+    let name = $("#trainer_profile_attributes_idcard_type").val();
+
+    if (!name) {
+      $("#idcard_type_error").text("Card Type can't be blank");
+      return false;
+    } else {
+      $("#idcard_type_error").text("");
+      return true;
+    }
+  }
+
+  function validateHigherEducation() {
+    let name = $("#trainer_profile_attributes_higher_education").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#higher_education_error").text("Higher Education can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#higher_education_error").text("Please enter a valid Higher Education  (only alphabets allowed)");
+      return false;
+    } else {
+      $("#higher_education_error").text("");
+      return true;
+    }
+  }
+
   // Event bindings for registration form fields
   $("#trainer_name").on("blur", validateName); // Validate name on blur
   $("#trainer_email").on("blur", validateEmail); // Validate email on blur
@@ -266,6 +310,9 @@ function formValidation() {
   $("#trainer_occupation").on("blur", validateOccupation); // Validate occupation on blur
   $("#trainer_contact_number").on("blur", validateContactNumber); // Validate contact number on blur
   $("#trainer_emergency_contact_number").on("blur", validateEmergencyContactNumber);
+  $("#trainer_profile_attributes_idcard_no").on("blur", validateCardNo);
+  $("#trainer_profile_attributes_idcard_type").on("blur", validateCardType);
+  $("#trainer_profile_attributes_higher_education").on("blur", validateHigherEducation);
 
 
   // Event binding for form submission
@@ -278,9 +325,12 @@ function formValidation() {
     let isOccupationValid = validateOccupation();
     let isContactNumberValid = validateContactNumber();
     let isEmergencyContactNumberValid = validateEmergencyContactNumber();
+    let isCardNoValid = validateCardNo();
+    let isCardTypeValid = validateCardType();
+    let isHigherEducationValid = validateHigherEducation();
 
     // Check if any field is invalid
-    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid) {
+    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid || !isCardNoValid || !isCardTypeValid || !isHigherEducationValid) {
       // Prevent form submission
       event.preventDefault();
 
@@ -292,6 +342,9 @@ function formValidation() {
       validateOccupation();
       validateContactNumber();
       validateEmergencyContactNumber();
+      validateCardNo();
+      validateCardType();
+      validateHigherEducation();
     }
   });
 }
@@ -423,6 +476,50 @@ function editFormValidation() {
     }
   }
 
+
+  function validateCardNo() {
+    let name = $("#edit_trainer_profile_attributes_idcard_no").val();
+
+    if (!name) {
+      $("#edit_idcard_no_error").text("Card Number can't be blank");
+      return false;
+    } else if (name.replace(/ /g, "").length < 10) {
+      $("#edit_idcard_no_error").text("Please enter a valid Card Number");
+      return false;
+    } else {
+      $("#edit_idcard_no_error").text("");
+      return true;
+    }
+  }
+
+  function validateCardType() {
+    let name = $("#edit_trainer_profile_attributes_idcard_type").val();
+
+    if (!name) {
+      $("#edit_idcard_type_error").text("Card Type can't be blank");
+      return false;
+    } else {
+      $("#edit_idcard_type_error").text("");
+      return true;
+    }
+  }
+
+  function validateHigherEducation() {
+    let name = $("#edit_trainer_profile_attributes_higher_education").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+
+    if (!name) {
+      $("#edit_higher_education_error").text("Higher Education can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#edit_higher_education_error").text("Please enter a valid Higher Education  (only alphabets allowed)");
+      return false;
+    } else {
+      $("#edit_higher_education_error").text("");
+      return true;
+    }
+  }
+
   
 
   $("#edit-trainer-popup").on("focusout", "#edit_trainer_name", validateName);
@@ -432,6 +529,9 @@ function editFormValidation() {
   $("#edit-trainer-popup").on("focusout", "#edit_trainer_occupation", validateOccupation);
   $("#edit-trainer-popup").on("focusout", "#edit_trainer_contact_number", validateContactNumber);
   $("#edit-trainer-popup").on("focusout", "#edit_trainer_emergency_contact_number", validateEmergencyContactNumber);
+  $("#edit-trainer-popup").on("focusout", "#edit_trainer_profile_attributes_idcard_no", validateCardNo);
+  $("#edit-trainer-popup").on("focusout", "#edit_trainer_profile_attributes_idcard_type", validateCardType);
+  $("#edit-trainer-popup").on("focusout", "#edit_trainer_profile_attributes_higher_education", validateHigherEducation);
 
 
   $("#edit-trainer-popup").on("submit", "#trainer-admin-edit-form", function(event) {
@@ -442,8 +542,11 @@ function editFormValidation() {
     let isOccupationValid = validateOccupation();
     let isContactNumberValid = validateContactNumber();
     let isEmergencyContactNumberValid = validateEmergencyContactNumber();
+    let isCardNoValid = validateCardNo();
+    let isCardTypeValid = validateCardType();
+    let isHigherEducationValid = validateHigherEducation();
 
-    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid) {
+    if (!isNameValid || !isEmailValid || !isPasswordValid || !isPasswordConfirmationValid || !isOccupationValid || !isContactNumberValid || !isEmergencyContactNumberValid || !isCardNoValid || !isCardTypeValid || !isHigherEducationValid) {
       event.preventDefault();
     }
   });

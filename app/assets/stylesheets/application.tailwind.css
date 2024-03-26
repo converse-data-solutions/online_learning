@@ -1643,6 +1643,11 @@ nav.main-menu li.active > a,
 .width-reducer{
   width: 211px !important;
 }
+.remove_border{
+  border: none !important;
+  border-color: #fff !important;
+  width: -webkit-fill-available !important;
+}
 
 .select-widht{
   width: -webkit-fill-available !important;
