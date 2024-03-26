@@ -35,6 +35,10 @@ function addBatchTime() {
     cloneBatchTimeForm();
     let timeIndex = $("#timeIndex").data("timeIndex");
   });
+  $("#edit-batch-popup #batch-admin-edit-form #edit_add_timing").on("click", function () {
+    cloneEditBatchTimeForm();
+    let timeIndex = $("#editTimeIndex").data("timeIndex");
+  });
 }
 
 function cloneBatchTimeForm() {
@@ -60,6 +64,36 @@ function cloneBatchTimeForm() {
   $("#batch-form #batch_timings_container").append(newtiming);
   timeIndex++;
   $("#batch-form #timeIndex").data("timeIndex", timeIndex);
+}
+
+function cloneEditBatchTimeForm() {
+  let timeIndex = $("#editTimeIndex").data("timeIndex");
+  console.log("edittimeIndex =", timeIndex);
+  let newtiming = $(
+    "#edit-batch-popup #batch-admin-edit-form #edit_batch_timings_container .edit_batch_timing_container:first"
+  ).clone();
+  console.log("newtiming =", newtiming);
+  newtiming.find("select").val("");
+  newtiming.find("select").each(function () {
+    let oldName = $(this).attr("name");
+    console.log("oldName =", oldName);
+    let newName = oldName.replace(/\[\d\]/, "[" + timeIndex + "]");
+    console.log("newName =", newName);
+    $(this).attr("name", newName);
+  });
+  newtiming.find("input").val("");
+  newtiming.find("input").each(function () {
+    let oldName = $(this).attr("name");
+    let newName = oldName.replace(/\[\d\]/, "[" + timeIndex + "]");
+    $(this).attr("name", newName);
+  });
+
+  $("#edit-batch-popup #batch-admin-edit-form #edit_batch_timings_container").append(newtiming);
+  timeIndex++;
+  $("#edit-batch-popup #editTimeIndex").data("time-index", timeIndex);
+
+
+  console.log("timeIndex =", timeIndex);
 }
 
 function dropdownCheckBoxes() {
@@ -844,9 +878,6 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
-    courseSelect();
-    selectCreateUser();
-    selectBatchName();
     addBatchTime();
     dropdownCheckBoxes();
     editTimeSlot();

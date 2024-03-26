@@ -1,4 +1,5 @@
   <!-- Modal body -->
+<div id="editTimeIndex" data-time-index="<%= @batch.batch_timings.size %>"></div>
 <div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
   <!-- Modal content -->
   <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
@@ -141,12 +142,36 @@
           <div class="mb-2 flex flex-col sm:flex-row w-full gap-2 lg:w-[50%] justify-between">
             <div class="w-full sm:w-[55%] flex flex-col">
               <div class="text-[#000] text-sm">Day</div>
+              <div class="text-red-600 text-sm" id="edit_batch_day_error">  </div>
+              <% @batch.batch_timings.each do |batch_timing| %>
+                <% if batch_timing.errors[:day].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch_timing.errors.full_messages_for(:day).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
             <div class="w-full sm:w-[55%] flex flex-col">
               <div class="text-[#000]text-sm" >From Time</div>
+              <div class="text-red-600 text-sm" id="edit_batch_from_time_error"></div>
+              <% @batch.batch_timings.each do |batch_timing| %>
+                <% if batch_timing.errors[:from_time].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch_timing.errors.full_messages_for(:from_time).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
             <div class="w-full sm:w-[55%] flex flex-col">
               <div class="text-[#000] text-sm">To Time</div>
+              <div class="text-red-600 text-sm" id="edit_batch_to_time_error"></div>
+              <% @batch.batch_timings.each do |batch_timing| %>
+                <% if batch_timing.errors[:to_time].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch_timing.errors.full_messages_for(:to_time).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>
@@ -157,43 +182,19 @@
               <div class="mb-4 flex flex-col sm:flex-row w-full gap-2 lg:w-[50%] justify-between">
                 <div class="w-full sm:w-[55%] flex flex-col">
                   <%= batchTimingForm.select(:day, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] ,  { prompt: 'Select Day' }, { class: 'validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200'} ) %>
-                  <div class="text-red-600 text-sm" id="edit_batch_day_error">  </div>
-                  <% @batch.batch_timings.each do |batch_timing| %>
-                    <% if batch_timing.errors[:day].any? %>
-                      <div class="text-red-600 text-sm mt-1">
-                        <%= batch_timing.errors.full_messages_for(:day).join(', ') %>
-                      </div>
-                    <% end %>
-                  <% end %>
                 </div>
                 <div class="w-full sm:w-[55%] flex flex-col">
                   <%= batchTimingForm.time_field :from_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_batch_from_time" , autocomplete: "off", placeholder: "From Time" %>
-                  <div class="text-red-600 text-sm" id="edit_batch_from_time_error"></div>
-                  <% @batch.batch_timings.each do |batch_timing| %>
-                    <% if batch_timing.errors[:from_time].any? %>
-                      <div class="text-red-600 text-sm mt-1">
-                        <%= batch_timing.errors.full_messages_for(:from_time).join(', ') %>
-                      </div>
-                    <% end %>
-                  <% end %>
                 </div>
                 <div class="w-full sm:w-[55%] flex flex-col">
                   <%= batchTimingForm.time_field :to_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_batch_to_time" ,autocomplete: "off", placeholder: "To Time" %>
-                  <div class="text-red-600 text-sm" id="edit_batch_to_time_error"></div>
-                  <% @batch.batch_timings.each do |batch_timing| %>
-                    <% if batch_timing.errors[:to_time].any? %>
-                      <div class="text-red-600 text-sm mt-1">
-                        <%= batch_timing.errors.full_messages_for(:to_time).join(', ') %>
-                      </div>
-                    <% end %>
-                  <% end %>
                 </div>
               </div>
             </div>
           <% end %>
         </div>
         <div class="w-full sm:w-[55%] flex flex-col">
-          <button type="button" id="add_timing" class="w-[100px] h-[42px] bg-[#ffffff] button-gradiant-hover border border-[#cccccc] bg-gradient-to-r from-[#1AB69D] to-[#31B978] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200">add day</button>
+          <button type="button" id="edit_add_timing" class="w-[100px] h-[42px] bg-[#ffffff]  border border-[#cccccc] bg-gradient-to-r from-[#969595] to-[#818181] text-[#fff] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200">add day</button>
         </div>
         <%= hidden_field_tag :page, params[:page]%>
         <%= hidden_field_tag :per_page, params[:per_page]%>
