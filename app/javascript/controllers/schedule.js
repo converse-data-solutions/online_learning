@@ -195,73 +195,6 @@ function scheduleCreateUser() {
   });
 }
 
-function scheduleCreateCourse() {
-  $("#schedule-form .new-lesson-custom-select").each(function() {
-    var classes = $(this).attr("class"),
-      id = $(this).attr("id"),
-      name = $(this).attr("name");
-
-    var placeholderText = $(this).find("option:first-of-type").text();
-
-    var template = '<div class="' + classes + '">';
-    template +=
-      '<span class="new-lesson-custom-select-trigger">' +
-      placeholderText +
-      "</span>";
-    template += '<div class="new-lesson-custom-options">';
-    $(this)
-      .find("option")
-      .each(function() {
-        template +=
-          '<span class="new-lesson-custom-option ' +
-          $(this).attr("class") +
-          '" data-value="' +
-          $(this).attr("value") +
-          '">' +
-          $(this).html() +
-          "</span>";
-      });
-    template += "</div></div>";
-
-    $(this).wrap('<div class="new-lesson-custom-select-wrapper"></div>');
-    $(this).hide();
-    $(this).after(template);
-  });
-
-  $(".new-lesson-custom-option:first-of-type").hover(
-    function() {
-      $(this).parents(".new-lesson-custom-options").addClass("option-hover");
-    },
-    function() {
-      $(this).parents(".new-lesson-custom-options").removeClass("option-hover");
-    }
-  );
-
-  $(".new-lesson-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
-      $(".new-lesson-custom-select").removeClass("opened");
-    });
-    $(this).parents(".new-lesson-custom-select").toggleClass("opened");
-    event.stopPropagation();
-  });
-
-  $(".new-lesson-custom-option").on("click", function() {
-    $(this)
-      .parents(".new-lesson-custom-select-wrapper")
-      .find("select")
-      .val($(this).data("value"));
-    $(this)
-      .parents(".new-lesson-custom-options")
-      .find(".new-lesson-custom-option")
-      .removeClass("selection");
-    $(this).addClass("selection");
-    $(this).parents(".new-lesson-custom-select").removeClass("opened");
-    $(this)
-      .parents(".new-lesson-custom-select")
-      .find(".new-lesson-custom-select-trigger")
-      .text($(this).text());
-  });
-}
 function scheduleEditUser() {
   $("#edit-schedule-popup .new-name-custom-select").each(function() {
     var classes = $(this).attr("class"),
@@ -422,25 +355,249 @@ function scheduleBatchData() {
   });
 }
 
+function initializeTimeDropdowns() {
+  $(document).ready(function() {
+    const $startDropdown = $("#start-time").closest(".dropdown");
+    const $startDropdownMenu = $startDropdown.find(".dropdown-menu");
+    const $endDropdown = $("#end-time").closest(".dropdown");
+    const $endDropdownMenu = $endDropdown.find(".dropdown-menu");
+    const $timeRangeInput = $("#time-range");
+
+    // Function to toggle dropdown menu
+    function toggleDropdown($dropdownMenu) {
+      $dropdownMenu.toggleClass("show");
+    }
+
+    // Function to generate time options
+    function generateTimeOptions($dropdownMenu) {
+      const hours = Array.from({
+        length: 12
+      }, (_, i) => (i === 0 ? 12 : i));
+      const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+      const amPm = ["AM", "PM"];
+      amPm.forEach((period) => {
+        hours.forEach((hour) => {
+          const hourStr = hour < 10 ? "0" + hour : "" + hour;
+          minutes.forEach((minute) => {
+            const minuteStr = minute < 10 ? "0" + minute : "" + minute;
+            const time = hourStr + ":" + minuteStr + " " + period;
+            const $optionElement = $("<div>")
+              .addClass("dropdown-menu-item")
+              .text(time);
+            $dropdownMenu.append($optionElement);
+          });
+        });
+      });
+    }
+
+    // Generate time options for start time dropdown
+    generateTimeOptions($startDropdownMenu);
+
+    // Generate time options for end time dropdown
+    generateTimeOptions($endDropdownMenu);
+
+    // Function to update the time range input
+    function updateSelectedTimeRange() {
+      const startTime = $("#start-time").val();
+      const endTime = $("#end-time").val();
+      const timeRange = startTime + " - " + endTime;
+      $timeRangeInput.val(timeRange);
+    }
+
+    // Add event listener to toggle dropdown menu for start time
+    $startDropdown.on("click", function(event) {
+      toggleDropdown($startDropdownMenu);
+    });
+
+    // Add event listener to toggle dropdown menu for end time
+    $endDropdown.on("click", function(event) {
+      toggleDropdown($endDropdownMenu);
+    });
+
+    // Add event listener to close the dropdown menu when clicking outside for start time
+    $(document).on("click", function(event) {
+      if (
+        !$startDropdown.is(event.target) &&
+        $startDropdown.has(event.target).length === 0
+      ) {
+        $startDropdownMenu.removeClass("show");
+      }
+    });
+
+    // Add event listener to close the dropdown menu when clicking outside for end time
+    $(document).on("click", function(event) {
+      if (
+        !$endDropdown.is(event.target) &&
+        $endDropdown.has(event.target).length === 0
+      ) {
+        $endDropdownMenu.removeClass("show");
+      }
+    });
+
+    // Add event listener to select start time from dropdown
+    $startDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+      const selectedTime = $(this).text();
+      $("#start-time").val(selectedTime);
+      $startDropdownMenu.removeClass("show");
+      updateSelectedTimeRange();
+    });
+
+    // Add event listener to select end time from dropdown
+    $endDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+      const selectedTime = $(this).text();
+      $("#end-time").val(selectedTime);
+      $endDropdownMenu.removeClass("show");
+      updateSelectedTimeRange();
+    });
+  });
+}
+
+function scheduleDate() {
+  $(function () {
+    $("#datepicker").datepicker({
+      dateFormat: "dd-mm-yy",
+      duration: "fast",
+      changeYear: true, // Enable changing the year
+    });
+
+    // Adding click functionality to the datepicker icon
+    $("#datepicker-icon").on("click", function (event) {
+      event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
+      var $datepicker = $("#datepicker");
+      if ($datepicker.datepicker("widget").is(":hidden")) {
+        $datepicker.datepicker("show"); // Show the datepicker if it's hidden
+      } else {
+        $datepicker.datepicker("hide"); // Hide the datepicker if it's visible
+      }
+    });
+  });
+}
+
+function createValidation() {
+  function validateBatchName() {
+
+    let name = $("#schedule_batch_id").val();
+
+    if (!name) {
+      $("#batch_error").text("Batch name can't be blank");
+      return false;
+    } else {
+      $("#batch_error").text("");
+      return true;
+    }
+  }
+
+  function validateUserName(){
+    let name = $("#schedule_user_id").val();
+
+    if (!name) {
+      $("#user_error").text("Trainer name can't be blank");
+      return false;
+    } else {
+      $("#user_error").text("");
+      return true;
+    }
+  }
+
+  function validateCourseName(){
+    let name = $("#schedule_course_id").val();
+
+    if (!name) {
+      $("#course_error").text("Course can't be blank");
+      return false;
+    } else {
+      $("#course_error").text("");
+      return true;
+    }
+  }
+
+  function validateScheduleDate(){
+    let name = $("#datepicker").val();
+
+    if (!name) {
+      $("#schedule_date_error").text("Schedule date can't be blank");
+      return false;
+    } else {
+      $("#schedule_date_error").text("");
+      return true;
+    }
+  }
+
+  function validateScheduleTime(){
+    let name = $("#time-range").val();
+
+    if (!name) {
+      $("#enquire_timeslot_error").text("Schedule timings can't be blank");
+      return false;
+    } else {
+      $("#enquire_timeslot_error").text("");
+      return true;
+    }
+  }
+  // Event bindings for registration form fields
+  
+  $("#schedule_batch_id").on("blur", validateBatchName);
+  $("#schedule_user_id").on("blur", validateUserName);
+  $("#schedule_course_id").on("blur", validateCourseName);
+  $("#datepicker").on("blur", validateScheduleDate);
+  $("#time-range").on("blur", validateScheduleTime);
+  
+  // Event binding for form submission
+  $("#schedule-admin-form").on("submit", function(event) {
+    // Validate all fields on form submission
+    let isBatchValid = validateBatchName();
+    let isUserValid = validateUserName();
+    let isCourseValid = validateCourseName();
+    let isDateValid = validateScheduleDate();
+    let isTimeValid = validateScheduleTime();
+
+
+   
+    // Check if any field is invalid
+    if (
+      !isBatchValid ||
+      !isUserValid ||
+      !isCourseValid ||
+      !isDateValid ||
+      !isTimeValid     
+    ) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      validateBatchName();
+      validateUserName();
+      validateCourseName();
+      validateScheduleDate();
+      validateScheduleTime();
+
+    }
+  });
+}
+
 $(document).ready(function() {
   editPopup();
   deletePopup();
   scheduleCreateBatch();
   scheduleCreateUser();
-  scheduleCreateCourse();
   scheduleEditBatch();
   scheduleEditUser();
   scheduleBatchData();
+  createValidation();
+  initializeTimeDropdowns();
+  scheduleDate();
 
   $(document).on("turbo:render", function() {
     editPopup();
     deletePopup();
     scheduleCreateBatch();
     scheduleCreateUser();
-    scheduleCreateCourse();
     scheduleEditBatch();
     scheduleEditUser();
     scheduleBatchData();
+    createValidation();
+    initializeTimeDropdowns();
+    scheduleDate();
   });
 
   $(document).on("turbo:before-render", function() {
@@ -460,14 +617,11 @@ addEventListener("turbo:before-stream-render", (event) => {
     if (streamElement.target == 'schedule-admin-form') {
       scheduleCreateBatch();
       scheduleCreateUser();
-      scheduleCreateCourse();
       scheduleBatchData();
     }
     if (streamElement.target == 'edit-schedule-popup') {
       scheduleEditBatch();
       scheduleEditUser();
-      editPopup();
-
     }
   };
 });

@@ -34,9 +34,9 @@
       <%= f.collection_select(:batch_id, Batch.all, :id, :batch_name, { prompt: "Select Batch", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select trainer_attendance_batch_select sources" })  %>
       <div class="text-red-600 text-sm mt-1" id="name-error"></div>
       <% if trainer_attendance&.errors&.any? %>
-        <% if trainer_attendance&.errors[:user_id].any? %>
+        <% if trainer_attendance&.errors[:batch_id].any? %>
           <div class="text-red-600 text-sm mt-1">
-            <%= trainer_attendance&.errors.full_messages_for(:user_id).join(', ') %>
+            <%= trainer_attendance&.errors.full_messages_for(:batch_id).join(', ') %>
           </div>
         <% end %>
       <% end %>

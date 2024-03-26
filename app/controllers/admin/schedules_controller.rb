@@ -45,7 +45,7 @@ class Admin::SchedulesController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('schedule-admin-form', partial: 'admin/schedules/form', locals: { schedule: @schedule }),
+            turbo_stream.replace('edit-schedule-popup', partial: 'admin/schedules/edit', locals: { schedule: @schedule }),
             turbo_stream.append('schedule-table', partial: 'shared/failed', locals: { message: 'Schedule update failed.', type: 'notice' })
           ]
         end

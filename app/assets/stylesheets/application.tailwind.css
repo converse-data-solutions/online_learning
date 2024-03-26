@@ -1649,6 +1649,11 @@ nav.main-menu li.active > a,
   width: -webkit-fill-available !important;
 }
 
+.shechedule_border{
+  border: 1px solid #cccccc !important;
+  width: 370px !important;
+}
+
 .select-widht{
   width: -webkit-fill-available !important;
   border: #cccccc !important;
