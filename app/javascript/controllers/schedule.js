@@ -452,6 +452,103 @@ function initializeTimeDropdowns() {
   });
 }
 
+function editTimeDropdowns() {
+  $(document).ready(function() {
+    const $startDropdown = $("#edit-start-time").closest(".dropdown");
+    const $startDropdownMenu = $startDropdown.find(".dropdown-menu");
+    const $endDropdown = $("#edit-end-time").closest(".dropdown");
+    const $endDropdownMenu = $endDropdown.find(".dropdown-menu");
+    const $timeRangeInput = $("#edit-time-range");
+
+    // Function to toggle dropdown menu
+    function toggleDropdown($dropdownMenu) {
+      $dropdownMenu.toggleClass("show");
+    }
+
+    // Function to generate time options
+    function generateTimeOptions($dropdownMenu) {
+      const hours = Array.from({
+        length: 12
+      }, (_, i) => (i === 0 ? 12 : i));
+      const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+      const amPm = ["AM", "PM"];
+      amPm.forEach((period) => {
+        hours.forEach((hour) => {
+          const hourStr = hour < 10 ? "0" + hour : "" + hour;
+          minutes.forEach((minute) => {
+            const minuteStr = minute < 10 ? "0" + minute : "" + minute;
+            const time = hourStr + ":" + minuteStr + " " + period;
+            const $optionElement = $("<div>")
+              .addClass("dropdown-menu-item")
+              .text(time);
+            $dropdownMenu.append($optionElement);
+          });
+        });
+      });
+    }
+
+    // Generate time options for start time dropdown
+    generateTimeOptions($startDropdownMenu);
+
+    // Generate time options for end time dropdown
+    generateTimeOptions($endDropdownMenu);
+
+    // Function to update the time range input
+    function updateSelectedTimeRange() {
+      const startTime = $("#edit-start-time").val();
+      const endTime = $("#edit-end-time").val();
+      const timeRange = startTime + " - " + endTime;
+      $timeRangeInput.val(timeRange);
+    }
+
+    // Add event listener to toggle dropdown menu for start time
+    $startDropdown.on("click", function(event) {
+      toggleDropdown($startDropdownMenu);
+    });
+
+    // Add event listener to toggle dropdown menu for end time
+    $endDropdown.on("click", function(event) {
+      toggleDropdown($endDropdownMenu);
+    });
+
+    // Add event listener to close the dropdown menu when clicking outside for start time
+    $(document).on("click", function(event) {
+      if (
+        !$startDropdown.is(event.target) &&
+        $startDropdown.has(event.target).length === 0
+      ) {
+        $startDropdownMenu.removeClass("show");
+      }
+    });
+
+    // Add event listener to close the dropdown menu when clicking outside for end time
+    $(document).on("click", function(event) {
+      if (
+        !$endDropdown.is(event.target) &&
+        $endDropdown.has(event.target).length === 0
+      ) {
+        $endDropdownMenu.removeClass("show");
+      }
+    });
+
+    // Add event listener to select start time from dropdown
+    $startDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+      const selectedTime = $(this).text();
+      $("#edit-start-time").val(selectedTime);
+      $startDropdownMenu.removeClass("show");
+      updateSelectedTimeRange();
+    });
+
+    // Add event listener to select end time from dropdown
+    $endDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+      const selectedTime = $(this).text();
+      $("#edit-end-time").val(selectedTime);
+      $endDropdownMenu.removeClass("show");
+      updateSelectedTimeRange();
+    });
+  });
+}
+
 function scheduleDate() {
   $(function () {
     $("#datepicker").datepicker({
@@ -464,6 +561,29 @@ function scheduleDate() {
     $("#datepicker-icon").on("click", function (event) {
       event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
       var $datepicker = $("#datepicker");
+      if ($datepicker.datepicker("widget").is(":hidden")) {
+        $datepicker.datepicker("show"); // Show the datepicker if it's hidden
+      } else {
+        $datepicker.datepicker("hide"); // Hide the datepicker if it's visible
+      }
+    });
+  });
+}
+
+function editScheduleDate() {
+  $(function () {
+    let initialDate = $("#editdatepicker").val(); // Assuming the date is stored in the input field
+
+    $("#editdatepicker").datepicker({
+      dateFormat: "dd-mm-yy", // Update this if needed
+      duration: "fast",
+      defaultDate: initialDate,
+      changeYear: true, // Enable changing the year
+    });
+
+    $("#editdatepicker-icon").on("click", function (event) {
+      event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
+      var $datepicker = $("#editdatepicker");
       if ($datepicker.datepicker("widget").is(":hidden")) {
         $datepicker.datepicker("show"); // Show the datepicker if it's hidden
       } else {
@@ -575,6 +695,89 @@ function createValidation() {
   });
 }
 
+function editFormValidation() {
+  function validateBatchName() {
+
+    let name = $("#edit_schedule_batch_id").val();
+
+    if (!name) {
+      $("#edit_batch_error").text("Batch name can't be blank");
+      return false;
+    } else {
+      $("#edit_batch_error").text("");
+      return true;
+    }
+  }
+
+  function validateUserName(){
+    let name = $("#edit_schedule_user_id").val();
+
+    if (!name) {
+      $("#edit_user_error").text("Trainer name can't be blank");
+      return false;
+    } else {
+      $("#edit_user_error").text("");
+      return true;
+    }
+  }
+
+  function validateCourseName(){
+    let name = $("#edit_schedule_course_id").val();
+
+    if (!name) {
+      $("#edit_course_error").text("Course can't be blank");
+      return false;
+    } else {
+      $("#edit_course_error").text("");
+      return true;
+    }
+  }
+
+  function validateScheduleDate(){
+    let name = $("#editdatepicker").val();
+
+    if (!name) {
+      $("#edit_schedule_date_error").text("Schedule date can't be blank");
+      return false;
+    } else {
+      $("#edit_schedule_date_error").text("");
+      return true;
+    }
+  }
+
+  function validateScheduleTime(){
+    let name = $("#edit-time-range").val();
+
+    if (!name) {
+      $("#edit_enquire_timeslot_error").text("Schedule timings can't be blank");
+      return false;
+    } else {
+      $("#edit_enquire_timeslot_error").text("");
+      return true;
+    }
+  }
+
+  $("#edit-schedule-popup").on("focusout", "#edit_schedule_batch_id", validateName);
+  $("#edit-schedule-popup").on("focusout", "#edit_schedule_user_id", validateName);
+  $("#edit-schedule-popup").on("focusout", "#edit_schedule_course_id", validateName);
+  $("#edit-schedule-popup").on("focusout", "#editdatepicker", validateName);
+  $("#edit-schedule-popup").on("focusout", "#edit-time-range", validateName);
+
+  $("#edit-schedule-popup").on("submit", "#schedule-admin-edit-form", function(event) {
+    let isBatchValid = validateBatchName();
+    let isUserValid = validateUserName();
+    let isCourseValid = validateCourseName();
+    let isDateValid = validateScheduleDate();
+    let isTimeValid = validateScheduleTime();
+ 
+
+    if (!isBatchValid || !isUserValid || !isCourseValid || !isDateValid || !isTimeValid) {
+      event.preventDefault();
+    }
+  });
+}
+
+
 $(document).ready(function() {
   editPopup();
   deletePopup();
@@ -586,6 +789,9 @@ $(document).ready(function() {
   createValidation();
   initializeTimeDropdowns();
   scheduleDate();
+  editTimeDropdowns();
+  editScheduleDate();
+  editFormValidation();
 
   $(document).on("turbo:render", function() {
     editPopup();
@@ -598,6 +804,9 @@ $(document).ready(function() {
     createValidation();
     initializeTimeDropdowns();
     scheduleDate();
+    editTimeDropdowns();
+    editScheduleDate();
+    editFormValidation();
   });
 
   $(document).on("turbo:before-render", function() {
@@ -614,6 +823,9 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function(streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
+    editTimeDropdowns();
+    editScheduleDate();
+    editFormValidation();
     if (streamElement.target == 'schedule-admin-form') {
       scheduleCreateBatch();
       scheduleCreateUser();
