@@ -35,19 +35,20 @@ function addBatchTime() {
     cloneBatchTimeForm();
     let timeIndex = $("#timeIndex").data("timeIndex");
   });
-  $("#edit-batch-popup #batch-admin-edit-form #edit_add_timing").on("click", function () {
-    cloneEditBatchTimeForm();
-    let timeIndex = $("#editTimeIndex").data("timeIndex");
-  });
+  $("#edit-batch-popup #batch-admin-edit-form #edit_add_timing").on(
+    "click",
+    function () {
+      cloneEditBatchTimeForm();
+      let timeIndex = $("#editTimeIndex").data("timeIndex");
+    }
+  );
 }
 
 function cloneBatchTimeForm() {
   let timeIndex = $("#timeIndex").data("timeIndex");
-  console.log("timeIndex =", timeIndex);
   let newtiming = $(
     "#batch-form #batch_timings_container .batch_timing_container:first"
   ).clone();
-  console.log("newtiming =", newtiming);
   newtiming.find("select").val("");
   newtiming.find("select").each(function () {
     let oldName = $(this).attr("name");
@@ -68,17 +69,13 @@ function cloneBatchTimeForm() {
 
 function cloneEditBatchTimeForm() {
   let timeIndex = $("#editTimeIndex").data("timeIndex");
-  console.log("edittimeIndex =", timeIndex);
   let newtiming = $(
     "#edit-batch-popup #batch-admin-edit-form #edit_batch_timings_container .edit_batch_timing_container:first"
   ).clone();
-  console.log("newtiming =", newtiming);
   newtiming.find("select").val("");
   newtiming.find("select").each(function () {
     let oldName = $(this).attr("name");
-    console.log("oldName =", oldName);
     let newName = oldName.replace(/\[\d\]/, "[" + timeIndex + "]");
-    console.log("newName =", newName);
     $(this).attr("name", newName);
   });
   newtiming.find("input").val("");
@@ -88,12 +85,11 @@ function cloneEditBatchTimeForm() {
     $(this).attr("name", newName);
   });
 
-  $("#edit-batch-popup #batch-admin-edit-form #edit_batch_timings_container").append(newtiming);
+  $(
+    "#edit-batch-popup #batch-admin-edit-form #edit_batch_timings_container"
+  ).append(newtiming);
   timeIndex++;
   $("#edit-batch-popup #editTimeIndex").data("time-index", timeIndex);
-
-
-  console.log("timeIndex =", timeIndex);
 }
 
 function dropdownCheckBoxes() {
@@ -237,12 +233,12 @@ function courseSelect() {
 }
 
 function batchEditCourse() {
-  $("#edit-batch-popup .new-course-custom-select").each(function() {
+  $("#edit-batch-popup .new-course-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
 
-    var placeholderText = $(this).find("option:first-of-type").text();
+    var placeholderText = $(this).find("option:selected").text();
 
     var template = '<div class="' + classes + '">';
     template +=
@@ -252,7 +248,7 @@ function batchEditCourse() {
     template += '<div class="new-course-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-course-custom-option ' +
           $(this).attr("class") +
@@ -270,23 +266,23 @@ function batchEditCourse() {
   });
 
   $(".new-course-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-course-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-course-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-course-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-course-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-course-custom-select").removeClass("opened");
     });
     $(this).parents(".new-course-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-course-custom-option").on("click", function() {
+  $(".new-course-custom-option").on("click", function () {
     $(this)
       .parents(".new-course-custom-select-wrapper")
       .find("select")
@@ -304,12 +300,12 @@ function batchEditCourse() {
   });
 }
 function batchEditPrimaryTrainer() {
-  $("#edit-batch-popup .new-status-custom-select").each(function() {
+  $("#edit-batch-popup .new-status-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       status = $(this).attr("status");
 
-    var placeholderText = $(this).find("option:first-of-type").text();
+    var placeholderText = $(this).find("option:selected").text();
 
     var template = '<div class="' + classes + '">';
     template +=
@@ -319,7 +315,7 @@ function batchEditPrimaryTrainer() {
     template += '<div class="new-status-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-status-custom-option ' +
           $(this).attr("class") +
@@ -337,23 +333,23 @@ function batchEditPrimaryTrainer() {
   });
 
   $(".new-status-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-status-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-status-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-status-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-status-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-status-custom-select").removeClass("opened");
     });
     $(this).parents(".new-status-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-status-custom-option").on("click", function() {
+  $(".new-status-custom-option").on("click", function () {
     $(this)
       .parents(".new-status-custom-select-wrapper")
       .find("select")
@@ -584,12 +580,12 @@ function editTimeSlot() {
 }
 
 function batchEditSecondaryTrainer() {
-  $("#edit-batch-popup .new-lesson-custom-select").each(function() {
+  $("#edit-batch-popup .new-lesson-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
 
-    var placeholderText = $(this).find("option:first-of-type").text();
+    var placeholderText = $(this).find("option:selected").text();
 
     var template = '<div class="' + classes + '">';
     template +=
@@ -599,7 +595,7 @@ function batchEditSecondaryTrainer() {
     template += '<div class="new-lesson-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-lesson-custom-option ' +
           $(this).attr("class") +
@@ -617,23 +613,23 @@ function batchEditSecondaryTrainer() {
   });
 
   $(".new-lesson-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-lesson-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-lesson-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-lesson-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-lesson-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-lesson-custom-select").removeClass("opened");
     });
     $(this).parents(".new-lesson-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-lesson-custom-option").on("click", function() {
+  $(".new-lesson-custom-option").on("click", function () {
     $(this)
       .parents(".new-lesson-custom-select-wrapper")
       .find("select")
@@ -651,13 +647,10 @@ function batchEditSecondaryTrainer() {
   });
 }
 
-
 function batchFormValidation() {
   function batchName() {
     let name = $("#batch_batch_name").val();
     let namecheck = /^[a-zA-Z ]+$/.test(name);
-    console.log(name);
-    console.log(namecheck);
     if (!name) {
       $("#batch_name_error").text("Name can't be blank");
       return false;
@@ -672,7 +665,7 @@ function batchFormValidation() {
     }
   }
 
-  function batchCourse() {
+  function editBatchCourse() {
     let name = $("#batch_course_id").val();
 
     if (!name) {
@@ -735,9 +728,7 @@ function batchFormValidation() {
   }
 
   function studentCheckboxValidation() {
-    console.log("studentCheckboxValidation");
     if ($('input[type="checkbox"]:checked').length === 0) {
-      console.log("no checkbox is checked");
       $("#batch_student_error").text("Please select atleast one student");
       return false;
     } else {
@@ -779,17 +770,15 @@ function batchFormValidation() {
 
   // Event bindings for registration form fields
   $("#batch_batch_name").on("blur", batchName);
+  $("#batch_course_id").on("blur", editBatchCourse);
   $("#datepicker").on("blur", batchFromDate);
   $("#datepicker_to").on("blur", batchToDate);
   $("user_id").on("blur", batchPrimaryTrainer);
   $("secondary_trainer_id").on("blur", batchSecondaryTrainer);
   $(".checkbox-custom").on("click", studentCheckboxValidation);
   $("#batch_batch_timings_attributes_0_day").on("blur", daySelectValidation);
-  $("#batch_batch_timings_attributes_0_from_time").on(
-    "blir",
-    fromTimeValidation
-  );
-  $("#batch_batch_timings_attributes_0_to_time").on("blir", toTimeValidation);
+  $("#batch_batch_timings_attributes_0_from_time").on("blur", fromTimeValidation);
+  $("#batch_batch_timings_attributes_0_to_time").on("blur", toTimeValidation);
   // Event binding for form submission
   $("#batch-admin-form").on("submit", function (event) {
     // Validate all fields on form submission
@@ -834,6 +823,171 @@ function batchFormValidation() {
     }
   });
 }
+function batchEditFormValidation() {
+  function editBatchName() {
+    let name = $("#edit_batch_name").val();
+    let namecheck = /^[a-zA-Z ]+$/.test(name);
+    if (!name) {
+      $("#edit_batch_name_error").text("Name can't be blank");
+      return false;
+    } else if (!namecheck) {
+      $("#edit_batch_name_error").text(
+        "Please enter a valid name (only alphabets allowed)"
+      );
+      return false;
+    } else {
+      $("#edit_batch_name_error").text("");
+      return true;
+    }
+  }
+
+  function editBatchCourse() {
+    let name = $("#edit_batch_course").val();
+
+    if (!name) {
+      $("#edit_batch_course_error").text("Course can't be blank");
+      return false;
+    } else {
+      $("#edit_batch_course_error").text("");
+      return true;
+    }
+  }
+
+  function editBatchFromDate() {
+    let from_date = $("#edit-datepicker").val();
+
+    if (!from_date) {
+      $("#edit_batch_effective_from_error").text("From Date can't be empty");
+      return false;
+    } else {
+      $("#edit_batch_effective_from_error").text("");
+      return true;
+    }
+  }
+
+  function editBatchToDate() {
+    let to_date = $("#edit-datepicker-to").val();
+
+    if (!to_date) {
+      $("#edit_batch_effective_to_error").text("To Date can't be blank");
+      return false;
+    } else {
+      $("#edit_batch_effective_to_error").text("");
+      return true;
+    }
+  }
+
+  function editBatchPrimaryTrainer() {
+    let user_id = $("#edit_user_id").val();
+
+    if (!user_id) {
+      $("#edit_batch__primary_trainer_error").text(
+        "Primary Trainer can't be blank"
+      );
+      return false;
+    } else {
+      $("#edit_batch__primary_trainer_error").text("");
+      return true;
+    }
+  }
+
+  function editBatchSecondaryTrainer() {
+    let second_user_id = $("#edit_secondary_trainer_id").val();
+
+    if (!second_user_id) {
+      $("#edit_batch__secondary_trainer_error").text(
+        "Secondary Trainer can't be blank"
+      );
+      return false;
+    } else {
+      $("#edit_batch__secondary_trainer_error").text("");
+      return true;
+    }
+  }
+
+  function editStudentCheckboxValidation() {
+    if ($('input[type="checkbox"]:checked').length === 0) {
+      $("#edit_batch_student_error").text("Please select atleast one student");
+      return false;
+    } else {
+      $("#edit_batch_student_error").text("");
+      return true;
+    }
+  }
+
+  function daySelectValidation() {
+    let day = $("#batch_batch_timings_attributes_0_day").val();
+    if (!day) {
+      $("#batch_day_error").text("Day can't be empty");
+      return false;
+    } else {
+      $("#batch_day_error").text("");
+      return true;
+    }
+  }
+  function fromTimeValidation() {
+    let from_time = $("#batch_batch_timings_attributes_0_from_time").val();
+    if (!from_time) {
+      $("#batch_from_time_error").text("From time can't be empty");
+      return false;
+    } else {
+      $("#batch_from_time_error").text("");
+      return true;
+    }
+  }
+  function toTimeValidation() {
+    let to_time = $("#batch_batch_timings_attributes_0_to_time").val();
+    if (!to_time) {
+      $("#batch_to_time_error").text("To time can't be empty");
+      return false;
+    } else {
+      $("#batch_to_time_error").text("");
+      return true;
+    }
+  }
+
+  // Event bindings for registration form fields
+  $("#edit_batch_name").on("blur", editBatchName);
+  $("#edit-datepicker").on("blur", editBatchFromDate);
+  $("#edit-datepicker-to").on("blur", editBatchToDate);
+  $("edit_user_id").on("blur", editBatchPrimaryTrainer);
+  $("edit_secondary_trainer_id").on("blur", editBatchSecondaryTrainer);
+  $(".checkbox-custom").on("click", editStudentCheckboxValidation);
+
+  // Event binding for form submission
+  $("#edit-batch-popup #batch-admin-edit-form").on("submit", function (event) {
+    // Validate all fields on form submission
+    let isNameValid = editBatchName();
+    let isCourseValid = editBatchCourse();
+    let isFromDateValid = editBatchFromDate();
+    let isToDateValid = editBatchToDate();
+    let parimaryTrainerValid = editBatchPrimaryTrainer();
+    let secondaryTrainerValid = editBatchSecondaryTrainer();
+    let isCheckboxValid = editStudentCheckboxValidation();
+
+    // Check if any field is invalid
+    if (
+      !isNameValid ||
+      !isCourseValid ||
+      !isFromDateValid ||
+      !isToDateValid ||
+      !parimaryTrainerValid ||
+      !secondaryTrainerValid ||
+      !isCheckboxValid
+    ) {
+      // Prevent form submission
+      event.preventDefault();
+
+      // Show all error messages
+      editBatchName();
+      editBatchCourse();
+      editBatchFromDate();
+      editBatchPrimaryTrainer();
+      editBatchSecondaryTrainer();
+      editStudentCheckboxValidation();
+    }
+  });
+}
 
 $(document).ready(function () {
   courseSelect();
@@ -848,7 +1002,7 @@ $(document).ready(function () {
   batchEditCourse();
   batchEditPrimaryTrainer();
   batchEditSecondaryTrainer();
-
+  batchEditFormValidation();
   $(document).on("turbo:render", function () {
     courseSelect();
     timeSlot();
@@ -862,6 +1016,7 @@ $(document).ready(function () {
     batchEditCourse();
     batchEditPrimaryTrainer();
     batchEditSecondaryTrainer();
+    batchEditFormValidation();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -884,7 +1039,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     batchEditCourse();
     batchEditPrimaryTrainer();
     batchEditSecondaryTrainer();
-
-
+    batchEditFormValidation();
   };
 });
