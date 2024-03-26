@@ -1,146 +1,116 @@
-<div class="relative w-full max-w-[86rem] max-h-full">
+  <!-- Modal body -->
+<div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
   <!-- Modal content -->
-  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+  <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
     <!-- Modal header -->
     <div class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
       <h3 class="text-[26px] font-semibold text-[#0BC08B] text-center flex justify-center w-full">
-        VIEW ENQUIRE
+        SHOW BATCH
       </h3>
-      <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="extralarge-modal">
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+      <button type="button" id="batch-modal-close-btn" class="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="extralarge-modal">
+        <svg class="w-8 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
         </svg>
         <span class="sr-only">Close modal</span>
       </button>
     </div>
     <!-- Modal body -->
     <div class="p-7 space-y-6 lg:w-[94%] sm:w-[95%] w-[90%] mr-auto ml-auto">
-      <div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Name</label>
+      <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
+        <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+          <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Batch Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= enquire.name %>
+              <%= @batch.batch_name %>
             </p>
           </div>
         </div>
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Course</label>
+        <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+          <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= enquire.course_name %>
+              <%= @batch.course.course_name %>
             </p>
           </div>
         </div>
       </div>
-      <div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="contact" class="block mb-2 text-lg font-medium text-[#000]">Contact</label>
-          <div class="sm:w-[55%] lg:w-[55%] w-full">
-            <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= enquire.contact %>
-            </p>
-          </div>
-        </div>
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="location" class="block mb-2 text-lg font-medium text-[#000]">Location</label>
-          <div class="flex w-[55%] lg:w-[55%]">
-            <p class="bg-[#F5F5F5] w-[100%] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
-              <%= enquire.location %>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="timeslot" class=" block mb-2 text-lg font-medium text-[#000]">Time Slot</label>
-          <div class="input-wrapper flex flex-col w-full sm:w-[55%] lg:w-[55%]">
-            <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
-              <%= enquire.timeslot %>
-            </p>
-          </div>
-        </div>
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="status" class=" block mb-2 text-lg font-medium text-[#000]">Status</label>
-          <div class="w-full sm:w-[55%] flex flex-col">
-            <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
-              <%= enquire.status %>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="no_of_people" class=" block mb-2 text-lg font-medium text-[#000]">No of People</label>
+      <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
+        <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+          <label for="effective_from" class=" block mb-2 text-lg font-medium text-[#000]">Effective From<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= enquire.no_of_people %>
+              <%= @batch.effective_from %>
             </p>
           </div>
         </div>
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="follow_up" class=" block mb-2 text-lg font-medium text-[#000]">Follow Up</label>
+        <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+          <label for="effective_to" class=" block mb-2 text-lg font-medium text-[#000]">Effective To<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= enquire.follow_up %>
+              <%= @batch.effective_to %>
             </p>
           </div>
         </div>
       </div>
-      <div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="remarks" class=" block mb-2 text-lg font-medium text-[#000]">Remarks</label>
+      <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
+        <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+          <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Primary Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
-            <textarea class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 ">
-        <%= enquire.remarks %>
-      </textarea>
-          </div>
-        </div>
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="sales_person" class=" block mb-2 text-lg font-medium text-[#000]">Sales Person</label>
-          <div class="w-full sm:w-[55%] lg:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= enquire.sales_person %>
+              <%= User.find_by(id: @batch.primary_trainer_id).name if @batch.primary_trainer_id.present? %>
+            </p>
+          </div>
+        </div>
+        <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+          <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Secondary Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+          <div class="w-full sm:w-[55%] flex flex-col">
+            <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
+              <%= User.find_by(id: @batch.secondary_trainer_id).name if @batch.secondary_trainer_id.present? %>
             </p>
           </div>
         </div>
       </div>
-      <div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="references" class=" block mb-2 text-lg font-medium text-[#000]">References</label>
-          <div class="w-full sm:w-[55%] lg:w-[55%] flex flex-col">
-            <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
-              <%= enquire.references %>
-            </p>
+      <!-- select student--->
+      <!--- nested batch timing -->
+      <div>
+        <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Batch Timings<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+        <% @batch.batch_timings.each do |b| %>
+          <div class= "flex w-[95.5%] gap-[50px] flex-col lg:flex-row edit_">
+            <div class="mb-4 flex flex-col sm:flex-row w-full gap-2 lg:w-[50%] justify-between">
+              <div class="w-full sm:w-[55%] flex flex-col">
+                <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
+                  <%= b.day %>
+                </p>
+              </div>
+              <div class="w-full sm:w-[55%] flex flex-col">
+                <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
+                  <%= b.from_time.strftime("%I:%M %p") %>
+                </p>
+              </div>
+              <div class="w-full sm:w-[55%] flex flex-col">
+                <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
+                  <%= b.to_time.strftime("%I:%M %p") %>
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="lead_source" class=" block mb-2 text-lg font-medium text-[#000]">Lead Source</label>
-          <div class="w-full sm:w-[55%] lg:w-[55%] flex flex-col">
-            <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
-              <%= enquire.lead_source %>
-            </p>
-          </div>
-        </div>
+        <% end %>
       </div>
-      <div class= "flex w-[100%] lg:gap-[50px] gap-[0px] flex-col lg:flex-row">
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
-          <label for="references" class=" block mb-2 text-lg font-medium text-[#000]">References</label>
-          <div class="w-full sm:w-[55%] lg:w-[55%] flex flex-col">
-            <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px]">
-              <% if enquire.attachment.attached? %>
-                <%= link_to " #{enquire.attachment.filename}", rails_blob_path(enquire.attachment, disposition: "attachment") %>
-              <% else %>
-                No attachments for this enquire
-              <% end %>
-            </p>
-          </div>
-        </div>
-        <div class="mb-3 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+      <div class= "w-[100%]">
+        <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Students<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+       <div class="grid grid-cols-4 gap-4 justify-between w-full">
+        <% @batch.students.each do |s| %>
+          
+            <div class= "">
+              <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
+                <%= s.name %>
+              </p>
+            </div>
+          
+        <% end %>
         </div>
       </div>
     </div>
-    <!-- Modal footer -->
     <div class="flex justify-end items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-gray-200 rounded-b dark:border-gray-600">
       <button type="button" class="w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-[7px] text-[20px] block items-center text-center mr-2 button-gradiant-hover" data-modal-hide="extralarge-modal">
         CLOSE

@@ -30,6 +30,39 @@ function editBatchPopup() {
   });
 }
 
+function   showBatchPopup(){
+  $("#batch-table").on("click", ".view-batch-model", function () {
+    let id = $(this).data("batch-id");
+    let url = $(this).data("url");
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
+    $("#overlay").show();
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {
+        batch_id: id,
+        page: page,
+        search: search,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function (res) {
+        Turbo.renderStreamMessage(res);
+        $("#overlay").hide();
+      },
+      // done: function () {},
+      error: function () {
+        console.log("Error fetching data");
+        $("#overlay").hide();
+      }
+    });
+  });
+}
+
+
 function addBatchTime() {
   $("#batch-form #add_timing").on("click", function () {
     cloneBatchTimeForm();
@@ -998,11 +1031,13 @@ $(document).ready(function () {
   dropdownCheckBoxes();
   batchFormValidation();
   editBatchPopup();
+  showBatchPopup();
   editTimeSlot();
   batchEditCourse();
   batchEditPrimaryTrainer();
   batchEditSecondaryTrainer();
   batchEditFormValidation();
+
   $(document).on("turbo:render", function () {
     courseSelect();
     timeSlot();
@@ -1012,6 +1047,7 @@ $(document).ready(function () {
     dropdownCheckBoxes();
     batchFormValidation();
     editBatchPopup();
+    showBatchPopup();
     editTimeSlot();
     batchEditCourse();
     batchEditPrimaryTrainer();
