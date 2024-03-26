@@ -43,11 +43,10 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
         format.turbo_stream
         format.json { render :update }
       else
-        byebug
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update('edit-attendance-popup', partial: 'admin/trainer_attendances/edit', locals: { trainer_attendance: @trainer_attendance }),
-            turbo_stream.append('trainer-course-table', partial: 'shared/failed', locals: { message: 'Attendance update failed.', type: 'notice' })
+            turbo_stream.append('trainer_attendance-table', partial: 'shared/failed', locals: { message: 'Attendance update failed.', type: 'notice' })
           ]
         end
       end
@@ -61,15 +60,15 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.append("trainer_trainer-course-table", partial: "shared/flash", locals: { message: 'Attendance updated successfully.', type: 'notice' }), # rubocop:disable Style/StringLiterals
-            turbo_stream.update("trainer_trainer-course-table", partial: "admin/trainer_attendances/table", locals: { trainer_attendances: @trainer_attendances }) # rubocop:disable Style/StringLiterals
+            turbo_stream.append("trainer_attendance-table", partial: "shared/flash", locals: { message: 'Attendance updated successfully.', type: 'notice' }), # rubocop:disable Style/StringLiterals
+            turbo_stream.update("trainer_attendance-table", partial: "admin/trainer_attendances/table", locals: { trainer_attendances: @trainer_attendances }) # rubocop:disable Style/StringLiterals
           ]
         end
       end
     else
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.append("trainer-course-table", partial: "shared/failed", locals: { message: 'Attendance update failed.', type: 'notice' }), # rubocop:disable Style/StringLiterals
+          turbo_stream.append("trainer_attendance-table", partial: "shared/failed", locals: { message: 'Attendance update failed.', type: 'notice' }), # rubocop:disable Style/StringLiterals
         ]
       end
     end
@@ -84,7 +83,7 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.append('trainer-course-table', partial: 'shared/failed', locals: { message: 'Attendance deletion failed.', type: 'notice' }),
+            turbo_stream.append('trainer_attendance-table', partial: 'shared/failed', locals: { message: 'Attendance deletion failed.', type: 'notice' }),
             turbo_stream.update("render-pagination", partial: "admin/trainer_attendances/paginate", locals: { trainer_attendances: @trainer_attendances }) # rubocop:disable Style/StringLiterals
           ]
         end
@@ -101,7 +100,7 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.append('trainer-course-table', partial: 'shared/failed', locals: { message: 'Course not found.', type: 'notice' })
+            turbo_stream.append('trainer_attendance-table', partial: 'shared/failed', locals: { message: 'Course not found.', type: 'notice' })
           ]
         end
       end
@@ -114,7 +113,7 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
     format.turbo_stream do
       render turbo_stream: [
         turbo_stream.replace('admin-attendance-form', partial: 'admin/trainer_attendances/form', locals: { trainer_attendance: @trainer_attendance }),
-        turbo_stream.append('trainer-course-table', partial: 'shared/failed', locals: { message: 'Attendance creation failed.', type: 'notice' }),
+        turbo_stream.append('trainer_attendance-table', partial: 'shared/failed', locals: { message: 'Attendance creation failed.', type: 'notice' }),
       ]
     end
     format.json { render json: @trainer_attendance.errors, status: :unprocessable_entity }
@@ -122,8 +121,8 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
 
   def render_destroy_success
     render turbo_stream: [
-      turbo_stream.append("trainer-course-table", partial: "shared/flash", locals: { message: 'Attendance was successfully deleted.', type: 'notice' }), # rubocop:disable Style/StringLiterals,Layout/LineLength
-      turbo_stream.update('trainer-course-table', partial: 'admin/trainer_attendances/table', locals: { trainer_attendances: @trainer_attendances })
+      turbo_stream.append("trainer_attendance-table", partial: "shared/flash", locals: { message: 'Attendance was successfully deleted.', type: 'notice' }), # rubocop:disable Style/StringLiterals,Layout/LineLength
+      turbo_stream.update('trainer_attendance-table', partial: 'admin/trainer_attendances/table', locals: { trainer_attendances: @trainer_attendances })
     ]
   end
 

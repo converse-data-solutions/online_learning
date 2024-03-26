@@ -25,7 +25,7 @@ class Admin::SchedulesController < ApplicationController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace('schedule-admin-form', partial: 'admin/schedules/form', locals: { schedule: @schedule }),
-            turbo_stream.append('sc\hedule-table', partial: 'shared/failed', locals: { message: 'Schedule creation failed.', type: 'notice' })
+            turbo_stream.append('schedule-table', partial: 'shared/failed', locals: { message: 'Schedule creation failed.', type: 'notice' })
           ]
         end
       end

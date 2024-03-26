@@ -45,7 +45,8 @@ class Admin::TrainerCoursesController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.update('edit-trainer-course-popup', partial: 'admin/trainer_courses/edit', locals: { trainer_course: @trainer_course })
+            turbo_stream.update('edit-trainer-course-popup', partial: 'admin/trainer_courses/edit', locals: { trainer_course: @trainer_course }),
+            turbo_stream.append('trainer-course-table', partial: 'shared/failed', locals: { message: 'Trainer course update failed.', type: 'notice' })
           ]
         end
         format.json { render json: @trainer.errors, status: :unprocessable_entity }
@@ -62,7 +63,7 @@ class Admin::TrainerCoursesController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.append('trainer-course-table', partial: 'shared/flash', locals: { message: 'trainer course deletion failed.', type: 'notice' }), # rubocop:disable Layout/LineLength
+            turbo_stream.append('trainer-course-table', partial: 'shared/failed', locals: { message: 'trainer course deletion failed.', type: 'notice' }), # rubocop:disable Layout/LineLength
             turbo_stream.update('render-pagination', partial: 'admin/trainer_courses/pagination', locals: { trainer_courses: @trainer_courses })
           ]
         end
@@ -76,7 +77,8 @@ class Admin::TrainerCoursesController < ApplicationController
   def render_invalid_trainer(format)
     format.turbo_stream do
       render turbo_stream: [
-        turbo_stream.replace('trainer-course-admin-form', partial: 'admin/trainer_courses/form', locals: { trainer_course: @trainer_course })
+        turbo_stream.replace('trainer-course-admin-form', partial: 'admin/trainer_courses/form', locals: { trainer_course: @trainer_course }),
+        turbo_stream.append('trainer-course-table', partial: 'shared/failed', locals: { message: 'Trainer course creation failed.', type: 'notice' })
       ]
     end
     format.json { render json: @trainer.errors, status: :unprocessable_entity }

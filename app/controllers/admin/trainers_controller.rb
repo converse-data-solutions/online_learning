@@ -26,7 +26,8 @@ class Admin::TrainersController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('trainer-admin-form', partial: 'admin/trainers/form', locals: { trainer: @trainer })
+            turbo_stream.replace('trainer-admin-form', partial: 'admin/trainers/form', locals: { trainer: @trainer }),
+            turbo_stream.append('trainer-table', partial: 'shared/failed', locals: { message: 'Trainer creation failed.', type: 'notice' })
           ]
         end
         format.json { render json: @trainer.errors, status: :unprocessable_entity }
@@ -51,7 +52,8 @@ class Admin::TrainersController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.update('edit-trainer-popup', partial: 'admin/trainers/edit', locals: { trainer: @trainer })
+            turbo_stream.update('edit-trainer-popup', partial: 'admin/trainers/edit', locals: { trainer: @trainer }),
+            turbo_stream.append('trainer-table', partial: 'shared/failed', locals: { message: 'Trainer update failed.', type: 'notice' })
           ]
         end
         format.json { render json: @trainer.errors, status: :unprocessable_entity }
@@ -86,7 +88,7 @@ class Admin::TrainersController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.append('trainer-table', partial: 'shared/flash', locals: { message: 'Trainer not found.', type: 'notice' })
+            turbo_stream.append('trainer-table', partial: 'shared/failed', locals: { message: 'Trainer not found.', type: 'notice' })
           ]
         end
         format.json { render json: @trainer.errors, status: :unprocessable_entity }
