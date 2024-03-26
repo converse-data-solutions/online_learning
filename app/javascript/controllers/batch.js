@@ -202,6 +202,141 @@ function courseSelect() {
   });
 }
 
+function batchEditCourse() {
+  $("#edit-batch-popup .new-course-custom-select").each(function() {
+    var classes = $(this).attr("class"),
+      id = $(this).attr("id"),
+      name = $(this).attr("name");
+
+    var placeholderText = $(this).find("option:first-of-type").text();
+
+    var template = '<div class="' + classes + '">';
+    template +=
+      '<span class="new-course-custom-select-trigger">' +
+      placeholderText +
+      "</span>";
+    template += '<div class="new-course-custom-options">';
+    $(this)
+      .find("option")
+      .each(function() {
+        template +=
+          '<span class="new-course-custom-option ' +
+          $(this).attr("class") +
+          '" data-value="' +
+          $(this).attr("value") +
+          '">' +
+          $(this).html() +
+          "</span>";
+      });
+    template += "</div></div>";
+
+    $(this).wrap('<div class="new-course-custom-select-wrapper"></div>');
+    $(this).hide();
+    $(this).after(template);
+  });
+
+  $(".new-course-custom-option:first-of-type").hover(
+    function() {
+      $(this).parents(".new-course-custom-options").addClass("option-hover");
+    },
+    function() {
+      $(this).parents(".new-course-custom-options").removeClass("option-hover");
+    }
+  );
+
+  $(".new-course-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
+      $(".new-course-custom-select").removeClass("opened");
+    });
+    $(this).parents(".new-course-custom-select").toggleClass("opened");
+    event.stopPropagation();
+  });
+
+  $(".new-course-custom-option").on("click", function() {
+    $(this)
+      .parents(".new-course-custom-select-wrapper")
+      .find("select")
+      .val($(this).data("value"));
+    $(this)
+      .parents(".new-course-custom-options")
+      .find(".new-course-custom-option")
+      .removeClass("selection");
+    $(this).addClass("selection");
+    $(this).parents(".new-course-custom-select").removeClass("opened");
+    $(this)
+      .parents(".new-course-custom-select")
+      .find(".new-course-custom-select-trigger")
+      .text($(this).text());
+  });
+}
+function batchEditPrimaryTrainer() {
+  $("#edit-batch-popup .new-status-custom-select").each(function() {
+    var classes = $(this).attr("class"),
+      id = $(this).attr("id"),
+      status = $(this).attr("status");
+
+    var placeholderText = $(this).find("option:first-of-type").text();
+
+    var template = '<div class="' + classes + '">';
+    template +=
+      '<span class="new-status-custom-select-trigger">' +
+      placeholderText +
+      "</span>";
+    template += '<div class="new-status-custom-options">';
+    $(this)
+      .find("option")
+      .each(function() {
+        template +=
+          '<span class="new-status-custom-option ' +
+          $(this).attr("class") +
+          '" data-value="' +
+          $(this).attr("value") +
+          '">' +
+          $(this).html() +
+          "</span>";
+      });
+    template += "</div></div>";
+
+    $(this).wrap('<div class="new-status-custom-select-wrapper"></div>');
+    $(this).hide();
+    $(this).after(template);
+  });
+
+  $(".new-status-custom-option:first-of-type").hover(
+    function() {
+      $(this).parents(".new-status-custom-options").addClass("option-hover");
+    },
+    function() {
+      $(this).parents(".new-status-custom-options").removeClass("option-hover");
+    }
+  );
+
+  $(".new-status-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
+      $(".new-status-custom-select").removeClass("opened");
+    });
+    $(this).parents(".new-status-custom-select").toggleClass("opened");
+    event.stopPropagation();
+  });
+
+  $(".new-status-custom-option").on("click", function() {
+    $(this)
+      .parents(".new-status-custom-select-wrapper")
+      .find("select")
+      .val($(this).data("value"));
+    $(this)
+      .parents(".new-status-custom-options")
+      .find(".new-status-custom-option")
+      .removeClass("selection");
+    $(this).addClass("selection");
+    $(this).parents(".new-status-custom-select").removeClass("opened");
+    $(this)
+      .parents(".new-status-custom-select")
+      .find(".new-status-custom-select-trigger")
+      .text($(this).text());
+  });
+}
+
 function selectCreateUser() {
   $("#batch-form .custom-select").each(function () {
     var classes = $(this).attr("class"),
@@ -414,6 +549,74 @@ function editTimeSlot() {
   });
 }
 
+function batchEditSecondaryTrainer() {
+  $("#edit-batch-popup .new-lesson-custom-select").each(function() {
+    var classes = $(this).attr("class"),
+      id = $(this).attr("id"),
+      name = $(this).attr("name");
+
+    var placeholderText = $(this).find("option:first-of-type").text();
+
+    var template = '<div class="' + classes + '">';
+    template +=
+      '<span class="new-lesson-custom-select-trigger">' +
+      placeholderText +
+      "</span>";
+    template += '<div class="new-lesson-custom-options">';
+    $(this)
+      .find("option")
+      .each(function() {
+        template +=
+          '<span class="new-lesson-custom-option ' +
+          $(this).attr("class") +
+          '" data-value="' +
+          $(this).attr("value") +
+          '">' +
+          $(this).html() +
+          "</span>";
+      });
+    template += "</div></div>";
+
+    $(this).wrap('<div class="new-lesson-custom-select-wrapper"></div>');
+    $(this).hide();
+    $(this).after(template);
+  });
+
+  $(".new-lesson-custom-option:first-of-type").hover(
+    function() {
+      $(this).parents(".new-lesson-custom-options").addClass("option-hover");
+    },
+    function() {
+      $(this).parents(".new-lesson-custom-options").removeClass("option-hover");
+    }
+  );
+
+  $(".new-lesson-custom-select-trigger").on("click", function(event) {
+    $("html").one("click", function() {
+      $(".new-lesson-custom-select").removeClass("opened");
+    });
+    $(this).parents(".new-lesson-custom-select").toggleClass("opened");
+    event.stopPropagation();
+  });
+
+  $(".new-lesson-custom-option").on("click", function() {
+    $(this)
+      .parents(".new-lesson-custom-select-wrapper")
+      .find("select")
+      .val($(this).data("value"));
+    $(this)
+      .parents(".new-lesson-custom-options")
+      .find(".new-lesson-custom-option")
+      .removeClass("selection");
+    $(this).addClass("selection");
+    $(this).parents(".new-lesson-custom-select").removeClass("opened");
+    $(this)
+      .parents(".new-lesson-custom-select")
+      .find(".new-lesson-custom-select-trigger")
+      .text($(this).text());
+  });
+}
+
 
 function batchFormValidation() {
   function batchName() {
@@ -608,7 +811,9 @@ $(document).ready(function () {
   batchFormValidation();
   editBatchPopup();
   editTimeSlot();
-  // editCourseSelect();
+  batchEditCourse();
+  batchEditPrimaryTrainer();
+  batchEditSecondaryTrainer();
 
   $(document).on("turbo:render", function () {
     courseSelect();
@@ -620,7 +825,9 @@ $(document).ready(function () {
     batchFormValidation();
     editBatchPopup();
     editTimeSlot();
-    // editCourseSelect();
+    batchEditCourse();
+    batchEditPrimaryTrainer();
+    batchEditSecondaryTrainer();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -642,8 +849,10 @@ addEventListener("turbo:before-stream-render", (event) => {
     selectBatchName();
     addBatchTime();
     dropdownCheckBoxes();
-      // editCourseSelect();
-      editTimeSlot();
+    editTimeSlot();
+    batchEditCourse();
+    batchEditPrimaryTrainer();
+    batchEditSecondaryTrainer();
 
 
   };
