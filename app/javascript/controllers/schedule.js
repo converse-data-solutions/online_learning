@@ -1,5 +1,5 @@
 function editPopup() {
-  $("#schedule-table").on('click', '.edit-schedule-model', function() {
+  $("#schedule-table").on("click", ".edit-schedule-model", function () {
     let id = $(this).data("schedule-id");
     let url = $(this).data("url");
     let searchParams = new URLSearchParams(window.location.search);
@@ -18,13 +18,12 @@ function editPopup() {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
 
-      success: function(res) {
+      success: function (res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
-
       },
-      done: function() {},
-      error: function() {
+      done: function () {},
+      error: function () {
         console.log("Error fetching data");
         $("#overlay").hide();
       },
@@ -33,7 +32,7 @@ function editPopup() {
 }
 
 function deletePopup() {
-  $("#schedule-table").on('click', '.send-delete-schedule', function() {
+  $("#schedule-table").on("click", ".send-delete-schedule", function () {
     let id = $(this).data("schedule-id");
     let searchParams = new URLSearchParams(window.location.search);
     let page = parseInt(searchParams.get("page")) || 1;
@@ -53,13 +52,159 @@ function deletePopup() {
     }
 
     if (per_page !== 10) {
-      baseUrl += (page === 1 && search === "") ? "?" : "&";
+      baseUrl += page === 1 && search === "" ? "?" : "&";
       baseUrl += `per_page=${per_page}`;
     }
 
     // Update the href attribute
     $("#delete-schedule-model").attr("data-schedule-id", id);
     $("#delete-schedule-model").attr("href", baseUrl);
+  });
+}
+
+function scheduleSearch() {
+  let delayTimer;
+
+  $("#schedule_search").on("input", function (e) {
+    clearTimeout(delayTimer);
+    delayTimer = setTimeout(function () {
+      let searchValue = $("#schedule_search").val();
+      $("#overlay").show();
+
+      $.ajax({
+        url: "/admin/schedules",
+        type: "GET",
+        data: {
+          search: searchValue,
+        },
+        headers: {
+          Accept:
+            "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+        },
+        success: function (res) {
+          Turbo.renderStreamMessage(res);
+          var newURL =
+            window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname +
+            "?search=" +
+            encodeURIComponent(searchValue);
+          window.history.pushState(
+            {
+              path: newURL,
+            },
+            "",
+            newURL
+          );
+          $("#overlay").hide();
+        },
+        error: function () {
+          console.log("Error fetching data");
+          $("#overlay").hide();
+        },
+      });
+    }, 500);
+  });
+}
+
+function dateFilter() {
+  $(".show-dates").change(function () {
+    var selectedOptions = [];
+    $(".show-dates:checked").each(function () {
+      selectedOptions.push($(this).val());
+    });
+
+    // Send AJAX request with selected options and date range
+    sendAjaxRequest(selectedOptions);
+  });
+
+  // Event handler for Dates Between checkbox
+  $("#datepicker, #todatepicker").change(function () {
+    // Only trigger the AJAX request if Dates Between option is selected
+    if ($("#hide-dates").is(":checked")) {
+      var fromDate = $("#datepicker").val();
+      var toDate = $("#todatepicker").val();
+
+      // Send AJAX request with selected options and date range
+      sendAjaxRequest(["dates_between"], fromDate, toDate);
+    }
+  });
+
+  // Function to send AJAX request
+  function sendAjaxRequest(selectedOptions, fromDate, toDate) {
+    $.ajax({
+      type: "GET",
+      url: "/admin/schedules",
+      data: {
+        dates: selectedOptions,
+        from_date: fromDate,
+        to_date: toDate,
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function (data) {
+        Turbo.renderStreamMessage(data);
+
+        var newUrl =
+          window.location.protocol +
+          "//" +
+          window.location.host +
+          window.location.pathname +
+          "?next_payment_date=" +
+          encodeURIComponent(selectedOptions) +
+          "&from_date=" +
+          encodeURIComponent(fromDate) +
+          "&to_date=" +
+          encodeURIComponent(toDate);
+        window.history.pushState(
+          {
+            path: newUrl,
+          },
+          "",
+          newUrl
+        );
+        $("#overlay").hide();
+      },
+      error: function (error) {
+        console.error("AJAX Error:", error);
+        $("#overlay").hide();
+      },
+    });
+  }
+}
+
+function differentDateFilter() {
+  // Toggle dropdown active state
+  $(".checkbox-dropdown").click(function () {
+    $(this).toggleClass("is-active");
+  });
+  // Prevent dropdown from closing when clicking inside it
+  $(".checkbox-dropdown ul").click(function (e) {
+    e.stopPropagation();
+  });
+  // Close dropdown when clicking outside it
+  $(document).click(function (e) {
+    if (!$(e.target).closest(".checkbox-dropdown").length) {
+      $(".checkbox-dropdown").removeClass("is-active");
+    }
+  });
+  // Ensure only one checkbox is checked at a time
+  $(".checkbox-dropdown input[type='checkbox']").change(function () {
+    var checkboxes = $(".checkbox-dropdown input[type='checkbox']");
+    checkboxes.each(function () {
+      if (this !== event.target) {
+        $(this).prop("checked", false);
+      }
+    });
+  });
+  // hide date between field
+  $("#hide-dates").on("click", function () {
+    $("#display-dates").removeClass("toggle-dates");
+  });
+  $(".show-dates").on("click", function () {
+    $("#display-dates").addClass("toggle-dates");
   });
 }
 
@@ -130,7 +275,7 @@ function scheduleCreateBatch() {
 }
 
 function scheduleCreateUser() {
-  $("#schedule-form .new-custom-select").each(function() {
+  $("#schedule-form .new-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -143,7 +288,7 @@ function scheduleCreateUser() {
     template += '<div class="new-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-custom-option ' +
           $(this).attr("class") +
@@ -161,23 +306,23 @@ function scheduleCreateUser() {
   });
 
   $(".new-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-custom-select").removeClass("opened");
     });
     $(this).parents(".new-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-custom-option").on("click", function() {
+  $(".new-custom-option").on("click", function () {
     $(this)
       .parents(".new-custom-select-wrapper")
       .find("select")
@@ -196,7 +341,7 @@ function scheduleCreateUser() {
 }
 
 function scheduleEditUser() {
-  $("#edit-schedule-popup .new-name-custom-select").each(function() {
+  $("#edit-schedule-popup .new-name-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       name = $(this).attr("name");
@@ -211,7 +356,7 @@ function scheduleEditUser() {
     template += '<div class="new-name-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-name-custom-option ' +
           $(this).attr("class") +
@@ -229,23 +374,23 @@ function scheduleEditUser() {
   });
 
   $(".new-name-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-name-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-name-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-name-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-name-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-name-custom-select").removeClass("opened");
     });
     $(this).parents(".new-name-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-name-custom-option").on("click", function() {
+  $(".new-name-custom-option").on("click", function () {
     $(this)
       .parents(".new-name-custom-select-wrapper")
       .find("select")
@@ -264,7 +409,7 @@ function scheduleEditUser() {
 }
 
 function scheduleEditBatch() {
-  $("#edit-schedule-popup .new-status-custom-select").each(function() {
+  $("#edit-schedule-popup .new-status-custom-select").each(function () {
     var classes = $(this).attr("class"),
       id = $(this).attr("id"),
       status = $(this).attr("status");
@@ -279,7 +424,7 @@ function scheduleEditBatch() {
     template += '<div class="new-status-custom-options">';
     $(this)
       .find("option")
-      .each(function() {
+      .each(function () {
         template +=
           '<span class="new-status-custom-option ' +
           $(this).attr("class") +
@@ -297,23 +442,23 @@ function scheduleEditBatch() {
   });
 
   $(".new-status-custom-option:first-of-type").hover(
-    function() {
+    function () {
       $(this).parents(".new-status-custom-options").addClass("option-hover");
     },
-    function() {
+    function () {
       $(this).parents(".new-status-custom-options").removeClass("option-hover");
     }
   );
 
-  $(".new-status-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
+  $(".new-status-custom-select-trigger").on("click", function (event) {
+    $("html").one("click", function () {
       $(".new-status-custom-select").removeClass("opened");
     });
     $(this).parents(".new-status-custom-select").toggleClass("opened");
     event.stopPropagation();
   });
 
-  $(".new-status-custom-option").on("click", function() {
+  $(".new-status-custom-option").on("click", function () {
     $(this)
       .parents(".new-status-custom-select-wrapper")
       .find("select")
@@ -332,31 +477,31 @@ function scheduleEditBatch() {
 }
 
 function scheduleBatchData() {
-  $("#schedule-form .custom-select").on("click", ".custom-option", function() {
-    var batchId = $(this).data('value');
+  $("#schedule-form .custom-select").on("click", ".custom-option", function () {
+    var batchId = $(this).data("value");
 
     // Make an AJAX request to fetch sections for the selected course
     $.ajax({
-      url: '/admin/schedules/load_batch_data',
-      type: 'GET',
+      url: "/admin/schedules/load_batch_data",
+      type: "GET",
       data: {
-        batch_id: batchId
+        batch_id: batchId,
       },
       headers: {
         Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
       },
-      success: function(data) {
+      success: function (data) {
         Turbo.renderStreamMessage(data);
       },
-      error: function(error) {
-        console.error('Error:', error);
-      }
+      error: function (error) {
+        console.error("Error:", error);
+      },
     });
   });
 }
 
 function initializeTimeDropdowns() {
-  $(document).ready(function() {
+  $(document).ready(function () {
     const $startDropdown = $("#start-time").closest(".dropdown");
     const $startDropdownMenu = $startDropdown.find(".dropdown-menu");
     const $endDropdown = $("#end-time").closest(".dropdown");
@@ -370,9 +515,12 @@ function initializeTimeDropdowns() {
 
     // Function to generate time options
     function generateTimeOptions($dropdownMenu) {
-      const hours = Array.from({
-        length: 12
-      }, (_, i) => (i === 0 ? 12 : i));
+      const hours = Array.from(
+        {
+          length: 12,
+        },
+        (_, i) => (i === 0 ? 12 : i)
+      );
       const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
       const amPm = ["AM", "PM"];
       amPm.forEach((period) => {
@@ -405,17 +553,17 @@ function initializeTimeDropdowns() {
     }
 
     // Add event listener to toggle dropdown menu for start time
-    $startDropdown.on("click", function(event) {
+    $startDropdown.on("click", function (event) {
       toggleDropdown($startDropdownMenu);
     });
 
     // Add event listener to toggle dropdown menu for end time
-    $endDropdown.on("click", function(event) {
+    $endDropdown.on("click", function (event) {
       toggleDropdown($endDropdownMenu);
     });
 
     // Add event listener to close the dropdown menu when clicking outside for start time
-    $(document).on("click", function(event) {
+    $(document).on("click", function (event) {
       if (
         !$startDropdown.is(event.target) &&
         $startDropdown.has(event.target).length === 0
@@ -425,7 +573,7 @@ function initializeTimeDropdowns() {
     });
 
     // Add event listener to close the dropdown menu when clicking outside for end time
-    $(document).on("click", function(event) {
+    $(document).on("click", function (event) {
       if (
         !$endDropdown.is(event.target) &&
         $endDropdown.has(event.target).length === 0
@@ -435,7 +583,7 @@ function initializeTimeDropdowns() {
     });
 
     // Add event listener to select start time from dropdown
-    $startDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+    $startDropdownMenu.on("click", ".dropdown-menu-item", function (event) {
       const selectedTime = $(this).text();
       $("#start-time").val(selectedTime);
       $startDropdownMenu.removeClass("show");
@@ -443,7 +591,7 @@ function initializeTimeDropdowns() {
     });
 
     // Add event listener to select end time from dropdown
-    $endDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+    $endDropdownMenu.on("click", ".dropdown-menu-item", function (event) {
       const selectedTime = $(this).text();
       $("#end-time").val(selectedTime);
       $endDropdownMenu.removeClass("show");
@@ -453,7 +601,7 @@ function initializeTimeDropdowns() {
 }
 
 function editTimeDropdowns() {
-  $(document).ready(function() {
+  $(document).ready(function () {
     const $startDropdown = $("#edit-start-time").closest(".dropdown");
     const $startDropdownMenu = $startDropdown.find(".dropdown-menu");
     const $endDropdown = $("#edit-end-time").closest(".dropdown");
@@ -467,9 +615,12 @@ function editTimeDropdowns() {
 
     // Function to generate time options
     function generateTimeOptions($dropdownMenu) {
-      const hours = Array.from({
-        length: 12
-      }, (_, i) => (i === 0 ? 12 : i));
+      const hours = Array.from(
+        {
+          length: 12,
+        },
+        (_, i) => (i === 0 ? 12 : i)
+      );
       const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
       const amPm = ["AM", "PM"];
       amPm.forEach((period) => {
@@ -502,17 +653,17 @@ function editTimeDropdowns() {
     }
 
     // Add event listener to toggle dropdown menu for start time
-    $startDropdown.on("click", function(event) {
+    $startDropdown.on("click", function (event) {
       toggleDropdown($startDropdownMenu);
     });
 
     // Add event listener to toggle dropdown menu for end time
-    $endDropdown.on("click", function(event) {
+    $endDropdown.on("click", function (event) {
       toggleDropdown($endDropdownMenu);
     });
 
     // Add event listener to close the dropdown menu when clicking outside for start time
-    $(document).on("click", function(event) {
+    $(document).on("click", function (event) {
       if (
         !$startDropdown.is(event.target) &&
         $startDropdown.has(event.target).length === 0
@@ -522,7 +673,7 @@ function editTimeDropdowns() {
     });
 
     // Add event listener to close the dropdown menu when clicking outside for end time
-    $(document).on("click", function(event) {
+    $(document).on("click", function (event) {
       if (
         !$endDropdown.is(event.target) &&
         $endDropdown.has(event.target).length === 0
@@ -532,7 +683,7 @@ function editTimeDropdowns() {
     });
 
     // Add event listener to select start time from dropdown
-    $startDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+    $startDropdownMenu.on("click", ".dropdown-menu-item", function (event) {
       const selectedTime = $(this).text();
       $("#edit-start-time").val(selectedTime);
       $startDropdownMenu.removeClass("show");
@@ -540,7 +691,7 @@ function editTimeDropdowns() {
     });
 
     // Add event listener to select end time from dropdown
-    $endDropdownMenu.on("click", ".dropdown-menu-item", function(event) {
+    $endDropdownMenu.on("click", ".dropdown-menu-item", function (event) {
       const selectedTime = $(this).text();
       $("#edit-end-time").val(selectedTime);
       $endDropdownMenu.removeClass("show");
@@ -595,7 +746,6 @@ function editScheduleDate() {
 
 function createValidation() {
   function validateBatchName() {
-
     let name = $("#schedule_batch_id").val();
 
     if (!name) {
@@ -607,7 +757,7 @@ function createValidation() {
     }
   }
 
-  function validateUserName(){
+  function validateUserName() {
     let name = $("#schedule_user_id").val();
 
     if (!name) {
@@ -619,7 +769,7 @@ function createValidation() {
     }
   }
 
-  function validateCourseName(){
+  function validateCourseName() {
     let name = $("#schedule_course_id").val();
 
     if (!name) {
@@ -631,7 +781,7 @@ function createValidation() {
     }
   }
 
-  function validateScheduleDate(){
+  function validateScheduleDate() {
     let name = $("#datepicker").val();
 
     if (!name) {
@@ -643,7 +793,7 @@ function createValidation() {
     }
   }
 
-  function validateScheduleTime(){
+  function validateScheduleTime() {
     let name = $("#time-range").val();
 
     if (!name) {
@@ -655,15 +805,15 @@ function createValidation() {
     }
   }
   // Event bindings for registration form fields
-  
+
   $("#schedule_batch_id").on("blur", validateBatchName);
   $("#schedule_user_id").on("blur", validateUserName);
   $("#schedule_course_id").on("blur", validateCourseName);
   $("#datepicker").on("blur", validateScheduleDate);
   $("#time-range").on("blur", validateScheduleTime);
-  
+
   // Event binding for form submission
-  $("#schedule-admin-form").on("submit", function(event) {
+  $("#schedule-admin-form").on("submit", function (event) {
     // Validate all fields on form submission
     let isBatchValid = validateBatchName();
     let isUserValid = validateUserName();
@@ -671,15 +821,13 @@ function createValidation() {
     let isDateValid = validateScheduleDate();
     let isTimeValid = validateScheduleTime();
 
-
-   
     // Check if any field is invalid
     if (
       !isBatchValid ||
       !isUserValid ||
       !isCourseValid ||
       !isDateValid ||
-      !isTimeValid     
+      !isTimeValid
     ) {
       // Prevent form submission
       event.preventDefault();
@@ -690,14 +838,12 @@ function createValidation() {
       validateCourseName();
       validateScheduleDate();
       validateScheduleTime();
-
     }
   });
 }
 
 function editFormValidation() {
   function validateBatchName() {
-
     let name = $("#edit_schedule_batch_id").val();
 
     if (!name) {
@@ -709,7 +855,7 @@ function editFormValidation() {
     }
   }
 
-  function validateUserName(){
+  function validateUserName() {
     let name = $("#edit_schedule_user_id").val();
 
     if (!name) {
@@ -721,7 +867,7 @@ function editFormValidation() {
     }
   }
 
-  function validateCourseName(){
+  function validateCourseName() {
     let name = $("#edit_schedule_course_id").val();
 
     if (!name) {
@@ -733,7 +879,7 @@ function editFormValidation() {
     }
   }
 
-  function validateScheduleDate(){
+  function validateScheduleDate() {
     let name = $("#editdatepicker").val();
 
     if (!name) {
@@ -745,7 +891,7 @@ function editFormValidation() {
     }
   }
 
-  function validateScheduleTime(){
+  function validateScheduleTime() {
     let name = $("#edit-time-range").val();
 
     if (!name) {
@@ -757,30 +903,51 @@ function editFormValidation() {
     }
   }
 
-  $("#edit-schedule-popup").on("focusout", "#edit_schedule_batch_id", validateName);
-  $("#edit-schedule-popup").on("focusout", "#edit_schedule_user_id", validateName);
-  $("#edit-schedule-popup").on("focusout", "#edit_schedule_course_id", validateName);
-  $("#edit-schedule-popup").on("focusout", "#editdatepicker", validateName);
-  $("#edit-schedule-popup").on("focusout", "#edit-time-range", validateName);
+  $("#edit-schedule-popup").on(
+    "focusout",
+    "#edit_schedule_batch_id",
+    validateBatchName
+  );
+  $("#edit-schedule-popup").on(
+    "focusout",
+    "#edit_schedule_user_id",
+    validateUserName
+  );
+  $("#edit-schedule-popup").on(
+    "focusout",
+    "#edit_schedule_course_id",
+    validateCourseName
+  );
+  $("#edit-schedule-popup").on("focusout", "#editdatepicker", validateScheduleDate);
+  $("#edit-schedule-popup").on("focusout", "#edit-time-range", validateScheduleTime);
 
-  $("#edit-schedule-popup").on("submit", "#schedule-admin-edit-form", function(event) {
-    let isBatchValid = validateBatchName();
-    let isUserValid = validateUserName();
-    let isCourseValid = validateCourseName();
-    let isDateValid = validateScheduleDate();
-    let isTimeValid = validateScheduleTime();
- 
+  $("#edit-schedule-popup").on(
+    "submit",
+    "#schedule-admin-edit-form",
+    function (event) {
+      let isBatchValid = validateBatchName();
+      let isUserValid = validateUserName();
+      let isCourseValid = validateCourseName();
+      let isDateValid = validateScheduleDate();
+      let isTimeValid = validateScheduleTime();
 
-    if (!isBatchValid || !isUserValid || !isCourseValid || !isDateValid || !isTimeValid) {
-      event.preventDefault();
+      if (
+        !isBatchValid ||
+        !isUserValid ||
+        !isCourseValid ||
+        !isDateValid ||
+        !isTimeValid
+      ) {
+        event.preventDefault();
+      }
     }
-  });
+  );
 }
 
-
-$(document).ready(function() {
+$(document).ready(function () {
   editPopup();
   deletePopup();
+  scheduleSearch();
   scheduleCreateBatch();
   scheduleCreateUser();
   scheduleEditBatch();
@@ -792,10 +959,13 @@ $(document).ready(function() {
   editTimeDropdowns();
   editScheduleDate();
   editFormValidation();
+  dateFilter();
+  differentDateFilter();
 
-  $(document).on("turbo:render", function() {
+  $(document).on("turbo:render", function () {
     editPopup();
     deletePopup();
+    scheduleSearch();
     scheduleCreateBatch();
     scheduleCreateUser();
     scheduleEditBatch();
@@ -807,12 +977,14 @@ $(document).ready(function() {
     editTimeDropdowns();
     editScheduleDate();
     editFormValidation();
+    dateFilter();
+    differentDateFilter();
   });
 
-  $(document).on("turbo:before-render", function() {
+  $(document).on("turbo:before-render", function () {
     $("#overlay").show();
   });
-  $(document).on("turbo:after-render", function() {
+  $(document).on("turbo:after-render", function () {
     $("#overlay").hide();
   });
 });
@@ -820,18 +992,20 @@ $(document).ready(function() {
 addEventListener("turbo:before-stream-render", (event) => {
   const fallbackToDefaultActions = event.detail.render;
 
-  event.detail.render = function(streamElement) {
+  event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
     editTimeDropdowns();
     editScheduleDate();
     editFormValidation();
-    if (streamElement.target == 'schedule-admin-form') {
+    scheduleSearch();
+    differentDateFilter();
+    if (streamElement.target == "schedule-admin-form") {
       scheduleCreateBatch();
       scheduleCreateUser();
       scheduleBatchData();
     }
-    if (streamElement.target == 'edit-schedule-popup') {
+    if (streamElement.target == "edit-schedule-popup") {
       scheduleEditBatch();
       scheduleEditUser();
     }

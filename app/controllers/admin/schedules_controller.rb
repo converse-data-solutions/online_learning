@@ -2,7 +2,7 @@ class Admin::SchedulesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_schedule, only: %i[show edit update destroy]
   def index
-    @schedules = Schedule.all
+    @schedules = Schedule.get_schedules(params)
     respond_to do |format|
       format.html { render :index }
       format.turbo_stream
@@ -18,14 +18,14 @@ class Admin::SchedulesController < ApplicationController
     @schedule = Schedule.new(schedule_params)
     respond_to do |format|
       if @schedule.save
-        @schedules = Schedule.all
+        @schedules = Schedule.get_schedules(params)
         format.turbo_stream
         format.json { render :show, status: :created, location: admin_schedule_url(@schedule) }
       else
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace('schedule-admin-form', partial: 'admin/schedules/form', locals: { schedule: @schedule }),
-            turbo_stream.append('schedule-table', partial: 'shared/failed', locals: { message: 'Schedule creation failed.', type: 'notice' })
+            turbo_stream.append('sc\hedule-table', partial: 'shared/failed', locals: { message: 'Schedule creation failed.', type: 'notice' })
           ]
         end
       end
@@ -39,7 +39,7 @@ class Admin::SchedulesController < ApplicationController
   def update
     respond_to do |format|
       if @schedule.update(schedule_params)
-        @schedules = Schedule.all
+        @schedules = Schedule.get_schedules(params)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_schedule_url(@schedule) }
       else
@@ -56,7 +56,7 @@ class Admin::SchedulesController < ApplicationController
   def destroy
     respond_to do |format|
       if @schedule&.destroy
-        @schedules = Schedule.all
+        @schedules = Schedule.get_schedules(params)
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace('schedule-table', partial: 'admin/schedules/table', locals: { schedules: @schedules }),
