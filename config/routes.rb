@@ -73,7 +73,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :schedules
+    resources :schedules do
+      collection do
+        get :load_batch_data
+      end
+    end
   end
 
   namespace :admin do

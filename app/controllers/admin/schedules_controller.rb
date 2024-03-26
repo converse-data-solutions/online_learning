@@ -74,6 +74,26 @@ class Admin::SchedulesController < ApplicationController
     end
   end
 
+  def load_batch_data
+    @batch = Batch.find_by(id: params[:batch_id])
+    respond_to do |format|
+      if @batch
+        @user = User.find_by(id: @batch.primary_trainer_id)
+        @course = @batch.course
+        format.turbo_stream
+        format.html { flash[:notice] = 'Batch loaded successfully.' }
+        format.json { render json: { batch: @batch, user: @user, course: @course } }
+      else
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('schedule-table', partial: 'shared/failed', locals: { message: 'Batch not found.', type: 'notice' })
+          ]
+        end
+        format.json { render json: { message: 'Batch not found.' }, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def set_schedule

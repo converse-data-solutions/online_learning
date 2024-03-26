@@ -21,7 +21,6 @@ function editPopup() {
       success: function(res) {
         Turbo.renderStreamMessage(res);
         $("#overlay").hide();
-        editFormValidation();
 
       },
       done: function() {},
@@ -265,11 +264,9 @@ function scheduleCreateCourse() {
 }
 function scheduleEditUser() {
   $("#edit-schedule-popup .new-name-custom-select").each(function() {
-    var classes = $(this).attr("class"),
-      id = $(this).attr("id"),
-      name = $(this).attr("name");
+    var classes = $(this).attr("class");
 
-    var placeholderText = $(this).find("option:first-of-type").text();
+    var placeholderText = $(this).find("option:selected").text();
 
     var template = '<div class="' + classes + '">';
     template +=
@@ -280,11 +277,10 @@ function scheduleEditUser() {
     $(this)
       .find("option")
       .each(function() {
+        var selected = $(this).is(":selected") ? "selection" : "";
         template +=
-          '<span class="new-name-custom-option ' +
-          $(this).attr("class") +
-          '" data-value="' +
-          $(this).attr("value") +
+          '<span class="new-name-custom-option ' + selected + '" data-value="' +
+          $(this).val() +
           '">' +
           $(this).html() +
           "</span>";
@@ -296,28 +292,14 @@ function scheduleEditUser() {
     $(this).after(template);
   });
 
-  $(".new-name-custom-option:first-of-type").hover(
-    function() {
-      $(this).parents(".new-name-custom-options").addClass("option-hover");
-    },
-    function() {
-      $(this).parents(".new-name-custom-options").removeClass("option-hover");
-    }
-  );
-
-  $(".new-name-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
-      $(".new-name-custom-select").removeClass("opened");
-    });
-    $(this).parents(".new-name-custom-select").toggleClass("opened");
-    event.stopPropagation();
-  });
-
   $(".new-name-custom-option").on("click", function() {
+    var value = $(this).data("value");
+    var text = $(this).text();
     $(this)
       .parents(".new-name-custom-select-wrapper")
       .find("select")
-      .val($(this).data("value"));
+      .val(value)
+      .trigger("change");
     $(this)
       .parents(".new-name-custom-options")
       .find(".new-name-custom-option")
@@ -327,17 +309,15 @@ function scheduleEditUser() {
     $(this)
       .parents(".new-name-custom-select")
       .find(".new-name-custom-select-trigger")
-      .text($(this).text());
+      .text(text);
   });
 }
 
 function scheduleEditBatch() {
   $("#edit-schedule-popup .new-status-custom-select").each(function() {
-    var classes = $(this).attr("class"),
-      id = $(this).attr("id"),
-      status = $(this).attr("status");
+    var classes = $(this).attr("class");
 
-    var placeholderText = $(this).find("option:first-of-type").text();
+    var placeholderText = $(this).find("option:selected").text();
 
     var template = '<div class="' + classes + '">';
     template +=
@@ -348,11 +328,10 @@ function scheduleEditBatch() {
     $(this)
       .find("option")
       .each(function() {
+        var selected = $(this).is(":selected") ? "selection" : "";
         template +=
-          '<span class="new-status-custom-option ' +
-          $(this).attr("class") +
-          '" data-value="' +
-          $(this).attr("value") +
+          '<span class="new-status-custom-option ' + selected + '" data-value="' +
+          $(this).val() +
           '">' +
           $(this).html() +
           "</span>";
@@ -364,28 +343,14 @@ function scheduleEditBatch() {
     $(this).after(template);
   });
 
-  $(".new-status-custom-option:first-of-type").hover(
-    function() {
-      $(this).parents(".new-status-custom-options").addClass("option-hover");
-    },
-    function() {
-      $(this).parents(".new-status-custom-options").removeClass("option-hover");
-    }
-  );
-
-  $(".new-status-custom-select-trigger").on("click", function(event) {
-    $("html").one("click", function() {
-      $(".new-status-custom-select").removeClass("opened");
-    });
-    $(this).parents(".new-status-custom-select").toggleClass("opened");
-    event.stopPropagation();
-  });
-
   $(".new-status-custom-option").on("click", function() {
+    var value = $(this).data("value");
+    var text = $(this).text();
     $(this)
       .parents(".new-status-custom-select-wrapper")
       .find("select")
-      .val($(this).data("value"));
+      .val(value)
+      .trigger("change");
     $(this)
       .parents(".new-status-custom-options")
       .find(".new-status-custom-option")
@@ -395,9 +360,10 @@ function scheduleEditBatch() {
     $(this)
       .parents(".new-status-custom-select")
       .find(".new-status-custom-select-trigger")
-      .text($(this).text());
+      .text(text);
   });
 }
+
 
 function scheduleEditCourse() {
   $("#edit-schedule-popup .new-course-custom-select").each(function() {
@@ -467,6 +433,30 @@ function scheduleEditCourse() {
   });
 }
 
+function scheduleBatchData() {
+  $("#schedule-form .custom-select").on("click", ".custom-option", function() {
+    var batchId = $(this).data('value');
+
+    // Make an AJAX request to fetch sections for the selected course
+    $.ajax({
+      url: '/admin/schedules/load_batch_data',
+      type: 'GET',
+      data: {
+        batch_id: batchId
+      },
+      headers: {
+        Accept: "text/vnd.turbo-stream.html, text/html, application/xhtml+xml",
+      },
+      success: function(data) {
+        Turbo.renderStreamMessage(data);
+      },
+      error: function(error) {
+        console.error('Error:', error);
+      }
+    });
+  });
+}
+
 $(document).ready(function() {
   editPopup();
   deletePopup();
@@ -476,6 +466,7 @@ $(document).ready(function() {
   scheduleEditCourse();
   scheduleEditBatch();
   scheduleEditUser();
+  scheduleBatchData();
 
   $(document).on("turbo:render", function() {
     editPopup();
@@ -486,6 +477,7 @@ $(document).ready(function() {
     scheduleEditCourse();
     scheduleEditBatch();
     scheduleEditUser();
+    scheduleBatchData();
   });
 
   $(document).on("turbo:before-render", function() {
@@ -506,11 +498,14 @@ addEventListener("turbo:before-stream-render", (event) => {
       scheduleCreateBatch();
       scheduleCreateUser();
       scheduleCreateCourse();
+      scheduleBatchData();
     }
     if (streamElement.target == 'edit-schedule-popup') {
       scheduleEditCourse();
       scheduleEditBatch();
       scheduleEditUser();
+      editPopup();
+
     }
   };
 });
