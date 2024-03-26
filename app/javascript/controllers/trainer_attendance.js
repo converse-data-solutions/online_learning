@@ -577,7 +577,7 @@ function formValidation() {
   }
 
   function validateClassDate() {
-    let classDate = $("#user_class_date").val().trim();
+    let classDate = $("#user_class_date").val();
 
     if (!classDate) {
         $("#date-error").text("Class Date can't be blank");
@@ -603,12 +603,12 @@ function formValidation() {
 
   // Event bindings for form fields
   $("#user_id").on("blur", validateName);
-  $("#user_course").on("change", validateCourse);
+  $("#user_course").on("blur", validateCourse);
   $("#datepicker").on("blur", validateClassDate); // Change to blur event
   $("#user_status").on("blur", validateStatus);
 
   // Event binding for form submission
-  $("#user-attendance-form").on("submit", function(event) {
+  $("#trainer-attendance-form").on("submit", function(event) {
     // Validate all fields on form submission
     let isNameValid = validateName();
     let isCourseValid = validateCourse();

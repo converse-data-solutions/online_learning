@@ -2,6 +2,12 @@ class TrainerAttendance < ApplicationRecord
   belongs_to :trainer_course
   belongs_to :batch
 
+  validates :trainer_course_id, presence: true
+  validates :batch_id, presence: true
+  validates :attendance_date, presence: true
+  validates :class_timing, presence: true
+  validates :status, presence: true
+
   def self.get_trainers_attendances(params)
     page = (params[:page].presence&.to_i&.positive? ? params[:page].to_i : 1)
     per_page = [(params[:per_page].presence&.to_i || 13).to_i, 1].max

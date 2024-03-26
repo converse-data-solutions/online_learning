@@ -97,7 +97,7 @@ class Admin::SchedulesController < ApplicationController
   private
 
   def set_schedule
-    @schedule = Schedule.find(params[:id])
+    @schedule = Schedule.find_by(id: params[:id])
   end
 
   def schedule_params

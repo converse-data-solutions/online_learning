@@ -80,8 +80,17 @@ class Admin::TrainersController < ApplicationController
 
   def show
     respond_to do |format|
+      if @trainer
       format.turbo_stream
       format.json { render :show, status: :ok, location: admin_trainer_url(@trainer) }
+      else
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('trainer-table', partial: 'shared/flash', locals: { message: 'Trainer not found.', type: 'notice' })
+          ]
+        end
+        format.json { render json: @trainer.errors, status: :unprocessable_entity }
+      end
     end
   end
 

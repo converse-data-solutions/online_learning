@@ -71,10 +71,6 @@ class Admin::TrainerCoursesController < ApplicationController
     end
   end
 
-  def receive_course_amount
-    @course = Course.find_by(id: params[:course_id])
-  end
-
   private
 
   def render_invalid_trainer(format)
