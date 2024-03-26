@@ -22,7 +22,8 @@ class Admin::BatchesController < ApplicationController
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('batch-admin-form', partial: 'admin/batches/form', locals: { batch: @batch, batch_timings: @batch.batch_timings })
+            turbo_stream.replace('batch-admin-form', partial: 'admin/batches/form', locals: { batch: @batch, batch_timings: @batch.batch_timings }),
+            turbo_stream.append('batch-table', partial: 'shared/failed', locals: { message: 'Batch creation failed.', type: 'notice' })
           ]
         end
         format.json { render json: @batch.errors, status: :unprocessable_entity }
@@ -32,8 +33,17 @@ class Admin::BatchesController < ApplicationController
 
   def show
     respond_to do |format|
+      if @batch
       format.turbo_stream
       format.json { render :show, status: :ok, location: admin_batch_url(@batch) }
+      else
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('batch-table', partial: 'shared/failed', locals: { message: 'Batch not found.', type: 'notice' })
+          ]
+        end
+        format.json { render json: @batch.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -55,6 +65,7 @@ class Admin::BatchesController < ApplicationController
         format.turbo_stream do
           render turbo_stream: turbo_stream.update('edit-batch-popup', partial: 'admin/batches/edit',
                                                                         locals: { batch: @batch })
+          render turbo_stream: turbo_stream.append('batch-table', partial: 'shared/failed', locals: { message: 'Batch updation failed.', type: 'notice' })
         end
         format.json { render json: @batch.errors, status: :unprocessable_entity }
       end
@@ -84,7 +95,7 @@ class Admin::BatchesController < ApplicationController
   private
 
   def set_batch
-    @batch = Batch.find(params[:id])
+    @batch = Batch.find_by(id: params[:id])
   end
 
   def batch_params

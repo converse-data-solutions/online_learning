@@ -93,13 +93,15 @@ function deleteBatchPopup() {
 function addBatchTime() {
   $("#batch-form #add_timing").on("click", function () {
     cloneBatchTimeForm();
-    let timeIndex = $("#timeIndex").data("timeIndex");
-  });
+  });  
+}
+
+function editAddBatchTime() {
   $("#edit-batch-popup #batch-admin-edit-form #edit_add_timing").on(
     "click",
     function () {
+      console.log("hello");
       cloneEditBatchTimeForm();
-      let timeIndex = $("#editTimeIndex").data("timeIndex");
     }
   );
 }
@@ -129,6 +131,7 @@ function cloneBatchTimeForm() {
 
 function cloneEditBatchTimeForm() {
   let timeIndex = $("#editTimeIndex").data("timeIndex");
+  console.log(timeIndex);
   let newtiming = $(
     "#edit-batch-popup #batch-admin-edit-form #edit_batch_timings_container .edit_batch_timing_container:first"
   ).clone();
@@ -1227,6 +1230,7 @@ $(document).ready(function () {
   searchBatch();
   selectBatchFilter();
   searchByCourse();
+  editAddBatchTime();
 
   $(document).on("turbo:render", function () {
     courseSelect();
@@ -1247,6 +1251,7 @@ $(document).ready(function () {
     searchBatch();
     selectBatchFilter();
     searchByCourse();
+    editAddBatchTime();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -1269,5 +1274,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     batchEditPrimaryTrainer();
     batchEditSecondaryTrainer();
     batchEditFormValidation();
+    editAddBatchTime();
   };
 });

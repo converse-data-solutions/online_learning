@@ -2250,7 +2250,7 @@ select:focus, textarea:focus {
   font-family: "Poppins", sans-serif;
   display: block;
   line-height: 1.5rem;
-  padding: 0;
+  padding: 10px;
   font-size: 1rem;
   color: #818181;
   width: 100%;
@@ -2258,7 +2258,7 @@ select:focus, textarea:focus {
   font-weight: 400;
   margin-bottom: 0.5rem;
   border: 1px solid #cccccc;
-  padding: 0.5rem 0.75rem;
+ 
   border-radius: 0.5rem;
 }
 
