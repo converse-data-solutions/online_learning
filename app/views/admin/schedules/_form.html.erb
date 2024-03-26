@@ -2,7 +2,7 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="name" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Batch Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= collection_select(:schedule, :batch_name, Batch.all, :id, :batch_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources select-widht" }) %>
+      <%= collection_select(:schedule, :batch_id, Batch.all, :id, :batch_name, { prompt: "Select Batch", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources select-widht" }) %>
       <div class="text-red-600 text-sm mt-1" id="batch_error"></div>
       <% if schedule&.errors&.any? %>
         <% if schedule&.errors[:batch_name].any? %>
@@ -16,7 +16,7 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= collection_select(:schedule, :user_id, [], :id, :name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources select-widht" }) %>
+      <%= collection_select(:schedule, :user_id, [], :id, :name, { prompt: "Select User", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select sources select-widht" }) %>
       <div class="text-red-600 text-sm mt-1" id="user_error"></div>
       <% if schedule&.errors&.any? %>
         <% if schedule&.errors[:user_id].any? %>
@@ -30,7 +30,7 @@
   <div class="mb-4 flex flex-col sm:flex-row">
     <label for="password" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
     <div class="w-full sm:w-[55%] flex flex-col">
-      <%= collection_select(:schedule, :course_id, [], :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select sources select-widht" }) %>
+      <%= collection_select(:schedule, :course_id, [], :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select sources select-widht" }) %>
       <div class="text-red-600 text-sm mt-1" id="course_error"></div>
       <% if schedule&.errors&.any? %>
         <% if schedule&.errors[:course_id].any? %>
