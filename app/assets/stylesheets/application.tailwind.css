@@ -973,6 +973,11 @@ nav.main-menu li.active > a,
   width: 16.25rem !important;
 }
 
+.trainer_attendance_batch_select{
+  border: 1px solid #CCCCCC !important;
+  width: 100% !important;
+}
+
 .new-select-border {
   border: 1px solid #CCCCCC !important;
   width: 100% !important;
@@ -1637,6 +1642,16 @@ nav.main-menu li.active > a,
 
 .width-reducer{
   width: 211px !important;
+}
+.remove_border{
+  border: none !important;
+  border-color: #fff !important;
+  width: -webkit-fill-available !important;
+}
+
+.shechedule_border{
+  border: 1px solid #cccccc !important;
+  width: 370px !important;
 }
 
 .select-widht{

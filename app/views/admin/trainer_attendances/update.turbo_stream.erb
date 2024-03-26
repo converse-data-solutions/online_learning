@@ -1,0 +1,3 @@
+<%= turbo_stream.update "trainer_attendance-table", partial: "admin/trainer_attendances/table", locals: { trainer_attendances: @trainer_attendances } %>
+<%= turbo_stream.update "edit-trainer_attendance-popup", partial: "admin/trainer_attendances/edit", locals: { trainer_attendance: @trainer_attendance } %>
+<%= turbo_stream.append "trainer_attendance-table", partial: "shared/flash", locals: { message: 'Attendance updated successfully.', type: 'notice' } %>

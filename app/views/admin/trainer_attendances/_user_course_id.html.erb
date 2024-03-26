@@ -1,0 +1,14 @@
+<div class="mb-4 flex flex-col sm:flex-row">
+  <label for="class_date" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Class Date<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+  <div class="w-full sm:w-[55%] flex flex-col">
+    <%= f.text_field :trainer_course_id, class: "validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"%>
+    <div class="text-red-600 text-sm mt-1" id="password-error"></div>
+    <% if trainer_attendance&.errors&.any? %>
+      <% if trainer_attendance&.errors[:trainer_course_id].any? %>
+        <div class="text-red-600 text-sm mt-1">
+          <%= trainer_attendance&.errors.full_messages_for(:trainer_course_id).join(', ') %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

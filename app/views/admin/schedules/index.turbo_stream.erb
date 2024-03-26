@@ -1,0 +1,2 @@
+<%= turbo_stream.update "schedule-table", partial: "admin/schedules/table", locals: { schedules: @schedules } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/schedules/paginate", locals: { schedules: @schedules } %>

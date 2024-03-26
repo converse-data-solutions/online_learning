@@ -1,0 +1,29 @@
+<div class="mb-4 flex flex-col sm:flex-row">
+    <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <%= collection_select(:schedule, :user_id, Trainer.all, :id, :name, { prompt: "Select User", selected: user.name }, { class: "bg-[#fff] border-0 foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-custom-select sources select-widht" }) %>
+      <div class="text-red-600 text-sm mt-1" id="user_error"></div>
+      <% if schedule&.errors&.any? %>
+        <% if schedule&.errors[:user_id].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= schedule&.errors.full_messages_for(:user_id).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="mb-4 flex flex-col sm:flex-row">
+    <label for="password" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000] dark:text-white">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <%= hidden_field(:schedule, :course_id, value: course.id) %>
+      <%= text_field_tag(:course_name_display, course.course_name, readonly: true, class: "w-full validate bg-[#FFFFFF] border border-[#cccccc] text-[#818181] text-[16px] font-medium rounded-lg focus:ring-0 focus:ring-offset-0 focus:border-gray-200 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white") %>
+      <div class="text-red-600 text-sm mt-1" id="course_error"></div>
+      <% if schedule&.errors&.any? %>
+        <% if schedule&.errors[:course_id].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= schedule&.errors.full_messages_for(:course_id).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>

@@ -16,12 +16,15 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :sections
   end
+
   namespace :admin do
     resources :lessons
   end
+
   resources :users, only: [] do
     resources :profiles
   end
+
   resources :payments do
     member do
       get 'invoice'
@@ -50,6 +53,31 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :students, only: %i[index edit update create destroy new show]
+  end
+
+  namespace :admin do
+    resources :trainers
+  end
+
+  namespace :admin do
+    resources :trainer_courses
+  end
+
+  namespace :admin do
+    resources :trainer_attendances do
+      collection do
+        get :find_users_course
+        patch 'toggle_status/:id', to: 'trainer_attendances#toggle_status', as: :toggle_status
+      end
+    end
+  end
+
+  namespace :admin do
+    resources :schedules do
+      collection do
+        get :load_batch_data
+      end
+    end
   end
 
   namespace :admin do
@@ -179,5 +207,8 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :batches
+  end
   get 'entollment_details/update_progress', to: 'entrollment_details#update_progress', as: :update_progress
 end
