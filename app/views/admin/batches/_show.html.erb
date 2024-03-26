@@ -21,7 +21,7 @@
           <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Batch Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= @batch.batch_name %>
+              <%= batch.batch_name %>
             </p>
           </div>
         </div>
@@ -29,7 +29,7 @@
           <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= @batch.course.course_name %>
+              <%= batch.course.course_name %>
             </p>
           </div>
         </div>
@@ -39,7 +39,7 @@
           <label for="effective_from" class=" block mb-2 text-lg font-medium text-[#000]">Effective From<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= @batch.effective_from %>
+              <%= batch.effective_from %>
             </p>
           </div>
         </div>
@@ -47,7 +47,7 @@
           <label for="effective_to" class=" block mb-2 text-lg font-medium text-[#000]">Effective To<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= @batch.effective_to %>
+              <%= batch.effective_to %>
             </p>
           </div>
         </div>
@@ -57,7 +57,7 @@
           <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Primary Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= User.find_by(id: @batch.primary_trainer_id).name if @batch.primary_trainer_id.present? %>
+              <%= User.find_by(id: batch.primary_trainer_id).name if batch.primary_trainer_id.present? %>
             </p>
           </div>
         </div>
@@ -65,7 +65,7 @@
           <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Secondary Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
           <div class="w-full sm:w-[55%] flex flex-col">
             <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">
-              <%= User.find_by(id: @batch.secondary_trainer_id).name if @batch.secondary_trainer_id.present? %>
+              <%= User.find_by(id: batch.secondary_trainer_id).name if batch.secondary_trainer_id.present? %>
             </p>
           </div>
         </div>
@@ -74,7 +74,7 @@
       <!--- nested batch timing -->
       <div>
         <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Batch Timings<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
-        <% @batch.batch_timings.each do |b| %>
+        <% batch.batch_timings.each do |b| %>
           <div class= "flex w-[95.5%] gap-[50px] flex-col lg:flex-row edit_">
             <div class="mb-4 flex flex-col sm:flex-row w-full gap-2 lg:w-[50%] justify-between">
               <div class="w-full sm:w-[55%] flex flex-col">
@@ -99,7 +99,7 @@
       <div class= "w-[100%]">
         <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Students<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
        <div class="grid grid-cols-4 gap-4 justify-between w-full">
-        <% @batch.students.each do |s| %>
+        <% batch.students.each do |s| %>
           
             <div class= "">
               <p class="bg-[#F5F5F5] border-0 text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200 h-[45px] truncate">

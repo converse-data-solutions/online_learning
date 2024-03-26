@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-json.array! @enquires, partial: 'admin/enquires/enquire', as: :enquire
+json.array! @batches, partial: 'admin/batches/batch', as: :batch

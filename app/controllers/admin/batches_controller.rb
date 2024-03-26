@@ -64,7 +64,7 @@ class Admin::BatchesController < ApplicationController
   def destroy
     respond_to do |format|
       if @batch.destroy
-        @batches = Batch.paginate(page: params[:page], per_page: 10)
+        @batches = Batch.includes(:course).paginate(page: params[:page], per_page: 10)
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update('batch-table', partial: 'admin/batches/table', locals: { batches: @batches }),

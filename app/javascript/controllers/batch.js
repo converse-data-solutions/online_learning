@@ -62,6 +62,34 @@ function   showBatchPopup(){
   });
 }
 
+function deleteBatchPopup() {``
+  $("#batch-table").on("click", ".send-delete-batch", function() {
+    let id = $(this).data("batch-id");
+    let searchParams = new URLSearchParams(window.location.search);
+    let page = parseInt(searchParams.get("page")) || 1;
+    let search = searchParams.get("search") || "";
+    let per_page = parseInt(searchParams.get("per_page")) || 10;
+
+    let delUrl = `batches/${id}`;
+
+    if (search !== 1) {
+      delUrl += `?page=${page}`;
+    }
+
+    if (search !== "") {
+      delUrl += (page === 1 ? "?" : "&") + `search=${search}`;
+    }
+
+    if (per_page !== 10) {
+      delUrl += page === 1 && search === "" ? "?" : "&";
+      delUrl += `per_page=${per_page}`;
+    }
+
+    $("#delete-batch-model").attr("data-batch-id", id);
+    $("#delete-batch-model").attr("href", delUrl);
+  });
+}
+
 
 function addBatchTime() {
   $("#batch-form #add_timing").on("click", function () {
@@ -1037,6 +1065,7 @@ $(document).ready(function () {
   batchEditPrimaryTrainer();
   batchEditSecondaryTrainer();
   batchEditFormValidation();
+  deleteBatchPopup();
 
   $(document).on("turbo:render", function () {
     courseSelect();
@@ -1053,6 +1082,7 @@ $(document).ready(function () {
     batchEditPrimaryTrainer();
     batchEditSecondaryTrainer();
     batchEditFormValidation();
+    deleteBatchPopup();
   });
 
   $(document).on("turbo:before-render", function () {
