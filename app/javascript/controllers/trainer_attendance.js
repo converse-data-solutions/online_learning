@@ -553,7 +553,7 @@ function rangeDateFilter() {
 
 function formValidation() {
   function validateName() {
-    let name = $("#user_id").val().trim();
+    let name = $("#user_id").val();
 
     if (!name) {
       $("#name-error").text("Name can't be blank");
@@ -577,7 +577,7 @@ function formValidation() {
   }
 
   function validateClassDate() {
-    let classDate = $("#user_class_date").val();
+    let classDate = $("#datepicker").val();
 
     if (!classDate) {
         $("#date-error").text("Class Date can't be blank");
@@ -590,7 +590,7 @@ function formValidation() {
 
 
   function validateStatus() {
-    let status = $("#user_status").val().trim();
+    let status = $("#user_status").val();
 
     if (!status) {
       $("#status-error").text("Status can't be blank");
@@ -887,7 +887,7 @@ $(document).ready(function () {
   updateStatus();
   rangeCalendar();
   rangeDateFilter();
-  formValidation();
+  // formValidation();
   createAttendance();
   editAttendance();
   initializeTimeDropdowns();
@@ -907,7 +907,7 @@ $(document).ready(function () {
     updateStatus();
     rangeCalendar();
     rangeDateFilter();
-    formValidation();
+    // formValidation();
     createAttendance();
     editAttendance();
     initializeTimeDropdowns();
