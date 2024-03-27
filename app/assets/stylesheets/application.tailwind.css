@@ -2114,14 +2114,6 @@ input[type="file"] {
   box-shadow: none !important;
 }
 
-[type=text]:focus{
-  outline: none !important;
-  outline-offset: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  border-color: #fff !important;
-}
-
 .checkbox {
   margin-bottom: 20px;
   &:last-child {
