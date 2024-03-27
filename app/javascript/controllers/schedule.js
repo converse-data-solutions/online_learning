@@ -702,16 +702,16 @@ function editTimeDropdowns() {
 
 function scheduleDate() {
   $(function () {
-    $("#datepicker").datepicker({
+    $("#createdatepicker").datepicker({
       dateFormat: "dd-mm-yy",
       duration: "fast",
       changeYear: true, // Enable changing the year
     });
 
     // Adding click functionality to the datepicker icon
-    $("#datepicker-icon").on("click", function (event) {
+    $("#createdatepicker-icon").on("click", function (event) {
       event.preventDefault(); // Prevent default behavior (opening the default date picker calendar)
-      var $datepicker = $("#datepicker");
+      var $datepicker = $("#createdatepicker");
       if ($datepicker.datepicker("widget").is(":hidden")) {
         $datepicker.datepicker("show"); // Show the datepicker if it's hidden
       } else {
@@ -782,7 +782,7 @@ function createValidation() {
   }
 
   function validateScheduleDate() {
-    let name = $("#datepicker").val();
+    let name = $("#createdatepicker").val();
 
     if (!name) {
       $("#schedule_date_error").text("Schedule date can't be blank");
@@ -1000,6 +1000,7 @@ addEventListener("turbo:before-stream-render", (event) => {
     editFormValidation();
     scheduleSearch();
     differentDateFilter();
+    scheduleDate();
     if (streamElement.target == "schedule-admin-form") {
       scheduleCreateBatch();
       scheduleCreateUser();
