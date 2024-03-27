@@ -98,13 +98,27 @@ function addBatchTime() {
 
 function removeBatchTime() {
   $("#batch_timings_container .batch_timing_container").on("click", ".remove_timing", function () {
-
-    removeBatchTimeForm(this)
-    
+    removeBatchTimeForm(this)   
   });  
 }
 
 function removeBatchTimeForm(elem) {
+  console.log("hello");
+  let timeIndex = $("#timeIndex").data("timeIndex");
+ let removeTiming = $(elem).closest(".batch_timing_container")
+ removeTiming.remove();
+ timeIndex--;
+ $("#batch-form #timeIndex").data("timeIndex", timeIndex);
+console.log(timeIndex);
+}
+
+function editRemoveBatchTime() {
+  $("#edit_batch_timings_container .edit_batch_timing_container").on("click", ".remove_timing", function () {
+    console.log("hello from edit");
+  });  
+}
+
+function editRemoveBatchTimeForm(elem) {
   console.log("hello");
   let timeIndex = $("#timeIndex").data("timeIndex");
  let removeTiming = $(elem).closest(".batch_timing_container")
@@ -165,6 +179,8 @@ function cloneEditBatchTimeForm() {
     let oldName = $(this).attr("name");
     let newName = oldName.replace(/\[\d\]/, "[" + timeIndex + "]");
     $(this).attr("name", newName);
+    editRemoveBatchTime();
+    console.log("edit clone loaded");
   });
 
   $(
@@ -1251,6 +1267,7 @@ $(document).ready(function () {
   searchByCourse();
   editAddBatchTime();
   removeBatchTime();
+  editRemoveBatchTime();
 
   $(document).on("turbo:render", function () {
     courseSelect();
@@ -1273,6 +1290,7 @@ $(document).ready(function () {
     searchByCourse();
     editAddBatchTime();
     removeBatchTime();
+    editRemoveBatchTime();
   });
 
   $(document).on("turbo:before-render", function () {
@@ -1297,5 +1315,6 @@ addEventListener("turbo:before-stream-render", (event) => {
     batchEditFormValidation();
     editAddBatchTime();
     removeBatchTime();
+    editRemoveBatchTime();
   };
 });
