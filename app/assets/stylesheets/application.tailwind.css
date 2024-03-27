@@ -1748,7 +1748,6 @@ nav.main-menu li.active > a,
 }
 
 
-
 /* File Upload */
 
 .fileUploadWrap {
@@ -1998,6 +1997,14 @@ input[type="file"] {
   border: none !important;
   outline-offset: unset !important;
   box-shadow: none !important;
+}
+
+[type=text]:focus{
+  outline: none !important;
+  outline-offset: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-color: #fff !important;
 }
 
 .checkbox {
