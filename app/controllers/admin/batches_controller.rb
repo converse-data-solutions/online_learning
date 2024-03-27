@@ -3,7 +3,9 @@ class Admin::BatchesController < ApplicationController
   before_action :set_batch, only: %i[edit update destroy show]
 
   def index
-    @batches = Batch.all
+    @batch = Batch.new
+    @batch_timings = @batch.batch_timings.build
+    @batches = Batch.get_batches(params)
     respond_to do |format|
       format.html { render :index }
       format.turbo_stream
@@ -11,21 +13,17 @@ class Admin::BatchesController < ApplicationController
     end
   end
 
-  def new
-    @batch = Batch.new
-  end
-
   def create
-    @batch = Batch.new(batch_params)
+    @batch = Batch.new(batch_params)    
     respond_to do |format|
-      if @batch.save
-        @batches = Batch.all
+      if @batch.save   
+        @batches = Batch.get_batches(params)
         format.turbo_stream
-        # format.json { render :show, status: :created, location: admin_batch_url(@batch) }
       else
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.replace('batch-admin-form', partial: 'admin/batches/form', locals: { batch: @batch })
+            turbo_stream.replace('batch-admin-form', partial: 'admin/batches/form', locals: { batch: @batch, batch_timings: @batch.batch_timings }),
+            turbo_stream.append('batch-table', partial: 'shared/failed', locals: { message: 'Batch creation failed.', type: 'notice' })
           ]
         end
         format.json { render json: @batch.errors, status: :unprocessable_entity }
@@ -35,25 +33,39 @@ class Admin::BatchesController < ApplicationController
 
   def show
     respond_to do |format|
+      if @batch
       format.turbo_stream
       format.json { render :show, status: :ok, location: admin_batch_url(@batch) }
+      else
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('batch-table', partial: 'shared/failed', locals: { message: 'Batch not found.', type: 'notice' })
+          ]
+        end
+        format.json { render json: @batch.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def edit
     render layout: false
+    return if @batch
+
+    flash[:alert] = 'Batch not found.'
+    redirect_to admin_batches_path
   end
 
   def update
     respond_to do |format|
       if @batch.update(batch_params)
-        @batches = Batch.all
+        @batches = Batch.get_batches(params)
         format.turbo_stream
         format.json { render :show, status: :ok, location: admin_batch_url(@batch) }
       else
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('edit-batch-popup', partial: 'admin/batches/edit',
+          render turbo_stream: turbo_stream.update('edit-batch-popup', partial: 'admin/batches/edit',
                                                                         locals: { batch: @batch })
+          render turbo_stream: turbo_stream.append('batch-table', partial: 'shared/failed', locals: { message: 'Batch updation failed.', type: 'notice' })
         end
         format.json { render json: @batch.errors, status: :unprocessable_entity }
       end
@@ -63,7 +75,7 @@ class Admin::BatchesController < ApplicationController
   def destroy
     respond_to do |format|
       if @batch.destroy
-        @batches = Batch.all
+        @batches = Batch.get_batches(params)
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.update('batch-table', partial: 'admin/batches/table', locals: { batches: @batches }),
@@ -83,10 +95,11 @@ class Admin::BatchesController < ApplicationController
   private
 
   def set_batch
-    @batch = Batch.find(params[:id])
+    @batch = Batch.find_by(id: params[:id])
   end
 
   def batch_params
-    params.require(:batch).permit(:name, :description, :start_date, :end_date)
+    params.require(:batch).permit(:batch_name, :course_id, :effective_from, :effective_to, :primary_trainer_id,
+                                  :secondary_trainer_id, batch_timings_attributes: [:id, :day, :from_time, :to_time, :_destroy], student_ids: [])
   end
 end

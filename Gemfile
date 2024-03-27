@@ -77,7 +77,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'brakeman', '~> 6.0', '>= 6.0.1'
   gem 'rack-mini-profiler', '~> 3.1', '>= 3.1.1', require: false
-  gem 'rubocop', '~> 1.56', '>= 1.56.4'
+  # gem 'rubocop', '~> 1.56', '>= 1.56.4'
   gem 'rubycritic', '~> 4.8', '>= 4.8.1'
   gem 'traceroute', '~> 0.8.1'
   gem 'web-console'

@@ -1,0 +1,4 @@
+<%= turbo_stream.update "batch-table", partial: "admin/batches/table", locals: { batches: @batches } %>
+<%= turbo_stream.update "batch-admin-form", partial: "admin/batches/form", locals: { batch: Batch.new, batch_timings: BatchTiming.new } %>
+<%= turbo_stream.append "batch-table", partial: "shared/flash", locals: { message: 'Batch created successfully.', type: 'notice' } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/batches/paginate", locals: { batches: @batches } %>
