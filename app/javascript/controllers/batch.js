@@ -93,39 +93,45 @@ function deleteBatchPopup() {
 function addBatchTime() {
   $("#batch-form #add_timing").on("click", function () {
     cloneBatchTimeForm();
-  });  
+  });
 }
 
 function removeBatchTime() {
-  $("#batch_timings_container .batch_timing_container").on("click", ".remove_timing", function () {
-    removeBatchTimeForm(this)   
-  });  
-}
-
-function removeBatchTimeForm(elem) {
   let timeIndex = $("#timeIndex").data("timeIndex");
- let removeTiming = $(elem).closest(".batch_timing_container")
- removeTiming.remove();
- timeIndex--;
- $("#batch-form #timeIndex").data("timeIndex", timeIndex);
+  if (timeIndex > 1) {
+    $("#batch_timings_container .batch_timing_container").on(
+      "click",
+      ".remove_timing",
+      function () {
+        let timeIndex = $("#timeIndex").data("timeIndex");
+        let removeTiming = $(this).closest(".batch_timing_container");
+        removeTiming.remove();
+        timeIndex--;
+        $("#batch-form #timeIndex").data("timeIndex", timeIndex);
+      }
+    );
+  }
 }
 
 function editRemoveBatchTime() {
-  $("#edit_batch_timings_container .edit_batch_timing_container").on("click", ".remove_timing", function () {
-    editRemoveBatchTimeForm(this)
-  });  
-}
-
-function editRemoveBatchTimeForm(elem) {
   let timeIndex = $("#editTimeIndex").data("timeIndex");
- let removeTiming = $(elem).closest(".edit_batch_timing_container")
- let removeBox = $(elem).closest(".edit_batch_timing_container").find(".checkbox");
- removeTiming.addClass("hidden");
- let clicked = false;
-
- removeBox.prop("checked", !clicked);
- timeIndex--;
- $("#batch-form #timeIndex").data("timeIndex", timeIndex);
+  if (timeIndex > 1) {
+    $("#edit_batch_timings_container .edit_batch_timing_container").on(
+      "click",
+      ".remove_timing",
+      function () {
+        let removeTiming = $(this).closest(".edit_batch_timing_container");
+        let removeBox = $(this)
+          .closest(".edit_batch_timing_container")
+          .find(".checkbox");
+        removeTiming.addClass("hidden");
+        let clicked = false;
+        removeBox.prop("checked", !clicked);
+        timeIndex--;
+        $("#batch-form #timeIndex").data("timeIndex", timeIndex);
+      }
+    );
+  }
 }
 
 function editAddBatchTime() {
