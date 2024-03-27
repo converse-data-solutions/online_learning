@@ -103,36 +103,35 @@ function removeBatchTime() {
 }
 
 function removeBatchTimeForm(elem) {
-  console.log("hello");
   let timeIndex = $("#timeIndex").data("timeIndex");
  let removeTiming = $(elem).closest(".batch_timing_container")
  removeTiming.remove();
  timeIndex--;
  $("#batch-form #timeIndex").data("timeIndex", timeIndex);
-console.log(timeIndex);
 }
 
 function editRemoveBatchTime() {
   $("#edit_batch_timings_container .edit_batch_timing_container").on("click", ".remove_timing", function () {
-    console.log("hello from edit");
+    editRemoveBatchTimeForm(this)
   });  
 }
 
 function editRemoveBatchTimeForm(elem) {
-  console.log("hello");
-  let timeIndex = $("#timeIndex").data("timeIndex");
- let removeTiming = $(elem).closest(".batch_timing_container")
- removeTiming.remove();
+  let timeIndex = $("#editTimeIndex").data("timeIndex");
+ let removeTiming = $(elem).closest(".edit_batch_timing_container")
+ let removeBox = $(elem).closest(".edit_batch_timing_container").find(".checkbox");
+ removeTiming.addClass("hidden");
+ let clicked = false;
+
+ removeBox.prop("checked", !clicked);
  timeIndex--;
  $("#batch-form #timeIndex").data("timeIndex", timeIndex);
-console.log(timeIndex);
 }
 
 function editAddBatchTime() {
   $("#edit-batch-popup #batch-admin-edit-form #edit_add_timing").on(
     "click",
     function () {
-      console.log("hello");
       cloneEditBatchTimeForm();
     }
   );
@@ -164,7 +163,6 @@ function cloneBatchTimeForm() {
 
 function cloneEditBatchTimeForm() {
   let timeIndex = $("#editTimeIndex").data("timeIndex");
-  console.log(timeIndex);
   let newtiming = $(
     "#edit-batch-popup #batch-admin-edit-form #edit_batch_timings_container .edit_batch_timing_container:first"
   ).clone();
@@ -179,8 +177,6 @@ function cloneEditBatchTimeForm() {
     let oldName = $(this).attr("name");
     let newName = oldName.replace(/\[\d\]/, "[" + timeIndex + "]");
     $(this).attr("name", newName);
-    editRemoveBatchTime();
-    console.log("edit clone loaded");
   });
 
   $(
@@ -188,6 +184,7 @@ function cloneEditBatchTimeForm() {
   ).append(newtiming);
   timeIndex++;
   $("#edit-batch-popup #editTimeIndex").data("time-index", timeIndex);
+  editRemoveBatchTime();
 }
 
 function dropdownCheckBoxes() {
