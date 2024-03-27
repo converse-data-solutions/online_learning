@@ -60,19 +60,22 @@ class Admin::TrainerAttendancesController < ApplicationController # rubocop:disa
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: [
-            turbo_stream.append("trainer_attendance-table", partial: "shared/flash", locals: { message: 'Attendance updated successfully.', type: 'notice' }), # rubocop:disable Style/StringLiterals
-            turbo_stream.update("trainer_attendance-table", partial: "admin/trainer_attendances/table", locals: { trainer_attendances: @trainer_attendances }) # rubocop:disable Style/StringLiterals
+            turbo_stream.append("trainer_attendance-table", partial: "shared/flash", locals: { message: 'Attendance updated successfully.', type: 'notice' }),
+            turbo_stream.update("trainer_attendance-table", partial: "admin/trainer_attendances/table", locals: { trainer_attendances: @trainer_attendances })
           ]
         end
       end
     else
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.append("trainer_attendance-table", partial: "shared/failed", locals: { message: 'Attendance update failed.', type: 'notice' }), # rubocop:disable Style/StringLiterals
-        ]
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append("trainer_attendance-table", partial: "shared/failed", locals: { message: 'Attendance update failed.', type: 'notice' })
+          ]
+        end
       end
     end
   end
+  
 
   def destroy # rubocop:disable Metrics/MethodLength
     respond_to do |format|

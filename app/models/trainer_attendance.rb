@@ -6,7 +6,7 @@ class TrainerAttendance < ApplicationRecord
   validates :batch_id, presence: true
   validates :attendance_date, presence: true
   validates :class_timing, presence: true
-  validates :status, presence: true
+  validates :status, presence: true, on: :create
 
   def self.get_trainers_attendances(params)
     page = (params[:page].presence&.to_i&.positive? ? params[:page].to_i : 1)

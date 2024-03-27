@@ -928,6 +928,7 @@ addEventListener("turbo:before-stream-render", (event) => {
   event.detail.render = function (streamElement) {
     fallbackToDefaultActions(streamElement);
     initModals();
+    updateStatus();
     if (streamElement.target == "course-select") {
     }
     selectCreateCourse();
