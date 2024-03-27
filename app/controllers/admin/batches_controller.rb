@@ -63,14 +63,15 @@ class Admin::BatchesController < ApplicationController
         format.json { render :show, status: :ok, location: admin_batch_url(@batch) }
       else
         format.turbo_stream do
-          render turbo_stream: turbo_stream.update('edit-batch-popup', partial: 'admin/batches/edit',
-                                                                        locals: { batch: @batch })
-          render turbo_stream: turbo_stream.append('batch-table', partial: 'shared/failed', locals: { message: 'Batch updation failed.', type: 'notice' })
+          render turbo_stream: [
+            turbo_stream.update('edit-batch-popup', partial: 'admin/batches/edit',locals: { batch: @batch }),
+            turbo_stream.append('batch-table', partial: 'shared/failed', locals: { message: 'Batch updation failed.', type: 'notice' })
+          ]
         end
         format.json { render json: @batch.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end 
 
   def destroy
     respond_to do |format|
