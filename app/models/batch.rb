@@ -4,7 +4,7 @@ class Batch < ApplicationRecord
   belongs_to :secondary_trainer, class_name: 'User'
   has_many :batch_timings, dependent: :destroy
   has_and_belongs_to_many :students, class_name: 'User', join_table: :batch_students
-  accepts_nested_attributes_for :batch_timings
+  accepts_nested_attributes_for :batch_timings, allow_destroy: true
   has_many :trainer_attendances
   has_many :schedules, dependent: :destroy
 
