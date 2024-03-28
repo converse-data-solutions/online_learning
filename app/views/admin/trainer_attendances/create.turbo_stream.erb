@@ -1,0 +1,4 @@
+<%= turbo_stream.update "trainer_attendance-table", partial: "admin/trainer_attendances/table", locals: { trainer_attendances: @trainer_attendances } %>
+<%= turbo_stream.replace "trainer-attendance-form", partial: "admin/trainer_attendances/form", locals: { trainer_attendance: TrainerAttendance.new } %>
+<%= turbo_stream.append "trainer_attendance-table", partial: "shared/flash", locals: { message: 'Attendance created successfully.', type: 'notice' } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/trainer_attendances/paginate", locals: { trainer_attendances: @attendace_details } %>

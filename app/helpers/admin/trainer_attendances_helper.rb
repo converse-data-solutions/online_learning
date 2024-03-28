@@ -1,0 +1,2 @@
+module Admin::TrainerAttendancesHelper
+end

@@ -1,0 +1,2 @@
+<%= turbo_stream.update "batch-table", partial: "admin/batches/table", locals: { batches: @batches } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/batches/paginate", locals: { batches: @batches } %>

@@ -1,0 +1,3 @@
+<%= turbo_stream.update "batch-table", partial: "admin/batches/table", locals: { batches: @batches } %>
+<%= turbo_stream.update "edit-batch-popup", partial: "admin/batches/edit", locals: { batch: @batch } %>
+<%= turbo_stream.append "batch-table", partial: "shared/flash", locals: { message: 'Batch updated successfully.', type: 'notice' } %>

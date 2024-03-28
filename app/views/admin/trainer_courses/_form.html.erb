@@ -1,0 +1,36 @@
+<%= form_for trainer_course || TrainerCourse.new, url: admin_trainer_courses_path, html: { class: "validate", id: "trainer-course-admin-form" }, validate: true, method: :post do |f| %>
+  <div class="mb-4 flex flex-col sm:flex-row">
+    <label for="name" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Student Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <%= collection_select(:trainer_course, :user_id, Trainer.all, :id, :name, { prompt: "Select trainer", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle custom-select border-[#cccccc] border-[1px] student_name width_course sources w-full sm:w-[53%]" })  %>
+      <div class="text-red-600 text-sm mt-1" id="student_name_error"></div>
+      <% if trainer_course&.errors&.any? %>
+        <% if trainer_course&.errors[:user_id].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= trainer_course&.errors.full_messages_for(:user_id).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="mb-4 flex flex-col sm:flex-row">
+    <label for="email" class="w-full sm:w-[45%] block mb-2 text-lg font-medium text-[#000]">Course Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+    <div class="w-full sm:w-[55%] flex flex-col">
+      <%= collection_select(:trainer_course, :course_id, Course.all, :id, :course_name, { prompt: "Select Course", selected: '' }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-course-custom-select border-[#cccccc] border-[1px] student_course width_course w-full sm:w-[53%] sources" })  %>
+      <div class="text-red-600 text-sm mt-1" id="course_name_error"></div>
+      <% if trainer_course&.errors&.any? %>
+        <% if trainer_course&.errors[:course_id].any? %>
+          <div class="text-red-600 text-sm mt-1">
+            <%= trainer_course&.errors.full_messages_for(:course_id).join(', ') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <%= hidden_field_tag :page, params[:page]%>
+  <%= hidden_field_tag :per_page, params[:per_page]%>
+  <%= hidden_field_tag :search, params[:search]%>
+  <div class="w-1/5 mx-auto mt-4 sm:mt-6">
+    <%= f.submit "CREATE", class: 'button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-lg text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 loader-btn' %>
+  </div>
+<% end %>

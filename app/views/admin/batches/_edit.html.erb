@@ -1,0 +1,215 @@
+  <!-- Modal body -->
+<div id="editTimeIndex" data-time-index="<%= @batch.batch_timings.size %>"></div>
+<div class="relative w-full lg:max-w-[90rem] sm:max-w-[42rem] max-h-full max-w-[30rem] sm:ml-[25px] md:ml-[0px]">
+  <!-- Modal content -->
+  <div class="relative bg-white rounded-[5px] shadow dark:bg-gray-700">
+    <!-- Modal header -->
+    <div class="flex items-center justify-between p-4 md:p-5 rounded-t dark:border-gray-600">
+      <h3 class="text-[26px] font-semibold text-[#0BC08B] text-center flex justify-center w-full">
+        EDIT BATCH
+      </h3>
+      <button type="button" id="batch-modal-close-btn" class="text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="large-modal">
+        <svg class="w-8 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="#0BC08B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+    </div>
+    <!-- Modal body -->
+    <div class="p-7 space-y-6 lg:w-[94%] sm:w-[95%] w-[90%] mr-auto ml-auto">
+      <%= form_for(batch, url: admin_batch_path(batch), html: { class: "validate", id: "batch-admin-edit-form" }, method: :patch, format: :turbo_stream) do |f| %>
+        <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
+          <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+            <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Batch Name<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+            <div class="w-full sm:w-[55%] flex flex-col">
+              <%= f.text_field :batch_name, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_batch_name", autocomplete: "off" %>
+              <div class="text-red-600 text-sm mt-1" id="edit_batch_name_error"></div>
+              <% if batch&.errors&.any? %>
+                <% if batch.errors[:batch_name].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch.errors.full_messages_for(:batch_name).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+            <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Course<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+            <div class="w-full sm:w-[55%] flex flex-col">
+              <div class="text-[#31B978] text-[18px] font-bold  pb-4 sm:pb-0">
+                <%= f.collection_select(:course_id, Course.all, :id, :course_name, { prompt: "Select Course"}, { class: "bg-[#FFFFFF] w-[50px] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block  p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-course-custom-select section_section_batch sources" , id: "edit_batch_course",  selected: @batch.course_id  })  %>
+              </div>
+              <div class="text-red-600 text-sm mt-1" id="edit_batch_course_error"></div>
+              <% if batch&.errors&.any? %>
+                <% if batch.errors[:course_id].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch.errors.full_messages_for(:course_id).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
+          <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+            <label for="effective_from" class=" block mb-2 text-lg font-medium text-[#000]">Effective From<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+            <div class="w-full sm:w-[55%] flex flex-col relative">
+              <%= f.text_field :effective_from, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg pl-10 pr-4', id: 'edit-datepicker', autocomplete: 'off' %>
+              <svg class="absolute right-3 top-4" id="edit-datepicker-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.2403 0C6.44452 0 6.64037 0.0811248 6.78477 0.225528C6.92918 0.369931 7.0103 0.565783 7.0103 0.77V2.2099H15.279V0.7799C15.279 0.575683 15.3601 0.379831 15.5045 0.235428C15.6489 0.0910248 15.8448 0.0099 16.049 0.0099C16.2532 0.0099 16.4491 0.0910248 16.5935 0.235428C16.7379 0.379831 16.819 0.575683 16.819 0.7799V2.2099H19.8C20.3833 2.2099 20.9427 2.44153 21.3552 2.85388C21.7678 3.26622 21.9997 3.82551 22 4.4088V19.8011C21.9997 20.3844 21.7678 20.9437 21.3552 21.356C20.9427 21.7684 20.3833 22 19.8 22H2.2C1.61671 22 1.0573 21.7684 0.644754 21.356C0.232205 20.9437 0.000291643 20.3844 0 19.8011L0 4.4088C0.000291643 3.82551 0.232205 3.26622 0.644754 2.85388C1.0573 2.44153 1.61671 2.2099 2.2 2.2099H5.4703V0.7689C5.47059 0.564874 5.55185 0.369304 5.69622 0.225139C5.84059 0.0809736 6.03627 -2.0819e-07 6.2403 0ZM1.54 8.5162V19.8011C1.54 19.8878 1.55707 19.9736 1.59024 20.0537C1.62341 20.1337 1.67202 20.2065 1.73331 20.2678C1.7946 20.3291 1.86735 20.3777 1.94743 20.4109C2.0275 20.444 2.11333 20.4611 2.2 20.4611H19.8C19.8867 20.4611 19.9725 20.444 20.0526 20.4109C20.1326 20.3777 20.2054 20.3291 20.2667 20.2678C20.328 20.2065 20.3766 20.1337 20.4098 20.0537C20.4429 19.9736 20.46 19.8878 20.46 19.8011V8.5316L1.54 8.5162ZM7.3337 16.0809V17.9135H5.5V16.0809H7.3337ZM11.9163 16.0809V17.9135H10.0837V16.0809H11.9163ZM16.5 16.0809V17.9135H14.6663V16.0809H16.5ZM7.3337 11.7062V13.5388H5.5V11.7062H7.3337ZM11.9163 11.7062V13.5388H10.0837V11.7062H11.9163ZM16.5 11.7062V13.5388H14.6663V11.7062H16.5ZM5.4703 3.7488H2.2C2.11333 3.7488 2.0275 3.76587 1.94743 3.79904C1.86735 3.83221 1.7946 3.88082 1.73331 3.94211C1.67202 4.0034 1.62341 4.07615 1.59024 4.15623C1.55707 4.2363 1.54 4.32213 1.54 4.4088V6.9773L20.46 6.9927V4.4088C20.46 4.32213 20.4429 4.2363 20.4098 4.15623C20.3766 4.07615 20.328 4.0034 20.2667 3.94211C20.2054 3.88082 20.1326 3.83221 20.0526 3.79904C19.9725 3.76587 19.8867 3.7488 19.8 3.7488H16.819V4.7707C16.819 4.97492 16.7379 5.17077 16.5935 5.31517C16.4491 5.45958 16.2532 5.5407 16.049 5.5407C15.8448 5.5407 15.6489 5.45958 15.5045 5.31517C15.3601 5.17077 15.279 4.97492 15.279 4.7707V3.7488H7.0103V4.7608C7.0103 4.96502 6.92918 5.16087 6.78477 5.30527C6.64037 5.44968 6.44452 5.5308 6.2403 5.5308C6.03608 5.5308 5.84023 5.44968 5.69583 5.30527C5.55142 5.16087 5.4703 4.96502 5.4703 4.7608V3.7488Z" fill="#818181"/>
+              </svg>
+              <div class="text-red-600 text-sm mt-1" id="edit_batch_effective_from_error"></div>
+              <% if batch&.errors&.any? %>
+                <% if batch&.errors[:effective_from].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch&.errors.full_messages_for(:effective_from).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+            <label for="effective_to" class=" block mb-2 text-lg font-medium text-[#000]">Effective To<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+            <div class="w-full sm:w-[55%] flex flex-col relative">
+              <%= f.text_field :effective_to, class: 'datepicker-input border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg pl-10 pr-4', id: 'edit-datepicker-to', autocomplete: 'off' %>
+              <svg class="absolute right-3 top-4" id="datepicker-icon-to" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.2403 0C6.44452 0 6.64037 0.0811248 6.78477 0.225528C6.92918 0.369931 7.0103 0.565783 7.0103 0.77V2.2099H15.279V0.7799C15.279 0.575683 15.3601 0.379831 15.5045 0.235428C15.6489 0.0910248 15.8448 0.0099 16.049 0.0099C16.2532 0.0099 16.4491 0.0910248 16.5935 0.235428C16.7379 0.379831 16.819 0.575683 16.819 0.7799V2.2099H19.8C20.3833 2.2099 20.9427 2.44153 21.3552 2.85388C21.7678 3.26622 21.9997 3.82551 22 4.4088V19.8011C21.9997 20.3844 21.7678 20.9437 21.3552 21.356C20.9427 21.7684 20.3833 22 19.8 22H2.2C1.61671 22 1.0573 21.7684 0.644754 21.356C0.232205 20.9437 0.000291643 20.3844 0 19.8011L0 4.4088C0.000291643 3.82551 0.232205 3.26622 0.644754 2.85388C1.0573 2.44153 1.61671 2.2099 2.2 2.2099H5.4703V0.7689C5.47059 0.564874 5.55185 0.369304 5.69622 0.225139C5.84059 0.0809736 6.03627 -2.0819e-07 6.2403 0ZM1.54 8.5162V19.8011C1.54 19.8878 1.55707 19.9736 1.59024 20.0537C1.62341 20.1337 1.67202 20.2065 1.73331 20.2678C1.7946 20.3291 1.86735 20.3777 1.94743 20.4109C2.0275 20.444 2.11333 20.4611 2.2 20.4611H19.8C19.8867 20.4611 19.9725 20.444 20.0526 20.4109C20.1326 20.3777 20.2054 20.3291 20.2667 20.2678C20.328 20.2065 20.3766 20.1337 20.4098 20.0537C20.4429 19.9736 20.46 19.8878 20.46 19.8011V8.5316L1.54 8.5162ZM7.3337 16.0809V17.9135H5.5V16.0809H7.3337ZM11.9163 16.0809V17.9135H10.0837V16.0809H11.9163ZM16.5 16.0809V17.9135H14.6663V16.0809H16.5ZM7.3337 11.7062V13.5388H5.5V11.7062H7.3337ZM11.9163 11.7062V13.5388H10.0837V11.7062H11.9163ZM16.5 11.7062V13.5388H14.6663V11.7062H16.5ZM5.4703 3.7488H2.2C2.11333 3.7488 2.0275 3.76587 1.94743 3.79904C1.86735 3.83221 1.7946 3.88082 1.73331 3.94211C1.67202 4.0034 1.62341 4.07615 1.59024 4.15623C1.55707 4.2363 1.54 4.32213 1.54 4.4088V6.9773L20.46 6.9927V4.4088C20.46 4.32213 20.4429 4.2363 20.4098 4.15623C20.3766 4.07615 20.328 4.0034 20.2667 3.94211C20.2054 3.88082 20.1326 3.83221 20.0526 3.79904C19.9725 3.76587 19.8867 3.7488 19.8 3.7488H16.819V4.7707C16.819 4.97492 16.7379 5.17077 16.5935 5.31517C16.4491 5.45958 16.2532 5.5407 16.049 5.5407C15.8448 5.5407 15.6489 5.45958 15.5045 5.31517C15.3601 5.17077 15.279 4.97492 15.279 4.7707V3.7488H7.0103V4.7608C7.0103 4.96502 6.92918 5.16087 6.78477 5.30527C6.64037 5.44968 6.44452 5.5308 6.2403 5.5308C6.03608 5.5308 5.84023 5.44968 5.69583 5.30527C5.55142 5.16087 5.4703 4.96502 5.4703 4.7608V3.7488Z" fill="#818181"/>
+              </svg>
+              <div class="text-red-600 text-sm mt-1" id="edit_batch_effective_to_error"></div>
+              <% if batch&.errors&.any? %>
+                <% if batch&.errors[:effective_to].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch&.errors.full_messages_for(:effective_to).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class= "flex w-[100%] gap-[50px] flex-col lg:flex-row">
+          <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+            <label for="name" class=" block mb-2 text-lg font-medium text-[#000]">Primary Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+            <div class="w-full sm:w-[55%] flex flex-col">
+              <%= f.collection_select(:primary_trainer_id, Trainer.all, :id, :name, { prompt: "Select Trainer" }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-status-custom-select new-select-border sources", id: "edit_user_id", selected: @batch.primary_trainer })  %>
+              <div class="text-red-600 text-sm mt-1" id="edit_batch__primary_trainer_error"></div>
+              <% if batch&.errors&.any? %>
+                <% if batch.errors[:primary_trainer_id].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch.errors.full_messages_for(:primary_trainer_id).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+            <label for="course" class=" block mb-2 text-lg font-medium text-[#000]">Secondary Trainer<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+            <div class="w-full sm:w-[55%] flex flex-col">
+              <%= f.collection_select(:secondary_trainer_id, Trainer.all, :id, :name, { prompt: "Select Trainer" }, { class: "bg-[#FFFFFF] foucus:ring-0 text-[#818181] text-[16px] font-medium rounded-lg outline-none block w-full p-2.5 rounded-[7px] bg-[#fff] text-[#818181] filter-handle new-lesson-custom-select new-select-border sources", id: "edit_secondary_trainer_id", selected: @batch.secondary_trainer })  %>
+              <div class="text-red-600 text-sm mt-1" id="edit_batch__secondary_trainer_error"></div>
+              <% if batch&.errors&.any? %>
+                <% if batch.errors[:secondary_trainer_id].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch.errors.full_messages_for(:secondary_trainer_id).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <!-- select student--->
+        <div class="mb-4 flex flex-col sm:flex-row w-full lg:w-[50%] justify-between">
+          <label for="student_ids" class="block mb-2 text-lg font-medium text-[#000]">Select Students</label>
+          <div class="sm:w-[57%] w-full">
+            <div class="dropdown w-[92%]">
+              <label class="dropdown-label">Select Options</label>
+              <div class="dropdown-list">
+                <div class="checkbox">
+                  <input type="checkbox" name="dropdown-group-all" class="check-all checkbox-custom" id="checkbox-main" />
+                  <label for="checkbox-main" class="checkbox-custom-label">Selection All</label>
+                </div>
+                <% User.all.each do |student| %>
+                  <div class="checkbox">
+                    <%= f.check_box :student_ids, { multiple: true }, student.id, nil %>
+                    <label for="checkbox-custom_<%= student.id %>" class="checkbox-custom-label"><%= student.name %></label>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="text-red-600 text-sm" id="edit_batch_student_error">  </div>
+          </div>
+        </div>
+        <label for="day" class=" block mb-2 text-lg font-medium text-[#000]">Batch Timings<span class="text-[#C6C6C6] text-[15px] font-medium">(Required)</span></label>
+        <div class= "flex w-[95.5%] gap-[50px] flex-col lg:flex-row edit_batch_timing_container">
+          <div class="mb-2 flex flex-col sm:flex-row w-full gap-2 lg:w-[50%] justify-between">
+            <div class="w-full sm:w-[55%] flex flex-col">
+              <div class="text-[#000] text-sm">Day</div>
+              <div class="text-red-600 text-sm" id="edit_batch_day_error">  </div>
+              <% @batch.batch_timings.each do |batch_timing| %>
+                <% if batch_timing.errors[:day].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch_timing.errors.full_messages_for(:day).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="w-full sm:w-[55%] flex flex-col">
+              <div class="text-[#000]text-sm" >From Time</div>
+              <div class="text-red-600 text-sm" id="edit_batch_from_time_error"></div>
+              <% @batch.batch_timings.each do |batch_timing| %>
+                <% if batch_timing.errors[:from_time].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch_timing.errors.full_messages_for(:from_time).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="w-full sm:w-[55%] flex flex-col">
+              <div class="text-[#000] text-sm">To Time</div>
+              <div class="text-red-600 text-sm" id="edit_batch_to_time_error"></div>
+              <% @batch.batch_timings.each do |batch_timing| %>
+                <% if batch_timing.errors[:to_time].any? %>
+                  <div class="text-red-600 text-sm mt-1">
+                    <%= batch_timing.errors.full_messages_for(:to_time).join(', ') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="w-full sm:w-[55%] flex flex-col">
+            </div>
+          </div>
+        </div>
+        <!--- nested form for edit_batch timing -->
+        <div id="edit_batch_timings_container">
+          <%= f.fields_for :batch_timings do |batchTimingForm| %>
+            <div class= "flex w-[95.5%] gap-[50px] flex-col lg:flex-row edit_batch_timing_container">
+              <div class="mb-4 flex flex-col sm:flex-row w-full gap-2 lg:w-[50%] justify-between">
+                <div class="w-full sm:w-[55%] flex flex-col">
+                  <%= batchTimingForm.select(:day, ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] ,  { prompt: 'Select Day' }, { class: 'validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200'} ) %>
+                </div>
+                <div class="w-full sm:w-[55%] flex flex-col">
+                  <%= batchTimingForm.time_field :from_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_batch_from_time" , autocomplete: "off", placeholder: "From Time" %>
+                </div>
+                <div class="w-full sm:w-[55%] flex flex-col">
+                  <%= batchTimingForm.time_field :to_time, class: "validate w-full bg-[#ffffff] border border-[#cccccc] text-[#818181] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200", id: "edit_batch_to_time" ,autocomplete: "off", placeholder: "To Time" %>
+                </div>
+                <div class="w-full sm:w-[55%] flex flex-col">
+                  <button type="button" class="w-[100px] h-[42px] bg-[#ffffff] remove_timing  border border-[#cccccc] bg-gradient-to-r from-[#de7373] to-[#a02424] text-[#fff] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200">Remove</button>
+                  <%= batchTimingForm.check_box :_destroy, id: "destroy", class: "checkbox hidden" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="w-full sm:w-[55%] flex flex-col">
+          <button type="button" id="edit_add_timing" class="w-[100px] h-[42px] bg-[#ffffff]  border border-[#cccccc] bg-gradient-to-r from-[#969595] to-[#818181] text-[#fff] text-base font-medium rounded-lg block p-2.5 focus:ring-0 focus:ring-offset-0 focus:border-gray-200">add day</button>
+        </div>
+        <%= hidden_field_tag :page, params[:page]%>
+        <%= hidden_field_tag :per_page, params[:per_page]%>
+        <%= hidden_field_tag :search, params[:search]%>
+        <div class="w-[150px] mx-auto mt-4 sm:mt-6">
+          <%= f.submit "UPDATE", class: 'button-gradiant-hover w-[150px] h-[42px] text-white bg-gradient-to-r from-[#1AB69D] to-[#31B978] font-semibold rounded-[7px] text-[16px] px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

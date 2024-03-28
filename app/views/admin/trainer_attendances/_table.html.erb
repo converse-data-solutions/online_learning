@@ -1,0 +1,86 @@
+<% if @trainer_attendances.present? %>
+  <% @trainer_attendances.each do |trainer_attendance| %>
+    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-600">
+      <th scope="row" class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181] whitespace-nowrap dark:text-white">
+        <%= trainer_attendance.trainer_course.user.name %>
+      </th>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= trainer_attendance.trainer_course.course.course_name %>
+      </td>
+      <td class="px-6 py-4 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <%= trainer_attendance.attendance_date %>
+      </td>
+      <td class="px-6 py-2 font-medium text-[12px] sm:text-[14px] md:text-[15px] text-[#818181]">
+        <% if trainer_attendance.status %>
+          <div>
+            <div id="present" class="attendance-status <%= trainer_attendance.status %> relative rounded-[18px] h-[35px] w-[110px] items-center bg-[#0BC08B] bg-opacity-20 flex flex-row-reverse" data-attendance-status="<%= trainer_attendance.status %> " data-attendance-detail-id="<%= trainer_attendance.id %>">
+              <div id="slider" class="mx-[2px] h-[30px] w-[30px] bg-white rounded-[50%] relative flex justify-center items-center right-0 slider-duration">
+                <div id="sliderContent">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none"><path d="M15.25 4.6875L7.34375 12.5938L3.75 9" stroke="#0BC08B" stroke-width="1.6666" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div class="self-center mx-auto flex justify-center">
+                <span id="attendanceText" class="text-[#0BC08B] text-base font-medium">
+                  Present
+                </span>
+              </div>
+            </div>
+          </div>  
+        <% else %>
+          <div>
+            <div id="absent" class="attendance-status <%= trainer_attendance.status %> relative rounded-[18px] h-[35px] w-[110px] items-center bg-[#F9DCDC] flex" data-attendance-status="<%= trainer_attendance.status %>" data-attendance-detail-id="<%= trainer_attendance.id %>">
+              <div id="slider" class="mx-[2px] h-[30px] w-[30px] bg-white rounded-[50%] relative flex justify-center items-center left-0 slider-duration">
+                <div id="sliderContent">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" viewBox="0 0 19 18" fill="none"><path d="M13.8125 4.6875L5.1875 13.3125M5.1875 4.6875L13.8125 13.3125" stroke="#DF4F4F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div class="self-center mx-auto flex justify-center">
+                <span id="attendanceText" class="text-[#DF4F4F] text-base font-medium">
+                  Absent
+                </span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </td>
+      <td class="px-6 py-4 flex gap-4">
+        <button data-modal-target="large-modal" data-modal-toggle="large-modal" data-turbo-frame="edit-lesson-popup-frame" data-action="click->modal#toggle" data-url="<%= edit_admin_trainer_attendance_path(trainer_attendance) %>" data-attendance-id="<%= trainer_attendance.id %>" class="block w-full md:w-auto edit-attendance-model loader-btn" type="button">
+          <img src="<%= asset_path("pencil.png") %>" alt="...">
+        </button>
+        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" data-action="click->modal#toggle" data-attendance-id="<%= trainer_attendance.id %>" class="block send-delete-attendance loader-btn" type="button">
+          <img src="<%= asset_path("delete.png") %>" alt="...">
+        </button>
+      </td>
+    </tr>
+  <% end %>
+<% else %>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-10 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td class="px-6 py-4"></td>
+  </tr>
+  <tr>
+    <td colspan="12" class="px-6 py-4 font-semibold text-[12px] sm:text-[14px] md:text-[15px] lg:text-2xl text-[#818181] text-center">No data found</td>
+  </tr>
+<% end %>
+<script>
+  $("#create-close-modal").click();
+  $("#modal-close-btn").click();
+  $("#detele-modal-btn").click();
+</script>

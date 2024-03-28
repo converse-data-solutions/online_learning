@@ -1,0 +1,4 @@
+<%= turbo_stream.update "trainer-table", partial: "admin/trainers/table", locals: { trainers: @trainers } %>
+<%= turbo_stream.update "trainer-admin-form", partial: "admin/trainers/form", locals: { trainer: Trainer.new } %>
+<%= turbo_stream.append "trainer-table", partial: "shared/flash", locals: { message: 'trainer created successfully.', type: 'notice' } %>
+<%= turbo_stream.update "render-pagination", partial: "admin/trainers/paginate", locals: { trainers: @trainers } %>

@@ -1,0 +1,3 @@
+<%= turbo_stream.update "schedule-table", partial: "admin/schedules/table", locals: { schedules: @schedules } %>
+<%= turbo_stream.update "edit-schedule-popup", partial: "admin/schedules/edit", locals: { schedule: @schedule } %>
+<%= turbo_stream.append "schedule-table", partial: "shared/flash", locals: { message: 'schedule updated successfully.', type: 'notice' } %>
