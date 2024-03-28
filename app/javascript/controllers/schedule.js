@@ -1005,6 +1005,7 @@ addEventListener("turbo:before-stream-render", (event) => {
       scheduleCreateBatch();
       scheduleCreateUser();
       scheduleBatchData();
+      initializeTimeDropdowns
     }
     if (streamElement.target == "edit-schedule-popup") {
       scheduleEditBatch();
